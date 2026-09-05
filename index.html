@@ -1,203 +1,133 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMC & ICT 6-Master AI Terminal</title>
-    <style>
-        body { background-color: #12161f; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 10px; }
-        .header { text-align: center; padding: 10px; background: #1e222d; border-radius: 8px; margin-bottom: 10px; }
-        .pair-selector { margin-bottom: 10px; }
-        .chart-container { height: 350px; width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
-        .card { background: #1e222d; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .card h3 { margin-top: 0; color: #2962ff; border-bottom: 1px solid #2a2e3d; padding-bottom: 8px; font-size: 16px; }
-        label { display: block; margin-bottom: 5px; font-size: 13px; color: #b2b5be; }
-        input, select, button { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #2a2e3d; background: #131722; color: #fff; box-sizing: border-box; font-size: 14px; margin-bottom: 10px; }
-        button.btn-analyze { background: #089981; font-weight: bold; font-size: 16px; padding: 12px; cursor: pointer; border: none; color: #fff; margin-top: 10px; }
-        .master-card { background: #131722; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #2962ff; }
-        .master-title { font-weight: bold; color: #2962ff; font-size: 14px; margin-bottom: 5px; }
-        .master-desc { font-size: 13px; color: #d1d4dc; line-height: 1.5; white-space: pre-line; }
-        .img-preview { width: 100%; max-height: 180px; object-fit: cover; border-radius: 5px; margin-top: 5px; display: none; }
-        #loading { display: none; text-align: center; color: #ffb703; font-weight: bold; margin: 15px 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMC & ICT 6-Master AI Terminal</title>
+  <style>
+    body { background-color: #12161f; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 15px; }
+    .card { background: #1e222d; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #2a2e39; }
+    input[type="text"], select { width: 100%; padding: 10px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 5px; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; background: #089981; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    button:disabled { background: #5d606b; }
+    .result-box { background: #131722; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.5; }
+  </style>
 </head>
 <body>
 
-    <div class="header">
-        <h2 style="margin:0; font-size:18px;">SMC & ICT 6-Master AI Terminal</h2>
-    </div>
+  <h2 style="text-align: center;">SMC & ICT 6-Master AI Terminal</h2>
 
-    <!-- API Key Input -->
-    <div class="card">
-        <h3>0. Weka Gemini API Key Yako</h3>
-        <input type="password" id="apiKeyInput" placeholder="Paste Gemini API Key hapa (AIzaSy...)">
-    </div>
+  <div class="card">
+    <h3>0. Weka Gemini API Key Yako</h3>
+    <input type="text" id="apiKey" placeholder="Paste Gemini API Key hapa (AQ.Ab... au AIzaSy...)">
+  </div>
 
-    <!-- Pair Selector -->
-    <div class="pair-selector">
-        <label for="pairSelect">Chagua Market / Pair:</label>
-        <select id="pairSelect" onchange="changePair()">
-            <option value="OANDA:XAUUSD">XAU/USD (Gold)</option>
-            <option value="BITSTAMP:BTCUSD">BTC/USD (Bitcoin)</option>
-            <option value="CAPITALCOM:US100">NAS100 / US100 (NASDAQ)</option>
-            <option value="FX:GBPUSD">GBP/USD</option>
-            <option value="FX:EURUSD">EUR/USD</option>
-            <option value="FX:AUDUSD">AUD/USD</option>
-            <option value="FX:USDJPY">USD/JPY</option>
-            <option value="FX:USDCAD">USD/CAD</option>
-        </select>
-    </div>
+  <div class="card">
+    <h3>1. Chagua Market / Pair</h3>
+    <select id="pair">
+      <option value="XAUUSD">XAU/USD (Gold)</option>
+      <option value="BTCUSD">BTC/USD (Bitcoin)</option>
+      <option value="EURUSD">EUR/USD</option>
+      <option value="GBPUSD">GBP/USD</option>
+      <option value="NASDAQ">NASDAQ (US100)</option>
+    </select>
+  </div>
 
-    <!-- Live Chart -->
-    <div class="chart-container" id="chartArea"></div>
+  <div class="card">
+    <h3>2. Upload Screenshot ya Chati</h3>
+    <input type="file" id="chartImage" accept="image/*">
+  </div>
 
-    <!-- Multi-Timeframe Image Import -->
-    <div class="card">
-        <h3>1. Upload Timeframe Screenshots</h3>
-        
-        <label>Upload H4 Chart (Daily Bias & PD Array):</label>
-        <input type="file" id="h4File" accept="image/*" onchange="previewImage(event, 'h4Preview')">
-        <img id="h4Preview" class="img-preview">
+  <button id="runBtn" onclick="analyzeChart()">RUN VISION AI ANALYSIS</button>
 
-        <label>Upload H1 Chart (Liquidity & FVG Zones):</label>
-        <input type="file" id="h1File" accept="image/*" onchange="previewImage(event, 'h1Preview')">
-        <img id="h1Preview" class="img-preview">
+  <div class="card" style="margin-top: 15px;">
+    <h3>3. Majibu ya Uchambuzi (Masters 6)</h3>
+    <div id="status" style="color: #f0b90b; font-size: 13px; margin-bottom: 8px;"></div>
+    <div id="output" class="result-box">Majibu yataonekana hapa baada ya kubonyeza RUN...</div>
+  </div>
 
-        <label>Upload M15 Chart (Entry CHoCH / MSS):</label>
-        <input type="file" id="m15File" accept="image/*" onchange="previewImage(event, 'm15Preview')">
-        <img id="m15Preview" class="img-preview">
+<script>
+async function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file);
+  });
+}
 
-        <button class="btn-analyze" onclick="analyzeWithGemini()">RUN VISION AI ANALYSIS</button>
-        <div id="loading">AI inachunguza picha zako kulingana na Masters 6... Tafadhali subiri kidogo.</div>
-    </div>
+async function analyzeChart() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const fileInput = document.getElementById('chartImage');
+  const statusDiv = document.getElementById('status');
+  const outputDiv = document.getElementById('output');
+  const runBtn = document.getElementById('runBtn');
 
-    <!-- AI Output Panel -->
-    <div id="analysisResult" class="card" style="display:none;">
-        <h3>2. Matokeo ya Uchambuzi (6 Masters AI)</h3>
-        <div class="master-card">
-            <div class="master-title">📋 Ripoti ya Masters Wote 6:</div>
-            <div class="master-desc" id="aiResponseText"></div>
-        </div>
-    </div>
+  if (!apiKey) {
+    alert("Tafadhali weka Gemini API Key kwanza.");
+    return;
+  }
 
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script type="text/javascript">
-        let widget;
+  if (fileInput.files.length === 0) {
+    alert("Tafadhali chagua picha ya chati kabla ya kuendelea.");
+    return;
+  }
 
-        function loadChart(symbol) {
-            document.getElementById('chartArea').innerHTML = '<div id="tv_chart" style="height:100%;width:100%;"></div>';
-            widget = new TradingView.widget({
-                "autosize": true,
-                "symbol": symbol,
-                "interval": "60",
-                "timezone": "Africa/Nairobi",
-                "theme": "dark",
-                "container_id": "tv_chart"
-            });
-        }
+  runBtn.disabled = true;
+  statusDiv.innerText = "AI inachunguza picha yako... Tafadhali subiri.";
+  outputDiv.innerText = "Inachakata...";
 
-        function changePair() {
-            let selectedSymbol = document.getElementById('pairSelect').value;
-            loadChart(selectedSymbol);
-        }
+  try {
+    const base64Image = await fileToBase64(fileInput.files[0]);
+    const pair = document.getElementById('pair').value;
 
-        function previewImage(event, previewId) {
-            let reader = new FileReader();
-            reader.onload = function() {
-                let output = document.getElementById(previewId);
-                output.src = reader.result;
-                output.style.display = 'block';
-            };
-            if(event.target.files[0]) {
-                reader.readAsDataURL(event.target.files[0]);
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const promptText = `Wewe ni mtaalamu wa technical analysis kwa kutumia mfumo wa 6-Master Framework (Price Action, Supply/Demand, Market Structure, Fundamental Analysis, SMC Liquidity, na ICT Concepts). 
+Fanya uchambuzi wa kina juu ya chati hii ya ${pair} na utoe majibu kwa lugha ya Kiswahili kwa kuainisha:
+1. Direction Trend (Bullish/Bearish)
+2. Key Levels (Liquidity Sweeps, Order Blocks, FVG)
+3. Entry Signal & Risk/Reward Ratio.`;
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [
+            { text: promptText },
+            {
+              inline_data: {
+                mime_type: fileInput.files[0].type || "image/png",
+                data: base64Image
+              }
             }
-        }
+          ]
+        }]
+      })
+    });
 
-        async function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
-                reader.readAsDataURL(file);
-            });
-        }
+    const data = await response.json();
 
-        async function analyzeWithGemini() {
-            const apiKey = document.getElementById('apiKeyInput').value.trim();
-            if (!apiKey) {
-                alert("Tafadhali weka Gemini API Key yako kwanza!");
-                return;
-            }
+    if (data.error) {
+      statusDiv.innerText = "Kosa kutoka kwenye API:";
+      outputDiv.innerText = JSON.stringify(data.error, null, 2);
+    } else if (data.candidates && data.candidates[0].content.parts[0].text) {
+      statusDiv.innerText = "Uchambuzi Umekamilika!";
+      outputDiv.innerText = data.candidates[0].content.parts[0].text;
+    } else {
+      statusDiv.innerText = "Kosa lisilojulikana:";
+      outputDiv.innerText = JSON.stringify(data, null, 2);
+    }
 
-            const m15Input = document.getElementById('m15File').files[0];
-            const h1Input = document.getElementById('h1File').files[0];
-            const h4Input = document.getElementById('h4File').files[0];
+  } catch (err) {
+    statusDiv.innerText = "Kosa la Mfumo:";
+    outputDiv.innerText = err.message;
+  } finally {
+    runBtn.disabled = false;
+  }
+}
+</script>
 
-            if (!m15Input && !h1Input && !h4Input) {
-                alert("Tafadhali upload angalau picha moja ya chati!");
-                return;
-            }
-
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('analysisResult').style.display = 'none';
-
-            try {
-                let contents = [];
-                let promptText = `Wewe ni mfumo wa AI unaochanganua chati za Forex/Crypto kulingana na sheria za Trading.
-Changanua picha hizi za chati na utoe matokeo kwa Lugha ya Kiswahili safi ukitumia Masters hawa 6:
-
-1. Price Action Master: Kagua Market Structure, wicks, na price rejection.
-2. Supply & Demand Master: Kagua Supply na Demand zones zilizopo na kama zimekuwa mitigated.
-3. Market Structure Master: Taja HTF trend na kama kuna CHoCH au BOS.
-4. Fundamental Analyst Master: Toa angalizo fupi kuhusu Volatility na risk ya soko.
-5. SMC Liquidity Master: Angalia Buy-Side (BSL) na Sell-Side (SSL) Liquidity Sweeps pamoja na Inducement.
-6. ICT Concepts Master: Kagua FVG (Fair Value Gap), Premium/Discount Zones, na AMD (Accumulation/Manipulation/Distribution).
-
-MWISHONI TOA HITIMISHO:
-- Direct Action: (BUY / SELL / WAIT)
-- Order Type: (Market Order au Limit Order)
-- Confidence Level: (HIGH / MEDIUM / LOW)
-- Reason: Maelezo mafupi sana.`;
-
-                let parts = [{ text: promptText }];
-
-                if (h4Input) {
-                    let base64 = await fileToBase64(h4Input);
-                    parts.push({ inline_data: { mime_type: h4Input.type, data: base64 } });
-                }
-                if (h1Input) {
-                    let base64 = await fileToBase64(h1Input);
-                    parts.push({ inline_data: { mime_type: h1Input.type, data: base64 } });
-                }
-                if (m15Input) {
-                    let base64 = await fileToBase64(m15Input);
-                    parts.push({ inline_data: { mime_type: m15Input.type, data: base64 } });
-                }
-
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: parts }] })
-                });
-
-                const data = await response.json();
-                document.getElementById('loading').style.display = 'none';
-
-                if (data.candidates && data.candidates[0].content.parts[0].text) {
-                    document.getElementById('aiResponseText').innerText = data.candidates[0].content.parts[0].text;
-                    document.getElementById('analysisResult').style.display = 'block';
-                    window.scrollTo({ top: document.getElementById('analysisResult').offsetTop - 10, behavior: 'smooth' });
-                } else {
-                    alert("Kuna makosa yametokea wakati wa kuisoma picha. Hakikisha API Key ni sahihi.");
-                }
-
-            } catch (err) {
-                document.getElementById('loading').style.display = 'none';
-                alert("Hitilafu kwenye API connection: " + err.message);
-            }
-        }
-
-        loadChart("OANDA:XAUUSD");
-    </script>
 </body>
 </html>
