@@ -68,7 +68,7 @@
   </div>
 
 <script>
-// API Key imewekwa rasmi na haitakuuliza tena
+// API Key yako rasmi
 const INTERNAL_API_KEY = 'AQ.Ab8RN6KBdwPCMJPh6-H6H051H-aOt7jRsq6zg8d2VHSrDyuK6w';
 
 async function fileToBase64(file) {
@@ -136,7 +136,8 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
       parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
     }
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${INTERNAL_API_KEY}`;
+    // Tumebadilisha kwenda gemini-2.5-flash
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${INTERNAL_API_KEY}`;
 
     const response = await fetch(endpoint, {
       method: 'POST',
