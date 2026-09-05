@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -23,6 +24,7 @@
 
   <h2 style="text-align: center;">⚡ SMC & ICT 6-MASTER AI TERMINAL ⚡</h2>
 
+  <!-- 1. PAIR SELECTOR -->
   <div class="card">
     <h3>1. Chagua Market / Pair</h3>
     <select id="pair">
@@ -39,6 +41,7 @@
     </select>
   </div>
 
+  <!-- 2. UPLOAD MULTIPLE TIMEFRAMES -->
   <div class="card">
     <h3>2. Upload Timeframe Screenshots</h3>
     
@@ -58,8 +61,10 @@
     </div>
   </div>
 
+  <!-- RUN BUTTON -->
   <button id="runBtn" onclick="analyzeChart()">RUN VISION AI ANALYSIS</button>
 
+  <!-- 3. OUTPUT AREA -->
   <div class="card" style="margin-top: 15px;">
     <h3>3. Maoni ya Masters 6 Mmoja Mmoja & Hitimisho</h3>
     <div id="status" style="color: #f0b90b; font-size: 13px; margin-bottom: 8px; font-weight: bold;"></div>
@@ -67,7 +72,8 @@
   </div>
 
 <script>
-const INTERNAL_API_KEY = 'AQ.Ab8RN6KBdwPCMJPh6-H6H051H-aOt7jRsq6zg8d2VHSrDyuK6w';
+// Token yako ya AQ... imewekwa kwenye mfumo wa Bearer Token Authentication
+const AUTH_TOKEN = 'AQ.Ab8RN6J_L-c-OjiB3B7PFYUngFo2D5...';
 
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -112,14 +118,14 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
    - ICT Concepts Master: [Mtazamo na sababu fupi]
 
 2. HITIMISHO LA PAMOJA NA CONFIDENCE LEVEL:
-   - Je, wote wamealiana (Consensus)? Kama wote wanakubaliana toa **STRONG BUY** au **STRONG SELL**. Kama wanapishana (mfano Price Action anapingana na Demand & Supply) toa **WAIT / STAND ASIDE**.
+   - Je, wote wamekubaliana (Consensus)? Kama wote wanakubaliana toa **STRONG BUY** au **STRONG SELL**. Kama wanapishana (mfano Price Action anapingana na Demand & Supply) toa **WAIT / STAND ASIDE**.
    - Confidence Level: Taja wazi kama ni **High**, **Medium**, au **Low** kutokana na kiwango cha makubaliano yao.
 
 3. RISK MANAGEMENT & FEDHA (USD & TZS):
    - Entry Zone: [Eneo la kuingilia]
    - Stop Loss (SL): [Bei kamili na alama yake]
    - Take Profit (TP1 & TP2): [Viwango vya malengo]
-   - Makadirio ya Faida (Potential Profit): Dola ($) na thamani yake katika Shilingi za Kitanzania (TZS) (mfano kwa kutumia kiwango cha 1 USD = 2,600 TZS).
+   - Makadirio ya Faida (Potential Profit): Dola ($) na thamani yake katika Shilingi za Kitanzania (TZS) (kwa kutumia kiwango cha 1 USD = 2,600 TZS).
    - Makadirio ya Hasara (Potential Loss / Risk): Dola ($) na TZS endapo SL itapigwa.
    - Risk to Reward Ratio (R:R).`;
 
@@ -143,11 +149,15 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
       parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
     }
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${INTERNAL_API_KEY}`;
+    // Endpoint inayotumia Bearer Token authorization kwa ajili ya token za AQ...
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent`;
 
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${AUTH_TOKEN}`
+      },
       body: JSON.stringify({ contents: [{ parts: parts }] })
     });
 
@@ -157,7 +167,7 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
       statusDiv.innerText = "Kosa kutoka kwenye API:";
       outputDiv.innerText = JSON.stringify(data.error, null, 2);
     } else if (data.candidates && data.candidates[0].content.parts[0].text) {
-      statusDiv.innerText = "✅ Uchambuzi wa Masters 6 Umekamilika kwa Viwango na Mitazamo ya Kipekee!";
+      statusDiv.innerText = "✅ Uchambuzi wa Masters 6 Umekamilika kikamilifu!";
       outputDiv.innerText = data.candidates[0].content.parts[0].text;
     } else {
       statusDiv.innerText = "Majibu yasiyotarajiwa:";
