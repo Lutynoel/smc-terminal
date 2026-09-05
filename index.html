@@ -8,7 +8,7 @@
   <style>
     body { background-color: #12161f; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 15px; }
     .card { background: #1e222d; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #2a2e39; }
-    input[type="text"], select, input[type="file"] { width: 100%; padding: 10px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 5px; box-sizing: border-box; margin-top: 5px; }
+    select, input[type="file"] { width: 100%; padding: 10px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 5px; box-sizing: border-box; margin-top: 5px; }
     button { width: 100%; padding: 12px; background: #089981; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     button:disabled { background: #5d606b; }
     .result-box { background: #131722; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.5; min-height: 100px; }
@@ -19,12 +19,6 @@
 <body>
 
   <h2 style="text-align: center;">SMC & ICT 6-Master AI Terminal</h2>
-
-  <!-- 0. API KEY -->
-  <div class="card">
-    <h3>0. Weka Gemini API Key Yako</h3>
-    <input type="text" id="apiKey" placeholder="Paste Gemini API Key hapa (AQ.Ab... au AIzaSy...)">
-  </div>
 
   <!-- 1. PAIR SELECTOR -->
   <div class="card">
@@ -74,6 +68,9 @@
   </div>
 
 <script>
+// WEKA API KEY YAKO HAPA NDANI YA ZILE QUOTES (' ')
+const INTERNAL_API_KEY = 'PASTE_API_KEY_YAKO_HAPA';
+
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -84,7 +81,6 @@ async function fileToBase64(file) {
 }
 
 async function analyzeChart() {
-  const apiKey = document.getElementById('apiKey').value.trim();
   const h4Input = document.getElementById('chartH4');
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
@@ -93,8 +89,8 @@ async function analyzeChart() {
   const outputDiv = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
 
-  if (!apiKey) {
-    alert("Tafadhali weka Gemini API Key kwanza.");
+  if (!INTERNAL_API_KEY || INTERNAL_API_KEY === 'PASTE_API_KEY_YAKO_HAPA') {
+    alert("Tafadhali weka API Key yako ndani ya kodi kwanza.");
     return;
   }
 
@@ -145,7 +141,7 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
       parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
     }
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${INTERNAL_API_KEY}`;
 
     const response = await fetch(endpoint, {
       method: 'POST',
