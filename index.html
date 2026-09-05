@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v8.4</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v8.5</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
@@ -89,11 +89,8 @@
     .checklist-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
     .checklist-item span { color: var(--green); font-weight: bold; }
 
-    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; gap: 12px; align-items: center; }
-    .agent-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--card-border); flex-shrink: 0; background: #1a1a1e; cursor: pointer; transition: 0.2s; }
-    .agent-thumb:hover { border-color: var(--accent); transform: scale(1.05); }
-    .agent-info { flex-grow: 1; }
-    .agent-title { font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 3px; }
+    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+    .agent-title { font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 4px; }
     .agent-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
     
     .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
@@ -217,9 +214,9 @@
       <!-- DASHBOARD OVERVIEW -->
       <div id="view-overview" class="view-section">
         <div class="card" style="border-left: 4px solid var(--accent);">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v8.4 PWA</div>
-          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Institutional Hunters & Standalone App</h2>
-          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Fixed Risk $2 Loss Protocol. Pips & Lot breakdown, Toast notifications, Clickable Past Analyses, na inajisakinisha kama App halisi.</p>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v8.5 PWA</div>
+          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">7 Institutional Hunters (Masters Kamili)</h2>
+          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Fixed Risk $2 Loss Protocol. Pips & Lot breakdown, Toast notifications, Clickable Past Analyses, na Masters wote 7 (Price Action, S&D, Market Structure, Fundamental, SMC, ICT, na Wyckoff/Institutional Volume).</p>
           <button class="primary-btn" onclick="navigate('analyst')" style="margin-top: 10px;">Start Trading →</button>
         </div>
       </div>
@@ -349,7 +346,7 @@
             </div>
           </div>
 
-          <!-- 7 SPECIALIST MASTERS -->
+          <!-- 7 SPECIALIST MASTERS KAMILI -->
           <div class="card">
             <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS CONSULTATION</div>
             <div id="agentsContainer"></div>
@@ -696,7 +693,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = "⏳ 7 Institutional Masters (Hunters) wanachambua soko...";
+  runBtn.innerText = "⏳ 7 Institutional Masters (Wataalamu Wote 7) wanachambua soko...";
 
   try {
     const pair = document.getElementById('pair').value;
@@ -704,6 +701,15 @@ async function runLutynoelAnalysis() {
     const parts = [];
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine yenye Wataalamu 7 Mahiri. Changanua picha za chati za ${pair} (${framework}) kwa mtazamo wa Institutional Hunter. Weka risk ya $2. 
+Lazima utoe uchambuzi wa kina na wa kipekee kwa KILA MASTER kati ya hawa 7:
+1. Price Action Master
+2. Supply & Demand Master
+3. Market Structure Master
+4. Fundamental & Macro Master
+5. SMC (Smart Money Concepts) Master
+6. ICT (Inner Circle Trader) Master
+7. Wyckoff & Institutional Volume Master
+
 Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
 {
   "action": "BUY",
@@ -736,11 +742,11 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
   "agent4_title": "4. Fundamental & Macro Master",
   "agent4_text": "Central bank liquidity flow and real-time interest rate sentiment favor asset appreciation.",
   "agent5_title": "5. SMC (Smart Money Concepts) Master",
-  "agent5_text": "Inducement liquidity cleared cleanly above previous highs.",
+  "agent5_text": "Inducement liquidity cleared cleanly above previous highs before mitigation.",
   "agent6_title": "6. ICT (Inner Circle Trader) Master",
-  "agent6_text": "Killzone session timing aligned with Fair Value Gap mitigation.",
+  "agent6_text": "Killzone session timing aligned perfectly with Fair Value Gap mitigation and liquidity void fill.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master",
-  "agent7_text": "Spring event completed with explosive volume expansion.",
+  "agent7_text": "Spring event completed with explosive volume expansion confirming smart money markup.",
   "tf": "4H: Premium-to-discount shift.\n1H: Order block reaction.\n15M: Liquidity sweep trigger."
 }`;
 
@@ -794,21 +800,15 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     document.getElementById('valTP1').innerText = resObj.tp1;
     document.getElementById('valRR').innerText = resObj.rr;
 
-    const fallbackImg = globalImages.h4 || globalImages.h1 || globalImages.m15 || 'https://via.placeholder.com/150';
-
+    // Kadi za Masters wote 7 kamili
     let agentsHtml = `
-      <div class="agent-card">
-        <img src="${globalImages.h4 || fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent1_title}</div><div class="agent-desc">${resObj.agent1_text}</div></div>
-      </div>
-      <div class="agent-card">
-        <img src="${globalImages.h1 || fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent2_title}</div><div class="agent-desc">${resObj.agent2_text}</div></div>
-      </div>
-      <div class="agent-card">
-        <img src="${globalImages.m15 || fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent3_title}</div><div class="agent-desc">${resObj.agent3_text}</div></div>
-      </div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent1_title || "1. Price Action Master"}</div><div class="agent-desc">${resObj.agent1_text}</div></div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent2_title || "2. Supply & Demand Master"}</div><div class="agent-desc">${resObj.agent2_text}</div></div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent3_title || "3. Market Structure Master"}</div><div class="agent-desc">${resObj.agent3_text}</div></div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent4_title || "4. Fundamental & Macro Master"}</div><div class="agent-desc">${resObj.agent4_text}</div></div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent5_title || "5. SMC Master"}</div><div class="agent-desc">${resObj.agent5_text}</div></div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent6_title || "6. ICT Master"}</div><div class="agent-desc">${resObj.agent6_text}</div></div>
+      <div class="agent-card"><div class="agent-title">${resObj.agent7_title || "7. Wyckoff & Institutional Volume Master"}</div><div class="agent-desc">${resObj.agent7_text}</div></div>
     `;
     document.getElementById('agentsContainer').innerHTML = agentsHtml;
     document.getElementById('tfOutput').innerText = resObj.tf;
@@ -827,18 +827,18 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
       sl_pips: resObj.sl_pips,
       tp_pips: resObj.tp_pips,
       agents: [
-        { title: resObj.agent1_title, text: resObj.agent1_text },
-        { title: resObj.agent2_title, text: resObj.agent2_text },
-        { title: resObj.agent3_title, text: resObj.agent3_text },
-        { title: resObj.agent4_title, text: resObj.agent4_text },
-        { title: resObj.agent5_title, text: resObj.agent5_text },
-        { title: resObj.agent6_title, text: resObj.agent6_text },
-        { title: resObj.agent7_title, text: resObj.agent7_text }
+        { title: resObj.agent1_title || "1. Price Action", text: resObj.agent1_text },
+        { title: resObj.agent2_title || "2. Supply & Demand", text: resObj.agent2_text },
+        { title: resObj.agent3_title || "3. Market Structure", text: resObj.agent3_text },
+        { title: resObj.agent4_title || "4. Fundamental & Macro", text: resObj.agent4_text },
+        { title: resObj.agent5_title || "5. SMC", text: resObj.agent5_text },
+        { title: resObj.agent6_title || "6. ICT", text: resObj.agent6_text },
+        { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume", text: resObj.agent7_text }
       ],
       tf: resObj.tf
     });
 
-    sendNotification("Lutynoel FX", `${pair} ${resObj.action} imechambuliwa na Masters 7 kikamilifu!`);
+    sendNotification("Lutynoel FX", `${pair} ${resObj.action} imechambuliwa na Masters 7 wote kikamilifu!`);
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -876,7 +876,7 @@ function loadTradeHistory() {
         <div>
           <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action} (${item.framework || 'Day Trader'})</div>
           <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}</div>
-          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date} — <strong>Bofya kuona uchambuzi wa Masters 7</strong></div>
+          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date} — <strong>Bofya kuona uchambuzi wa Masters wote 7</strong></div>
         </div>
         <div style="text-align: right;">
           <span class="badge-status" style="font-size: 9px;">${item.status}</span>
@@ -908,7 +908,7 @@ function openHistoryDetail(index) {
   }
 
   let detailHtml = `
-    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Masters 7</h3>
+    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Masters 7 Kamili</h3>
     <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date} | Framework: ${item.framework || 'Day Trader'}</p>
     
     <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 10px;">
