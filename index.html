@@ -348,7 +348,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
     
-    // Kama ni mgeni, badilisha jina la PRO liwe GUEST
     if(savedUser.includes('guest')) {
       document.getElementById('displayUserRole').innerText = 'GUEST';
     }
@@ -356,7 +355,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function setupSecurityMath() {
-  // Randomization ya namba za usalama ili zibadilike kila mara
   const n1 = Math.floor(Math.random() * 20) + 10;
   const n2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns1 = n1 - n2;
@@ -396,10 +394,8 @@ function handleLogin() {
   document.getElementById('appInterface').style.display = 'block';
 }
 
-// Sehemu ya Mgeni kuingia moja kwa moja bila akaunti
 function handleGuestLogin() {
   const guestEmail = "guest_" + Math.random().toString(36).substring(2, 8) + "@lutynoelfx.com";
-  // Weka API Key ya mfano au ruhusu mgeni aweke baadaye, hapa tunatumia default au kuangalia kama ipo
   const defaultKey = prompt("Weka Gemini API Key yako ili mgeni atumie AI:", "");
   if (!defaultKey) { alert("API Key inahitajika ili mfumo ufanye kazi."); return; }
 
@@ -509,7 +505,7 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
     if (h1Input.files.length > 0) parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     if (m15Input.files.length > 0) parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -523,7 +519,6 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
 
     let rawText = data.candidates[0].content.parts[0].text;
     
-    // Robuste JSON extraction endapo AI italeta maandishi ya ziada
     const jsonMatch = rawText.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       rawText = jsonMatch[0];
@@ -587,7 +582,6 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
-    // AI Error Logging wazi zaidi
     console.error("Lutynoel FX AI Error Log:", err);
     alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia kama Gemini API Key yako ni sahihi na jaribu tena."));
   } finally {
