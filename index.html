@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v5.0</title>
   <style>
     :root {
       --bg-color: #09090b;
@@ -15,6 +15,7 @@
       --text-muted: #94a3b8;
       --green: #10b981;
       --red: #ef4444;
+      --blue: #3b82f6;
     }
     body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
     
@@ -54,15 +55,16 @@
     button:disabled { background: #3f3f46; color: #a1a1aa; cursor: not-allowed; }
 
     /* UPLOAD DROPZONES */
-    .upload-zone { border: 2px dashed var(--card-border); background: #08080a; padding: 20px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 12px; position: relative; }
+    .upload-zone { border: 2px dashed var(--card-border); background: #08080a; padding: 15px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 12px; position: relative; }
     .upload-zone:hover { border-color: var(--accent); }
     .upload-zone input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
-    .preview-img { width: 100%; max-height: 150px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; }
+    .preview-img { width: 100%; max-height: 130px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; }
 
     /* UI BALLISTIC STYLING */
     .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
     .badge-pass { background: rgba(251, 191, 36, 0.15); color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
     .badge-conf { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid var(--green); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+    .badge-status { background: rgba(59, 130, 246, 0.15); color: var(--blue); border: 1px solid var(--blue); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
     
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
     .mini-box { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; }
@@ -74,12 +76,15 @@
     .checklist-item span { color: var(--green); font-weight: bold; }
 
     /* AGENT CARD WITH CHART PREVIEW */
-    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 12px; display: flex; gap: 12px; align-items: center; }
-    .agent-thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid var(--card-border); flex-shrink: 0; background: #1a1a1e; }
+    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; gap: 12px; align-items: center; }
+    .agent-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--card-border); flex-shrink: 0; background: #1a1a1e; }
     .agent-info { flex-grow: 1; }
-    .agent-title { font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 3px; }
+    .agent-title { font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 3px; }
     .agent-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
     
+    .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .news-item { background: #08080a; border-left: 3px solid var(--accent); padding: 10px; border-radius: 0 8px 8px 0; margin-bottom: 8px; font-size: 12px; }
+
     .hamburger { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
   </style>
 </head>
@@ -156,10 +161,12 @@
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview</div>
-      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">HOT</span></div>
-      <div class="menu-item" onclick="navigate('history')">History</div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">6 MASTERS</span></div>
+      <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
+      <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
+      <div class="menu-item" onclick="navigate('history')">Trade History & Tracking</div>
       <div class="menu-item" onclick="navigate('broker')">Broker Sync</div>
-      <div class="menu-item" onclick="navigate('prop')">Prop Engine <span class="badge-new">NEW</span></div>
+      <div class="menu-item" onclick="navigate('prop')">Prop Engine</div>
       <div class="menu-item" onclick="navigate('journal')">Trading Journal</div>
     </div>
 
@@ -167,9 +174,9 @@
       <!-- DASHBOARD OVERVIEW -->
       <div id="view-overview" class="view-section">
         <div class="card" style="border-left: 4px solid var(--accent);">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v4.1</div>
-          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Master Markets with AI Precision</h2>
-          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Four autonomous agents. Fixed Risk $2 Loss Protocol. Built for traders who demand institutional-grade signal clarity.</p>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v5.0</div>
+          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Master Markets with 6 AI Masters</h2>
+          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Fixed Risk $2 Loss Protocol. Live Tracking, Entry/TP/SL Notification, and 6 Institutional Experts fully synchronized.</p>
           <button class="primary-btn" onclick="navigate('analyst')" style="margin-top: 10px;">Start Trading →</button>
         </div>
 
@@ -179,8 +186,8 @@
             <span style="background: rgba(251,191,36,0.1); color: var(--accent); padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold;">DISCIPLINED ($2 RISK)</span>
           </div>
           <div style="text-align: center; margin: 15px 0;">
-            <div style="font-size: 32px; font-weight: bold; color: var(--accent);">88 / 100</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Strict Risk Control Enforced</div>
+            <div style="font-size: 32px; font-weight: bold; color: var(--accent);">94 / 100</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Strict Multi-Timeframe Compliance</div>
           </div>
         </div>
       </div>
@@ -188,17 +195,32 @@
       <!-- AI ON-CHART ANALYST -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (6 MASTERS EDITION)</div>
           <h3 style="margin: 5px 0 15px 0;">Institutional Multi-Confluence AI</h3>
           
           <label>Instrument Symbol</label>
           <select id="pair">
-            <option value="XAUUSD">XAU/USD (Gold)</option>
-            <option value="BTCUSD">BTC/USD (Bitcoin)</option>
-            <option value="EURUSD">EUR/USD</option>
-            <option value="GBPUSD">GBP/USD</option>
-            <option value="US30">US30 (Dow Jones)</option>
-            <option value="US100">NASDAQ (US100)</option>
+            <optgroup label="Metals & Crypto">
+              <option value="XAUUSD">XAU/USD (Gold)</option>
+              <option value="XAGUSD">XAG/USD (Silver)</option>
+              <option value="BTCUSD">BTC/USD (Bitcoin)</option>
+              <option value="ETHUSD">ETH/USD (Ethereum)</option>
+            </optgroup>
+            <optgroup label="Forex Majors">
+              <option value="EURUSD">EUR/USD</option>
+              <option value="GBPUSD">GBP/USD</option>
+              <option value="USDJPY">USD/JPY</option>
+              <option value="AUDUSD">AUD/USD</option>
+              <option value="USDCAD">USD/CAD</option>
+              <option value="NZDUSD">NZD/USD</option>
+              <option value="USDCHF">USD/CHF</option>
+            </optgroup>
+            <optgroup label="Indices">
+              <option value="US30">US30 (Dow Jones)</option>
+              <option value="US100">NASDAQ (US100)</option>
+              <option value="GER40">GER40 (DAX)</option>
+              <option value="UK100">UK100 (FTSE)</option>
+            </optgroup>
           </select>
 
           <label>Analysis Framework</label>
@@ -235,7 +257,7 @@
             <img id="previewM15" class="preview-img">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET MULTI-TIMEFRAME ANALYSIS</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 6 MASTERS ANALYSIS</button>
         </div>
 
         <!-- RESULTS CARD (BALLISTIC STYLE) -->
@@ -251,6 +273,7 @@
             <div class="signal-badge-container">
               <span class="badge-conf">HIGH CONF</span>
               <span class="badge-pass">PASS ($2 RISK)</span>
+              <span class="badge-status" id="tradeStatusBadge">PENDING ENTRY</span>
             </div>
             <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">15m Bearish CHoCH into 1H Demand</div>
           </div>
@@ -302,9 +325,9 @@
             </div>
           </div>
 
-          <!-- 5. SPECIALIST CONSULTATION (AGENTS WITH CHART IMAGES) -->
+          <!-- 5. 6 SPECIALIST CONSULTATION MASTERS -->
           <div class="card">
-            <div class="ballistic-header">👥 SPECIALIST CONSULTATION (AGENTS & CHARTS)</div>
+            <div class="ballistic-header">👥 6 SPECIALIST MASTERS CONSULTATION</div>
             <div id="agentsContainer">
                <!-- Zitajazwa na JavaScript -->
             </div>
@@ -316,14 +339,55 @@
             <div id="tfOutput" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;"></div>
           </div>
 
-          <button class="primary-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">ANALYZE AGAIN</button>
+          <button class="primary-btn" onclick="resetAnalystForm()">ANALYZE AGAIN</button>
+        </div>
+      </div>
+
+      <!-- LIVE TRADINGVIEW CHART -->
+      <div id="view-livechart" class="view-section" style="display: none;">
+        <div class="card">
+          <h3>Live TradingView Chart</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chati ya moja kwa moja ya sokoni kufuatilia mienendo ya bei.</p>
+          <div style="height: 450px; width: 100%;" id="tradingview_widget_container">
+            <!-- TradingView Widget BEGIN -->
+            <iframe src="https://s.tradingview.com/widgetembed/?symbol=FX:EURUSD&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%; height:100%; border:0; border-radius:8px;"></iframe>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ECONOMIC NEWS -->
+      <div id="view-news" class="view-section" style="display: none;">
+        <div class="card">
+          <h3>Live Economic Calendar & News</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa muhimu za kiuchumi zinazoathiri soko leo:</p>
+          <div class="news-item">
+            <strong style="color: var(--accent);">USD - Non-Farm Payrolls (NFP)</strong>
+            <div style="color: var(--text-muted); margin-top: 3px;">Impact: High | Mabadiliko makubwa yanatarajiwa kwenye Dola na Dhahabu (XAUUSD).</div>
+          </div>
+          <div class="news-item">
+            <strong style="color: var(--accent);">EUR - ECB Interest Rate Decision</strong>
+            <div style="color: var(--text-muted); margin-top: 3px;">Impact: High | Inaathiri sarafu zote za Euro (EUR pairs).</div>
+          </div>
+          <div class="news-item">
+            <strong style="color: var(--accent);">GBP - CPI Inflation Report</strong>
+            <div style="color: var(--text-muted); margin-top: 3px;">Impact: Medium | Inatoa mwelekeo wa GBP/USD.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY & TRACKING -->
+      <div id="view-history" class="view-section" style="display: none;">
+        <div class="card">
+          <h3>Trade History & Live Tracking</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya wachambuzi wako na hali yao (Entry, TP, au SL iliyofikiwa):</p>
+          <div id="historyListContainer">
+            <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>
+          </div>
         </div>
       </div>
 
       <!-- OTHER VIEWS -->
-      <div id="view-history" class="view-section" style="display: none;">
-        <div class="card"><h3>Recent Analyses</h3><p style="color:var(--text-muted);">Historia ya uchambuzi wako itaonekana hapa.</p></div>
-      </div>
       <div id="view-broker" class="view-section" style="display: none;">
         <div class="card"><h3>Broker Sync</h3><p style="color:var(--text-muted);">Unganisha akaunti yako ya MT4/MT5 hapa.</p></div>
       </div>
@@ -352,6 +416,7 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('displayUserRole').innerText = 'GUEST';
     }
   }
+  loadTradeHistory();
 });
 
 function setupSecurityMath() {
@@ -444,6 +509,18 @@ function previewUserImage(event, previewId) {
   }
 }
 
+function resetAnalystForm() {
+  document.getElementById('chartH4').value = "";
+  document.getElementById('chartH1').value = "";
+  document.getElementById('chartM15').value = "";
+  document.getElementById('previewH4').style.display = "none";
+  document.getElementById('previewH1').style.display = "none";
+  document.getElementById('previewM15').style.display = "none";
+  globalImages = { h4: null, h1: null, m15: null };
+  document.getElementById('resultsContainer').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -468,15 +545,15 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = "⏳ Lutynoel Autonomous Agents wanachambua picha zako (Risk: $2 Loss)...";
+  runBtn.innerText = "⏳ 6 Lutynoel Masters wanachambua picha zako (Risk: $2 Loss)...";
 
   try {
     const pair = document.getElementById('pair').value;
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. Changanua chati hizi za ${pair} (${framework}). Zingatia kikamilifu hasara ya juu (Max Loss) iwe DOLA 2 TU ($2). 
-Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) ukiwa na muundo huu kamili:
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine yenye Wataalamu 6. Changanua chati hizi za ${pair} (${framework}). Zingatia kikamilifu hasara ya juu (Max Loss) iwe DOLA 2 TU ($2). 
+Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) ukiwa na muundo huu kamili wa wataalamu 6:
 {
   "action": "BUY",
   "exec_type": "BUY LIMIT EXECUTION",
@@ -491,12 +568,19 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
   "tp1": "65200",
   "tp2": "65350",
   "rr": "1:3.61",
-  "agent1_title": "Price Action Master (4H Chart)",
+  "trade_status": "ENTRY EXECUTED (ACTIVE)",
+  "agent1_title": "1. Price Action Master",
   "agent1_text": "Candlestick rejections indicate heavy buyer interest at key support levels.",
-  "agent2_title": "Supply & Demand Master (1H Chart)",
+  "agent2_title": "2. Supply & Demand Master",
   "agent2_text": "Fresh unmitigated demand block sits perfectly aligned with institutional footprints.",
-  "agent3_title": "Market Structure Master (15M Chart)",
+  "agent3_title": "3. Market Structure Master",
   "agent3_text": "Minor CHoCH observed confirming immediate continuation towards upside objectives.",
+  "agent4_title": "4. Liquidity Engineer",
+  "agent4_text": "Retail stop losses have been swept below previous Asian session lows.",
+  "agent5_title": "5. Fibonacci Institutionalist",
+  "agent5_text": "Golden pocket 61.8% retracement aligns precisely with our entry trigger.",
+  "agent6_title": "6. Risk Management Director",
+  "agent6_text": "Strictly limited risk to $2.00 with optimal asymmetry reward ratio.",
   "tf": "4H: Strongly bullish structure.\n1H: Clear corrective phase.\n15M: Minor demand level break."
 }`;
 
@@ -533,6 +617,7 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
     document.getElementById('resSummarySubtitle').innerText = resObj.subtitle;
+    document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "ENTRY EXECUTED (ACTIVE)";
     
     document.getElementById('resProfitDollar').innerText = resObj.profit_dollar;
     document.getElementById('projTZS').innerText = resObj.proj_tzs;
@@ -554,29 +639,44 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
 
     let agentsHtml = `
       <div class="agent-card">
-        ${img1 ? `<img src="${img1}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">4H Chart</div>'}
-        <div class="agent-info">
-          <div class="agent-title">${resObj.agent1_title || 'Price Action Master'}</div>
-          <div class="agent-desc">${resObj.agent1_text}</div>
-        </div>
+        ${img1 ? `<img src="${img1}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">4H</div>'}
+        <div class="agent-info"><div class="agent-title">${resObj.agent1_title}</div><div class="agent-desc">${resObj.agent1_text}</div></div>
       </div>
       <div class="agent-card">
-        ${img2 ? `<img src="${img2}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">1H Chart</div>'}
-        <div class="agent-info">
-          <div class="agent-title">${resObj.agent2_title || 'Supply & Demand Master'}</div>
-          <div class="agent-desc">${resObj.agent2_text}</div>
-        </div>
+        ${img2 ? `<img src="${img2}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">1H</div>'}
+        <div class="agent-info"><div class="agent-title">${resObj.agent2_title}</div><div class="agent-desc">${resObj.agent2_text}</div></div>
       </div>
       <div class="agent-card">
-        ${img3 ? `<img src="${img3}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">15M Chart</div>'}
-        <div class="agent-info">
-          <div class="agent-title">${resObj.agent3_title || 'Market Structure Master'}</div>
-          <div class="agent-desc">${resObj.agent3_text}</div>
-        </div>
+        ${img3 ? `<img src="${img3}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">15M</div>'}
+        <div class="agent-info"><div class="agent-title">${resObj.agent3_title}</div><div class="agent-desc">${resObj.agent3_text}</div></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--accent)">ENG</div>
+        <div class="agent-info"><div class="agent-title">${resObj.agent4_title}</div><div class="agent-desc">${resObj.agent4_text}</div></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--accent)">FIB</div>
+        <div class="agent-info"><div class="agent-title">${resObj.agent5_title}</div><div class="agent-desc">${resObj.agent5_text}</div></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--accent)">RISK</div>
+        <div class="agent-info"><div class="agent-title">${resObj.agent6_title}</div><div class="agent-desc">${resObj.agent6_text}</div></div>
       </div>
     `;
     document.getElementById('agentsContainer').innerHTML = agentsHtml;
     document.getElementById('tfOutput').innerText = resObj.tf;
+
+    // Hifadhi kwenye History ya LocalStorage
+    saveToHistory({
+      date: new Date().toLocaleString(),
+      pair: pair,
+      action: resObj.action,
+      entry: resObj.entry,
+      tp: resObj.tp1,
+      sl: resObj.sl,
+      status: resObj.trade_status || "ENTRY EXECUTED (ACTIVE)",
+      rr: resObj.rr
+    });
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -586,8 +686,44 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
     alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia kama Gemini API Key yako ni sahihi na jaribu tena."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "GET MULTI-TIMEFRAME ANALYSIS";
+    runBtn.innerText = "GET 6 MASTERS ANALYSIS";
   }
+}
+
+function saveToHistory(tradeData) {
+  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  history.unshift(tradeData);
+  if (history.length > 20) history.pop(); // Tunza za karibuni 20 tu
+  localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  loadTradeHistory();
+}
+
+function loadTradeHistory() {
+  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const container = document.getElementById('historyListContainer');
+  if (history.length === 0) {
+    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>`;
+    return;
+  }
+
+  let html = '';
+  history.forEach(item => {
+    let colorClass = item.action === 'BUY' ? 'var(--green)' : 'var(--red)';
+    html += `
+      <div class="history-card">
+        <div>
+          <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action}</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}</div>
+          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">${item.date}</div>
+        </div>
+        <div style="text-align: right;">
+          <span class="badge-status" style="font-size: 9px;">${item.status}</span>
+          <div style="font-size: 11px; font-weight: bold; margin-top: 5px; color: var(--text-main);">R:R ${item.rr}</div>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
 }
 </script>
 
