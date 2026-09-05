@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -49,8 +47,10 @@
     /* FORM & INPUTS */
     label { font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
     input, select { width: 100%; padding: 12px; background: #08080a; color: #fff; border: 1px solid var(--card-border); border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; font-size: 14px; }
-    button.primary-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; }
+    button.primary-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; margin-top: 5px; }
     button.primary-btn:hover { background: var(--accent-hover); }
+    button.secondary-btn { width: 100%; padding: 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; margin-top: 8px; }
+    button.secondary-btn:hover { background: rgba(251,191,36,0.1); }
     button:disabled { background: #3f3f46; color: #a1a1aa; cursor: not-allowed; }
 
     /* UPLOAD DROPZONES */
@@ -85,6 +85,7 @@
 </head>
 <body>
 
+  <!-- ================= AUTH SCREENS ================= -->
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
@@ -101,9 +102,11 @@
         <input type="number" id="mathA1" placeholder="Weka jibu hapa">
 
         <label>Gemini API Key (API Token):</label>
-        <input type="text" id="authApiKey" placeholder="Weka API Key hapa (AIzaSy... au AQ...)">
+        <input type="text" id="authApiKey" placeholder="Weka API Key hapa (AIzaSy...)">
 
         <button class="primary-btn" onclick="handleLogin()">Sign In</button>
+        <button class="secondary-btn" onclick="handleGuestLogin()">Ingia Kama Mgeni (Guest)</button>
+
         <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
           Don't have an account? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('register')">Create Account</span>
         </div>
@@ -121,7 +124,7 @@
         <input type="number" id="mathA2" placeholder="Weka jibu hapa">
 
         <label>Gemini API Key (API Token):</label>
-        <input type="text" id="regApiKey" placeholder="Weka API Key hapa (AIzaSy... au AQ...)">
+        <input type="text" id="regApiKey" placeholder="Weka API Key hapa (AIzaSy...)">
 
         <button class="primary-btn" onclick="handleRegister()">Create Account</button>
         <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
@@ -131,6 +134,7 @@
     </div>
   </div>
 
+  <!-- ================= MAIN APP INTERFACE ================= -->
   <div id="appInterface">
     <header>
       <div style="display: flex; align-items: center; gap: 12px;">
@@ -145,6 +149,7 @@
       </div>
     </header>
 
+    <!-- SIDEBAR MENU -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
         <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX</div>
@@ -159,9 +164,10 @@
     </div>
 
     <div class="main-content">
+      <!-- DASHBOARD OVERVIEW -->
       <div id="view-overview" class="view-section">
         <div class="card" style="border-left: 4px solid var(--accent);">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v4.0</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v4.1</div>
           <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Master Markets with AI Precision</h2>
           <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Four autonomous agents. Fixed Risk $2 Loss Protocol. Built for traders who demand institutional-grade signal clarity.</p>
           <button class="primary-btn" onclick="navigate('analyst')" style="margin-top: 10px;">Start Trading →</button>
@@ -179,6 +185,7 @@
         </div>
       </div>
 
+      <!-- AI ON-CHART ANALYST -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB</div>
@@ -201,6 +208,7 @@
             <option value="Swing Trader">Swing Trader (HTF Setup)</option>
           </select>
 
+          <!-- UPLOAD 4H -->
           <label style="margin-top: 15px;">Required Market Timeframe: 4H Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
@@ -209,6 +217,7 @@
             <img id="previewH4" class="preview-img">
           </div>
 
+          <!-- UPLOAD 1H -->
           <label>Required Market Timeframe: 1H Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
@@ -217,6 +226,7 @@
             <img id="previewH1" class="preview-img">
           </div>
 
+          <!-- UPLOAD 15M -->
           <label>Required Market Timeframe: 15M Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
@@ -228,7 +238,9 @@
           <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET MULTI-TIMEFRAME ANALYSIS</button>
         </div>
 
+        <!-- RESULTS CARD (BALLISTIC STYLE) -->
         <div id="resultsContainer" style="display: none;">
+          <!-- 1. ACTION & EXECUTION CARD -->
           <div class="card" style="text-align: center; border-color: var(--green);">
             <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAU/USD</div>
             <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Day Trader</div>
@@ -243,6 +255,7 @@
             <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">15m Bearish CHoCH into 1H Demand</div>
           </div>
 
+          <!-- 2. BALLISTIC AI INSIGHT -->
           <div class="card">
             <div class="ballistic-header">
               <span>🧮</span> INSTITUTIONAL INTEL: BALLISTIC AI INSIGHT ($2 LOSS PROTOCOL)
@@ -265,6 +278,7 @@
             </div>
           </div>
 
+          <!-- 3. PRE-FLIGHT PROTOCOL -->
           <div class="card">
             <div class="ballistic-header">🛡️ PRE-FLIGHT PROTOCOL</div>
             <div class="checklist-item"><span>✓</span> <span id="chk1">15m Mitigation of Demand Zone</span></div>
@@ -272,6 +286,7 @@
             <div class="checklist-item"><span>✓</span> <span id="chk3">Price in Discount (below 50% retracement)</span></div>
           </div>
 
+          <!-- 4. ENTRY, SL, TP & R:R GRID -->
           <div class="card">
             <div class="grid-2">
               <div class="mini-box"><label>ENTRY</label><div id="valEntry" style="font-size: 16px; font-weight: bold;">64730</div></div>
@@ -287,12 +302,15 @@
             </div>
           </div>
 
+          <!-- 5. SPECIALIST CONSULTATION (AGENTS WITH CHART IMAGES) -->
           <div class="card">
             <div class="ballistic-header">👥 SPECIALIST CONSULTATION (AGENTS & CHARTS)</div>
             <div id="agentsContainer">
-               </div>
+               <!-- Zitajazwa na JavaScript -->
+            </div>
           </div>
 
+          <!-- 6. MULTI-TIMEFRAME CONFLUENCE -->
           <div class="card">
             <div class="ballistic-header">⏳ MULTI-TIMEFRAME CONFLUENCE</div>
             <div id="tfOutput" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;"></div>
@@ -302,6 +320,7 @@
         </div>
       </div>
 
+      <!-- OTHER VIEWS -->
       <div id="view-history" class="view-section" style="display: none;">
         <div class="card"><h3>Recent Analyses</h3><p style="color:var(--text-muted);">Historia ya uchambuzi wako itaonekana hapa.</p></div>
       </div>
@@ -318,8 +337,8 @@
   </div>
 
 <script>
-let currentMathAns1 = 8;
-let currentMathAns2 = 14;
+let currentMathAns1 = 0;
+let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -328,17 +347,23 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedUser) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
+    
+    // Kama ni mgeni, badilisha jina la PRO liwe GUEST
+    if(savedUser.includes('guest')) {
+      document.getElementById('displayUserRole').innerText = 'GUEST';
+    }
   }
 });
 
 function setupSecurityMath() {
-  const n1 = Math.floor(Math.random() * 10) + 10;
-  const n2 = Math.floor(Math.random() * 5) + 1;
+  // Randomization ya namba za usalama ili zibadilike kila mara
+  const n1 = Math.floor(Math.random() * 20) + 10;
+  const n2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns1 = n1 - n2;
   document.getElementById('mathQ1').innerText = `${n1} - ${n2}`;
 
-  const m1 = Math.floor(Math.random() * 10) + 5;
-  const m2 = Math.floor(Math.random() * 5) + 1;
+  const m1 = Math.floor(Math.random() * 15) + 5;
+  const m2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns2 = m1 + m2;
   document.getElementById('mathQ2').innerText = `${m1} + ${m2}`;
 }
@@ -363,12 +388,26 @@ function handleLogin() {
   const apiKey = document.getElementById('authApiKey').value.trim();
 
   if (!email || !apiKey) { alert("Tafadhali jaza email na Gemini API Key yako!"); return; }
-  if (ans !== currentMathAns1) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
+  if (ans !== currentMathAns1) { alert("Jibu la Security Check si sahihi! Jaribu tena."); setupSecurityMath(); return; }
 
   localStorage.setItem('lutynoel_user', email);
   localStorage.setItem('smc_gemini_key', apiKey);
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
+}
+
+// Sehemu ya Mgeni kuingia moja kwa moja bila akaunti
+function handleGuestLogin() {
+  const guestEmail = "guest_" + Math.random().toString(36).substring(2, 8) + "@lutynoelfx.com";
+  // Weka API Key ya mfano au ruhusu mgeni aweke baadaye, hapa tunatumia default au kuangalia kama ipo
+  const defaultKey = prompt("Weka Gemini API Key yako ili mgeni atumie AI:", "");
+  if (!defaultKey) { alert("API Key inahitajika ili mfumo ufanye kazi."); return; }
+
+  localStorage.setItem('lutynoel_user', guestEmail);
+  localStorage.setItem('smc_gemini_key', defaultKey.trim());
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appInterface').style.display = 'block';
+  document.getElementById('displayUserRole').innerText = 'GUEST';
 }
 
 function handleRegister() {
@@ -378,7 +417,7 @@ function handleRegister() {
   const apiKey = document.getElementById('regApiKey').value.trim();
 
   if (!name || !email || !apiKey) { alert("Tafadhali jaza taarifa zote na Gemini API Key yako!"); return; }
-  if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
+  if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi! Jaribu tena."); setupSecurityMath(); return; }
 
   localStorage.setItem('lutynoel_user', email);
   localStorage.setItem('smc_gemini_key', apiKey);
@@ -441,11 +480,11 @@ async function runLutynoelAnalysis() {
     const parts = [];
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. Changanua chati hizi za ${pair} (${framework}). Zingatia kikamilifu hasara ya juu (Max Loss) iwe DOLA 2 TU ($2). 
-Wasilisha majibu katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) ukiwa na muundo huu kamili:
+Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) ukiwa na muundo huu kamili:
 {
   "action": "BUY",
   "exec_type": "BUY LIMIT EXECUTION",
-  "subtitle": "15m mitigation of demand zone and bullish alignment",
+  "subtitle": "Mitigation of demand zone and bullish alignment",
   "profit_dollar": "$7.22",
   "proj_tzs": "TZS 19,850",
   "chk1": "15m Mitigation of Demand Zone",
@@ -470,7 +509,7 @@ Wasilisha majibu katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) u
     if (h1Input.files.length > 0) parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     if (m15Input.files.length > 0) parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -478,9 +517,20 @@ Wasilisha majibu katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) u
     });
 
     const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error.message || "Gemini API Error");
+    }
+
     let rawText = data.candidates[0].content.parts[0].text;
     
-    rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+    // Robuste JSON extraction endapo AI italeta maandishi ya ziada
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      rawText = jsonMatch[0];
+    } else {
+      rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+    }
+    
     const resObj = JSON.parse(rawText);
 
     document.getElementById('resPairBadge').innerText = pair;
@@ -537,7 +587,9 @@ Wasilisha majibu katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) u
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
-    alert("Imeshindikana kusoma majibu ya AI. Tafadhali hakikisha picha zako ziko wazi.");
+    // AI Error Logging wazi zaidi
+    console.error("Lutynoel FX AI Error Log:", err);
+    alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia kama Gemini API Key yako ni sahihi na jaribu tena."));
   } finally {
     runBtn.disabled = false;
     runBtn.innerText = "GET MULTI-TIMEFRAME ANALYSIS";
