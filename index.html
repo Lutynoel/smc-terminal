@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,33 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SMC & ICT 6-Master AI Terminal</title>
   <style>
-    body { background-color: #12161f; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 15px; }
-    .card { background: #1e222d; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #2a2e39; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-    select, input[type="file"], input[type="text"] { width: 100%; padding: 12px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 6px; box-sizing: border-box; margin-top: 5px; font-size: 14px; }
-    button { width: 100%; padding: 14px; background: #089981; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
-    button:hover { background: #07856d; }
-    button:disabled { background: #5d606b; cursor: not-allowed; }
-    .result-box { background: #131722; padding: 18px; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.6; min-height: 120px; border: 1px solid #2a2e39; color: #e1e4ed; }
-    label { font-size: 13px; color: #848e9c; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; }
+    .header-profile { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 12px 18px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 15px; }
+    .profile-info { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
+    .card { background: var(--card-bg); padding: 18px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+    select, input[type="file"], input[type="text"], input[type="password"] { width: 100%; padding: 12px; background: #0f172a; color: #fff; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; margin-top: 6px; font-size: 14px; }
+    button { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+    button:hover { background: var(--accent-hover); }
+    button:disabled { background: #475569; cursor: not-allowed; }
+    .result-box { background: #0f172a; padding: 18px; border-radius: 8px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.6; min-height: 150px; border: 1px solid var(--border); color: #e2e8f0; }
+    label { font-size: 12px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
     .tf-group { margin-bottom: 15px; }
-    h2 { color: #f0b90b; letter-spacing: 0.5px; }
-    h3 { color: #d1d4dc; font-size: 16px; margin-top: 0; }
+    .preview-container { display: flex; gap: 10px; margin-top: 8px; overflow-x: auto; }
+    .preview-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--accent); display: none; }
+    h2 { color: #fbbf24; font-size: 20px; text-align: center; margin: 10px 0 20px 0; }
+    h3 { color: #f1f5f9; font-size: 15px; margin-top: 0; display: flex; align-items: center; gap: 8px; }
+    .badge { background: #3b82f6; color: white; font-size: 11px; padding: 2px 8px; border-radius: 12px; }
   </style>
 </head>
 <body>
 
-  <h2 style="text-align: center;">⚡ SMC & ICT 6-MASTER AI TERMINAL ⚡</h2>
+  <h2>⚡ SMC & ICT 6-MASTER AI TERMINAL ⚡</h2>
 
-  <!-- 0. API KEY CONFIG -->
+  <!-- PROFILE / AUTH PANEL -->
+  <div class="header-profile">
+    <div class="profile-info">
+      <div class="avatar">TR</div>
+      <div>
+        <div style="font-weight: bold; font-size: 14px;">Trader Profile</div>
+        <div style="font-size: 11px; color: var(--accent);">Status: Active & Authenticated</div>
+      </div>
+    </div>
+    <button onclick="clearData()" style="width: auto; padding: 6px 12px; font-size: 12px; background: #ef4444; margin:0;">Weka Upya</button>
+  </div>
+
+  <!-- 0. API KEY CONFIG & MEMORY -->
   <div class="card">
-    <h3>0. Weka Gemini API Key Yako</h3>
-    <label>API Key (Inayoanza na AIzaSy... au token yako):</label>
-    <input type="text" id="apiKeyInput" placeholder="Weka API Key yako hapa..." value="">
+    <h3>🔑 0. Credentials & Memory Setup</h3>
+    <label>Gemini API Key (Inahifadhiwa kwenye simu yako moja kwa moja):</label>
+    <input type="text" id="apiKeyInput" placeholder="Weka key hapa (AIzaSy... au AQ...)">
   </div>
 
   <!-- 1. PAIR SELECTOR -->
   <div class="card">
-    <h3>1. Chagua Market / Pair</h3>
+    <h3>📈 1. Chagua Market / Pair</h3>
     <select id="pair">
       <option value="XAUUSD">XAU/USD (Gold)</option>
       <option value="BTCUSD">BTC/USD (Bitcoin)</option>
@@ -47,37 +73,63 @@
     </select>
   </div>
 
-  <!-- 2. UPLOAD MULTIPLE TIMEFRAMES -->
+  <!-- 2. UPLOAD MULTIPLE TIMEFRAMES WITH PREVIEWS -->
   <div class="card">
-    <h3>2. Upload Timeframe Screenshots</h3>
+    <h3>🖼️ 2. Upload Timeframe Screenshots (H4, H1, M15)</h3>
     
     <div class="tf-group">
       <label>H4 Chart (Trend & HTF Order Blocks):</label>
-      <input type="file" id="chartH4" accept="image/*">
+      <input type="file" id="chartH4" accept="image/*" onchange="previewImage(event, 'previewH4')">
+      <img id="previewH4" class="preview-thumb">
     </div>
 
     <div class="tf-group">
       <label>H1 Chart (Liquidity Sweeps & Structure):</label>
-      <input type="file" id="chartH1" accept="image/*">
+      <input type="file" id="chartH1" accept="image/*" onchange="previewImage(event, 'previewH1')">
+      <img id="previewH1" class="preview-thumb">
     </div>
 
     <div class="tf-group">
       <label>M15 Chart (Entry Signal, CHoCH, FVG):</label>
-      <input type="file" id="chartM15" accept="image/*">
+      <input type="file" id="chartM15" accept="image/*" onchange="previewImage(event, 'previewM15')">
+      <img id="previewM15" class="preview-thumb">
     </div>
   </div>
 
   <!-- RUN BUTTON -->
-  <button id="runBtn" onclick="analyzeChart()">RUN VISION AI ANALYSIS</button>
+  <button id="runBtn" onclick="analyzeChart()">RUN 6-MASTER VISION ANALYSIS</button>
 
   <!-- 3. OUTPUT AREA -->
   <div class="card" style="margin-top: 15px;">
-    <h3>3. Maoni ya Masters 6 Mmoja Mmoja & Hitimisho</h3>
-    <div id="status" style="color: #f0b90b; font-size: 13px; margin-bottom: 8px; font-weight: bold;"></div>
-    <div id="output" class="result-box">Uchambuzi wa kila master, mtazamo wa pamoja, na viwango vya fedha (USD & TZS) vitaonekana hapa...</div>
+    <h3>📊 3. Uchambuzi wa Masters 6 na Hesabu za Hatari</h3>
+    <div id="status" style="color: #fbbf24; font-size: 13px; margin-bottom: 8px; font-weight: bold;"></div>
+    <div id="output" class="result-box">Matokeo ya uchambuzi wa Masters 6 kulingana na chati zilizowekwa yataonekana hapa...</div>
   </div>
 
 <script>
+// Auto-load saved API key on startup
+window.addEventListener('DOMContentLoaded', () => {
+  const savedKey = localStorage.getItem('smc_gemini_key');
+  if (savedKey) {
+    document.getElementById('apiKeyInput').value = savedKey;
+  }
+});
+
+function previewImage(event, previewId) {
+  const file = event.target.files[0];
+  const preview = document.getElementById(previewId);
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = 'block';
+  }
+}
+
+function clearData() {
+  localStorage.removeItem('smc_gemini_key');
+  document.getElementById('apiKeyInput').value = '';
+  alert("Taarifa zimefutwa kikamilifu kwenye kumbukumbu!");
+}
+
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -98,67 +150,72 @@ async function analyzeChart() {
   const runBtn = document.getElementById('runBtn');
 
   if (!apiKey) {
-    alert("Tafadhali weka API Key yako kwenye eneo namba 0 hapo juu kabla ya kuendesha uchambuzi.");
+    alert("Tafadhali weka API Key yako kwanza kwenye eneo namba 0.");
     return;
   }
 
+  // Save key automatically to browser memory so you don't type it next time
+  localStorage.setItem('smc_gemini_key', apiKey);
+
   if (h4Input.files.length === 0 && h1Input.files.length === 0 && m15Input.files.length === 0) {
-    alert("Tafadhali chagua angalau picha moja ya chati (H4, H1, au M15) kabla ya kuendelea.");
+    alert("Chagua angalau picha moja ya chati (H4, H1, au M15).");
     return;
   }
 
   runBtn.disabled = true;
-  statusDiv.innerText = "⏳ Masters 6 wanatathmini kwa kina kila mmoja kivyake... Tafadhali subiri.";
-  outputDiv.innerText = "Inachakata mitazamo ya kila Master...";
+  statusDiv.innerText = "⏳ Masters 6 wanapitia picha za chati ulizoweka moja moja...";
+  outputDiv.innerText = "Inachambua mtazamo wa kila Master kwa ulinganifu wa chati...";
 
   try {
     const parts = [];
     const pair = document.getElementById('pair').value;
 
-    const promptText = `Wewe ni mfumo wa AI Trading Terminal wenye uchambuzi wa kina kupitia Masters 6 wa Trading. 
-Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ripoti kwa lugha ya Kiswahili iliyogawanyika katika sehemu zifuatazo:
+    const promptText = `Wewe ni mfumo wa AI Trading Terminal unaoongozwa na Masters 6: (1. Price Action Master, 2. Supply & Demand Master, 3. Market Structure Master, 4. Fundamental Analysis Master, 5. SMC Liquidity Master, 6. ICT Concepts Master).
 
-1. MAONI YA MASTERS 6 MMOJA MMOJA (Taja kila mmoja na msimamo wake: BUY, SELL, au WAIT):
-   - Price Action Master: [Mtazamo na sababu fupi]
-   - Supply & Demand Master: [Mtazamo na sababu fupi]
-   - Market Structure Master: [Mtazamo na sababu fupi]
-   - Fundamental Analysis Master: [Mtazamo na sababu fupi]
-   - SMC Liquidity Master: [Mtazamo na sababu fupi]
-   - ICT Concepts Master: [Mtazamo na sababu fupi]
+Changanua picha za chati za pair ya ${pair} ulizopewa (H4, H1, M15). Toa maoni na tathmini ya KILA MASTER KIVYAKE kulingana na kile kinachoonekana kwenye picha za chati hizo.
 
-2. HITIMISHO LA PAMOJA NA CONFIDENCE LEVEL:
-   - Je, wote wamekubaliana (Consensus)? Kama wote wanakubaliana toa **STRONG BUY** au **STRONG SELL**. Kama wanapishana (mfano Price Action anapingana na Demand & Supply) toa **WAIT / STAND ASIDE**.
-   - Confidence Level: Taja wazi kama ni **High**, **Medium**, au **Low** kutokana na kiwango cha makubaliano yao.
+Punguza sana maelezo marefu ya maneno yasiyo na lazima; tumia muundo wa namba na alama fupi.
 
-3. RISK MANAGEMENT & FEDHA (USD & TZS):
-   - Entry Zone: [Eneo la kuingilia]
-   - Stop Loss (SL): [Bei kamili na alama yake]
-   - Take Profit (TP1 & TP2): [Viwango vya malengo]
-   - Makadirio ya Faida (Potential Profit): Dola ($) na thamani yake katika Shilingi za Kitanzania (TZS) (kwa kutumia kiwango cha 1 USD = 2,600 TZS).
-   - Makadirio ya Hasara (Potential Loss / Risk): Dola ($) na TZS endapo SL itapigwa.
-   - Risk to Reward Ratio (R:R).`;
+Pangilia majibu yako hivi:
+1. UCHAMBUZI WA KILA MASTER KUTOKA KWENYE CHATI ZILIZOWEKA:
+   - Price Action Master: [Mtazamo: BUY/SELL/WAIT na sababu fupi ya kile kinachoonekana kwenye chati]
+   - Supply & Demand Master: [Mtazamo na eneo la S&D lililotumika kutoka kwenye picha]
+   - Market Structure Master: [Mtazamo na muundo wa BOS/CHoCH uliopo kwenye chati]
+   - Fundamental Analysis Master: [Mtazamo wa jumla wa soko kwa sasa]
+   - SMC Liquidity Master: [Eneo la Liquidity Sweep au Inducement lililoonekana kwenye picha]
+   - ICT Concepts Master: [Kipengele cha FVG au Order Block kilichotambuliwa kwenye picha]
+
+2. HITIMISHO LA PAMOJA (CONSENSUS & CONFIDENCE):
+   - Msimamo wa Pamoja: [STRONG BUY / STRONG SELL / WAIT]
+   - Confidence Level: [High / Medium / Low]
+
+3. HESABU ZA FEDHA NA HATARI (Zingatia Stop Loss iwe hasara ya DOLA 2 ($2) tu sawa na TZS 5,200):
+   - Entry Price: [Bei]
+   - Stop Loss (SL): [Bei (Hatari: $2 / TZS 5,200)]
+   - Take Profit 1 (TP1): [Bei | Faida: $... / TZS ...]
+   - Take Profit 2 (TP2): [Bei | Faida kubwa zaidi: $... / TZS ...]
+   - Risk to Reward (R:R): [Uwiano]`;
 
     parts.push({ text: promptText });
 
     if (h4Input.files.length > 0) {
       const base64H4 = await fileToBase64(h4Input.files[0]);
-      parts.push({ text: "Hii hapa picha ya H4 Timeframe:" });
+      parts.push({ text: "Hii hapa picha ya chati ya H4:" });
       parts.push({ inline_data: { mime_type: h4Input.files[0].type || "image/png", data: base64H4 } });
     }
 
     if (h1Input.files.length > 0) {
       const base64H1 = await fileToBase64(h1Input.files[0]);
-      parts.push({ text: "Hii hapa picha ya H1 Timeframe:" });
+      parts.push({ text: "Hii hapa picha ya chati ya H1:" });
       parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: base64H1 } });
     }
 
     if (m15Input.files.length > 0) {
       const base64M15 = await fileToBase64(m15Input.files[0]);
-      parts.push({ text: "Hii hapa picha ya M15 Timeframe:" });
+      parts.push({ text: "Hii hapa picha ya chati ya M15:" });
       parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
     }
 
-    // Kutumia API key kupitia URL parameter ya kawaida
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(endpoint, {
@@ -173,7 +230,7 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
       statusDiv.innerText = "Kosa kutoka kwenye API:";
       outputDiv.innerText = JSON.stringify(data.error, null, 2);
     } else if (data.candidates && data.candidates[0].content.parts[0].text) {
-      statusDiv.innerText = "✅ Uchambuzi wa Masters 6 Umekamilika kikamilifu!";
+      statusDiv.innerText = "✅ Uchambuzi wa Masters 6 Kutoka Kwenye Chati Umekamilika!";
       outputDiv.innerText = data.candidates[0].content.parts[0].text;
     } else {
       statusDiv.innerText = "Majibu yasiyotarajiwa:";
@@ -191,3 +248,4 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
 
 </body>
 </html>
+
