@@ -68,8 +68,8 @@
   </div>
 
 <script>
-// WEKA API KEY YAKO HAPA NDANI YA ZILE QUOTES (' ')
-const INTERNAL_API_KEY = 'PASTE_API_KEY_YAKO_HAPA';
+// WEKA API KEY YAKO HALISI MOJA KWA MOJA NDANI YA ZILE QUOTES BELOW:
+const INTERNAL_API_KEY = 'WEKA_GEMINI_API_KEY_YAKO_HAPA';
 
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -89,8 +89,8 @@ async function analyzeChart() {
   const outputDiv = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
 
-  if (!INTERNAL_API_KEY || INTERNAL_API_KEY === 'PASTE_API_KEY_YAKO_HAPA') {
-    alert("Tafadhali weka API Key yako ndani ya kodi kwanza.");
+  if (!INTERNAL_API_KEY || INTERNAL_API_KEY === 'WEKA_GEMINI_API_KEY_YAKO_HAPA') {
+    alert("Tafadhali badilisha 'WEKA_GEMINI_API_KEY_YAKO_HAPA' na uweke API Key yako halisi kwenye kodi kwanza.");
     return;
   }
 
