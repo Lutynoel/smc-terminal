@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -9,7 +8,7 @@
   <style>
     body { background-color: #12161f; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 15px; }
     .card { background: #1e222d; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #2a2e39; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-    select, input[type="file"] { width: 100%; padding: 12px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 6px; box-sizing: border-box; margin-top: 5px; font-size: 14px; }
+    select, input[type="file"], input[type="text"] { width: 100%; padding: 12px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 6px; box-sizing: border-box; margin-top: 5px; font-size: 14px; }
     button { width: 100%; padding: 14px; background: #089981; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
     button:hover { background: #07856d; }
     button:disabled { background: #5d606b; cursor: not-allowed; }
@@ -23,6 +22,13 @@
 <body>
 
   <h2 style="text-align: center;">⚡ SMC & ICT 6-MASTER AI TERMINAL ⚡</h2>
+
+  <!-- 0. API KEY CONFIG -->
+  <div class="card">
+    <h3>0. Weka Gemini API Key Yako</h3>
+    <label>API Key (Inayoanza na AIzaSy... au token yako):</label>
+    <input type="text" id="apiKeyInput" placeholder="Weka API Key yako hapa..." value="">
+  </div>
 
   <!-- 1. PAIR SELECTOR -->
   <div class="card">
@@ -72,9 +78,6 @@
   </div>
 
 <script>
-// Token yako ya AQ... imewekwa kwenye mfumo wa Bearer Token Authentication
-const AUTH_TOKEN = 'AQ.Ab8RN6J_L-c-OjiB3B7PFYUngFo2D5...';
-
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -85,6 +88,7 @@ async function fileToBase64(file) {
 }
 
 async function analyzeChart() {
+  const apiKey = document.getElementById('apiKeyInput').value.trim();
   const h4Input = document.getElementById('chartH4');
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
@@ -92,6 +96,11 @@ async function analyzeChart() {
   const statusDiv = document.getElementById('status');
   const outputDiv = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
+
+  if (!apiKey) {
+    alert("Tafadhali weka API Key yako kwenye eneo namba 0 hapo juu kabla ya kuendesha uchambuzi.");
+    return;
+  }
 
   if (h4Input.files.length === 0 && h1Input.files.length === 0 && m15Input.files.length === 0) {
     alert("Tafadhali chagua angalau picha moja ya chati (H4, H1, au M15) kabla ya kuendelea.");
@@ -149,15 +158,12 @@ Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ri
       parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
     }
 
-    // Endpoint inayotumia Bearer Token authorization kwa ajili ya token za AQ...
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent`;
+    // Kutumia API key kupitia URL parameter ya kawaida
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${AUTH_TOKEN}`
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ contents: [{ parts: parts }] })
     });
 
