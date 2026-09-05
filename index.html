@@ -68,8 +68,8 @@
   </div>
 
 <script>
-// WEKA API KEY YAKO HALISI MOJA KWA MOJA NDANI YA ZILE QUOTES BELOW:
-const INTERNAL_API_KEY = 'WEKA_GEMINI_API_KEY_YAKO_HAPA';
+// API Key imewekwa rasmi na haitakuuliza tena
+const INTERNAL_API_KEY = 'AQ.Ab8RN6KBdwPCMJPh6-H6H051H-aOt7jRsq6zg8d2VHSrDyuK6w';
 
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -88,11 +88,6 @@ async function analyzeChart() {
   const statusDiv = document.getElementById('status');
   const outputDiv = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
-
-  if (!INTERNAL_API_KEY || INTERNAL_API_KEY === 'WEKA_GEMINI_API_KEY_YAKO_HAPA') {
-    alert("Tafadhali badilisha 'WEKA_GEMINI_API_KEY_YAKO_HAPA' na uweke API Key yako halisi kwenye kodi kwanza.");
-    return;
-  }
 
   if (h4Input.files.length === 0 && h1Input.files.length === 0 && m15Input.files.length === 0) {
     alert("Tafadhali chagua angalau picha moja ya chati (H4, H1, au M15) kabla ya kuendelea.");
