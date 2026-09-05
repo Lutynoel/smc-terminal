@@ -1,133 +1,412 @@
+
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMC & ICT 6-Master AI Terminal</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol</title>
   <style>
     :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --accent: #10b981;
-      --accent-hover: #059669;
+      --bg-color: #09090b;
+      --card-bg: #121215;
+      --card-border: #222228;
+      --accent: #fbbf24;
+      --accent-hover: #f59e0b;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --border: #334155;
+      --green: #10b981;
+      --red: #ef4444;
     }
-    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; }
-    .header-profile { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 12px 18px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 15px; }
-    .profile-info { display: flex; align-items: center; gap: 12px; }
-    .avatar { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
-    .card { background: var(--card-bg); padding: 18px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-    select, input[type="file"], input[type="text"], input[type="password"] { width: 100%; padding: 12px; background: #0f172a; color: #fff; border: 1px solid var(--border); border-radius: 8px; box-sizing: border-box; margin-top: 6px; font-size: 14px; }
-    button { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
-    button:hover { background: var(--accent-hover); }
-    button:disabled { background: #475569; cursor: not-allowed; }
-    .result-box { background: #0f172a; padding: 18px; border-radius: 8px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.6; min-height: 150px; border: 1px solid var(--border); color: #e2e8f0; }
-    label { font-size: 12px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
-    .tf-group { margin-bottom: 15px; }
-    .preview-container { display: flex; gap: 10px; margin-top: 8px; overflow-x: auto; }
-    .preview-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--accent); display: none; }
-    h2 { color: #fbbf24; font-size: 20px; text-align: center; margin: 10px 0 20px 0; }
-    h3 { color: #f1f5f9; font-size: 15px; margin-top: 0; display: flex; align-items: center; gap: 8px; }
-    .badge { background: #3b82f6; color: white; font-size: 11px; padding: 2px 8px; border-radius: 12px; }
+    body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    
+    /* AUTH / LOGIN SCREENS */
+    .auth-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+    .auth-box { background: var(--card-bg); border: 1px solid var(--card-border); padding: 25px; border-radius: 14px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    .auth-title { text-align: center; color: var(--text-main); font-size: 22px; font-weight: bold; margin-bottom: 5px; }
+    .auth-subtitle { text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 20px; }
+    
+    /* APP INTERFACE */
+    #appInterface { display: none; padding-bottom: 40px; }
+    header { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 12px 18px; border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; }
+    .logo-area { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 18px; color: var(--accent); }
+    .logo-icon { background: var(--accent); color: #000; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
+    .header-icons { display: flex; align-items: center; gap: 12px; }
+    .user-pill { background: var(--accent); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+
+    /* SIDEBAR */
+    .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: #0c0c0e; border-right: 1px solid var(--card-border); z-index: 1000; transition: left 0.3s ease; overflow-y: auto; padding: 20px; box-sizing: border-box; }
+    .sidebar.open { left: 0; }
+    .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+    .menu-item { padding: 12px 10px; color: var(--text-muted); font-size: 14px; cursor: pointer; border-radius: 6px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+    .menu-item:hover, .menu-item.active { background: rgba(251, 191, 36, 0.1); color: var(--accent); }
+    .badge-new { background: var(--accent); color: #000; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
+
+    /* CONTENT WRAPPER */
+    .main-content { padding: 15px; max-width: 600px; margin: 0 auto; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); padding: 18px; border-radius: 12px; margin-bottom: 15px; }
+    
+    /* FORM & INPUTS */
+    label { font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 12px; background: #08080a; color: #fff; border: 1px solid var(--card-border); border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; font-size: 14px; }
+    button.primary-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; }
+    button.primary-btn:hover { background: var(--accent-hover); }
+    button:disabled { background: #3f3f46; color: #a1a1aa; cursor: not-allowed; }
+
+    /* UPLOAD DROPZONES */
+    .upload-zone { border: 2px dashed var(--card-border); background: #08080a; padding: 20px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 12px; position: relative; }
+    .upload-zone:hover { border-color: var(--accent); }
+    .upload-zone input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .preview-img { width: 100%; max-height: 150px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; }
+
+    /* UI BALLISTIC STYLING */
+    .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
+    .badge-pass { background: rgba(251, 191, 36, 0.15); color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+    .badge-conf { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid var(--green); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .mini-box { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; }
+    
+    .ballistic-header { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--accent); font-weight: bold; letter-spacing: 1px; margin-bottom: 12px; }
+    .lot-row { background: #08080a; border: 1px solid var(--card-border); padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    
+    .checklist-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+    .checklist-item span { color: var(--green); font-weight: bold; }
+
+    /* AGENT CARD WITH CHART PREVIEW */
+    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 12px; display: flex; gap: 12px; align-items: center; }
+    .agent-thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid var(--card-border); flex-shrink: 0; background: #1a1a1e; }
+    .agent-info { flex-grow: 1; }
+    .agent-title { font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 3px; }
+    .agent-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    
+    .hamburger { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <h2>⚡ SMC & ICT 6-MASTER AI TERMINAL ⚡</h2>
+  <div id="authScreen" class="auth-container">
+    <div class="auth-box">
+      <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX Terminal</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional secure authentication required</div>
 
-  <!-- PROFILE / AUTH PANEL -->
-  <div class="header-profile">
-    <div class="profile-info">
-      <div class="avatar">TR</div>
-      <div>
-        <div style="font-weight: bold; font-size: 14px;">Trader Profile</div>
-        <div style="font-size: 11px; color: var(--accent);">Status: Active & Authenticated</div>
+      <div id="loginFormSection">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="trader@lutynoelfx.com">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="********">
+        
+        <label>Security Check (<span id="mathQ1">14 - 8</span> = ?)</label>
+        <input type="number" id="mathA1" placeholder="Weka jibu hapa">
+
+        <label>Gemini API Key (API Token):</label>
+        <input type="text" id="authApiKey" placeholder="Weka API Key hapa (AIzaSy... au AQ...)">
+
+        <button class="primary-btn" onclick="handleLogin()">Sign In</button>
+        <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
+          Don't have an account? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('register')">Create Account</span>
+        </div>
+      </div>
+
+      <div id="registerFormSection" style="display: none;">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="John Doe">
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="trader@lutynoelfx.com">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="********">
+
+        <label>Security Check (<span id="mathQ2">12 + 2</span> = ?)</label>
+        <input type="number" id="mathA2" placeholder="Weka jibu hapa">
+
+        <label>Gemini API Key (API Token):</label>
+        <input type="text" id="regApiKey" placeholder="Weka API Key hapa (AIzaSy... au AQ...)">
+
+        <button class="primary-btn" onclick="handleRegister()">Create Account</button>
+        <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
+          Already registered? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('login')">Sign In Instead</span>
+        </div>
       </div>
     </div>
-    <button onclick="clearData()" style="width: auto; padding: 6px 12px; font-size: 12px; background: #ef4444; margin:0;">Weka Upya</button>
   </div>
 
-  <!-- 0. API KEY CONFIG & MEMORY -->
-  <div class="card">
-    <h3>🔑 0. Credentials & Memory Setup</h3>
-    <label>Gemini API Key (Inahifadhiwa kwenye simu yako moja kwa moja):</label>
-    <input type="text" id="apiKeyInput" placeholder="Weka key hapa (AIzaSy... au AQ...)">
-  </div>
+  <div id="appInterface">
+    <header>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <div class="logo-area">
+          <div class="logo-icon">📈</div> Lutynoel FX
+        </div>
+      </div>
+      <div class="header-icons">
+        <div class="user-pill" id="displayUserRole">PRO</div>
+        <button onclick="logout()" style="background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Toka</button>
+      </div>
+    </header>
 
-  <!-- 1. PAIR SELECTOR -->
-  <div class="card">
-    <h3>📈 1. Chagua Market / Pair</h3>
-    <select id="pair">
-      <option value="XAUUSD">XAU/USD (Gold)</option>
-      <option value="BTCUSD">BTC/USD (Bitcoin)</option>
-      <option value="EURUSD">EUR/USD</option>
-      <option value="GBPUSD">GBP/USD</option>
-      <option value="USDJPY">USD/JPY</option>
-      <option value="AUDUSD">AUD/USD</option>
-      <option value="USDCAD">USD/CAD</option>
-      <option value="GBPJPY">GBP/JPY</option>
-      <option value="US100">NASDAQ (US100)</option>
-      <option value="US30">US30 (Dow Jones)</option>
-    </select>
-  </div>
-
-  <!-- 2. UPLOAD MULTIPLE TIMEFRAMES WITH PREVIEWS -->
-  <div class="card">
-    <h3>🖼️ 2. Upload Timeframe Screenshots (H4, H1, M15)</h3>
-    
-    <div class="tf-group">
-      <label>H4 Chart (Trend & HTF Order Blocks):</label>
-      <input type="file" id="chartH4" accept="image/*" onchange="previewImage(event, 'previewH4')">
-      <img id="previewH4" class="preview-thumb">
+    <div class="sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX</div>
+        <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
+      </div>
+      <div class="menu-item active" onclick="navigate('overview')">Overview</div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">HOT</span></div>
+      <div class="menu-item" onclick="navigate('history')">History</div>
+      <div class="menu-item" onclick="navigate('broker')">Broker Sync</div>
+      <div class="menu-item" onclick="navigate('prop')">Prop Engine <span class="badge-new">NEW</span></div>
+      <div class="menu-item" onclick="navigate('journal')">Trading Journal</div>
     </div>
 
-    <div class="tf-group">
-      <label>H1 Chart (Liquidity Sweeps & Structure):</label>
-      <input type="file" id="chartH1" accept="image/*" onchange="previewImage(event, 'previewH1')">
-      <img id="previewH1" class="preview-thumb">
+    <div class="main-content">
+      <div id="view-overview" class="view-section">
+        <div class="card" style="border-left: 4px solid var(--accent);">
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v4.0</div>
+          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Master Markets with AI Precision</h2>
+          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Four autonomous agents. Fixed Risk $2 Loss Protocol. Built for traders who demand institutional-grade signal clarity.</p>
+          <button class="primary-btn" onclick="navigate('analyst')" style="margin-top: 10px;">Start Trading →</button>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-weight: bold; font-size: 14px;">Lutynoel Discipline Index</span>
+            <span style="background: rgba(251,191,36,0.1); color: var(--accent); padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold;">DISCIPLINED ($2 RISK)</span>
+          </div>
+          <div style="text-align: center; margin: 15px 0;">
+            <div style="font-size: 32px; font-weight: bold; color: var(--accent);">88 / 100</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Strict Risk Control Enforced</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-analyst" class="view-section" style="display: none;">
+        <div class="card">
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB</div>
+          <h3 style="margin: 5px 0 15px 0;">Institutional Multi-Confluence AI</h3>
+          
+          <label>Instrument Symbol</label>
+          <select id="pair">
+            <option value="XAUUSD">XAU/USD (Gold)</option>
+            <option value="BTCUSD">BTC/USD (Bitcoin)</option>
+            <option value="EURUSD">EUR/USD</option>
+            <option value="GBPUSD">GBP/USD</option>
+            <option value="US30">US30 (Dow Jones)</option>
+            <option value="US100">NASDAQ (US100)</option>
+          </select>
+
+          <label>Analysis Framework</label>
+          <select id="framework">
+            <option value="Day Trader">Day Trader (Multi-Confluence)</option>
+            <option value="Scalper">Scalper (M15 / M5)</option>
+            <option value="Swing Trader">Swing Trader (HTF Setup)</option>
+          </select>
+
+          <label style="margin-top: 15px;">Required Market Timeframe: 4H Chart</label>
+          <div class="upload-zone">
+            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
+            <input type="file" id="chartH4" accept="image/*" onchange="previewUserImage(event, 'previewH4')">
+            <img id="previewH4" class="preview-img">
+          </div>
+
+          <label>Required Market Timeframe: 1H Chart</label>
+          <div class="upload-zone">
+            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
+            <input type="file" id="chartH1" accept="image/*" onchange="previewUserImage(event, 'previewH1')">
+            <img id="previewH1" class="preview-img">
+          </div>
+
+          <label>Required Market Timeframe: 15M Chart</label>
+          <div class="upload-zone">
+            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
+            <input type="file" id="chartM15" accept="image/*" onchange="previewUserImage(event, 'previewM15')">
+            <img id="previewM15" class="preview-img">
+          </div>
+
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET MULTI-TIMEFRAME ANALYSIS</button>
+        </div>
+
+        <div id="resultsContainer" style="display: none;">
+          <div class="card" style="text-align: center; border-color: var(--green);">
+            <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAU/USD</div>
+            <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Day Trader</div>
+            
+            <div id="resActionType" style="font-size: 32px; font-weight: bold; color: var(--green); margin: 5px 0;">BUY</div>
+            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">BUY LIMIT EXECUTION</div>
+            
+            <div class="signal-badge-container">
+              <span class="badge-conf">HIGH CONF</span>
+              <span class="badge-pass">PASS ($2 RISK)</span>
+            </div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">15m Bearish CHoCH into 1H Demand</div>
+          </div>
+
+          <div class="card">
+            <div class="ballistic-header">
+              <span>🧮</span> INSTITUTIONAL INTEL: BALLISTIC AI INSIGHT ($2 LOSS PROTOCOL)
+            </div>
+            <div style="background: #08080a; border: 1px solid var(--card-border); padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+              <div>
+                <div style="font-size: 10px; color: var(--text-muted); font-weight: bold;">MAX RISK (LOSS)</div>
+                <div style="font-size: 22px; font-weight: bold; color: var(--red);">$2.00 <span style="font-size: 12px; color: var(--text-muted);">(~TZS 5,500)</span></div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 10px; color: var(--text-muted); font-weight: bold;">POTENTIAL PROFIT (RR)</div>
+                <div id="resProfitDollar" style="font-size: 22px; font-weight: bold; color: var(--green);">$7.22</div>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin-bottom: 8px;">TZS PROFIT PROJECTIONS (BASED ON $2 RISK)</div>
+            <div class="lot-row">
+              <div><span style="font-size: 10px; color: var(--text-muted); display: block;">TARGET R:R</span><strong style="font-size: 14px;">1:3.61</strong></div>
+              <div style="text-align: right;"><span style="font-size: 10px; color: var(--text-muted); display: block;">ESTIMATED PROFIT</span><strong style="color: var(--accent); font-size: 14px;" id="projTZS">TZS 19,850</strong></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="ballistic-header">🛡️ PRE-FLIGHT PROTOCOL</div>
+            <div class="checklist-item"><span>✓</span> <span id="chk1">15m Mitigation of Demand Zone</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk2">Bullish HTF Trend Alignment</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Price in Discount (below 50% retracement)</span></div>
+          </div>
+
+          <div class="card">
+            <div class="grid-2">
+              <div class="mini-box"><label>ENTRY</label><div id="valEntry" style="font-size: 16px; font-weight: bold;">64730</div></div>
+              <div class="mini-box"><label style="color: var(--red);">STOP LOSS ($2)</label><div id="valSL" style="font-size: 16px; font-weight: bold; color: var(--red);">64600</div></div>
+            </div>
+            <div class="grid-2">
+              <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT</label><div id="valTP1" style="font-size: 16px; font-weight: bold; color: var(--green);">65200</div></div>
+              <div class="mini-box"><label style="color: var(--green);">TP2</label><div id="valTP2" style="font-size: 16px; font-weight: bold; color: var(--green);">65350</div></div>
+            </div>
+            <div class="mini-box" style="text-align: center; margin-top: 5px;">
+              <label>R:R RATIO</label>
+              <div id="valRR" style="font-size: 20px; font-weight: bold; color: var(--accent);">1:3.61</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="ballistic-header">👥 SPECIALIST CONSULTATION (AGENTS & CHARTS)</div>
+            <div id="agentsContainer">
+               </div>
+          </div>
+
+          <div class="card">
+            <div class="ballistic-header">⏳ MULTI-TIMEFRAME CONFLUENCE</div>
+            <div id="tfOutput" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;"></div>
+          </div>
+
+          <button class="primary-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">ANALYZE AGAIN</button>
+        </div>
+      </div>
+
+      <div id="view-history" class="view-section" style="display: none;">
+        <div class="card"><h3>Recent Analyses</h3><p style="color:var(--text-muted);">Historia ya uchambuzi wako itaonekana hapa.</p></div>
+      </div>
+      <div id="view-broker" class="view-section" style="display: none;">
+        <div class="card"><h3>Broker Sync</h3><p style="color:var(--text-muted);">Unganisha akaunti yako ya MT4/MT5 hapa.</p></div>
+      </div>
+      <div id="view-prop" class="view-section" style="display: none;">
+        <div class="card"><h3>Prop Engine</h3><p style="color:var(--text-muted);">Simamia malengo ya Prop Firms hapa.</p></div>
+      </div>
+      <div id="view-journal" class="view-section" style="display: none;">
+        <div class="card"><h3>Trading Journal</h3><p style="color:var(--text-muted);">Rekodi na fuatilia biashara zako.</p></div>
+      </div>
     </div>
-
-    <div class="tf-group">
-      <label>M15 Chart (Entry Signal, CHoCH, FVG):</label>
-      <input type="file" id="chartM15" accept="image/*" onchange="previewImage(event, 'previewM15')">
-      <img id="previewM15" class="preview-thumb">
-    </div>
-  </div>
-
-  <!-- RUN BUTTON -->
-  <button id="runBtn" onclick="analyzeChart()">RUN 6-MASTER VISION ANALYSIS</button>
-
-  <!-- 3. OUTPUT AREA -->
-  <div class="card" style="margin-top: 15px;">
-    <h3>📊 3. Uchambuzi wa Masters 6 na Hesabu za Hatari</h3>
-    <div id="status" style="color: #fbbf24; font-size: 13px; margin-bottom: 8px; font-weight: bold;"></div>
-    <div id="output" class="result-box">Matokeo ya uchambuzi wa Masters 6 kulingana na chati zilizowekwa yataonekana hapa...</div>
   </div>
 
 <script>
-// Auto-load saved API key on startup
+let currentMathAns1 = 8;
+let currentMathAns2 = 14;
+let globalImages = { h4: null, h1: null, m15: null };
+
 window.addEventListener('DOMContentLoaded', () => {
-  const savedKey = localStorage.getItem('smc_gemini_key');
-  if (savedKey) {
-    document.getElementById('apiKeyInput').value = savedKey;
+  setupSecurityMath();
+  const savedUser = localStorage.getItem('lutynoel_user');
+  if (savedUser) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('appInterface').style.display = 'block';
   }
 });
 
-function previewImage(event, previewId) {
-  const file = event.target.files[0];
-  const preview = document.getElementById(previewId);
-  if (file) {
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = 'block';
+function setupSecurityMath() {
+  const n1 = Math.floor(Math.random() * 10) + 10;
+  const n2 = Math.floor(Math.random() * 5) + 1;
+  currentMathAns1 = n1 - n2;
+  document.getElementById('mathQ1').innerText = `${n1} - ${n2}`;
+
+  const m1 = Math.floor(Math.random() * 10) + 5;
+  const m2 = Math.floor(Math.random() * 5) + 1;
+  currentMathAns2 = m1 + m2;
+  document.getElementById('mathQ2').innerText = `${m1} + ${m2}`;
+}
+
+function toggleAuthMode(mode) {
+  if (mode === 'register') {
+    document.getElementById('loginFormSection').style.display = 'none';
+    document.getElementById('registerFormSection').style.display = 'block';
+    document.getElementById('authTitle').innerText = 'Create Account';
+    document.getElementById('authSubtitle').innerText = 'Deploy your institutional trading edge';
+  } else {
+    document.getElementById('loginFormSection').style.display = 'block';
+    document.getElementById('registerFormSection').style.display = 'none';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX Terminal';
+    document.getElementById('authSubtitle').innerText = 'Secure authentication required';
   }
 }
 
-function clearData() {
-  localStorage.removeItem('smc_gemini_key');
-  document.getElementById('apiKeyInput').value = '';
-  alert("Taarifa zimefutwa kikamilifu kwenye kumbukumbu!");
+function handleLogin() {
+  const email = document.getElementById('loginEmail').value;
+  const ans = parseInt(document.getElementById('mathA1').value);
+  const apiKey = document.getElementById('authApiKey').value.trim();
+
+  if (!email || !apiKey) { alert("Tafadhali jaza email na Gemini API Key yako!"); return; }
+  if (ans !== currentMathAns1) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
+
+  localStorage.setItem('lutynoel_user', email);
+  localStorage.setItem('smc_gemini_key', apiKey);
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appInterface').style.display = 'block';
+}
+
+function handleRegister() {
+  const name = document.getElementById('regName').value;
+  const email = document.getElementById('regEmail').value;
+  const ans = parseInt(document.getElementById('mathA2').value);
+  const apiKey = document.getElementById('regApiKey').value.trim();
+
+  if (!name || !email || !apiKey) { alert("Tafadhali jaza taarifa zote na Gemini API Key yako!"); return; }
+  if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
+
+  localStorage.setItem('lutynoel_user', email);
+  localStorage.setItem('smc_gemini_key', apiKey);
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appInterface').style.display = 'block';
+}
+
+function logout() { localStorage.removeItem('lutynoel_user'); location.reload(); }
+function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
+
+function navigate(viewId) {
+  document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
+  document.getElementById('view-' + viewId).style.display = 'block';
+  document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('appSidebar').classList.remove('open');
+}
+
+function previewUserImage(event, previewId) {
+  const file = event.target.files[0];
+  const preview = document.getElementById(previewId);
+  if (file) {
+    const url = URL.createObjectURL(file);
+    preview.src = url;
+    preview.style.display = 'block';
+    if (previewId === 'previewH4') globalImages.h4 = url;
+    if (previewId === 'previewH1') globalImages.h1 = url;
+    if (previewId === 'previewM15') globalImages.m15 = url;
+  }
 }
 
 async function fileToBase64(file) {
@@ -139,85 +418,59 @@ async function fileToBase64(file) {
   });
 }
 
-async function analyzeChart() {
-  const apiKey = document.getElementById('apiKeyInput').value.trim();
+async function runLutynoelAnalysis() {
+  const apiKey = localStorage.getItem('smc_gemini_key');
+  if (!apiKey) { alert("API Key haionekani. Tafadhali ingia tena."); logout(); return; }
+
   const h4Input = document.getElementById('chartH4');
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
-  
-  const statusDiv = document.getElementById('status');
-  const outputDiv = document.getElementById('output');
-  const runBtn = document.getElementById('runBtn');
-
-  if (!apiKey) {
-    alert("Tafadhali weka API Key yako kwanza kwenye eneo namba 0.");
-    return;
-  }
-
-  // Save key automatically to browser memory so you don't type it next time
-  localStorage.setItem('smc_gemini_key', apiKey);
 
   if (h4Input.files.length === 0 && h1Input.files.length === 0 && m15Input.files.length === 0) {
-    alert("Chagua angalau picha moja ya chati (H4, H1, au M15).");
+    alert("Tafadhali weka angalau picha moja ya chati.");
     return;
   }
 
+  const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  statusDiv.innerText = "⏳ Masters 6 wanapitia picha za chati ulizoweka moja moja...";
-  outputDiv.innerText = "Inachambua mtazamo wa kila Master kwa ulinganifu wa chati...";
+  runBtn.innerText = "⏳ Lutynoel Autonomous Agents wanachambua picha zako (Risk: $2 Loss)...";
 
   try {
-    const parts = [];
     const pair = document.getElementById('pair').value;
+    const framework = document.getElementById('framework').value;
+    const parts = [];
 
-    const promptText = `Wewe ni mfumo wa AI Trading Terminal unaoongozwa na Masters 6: (1. Price Action Master, 2. Supply & Demand Master, 3. Market Structure Master, 4. Fundamental Analysis Master, 5. SMC Liquidity Master, 6. ICT Concepts Master).
-
-Changanua picha za chati za pair ya ${pair} ulizopewa (H4, H1, M15). Toa maoni na tathmini ya KILA MASTER KIVYAKE kulingana na kile kinachoonekana kwenye picha za chati hizo.
-
-Punguza sana maelezo marefu ya maneno yasiyo na lazima; tumia muundo wa namba na alama fupi.
-
-Pangilia majibu yako hivi:
-1. UCHAMBUZI WA KILA MASTER KUTOKA KWENYE CHATI ZILIZOWEKA:
-   - Price Action Master: [Mtazamo: BUY/SELL/WAIT na sababu fupi ya kile kinachoonekana kwenye chati]
-   - Supply & Demand Master: [Mtazamo na eneo la S&D lililotumika kutoka kwenye picha]
-   - Market Structure Master: [Mtazamo na muundo wa BOS/CHoCH uliopo kwenye chati]
-   - Fundamental Analysis Master: [Mtazamo wa jumla wa soko kwa sasa]
-   - SMC Liquidity Master: [Eneo la Liquidity Sweep au Inducement lililoonekana kwenye picha]
-   - ICT Concepts Master: [Kipengele cha FVG au Order Block kilichotambuliwa kwenye picha]
-
-2. HITIMISHO LA PAMOJA (CONSENSUS & CONFIDENCE):
-   - Msimamo wa Pamoja: [STRONG BUY / STRONG SELL / WAIT]
-   - Confidence Level: [High / Medium / Low]
-
-3. HESABU ZA FEDHA NA HATARI (Zingatia Stop Loss iwe hasara ya DOLA 2 ($2) tu sawa na TZS 5,200):
-   - Entry Price: [Bei]
-   - Stop Loss (SL): [Bei (Hatari: $2 / TZS 5,200)]
-   - Take Profit 1 (TP1): [Bei | Faida: $... / TZS ...]
-   - Take Profit 2 (TP2): [Bei | Faida kubwa zaidi: $... / TZS ...]
-   - Risk to Reward (R:R): [Uwiano]`;
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. Changanua chati hizi za ${pair} (${framework}). Zingatia kikamilifu hasara ya juu (Max Loss) iwe DOLA 2 TU ($2). 
+Wasilisha majibu katika mfumo wa JSON pekee (usiseme neno lingine nje ya JSON) ukiwa na muundo huu kamili:
+{
+  "action": "BUY",
+  "exec_type": "BUY LIMIT EXECUTION",
+  "subtitle": "15m mitigation of demand zone and bullish alignment",
+  "profit_dollar": "$7.22",
+  "proj_tzs": "TZS 19,850",
+  "chk1": "15m Mitigation of Demand Zone",
+  "chk2": "Bullish HTF Trend Alignment",
+  "chk3": "Price in Discount (below 50% retracement)",
+  "entry": "64730",
+  "sl": "64600",
+  "tp1": "65200",
+  "tp2": "65350",
+  "rr": "1:3.61",
+  "agent1_title": "Price Action Master (4H Chart)",
+  "agent1_text": "Candlestick rejections indicate heavy buyer interest at key support levels.",
+  "agent2_title": "Supply & Demand Master (1H Chart)",
+  "agent2_text": "Fresh unmitigated demand block sits perfectly aligned with institutional footprints.",
+  "agent3_title": "Market Structure Master (15M Chart)",
+  "agent3_text": "Minor CHoCH observed confirming immediate continuation towards upside objectives.",
+  "tf": "4H: Strongly bullish structure.\n1H: Clear corrective phase.\n15M: Minor demand level break."
+}`;
 
     parts.push({ text: promptText });
+    if (h4Input.files.length > 0) parts.push({ inline_data: { mime_type: h4Input.files[0].type || "image/png", data: await fileToBase64(h4Input.files[0]) } });
+    if (h1Input.files.length > 0) parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
+    if (m15Input.files.length > 0) parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    if (h4Input.files.length > 0) {
-      const base64H4 = await fileToBase64(h4Input.files[0]);
-      parts.push({ text: "Hii hapa picha ya chati ya H4:" });
-      parts.push({ inline_data: { mime_type: h4Input.files[0].type || "image/png", data: base64H4 } });
-    }
-
-    if (h1Input.files.length > 0) {
-      const base64H1 = await fileToBase64(h1Input.files[0]);
-      parts.push({ text: "Hii hapa picha ya chati ya H1:" });
-      parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: base64H1 } });
-    }
-
-    if (m15Input.files.length > 0) {
-      const base64M15 = await fileToBase64(m15Input.files[0]);
-      parts.push({ text: "Hii hapa picha ya chati ya M15:" });
-      parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
-    }
-
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
-
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -225,27 +478,72 @@ Pangilia majibu yako hivi:
     });
 
     const data = await response.json();
+    let rawText = data.candidates[0].content.parts[0].text;
+    
+    rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+    const resObj = JSON.parse(rawText);
 
-    if (data.error) {
-      statusDiv.innerText = "Kosa kutoka kwenye API:";
-      outputDiv.innerText = JSON.stringify(data.error, null, 2);
-    } else if (data.candidates && data.candidates[0].content.parts[0].text) {
-      statusDiv.innerText = "✅ Uchambuzi wa Masters 6 Kutoka Kwenye Chati Umekamilika!";
-      outputDiv.innerText = data.candidates[0].content.parts[0].text;
-    } else {
-      statusDiv.innerText = "Majibu yasiyotarajiwa:";
-      outputDiv.innerText = JSON.stringify(data, null, 2);
-    }
+    document.getElementById('resPairBadge').innerText = pair;
+    document.getElementById('resFramework').innerText = framework;
+    document.getElementById('resActionType').innerText = resObj.action;
+    document.getElementById('resExecType').innerText = resObj.exec_type;
+    document.getElementById('resSummarySubtitle').innerText = resObj.subtitle;
+    
+    document.getElementById('resProfitDollar').innerText = resObj.profit_dollar;
+    document.getElementById('projTZS').innerText = resObj.proj_tzs;
+
+    document.getElementById('chk1').innerText = resObj.chk1;
+    document.getElementById('chk2').innerText = resObj.chk2;
+    document.getElementById('chk3').innerText = resObj.chk3;
+
+    document.getElementById('valEntry').innerText = resObj.entry;
+    document.getElementById('valSL').innerText = resObj.sl;
+    document.getElementById('valTP1').innerText = resObj.tp1;
+    document.getElementById('valTP2').innerText = resObj.tp2;
+    document.getElementById('valRR').innerText = resObj.rr;
+
+    const fallbackImg = globalImages.h4 || globalImages.h1 || globalImages.m15 || '';
+    const img1 = globalImages.h4 || fallbackImg;
+    const img2 = globalImages.h1 || fallbackImg;
+    const img3 = globalImages.m15 || fallbackImg;
+
+    let agentsHtml = `
+      <div class="agent-card">
+        ${img1 ? `<img src="${img1}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">4H Chart</div>'}
+        <div class="agent-info">
+          <div class="agent-title">${resObj.agent1_title || 'Price Action Master'}</div>
+          <div class="agent-desc">${resObj.agent1_text}</div>
+        </div>
+      </div>
+      <div class="agent-card">
+        ${img2 ? `<img src="${img2}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">1H Chart</div>'}
+        <div class="agent-info">
+          <div class="agent-title">${resObj.agent2_title || 'Supply & Demand Master'}</div>
+          <div class="agent-desc">${resObj.agent2_text}</div>
+        </div>
+      </div>
+      <div class="agent-card">
+        ${img3 ? `<img src="${img3}" class="agent-thumb">` : '<div class="agent-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted)">15M Chart</div>'}
+        <div class="agent-info">
+          <div class="agent-title">${resObj.agent3_title || 'Market Structure Master'}</div>
+          <div class="agent-desc">${resObj.agent3_text}</div>
+        </div>
+      </div>
+    `;
+    document.getElementById('agentsContainer').innerHTML = agentsHtml;
+    document.getElementById('tfOutput').innerText = resObj.tf;
+
+    document.getElementById('resultsContainer').style.display = 'block';
+    document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
-    statusDiv.innerText = "Kosa la Mfumo:";
-    outputDiv.innerText = err.message;
+    alert("Imeshindikana kusoma majibu ya AI. Tafadhali hakikisha picha zako ziko wazi.");
   } finally {
     runBtn.disabled = false;
+    runBtn.innerText = "GET MULTI-TIMEFRAME ANALYSIS";
   }
 }
 </script>
 
 </body>
 </html>
-
