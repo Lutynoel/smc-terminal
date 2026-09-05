@@ -505,7 +505,7 @@ Wasilisha majibu yako katika mfumo wa JSON pekee (usiseme neno lingine nje ya JS
     if (h1Input.files.length > 0) parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     if (m15Input.files.length > 0) parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
