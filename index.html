@@ -7,21 +7,25 @@
   <style>
     body { background-color: #12161f; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding: 15px; }
     .card { background: #1e222d; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #2a2e39; }
-    input[type="text"], select { width: 100%; padding: 10px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 5px; box-sizing: border-box; }
-    button { width: 100%; padding: 12px; background: #089981; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    input[type="text"], select, input[type="file"] { width: 100%; padding: 10px; background: #131722; color: #fff; border: 1px solid #363c4e; border-radius: 5px; box-sizing: border-box; margin-top: 5px; }
+    button { width: 100%; padding: 12px; background: #089981; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     button:disabled { background: #5d606b; }
-    .result-box { background: #131722; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.5; }
+    .result-box { background: #131722; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.5; min-height: 100px; }
+    label { font-size: 13px; color: #d1d4dc; font-weight: bold; }
+    .tf-group { margin-bottom: 12px; }
   </style>
 </head>
 <body>
 
   <h2 style="text-align: center;">SMC & ICT 6-Master AI Terminal</h2>
 
+  <!-- 0. API KEY -->
   <div class="card">
     <h3>0. Weka Gemini API Key Yako</h3>
     <input type="text" id="apiKey" placeholder="Paste Gemini API Key hapa (AQ.Ab... au AIzaSy...)">
   </div>
 
+  <!-- 1. PAIR SELECTOR -->
   <div class="card">
     <h3>1. Chagua Market / Pair</h3>
     <select id="pair">
@@ -29,21 +33,43 @@
       <option value="BTCUSD">BTC/USD (Bitcoin)</option>
       <option value="EURUSD">EUR/USD</option>
       <option value="GBPUSD">GBP/USD</option>
-      <option value="NASDAQ">NASDAQ (US100)</option>
+      <option value="USDJPY">USD/JPY</option>
+      <option value="AUDUSD">AUD/USD</option>
+      <option value="USDCAD">USD/CAD</option>
+      <option value="GBPJPY">GBP/JPY</option>
+      <option value="US100">NASDAQ (US100)</option>
+      <option value="US30">US30 (Dow Jones)</option>
     </select>
   </div>
 
+  <!-- 2. UPLOAD MULTIPLE TIMEFRAMES -->
   <div class="card">
-    <h3>2. Upload Screenshot ya Chati</h3>
-    <input type="file" id="chartImage" accept="image/*">
+    <h3>2. Upload Timeframe Screenshots</h3>
+    
+    <div class="tf-group">
+      <label>H4 Chart (Higher Timeframe / Trend & HTF Order Blocks):</label>
+      <input type="file" id="chartH4" accept="image/*">
+    </div>
+
+    <div class="tf-group">
+      <label>H1 Chart (Medium Timeframe / Liquidity Sweeps & Structure):</label>
+      <input type="file" id="chartH1" accept="image/*">
+    </div>
+
+    <div class="tf-group">
+      <label>M15 Chart (Lower Timeframe / Entry Signal, CHoCH, FVG):</label>
+      <input type="file" id="chartM15" accept="image/*">
+    </div>
   </div>
 
+  <!-- RUN BUTTON -->
   <button id="runBtn" onclick="analyzeChart()">RUN VISION AI ANALYSIS</button>
 
+  <!-- 3. OUTPUT AREA -->
   <div class="card" style="margin-top: 15px;">
     <h3>3. Majibu ya Uchambuzi (Masters 6)</h3>
     <div id="status" style="color: #f0b90b; font-size: 13px; margin-bottom: 8px;"></div>
-    <div id="output" class="result-box">Majibu yataonekana hapa baada ya kubonyeza RUN...</div>
+    <div id="output" class="result-box">Majibu yataonekana hapa baada ya ku-upload picha na kubonyeza RUN...</div>
   </div>
 
 <script>
@@ -58,7 +84,10 @@ async function fileToBase64(file) {
 
 async function analyzeChart() {
   const apiKey = document.getElementById('apiKey').value.trim();
-  const fileInput = document.getElementById('chartImage');
+  const h4Input = document.getElementById('chartH4');
+  const h1Input = document.getElementById('chartH1');
+  const m15Input = document.getElementById('chartM15');
+  
   const statusDiv = document.getElementById('status');
   const outputDiv = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
@@ -68,43 +97,59 @@ async function analyzeChart() {
     return;
   }
 
-  if (fileInput.files.length === 0) {
-    alert("Tafadhali chagua picha ya chati kabla ya kuendelea.");
+  if (h4Input.files.length === 0 && h1Input.files.length === 0 && m15Input.files.length === 0) {
+    alert("Tafadhali chagua angalau picha moja ya chati (H4, H1, au M15) kabla ya kuendelea.");
     return;
   }
 
   runBtn.disabled = true;
-  statusDiv.innerText = "AI inachunguza picha yako... Tafadhali subiri.";
+  statusDiv.innerText = "AI inachunguza picha zako kulingana na Masters 6... Tafadhali subiri kidogo.";
   outputDiv.innerText = "Inachakata...";
 
   try {
-    const base64Image = await fileToBase64(fileInput.files[0]);
+    const parts = [];
     const pair = document.getElementById('pair').value;
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const promptText = `Wewe ni mfumo wenye akili bandia (AI Terminal) unaotumia Masters 6 wa Trading:
+1. Price Action Master
+2. Supply & Demand Master
+3. Market Structure Master
+4. Fundamental Analysis Master
+5. SMC Liquidity Master
+6. ICT Concepts Master
 
-    const promptText = `Wewe ni mtaalamu wa technical analysis kwa kutumia mfumo wa 6-Master Framework (Price Action, Supply/Demand, Market Structure, Fundamental Analysis, SMC Liquidity, na ICT Concepts). 
-Fanya uchambuzi wa kina juu ya chati hii ya ${pair} na utoe majibu kwa lugha ya Kiswahili kwa kuainisha:
-1. Direction Trend (Bullish/Bearish)
-2. Key Levels (Liquidity Sweeps, Order Blocks, FVG)
-3. Entry Signal & Risk/Reward Ratio.`;
+Changanua picha za chati za pair ya ${pair} zilizowekwa (H4, H1, M15) na utoe ripoti iliyopangwa vyema kwa Kiswahili ikijumuisha:
+- Overall Market Trend & Direction
+- Key Liquidity Pools (BSL/SSL) & FVG Gaps
+- Entry Zone (Poi / Order Block)
+- Stop Loss & Take Profit Target (Risk to Reward Ratio).`;
+
+    parts.push({ text: promptText });
+
+    if (h4Input.files.length > 0) {
+      const base64H4 = await fileToBase64(h4Input.files[0]);
+      parts.push({ text: "Hii hapa picha ya H4 Timeframe:" });
+      parts.push({ inline_data: { mime_type: h4Input.files[0].type || "image/png", data: base64H4 } });
+    }
+
+    if (h1Input.files.length > 0) {
+      const base64H1 = await fileToBase64(h1Input.files[0]);
+      parts.push({ text: "Hii hapa picha ya H1 Timeframe:" });
+      parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: base64H1 } });
+    }
+
+    if (m15Input.files.length > 0) {
+      const base64M15 = await fileToBase64(m15Input.files[0]);
+      parts.push({ text: "Hii hapa picha ya M15 Timeframe:" });
+      parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: base64M15 } });
+    }
+
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{
-          parts: [
-            { text: promptText },
-            {
-              inline_data: {
-                mime_type: fileInput.files[0].type || "image/png",
-                data: base64Image
-              }
-            }
-          ]
-        }]
-      })
+      body: JSON.stringify({ contents: [{ parts: parts }] })
     });
 
     const data = await response.json();
@@ -116,7 +161,7 @@ Fanya uchambuzi wa kina juu ya chati hii ya ${pair} na utoe majibu kwa lugha ya 
       statusDiv.innerText = "Uchambuzi Umekamilika!";
       outputDiv.innerText = data.candidates[0].content.parts[0].text;
     } else {
-      statusDiv.innerText = "Kosa lisilojulikana:";
+      statusDiv.innerText = "Majibu yasiyotarajiwa:";
       outputDiv.innerText = JSON.stringify(data, null, 2);
     }
 
