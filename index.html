@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v8.0</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v8.2</title>
+  
+  <!-- PWA MANIFEST LINK (Dynamically Injected) -->
+  <link rel="manifest" id="dynamicManifest">
+  <meta name="theme-color" content="#09090b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX">
+
   <style>
     :root {
       --bg-color: #09090b;
@@ -33,6 +41,11 @@
     .logo-icon { background: var(--accent); color: #000; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
     .header-icons { display: flex; align-items: center; gap: 12px; }
     .user-pill { background: var(--accent); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+
+    /* INSTALL APP BANNER */
+    .install-banner { background: linear-gradient(135deg, #1e1b4b, #311039); border: 1px solid var(--accent); padding: 12px 16px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .install-banner-text { font-size: 12px; color: #fff; }
+    .install-btn { background: var(--accent); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; }
 
     /* SIDEBAR */
     .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: #0c0c0e; border-right: 1px solid var(--card-border); z-index: 1000; transition: left 0.3s ease; overflow-y: auto; padding: 20px; box-sizing: border-box; }
@@ -84,9 +97,10 @@
     .agent-title { font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 3px; }
     .agent-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
     
-    .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+    .history-card:hover { border-color: var(--accent); background: #141418; }
     
-    /* NEWS STYLES WITH IMPACT COLORS */
+    /* NEWS STYLES */
     .news-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
     .news-card:hover { border-color: var(--accent); }
     .impact-red { border-left: 4px solid var(--red); }
@@ -96,18 +110,20 @@
 
     /* MODAL */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-    .modal-content { max-width: 90%; max-height: 85vh; border-radius: 8px; border: 1px solid var(--accent); background: var(--card-bg); padding: 20px; color: #fff; overflow-y: auto; }
-    .modal-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 35px; font-weight: bold; cursor: pointer; }
+    .modal-content { max-width: 90%; max-height: 85vh; border-radius: 8px; border: 1px solid var(--accent); background: var(--card-bg); padding: 20px; color: #fff; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 10px; right: 20px; color: #fff; font-size: 30px; font-weight: bold; cursor: pointer; }
 
     .hamburger { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <!-- UNIVERSAL MODAL FOR IMAGES & NEWS DETAILS -->
+  <!-- UNIVERSAL MODAL -->
   <div id="universalModal" class="modal" onclick="closeUniversalModal()">
-    <span class="modal-close">&times;</span>
-    <div id="modalBody" onclick="event.stopPropagation()"></div>
+    <div id="modalBody" onclick="event.stopPropagation()" class="modal-content">
+      <span class="modal-close" onclick="closeUniversalModal()">&times;</span>
+      <div id="modalInnerContent"></div>
+    </div>
   </div>
 
   <!-- AUTH SCREENS -->
@@ -115,7 +131,7 @@
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
       <div class="auth-title" id="authTitle">Lutynoel FX Terminal</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Secure Access Protocol</div>
+      <div class="auth-subtitle" id="authSubtitle">PWA Secure Institutional Access</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -191,12 +207,20 @@
     </div>
 
     <div class="main-content">
+      <!-- INSTALL APP PROMPT BANNER -->
+      <div id="installBanner" class="install-banner" style="display: none;">
+        <div class="install-banner-text">
+          <strong>Install App</strong><br>Wezesha iwe app kamili kwenye simu yako.
+        </div>
+        <button class="install-btn" id="installAppBtn">INSTALL</button>
+      </div>
+
       <!-- DASHBOARD OVERVIEW -->
       <div id="view-overview" class="view-section">
         <div class="card" style="border-left: 4px solid var(--accent);">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v8.0</div>
-          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Institutional Hunters & Multi-Lot Calculator</h2>
-          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Fixed Risk $2 Loss Protocol. Pips & Lot breakdown (0.01 to 1.0), Live Notifications, Dynamic TradingView Charts, and 7 Institutional Experts.</p>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v8.2 PWA</div>
+          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">Institutional Hunters & Standalone App</h2>
+          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Fixed Risk $2 Loss Protocol. Pips & Lot breakdown, Live Notifications, Clickable Past Analyses, na sasa inajisakinisha kama App halisi.</p>
           <button class="primary-btn" onclick="navigate('analyst')" style="margin-top: 10px;">Start Trading →</button>
         </div>
       </div>
@@ -365,7 +389,7 @@
       <div id="view-history" class="view-section" style="display: none;">
         <div class="card">
           <h3>Trade History & Live Tracking</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi wako na hali zao za live:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi wako (Bofya uchambuzi wowote kuona maelezo kamili):</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>
           </div>
@@ -389,8 +413,10 @@
 let currentMathAns1 = 0;
 let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
+let deferredPrompt = null;
 
 window.addEventListener('DOMContentLoaded', () => {
+  setupPWA();
   setupSecurityMath();
   requestNotificationPermission();
   loadEconomicCalendar();
@@ -404,6 +430,55 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   loadTradeHistory();
   updateTradingViewSymbol();
+});
+
+// Setup PWA Manifest & Service Worker dynamically
+function setupPWA() {
+  const manifestData = {
+    name: "Lutynoel FX Institutional Terminal",
+    short_name: "Lutynoel FX",
+    start_url: "./",
+    display: "standalone",
+    background_color: "#09090b",
+    theme_color: "#fbbf24",
+    icons: [
+      { src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }
+    ]
+  };
+  const stringManifest = JSON.stringify(manifestData);
+  const blob = new Blob([stringManifest], {type: 'application/json'});
+  document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    const swCode = `
+      self.addEventListener('install', (e) => { e.waitUntil(self.skipWaiting()); });
+      self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
+      self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); });
+    `;
+    const swBlob = new Blob([swCode], {type: 'text/javascript'});
+    const swUrl = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swUrl).catch(err => console.log('SW error:', err));
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').style.display = 'flex';
+});
+
+document.getElementById('installAppBtn').addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      document.getElementById('installBanner').style.display = 'none';
+    }
+    deferredPrompt = null;
+  } else {
+    alert("Kama haileti prompt ya moja kwa moja, tumia menyu ya kivinjari chako (⋮) kisha uchague 'Install app' au 'Add to Home screen'.");
+  }
 });
 
 function requestNotificationPermission() {
@@ -440,7 +515,7 @@ function toggleAuthMode(mode) {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
     document.getElementById('authTitle').innerText = 'Lutynoel FX Terminal';
-    document.getElementById('authSubtitle').innerText = 'Institutional secure access protocol';
+    document.getElementById('authSubtitle').innerText = 'PWA Secure Institutional Access';
   }
 }
 
@@ -538,10 +613,8 @@ function updateTradingViewSymbol() {
 }
 
 function openModal(contentHtml) {
-  const modal = document.getElementById('universalModal');
-  const modalBody = document.getElementById('modalBody');
-  modalBody.innerHTML = contentHtml;
-  modal.style.display = "flex";
+  document.getElementById('modalInnerContent').innerHTML = contentHtml;
+  document.getElementById('universalModal').style.display = "flex";
 }
 
 function closeUniversalModal() {
@@ -558,21 +631,20 @@ function loadEconomicCalendar() {
       <div class="news-card impact-none">
         <div style="font-size: 11px; color: var(--text-muted); font-weight: bold;">TAREHE: ${todayDateStr}</div>
         <strong style="color: var(--accent); font-size: 14px; display: block; margin: 5px 0;">Hakuna News Kuu Leo (Weekend)</strong>
-        <div style="font-size: 12px; color: var(--text-muted);">Masoko yamefungwa kwa mapumziko ya mwisho wa wiki. Hakuna taarifa za kiuchumi zenye athari (High/Medium Impact) zilizopangwa leo.</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Masoko yamefungwa kwa mapumziko ya mwisho wa wiki. Hakuna taarifa za kiuchumi zenye athari zilizopangwa leo.</div>
       </div>
     `;
     return;
   }
 
-  // Mfano wa news za siku ya kazi zenye viwango vya rangi
   const newsList = [
-    { title: "USD - US Non-Farm Payrolls (NFP)", time: "15:30 EAT", impact: "red", label: "HIGH IMPACT (🔴 Nyekundu)", desc: "Taarifa kuu ya ajira ya Marekani inayoleta mabadiliko makubwa na ya ghafla kwenye soko la dhahabu na dola." },
-    { title: "EUR - ECB Monetary Policy Meeting", time: "12:15 EAT", impact: "orange", label: "MEDIUM IMPACT (🟠 Machungwa)", desc: "Mkutano wa Benki Kuu ya Ulaya unaoathiri ukwasi wa EUR na cross pairs zake." },
+    { title: "USD - US Non-Farm Payrolls (NFP)", time: "15:30 EAT", impact: "red", label: "HIGH IMPACT (🔴 Nyekundu)", desc: "Taarifa kuu ya ajira ya Marekani inayoleta mabadiliko makubwa kwenye dhahabu na dola." },
+    { title: "EUR - ECB Monetary Policy Meeting", time: "12:15 EAT", impact: "orange", label: "MEDIUM IMPACT (🟠 Machungwa)", desc: "Mkutano wa Benki Kuu ya Ulaya unaoathiri ukwasi wa EUR." },
     { title: "GBP - Retail Sales (MoM)", time: "10:00 EAT", impact: "yellow", label: "LOW IMPACT (🟡 Njano)", desc: "Viwango vya manunuzi ya rejareja Uingereza, athari ndogo kwa GBP." }
   ];
 
   let html = `<div style="font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 10px;">TAREHE YA LEO: ${todayDateStr}</div>`;
-  newsList.forEach((n, idx) => {
+  newsList.forEach((n) => {
     let impactClass = `impact-${n.impact}`;
     html += `
       <div class="news-card ${impactClass}" onclick="openModal('<h3>${n.title}</h3><p style=\\'color:var(--accent); font-size:12px;\\'>Muda: ${n.time} | Viwango: ${n.label}</p><p style=\\'font-size:13px; color:var(--text-muted);\\'>${n.desc}</p>')">
@@ -724,22 +796,6 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
         <img src="${globalImages.m15 || fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
         <div class="agent-info"><div class="agent-title">${resObj.agent3_title}</div><div class="agent-desc">${resObj.agent3_text}</div></div>
       </div>
-      <div class="agent-card">
-        <img src="${fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent4_title}</div><div class="agent-desc">${resObj.agent4_text}</div></div>
-      </div>
-      <div class="agent-card">
-        <img src="${fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent5_title}</div><div class="agent-desc">${resObj.agent5_text}</div></div>
-      </div>
-      <div class="agent-card">
-        <img src="${fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent6_title}</div><div class="agent-desc">${resObj.agent6_text}</div></div>
-      </div>
-      <div class="agent-card">
-        <img src="${fallbackImg}" class="agent-thumb" onclick="openModal('<img src=\\'${this.src}\\' style=\\'width:100%; border-radius:8px;\\'>')">
-        <div class="agent-info"><div class="agent-title">${resObj.agent7_title}</div><div class="agent-desc">${resObj.agent7_text}</div></div>
-      </div>
     `;
     document.getElementById('agentsContainer').innerHTML = agentsHtml;
     document.getElementById('tfOutput').innerText = resObj.tf;
@@ -747,12 +803,25 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     saveToHistory({
       date: new Date().toLocaleString(),
       pair: pair,
+      framework: framework,
       action: resObj.action,
       entry: resObj.entry,
       tp: resObj.tp1,
       sl: resObj.sl,
       status: resObj.trade_status || "ENTRY EXECUTED (ACTIVE)",
-      rr: resObj.rr
+      rr: resObj.rr,
+      sl_pips: resObj.sl_pips,
+      tp_pips: resObj.tp_pips,
+      agents: [
+        { title: resObj.agent1_title, text: resObj.agent1_text },
+        { title: resObj.agent2_title, text: resObj.agent2_text },
+        { title: resObj.agent3_title, text: resObj.agent3_text },
+        { title: resObj.agent4_title, text: resObj.agent4_text },
+        { title: resObj.agent5_title, text: resObj.agent5_text },
+        { title: resObj.agent6_title, text: resObj.agent6_text },
+        { title: resObj.agent7_title, text: resObj.agent7_text }
+      ],
+      tf: resObj.tf
     });
 
     sendNotification("Lutynoel FX: Trade Executed!", `${pair} ${resObj.action} imefunguliwa kwenye Entry ${resObj.entry}`);
@@ -786,14 +855,14 @@ function loadTradeHistory() {
   }
 
   let html = '';
-  history.forEach(item => {
+  history.forEach((item, index) => {
     let colorClass = item.action === 'BUY' ? 'var(--green)' : 'var(--red)';
     html += `
-      <div class="history-card">
+      <div class="history-card" onclick="openHistoryDetail(${index})">
         <div>
-          <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action}</div>
+          <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action} (${item.framework || 'Day Trader'})</div>
           <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}</div>
-          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">${item.date}</div>
+          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date} — <strong>Bofya kuona undani</strong></div>
         </div>
         <div style="text-align: right;">
           <span class="badge-status" style="font-size: 9px;">${item.status}</span>
@@ -803,6 +872,44 @@ function loadTradeHistory() {
     `;
   });
   container.innerHTML = html;
+}
+
+function openHistoryDetail(index) {
+  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const item = history[index];
+  if (!item) return;
+
+  let agentsHtml = '';
+  if (item.agents && item.agents.length > 0) {
+    item.agents.forEach(ag => {
+      agentsHtml += `<div style="margin-bottom: 8px; font-size: 12px;"><strong style="color: var(--accent);">${ag.title}:</strong> <span style="color: var(--text-muted);">${ag.text}</span></div>`;
+    });
+  }
+
+  let detailHtml = `
+    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action})</h3>
+    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date} | Framework: ${item.framework || 'Day Trader'}</p>
+    
+    <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 10px;">
+      <div style="font-size: 12px; font-weight: bold; color: var(--green); margin-bottom: 5px;">Vigezo Vya Biashara:</div>
+      <div style="font-size: 12px;">Entry: <strong>${item.entry}</strong></div>
+      <div style="font-size: 12px; color: var(--red);">Stop Loss: <strong>${item.sl}</strong> (${item.sl_pips || 'N/A'})</div>
+      <div style="font-size: 12px; color: var(--green);">Take Profit: <strong>${item.tp}</strong> (${item.tp_pips || 'N/A'})</div>
+      <div style="font-size: 12px; color: var(--accent);">R:R Ratio: <strong>${item.rr}</strong></div>
+    </div>
+
+    <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 10px;">
+      <div style="font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 5px;">Uchambuzi wa Wataalamu 7:</div>
+      ${agentsHtml}
+    </div>
+
+    <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border);">
+      <div style="font-size: 12px; font-weight: bold; color: var(--blue); margin-bottom: 5px;">Multi-Timeframe Confluence:</div>
+      <div style="font-size: 12px; color: var(--text-muted); white-space: pre-line;">${item.tf || 'N/A'}</div>
+    </div>
+  `;
+
+  openModal(detailHtml);
 }
 </script>
 
