@@ -342,7 +342,7 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN</div>
+            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS)</div>
             
             <div class="grid-2">
               <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">20 Pips</div></div>
@@ -350,11 +350,11 @@
             </div>
 
             <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP)</div>
-            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green);" id="tp_lot001">$9.00</div></div>
-            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green);" id="tp_lot002">$18.00</div></div>
-            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green);" id="tp_lot003">$27.00</div></div>
-            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green);" id="tp_lot010">$90.00</div></div>
-            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green);" id="tp_lot100">$900.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot001">$9.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 23,400</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot002">$18.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 46,800</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot003">$27.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 70,200</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot010">$90.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 234,000</span></div></div>
+            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot100">$900.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 2,340,000</span></div></div>
           </div>
 
           <div class="card">
@@ -490,6 +490,7 @@ let currentMathAns1 = 0;
 let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
 let deferredPrompt = null;
+const TZS_RATE = 2600; // Makadirio ya kubadilisha USD kwenda TZS
 
 window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
@@ -796,7 +797,6 @@ async function runLutynoelAnalysis() {
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    // Correct pip sizing multipliers
     let pipMultiplier = 10;
     if(pair.includes("JPY")) pipMultiplier = 100;
     if(pair.includes("BTC") || pair.includes("ETH") || pair.includes("XAU") || pair.includes("US30")) pipMultiplier = 1;
@@ -806,6 +806,22 @@ async function runLutynoelAnalysis() {
 
     let slPrice = pair.includes("BUY") ? livePrice - (slPipsVal / pipMultiplier) : livePrice + (slPipsVal / pipMultiplier);
     let tpPrice = pair.includes("BUY") ? livePrice + (tpPipsVal / pipMultiplier) : livePrice - (tpPipsVal / pipMultiplier);
+
+    // Hesabu za Dola na TZS kwa kila Lot Size (Kila pip moja kwa 0.01 lot ni takriban $0.10 au $1 kulingana na pair)
+    const calcProfitDetails = (pips) => {
+      let baseUsd = pips * 0.10 * (pair.includes("XAU") || pair.includes("BTC") ? 10 : 1); 
+      let lots = [0.01, 0.02, 0.03, 0.10, 1.00];
+      let resObj = {};
+      lots.forEach(l => {
+        let usd = baseUsd * (l / 0.01);
+        let tzs = usd * TZS_RATE;
+        let key = 'tp_' + l.toString().replace('.', '');
+        resObj[key] = `$${usd.toFixed(2)} <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS ${tzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
+      });
+      return resObj;
+    };
+
+    let profitMap = calcProfitDetails(tpPipsVal);
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. PAIR ILIYOTEULIWA NI: ${pair}. 
 Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair}.
@@ -820,11 +836,11 @@ Toa majibu katika muundo wa JSON pekee:
   "subtitle": "Strict ${pair} Multi-TF Confluence & Accurate Valuation",
   "sl_pips": "${slPipsVal} Pips",
   "tp_pips": "${tpPipsVal} Pips",
-  "tp_001": "$${(tpPipsVal * 0.1).toFixed(2)}",
-  "tp_002": "$${(tpPipsVal * 0.2).toFixed(2)}",
-  "tp_003": "$${(tpPipsVal * 0.3).toFixed(2)}",
-  "tp_010": "$${(tpPipsVal * 1.0).toFixed(2)}",
-  "tp_100": "$${(tpPipsVal * 10.0).toFixed(2)}",
+  "tp_001": "${profitMap.tp_001}",
+  "tp_002": "${profitMap.tp_002}",
+  "tp_003": "${profitMap.tp_003}",
+  "tp_010": "${profitMap.tp_010}",
+  "tp_100": "${profitMap.tp_100}",
   "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed for ${pair}",
   "chk2": "Institutional Order Block Mitigation Validated across all 3 charts",
   "chk3": "Accurate Asset Valuation & Live Pricing Sync",
@@ -862,7 +878,7 @@ Toa majibu katika muundo wa JSON pekee:
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -888,11 +904,11 @@ Toa majibu katika muundo wa JSON pekee:
     document.getElementById('valSLPips').innerText = resObj.sl_pips;
     document.getElementById('valTPPIps').innerText = resObj.tp_pips;
 
-    document.getElementById('tp_lot001').innerText = resObj.tp_001;
-    document.getElementById('tp_lot002').innerText = resObj.tp_002;
-    document.getElementById('tp_lot003').innerText = resObj.tp_003;
-    document.getElementById('tp_lot010').innerText = resObj.tp_010;
-    document.getElementById('tp_lot100').innerText = resObj.tp_100;
+    document.getElementById('tp_lot001').innerHTML = resObj.tp_001;
+    document.getElementById('tp_lot002').innerHTML = resObj.tp_002;
+    document.getElementById('tp_lot003').innerHTML = resObj.tp_003;
+    document.getElementById('tp_lot010').innerHTML = resObj.tp_010;
+    document.getElementById('tp_lot100').innerHTML = resObj.tp_100;
 
     document.getElementById('chk1').innerText = resObj.chk1;
     document.getElementById('chk2').innerText = resObj.chk2;
@@ -1018,15 +1034,13 @@ function drawSmartOverlayOnCanvas(canvasId, imgSrc, labelText, actionType) {
       let w = canvasEl.width;
       let h = canvasEl.height;
 
-      // Draw Institutional Order Block Box
       ctx.fillStyle = actionType === 'BUY' ? "rgba(16, 185, 129, 0.25)" : "rgba(239, 68, 68, 0.25)";
       ctx.strokeStyle = actionType === 'BUY' ? "#10b981" : "#ef4444";
       ctx.lineWidth = 3;
       ctx.fillRect(w * 0.2, h * 0.35, w * 0.35, h * 0.25);
       ctx.strokeRect(w * 0.2, h * 0.35, w * 0.35, h * 0.25);
 
-      // Draw Entry / TP / SL Lines
-      ctx.strokeStyle = "#fbbf24"; // Gold for Entry
+      ctx.strokeStyle = "#fbbf24";
       ctx.lineWidth = 2;
       ctx.setLineDash([4, 4]);
       ctx.beginPath();
@@ -1034,7 +1048,6 @@ function drawSmartOverlayOnCanvas(canvasId, imgSrc, labelText, actionType) {
       ctx.lineTo(w, h * 0.5);
       ctx.stroke();
 
-      // Label Banner
       ctx.setLineDash([]);
       ctx.fillStyle = "rgba(9, 9, 11, 0.85)";
       ctx.fillRect(10, 10, w - 20, 36);
@@ -1094,7 +1107,7 @@ function saveManualJournalTrade() {
   };
 
   saveToHistory(tradeRecord);
-  alert(`Trade imehifadhiwa! P&L: $${pnl}`);
+  alert(`Trade imehifadhiwa! P&L: $${pnl} (≈ TZS ${(pnl * TZS_RATE).toLocaleString()})`);
   navigate('history');
 }
 
@@ -1173,10 +1186,12 @@ function updateStatsOverview() {
   });
 
   const winRate = closedCount > 0 ? Math.round((wins / closedCount) * 100) : 0;
+  const netTzs = netPL * TZS_RATE;
   
   document.getElementById('statTotalAnalyses').innerText = total;
   document.getElementById('statWinRate').innerText = winRate + "%";
-  document.getElementById('statNetPL').innerText = (netPL >= 0 ? "+$" : "-$") + Math.abs(netPL).toFixed(2);
+  document.getElementById('statNetPL.innerText') = (netPL >= 0 ? "+$" : "-$") + Math.abs(netPL).toFixed(2);
+  document.getElementById('statNetPL').innerHTML = (netPL >= 0 ? "+$" : "-$") + Math.abs(netPL).toFixed(2) + `<br><span style="font-size:11px; color:var(--text-muted);">≈ TZS ${netTzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
   document.getElementById('statNetPL').style.color = netPL >= 0 ? "var(--green)" : "var(--red)";
 }
 
@@ -1191,7 +1206,7 @@ function loadTradeHistory() {
   let html = '';
   history.forEach((item, index) => {
     let colorClass = item.action === 'BUY' ? 'var(--green)' : 'var(--red)';
-    let pnlDisplay = item.pnl !== undefined ? ` | P&L: $${item.pnl}` : '';
+    let pnlDisplay = item.pnl !== undefined ? ` | P&L: $${item.pnl} (TZS ${(item.pnl * TZS_RATE).toLocaleString()})` : '';
     html += `
       <div class="history-card" onclick="openHistoryDetail(${index})">
         <div>
