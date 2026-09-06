@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v10.8</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v10.9</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10.8">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10.9">
 
   <style>
     :root {
@@ -132,8 +132,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v10.8</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v10.9</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Gemini 3.6)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -196,11 +196,11 @@
     <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.8</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.9</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
-      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">SMART OVERLAY</span></div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">GEMINI 3.6</span></div>
       <div class="menu-item" onclick="navigate('journal')">Trade Journal & Tracking <span class="badge-new">NEW</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
       <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
@@ -222,7 +222,7 @@
         <div class="forex-hero">
           <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • ETH/USD • US30</div>
           <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
-          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa taasisi wakichambua chati 3 zote kwa ufanisi mkubwa na michoro ya moja kwa moja kwenye picha.</p>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa taasisi wakichambua chati 3 zote kwa ufanisi mkubwa kwa kutumia Gemini 3.6.</p>
           
           <div class="forex-chart-preview">
             <div class="f-candle" style="height: 15px;"></div>
@@ -253,7 +253,7 @@
 
         <div class="card">
           <h3 style="margin-top:0; font-size: 15px; color: var(--accent);">Njia za Haraka</h3>
-          <button class="primary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Analysis (Smart Overlays) →</button>
+          <button class="primary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Analysis (Gemini 3.6) →</button>
           <button class="secondary-btn" onclick="navigate('journal')">Fungua Trade Journal & P&L Tracker</button>
         </div>
       </div>
@@ -261,7 +261,7 @@
       <!-- AI ON-CHART ANALYST WITH ORGANIZED PAIR LIST -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v10.8</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v10.9 (GEMINI 3.6)</div>
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
@@ -321,7 +321,7 @@
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN 7 MASTERS SMART ANALYSIS</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN 7 MASTERS (GEMINI 3.6)</button>
         </div>
 
         <!-- RESULTS CARD -->
@@ -334,7 +334,7 @@
             <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">MARKET EXECUTED</div>
             
             <div class="signal-badge-container">
-              <span class="badge-conf">SMART CANVAS OVERLAY</span>
+              <span class="badge-conf">GEMINI 3.6 ENGINE</span>
               <span class="badge-pass">CONFLUENCE PASS</span>
               <span class="badge-status" id="tradeStatusBadge">EXECUTED SOKONI</span>
             </div>
@@ -520,7 +520,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v10.8",
+    name: "Lutynoel FX Institutional Terminal v10.9",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -592,8 +592,8 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.8';
-    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.9';
+    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol (Gemini 3.6)';
   }
 }
 
@@ -790,7 +790,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters wanasoma chati zote 3 za ${pair}...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma chati zote 3 za ${pair}...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
@@ -807,7 +807,6 @@ async function runLutynoelAnalysis() {
     let slPrice = pair.includes("BUY") ? livePrice - (slPipsVal / pipMultiplier) : livePrice + (slPipsVal / pipMultiplier);
     let tpPrice = pair.includes("BUY") ? livePrice + (tpPipsVal / pipMultiplier) : livePrice - (tpPipsVal / pipMultiplier);
 
-    // Hesabu za Dola na TZS kwa kila Lot Size (Kila pip moja kwa 0.01 lot ni takriban $0.10 au $1 kulingana na pair)
     const calcProfitDetails = (pips) => {
       let baseUsd = pips * 0.10 * (pair.includes("XAU") || pair.includes("BTC") ? 10 : 1); 
       let lots = [0.01, 0.02, 0.03, 0.10, 1.00];
@@ -823,7 +822,7 @@ async function runLutynoelAnalysis() {
 
     let profitMap = calcProfitDetails(tpPipsVal);
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. PAIR ILIYOTEULIWA NI: ${pair}. 
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6. PAIR ILIYOTEULIWA NI: ${pair}. 
 Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair}.
 
 Kila mmoja kati ya Wataalamu 7 wa Taasisi lazima achambue PICHA ZOTE TATU (4H, 1H, na 15M) kwa kina.
@@ -878,7 +877,8 @@ Toa majibu katika muundo wa JSON pekee:
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    // Hapa ndipo toleo limebadilishwa rasmi kuwa gemini-3.6-flash
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -949,7 +949,7 @@ Toa majibu katika muundo wa JSON pekee:
       tf: resObj.tf
     });
 
-    showToast(`Uchambuzi wa 7 Masters na Smart Overlays kwa ${pair} umekamilika!`);
+    showToast(`Uchambuzi wa 7 Masters (Gemini 3.6) kwa ${pair} umekamilika!`);
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -959,7 +959,7 @@ Toa majibu katika muundo wa JSON pekee:
     alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia Gemini API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "RUN 7 MASTERS SMART ANALYSIS";
+    runBtn.innerText = "RUN 7 MASTERS (GEMINI 3.6)";
   }
 }
 
@@ -1190,7 +1190,6 @@ function updateStatsOverview() {
   
   document.getElementById('statTotalAnalyses').innerText = total;
   document.getElementById('statWinRate').innerText = winRate + "%";
-  document.getElementById('statNetPL.innerText') = (netPL >= 0 ? "+$" : "-$") + Math.abs(netPL).toFixed(2);
   document.getElementById('statNetPL').innerHTML = (netPL >= 0 ? "+$" : "-$") + Math.abs(netPL).toFixed(2) + `<br><span style="font-size:11px; color:var(--text-muted);">≈ TZS ${netTzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
   document.getElementById('statNetPL').style.color = netPL >= 0 ? "var(--green)" : "var(--red)";
 }
