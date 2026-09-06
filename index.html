@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v10.6</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v10.7</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10.6">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10.7">
 
   <style>
     :root {
@@ -128,7 +128,7 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v10.6</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v10.7</div>
       <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol</div>
 
       <div id="loginFormSection">
@@ -192,7 +192,7 @@
     <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.6</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.7</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
@@ -491,23 +491,40 @@ window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   setupSecurityMath();
   loadEconomicCalendar();
+  
+  // Restore saved fields if available
+  const savedEmail = localStorage.getItem('lutynoel_email');
+  const savedPass = localStorage.getItem('lutynoel_pass');
+  const savedApiKey = localStorage.getItem('smc_gemini_key');
+  
+  if(savedEmail) {
+    document.getElementById('loginEmail').value = savedEmail;
+  }
+  if(savedPass) {
+    document.getElementById('loginPassword').value = savedPass;
+  }
+  if(savedApiKey) {
+    document.getElementById('authApiKey').value = savedApiKey;
+  }
+
   const savedUser = localStorage.getItem('lutynoel_user');
-  if (savedUser) {
+  if (savedUser && savedApiKey) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
     if(savedUser.includes('guest')) {
       document.getElementById('displayUserRole').innerText = 'GUEST';
     }
   }
+
   loadTradeHistory();
   updateStatsOverview();
   runAutomatedTPSLChecker();
-  setInterval(runAutomatedTPSLChecker, 15000); // Check TP/SL automation every 15s
+  setInterval(runAutomatedTPSLChecker, 15000);
 });
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v10.6",
+    name: "Lutynoel FX Institutional Terminal v10.7",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -581,32 +598,40 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.6';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.7';
     document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
   }
 }
 
 function handleLogin() {
   const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPassword').value;
   const ans = parseInt(document.getElementById('mathA1').value);
   const apiKey = document.getElementById('authApiKey').value.trim();
 
   if (!email || !apiKey) { alert("Tafadhali jaza email na Gemini API Key yako!"); return; }
   if (ans !== currentMathAns1) { alert("Jibu la Security Check si sahihi! Jaribu tena."); setupSecurityMath(); return; }
 
+  // Save everything persistently
   localStorage.setItem('lutynoel_user', email);
+  localStorage.setItem('lutynoel_email', email);
+  localStorage.setItem('lutynoel_pass', pass);
   localStorage.setItem('smc_gemini_key', apiKey);
+
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
 }
 
 function handleGuestLogin() {
   const guestEmail = "guest_" + Math.random().toString(36).substring(2, 8) + "@lutynoelfx.com";
-  const defaultKey = prompt("Weka Gemini API Key yako ili mgeni atumie AI:", "");
+  let existingKey = localStorage.getItem('smc_gemini_key');
+  const defaultKey = existingKey || prompt("Weka Gemini API Key yako ili mgeni atumie AI:", "");
   if (!defaultKey) { alert("API Key inahitajika."); return; }
 
   localStorage.setItem('lutynoel_user', guestEmail);
+  localStorage.setItem('lutynoel_email', guestEmail);
   localStorage.setItem('smc_gemini_key', defaultKey.trim());
+
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserRole').innerText = 'GUEST';
@@ -615,6 +640,7 @@ function handleGuestLogin() {
 function handleRegister() {
   const name = document.getElementById('regName').value;
   const email = document.getElementById('regEmail').value;
+  const pass = document.getElementById('regPassword').value;
   const ans = parseInt(document.getElementById('mathA2').value);
   const apiKey = document.getElementById('regApiKey').value.trim();
 
@@ -622,12 +648,19 @@ function handleRegister() {
   if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
 
   localStorage.setItem('lutynoel_user', email);
+  localStorage.setItem('lutynoel_email', email);
+  localStorage.setItem('lutynoel_pass', pass);
   localStorage.setItem('smc_gemini_key', apiKey);
+
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
 }
 
-function logout() { localStorage.removeItem('lutynoel_user'); location.reload(); }
+function logout() { 
+  localStorage.removeItem('lutynoel_user'); 
+  location.reload(); 
+}
+
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
 function goBackToOverview() { navigate('overview'); }
 
@@ -638,7 +671,7 @@ function navigate(viewId) {
   
   const items = document.querySelectorAll('.menu-item');
   items.forEach(item => {
-    if(item.getAttribute('onclick') && item.getAttribute('onclick'].includes(viewId)) {
+    if(item.getAttribute('onclick') && item.getAttribute('onclick').includes(viewId)) {
       item.classList.add('active');
     }
   });
@@ -717,7 +750,7 @@ async function fetchLiveMarketPrice(pair) {
     let symbolQuery = "XAUUSD";
     if(pair.includes("BTC")) symbolQuery = "BTCUSDT";
     else if(pair.includes("ETH")) symbolQuery = "ETHUSDT";
-    else if(pair.includes("EUR")) symbolQuery = "EURUSDT"; // fallback map
+    else if(pair.includes("EUR")) symbolQuery = "EURUSDT";
     else symbolQuery = pair + "USDT";
 
     const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbolQuery}`);
@@ -727,7 +760,6 @@ async function fetchLiveMarketPrice(pair) {
     }
   } catch(e) {}
 
-  // Fallbacks based on pair
   if(pair.includes("XAU")) return 2500.50;
   if(pair.includes("BTC")) return 64500.00;
   if(pair.includes("ETH")) return 3200.00;
@@ -1016,7 +1048,7 @@ async function runAutomatedTPSLChecker() {
             item.pnl = -15.00;
             updated = true;
           }
-        } else { // SELL
+        } else {
           if (currentLive <= tpVal) {
             item.status = 'WIN (TP HIT)';
             item.outcome = 'WIN';
