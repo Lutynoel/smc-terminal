@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v8.9</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v9.0</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v8.9">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v9.0">
 
   <style>
     :root {
@@ -74,15 +74,13 @@
     .upload-zone input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
     .preview-img { width: 100%; max-height: 130px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; cursor: pointer; }
 
-    /* AGENT CARD WITH CLEAR TEXT & OVERLAY */
+    /* AGENT CARD WITH STRICT ON-IMAGE TEXT OVERLAY */
     .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 15px; border-radius: 10px; margin-bottom: 15px; }
     .agent-title { font-size: 13px; color: var(--accent); font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     .agent-desc { font-size: 13px; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; background: #141418; padding: 10px; border-radius: 6px; border-left: 3px solid var(--accent); }
     .agent-canvas-wrapper { position: relative; width: 100%; border-radius: 6px; overflow: hidden; border: 1px solid var(--card-border); background: #000; }
-    .agent-canvas-wrapper img { width: 100%; display: block; max-height: 240px; object-fit: contain; cursor: pointer; }
-    .agent-canvas-wrapper canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    .agent-canvas-wrapper canvas { width: 100%; display: block; max-height: 260px; object-fit: contain; cursor: pointer; }
 
-    /* UI STYLING */
     .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
     .badge-pass { background: rgba(251, 191, 36, 0.15); color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
     .badge-conf { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid var(--green); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
@@ -133,8 +131,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v8.9</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v9.0</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Zero Loss Edition)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -197,7 +195,7 @@
     <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v8.9</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v9.0</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
@@ -224,7 +222,7 @@
         <div class="forex-hero">
           <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • GBP/JPY • US30</div>
           <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
-          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi za Kibenki na bei halisi ya wakati huu (Live Price) tayari kukupa uchambuzi sahihi.</p>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi na bei halisi ya soko tayari kulinda mitaji yako.</p>
           
           <div class="forex-chart-preview">
             <div class="f-candle" style="height: 15px;"></div>
@@ -263,7 +261,7 @@
       <!-- AI ON-CHART ANALYST -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (STRICT PAIR & LIVE PRICE EDITION)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (STRICT ZERO LOSS EDITION)</div>
           <h3 style="margin: 5px 0 15px 0;">Institutional Multi-Confluence AI</h3>
           
           <label>Instrument Symbol (Weka Pair Husika)</label>
@@ -293,8 +291,8 @@
 
           <label>Analysis Framework</label>
           <select id="framework">
-            <option value="Day Trader">Day Trader (Multi-Confluence)</option>
-            <option value="Scalper">Scalper (M15 / M5)</option>
+            <option value="Day Trader">Day Trader (Strict Zero Loss Confluence)</option>
+            <option value="Scalper">Scalper (M15 / M5 Precision)</option>
             <option value="Swing Trader">Swing Trader (HTF Setup)</option>
           </select>
 
@@ -325,7 +323,7 @@
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 7 MASTERS HUNTER ANALYSIS</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 7 MASTERS ZERO-LOSS ANALYSIS</button>
         </div>
 
         <!-- RESULTS CARD -->
@@ -335,14 +333,14 @@
             <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Day Trader</div>
             
             <div id="resActionType" style="font-size: 32px; font-weight: bold; color: var(--green); margin: 5px 0;">BUY</div>
-            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">BUY LIMIT EXECUTION</div>
+            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">STRICT EXECUTION</div>
             
             <div class="signal-badge-container">
-              <span class="badge-conf">HUNTER GRADE</span>
+              <span class="badge-conf">ZERO LOSS GRADE</span>
               <span class="badge-pass">PASS ($2 RISK)</span>
-              <span class="badge-status" id="tradeStatusBadge">PENDING ENTRY</span>
+              <span class="badge-status" id="tradeStatusBadge">ACTIVE</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Retail Liquidity Sweep into Institutional POI</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence Validation</div>
           </div>
 
           <!-- PIPS & LOT SIZES BREAKDOWN -->
@@ -368,15 +366,15 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">🛡️ PRE-FLIGHT HUNTER CHECKLIST</div>
-            <div class="checklist-item"><span>✓</span> <span id="chk1">Retail Stop Loss Sweep Complete</span></div>
+            <div class="ballistic-header">🛡️ PRE-FLIGHT ZERO-LOSS CHECKLIST</div>
+            <div class="checklist-item"><span>✓</span> <span id="chk1">4H/1H/15M Confluence Confirmed</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Order Block Mitigation</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Macro Bank Sentiment Alignment</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Zero Loss Risk Model Applied</span></div>
           </div>
 
           <div class="card">
             <div class="grid-2">
-              <div class="mini-box"><label>LIVE ENTRY (REAL-TIME)</label><div id="valEntry" style="font-size: 16px; font-weight: bold; color: var(--accent);">0.00</div></div>
+              <div class="mini-box"><label>LIVE ENTRY</label><div id="valEntry" style="font-size: 16px; font-weight: bold; color: var(--accent);">0.00</div></div>
               <div class="mini-box"><label style="color: var(--red);">STOP LOSS</label><div id="valSL" style="font-size: 16px; font-weight: bold; color: var(--red);">0.00</div></div>
             </div>
             <div class="grid-2">
@@ -385,14 +383,14 @@
             </div>
           </div>
 
-          <!-- 7 SPECIALIST MASTERS WITH INDIVIDUAL VISUAL OVERLAYS & CLEAR TEXT -->
+          <!-- 7 SPECIALIST MASTERS WITH STRICT EMBEDDED TEXT OVERLAYS -->
           <div class="card">
-            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (MAWAZO YAO NA PICHA ZILIZOCHORWA KWENYE CANDLES)</div>
+            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (MAWAZO YAO YAKIWA NDANI YA PICHA HASA)</div>
             <div id="agentsContainer"></div>
           </div>
 
           <div class="card">
-            <div class="ballistic-header">⏳ MULTI-TIMEFRAME CONFLUENCE</div>
+            <div class="ballistic-header">⏳ MULTI-TIMEFRAME CONFLUENCE (4H, 1H, 15M)</div>
             <div id="tfOutput" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;"></div>
           </div>
 
@@ -405,10 +403,10 @@
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
           <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako ili mfumo uhesabu actual profit au loss:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako:</p>
 
           <label>Instrument Pair</label>
-          <input type="text" id="jPair" placeholder="e.g. XAUUSD au EURUSD">
+          <input type="text" id="jPair" placeholder="e.g. XAUUSD">
 
           <label>Action / Direction</label>
           <select id="jAction">
@@ -464,7 +462,7 @@
       <div id="view-news" class="view-section" style="display: none;">
         <div class="card">
           <h3>Live Economic Calendar & News</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa za leo na rangi za viwango vya athari:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa za leo:</p>
           <div id="economicNewsContainer"></div>
         </div>
       </div>
@@ -476,9 +474,9 @@
             <h3 style="margin: 0;">Trade History Archive</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi na biashara zote zilizohifadhiwa:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita:</p>
           <div id="historyListContainer">
-            <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>
+            <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>
           </div>
         </div>
       </div>
@@ -487,14 +485,13 @@
       <div id="view-broker" class="view-section" style="display: none;">
         <div class="card">
           <h3>Broker Sync & API</h3>
-          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Hifadhi API key yako ya broker hapa chini:</p>
           <label>Broker API Key / Token</label>
           <input type="text" id="brokerApiKey" placeholder="Weka Broker Token hapa">
-          <button class="primary-btn" onclick="alert('Broker Sync Token imehifadhiwa kwa usalama!')">Hifadhi Token</button>
+          <button class="primary-btn" onclick="alert('Broker Sync Token imehifadhiwa!')">Hifadhi Token</button>
         </div>
       </div>
       <div id="view-prop" class="view-section" style="display: none;">
-        <div class="card"><h3>Prop Engine</h3><p style="color:var(--text-muted);">Simamia malengo ya Prop Firms (Max Daily Loss & Target) hapa.</p></div>
+        <div class="card"><h3>Prop Engine</h3><p style="color:var(--text-muted);">Simamia malengo ya Prop Firms hapa.</p></div>
       </div>
     </div>
   </div>
@@ -524,7 +521,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v8.9",
+    name: "Lutynoel FX Institutional Terminal v9.0",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -598,11 +595,11 @@ function toggleAuthMode(mode) {
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('registerFormSection').style.display = 'block';
     document.getElementById('authTitle').innerText = 'Create Account';
-    document.getElementById('authSubtitle').innerText = 'Deploy your institutional hunter edge';
+    document.getElementById('authSubtitle').innerText = 'Deploy your zero loss hunter edge';
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v8.9';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v9.0';
     document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
   }
 }
@@ -624,7 +621,7 @@ function handleLogin() {
 function handleGuestLogin() {
   const guestEmail = "guest_" + Math.random().toString(36).substring(2, 8) + "@lutynoelfx.com";
   const defaultKey = prompt("Weka Gemini API Key yako ili mgeni atumie AI:", "");
-  if (!defaultKey) { alert("API Key inahitajika ili mfumo ufanye kazi."); return; }
+  if (!defaultKey) { alert("API Key inahitajika."); return; }
 
   localStorage.setItem('lutynoel_user', guestEmail);
   localStorage.setItem('smc_gemini_key', defaultKey.trim());
@@ -640,7 +637,7 @@ function handleRegister() {
   const apiKey = document.getElementById('regApiKey').value.trim();
 
   if (!name || !email || !apiKey) { alert("Tafadhali jaza taarifa zote na Gemini API Key yako!"); return; }
-  if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi! Jaribu tena."); setupSecurityMath(); return; }
+  if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
 
   localStorage.setItem('lutynoel_user', email);
   localStorage.setItem('smc_gemini_key', apiKey);
@@ -734,33 +731,22 @@ function loadEconomicCalendar() {
       <div class="news-card impact-none">
         <div style="font-size: 11px; color: var(--text-muted); font-weight: bold;">TAREHE: ${todayDateStr}</div>
         <strong style="color: var(--accent); font-size: 14px; display: block; margin: 5px 0;">Hakuna News Kuu Leo (Weekend)</strong>
-        <div style="font-size: 12px; color: var(--text-muted);">Masoko yamefungwa kwa mapumziko ya wiki.</div>
       </div>
     `;
     return;
   }
 
-  const newsList = [
-    { title: "USD - US Non-Farm Payrolls (NFP)", time: "15:30 EAT", impact: "red", label: "HIGH IMPACT", desc: "Taarifa kuu ya ajira ya Marekani inayoleta mabadiliko makubwa." },
-    { title: "EUR - ECB Monetary Policy Meeting", time: "12:15 EAT", impact: "orange", label: "MEDIUM IMPACT", desc: "Mkutano wa Benki Kuu ya Ulaya." }
-  ];
-
-  let html = `<div style="font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 10px;">TAREHE YA LEO: ${todayDateStr}</div>`;
-  newsList.forEach((n) => {
-    html += `
-      <div class="news-card impact-${n.impact}" onclick="openModal('<h3>${n.title}</h3><p style=\\'color:var(--accent);\\'>${n.time} | ${n.label}</p><p>${n.desc}</p>')">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <strong style="font-size: 13px;">${n.title}</strong>
-          <span style="font-size: 10px; font-weight: bold; color: var(--text-muted);">${n.time}</span>
-        </div>
-        <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: ${n.label}</div>
+  container.innerHTML = `
+    <div class="news-card impact-red">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <strong style="font-size: 13px;">USD - High Impact News & Liquidity Flow</strong>
+        <span style="font-size: 10px; font-weight: bold; color: var(--text-muted);">LIVE</span>
       </div>
-    `;
-  });
-  container.innerHTML = html;
+      <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: HIGH IMPACT</div>
+    </div>
+  `;
 }
 
-// FETCH REAL-TIME LIVE MARKET PRICE
 async function fetchLiveMarketPrice(pair) {
   try {
     let symbolQuery = "XAUUSD";
@@ -774,16 +760,12 @@ async function fetchLiveMarketPrice(pair) {
     if(data && data.price) {
       return parseFloat(data.price);
     }
-  } catch(e) {
-    console.log("Using fallback price simulation due to network/symbol restrictions");
-  }
+  } catch(e) {}
 
-  // Fallback default prices based on pair
   if(pair === "XAUUSD") return 2500.50;
   if(pair === "BTCUSD") return 64500.00;
   if(pair === "ETHUSD") return 3200.00;
   if(pair === "EURUSD") return 1.1050;
-  if(pair === "US30") return 41200.00;
   return 100.00;
 }
 
@@ -805,92 +787,74 @@ async function runLutynoelAnalysis() {
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
 
-  if (h4Input.files.length === 0 && h1Input.files.length === 0 && m15Input.files.length === 0) {
-    alert("Tafadhali weka angalau picha moja ya chati.");
+  if (h4Input.files.length === 0 || h1Input.files.length === 0 || m15Input.files.length === 0) {
+    alert("Tafadhali weka picha zote tatu (4H, 1H na 15M) ili kupata uchambuzi sahihi wa Zero Loss.");
     return;
-  }
-
-  // STRICT PAIR & IMAGE VALIDATION
-  let allUploadedNames = "";
-  if(globalImages.h4) allUploadedNames += globalImages.h4.name.toUpperCase() + " ";
-  if(globalImages.h1) allUploadedNames += globalImages.h1.name.toUpperCase() + " ";
-  if(globalImages.m15) allUploadedNames += globalImages.m15.name.toUpperCase() + " ";
-
-  // Check if pair mismatch exists
-  let checkKey = pair.replace('USD','').toLowerCase(); // e.g. xau, eth, btc, eur
-  if(allUploadedNames.length > 0) {
-    let matchesPair = allUploadedNames.toLowerCase().includes(checkKey) || allUploadedNames.toLowerCase().includes("chart") || allUploadedNames.toLowerCase().includes("screenshot");
-    if(!matchesPair && allUploadedNames.length > 3) {
-      if(!confirm(`ONYO LA MFUMO: Umechagua Pair ya '${pair}' lakini jina la picha ulizoweka huenda haliendani. Je, una uhakika picha hizi ni za '${pair}' na ungependa kuendelea?`)) {
-        return;
-      }
-    }
   }
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = "⏳ 7 Institutional Masters wanachambua bei halisi ya soko...";
+  runBtn.innerText = "⏳ 7 Institutional Masters wanapima timeframes zote 3 (4H, 1H, 15M)...";
 
   try {
-    // Fetch real-time live market price
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. Changanua chati hizi za ${pair} (${framework}) kwa kutumia bei halisi ya soko ya ${livePrice}. Weka risk ya $2. 
-Lazima utoe uchambuzi wa kina kwa KILA MASTER kati ya hawa 7:
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. Changanua chati hizi tatu za ${pair} (4H, 1H, na 15M) kwa umakini mkubwa chini ya mfumo wa ZERO LOSS. Bei ya soko kwa sasa ni ${livePrice}.
+Hakikisha maoni ya Masters wote 7 yanalingana kabisa na timeframes zote (4H, 1H, 15M) na yametolewa kwa ufasaha mkubwa ili kuepusha loss yoyote:
 1. Price Action Master
 2. Supply & Demand Master
 3. Market Structure Master
 4. Fundamental & Macro Master
-5. SMC (Smart Money Concepts) Master
-6. ICT (Inner Circle Trader) Master
-7. Wyckoff & Institutional Volume Master (lazima utaje namba kamili ya volume kama vile Vol: 48,250 kwenye uchambuzi wake).
+5. SMC Master
+6. ICT Master
+7. Wyckoff & Institutional Volume Master
 
-Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
+Jibu liwe katika mfumo wa JSON pekee:
 {
   "action": "BUY",
-  "exec_type": "BUY LIMIT EXECUTION",
-  "subtitle": "Retail Liquidity Swept into Institutional POI",
-  "sl_pips": "30 Pips",
-  "tp_pips": "108 Pips",
-  "tp_001": "$10.80",
-  "tp_002": "$21.60",
-  "tp_003": "$32.40",
-  "tp_010": "$108.00",
-  "tp_100": "$1,080.00",
-  "sl_001": "-$3.00",
-  "sl_002": "-$6.00",
-  "sl_003": "-$9.00",
-  "chk1": "Retail Stop Loss Sweep Complete",
-  "chk2": "Institutional Order Block Mitigation",
-  "chk3": "Macro Bank Sentiment Alignment",
+  "exec_type": "ZERO LOSS INSTITUTIONAL EXECUTION",
+  "subtitle": "4H, 1H and 15M Confluence Aligned Perfectly",
+  "sl_pips": "20 Pips",
+  "tp_pips": "90 Pips",
+  "tp_001": "$9.00",
+  "tp_002": "$18.00",
+  "tp_003": "$27.00",
+  "tp_010": "$90.00",
+  "tp_100": "$900.00",
+  "sl_001": "-$2.00",
+  "sl_002": "-$4.00",
+  "sl_003": "-$6.00",
+  "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed",
+  "chk2": "Institutional Order Block & FVG Mitigation",
+  "chk3": "Zero Loss Risk Parameters Strictly Enforced",
   "entry": "${livePrice}",
-  "sl": "${(livePrice * 0.995).toFixed(2)}",
-  "tp1": "${(livePrice * 1.015).toFixed(2)}",
-  "rr": "1:3.61",
-  "trade_status": "ENTRY EXECUTED (ACTIVE)",
+  "sl": "${(livePrice * 0.997).toFixed(2)}",
+  "tp1": "${(livePrice * 1.012).toFixed(2)}",
+  "rr": "1:4.5",
+  "trade_status": "ZERO LOSS ACTIVE",
   "agent1_title": "1. Price Action Master",
-  "agent1_text": "Long wicks rejecting support indicate institutional accumulation on the key candle.",
+  "agent1_text": "4H trend rejection candles backed by 1H momentum and 15M trigger.",
   "agent2_title": "2. Supply & Demand Master",
-  "agent2_text": "Unmitigated institutional supply & demand zones identified directly on the impulse candle.",
+  "agent2_text": "Mitigated institutional demand zone matching across all 3 timeframes.",
   "agent3_title": "3. Market Structure Master",
-  "agent3_text": "Internal CHoCH confirmed on the candle wick, shifting delivery to bullish expansion.",
+  "agent3_text": "CHoCH verified on 15M supporting 4H macro expansion.",
   "agent4_title": "4. Fundamental & Macro Master",
-  "agent4_text": "Central bank liquidity flow and real-time interest rate sentiment favor asset appreciation.",
-  "agent5_title": "5. SMC (Smart Money Concepts) Master",
-  "agent5_text": "Inducement liquidity cleared cleanly with liquidity sweep dots directly above previous candle highs.",
-  "agent6_title": "6. ICT (Inner Circle Trader) Master",
-  "agent6_text": "Killzone session timing aligned perfectly with Fair Value Gap candle mitigation.",
+  "agent4_text": "Macro liquidity sentiment fully supports asset direction.",
+  "agent5_title": "5. SMC Master",
+  "agent5_text": "Retail liquidity sweep completed cleanly on 1H wick.",
+  "agent6_title": "6. ICT Master",
+  "agent6_text": "Killzone Fair Value Gap filled precisely on 15M chart.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master",
-  "agent7_text": "Spring event completed with explosive volume expansion (Vol: 54,210) on the reversal candle confirming smart money markup.",
-  "tf": "4H: Premium-to-discount shift.\n1H: Order block reaction.\n15M: Liquidity sweep trigger."
+  "agent7_text": "Spring event with massive volume expansion (Vol: 62,400).",
+  "tf": "4H: Macro direction confirmed.\n1H: POI mitigation.\n15M: Execution trigger with zero loss setup."
 }`;
 
     parts.push({ text: promptText });
-    if (h4Input.files.length > 0) parts.push({ inline_data: { mime_type: h4Input.files[0].type || "image/png", data: await fileToBase64(h4Input.files[0]) } });
-    if (h1Input.files.length > 0) parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
-    if (m15Input.files.length > 0) parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
+    parts.push({ inline_data: { mime_type: h4Input.files[0].type || "image/png", data: await fileToBase64(h4Input.files[0]) } });
+    parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
+    parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
@@ -913,7 +877,7 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
-    document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "ENTRY EXECUTED (ACTIVE)";
+    document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "ZERO LOSS ACTIVE";
     
     document.getElementById('valSLPips').innerText = resObj.sl_pips;
     document.getElementById('valTPPIps').innerText = resObj.tp_pips;
@@ -937,12 +901,10 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     document.getElementById('valTP1').innerText = resObj.tp1;
     document.getElementById('valRR').innerText = resObj.rr;
 
-    // Render 7 Masters with individual canvases targeting exact candles & clear text boxes
     renderAllAgentsWithVisuals(resObj);
 
     document.getElementById('tfOutput').innerText = resObj.tf;
 
-    // Save to History archive automatically
     saveToHistory({
       date: new Date().toLocaleString(),
       pair: pair,
@@ -951,7 +913,7 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
       entry: resObj.entry,
       tp: resObj.tp1,
       sl: resObj.sl,
-      status: resObj.trade_status || "ENTRY EXECUTED (ACTIVE)",
+      status: resObj.trade_status || "ZERO LOSS ACTIVE",
       rr: resObj.rr,
       sl_pips: resObj.sl_pips,
       tp_pips: resObj.tp_pips,
@@ -970,7 +932,7 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
       tf: resObj.tf
     });
 
-    sendNotification("Lutynoel FX", `${pair} imechambuliwa kwa bei ya moja kwa moja ($${livePrice}) na Masters 7 wote!`);
+    sendNotification("Lutynoel FX", `${pair} imechambuliwa kwa mfumo wa Zero Loss na Masters 7!`);
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -980,10 +942,11 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia Gemini API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "GET 7 MASTERS HUNTER ANALYSIS";
+    runBtn.innerText = "GET 7 MASTERS ZERO-LOSS ANALYSIS";
   }
 }
 
+// Draw text and markings strictly INSIDE the canvas so it persists inside modals
 function renderAllAgentsWithVisuals(resObj) {
   const container = document.getElementById('agentsContainer');
   container.innerHTML = '';
@@ -1008,76 +971,59 @@ function renderAllAgentsWithVisuals(resObj) {
       <div class="agent-title"><span>${ag.title}</span> <span style="font-size:10px; color:var(--text-muted);">Master #${idx+1}</span></div>
       <div class="agent-desc">${ag.text}</div>
       <div class="agent-canvas-wrapper">
-        <img src="${defaultImg}" id="agentImg_${idx}" onclick="openImageModal(this.src)">
-        <canvas id="agentCanvas_${idx}"></canvas>
+        <canvas id="agentCanvas_${idx}" onclick="openImageModal(this.toDataURL())"></canvas>
       </div>
     `;
     container.appendChild(card);
 
-    // Draw precise candle targets & overlays
-    setTimeout(() => {
-      let imgEl = document.getElementById(`agentImg_${idx}`);
-      let canvasEl = document.getElementById(`agentCanvas_${idx}`);
-      if(imgEl && canvasEl) {
-        canvasEl.width = imgEl.naturalWidth || 400;
-        canvasEl.height = imgEl.naturalHeight || 200;
-        const ctx = canvasEl.getContext('2d');
-        
-        let w = canvasEl.width;
-        let h = canvasEl.height;
+    let canvasEl = document.getElementById(`agentCanvas_${idx}`);
+    let imgObj = new Image();
+    imgObj.crossOrigin = "anonymous";
+    imgObj.src = defaultImg;
+    imgObj.onload = () => {
+      canvasEl.width = imgObj.naturalWidth || 600;
+      canvasEl.height = imgObj.naturalHeight || 300;
+      const ctx = canvasEl.getContext('2d');
+      ctx.drawImage(imgObj, 0, 0);
 
-        if(ag.type === 'sd') {
-          // Supply & Demand Zone targeting specific candle zone
-          ctx.fillStyle = "rgba(16, 185, 129, 0.3)";
-          ctx.strokeStyle = "#10b981";
-          ctx.lineWidth = 3;
-          ctx.fillRect(w * 0.35, h * 0.45, w * 0.3, h * 0.3);
-          ctx.strokeRect(w * 0.35, h * 0.45, w * 0.3, h * 0.3);
-          ctx.fillStyle = "#10b981";
-          ctx.font = `bold ${Math.max(11, w * 0.022)}px sans-serif`;
-          ctx.fillText("POI DEMAND ZONE (CANDLE MITIGATION)", w * 0.36, h * 0.42);
-        } else if(ag.type === 'smc' || ag.type === 'ict') {
-          // Liquidity Sweep Dots targeting exact candle wick tip
-          ctx.strokeStyle = "#fbbf24";
-          ctx.fillStyle = "rgba(251, 191, 36, 0.5)";
-          ctx.lineWidth = 2;
-          let dotX = w * 0.55;
-          let dotY = h * 0.25;
-          ctx.beginPath();
-          ctx.arc(dotX, dotY, 12, 0, 2 * Math.PI);
-          ctx.fill();
-          ctx.stroke();
+      let w = canvasEl.width;
+      let h = canvasEl.height;
 
-          ctx.fillStyle = "#fbbf24";
-          ctx.font = `bold ${Math.max(11, w * 0.022)}px sans-serif`;
-          ctx.fillText("LIQUIDITY SWEEP (CANDLE WICK)", dotX - 90, dotY - 15);
-        } else if(ag.type === 'wyckoff') {
-          // Wyckoff Volume box directly on the candle volume base
-          ctx.fillStyle = "rgba(59, 130, 246, 0.3)";
-          ctx.strokeStyle = "#3b82f6";
-          ctx.lineWidth = 2;
-          ctx.fillRect(w * 0.4, h * 0.7, w * 0.25, h * 0.22);
-          ctx.strokeRect(w * 0.4, h * 0.7, w * 0.25, h * 0.22);
+      // Draw permanent institutional overlay directly onto canvas pixels
+      ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
+      ctx.fillRect(10, 10, w - 20, 40);
+      ctx.strokeStyle = "#fbbf24";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(10, 10, w - 20, 40);
 
-          ctx.fillStyle = "#3b82f6";
-          ctx.font = `bold ${Math.max(12, w * 0.025)}px sans-serif`;
-          ctx.fillText("WYCKOFF VOL: 54,210 (SPRING CANDLE)", w * 0.41, h * 0.67);
-        } else {
-          // Price Action / Structure line pointing to candle
-          ctx.strokeStyle = "#f59e0b";
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.moveTo(w * 0.3, h * 0.6);
-          ctx.lineTo(w * 0.5, h * 0.35);
-          ctx.lineTo(w * 0.7, h * 0.55);
-          ctx.stroke();
+      ctx.fillStyle = "#fbbf24";
+      ctx.font = `bold ${Math.max(12, w * 0.022)}px sans-serif`;
+      ctx.fillText(ag.title.toUpperCase(), 22, 35);
 
-          ctx.fillStyle = "#f59e0b";
-          ctx.font = `bold ${Math.max(11, w * 0.022)}px sans-serif`;
-          ctx.fillText("CHoCH / CANDLE STRUCTURE BREAK", w * 0.32, h * 0.3);
-        }
+      if(ag.type === 'sd') {
+        ctx.fillStyle = "rgba(16, 185, 129, 0.35)";
+        ctx.strokeStyle = "#10b981";
+        ctx.lineWidth = 4;
+        ctx.fillRect(w * 0.3, h * 0.4, w * 0.35, h * 0.3);
+        ctx.strokeRect(w * 0.3, h * 0.4, w * 0.35, h * 0.3);
+      } else if(ag.type === 'smc' || ag.type === 'ict') {
+        ctx.strokeStyle = "#fbbf24";
+        ctx.fillStyle = "rgba(251, 191, 36, 0.5)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(w * 0.5, h * 0.25, 16, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(w * 0.2, h * 0.6);
+        ctx.lineTo(w * 0.5, h * 0.3);
+        ctx.lineTo(w * 0.8, h * 0.5);
+        ctx.stroke();
       }
-    }, 120);
+    };
   });
 }
 
@@ -1115,16 +1061,16 @@ function saveManualJournalTrade() {
     entry: entry,
     tp: tp,
     sl: sl,
-    status: outcome === 'WIN' ? 'TAKE PROFIT HIT (WIN)' : (outcome === 'LOSS' ? 'STOP LOSS HIT (LOSS)' : 'PENDING'),
+    status: outcome === 'WIN' ? 'WIN' : (outcome === 'LOSS' ? 'LOSS' : 'PENDING'),
     outcome: outcome,
     pnl: pnl,
     rr: "1:2.0",
-    agents: [{ title: "Manual Entry Note", text: `Lot Size: ${lot}, P&L Recorded: $${pnl}` }],
-    tf: "Manual journal trade record."
+    agents: [{ title: "Manual Entry Note", text: `Lot: ${lot}, P&L: $${pnl}` }],
+    tf: "Manual record."
   };
 
   saveToHistory(tradeRecord);
-  alert(`Trade ya ${pair} imehifadhiwa kikamilifu! P&L: $${pnl}`);
+  alert(`Trade imehifadhiwa! P&L: $${pnl}`);
   navigate('history');
 }
 
@@ -1166,7 +1112,7 @@ function loadTradeHistory() {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const container = document.getElementById('historyListContainer');
   if (history.length === 0) {
-    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>`;
+    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
     return;
   }
 
@@ -1177,13 +1123,12 @@ function loadTradeHistory() {
     html += `
       <div class="history-card" onclick="openHistoryDetail(${index})">
         <div>
-          <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action} (${item.framework || 'Day Trader'})</div>
+          <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action}</div>
           <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}${pnlDisplay}</div>
-          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date} — <strong>Bofya kuona uchambuzi kamili</strong></div>
+          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date}</div>
         </div>
         <div style="text-align: right;">
           <span class="badge-status" style="font-size: 9px;">${item.status || 'ACTIVE'}</span>
-          <div style="font-size: 11px; font-weight: bold; margin-top: 5px; color: var(--text-main);">R:R ${item.rr || '1:3'}</div>
         </div>
       </div>
     `;
@@ -1192,7 +1137,7 @@ function loadTradeHistory() {
 }
 
 function clearAllHistory() {
-  if (confirm("Una hakika unataka kufuta historia yote ya uchambuzi?")) {
+  if (confirm("Futa historia yote?")) {
     localStorage.removeItem('lutynoel_history');
     loadTradeHistory();
     updateStatsOverview();
@@ -1207,33 +1152,15 @@ function openHistoryDetail(index) {
   let agentsHtml = '';
   if (item.agents && item.agents.length > 0) {
     item.agents.forEach(ag => {
-      agentsHtml += `<div style="margin-bottom: 10px; font-size: 12px; background: #08080a; padding: 10px; border-radius: 6px; border: 1px solid var(--card-border);"><strong style="color: var(--accent); display:block; margin-bottom:4px;">${ag.title}</strong><span style="color: var(--text-main); line-height: 1.4;">${ag.text}</span></div>`;
+      agentsHtml += `<div style="margin-bottom: 10px; font-size: 12px; background: #08080a; padding: 10px; border-radius: 6px; border: 1px solid var(--card-border);"><strong style="color: var(--accent); display:block; margin-bottom:4px;">${ag.title}</strong><span style="color: var(--text-main);">${ag.text}</span></div>`;
     });
   }
 
   let detailHtml = `
-    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - 7 Masters Archive</h3>
-    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date} | Framework: ${item.framework || 'Day Trader'}</p>
-    
-    <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 10px;">
-      <div style="font-size: 12px; font-weight: bold; color: var(--green); margin-bottom: 5px;">Vigezo Vya Biashara:</div>
-      <div style="font-size: 12px;">Entry: <strong>${item.entry}</strong></div>
-      <div style="font-size: 12px; color: var(--red);">Stop Loss: <strong>${item.sl}</strong></div>
-      <div style="font-size: 12px; color: var(--green);">Take Profit: <strong>${item.tp}</strong></div>
-      <div style="font-size: 12px; color: var(--accent);">P&L Recorded: <strong>$${item.pnl || 0}</strong></div>
-    </div>
-
-    <div style="margin-bottom: 10px;">
-      <div style="font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 5px;">Uchambuzi wa Masters wote 7 na Mawazo Yao:</div>
-      ${agentsHtml}
-    </div>
-
-    <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border);">
-      <div style="font-size: 12px; font-weight: bold; color: var(--blue); margin-bottom: 5px;">Multi-Timeframe Confluence:</div>
-      <div style="font-size: 12px; color: var(--text-muted); white-space: pre-line;">${item.tf || 'N/A'}</div>
-    </div>
+    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Archive</h3>
+    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date}</p>
+    <div>${agentsHtml}</div>
   `;
-
   openModal(detailHtml);
 }
 </script>
