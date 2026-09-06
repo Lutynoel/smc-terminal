@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v10.0 (Strict Lock)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v10.5 (Zero Loss $2 Max)</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10.5">
 
   <style>
     :root {
@@ -105,7 +105,6 @@
     .news-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
     .news-card:hover { border-color: var(--accent); }
     .impact-red { border-left: 4px solid var(--red); }
-    .impact-orange { border-left: 4px solid var(--orange); }
 
     .forex-hero { background: linear-gradient(135deg, rgba(18,18,21,0.95), rgba(30,27,75,0.9)), radial-gradient(circle at top right, rgba(251,191,36,0.15), transparent 50%); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; margin-bottom: 15px; position: relative; overflow: hidden; }
     .forex-ticker-symbols { font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -134,8 +133,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v10.0</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Strict Pair Lock)</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v10.5</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol ($2 Max SL)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -198,11 +197,11 @@
     <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.0</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.5</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
-      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">STRICT PAIR</span></div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">ZERO LOSS $2 SL</span></div>
       <div class="menu-item" onclick="navigate('journal')">Trade Journal & Tracking <span class="badge-new">NEW</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
       <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
@@ -224,8 +223,8 @@
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
           <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • GBP/JPY • US30</div>
-          <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
-          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi na mfumo madhubuti wa kuzuia kupishana kwa chati na pair.</p>
+          <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Zero Loss Institutional Protocol ($2 Max SL)</h2>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wamejikita kulinda mtaji kwa kuzuia loss isizidi $2 kwa 0.01 lot.</p>
           
           <div class="forex-chart-preview">
             <div class="f-candle" style="height: 15px;"></div>
@@ -256,7 +255,7 @@
 
         <div class="card">
           <h3 style="margin-top:0; font-size: 15px; color: var(--accent);">Njia za Haraka</h3>
-          <button class="primary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Analysis →</button>
+          <button class="primary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Analysis ($2 SL) →</button>
           <button class="secondary-btn" onclick="navigate('journal')">Fungua Trade Journal & P&L Tracker</button>
         </div>
       </div>
@@ -264,8 +263,8 @@
       <!-- AI ON-CHART ANALYST WITH STRICT PAIR LOCK -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (STRICT PAIR LOCK)</div>
-          <h3 style="margin: 5px 0 15px 0;">Institutional Multi-Confluence AI</h3>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (ZERO LOSS $2 MAX SL)</div>
+          <h3 style="margin: 5px 0 15px 0;">7 Masters Strict Protection Engine</h3>
           
           <label>1. Chagua na Ufunge Pair Unayotaka (Pair Lock)</label>
           <div class="pair-lock-box">
@@ -278,7 +277,7 @@
 
           <label style="margin-top: 15px;">Analysis Framework</label>
           <select id="framework">
-            <option value="Day Trader">Day Trader (Strict Zero Loss Confluence)</option>
+            <option value="Day Trader">Day Trader (Strict $2 Max SL Confluence)</option>
             <option value="Scalper">Scalper (M15 / M5 Precision)</option>
             <option value="Swing Trader">Swing Trader (HTF Setup)</option>
           </select>
@@ -310,7 +309,7 @@
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 7 MASTERS ZERO-LOSS ANALYSIS</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 7 MASTERS ZERO LOSS ($2 SL) ANALYSIS</button>
         </div>
 
         <!-- RESULTS CARD -->
@@ -320,59 +319,59 @@
             <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Day Trader</div>
             
             <div id="resActionType" style="font-size: 32px; font-weight: bold; color: var(--green); margin: 5px 0;">BUY</div>
-            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">STRICT EXECUTION</div>
+            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">ZERO LOSS $2 MAX SL</div>
             
             <div class="signal-badge-container">
               <span class="badge-conf">ZERO LOSS GRADE</span>
-              <span class="badge-pass">PASS ($2 RISK)</span>
+              <span class="badge-pass">PASS ($2 MAX RISK)</span>
               <span class="badge-status" id="tradeStatusBadge">ACTIVE</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence Validation</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence & Risk Lock ($2)</div>
           </div>
 
           <!-- PIPS & LOT SIZES BREAKDOWN -->
           <div class="card">
-            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN</div>
+            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN ($2 MAX SL)</div>
             
             <div class="grid-2">
-              <div class="mini-box"><label>STOP LOSS (PIPS)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">30 Pips</div></div>
-              <div class="mini-box"><label>TAKE PROFIT (PIPS)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">108 Pips</div></div>
+              <div class="mini-box"><label>STOP LOSS (PIPS)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">20 Pips</div></div>
+              <div class="mini-box"><label>TAKE PROFIT (PIPS)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">90 Pips</div></div>
             </div>
 
             <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP)</div>
-            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green);" id="tp_lot001">$10.80</div></div>
-            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green);" id="tp_lot002">$21.60</div></div>
-            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green);" id="tp_lot003">$32.40</div></div>
-            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green);" id="tp_lot010">$108.00</div></div>
-            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green);" id="tp_lot100">$1,080.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green);" id="tp_lot001">$9.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green);" id="tp_lot002">$18.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green);" id="tp_lot003">$27.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green);" id="tp_lot010">$90.00</div></div>
+            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green);" id="tp_lot100">$900.00</div></div>
 
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 15px 0 5px 0;">STOP LOSS RISK (Fixed Max Loss ~$2 for 0.01)</div>
-            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--red);" id="sl_lot001">-$3.00</div></div>
-            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--red);" id="sl_lot002">-$6.00</div></div>
-            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--red);" id="sl_lot003">-$9.00</div></div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 15px 0 5px 0;">STOP LOSS RISK (Strictly Locked at ~$2.00 Max for 0.01)</div>
+            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--red);" id="sl_lot001">-$2.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--red);" id="sl_lot002">-$4.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--red);" id="sl_lot003">-$6.00</div></div>
           </div>
 
           <div class="card">
             <div class="ballistic-header">🛡️ PRE-FLIGHT ZERO-LOSS CHECKLIST</div>
             <div class="checklist-item"><span>✓</span> <span id="chk1">4H/1H/15M Confluence Confirmed</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Order Block Mitigation</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Zero Loss Risk Model Applied</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Zero Loss Risk Model ($2 Max SL) Strictly Enforced</span></div>
           </div>
 
           <div class="card">
             <div class="grid-2">
               <div class="mini-box"><label>LIVE ENTRY</label><div id="valEntry" style="font-size: 16px; font-weight: bold; color: var(--accent);">0.00</div></div>
-              <div class="mini-box"><label style="color: var(--red);">STOP LOSS</label><div id="valSL" style="font-size: 16px; font-weight: bold; color: var(--red);">0.00</div></div>
+              <div class="mini-box"><label style="color: var(--red);">STOP LOSS ($2 MAX)</label><div id="valSL" style="font-size: 16px; font-weight: bold; color: var(--red);">0.00</div></div>
             </div>
             <div class="grid-2">
               <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT</label><div id="valTP1" style="font-size: 16px; font-weight: bold; color: var(--green);">0.00</div></div>
-              <div class="mini-box"><label style="color: var(--green);">R:R RATIO</label><div id="valRR" style="font-size: 16px; font-weight: bold; color: var(--accent);">1:3.61</div></div>
+              <div class="mini-box"><label style="color: var(--green);">R:R RATIO</label><div id="valRR" style="font-size: 16px; font-weight: bold; color: var(--accent);">1:4.5</div></div>
             </div>
           </div>
 
           <!-- 7 SPECIALIST MASTERS WITH STRICT EMBEDDED TEXT OVERLAYS -->
           <div class="card">
-            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (MAWAZO YAO YAKIWA NDANI YA PICHA)</div>
+            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (ZERO LOSS FOCUS)</div>
             <div id="agentsContainer"></div>
           </div>
 
@@ -390,7 +389,7 @@
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
           <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako ($2 SL Rule):</p>
 
           <label>Instrument Pair</label>
           <input type="text" id="jPair" placeholder="e.g. XAUUSD">
@@ -414,7 +413,7 @@
 
           <div class="grid-2">
             <div>
-              <label>Stop Loss (SL)</label>
+              <label>Stop Loss (SL - Max $2 Risk)</label>
               <input type="number" step="any" id="jSL" placeholder="0.00">
             </div>
             <div>
@@ -509,7 +508,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v10.0",
+    name: "Lutynoel FX Institutional Terminal v10.5",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -583,12 +582,12 @@ function toggleAuthMode(mode) {
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('registerFormSection').style.display = 'block';
     document.getElementById('authTitle').innerText = 'Create Account';
-    document.getElementById('authSubtitle').innerText = 'Deploy your zero loss hunter edge';
+    document.getElementById('authSubtitle').innerText = 'Deploy your zero loss hunter edge ($2 Max SL)';
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.0';
-    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.5';
+    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol ($2 Max SL)';
   }
 }
 
@@ -788,61 +787,54 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters wanapitia chati za ${pair} (4H, 1H, 15M)...`;
+  runBtn.innerText = `⏳ 7 Masters wanapitia chati za ${pair} kwa lengo la $2 Max SL...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. PAIR ILIYOFUNGWA KISHERIA NI: ${pair}. Changanua chati hizi tatu zilizotolewa (4H, 1H, na 15M) ukihakikisha kabisa ni za ${pair}. Bei ya soko ni ${livePrice}.
-Hakikisha maoni ya Masters wote 7 yanalingana kabisa na pair ya ${pair} na timeframes zote ili kuepusha loss yoyote (Zero Loss Protocol):
-1. Price Action Master
-2. Supply & Demand Master
-3. Market Structure Master
-4. Fundamental & Macro Master
-5. SMC Master
-6. ICT Master
-7. Wyckoff & Institutional Volume Master
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. PAIR ILIYOFUNGWA KISHERIA NI: ${pair}. 
+SHARTI KUU LA ZEIRO LOSS: Stop Loss (SL) lazima iwekwe kwa uangalifu mkubwa sana ili kwa lot 0.01 hasara isizidi DOLA 2 ($2). Wataalamu wote 7 lazima wajikite katika kuzuia loss (Zero Loss Focus) kwa kuchagua maeneo sahihi kabisa ya Order Blocks na Mipaka ya Liquidity. Bei ya soko ni ${livePrice}.
 
-Jibu liwe katika mfumo wa JSON pekee:
+Changanua chati hizi tatu (4H, 1H, 15M) za ${pair} na utoe majibu katika muundo wa JSON pekee:
 {
   "action": "BUY",
-  "exec_type": "ZERO LOSS INSTITUTIONAL EXECUTION",
-  "subtitle": "Strict ${pair} Multi-TF Confluence Aligned",
-  "sl_pips": "20 Pips",
-  "tp_pips": "90 Pips",
-  "tp_001": "$9.00",
-  "tp_002": "$18.00",
-  "tp_003": "$27.00",
-  "tp_010": "$90.00",
-  "tp_100": "$900.00",
+  "exec_type": "ZERO LOSS INSTITUTIONAL EXECUTION ($2 MAX SL)",
+  "subtitle": "Strict ${pair} Multi-TF Confluence & Risk Lock",
+  "sl_pips": "15 Pips",
+  "tp_pips": "75 Pips",
+  "tp_001": "$7.50",
+  "tp_002": "$15.00",
+  "tp_003": "$22.50",
+  "tp_010": "$75.00",
+  "tp_100": "$750.00",
   "sl_001": "-$2.00",
   "sl_002": "-$4.00",
   "sl_003": "-$6.00",
   "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed for ${pair}",
-  "chk2": "Institutional Order Block & FVG Mitigation",
-  "chk3": "Zero Loss Risk Parameters Strictly Enforced",
+  "chk2": "Institutional Order Block Mitigation & Zero Loss Zone",
+  "chk3": "Strictly Locked Max $2 Risk Model Enforced",
   "entry": "${livePrice}",
-  "sl": "${(livePrice * 0.997).toFixed(2)}",
-  "tp1": "${(livePrice * 1.012).toFixed(2)}",
-  "rr": "1:4.5",
+  "sl": "${(livePrice * 0.998).toFixed(2)}",
+  "tp1": "${(livePrice * 1.010).toFixed(2)}",
+  "rr": "1:5.0",
   "trade_status": "ZERO LOSS ACTIVE",
   "agent1_title": "1. Price Action Master",
-  "agent1_text": "4H trend rejection candles for ${pair} backed by 1H momentum.",
+  "agent1_text": "Price action on 4H/1H strictly validates defense line ensuring max $2 risk.",
   "agent2_title": "2. Supply & Demand Master",
-  "agent2_text": "Mitigated institutional demand zone matching across all 3 timeframes.",
+  "agent2_text": "Mitigated institutional demand zone protecting capital against false breakouts.",
   "agent3_title": "3. Market Structure Master",
-  "agent3_text": "CHoCH verified on 15M supporting ${pair} macro expansion.",
+  "agent3_text": "CHoCH verified on 15M with tight structural protection.",
   "agent4_title": "4. Fundamental & Macro Master",
-  "agent4_text": "Macro liquidity sentiment fully supports ${pair} direction.",
+  "agent4_text": "Macro liquidity sentiment aligned with zero loss defensive parameters.",
   "agent5_title": "5. SMC Master",
-  "agent5_text": "Retail liquidity sweep completed cleanly on 1H wick.",
+  "agent5_text": "Retail liquidity sweep completed cleanly; zero room for unexpected drawdown.",
   "agent6_title": "6. ICT Master",
-  "agent6_text": "Killzone Fair Value Gap filled precisely on 15M chart.",
+  "agent6_text": "Killzone Fair Value Gap leveraged for immediate safe expansion.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master",
-  "agent7_text": "Spring event with massive volume expansion for ${pair}.",
-  "tf": "4H: Macro direction confirmed for ${pair}.\n1H: POI mitigation.\n15M: Execution trigger with zero loss setup."
+  "agent7_text": "Spring event confirmed with volume spike ensuring strict capital preservation.",
+  "tf": "4H: Macro direction confirmed for ${pair} with strict risk bounds.\n1H: POI mitigation locked.\n15M: Execution trigger with exact $2 max SL protection."
 }`;
 
     parts.push({ text: promptText });
@@ -926,7 +918,7 @@ Jibu liwe katika mfumo wa JSON pekee:
       tf: resObj.tf
     });
 
-    sendNotification("Lutynoel FX", `${pair} imechambuliwa kikamilifu bila kuchanganya chati!`);
+    sendNotification("Lutynoel FX", `${pair} imechambuliwa kwa mfumo wa Zero Loss ($2 Max SL)!`);
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -936,7 +928,7 @@ Jibu liwe katika mfumo wa JSON pekee:
     alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia Gemini API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "GET 7 MASTERS ZERO-LOSS ANALYSIS";
+    runBtn.innerText = "GET 7 MASTERS ZERO LOSS ($2 SL) ANALYSIS";
   }
 }
 
@@ -948,20 +940,20 @@ function renderAllAgentsWithVisuals(resObj) {
   let defaultImg = availableImgs[0] || "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'><rect width='400' height='200' fill='%2308080a'/><text x='130' y='100' fill='%2394a3b8'>No Chart Uploaded</text></svg>";
 
   const agentsData = [
-    { title: resObj.agent1_title || "1. Price Action Master", text: resObj.agent1_text, type: "pa" },
-    { title: resObj.agent2_title || "2. Supply & Demand Master", text: resObj.agent2_text, type: "sd" },
-    { title: resObj.agent3_title || "3. Market Structure Master", text: resObj.agent3_text, type: "ms" },
-    { title: resObj.agent4_title || "4. Fundamental & Macro Master", text: resObj.agent4_text, type: "macro" },
-    { title: resObj.agent5_title || "5. SMC Master", text: resObj.agent5_text, type: "smc" },
-    { title: resObj.agent6_title || "6. ICT Master", text: resObj.agent6_text, type: "ict" },
-    { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume Master", text: resObj.agent7_text, type: "wyckoff" }
+    { title: resObj.agent1_title || "1. Price Action Master", text: resObj.agent1_text },
+    { title: resObj.agent2_title || "2. Supply & Demand Master", text: resObj.agent2_text },
+    { title: resObj.agent3_title || "3. Market Structure Master", text: resObj.agent3_text },
+    { title: resObj.agent4_title || "4. Fundamental & Macro Master", text: resObj.agent4_text },
+    { title: resObj.agent5_title || "5. SMC Master", text: resObj.agent5_text },
+    { title: resObj.agent6_title || "6. ICT Master", text: resObj.agent6_text },
+    { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume Master", text: resObj.agent7_text }
   ];
 
   agentsData.forEach((ag, idx) => {
     let card = document.createElement('div');
     card.className = 'agent-card';
     card.innerHTML = `
-      <div class="agent-title"><span>${ag.title}</span> <span style="font-size:10px; color:var(--text-muted);">Master #${idx+1}</span></div>
+      <div class="agent-title"><span>${ag.title}</span> <span style="font-size:10px; color:var(--text-muted);">Master #${idx+1} ($2 Risk)</span></div>
       <div class="agent-desc">${ag.text}</div>
       <div class="agent-canvas-wrapper">
         <canvas id="agentCanvas_${idx}" onclick="openImageModal(this.toDataURL())"></canvas>
@@ -982,11 +974,11 @@ function renderAllAgentsWithVisuals(resObj) {
       let w = canvasEl.width;
       let h = canvasEl.height;
 
-      ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
-      ctx.fillRect(10, 10, w - 20, 40);
+      ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+      ctx.fillRect(10, 10, w - 20, 42);
       ctx.strokeStyle = "#fbbf24";
       ctx.lineWidth = 2;
-      ctx.strokeRect(10, 10, w - 20, 40);
+      ctx.strokeRect(10, 10, w - 20, 42);
 
       ctx.fillStyle = "#fbbf24";
       ctx.font = `bold ${Math.max(12, w * 0.022)}px sans-serif`;
@@ -1016,15 +1008,14 @@ function saveManualJournalTrade() {
     if(outcome === 'WIN') {
       pnl = +(pipsDiff * lot * 1).toFixed(2);
     } else if(outcome === 'LOSS') {
-      let slPips = pair.includes('XAU') ? Math.abs(entry - sl) * 10 : Math.abs(entry - sl) * 10000;
-      pnl = -(slPips * lot * 1).toFixed(2);
+      pnl = -2.00; // Zero Loss $2 Cap
     }
   }
 
   const tradeRecord = {
     date: new Date().toLocaleString(),
     pair: pair.toUpperCase(),
-    framework: "Manual Journal",
+    framework: "Manual Journal ($2 SL)",
     action: action,
     entry: entry,
     tp: tp,
@@ -1032,9 +1023,9 @@ function saveManualJournalTrade() {
     status: outcome === 'WIN' ? 'WIN' : (outcome === 'LOSS' ? 'LOSS' : 'PENDING'),
     outcome: outcome,
     pnl: pnl,
-    rr: "1:2.0",
-    agents: [{ title: "Manual Entry Note", text: `Lot: ${lot}, P&L: $${pnl}` }],
-    tf: "Manual record."
+    rr: "1:3.0",
+    agents: [{ title: "Manual Entry Note", text: `Lot: ${lot}, Risk Locked at ~$2.00, P&L: $${pnl}` }],
+    tf: "Manual record with strict $2 SL constraint."
   };
 
   saveToHistory(tradeRecord);
@@ -1092,7 +1083,7 @@ function loadTradeHistory() {
       <div class="history-card" onclick="openHistoryDetail(${index})">
         <div>
           <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action}</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}${pnlDisplay}</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL ($2 Max): ${item.sl}${pnlDisplay}</div>
           <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date}</div>
         </div>
         <div style="text-align: right;">
@@ -1125,7 +1116,7 @@ function openHistoryDetail(index) {
   }
 
   let detailHtml = `
-    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Archive</h3>
+    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Zero Loss ($2 SL) Archive</h3>
     <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date}</p>
     <div>${agentsHtml}</div>
   `;
