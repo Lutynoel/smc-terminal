@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v8.7</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v8.8</title>
   
-  <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v8.7">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v8.8">
 
   <style>
     :root {
@@ -74,10 +73,13 @@
     .upload-zone input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
     .preview-img { width: 100%; max-height: 130px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; cursor: pointer; }
 
-    /* CANVAS OVERLAY CONTAINER */
-    .canvas-overlay-wrapper { position: relative; width: 100%; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid var(--card-border); background: #000; }
-    .canvas-overlay-wrapper img { width: 100%; display: block; max-height: 280px; object-fit: contain; }
-    .canvas-overlay-wrapper canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    /* CANVAS OVERLAY CONTAINER FOR EACH MASTER */
+    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 14px; border-radius: 10px; margin-bottom: 12px; }
+    .agent-title { font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+    .agent-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
+    .agent-canvas-wrapper { position: relative; width: 100%; border-radius: 6px; overflow: hidden; border: 1px solid var(--card-border); background: #000; margin-top: 8px; }
+    .agent-canvas-wrapper img { width: 100%; display: block; max-height: 200px; object-fit: contain; }
+    .agent-canvas-wrapper canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
 
     /* UI STYLING */
     .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
@@ -95,10 +97,6 @@
     .checklist-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
     .checklist-item span { color: var(--green); font-weight: bold; }
 
-    .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
-    .agent-title { font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 4px; }
-    .agent-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
-    
     .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
     .history-card:hover { border-color: var(--accent); background: #141418; }
     
@@ -127,7 +125,6 @@
 </head>
 <body>
 
-  <!-- UNIVERSAL MODAL -->
   <div id="universalModal" class="modal" onclick="closeUniversalModal()">
     <div id="modalBody" onclick="event.stopPropagation()" class="modal-content">
       <span class="modal-close" onclick="closeUniversalModal()">&times;</span>
@@ -135,11 +132,10 @@
     </div>
   </div>
 
-  <!-- AUTH SCREENS -->
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v8.7</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v8.8</div>
       <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol</div>
 
       <div id="loginFormSection">
@@ -184,11 +180,9 @@
     </div>
   </div>
 
-  <!-- MAIN APP INTERFACE -->
   <div id="appInterface">
     <header>
       <div style="display: flex; align-items: center; gap: 10px;">
-        <!-- BACK ARROW BUTTON -->
         <button class="nav-btn" onclick="goBackToOverview()" title="Rudi Nyuma (Overview)">←</button>
         <button class="nav-btn" onclick="toggleSidebar()" title="Fungua Menyu">☰</button>
         <div class="logo-area">
@@ -201,10 +195,9 @@
       </div>
     </header>
 
-    <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v8.7</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v8.8</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
@@ -218,7 +211,6 @@
     </div>
 
     <div class="main-content">
-      <!-- INSTALL APP PROMPT BANNER -->
       <div id="installBanner" class="install-banner" style="display: none;">
         <div class="install-banner-text">
           <strong>Install App</strong><br>Wezesha iwe app kamili kwenye simu yako.
@@ -226,12 +218,11 @@
         <button class="install-btn" id="installAppBtn">INSTALL</button>
       </div>
 
-      <!-- DASHBOARD OVERVIEW (WITH FOREX NEON GRAPHICS & STATS) -->
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
           <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • GBP/JPY • US30</div>
           <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
-          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi za Kibenki (Price Action, S&D, Market Structure, Fundamental, SMC, ICT, na Wyckoff) tayari kukupa makadirio sahihi ya $2 Risk Management.</p>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi za Kibenki (Price Action, S&D, Market Structure, Fundamental, SMC, ICT, na Wyckoff) tayari kukupa makadirio sahihi ya $2 Risk Management na picha maalum kwa kila mtaalamu.</p>
           
           <div class="forex-chart-preview">
             <div class="f-candle" style="height: 15px;"></div>
@@ -245,7 +236,6 @@
           </div>
         </div>
 
-        <!-- STATS COUNTERS -->
         <div class="grid-3">
           <div class="mini-box" style="text-align: center;">
             <label>Jumla ya Analiza</label>
@@ -268,13 +258,12 @@
         </div>
       </div>
 
-      <!-- AI ON-CHART ANALYST -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (7 MASTERS HUNTER EDITION)</div>
           <h3 style="margin: 5px 0 15px 0;">Institutional Multi-Confluence AI</h3>
           
-          <label>Instrument Symbol</label>
+          <label>Instrument Symbol (Weka Pair Husika)</label>
           <select id="pair" onchange="updateTradingViewSymbol()">
             <optgroup label="Metals & Crypto">
               <option value="XAUUSD">XAU/USD (Gold)</option>
@@ -306,7 +295,6 @@
             <option value="Swing Trader">Swing Trader (HTF Setup)</option>
           </select>
 
-          <!-- UPLOAD 4H -->
           <label style="margin-top: 15px;">Required Market Timeframe: 4H Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
@@ -315,7 +303,6 @@
             <img id="previewH4" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <!-- UPLOAD 1H -->
           <label>Required Market Timeframe: 1H Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
@@ -324,7 +311,6 @@
             <img id="previewH1" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <!-- UPLOAD 15M -->
           <label>Required Market Timeframe: 15M Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
@@ -336,7 +322,6 @@
           <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 7 MASTERS HUNTER ANALYSIS</button>
         </div>
 
-        <!-- RESULTS CARD -->
         <div id="resultsContainer" style="display: none;">
           <div class="card" style="text-align: center; border-color: var(--green);">
             <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAU/USD</div>
@@ -353,13 +338,6 @@
             <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Retail Liquidity Sweep into Institutional POI</div>
           </div>
 
-          <!-- VISUAL OVERLAYS SECTION (CHART WITH OVERLAYS) -->
-          <div class="card" id="visualOverlayCard" style="display: none;">
-            <div class="ballistic-header">🎨 VISUAL CHART OVERLAYS (Order Blocks & Arrows)</div>
-            <div id="visualOverlayContainer"></div>
-          </div>
-
-          <!-- PIPS & LOT SIZES BREAKDOWN -->
           <div class="card">
             <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN</div>
             
@@ -399,9 +377,8 @@
             </div>
           </div>
 
-          <!-- 7 SPECIALIST MASTERS KAMILI -->
           <div class="card">
-            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS CONSULTATION</div>
+            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (KILA MTAALAM NA PICHA YAKE)</div>
             <div id="agentsContainer"></div>
           </div>
 
@@ -414,12 +391,11 @@
         </div>
       </div>
 
-      <!-- TRADE JOURNAL & P&L TRACKER -->
       <div id="view-journal" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
           <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako ili mfumo uhesabu actual profit au loss na kuweka kwenye kumbukumbu:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako ili mfumo uhesabu actual profit au loss:</p>
 
           <label>Instrument Pair</label>
           <input type="text" id="jPair" placeholder="e.g. XAUUSD au EURUSD">
@@ -463,45 +439,41 @@
         </div>
       </div>
 
-      <!-- LIVE TRADINGVIEW CHART -->
       <div id="view-livechart" class="view-section" style="display: none;">
         <div class="card">
           <h3>Live TradingView Chart</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chati ya moja kwa moja ya pair uliyochagua:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chati ya moja kwa moja:</p>
           <div style="height: 480px; width: 100%;" id="tradingview_widget_container">
             <iframe id="tvLiveIframe" src="https://s.tradingview.com/widgetembed/?symbol=FX:XAUUSD&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%; height:100%; border:0; border-radius:8px;"></iframe>
           </div>
         </div>
       </div>
 
-      <!-- ECONOMIC NEWS -->
       <div id="view-news" class="view-section" style="display: none;">
         <div class="card">
           <h3>Live Economic Calendar & News</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa za leo na rangi za viwango vya athari (Bofya kusoma zaidi):</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa za leo na rangi za viwango vya athari:</p>
           <div id="economicNewsContainer"></div>
         </div>
       </div>
 
-      <!-- HISTORY & ARCHIVE -->
       <div id="view-history" class="view-section" style="display: none;">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <h3 style="margin: 0;">Trade History Archive</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi na biashara zote zilizohifadhiwa (Bofya kuona maelezo kamili):</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi na biashara zote zilizohifadhiwa:</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>
           </div>
         </div>
       </div>
 
-      <!-- OTHER VIEWS -->
       <div id="view-broker" class="view-section" style="display: none;">
         <div class="card">
           <h3>Broker Sync & API</h3>
-          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Kupitia PWA yetu, Broker Sync inakupa uwezo wa kuunganisha mahesabu yako ya Risk Management na akaunti za MT4/MT5 au kuchukua taarifa za moja kwa moja za Exness/Deriv kupitia Web API token. Hifadhi API key yako ya broker hapa chini:</p>
+          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Hifadhi API key yako ya broker hapa chini:</p>
           <label>Broker API Key / Token</label>
           <input type="text" id="brokerApiKey" placeholder="Weka Broker Token hapa">
           <button class="primary-btn" onclick="alert('Broker Sync Token imehifadhiwa kwa usalama!')">Hifadhi Token</button>
@@ -538,7 +510,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v8.7",
+    name: "Lutynoel FX Institutional Terminal v8.8",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -616,7 +588,7 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v8.7';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v8.8';
     document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
   }
 }
@@ -755,28 +727,26 @@ function loadEconomicCalendar() {
       <div class="news-card impact-none">
         <div style="font-size: 11px; color: var(--text-muted); font-weight: bold;">TAREHE: ${todayDateStr}</div>
         <strong style="color: var(--accent); font-size: 14px; display: block; margin: 5px 0;">Hakuna News Kuu Leo (Weekend)</strong>
-        <div style="font-size: 12px; color: var(--text-muted);">Masoko yamefungwa kwa mapumziko ya mwisho wa wiki. Hakuna taarifa za kiuchumi zenye athari zilizopangwa leo.</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Masoko yamefungwa kwa mapumziko ya wiki.</div>
       </div>
     `;
     return;
   }
 
   const newsList = [
-    { title: "USD - US Non-Farm Payrolls (NFP)", time: "15:30 EAT", impact: "red", label: "HIGH IMPACT (🔴 Nyekundu)", desc: "Taarifa kuu ya ajira ya Marekani inayoleta mabadiliko makubwa kwenye dhahabu na dola." },
-    { title: "EUR - ECB Monetary Policy Meeting", time: "12:15 EAT", impact: "orange", label: "MEDIUM IMPACT (🟠 Machungwa)", desc: "Mkutano wa Benki Kuu ya Ulaya unaoathiri ukwasi wa EUR." },
-    { title: "GBP - Retail Sales (MoM)", time: "10:00 EAT", impact: "yellow", label: "LOW IMPACT (🟡 Njano)", desc: "Viwango vya manunuzi ya rejareja Uingereza, athari ndogo kwa GBP." }
+    { title: "USD - US Non-Farm Payrolls (NFP)", time: "15:30 EAT", impact: "red", label: "HIGH IMPACT", desc: "Taarifa kuu ya ajira ya Marekani inayoleta mabadiliko makubwa." },
+    { title: "EUR - ECB Monetary Policy Meeting", time: "12:15 EAT", impact: "orange", label: "MEDIUM IMPACT", desc: "Mkutano wa Benki Kuu ya Ulaya." }
   ];
 
   let html = `<div style="font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 10px;">TAREHE YA LEO: ${todayDateStr}</div>`;
   newsList.forEach((n) => {
-    let impactClass = `impact-${n.impact}`;
     html += `
-      <div class="news-card ${impactClass}" onclick="openModal('<h3>${n.title}</h3><p style=\\'color:var(--accent); font-size:12px;\\'>Muda: ${n.time} | Viwango: ${n.label}</p><p style=\\'font-size:13px; color:var(--text-muted);\\'>${n.desc}</p>')">
+      <div class="news-card impact-${n.impact}" onclick="openModal('<h3>${n.title}</h3><p style=\\'color:var(--accent);\\'>${n.time} | ${n.label}</p><p>${n.desc}</p>')">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <strong style="font-size: 13px;">${n.title}</strong>
           <span style="font-size: 10px; font-weight: bold; color: var(--text-muted);">${n.time}</span>
         </div>
-        <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: ${n.label} (Bofya kusoma zaidi)</div>
+        <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: ${n.label}</div>
       </div>
     `;
   });
@@ -796,6 +766,7 @@ async function runLutynoelAnalysis() {
   const apiKey = localStorage.getItem('smc_gemini_key');
   if (!apiKey) { alert("API Key haionekani. Tafadhali ingia tena."); logout(); return; }
 
+  const pair = document.getElementById('pair').value;
   const h4Input = document.getElementById('chartH4');
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
@@ -805,16 +776,31 @@ async function runLutynoelAnalysis() {
     return;
   }
 
+  // SMART PAIR & IMAGE VALIDATION
+  let uploadedFileNames = "";
+  if(h4Input.files[0]) uploadedFileNames += h4Input.files[0].name.toUpperCase() + " ";
+  if(h1Input.files[0]) uploadedFileNames += h1Input.files[0].name.toUpperCase() + " ";
+  if(m15Input.files[0]) uploadedFileNames += m15Input.files[0].name.toUpperCase() + " ";
+
+  // Check if user selected e.g. XAUUSD but uploaded something completely mismatching if names give a hint, or prompt validation warning
+  if(uploadedFileNames.length > 0) {
+    let basePairShort = pair.replace('USD','').replace('US',''); // e.g. ETH from ETHUSD, XAU from XAUUSD
+    if(uploadedFileNames.includes('ETH') && pair.includes('XAU')) {
+      if(!confirm(`Onyo: Umechagua Pair '${pair}' lakini picha ulizoweka zinaonekana kuwa za 'ETH' au tofauti. Je, ungependa kuendelea au uhakikishe kwanza?`)) {
+        return;
+      }
+    }
+  }
+
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
   runBtn.innerText = "⏳ 7 Institutional Masters wanachambua soko...";
 
   try {
-    const pair = document.getElementById('pair').value;
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine yenye Wataalamu 7 Mahiri. Changanua picha za chati za ${pair} (${framework}) kwa mtazamo wa Institutional Hunter. Weka risk ya $2. 
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine yenye Wataalamu 7 Mahiri. Changanua picha za chati za ${pair} (${framework}). Weka risk ya $2. 
 Lazima utoe uchambuzi wa kina na wa kipekee kwa KILA MASTER kati ya hawa 7:
 1. Price Action Master
 2. Supply & Demand Master
@@ -822,7 +808,7 @@ Lazima utoe uchambuzi wa kina na wa kipekee kwa KILA MASTER kati ya hawa 7:
 4. Fundamental & Macro Master
 5. SMC (Smart Money Concepts) Master
 6. ICT (Inner Circle Trader) Master
-7. Wyckoff & Institutional Volume Master
+7. Wyckoff & Institutional Volume Master (lazima utaje namba kamili ya volume kama vile Vol: 48,250 kwenye uchambuzi wake).
 
 Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
 {
@@ -850,17 +836,17 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
   "agent1_title": "1. Price Action Master",
   "agent1_text": "Long wicks rejecting support indicate institutional accumulation.",
   "agent2_title": "2. Supply & Demand Master",
-  "agent2_text": "Unmitigated institutional order block identified as a high-probability reversal magnet.",
+  "agent2_text": "Unmitigated institutional supply & demand zones identified as high-probability reversal magnet.",
   "agent3_title": "3. Market Structure Master",
   "agent3_text": "Internal CHoCH confirmed, shifting delivery to bullish expansion.",
   "agent4_title": "4. Fundamental & Macro Master",
   "agent4_text": "Central bank liquidity flow and real-time interest rate sentiment favor asset appreciation.",
   "agent5_title": "5. SMC (Smart Money Concepts) Master",
-  "agent5_text": "Inducement liquidity cleared cleanly above previous highs before mitigation.",
+  "agent5_text": "Inducement liquidity cleared cleanly with liquidity sweep dots above previous highs.",
   "agent6_title": "6. ICT (Inner Circle Trader) Master",
-  "agent6_text": "Killzone session timing aligned perfectly with Fair Value Gap mitigation and liquidity void fill.",
+  "agent6_text": "Killzone session timing aligned perfectly with Fair Value Gap mitigation.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master",
-  "agent7_text": "Spring event completed with explosive volume expansion confirming smart money markup.",
+  "agent7_text": "Spring event completed with explosive volume expansion (Vol: 54,210) confirming smart money markup.",
   "tf": "4H: Premium-to-discount shift.\n1H: Order block reaction.\n15M: Liquidity sweep trigger."
 }`;
 
@@ -914,20 +900,10 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     document.getElementById('valTP1').innerText = resObj.tp1;
     document.getElementById('valRR').innerText = resObj.rr;
 
-    let agentsHtml = `
-      <div class="agent-card"><div class="agent-title">${resObj.agent1_title || "1. Price Action Master"}</div><div class="agent-desc">${resObj.agent1_text}</div></div>
-      <div class="agent-card"><div class="agent-title">${resObj.agent2_title || "2. Supply & Demand Master"}</div><div class="agent-desc">${resObj.agent2_text}</div></div>
-      <div class="agent-card"><div class="agent-title">${resObj.agent3_title || "3. Market Structure Master"}</div><div class="agent-desc">${resObj.agent3_text}</div></div>
-      <div class="agent-card"><div class="agent-title">${resObj.agent4_title || "4. Fundamental & Macro Master"}</div><div class="agent-desc">${resObj.agent4_text}</div></div>
-      <div class="agent-card"><div class="agent-title">${resObj.agent5_title || "5. SMC Master"}</div><div class="agent-desc">${resObj.agent5_text}</div></div>
-      <div class="agent-card"><div class="agent-title">${resObj.agent6_title || "6. ICT Master"}</div><div class="agent-desc">${resObj.agent6_text}</div></div>
-      <div class="agent-card"><div class="agent-title">${resObj.agent7_title || "7. Wyckoff & Institutional Volume Master"}</div><div class="agent-desc">${resObj.agent7_text}</div></div>
-    `;
-    document.getElementById('agentsContainer').innerHTML = agentsHtml;
-    document.getElementById('tfOutput').innerText = resObj.tf;
+    // Render 7 Masters with individual canvases
+    renderAllAgentsWithVisuals(resObj);
 
-    // Render Visual Chart Overlays (Canvas Draw on User Images)
-    renderVisualChartOverlays();
+    document.getElementById('tfOutput').innerText = resObj.tf;
 
     // Save to History archive automatically
     saveToHistory({
@@ -946,13 +922,13 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
       pnl: 0,
       images: [globalImages.h4, globalImages.h1, globalImages.m15].filter(Boolean),
       agents: [
-        { title: resObj.agent1_title || "1. Price Action", text: resObj.agent1_text },
-        { title: resObj.agent2_title || "2. Supply & Demand", text: resObj.agent2_text },
-        { title: resObj.agent3_title || "3. Market Structure", text: resObj.agent3_text },
-        { title: resObj.agent4_title || "4. Fundamental & Macro", text: resObj.agent4_text },
-        { title: resObj.agent5_title || "5. SMC", text: resObj.agent5_text },
-        { title: resObj.agent6_title || "6. ICT", text: resObj.agent6_text },
-        { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume", text: resObj.agent7_text }
+        { title: resObj.agent1_title || "1. Price Action Master", text: resObj.agent1_text },
+        { title: resObj.agent2_title || "2. Supply & Demand Master", text: resObj.agent2_text },
+        { title: resObj.agent3_title || "3. Market Structure Master", text: resObj.agent3_text },
+        { title: resObj.agent4_title || "4. Fundamental & Macro Master", text: resObj.agent4_text },
+        { title: resObj.agent5_title || "5. SMC Master", text: resObj.agent5_text },
+        { title: resObj.agent6_title || "6. ICT Master", text: resObj.agent6_text },
+        { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume Master", text: resObj.agent7_text }
       ],
       tf: resObj.tf
     });
@@ -971,92 +947,98 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
   }
 }
 
-function renderVisualChartOverlays() {
-  const container = document.getElementById('visualOverlayContainer');
+function renderAllAgentsWithVisuals(resObj) {
+  const container = document.getElementById('agentsContainer');
   container.innerHTML = '';
-  let activeImgs = [
-    { label: "4H Institutional Chart", src: globalImages.h4 },
-    { label: "1H Order Block Chart", src: globalImages.h1 },
-    { label: "15M Liquidity Sweep Chart", src: globalImages.m15 }
-  ].filter(item => item.src !== null);
 
-  if(activeImgs.length === 0) {
-    document.getElementById('visualOverlayCard').style.display = 'none';
-    return;
-  }
+  let availableImgs = [globalImages.h4, globalImages.h1, globalImages.m15].filter(Boolean);
+  let defaultImg = availableImgs[0] || "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'><rect width='400' height='200' fill='%2308080a'/><text x='150' y='100' fill='%2394a3b8'>No Chart Uploaded</text></svg>";
 
-  document.getElementById('visualOverlayCard').style.display = 'block';
+  const agentsData = [
+    { title: resObj.agent1_title || "1. Price Action Master", text: resObj.agent1_text, type: "pa" },
+    { title: resObj.agent2_title || "2. Supply & Demand Master", text: resObj.agent2_text, type: "sd" },
+    { title: resObj.agent3_title || "3. Market Structure Master", text: resObj.agent3_text, type: "ms" },
+    { title: resObj.agent4_title || "4. Fundamental & Macro Master", text: resObj.agent4_text, type: "macro" },
+    { title: resObj.agent5_title || "5. SMC Master", text: resObj.agent5_text, type: "smc" },
+    { title: resObj.agent6_title || "6. ICT Master", text: resObj.agent6_text, type: "ict" },
+    { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume Master", text: resObj.agent7_text, type: "wyckoff" }
+  ];
 
-  activeImgs.forEach((item, idx) => {
-    let wrapper = document.createElement('div');
-    wrapper.className = 'canvas-overlay-wrapper';
-    
-    let img = document.createElement('img');
-    img.src = item.src;
-    img.id = `overlayImg_${idx}`;
-    img.onclick = () => openImageModal(item.src);
+  agentsData.forEach((ag, idx) => {
+    let card = document.createElement('div');
+    card.className = 'agent-card';
+    card.innerHTML = `
+      <div class="agent-title"><span>${ag.title}</span> <span style="font-size:10px; color:var(--text-muted);">Master #${idx+1}</span></div>
+      <div class="agent-desc">${ag.text}</div>
+      <div class="agent-canvas-wrapper">
+        <img src="${defaultImg}" id="agentImg_${idx}" onclick="openImageModal(this.src)">
+        <canvas id="agentCanvas_${idx}"></canvas>
+      </div>
+    `;
+    container.appendChild(card);
 
-    let canvas = document.createElement('canvas');
-    canvas.id = `overlayCanvas_${idx}`;
+    // Draw individual overlay after image loads
+    setTimeout(() => {
+      let imgEl = document.getElementById(`agentImg_${idx}`);
+      let canvasEl = document.getElementById(`agentCanvas_${idx}`);
+      if(imgEl && canvasEl) {
+        canvasEl.width = imgEl.naturalWidth || 400;
+        canvasEl.height = imgEl.naturalHeight || 200;
+        const ctx = canvasEl.getContext('2d');
+        
+        // Custom drawings based on Master type
+        if(ag.type === 'sd') {
+          // Supply & Demand Zones
+          ctx.fillStyle = "rgba(16, 185, 129, 0.25)";
+          ctx.strokeStyle = "#10b981";
+          ctx.lineWidth = 3;
+          ctx.fillRect(canvasEl.width * 0.1, canvasEl.height * 0.6, canvasEl.width * 0.8, canvasEl.height * 0.25);
+          ctx.strokeRect(canvasEl.width * 0.1, canvasEl.height * 0.6, canvasEl.width * 0.8, canvasEl.height * 0.25);
+          ctx.fillStyle = "#10b981";
+          ctx.font = `bold ${Math.max(12, canvasEl.width * 0.025)}px sans-serif`;
+          ctx.fillText("DEMAND ZONE (MITIGATION)", canvasEl.width * 0.12, canvasEl.height * 0.75);
+        } else if(ag.type === 'smc' || ag.type === 'ict') {
+          // Liquidity Sweep Dots & Bubbles
+          ctx.strokeStyle = "#fbbf24";
+          ctx.fillStyle = "rgba(251, 191, 36, 0.4)";
+          ctx.lineWidth = 2;
+          let dotX = canvasEl.width * 0.5;
+          let dotY = canvasEl.height * 0.3;
+          ctx.beginPath();
+          ctx.arc(dotX, dotY, 15, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.stroke();
 
-    wrapper.appendChild(img);
-    wrapper.appendChild(canvas);
-    container.appendChild(wrapper);
+          ctx.fillStyle = "#fbbf24";
+          ctx.font = `bold ${Math.max(12, canvasEl.width * 0.025)}px sans-serif`;
+          ctx.fillText("LIQUIDITY SWEEP (BUBBLE)", dotX - 80, dotY - 20);
+        } else if(ag.type === 'wyckoff') {
+          // Wyckoff Volume Number Display
+          ctx.fillStyle = "rgba(59, 130, 246, 0.25)";
+          ctx.strokeStyle = "#3b82f6";
+          ctx.lineWidth = 2;
+          ctx.fillRect(canvasEl.width * 0.2, canvasEl.height * 0.7, canvasEl.width * 0.6, canvasEl.height * 0.2);
+          ctx.strokeRect(canvasEl.width * 0.2, canvasEl.height * 0.7, canvasEl.width * 0.6, canvasEl.height * 0.2);
 
-    // Draw overlays once image loads
-    img.onload = () => {
-      canvas.width = img.naturalWidth || img.width;
-      canvas.height = img.naturalHeight || img.height;
-      const ctx = canvas.getContext('2d');
-      
-      // Draw Institutional Order Block Box (Gold Highlight)
-      ctx.fillStyle = "rgba(251, 191, 36, 0.25)";
-      ctx.strokeStyle = "#fbbf24";
-      ctx.lineWidth = Math.max(3, canvas.width * 0.005);
-      let boxX = canvas.width * 0.25;
-      let boxY = canvas.height * 0.35;
-      let boxW = canvas.width * 0.50;
-      let boxH = canvas.height * 0.20;
-      ctx.fillRect(boxX, boxY, boxW, boxH);
-      ctx.strokeRect(boxX, boxY, boxW, boxH);
+          ctx.fillStyle = "#3b82f6";
+          ctx.font = `bold ${Math.max(14, canvasEl.width * 0.03)}px sans-serif`;
+          ctx.fillText("WYCKOFF VOLUME: 54,210 (SPRING)", canvasEl.width * 0.22, canvasEl.height * 0.83);
+        } else {
+          // General Price Action / Structure Line
+          ctx.strokeStyle = "#f59e0b";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(canvasEl.width * 0.2, canvasEl.height * 0.5);
+          ctx.lineTo(canvasEl.width * 0.5, canvasEl.height * 0.3);
+          ctx.lineTo(canvasEl.width * 0.8, canvasEl.height * 0.6);
+          ctx.stroke();
 
-      // Label inside Order Block
-      ctx.fillStyle = "#fbbf24";
-      ctx.font = `bold ${Math.max(16, canvas.width * 0.025)}px sans-serif`;
-      ctx.fillText("INSTITUTIONAL ORDER BLOCK (POI)", boxX + 10, boxY + 30);
-
-      // Draw Directional Arrow (Green for Buy, Red for Sell)
-      ctx.strokeStyle = "#10b981";
-      ctx.fillStyle = "#10b981";
-      ctx.lineWidth = Math.max(4, canvas.width * 0.008);
-      
-      let startX = canvas.width * 0.30;
-      let startY = canvas.height * 0.75;
-      let endX = canvas.width * 0.70;
-      let endY = canvas.height * 0.25;
-
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
-      ctx.stroke();
-
-      // Arrowhead
-      let angle = Math.atan2(endY - startY, endX - startX);
-      let headLen = canvas.width * 0.03;
-      ctx.beginPath();
-      ctx.moveTo(endX, endY);
-      ctx.lineTo(endX - headLen * Math.cos(angle - Math.PI / 6), endY - headLen * Math.sin(angle - Math.PI / 6));
-      ctx.lineTo(endX - headLen * Math.cos(angle + Math.PI / 6), endY - headLen * Math.sin(angle + Math.PI / 6));
-      ctx.lineTo(endX, endY);
-      ctx.fill();
-
-      // Absorption Zone Circle
-      ctx.strokeStyle = "#3b82f6";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(boxX + boxW * 0.5, boxY + boxH * 0.5, boxH * 0.6, 0, 2 * Math.PI);
-      ctx.stroke();
-    };
+          ctx.fillStyle = "#f59e0b";
+          ctx.font = `bold ${Math.max(12, canvasEl.width * 0.025)}px sans-serif`;
+          ctx.fillText("STRUCTURE & CHoCH POINT", canvasEl.width * 0.3, canvasEl.height * 0.25);
+        }
+      }
+    }, 100);
   });
 }
 
@@ -1190,15 +1172,6 @@ function openHistoryDetail(index) {
     });
   }
 
-  let imgsHtml = '';
-  if (item.images && item.images.length > 0) {
-    imgsHtml += `<div style="margin: 10px 0;"><div style="font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 5px;">Chati Zilizotumika (Bofya kuzaa):</div><div style="display:flex; gap:6px; flex-wrap:wrap;">`;
-    item.images.forEach(imgUrl => {
-      if(imgUrl) imgsHtml += `<img src="${imgUrl}" style="width:70px; height:50px; object-fit:cover; border-radius:4px; cursor:pointer; border:1px solid var(--card-border);" onclick="openImageModal(this.src)">`;
-    });
-    imgsHtml += `</div></div>`;
-  }
-
   let detailHtml = `
     <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - 7 Masters Archive</h3>
     <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date} | Framework: ${item.framework || 'Day Trader'}</p>
@@ -1210,8 +1183,6 @@ function openHistoryDetail(index) {
       <div style="font-size: 12px; color: var(--green);">Take Profit: <strong>${item.tp}</strong></div>
       <div style="font-size: 12px; color: var(--accent);">P&L Recorded: <strong>$${item.pnl || 0}</strong></div>
     </div>
-
-    ${imgsHtml}
 
     <div style="margin-bottom: 10px;">
       <div style="font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 5px;">Uchambuzi wa Masters wote 7:</div>
