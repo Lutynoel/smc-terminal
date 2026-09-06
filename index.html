@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lutynoel FX - Institutional Intelligence Protocol v10.9</title>
   
-  <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -120,7 +119,6 @@
 </head>
 <body>
 
-  <!-- UNIVERSAL MODAL -->
   <div id="universalModal" class="modal" onclick="closeUniversalModal()">
     <div id="modalBody" onclick="event.stopPropagation()" class="modal-content">
       <span class="modal-close" onclick="closeUniversalModal()">&times;</span>
@@ -128,7 +126,6 @@
     </div>
   </div>
 
-  <!-- AUTH SCREENS -->
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
@@ -177,7 +174,6 @@
     </div>
   </div>
 
-  <!-- MAIN APP INTERFACE -->
   <div id="appInterface">
     <header>
       <div style="display: flex; align-items: center; gap: 10px;">
@@ -193,7 +189,6 @@
       </div>
     </header>
 
-    <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
         <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.9</div>
@@ -209,7 +204,6 @@
     </div>
 
     <div class="main-content">
-      <!-- INSTALL APP PROMPT BANNER -->
       <div id="installBanner" class="install-banner" style="display: none;">
         <div class="install-banner-text">
           <strong>Install App</strong><br>Wezesha iwe app kamili kwenye simu yako.
@@ -217,7 +211,6 @@
         <button class="install-btn" id="installAppBtn">INSTALL</button>
       </div>
 
-      <!-- DASHBOARD OVERVIEW -->
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
           <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • ETH/USD • US30</div>
@@ -258,7 +251,6 @@
         </div>
       </div>
 
-      <!-- AI ON-CHART ANALYST WITH ORGANIZED PAIR LIST -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v10.9 (GEMINI 3.6)</div>
@@ -294,7 +286,6 @@
             <option value="Swing Trader">Swing Trader (HTF Setup)</option>
           </select>
 
-          <!-- UPLOAD 4H -->
           <label style="margin-top: 15px;">2. Required Market Timeframe: 4H Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
@@ -303,7 +294,6 @@
             <img id="previewH4" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <!-- UPLOAD 1H -->
           <label>Required Market Timeframe: 1H Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
@@ -312,7 +302,6 @@
             <img id="previewH1" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <!-- UPLOAD 15M -->
           <label>Required Market Timeframe: 15M Chart</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
@@ -324,7 +313,6 @@
           <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN 7 MASTERS (GEMINI 3.6)</button>
         </div>
 
-        <!-- RESULTS CARD -->
         <div id="resultsContainer" style="display: none;">
           <div class="card" style="text-align: center; border-color: var(--green);">
             <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAU/USD</div>
@@ -342,7 +330,7 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS)</div>
+            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS) - MYFXBOOK ENGINE</div>
             
             <div class="grid-2">
               <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">20 Pips</div></div>
@@ -350,11 +338,11 @@
             </div>
 
             <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP)</div>
-            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot001">$9.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 23,400</span></div></div>
-            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot002">$18.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 46,800</span></div></div>
-            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot003">$27.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 70,200</span></div></div>
-            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot010">$90.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 234,000</span></div></div>
-            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot100">$900.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 2,340,000</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot001">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot002">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot003">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
+            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot010">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
+            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot100">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
           </div>
 
           <div class="card">
@@ -375,7 +363,6 @@
             </div>
           </div>
 
-          <!-- 7 SPECIALIST MASTERS WITH 3 CHARTS EACH -->
           <div class="card">
             <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (ALL 3 CHARTS ANALYZED PER MASTER)</div>
             <div id="agentsContainer"></div>
@@ -390,7 +377,6 @@
         </div>
       </div>
 
-      <!-- TRADE JOURNAL & P&L TRACKER -->
       <div id="view-journal" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
@@ -439,7 +425,6 @@
         </div>
       </div>
 
-      <!-- LIVE TRADINGVIEW CHART -->
       <div id="view-livechart" class="view-section" style="display: none;">
         <div class="card">
           <h3>Live TradingView Chart</h3>
@@ -450,7 +435,6 @@
         </div>
       </div>
 
-      <!-- ECONOMIC NEWS -->
       <div id="view-news" class="view-section" style="display: none;">
         <div class="card">
           <h3>Live Economic Calendar & News</h3>
@@ -459,7 +443,6 @@
         </div>
       </div>
 
-      <!-- HISTORY & ARCHIVE -->
       <div id="view-history" class="view-section" style="display: none;">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -473,7 +456,6 @@
         </div>
       </div>
 
-      <!-- OTHER VIEWS -->
       <div id="view-broker" class="view-section" style="display: none;">
         <div class="card">
           <h3>Broker Sync & API</h3>
@@ -489,8 +471,7 @@
 let currentMathAns1 = 0;
 let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
-let deferredPrompt = null;
-const TZS_RATE = 2600; // Makadirio ya kubadilisha USD kwenda TZS
+const TZS_RATE = 2600; // Viwango vya kubadilisha fedha
 
 window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
@@ -757,7 +738,7 @@ async function fetchLiveMarketPrice(pair) {
   } catch(e) {}
 
   if(pair.includes("XAU")) return 2500.50;
-  if(pair.includes("ETH")) return 2650.00;
+  if(pair.includes("ETH")) return 3100.00;
   if(pair.includes("BTC")) return 64500.00;
   if(pair.includes("US30")) return 41200.00;
   if(pair.includes("NAS")) return 19500.00;
@@ -771,6 +752,49 @@ async function fileToBase64(file) {
     reader.onerror = error => reject(error);
     reader.readAsDataURL(file);
   });
+}
+
+// MYFXBOOK ACCURATE DYNAMIC CALCULATOR ENGINE
+function calculateAccurateProfit(pairName, entry, tp) {
+  let pips = 0;
+  let pipValuePerStandardLot = 10.0; 
+  let upperAssetType = pairName.toUpperCase();
+
+  if (upperAssetType.includes("ETH")) {
+    pipValuePerStandardLot = 0.01; // Myfxbook accurate standard for ETH
+  } else if (upperAssetType.includes("BTC")) {
+    pipValuePerStandardLot = 0.10;
+  } else if (upperAssetType.includes("XAU")) {
+    pipValuePerStandardLot = 1.0;
+  } else if (upperAssetType.includes("JPY")) {
+    pipValuePerStandardLot = 8.5;
+  }
+
+  if (entry > 0 && tp > 0) {
+    let priceDiff = Math.abs(tp - entry);
+    if (upperAssetType.includes("JPY")) {
+      pips = priceDiff * 100;
+    } else if (upperAssetType.includes("BTC") || upperAssetType.includes("ETH") || upperAssetType.includes("XAU")) {
+      pips = priceDiff * 10; 
+    } else {
+      pips = priceDiff * 10000; 
+    }
+  }
+
+  let lots = [0.01, 0.02, 0.03, 0.10, 1.00];
+  let resObj = {};
+
+  lots.forEach(l => {
+    let usd = pips * pipValuePerStandardLot * l;
+    let tzs = usd * TZS_RATE;
+    let key = 'tp_' + l.toString().replace('.', '');
+    resObj[key] = `$${usd.toFixed(3)} <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS ${tzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
+  });
+
+  return {
+    calculatedPips: Math.round(pips),
+    projections: resObj
+  };
 }
 
 async function runLutynoelAnalysis() {
@@ -797,30 +821,15 @@ async function runLutynoelAnalysis() {
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    let pipMultiplier = 10;
-    if(pair.includes("JPY")) pipMultiplier = 100;
-    if(pair.includes("BTC") || pair.includes("ETH") || pair.includes("XAU") || pair.includes("US30")) pipMultiplier = 1;
-
     let slPipsVal = pair.includes("BTC") || pair.includes("ETH") ? 45 : (pair.includes("XAU") ? 25 : 20);
     let tpPipsVal = slPipsVal * 4;
 
-    let slPrice = pair.includes("BUY") ? livePrice - (slPipsVal / pipMultiplier) : livePrice + (slPipsVal / pipMultiplier);
-    let tpPrice = pair.includes("BUY") ? livePrice + (tpPipsVal / pipMultiplier) : livePrice - (tpPipsVal / pipMultiplier);
+    let pipMultiplierDiv = pair.includes("JPY") ? 100 : (pair.includes("BTC") || pair.includes("ETH") || pair.includes("XAU") || pair.includes("US30") ? 10 : 10000);
+    let slPrice = livePrice - (slPipsVal / pipMultiplierDiv);
+    let tpPrice = livePrice + (tpPipsVal / pipMultiplierDiv);
 
-    const calcProfitDetails = (pips) => {
-      let baseUsd = pips * 0.10 * (pair.includes("XAU") || pair.includes("BTC") ? 10 : 1); 
-      let lots = [0.01, 0.02, 0.03, 0.10, 1.00];
-      let resObj = {};
-      lots.forEach(l => {
-        let usd = baseUsd * (l / 0.01);
-        let tzs = usd * TZS_RATE;
-        let key = 'tp_' + l.toString().replace('.', '');
-        resObj[key] = `$${usd.toFixed(2)} <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS ${tzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
-      });
-      return resObj;
-    };
-
-    let profitMap = calcProfitDetails(tpPipsVal);
+    // Dynamic Myfxbook Calculation
+    const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6. PAIR ILIYOTEULIWA NI: ${pair}. 
 Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair}.
@@ -834,12 +843,12 @@ Toa majibu katika muundo wa JSON pekee:
   "exec_type": "MARKET EXECUTED SOKONI",
   "subtitle": "Strict ${pair} Multi-TF Confluence & Accurate Valuation",
   "sl_pips": "${slPipsVal} Pips",
-  "tp_pips": "${tpPipsVal} Pips",
-  "tp_001": "${profitMap.tp_001}",
-  "tp_002": "${profitMap.tp_002}",
-  "tp_003": "${profitMap.tp_003}",
-  "tp_010": "${profitMap.tp_010}",
-  "tp_100": "${profitMap.tp_100}",
+  "tp_pips": "${calcData.calculatedPips} Pips",
+  "tp_001": "${calcData.projections.tp_001}",
+  "tp_002": "${calcData.projections.tp_002}",
+  "tp_003": "${calcData.projections.tp_003}",
+  "tp_010": "${calcData.projections.tp_010}",
+  "tp_100": "${calcData.projections.tp_100}",
   "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed for ${pair}",
   "chk2": "Institutional Order Block Mitigation Validated across all 3 charts",
   "chk3": "Accurate Asset Valuation & Live Pricing Sync",
@@ -877,7 +886,7 @@ Toa majibu katika muundo wa JSON pekee:
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    // Hapa ndipo toleo limebadilishwa rasmi kuwa gemini-3.6-flash
+    // Endpoint rasmi ya kutumia gemini-3.6-flash
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -1083,11 +1092,11 @@ function saveManualJournalTrade() {
   const outcome = document.getElementById('jOutcome').value;
 
   let pnl = 0;
-  let pipsDiff = 0;
+  let calcResult = calculateAccurateProfit(pair, entry, tp);
   if(entry > 0 && tp > 0 && sl > 0) {
-    pipsDiff = action === 'BUY' ? Math.abs(tp - entry) * 10 : Math.abs(entry - tp) * 10;
-    if(outcome === 'WIN') pnl = +(pipsDiff * lot * 1).toFixed(2);
-    else if(outcome === 'LOSS') pnl = -(Math.abs(entry - sl) * 10 * lot * 1).toFixed(2);
+    let pipVal = pair.includes("ETH") ? 0.01 : (pair.includes("BTC") ? 0.10 : 10.0);
+    if(outcome === 'WIN') pnl = +(calcResult.calculatedPips * pipVal * lot).toFixed(2);
+    else if(outcome === 'LOSS') pnl = -(Math.abs(entry - sl) * 10 * pipVal * lot).toFixed(2);
   }
 
   const tradeRecord = {
