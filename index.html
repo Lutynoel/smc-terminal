@@ -274,7 +274,7 @@
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
-          <select id="selectedPairDropdown">
+          <select id="selectedPairDropdown" onchange="syncPairSelection(this.value)">
             <optgroup label="✨ Metals (XAU / XAG)">
               <option value="XAUUSD">XAU/USD (Gold)</option>
               <option value="XAGUSD">XAG/USD (Silver)</option>
@@ -445,8 +445,23 @@
       <div id="view-livechart" class="view-section" style="display: none;">
         <div class="card">
           <h3>Live TradingView Chart</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chati ya moja kwa moja:</p>
-          <div style="height: 480px; width: 100%;" id="tradingview_widget_container">
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chagua Pair ya Kuangalia Live Chart:</p>
+          
+          <select id="liveChartPairSelector" onchange="changeLiveChartPair(this.value)">
+            <option value="OANDA:XAUUSD">XAU/USD (Gold)</option>
+            <option value="OANDA:XAGUSD">XAG/USD (Silver)</option>
+            <option value="BINANCE:BTCUSDT">BTC/USD (Bitcoin)</option>
+            <option value="BINANCE:ETHUSDT">ETH/USD (Ethereum)</option>
+            <option value="OANDA:EURUSD">EUR/USD</option>
+            <option value="OANDA:GBPUSD">GBP/USD</option>
+            <option value="OANDA:USDJPY">USD/JPY</option>
+            <option value="OANDA:AUDUSD">AUD/USD</option>
+            <option value="OANDA:USDCAD">USD/CAD</option>
+            <option value="CAPITALCOM:US30">US30 (Dow Jones)</option>
+            <option value="CAPITALCOM:US100">NAS100 (Nasdaq)</option>
+          </select>
+
+          <div style="height: 480px; width: 100%; margin-top: 10px;" id="tradingview_widget_container">
             <iframe id="tvLiveIframe" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%; height:100%; border:0; border-radius:8px;"></iframe>
           </div>
         </div>
@@ -544,7 +559,7 @@ function setupSecurityMath() {
   const n2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns1 = n1 - n2;
   document.getElementById('mathQ1').innerText = `${n1} - ${n2}`;
-  document.getElementById('mathA1').value = currentMathAns1; // Automatic pass ili kutorudia kusumbua
+  document.getElementById('mathA1').value = currentMathAns1;
 
   const m1 = Math.floor(Math.random() * 15) + 5;
   const m2 = Math.floor(Math.random() * 9) + 1;
@@ -636,6 +651,55 @@ function navigate(viewId) {
   document.getElementById('appSidebar').classList.remove('open');
   if(viewId === 'history') loadTradeHistory();
   if(viewId === 'overview') updateStatsOverview();
+}
+
+// AUTOMATIC LIVE CHART & ANALYST PAIR SYNCHRONIZATION
+function syncPairSelection(pairValue) {
+  let tvSymbol = "OANDA:XAUUSD";
+  if (pairValue === "XAGUSD") tvSymbol = "OANDA:XAGUSD";
+  else if (pairValue === "BTCUSD") tvSymbol = "BINANCE:BTCUSDT";
+  else if (pairValue === "ETHUSD") tvSymbol = "BINANCE:ETHUSDT";
+  else if (pairValue === "EURUSD") tvSymbol = "OANDA:EURUSD";
+  else if (pairValue === "GBPUSD") tvSymbol = "OANDA:GBPUSD";
+  else if (pairValue === "USDJPY") tvSymbol = "OANDA:USDJPY";
+  else if (pairValue === "AUDUSD") tvSymbol = "OANDA:AUDUSD";
+  else if (pairValue === "USDCAD") tvSymbol = "OANDA:USDCAD";
+  else if (pairValue === "US30") tvSymbol = "CAPITALCOM:US30";
+  else if (pairValue === "NAS100") tvSymbol = "CAPITALCOM:US100";
+
+  // Update Live Chart dropdown & iframe
+  const liveChartSelect = document.getElementById('liveChartPairSelector');
+  if(liveChartSelect) {
+    liveChartSelect.value = tvSymbol;
+  }
+  updateTradingViewIframe(tvSymbol);
+}
+
+function changeLiveChartPair(tvSymbol) {
+  updateTradingViewIframe(tvSymbol);
+  
+  // Optionally sync back to Analyst dropdown if it exists
+  const analystSelect = document.getElementById('selectedPairDropdown');
+  if(analystSelect) {
+    if(tvSymbol.includes('XAU')) analystSelect.value = 'XAUUSD';
+    else if(tvSymbol.includes('XAG')) analystSelect.value = 'XAGUSD';
+    else if(tvSymbol.includes('BTC')) analystSelect.value = 'BTCUSD';
+    else if(tvSymbol.includes('ETH')) analystSelect.value = 'ETHUSD';
+    else if(tvSymbol.includes('EUR')) analystSelect.value = 'EURUSD';
+    else if(tvSymbol.includes('GBP')) analystSelect.value = 'GBPUSD';
+    else if(tvSymbol.includes('JPY')) analystSelect.value = 'USDJPY';
+    else if(tvSymbol.includes('AUD')) analystSelect.value = 'AUDUSD';
+    else if(tvSymbol.includes('CAD')) analystSelect.value = 'USDCAD';
+    else if(tvSymbol.includes('US30')) analystSelect.value = 'US30';
+    else if(tvSymbol.includes('US100')) analystSelect.value = 'NAS100';
+  }
+}
+
+function updateTradingViewIframe(symbol) {
+  const iframe = document.getElementById('tvLiveIframe');
+  if(iframe) {
+    iframe.src = `https://s.tradingview.com/widgetembed/?symbol=${symbol}&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC`;
+  }
 }
 
 async function sendAIChatMessage() {
