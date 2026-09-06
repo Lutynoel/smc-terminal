@@ -222,8 +222,7 @@
 
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
-          <!-- Hapa ndipo picha uliyoileta imewekwa rasmi kwenye Banner -->
-          <img src="1000648830_2.jpg" alt="5 Best AI Trading Tools" class="hero-banner-img" onclick="openImageModal(this.src)">
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=" alt="5 Best AI Trading Tools" class="hero-banner-img" onclick="openImageModal(this.src)" id="heroBannerImg">
 
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAU/USD • BTC/USD • EUR/USD • US30</div>
@@ -237,7 +236,7 @@
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
             <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Institutional Intelligence & AI Tools)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Zero Loss Institutional Intelligence Protocol powered by Gemini 3.6.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Zero Loss Institutional Intelligence Protocol powered by Gemini.</p>
         </div>
 
         <div class="grid-3">
@@ -262,7 +261,6 @@
         </div>
       </div>
 
-      <!-- KIPENGELE CHA AI ASSISTANCE (CHAT) -->
       <div id="view-aiassistant" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL</div>
@@ -340,7 +338,7 @@
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN 7 MASTERS (GEMINI 3.6)</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN 7 MASTERS (GEMINI)</button>
         </div>
 
         <div id="resultsContainer" style="display: none;">
@@ -584,12 +582,12 @@ function setupSecurityMath() {
   const n1 = Math.floor(Math.random() * 20) + 10;
   const n2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns1 = n1 - n2;
-  document.getElementById('mathQ1').innerText = `${n1} - ${n2}`;
+  document.getElementById('mathQ1').innerText = `${n1} -${n2}`;
 
   const m1 = Math.floor(Math.random() * 15) + 5;
   const m2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns2 = m1 + m2;
-  document.getElementById('mathQ2').innerText = `${m1} + ${m2}`;
+  document.getElementById('mathQ2').innerText = `${m1} +${m2}`;
 }
 
 function toggleAuthMode(mode) {
@@ -602,7 +600,7 @@ function toggleAuthMode(mode) {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
     document.getElementById('authTitle').innerText = 'Lutynoel FX v11.0';
-    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & AI Assistance (Gemini 3.6)';
+    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & AI Assistance (Gemini)';
   }
 }
 
@@ -701,7 +699,7 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -890,7 +888,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma chati zote 3 za ${pair}...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini) wanasoma chati zote 3 za ${pair}...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
@@ -906,7 +904,7 @@ async function runLutynoelAnalysis() {
 
     const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 (Zero Loss Edition). PAIR ILIYOTEULIWA NI: ${pair}. 
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini (Zero Loss Edition). PAIR ILIYOTEULIWA NI: ${pair}. 
 Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair} huku ukizingatia hatari isiyozidi $2 kwa lot 0.01.
 
 Kila mmoja kati ya Wataalamu 7 wa Taasisi lazima achambue PICHA ZOTE TATU (4H, 1H, na 15M) kwa kina.
@@ -961,7 +959,7 @@ Toa majibu katika muundo wa JSON pekee:
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1032,7 +1030,7 @@ Toa majibu katika muundo wa JSON pekee:
       tf: resObj.tf
     });
 
-    showToast(`Uchambuzi wa 7 Masters (Gemini 3.6) kwa ${pair} umehifadhiwa kwenye History!`);
+    showToast(`Uchambuzi wa 7 Masters (Gemini) kwa ${pair} umehifadhiwa kwenye History!`);
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -1042,7 +1040,7 @@ Toa majibu katika muundo wa JSON pekee:
     alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia Gemini API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "RUN 7 MASTERS (GEMINI 3.6)";
+    runBtn.innerText = "RUN 7 MASTERS (GEMINI)";
   }
 }
 
@@ -1216,7 +1214,7 @@ function loadTradeHistory() {
       <div class="history-card" onclick="openHistoryDetail(${index})">
         <div>
           <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action} (${item.framework || '7 Masters'})</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}${pnlDisplay}</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} \vert{} TP:${item.tp} | SL: ${item.sl}${pnlDisplay}</div>
           <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date}</div>
         </div>
         <div style="text-align: right;">
@@ -1245,18 +1243,4 @@ function openHistoryDetail(index) {
   let agentsHtml = '';
   if (item.agents && item.agents.length > 0) {
     item.agents.forEach(ag => {
-      agentsHtml += `<div style="margin-bottom: 10px; font-size: 12px; background: #08080a; padding: 10px; border-radius: 6px; border: 1px solid var(--card-border);"><strong style="color: var(--accent); display:block; margin-bottom:4px;">${ag.title} (${ag.decision})</strong><span style="color: var(--text-main);">${ag.text}</span></div>`;
-    });
-  }
-
-  let detailHtml = `
-    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Archive Details</h3>
-    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date} | Hali: ${item.status} | Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}</p>
-    <div style="max-height: 50vh; overflow-y: auto;">${agentsHtml}</div>
-  `;
-  openModal(detailHtml);
-}
-</script>
-
-</body>
-</html>
+      agentsHtml += `<div style="margin-bottom: 10px; font-size: 12px; background
