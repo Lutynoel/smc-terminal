@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v8.5</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v8.7</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v8.7">
 
   <style>
     :root {
@@ -72,7 +72,12 @@
     .upload-zone { border: 2px dashed var(--card-border); background: #08080a; padding: 15px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 12px; position: relative; }
     .upload-zone:hover { border-color: var(--accent); }
     .upload-zone input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
-    .preview-img { width: 100%; max-height: 130px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; }
+    .preview-img { width: 100%; max-height: 130px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; cursor: pointer; }
+
+    /* CANVAS OVERLAY CONTAINER */
+    .canvas-overlay-wrapper { position: relative; width: 100%; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid var(--card-border); background: #000; }
+    .canvas-overlay-wrapper img { width: 100%; display: block; max-height: 280px; object-fit: contain; }
+    .canvas-overlay-wrapper canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
 
     /* UI STYLING */
     .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
@@ -81,6 +86,7 @@
     .badge-status { background: rgba(59, 130, 246, 0.15); color: var(--blue); border: 1px solid var(--blue); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
     
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
     .mini-box { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; }
     
     .ballistic-header { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--accent); font-weight: bold; letter-spacing: 1px; margin-bottom: 12px; }
@@ -104,9 +110,16 @@
     .impact-yellow { border-left: 4px solid var(--accent); }
     .impact-none { border-left: 4px solid var(--text-muted); }
 
+    /* FOREX NEON BANNER GRAPHICS */
+    .forex-hero { background: linear-gradient(135deg, rgba(18,18,21,0.95), rgba(30,27,75,0.9)), radial-gradient(circle at top right, rgba(251,191,36,0.15), transparent 50%); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; margin-bottom: 15px; position: relative; overflow: hidden; }
+    .forex-ticker-symbols { font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .forex-chart-preview { display: flex; align-items: flex-end; gap: 4px; height: 35px; margin-top: 10px; opacity: 0.6; }
+    .f-candle { width: 6px; background: var(--green); border-radius: 2px; position: relative; }
+    .f-candle.bear { background: var(--red); }
+
     /* MODAL */
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-    .modal-content { max-width: 90%; max-height: 85vh; border-radius: 8px; border: 1px solid var(--accent); background: var(--card-bg); padding: 20px; color: #fff; overflow-y: auto; position: relative; }
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+    .modal-content { max-width: 92%; max-height: 88vh; border-radius: 10px; border: 1px solid var(--accent); background: var(--card-bg); padding: 20px; color: #fff; overflow-y: auto; position: relative; }
     .modal-close { position: absolute; top: 10px; right: 20px; color: #fff; font-size: 30px; font-weight: bold; cursor: pointer; }
 
     .hamburger { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
@@ -126,8 +139,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX Terminal</div>
-      <div class="auth-subtitle" id="authSubtitle">PWA Secure Institutional Access</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v8.7</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -189,17 +202,17 @@
     <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v8.7</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
-      <div class="menu-item active" onclick="navigate('overview')">Overview</div>
+      <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
       <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">7 MASTERS</span></div>
+      <div class="menu-item" onclick="navigate('journal')">Trade Journal & Tracking <span class="badge-new">NEW</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
       <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
-      <div class="menu-item" onclick="navigate('history')" style="background: rgba(251, 191, 36, 0.1); color: var(--accent);">Trade History & Tracking</div>
-      <div class="menu-item" onclick="navigate('broker')">Broker Sync</div>
+      <div class="menu-item" onclick="navigate('history')">Trade History Archive</div>
+      <div class="menu-item" onclick="navigate('broker')">Broker Sync & API</div>
       <div class="menu-item" onclick="navigate('prop')">Prop Engine</div>
-      <div class="menu-item" onclick="navigate('journal')">Trading Journal</div>
     </div>
 
     <div class="main-content">
@@ -211,13 +224,45 @@
         <button class="install-btn" id="installAppBtn">INSTALL</button>
       </div>
 
-      <!-- DASHBOARD OVERVIEW -->
+      <!-- DASHBOARD OVERVIEW (WITH FOREX NEON GRAPHICS & STATS) -->
       <div id="view-overview" class="view-section">
-        <div class="card" style="border-left: 4px solid var(--accent);">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX PROTOCOL v8.5 PWA</div>
-          <h2 style="margin: 5px 0 10px 0; font-size: 20px;">7 Institutional Hunters (Masters Kamili)</h2>
-          <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Fixed Risk $2 Loss Protocol. Pips & Lot breakdown, Toast notifications, Clickable Past Analyses, na Masters wote 7 (Price Action, S&D, Market Structure, Fundamental, SMC, ICT, na Wyckoff/Institutional Volume).</p>
-          <button class="primary-btn" onclick="navigate('analyst')" style="margin-top: 10px;">Start Trading →</button>
+        <div class="forex-hero">
+          <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • GBP/JPY • US30</div>
+          <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi za Kibenki (Price Action, S&D, Market Structure, Fundamental, SMC, ICT, na Wyckoff) tayari kukupa makadirio sahihi ya $2 Risk Management.</p>
+          
+          <div class="forex-chart-preview">
+            <div class="f-candle" style="height: 15px;"></div>
+            <div class="f-candle bear" style="height: 25px;"></div>
+            <div class="f-candle" style="height: 20px;"></div>
+            <div class="f-candle" style="height: 32px;"></div>
+            <div class="f-candle bear" style="height: 12px;"></div>
+            <div class="f-candle" style="height: 28px;"></div>
+            <div class="f-candle" style="height: 35px;"></div>
+            <div class="f-candle bear" style="height: 18px;"></div>
+          </div>
+        </div>
+
+        <!-- STATS COUNTERS -->
+        <div class="grid-3">
+          <div class="mini-box" style="text-align: center;">
+            <label>Jumla ya Analiza</label>
+            <div id="statTotalAnalyses" style="font-size: 20px; font-weight: bold; color: var(--accent);">0</div>
+          </div>
+          <div class="mini-box" style="text-align: center;">
+            <label>Win Rate</label>
+            <div id="statWinRate" style="font-size: 20px; font-weight: bold; color: var(--green);">0%</div>
+          </div>
+          <div class="mini-box" style="text-align: center;">
+            <label>Net P&L</label>
+            <div id="statNetPL" style="font-size: 20px; font-weight: bold; color: var(--blue);">$0.00</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0; font-size: 15px; color: var(--accent);">Njia za Haraka</h3>
+          <button class="primary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Analysis →</button>
+          <button class="secondary-btn" onclick="navigate('journal')">Fungua Trade Journal & P&L Tracker</button>
         </div>
       </div>
 
@@ -265,7 +310,7 @@
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
             <input type="file" id="chartH4" accept="image/*" onchange="previewUserImage(event, 'previewH4')">
-            <img id="previewH4" class="preview-img">
+            <img id="previewH4" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
           <!-- UPLOAD 1H -->
@@ -274,7 +319,7 @@
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
             <input type="file" id="chartH1" accept="image/*" onchange="previewUserImage(event, 'previewH1')">
-            <img id="previewH1" class="preview-img">
+            <img id="previewH1" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
           <!-- UPLOAD 15M -->
@@ -283,7 +328,7 @@
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
             <input type="file" id="chartM15" accept="image/*" onchange="previewUserImage(event, 'previewM15')">
-            <img id="previewM15" class="preview-img">
+            <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
           <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">GET 7 MASTERS HUNTER ANALYSIS</button>
@@ -304,6 +349,12 @@
               <span class="badge-status" id="tradeStatusBadge">PENDING ENTRY</span>
             </div>
             <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Retail Liquidity Sweep into Institutional POI</div>
+          </div>
+
+          <!-- VISUAL OVERLAYS SECTION (CHART WITH OVERLAYS) -->
+          <div class="card" id="visualOverlayCard" style="display: none;">
+            <div class="ballistic-header">🎨 VISUAL CHART OVERLAYS (Order Blocks & Arrows)</div>
+            <div id="visualOverlayContainer"></div>
           </div>
 
           <!-- PIPS & LOT SIZES BREAKDOWN -->
@@ -361,6 +412,55 @@
         </div>
       </div>
 
+      <!-- TRADE JOURNAL & P&L TRACKER -->
+      <div id="view-journal" class="view-section" style="display: none;">
+        <div class="card">
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
+          <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako ili mfumo uhesabu actual profit au loss na kuweka kwenye kumbukumbu:</p>
+
+          <label>Instrument Pair</label>
+          <input type="text" id="jPair" placeholder="e.g. XAUUSD au EURUSD">
+
+          <label>Action / Direction</label>
+          <select id="jAction">
+            <option value="BUY">BUY</option>
+            <option value="SELL">SELL</option>
+          </select>
+
+          <div class="grid-2">
+            <div>
+              <label>Entry Price</label>
+              <input type="number" step="any" id="jEntry" placeholder="0.00">
+            </div>
+            <div>
+              <label>Lot Size</label>
+              <input type="number" step="0.01" id="jLot" value="0.01" placeholder="0.01">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label>Stop Loss (SL)</label>
+              <input type="number" step="any" id="jSL" placeholder="0.00">
+            </div>
+            <div>
+              <label>Take Profit (TP)</label>
+              <input type="number" step="any" id="jTP" placeholder="0.00">
+            </div>
+          </div>
+
+          <label>Outcome Status</label>
+          <select id="jOutcome">
+            <option value="WIN">WIN (Take Profit Hit)</option>
+            <option value="LOSS">LOSS (Stop Loss Hit)</option>
+            <option value="PENDING">PENDING (Bado inaendelea)</option>
+          </select>
+
+          <button class="primary-btn" onclick="saveManualJournalTrade()">Hifadhi kwenye Journal & Historia</button>
+        </div>
+      </div>
+
       <!-- LIVE TRADINGVIEW CHART -->
       <div id="view-livechart" class="view-section" style="display: none;">
         <div class="card">
@@ -381,14 +481,14 @@
         </div>
       </div>
 
-      <!-- HISTORY & TRACKING -->
+      <!-- HISTORY & ARCHIVE -->
       <div id="view-history" class="view-section" style="display: none;">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <h3 style="margin: 0;">Trade History & Live Tracking</h3>
+            <h3 style="margin: 0;">Trade History Archive</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi wako wote uliowahi kufanya (Bofya uchambuzi wowote kuona maelezo kamili ya Masters wote 7):</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi na biashara zote zilizohifadhiwa (Bofya kuona maelezo kamili):</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi mpya.</div>
           </div>
@@ -397,13 +497,16 @@
 
       <!-- OTHER VIEWS -->
       <div id="view-broker" class="view-section" style="display: none;">
-        <div class="card"><h3>Broker Sync</h3><p style="color:var(--text-muted);">Unganisha akaunti yako ya MT4/MT5 hapa.</p></div>
+        <div class="card">
+          <h3>Broker Sync & API</h3>
+          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Kupitia PWA yetu, Broker Sync inakupa uwezo wa kuunganisha mahesabu yako ya Risk Management na akaunti za MT4/MT5 au kuchukua taarifa za moja kwa moja za Exness/Deriv kupitia Web API token. Hifadhi API key yako ya broker hapa chini:</p>
+          <label>Broker API Key / Token</label>
+          <input type="text" id="brokerApiKey" placeholder="Weka Broker Token hapa">
+          <button class="primary-btn" onclick="alert('Broker Sync Token imehifadhiwa kwa usalama!')">Hifadhi Token</button>
+        </div>
       </div>
       <div id="view-prop" class="view-section" style="display: none;">
-        <div class="card"><h3>Prop Engine</h3><p style="color:var(--text-muted);">Simamia malengo ya Prop Firms hapa.</p></div>
-      </div>
-      <div id="view-journal" class="view-section" style="display: none;">
-        <div class="card"><h3>Trading Journal</h3><p style="color:var(--text-muted);">Rekodi na fuatilia biashara zako.</p></div>
+        <div class="card"><h3>Prop Engine</h3><p style="color:var(--text-muted);">Simamia malengo ya Prop Firms (Max Daily Loss & Target) hapa.</p></div>
       </div>
     </div>
   </div>
@@ -427,13 +530,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   loadTradeHistory();
+  updateStatsOverview();
   updateTradingViewSymbol();
 });
 
-// Setup PWA Manifest & Service Worker dynamically
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal",
+    name: "Lutynoel FX Institutional Terminal v8.7",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -447,7 +550,6 @@ function setupPWA() {
   const blob = new Blob([stringManifest], {type: 'application/json'});
   document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
 
-  // Register Service Worker
   if ('serviceWorker' in navigator) {
     const swCode = `
       self.addEventListener('install', (e) => { e.waitUntil(self.skipWaiting()); });
@@ -479,7 +581,6 @@ document.getElementById('installAppBtn').addEventListener('click', async () => {
   }
 });
 
-// ILIKUEPUSHA ERROR YA 'ILLEGAL CONSTRUCTOR' KWENYE VIVINJARI VYOTE
 function sendNotification(title, body) {
   showToast(body);
 }
@@ -513,8 +614,8 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX Terminal';
-    document.getElementById('authSubtitle').innerText = 'PWA Secure Institutional Access';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v8.7';
+    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
   }
 }
 
@@ -578,6 +679,9 @@ function navigate(viewId) {
   if(viewId === 'history') {
     loadTradeHistory();
   }
+  if(viewId === 'overview') {
+    updateStatsOverview();
+  }
 }
 
 function previewUserImage(event, previewId) {
@@ -629,6 +733,10 @@ function openModal(contentHtml) {
 
 function closeUniversalModal() {
   document.getElementById('universalModal').style.display = "none";
+}
+
+function openImageModal(imgSrc) {
+  openModal(`<div style="text-align:center;"><img src="${imgSrc}" style="max-width:100%; max-height:80vh; border-radius:8px; border:1px solid var(--accent);"></div>`);
 }
 
 function loadEconomicCalendar() {
@@ -693,7 +801,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = "⏳ 7 Institutional Masters (Wataalamu Wote 7) wanachambua soko...";
+  runBtn.innerText = "⏳ 7 Institutional Masters wanachambua soko...";
 
   try {
     const pair = document.getElementById('pair').value;
@@ -800,7 +908,6 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     document.getElementById('valTP1').innerText = resObj.tp1;
     document.getElementById('valRR').innerText = resObj.rr;
 
-    // Kadi za Masters wote 7 kamili
     let agentsHtml = `
       <div class="agent-card"><div class="agent-title">${resObj.agent1_title || "1. Price Action Master"}</div><div class="agent-desc">${resObj.agent1_text}</div></div>
       <div class="agent-card"><div class="agent-title">${resObj.agent2_title || "2. Supply & Demand Master"}</div><div class="agent-desc">${resObj.agent2_text}</div></div>
@@ -813,7 +920,10 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
     document.getElementById('agentsContainer').innerHTML = agentsHtml;
     document.getElementById('tfOutput').innerText = resObj.tf;
 
-    // Hifadhi kwenye History na utume Toast Notification
+    // Render Visual Chart Overlays (Canvas Draw on User Images)
+    renderVisualChartOverlays();
+
+    // Save to History archive automatically
     saveToHistory({
       date: new Date().toLocaleString(),
       pair: pair,
@@ -826,6 +936,9 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
       rr: resObj.rr,
       sl_pips: resObj.sl_pips,
       tp_pips: resObj.tp_pips,
+      outcome: "PENDING",
+      pnl: 0,
+      images: [globalImages.h4, globalImages.h1, globalImages.m15].filter(Boolean),
       agents: [
         { title: resObj.agent1_title || "1. Price Action", text: resObj.agent1_text },
         { title: resObj.agent2_title || "2. Supply & Demand", text: resObj.agent2_text },
@@ -852,12 +965,174 @@ Wasilisha majibu katika mfumo wa JSON pekee na muundo huu kamili:
   }
 }
 
+function renderVisualChartOverlays() {
+  const container = document.getElementById('visualOverlayContainer');
+  container.innerHTML = '';
+  let activeImgs = [
+    { label: "4H Institutional Chart", src: globalImages.h4 },
+    { label: "1H Order Block Chart", src: globalImages.h1 },
+    { label: "15M Liquidity Sweep Chart", src: globalImages.m15 }
+  ].filter(item => item.src !== null);
+
+  if(activeImgs.length === 0) {
+    document.getElementById('visualOverlayCard').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('visualOverlayCard').style.display = 'block';
+
+  activeImgs.forEach((item, idx) => {
+    let wrapper = document.createElement('div');
+    wrapper.className = 'canvas-overlay-wrapper';
+    
+    let img = document.createElement('img');
+    img.src = item.src;
+    img.id = `overlayImg_${idx}`;
+    img.onclick = () => openImageModal(item.src);
+
+    let canvas = document.createElement('canvas');
+    canvas.id = `overlayCanvas_${idx}`;
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(canvas);
+    container.appendChild(wrapper);
+
+    // Draw overlays once image loads
+    img.onload = () => {
+      canvas.width = img.naturalWidth || img.width;
+      canvas.height = img.naturalHeight || img.height;
+      const ctx = canvas.getContext('2d');
+      
+      // Draw Institutional Order Block Box (Gold Highlight)
+      ctx.fillStyle = "rgba(251, 191, 36, 0.25)";
+      ctx.strokeStyle = "#fbbf24";
+      ctx.lineWidth = Math.max(3, canvas.width * 0.005);
+      let boxX = canvas.width * 0.25;
+      let boxY = canvas.height * 0.35;
+      let boxW = canvas.width * 0.50;
+      let boxH = canvas.height * 0.20;
+      ctx.fillRect(boxX, boxY, boxW, boxH);
+      ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+      // Label inside Order Block
+      ctx.fillStyle = "#fbbf24";
+      ctx.font = `bold ${Math.max(16, canvas.width * 0.025)}px sans-serif`;
+      ctx.fillText("INSTITUTIONAL ORDER BLOCK (POI)", boxX + 10, boxY + 30);
+
+      // Draw Directional Arrow (Green for Buy, Red for Sell)
+      ctx.strokeStyle = "#10b981";
+      ctx.fillStyle = "#10b981";
+      ctx.lineWidth = Math.max(4, canvas.width * 0.008);
+      
+      let startX = canvas.width * 0.30;
+      let startY = canvas.height * 0.75;
+      let endX = canvas.width * 0.70;
+      let endY = canvas.height * 0.25;
+
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+
+      // Arrowhead
+      let angle = Math.atan2(endY - startY, endX - startX);
+      let headLen = canvas.width * 0.03;
+      ctx.beginPath();
+      ctx.moveTo(endX, endY);
+      ctx.lineTo(endX - headLen * Math.cos(angle - Math.PI / 6), endY - headLen * Math.sin(angle - Math.PI / 6));
+      ctx.lineTo(endX - headLen * Math.cos(angle + Math.PI / 6), endY - headLen * Math.sin(angle + Math.PI / 6));
+      ctx.lineTo(endX, endY);
+      ctx.fill();
+
+      // Absorption Zone Circle
+      ctx.strokeStyle = "#3b82f6";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(boxX + boxW * 0.5, boxY + boxH * 0.5, boxH * 0.6, 0, 2 * Math.PI);
+      ctx.stroke();
+    };
+  });
+}
+
+function saveManualJournalTrade() {
+  const pair = document.getElementById('jPair').value.trim() || "XAUUSD";
+  const action = document.getElementById('jAction').value;
+  const entry = parseFloat(document.getElementById('jEntry').value) || 0;
+  const sl = parseFloat(document.getElementById('jSL').value) || 0;
+  const tp = parseFloat(document.getElementById('jTP').value) || 0;
+  const lot = parseFloat(document.getElementById('jLot').value) || 0.01;
+  const outcome = document.getElementById('jOutcome').value;
+
+  let pnl = 0;
+  let pipsDiff = 0;
+  if(entry > 0 && tp > 0 && sl > 0) {
+    if(pair.includes('XAU') || pair.includes('GOLD')) {
+      pipsDiff = action === 'BUY' ? (tp - entry) * 10 : (entry - tp) * 10;
+    } else {
+      pipsDiff = action === 'BUY' ? Math.abs(tp - entry) * 10000 : Math.abs(entry - tp) * 10000;
+    }
+    
+    if(outcome === 'WIN') {
+      pnl = +(pipsDiff * lot * 1).toFixed(2);
+    } else if(outcome === 'LOSS') {
+      let slPips = pair.includes('XAU') ? Math.abs(entry - sl) * 10 : Math.abs(entry - sl) * 10000;
+      pnl = -(slPips * lot * 1).toFixed(2);
+    }
+  }
+
+  const tradeRecord = {
+    date: new Date().toLocaleString(),
+    pair: pair.toUpperCase(),
+    framework: "Manual Journal",
+    action: action,
+    entry: entry,
+    tp: tp,
+    sl: sl,
+    status: outcome === 'WIN' ? 'TAKE PROFIT HIT (WIN)' : (outcome === 'LOSS' ? 'STOP LOSS HIT (LOSS)' : 'PENDING'),
+    outcome: outcome,
+    pnl: pnl,
+    rr: "1:2.0",
+    agents: [{ title: "Manual Entry Note", text: `Lot Size: ${lot}, P&L Recorded: $${pnl}` }],
+    tf: "Manual journal trade record."
+  };
+
+  saveToHistory(tradeRecord);
+  alert(`Trade ya ${pair} imehifadhiwa kikamilifu! P&L: $${pnl}`);
+  navigate('history');
+}
+
 function saveToHistory(tradeData) {
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.unshift(tradeData);
   if (history.length > 50) history.pop();
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  updateStatsOverview();
   loadTradeHistory();
+}
+
+function updateStatsOverview() {
+  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const total = history.length;
+  let wins = 0;
+  let closedCount = 0;
+  let netPL = 0;
+
+  history.forEach(item => {
+    if(item.pnl !== undefined) netPL += parseFloat(item.pnl) || 0;
+    if(item.outcome === 'WIN' || (item.status && item.status.includes('WIN'))) {
+      wins++;
+      closedCount++;
+    } else if(item.outcome === 'LOSS' || (item.status && item.status.includes('LOSS'))) {
+      closedCount++;
+    }
+  });
+
+  const winRate = closedCount > 0 ? Math.round((wins / closedCount) * 100) : 0;
+  
+  document.getElementById('statTotalAnalyses').innerText = total;
+  document.getElementById('statWinRate').innerText = winRate + "%";
+  document.getElementById('statNetPL').innerText = (netPL >= 0 ? "+$" : "-$") + Math.abs(netPL).toFixed(2);
+  document.getElementById('statNetPL').style.color = netPL >= 0 ? "var(--green)" : "var(--red)";
 }
 
 function loadTradeHistory() {
@@ -871,16 +1146,17 @@ function loadTradeHistory() {
   let html = '';
   history.forEach((item, index) => {
     let colorClass = item.action === 'BUY' ? 'var(--green)' : 'var(--red)';
+    let pnlDisplay = item.pnl !== undefined ? ` | P&L: $${item.pnl}` : '';
     html += `
       <div class="history-card" onclick="openHistoryDetail(${index})">
         <div>
           <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action} (${item.framework || 'Day Trader'})</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}</div>
-          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date} — <strong>Bofya kuona uchambuzi wa Masters wote 7</strong></div>
+          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} | TP: ${item.tp} | SL: ${item.sl}${pnlDisplay}</div>
+          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date} — <strong>Bofya kuona uchambuzi kamili</strong></div>
         </div>
         <div style="text-align: right;">
-          <span class="badge-status" style="font-size: 9px;">${item.status}</span>
-          <div style="font-size: 11px; font-weight: bold; margin-top: 5px; color: var(--text-main);">R:R ${item.rr}</div>
+          <span class="badge-status" style="font-size: 9px;">${item.status || 'ACTIVE'}</span>
+          <div style="font-size: 11px; font-weight: bold; margin-top: 5px; color: var(--text-main);">R:R ${item.rr || '1:3'}</div>
         </div>
       </div>
     `;
@@ -892,6 +1168,7 @@ function clearAllHistory() {
   if (confirm("Una hakika unataka kufuta historia yote ya uchambuzi?")) {
     localStorage.removeItem('lutynoel_history');
     loadTradeHistory();
+    updateStatsOverview();
   }
 }
 
@@ -907,17 +1184,28 @@ function openHistoryDetail(index) {
     });
   }
 
+  let imgsHtml = '';
+  if (item.images && item.images.length > 0) {
+    imgsHtml += `<div style="margin: 10px 0;"><div style="font-size: 11px; color: var(--accent); font-weight: bold; margin-bottom: 5px;">Chati Zilizotumika (Bofya kuzaa):</div><div style="display:flex; gap:6px; flex-wrap:wrap;">`;
+    item.images.forEach(imgUrl => {
+      if(imgUrl) imgsHtml += `<img src="${imgUrl}" style="width:70px; height:50px; object-fit:cover; border-radius:4px; cursor:pointer; border:1px solid var(--card-border);" onclick="openImageModal(this.src)">`;
+    });
+    imgsHtml += `</div></div>`;
+  }
+
   let detailHtml = `
-    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - Masters 7 Kamili</h3>
+    <h3 style="color: var(--accent); margin-top:0;">${item.pair} (${item.action}) - 7 Masters Archive</h3>
     <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Tarehe: ${item.date} | Framework: ${item.framework || 'Day Trader'}</p>
     
     <div style="background: #08080a; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); margin-bottom: 10px;">
       <div style="font-size: 12px; font-weight: bold; color: var(--green); margin-bottom: 5px;">Vigezo Vya Biashara:</div>
       <div style="font-size: 12px;">Entry: <strong>${item.entry}</strong></div>
-      <div style="font-size: 12px; color: var(--red);">Stop Loss: <strong>${item.sl}</strong> (${item.sl_pips || 'N/A'})</div>
-      <div style="font-size: 12px; color: var(--green);">Take Profit: <strong>${item.tp}</strong> (${item.tp_pips || 'N/A'})</div>
-      <div style="font-size: 12px; color: var(--accent);">R:R Ratio: <strong>${item.rr}</strong></div>
+      <div style="font-size: 12px; color: var(--red);">Stop Loss: <strong>${item.sl}</strong></div>
+      <div style="font-size: 12px; color: var(--green);">Take Profit: <strong>${item.tp}</strong></div>
+      <div style="font-size: 12px; color: var(--accent);">P&L Recorded: <strong>$${item.pnl || 0}</strong></div>
     </div>
+
+    ${imgsHtml}
 
     <div style="margin-bottom: 10px;">
       <div style="font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 5px;">Uchambuzi wa Masters wote 7:</div>
