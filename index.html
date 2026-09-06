@@ -252,7 +252,7 @@
           </div>
           <div class="mini-box" style="text-align: center;">
             <label>Net P&L</label>
-            <div id="statNetPL" style="font-size: 20px; font-weight: bold; color: var(--blue);">$0.00</div>
+            <div id="statNetPL" style="font-size: 16px; font-weight: bold; color: var(--blue);">$0.00</div>
           </div>
         </div>
 
@@ -938,7 +938,6 @@ Toa majibu katika muundo wa JSON pekee:
     await renderAllAgentsWithSmartCanvas(resObj);
     document.getElementById('tfOutput').innerText = resObj.tf;
 
-    // Hifadhi moja kwa moja kwenye history ikiwa na data zote za Entry, TP, na SL
     saveToHistory({
       date: new Date().toLocaleString(),
       pair: pair,
@@ -1145,11 +1144,14 @@ function updateStatsOverview() {
   let netPL = 0;
 
   history.forEach(item => {
-    if(item.pnl !== undefined && item.pnl !== null) netPL += parseFloat(item.pnl) || 0;
-    if(item.outcome === 'WIN' || (item.status && item.status.includes('WIN'))) {
+    if (item.pnl !== undefined && item.pnl !== null && item.pnl !== "") {
+      netPL += parseFloat(item.pnl) || 0;
+    }
+    
+    if (item.outcome === 'WIN' || (item.status && item.status.includes('WIN'))) {
       wins++;
       closedCount++;
-    } else if(item.outcome === 'LOSS' || (item.status && item.status.includes('LOSS'))) {
+    } else if (item.outcome === 'LOSS' || (item.status && item.status.includes('LOSS'))) {
       closedCount++;
     }
   });
@@ -1159,8 +1161,14 @@ function updateStatsOverview() {
   
   document.getElementById('statTotalAnalyses').innerText = total;
   document.getElementById('statWinRate').innerText = winRate + "%";
-  document.getElementById('statNetPL').innerHTML = (netPL >= 0 ? "+$"+netPL.toFixed(2) : "-$"+Math.abs(netPL).toFixed(2)) + `<br><span style="font-size:11px; color:var(--text-muted);">≈ TZS ${netTzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
-  document.getElementById('statNetPL').style.color = netPL >= 0 ? "var(--green)" : "var(--red)";
+  
+  const netPlElem = document.getElementById('statNetPL');
+  let formattedPL = netPL >= 0 ? `+$${netPL.toFixed(2)}` : `-$${Math.abs(netPL).toFixed(2)}`;
+  let formattedTzs = `≈ TZS ${Math.abs(netTzs).toLocaleString('en-US', {maximumFractionDigits: 0})}`;
+  if (netTzs < 0) formattedTzs = `- ` + formattedTzs;
+
+  netPlElem.innerHTML = `${formattedPL}<br><span style="font-size:11px; color:var(--text-muted);">${formattedTzs}</span>`;
+  netPlElem.style.color = netPL >= 0 ? "var(--green)" : "var(--red)";
 }
 
 function loadTradeHistory() {
