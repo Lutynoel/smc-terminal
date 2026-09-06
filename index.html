@@ -122,7 +122,7 @@
     .modal-content { max-width: 92%; max-height: 88vh; border-radius: 10px; border: 1px solid var(--accent); background: var(--card-bg); padding: 20px; color: #fff; overflow-y: auto; position: relative; }
     .modal-close { position: absolute; top: 10px; right: 20px; color: #fff; font-size: 30px; font-weight: bold; cursor: pointer; }
 
-    .hamburger { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
+    .nav-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   </style>
 </head>
 <body>
@@ -187,8 +187,10 @@
   <!-- MAIN APP INTERFACE -->
   <div id="appInterface">
     <header>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <!-- BACK ARROW BUTTON -->
+        <button class="nav-btn" onclick="goBackToOverview()" title="Rudi Nyuma (Overview)">←</button>
+        <button class="nav-btn" onclick="toggleSidebar()" title="Fungua Menyu">☰</button>
         <div class="logo-area">
           <div class="logo-icon">📈</div> Lutynoel FX
         </div>
@@ -662,6 +664,10 @@ function handleRegister() {
 
 function logout() { localStorage.removeItem('lutynoel_user'); location.reload(); }
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
+
+function goBackToOverview() {
+  navigate('overview');
+}
 
 function navigate(viewId) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
