@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v10.9 (Zero Loss Edition)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v11.0 (Zero Loss Edition)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10.9">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v11">
 
   <style>
     :root {
@@ -59,7 +59,7 @@
     
     /* FORM & INPUTS */
     label { font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
-    input, select { width: 100%; padding: 12px; background: #08080a; color: #fff; border: 1px solid var(--card-border); border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; font-size: 14px; }
+    input, select, textarea { width: 100%; padding: 12px; background: #08080a; color: #fff; border: 1px solid var(--card-border); border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; font-size: 14px; font-family: inherit; }
     button.primary-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; margin-top: 5px; }
     button.primary-btn:hover { background: var(--accent-hover); }
     button.secondary-btn { width: 100%; padding: 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; margin-top: 8px; }
@@ -104,22 +104,19 @@
     .news-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
     .impact-red { border-left: 4px solid var(--red); }
 
-    /* FOREX HERO WITH ROBOT AI & CANDLESTICKS */
-    .forex-hero { background: linear-gradient(135deg, rgba(18,18,21,0.95), rgba(30,27,75,0.9)), radial-gradient(circle at top right, rgba(251,191,36,0.15), transparent 50%); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; margin-bottom: 15px; position: relative; overflow: hidden; }
-    .hero-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .forex-ticker-symbols { font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .bull-bear-badges { display: flex; gap: 6px; }
-    .badge-bull { background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
-    .badge-bear { background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
-    
-    .hero-visual-grid { display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center; margin-top: 12px; }
-    .hero-graphic-box { background: rgba(0,0,0,0.4); border: 1px solid var(--card-border); padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 12px; }
-    .robot-avatar { font-size: 32px; animation: pulseRobot 2s infinite ease-in-out; }
-    @keyframes pulseRobot { 0% { transform: scale(1); } 50% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(251,191,36,0.6)); } 100% { transform: scale(1); } }
-    
-    .forex-chart-preview { display: flex; align-items: flex-end; gap: 4px; height: 40px; }
-    .f-candle { width: 6px; background: var(--green); border-radius: 2px; position: relative; }
-    .f-candle.bear { background: var(--red); }
+    /* FOREX HERO WITH BANNER IMAGE & ROBOT AI */
+    .forex-hero { background: linear-gradient(135deg, rgba(18,18,21,0.95), rgba(30,27,75,0.9)); border: 1px solid var(--card-border); border-radius: 12px; padding: 15px; margin-bottom: 15px; overflow: hidden; }
+    .hero-banner-img { width: 100%; max-height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid var(--accent); margin-bottom: 12px; box-shadow: 0 4px 15px rgba(251,191,36,0.2); }
+
+    /* AI ASSISTANCE CHAT BOX STYLES */
+    .chat-container { display: flex; flex-direction: column; height: 380px; background: #08080a; border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+    .chat-messages { flex-grow: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+    .chat-bubble { max-width: 85%; padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.4; }
+    .chat-bubble.user { background: var(--accent); color: #000; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 500; }
+    .chat-bubble.ai { background: #1a1a20; color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid var(--card-border); }
+    .chat-input-row { display: flex; padding: 8px; background: #121215; border-top: 1px solid var(--card-border); gap: 8px; }
+    .chat-input-row input { margin-bottom: 0; }
+    .chat-send-btn { background: var(--accent); color: #000; border: none; padding: 0 16px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
     /* MODAL */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
@@ -140,8 +137,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v10.9</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Gemini 3.6 - Zero Loss Strategy)</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v11.0</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & AI Assistance (Gemini 3.6)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -202,11 +199,12 @@
 
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.9</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.0</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
-      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">GEMINI 3.6</span></div>
+      <div class="menu-item" onclick="navigate('aiassistant')">🤖 AI Assistance Chat <span class="badge-new">GEMINI</span></div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">7 MASTERS</span></div>
       <div class="menu-item" onclick="navigate('journal')">Trade Journal & Tracking <span class="badge-new">NEW</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
       <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
@@ -224,36 +222,22 @@
 
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
-          <div class="hero-top-row">
-            <div class="forex-ticker-symbols">XAU/USD • BTC/USD • EUR/USD • US30</div>
-            <div class="bull-bear-badges">
-              <span class="badge-bull">🐂 BULL MARKET</span>
-              <span class="badge-bear">🐻 BEAR DEFENSE</span>
+          <!-- Hapa ndipo picha uliyoileta imewekwa rasmi kwenye Banner -->
+          <img src="1000648830_2.jpg" alt="5 Best AI Trading Tools" class="hero-banner-img" onclick="openImageModal(this.src)">
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAU/USD • BTC/USD • EUR/USD • US30</div>
+            <div style="display: flex; gap: 6px;">
+              <span style="background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🐂 BULL MARKET</span>
+              <span style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🐻 BEAR DEFENSE</span>
             </div>
           </div>
           
           <h2 style="margin: 0 0 5px 0; font-size: 19px;">
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
-            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(7 Masters Institutional Decision Engine)</span>
+            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Institutional Intelligence & AI Tools)</span>
           </h2>
           <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Zero Loss Institutional Intelligence Protocol powered by Gemini 3.6.</p>
-          
-          <div class="hero-graphic-box">
-            <div class="robot-avatar" title="AI Thinking Robot">🤖💡</div>
-            <div style="flex-grow: 1;">
-              <div style="font-size: 10px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LIVE MULTI-TF CHART & AI THINKING STREAM</div>
-              <div class="forex-chart-preview">
-                <div class="f-candle" style="height: 18px;"></div>
-                <div class="f-candle bear" style="height: 28px;"></div>
-                <div class="f-candle" style="height: 22px;"></div>
-                <div class="f-candle" style="height: 35px;"></div>
-                <div class="f-candle bear" style="height: 15px;"></div>
-                <div class="f-candle" style="height: 30px;"></div>
-                <div class="f-candle" style="height: 38px;"></div>
-                <div class="f-candle bear" style="height: 20px;"></div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="grid-3">
@@ -273,14 +257,33 @@
 
         <div class="card">
           <h3 style="margin-top:0; font-size: 15px; color: var(--accent);">Njia za Haraka</h3>
-          <button class="primary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Analysis (Gemini 3.6) →</button>
-          <button class="secondary-btn" onclick="navigate('journal')">Fungua Trade Journal & P&L Tracker</button>
+          <button class="primary-btn" onclick="navigate('aiassistant')">Fungua AI Assistance Chat (Gemini) 🤖</button>
+          <button class="secondary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Chart Analysis →</button>
+        </div>
+      </div>
+
+      <!-- KIPENGELE CHA AI ASSISTANCE (CHAT) -->
+      <div id="view-aiassistant" class="view-section" style="display: none;">
+        <div class="card">
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL</div>
+          <h3 style="margin: 0 0 12px 0; font-size: 16px;">Chat na Mtaalamu Wako wa AI</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu biashara ya forex, uchambuzi wa XAUUSD, Bitcoin, au ushauri wa mikakati ya Zero Loss.</p>
+
+          <div class="chat-container">
+            <div id="chatMessages" class="chat-messages">
+              <div class="chat-bubble ai">Habari! Mimi ni Lutynoel FX AI Assistant wako wa Gemini. Nipo hapa kukusaidia na maswali yako yote ya biashara, mikakati ya hatari (Risk Management), na uchambuzi wa soko. Niambie nikupe msaada gani leo?</div>
+            </div>
+            <div class="chat-input-row">
+              <input type="text" id="chatUserInput" placeholder="Andika swali lako hapa..." onkeydown="if(event.key === 'Enter') sendAIChatMessage()">
+              <button class="chat-send-btn" onclick="sendAIChatMessage()">Tuma</button>
+            </div>
+          </div>
         </div>
       </div>
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v10.9 (ZERO LOSS ENGINE)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.0 (ZERO LOSS ENGINE)</div>
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
@@ -526,7 +529,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v10.9",
+    name: "Lutynoel FX Institutional Terminal v11.0",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -598,8 +601,8 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.9';
-    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol (Gemini 3.6)';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v11.0';
+    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & AI Assistance (Gemini 3.6)';
   }
 }
 
@@ -677,6 +680,55 @@ function navigate(viewId) {
   document.getElementById('appSidebar').classList.remove('open');
   if(viewId === 'history') loadTradeHistory();
   if(viewId === 'overview') updateStatsOverview();
+}
+
+/* AI ASSISTANCE CHAT FUNCTIONALITY */
+async function sendAIChatMessage() {
+  const inputEl = document.getElementById('chatUserInput');
+  const msg = inputEl.value.trim();
+  if (!msg) return;
+
+  const apiKey = localStorage.getItem('smc_gemini_key');
+  if (!apiKey) { alert("Gemini API Key haionekani. Tafadhali ingia tena."); logout(); return; }
+
+  const chatMessages = document.getElementById('chatMessages');
+  chatMessages.innerHTML += `<div class="chat-bubble user">${escapeHtml(msg)}</div>`;
+  inputEl.value = '';
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  let loadingId = 'ai_load_' + Date.now();
+  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI inatafakari...</div>`;
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  try {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya Forex, XAUUSD, Bitcoin, na mikakati ya Zero Loss. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
+        }]
+      })
+    });
+
+    const data = await response.json();
+    document.getElementById(loadingId).remove();
+
+    if (data.error) throw new Error(data.error.message);
+    const aiReply = data.candidates[0].content.parts[0].text;
+
+    chatMessages.innerHTML += `<div class="chat-bubble ai">${escapeHtml(aiReply)}</div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  } catch (err) {
+    document.getElementById(loadingId).remove();
+    chatMessages.innerHTML += `<div class="chat-bubble ai" style="color:var(--red);">Hitilafu: ${err.message || "Imeshindikana kuunganisha na Gemini API."}</div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+}
+
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function previewUserImage(event, previewId) {
@@ -1104,44 +1156,6 @@ function drawSmartOverlayOnCanvas(canvasId, imgSrc, labelText, actionType) {
   });
 }
 
-function saveManualJournalTrade() {
-  const pair = document.getElementById('jPair').value.trim() || "XAUUSD";
-  const action = document.getElementById('jAction').value;
-  const entry = parseFloat(document.getElementById('jEntry').value) || 0;
-  const sl = parseFloat(document.getElementById('jSL').value) || 0;
-  const tp = parseFloat(document.getElementById('jTP').value) || 0;
-  const lot = parseFloat(document.getElementById('jLot').value) || 0.01;
-  const outcome = document.getElementById('jOutcome').value;
-
-  let pnl = 0;
-  let calcResult = calculateAccurateProfit(pair, entry, tp);
-  if(entry > 0 && tp > 0 && sl > 0) {
-    let pipVal = pair.includes("ETH") ? 0.01 : (pair.includes("BTC") ? 0.10 : 10.0);
-    if(outcome === 'WIN') pnl = +(calcResult.calculatedPips * pipVal * lot).toFixed(2);
-    else if(outcome === 'LOSS') pnl = -(Math.abs(entry - sl) * 10 * pipVal * lot).toFixed(2);
-  }
-
-  const tradeRecord = {
-    date: new Date().toLocaleString(),
-    pair: pair.toUpperCase(),
-    framework: "Manual Journal",
-    action: action,
-    entry: entry,
-    tp: tp,
-    sl: sl,
-    status: outcome === 'WIN' ? 'WIN' : (outcome === 'LOSS' ? 'LOSS' : 'PENDING'),
-    outcome: outcome,
-    pnl: pnl,
-    rr: "1:3.0",
-    agents: [{ title: "Manual Entry Note", decision: action, text: `Lot: ${lot}, P&L: $${pnl}` }],
-    tf: "Manual record."
-  };
-
-  saveToHistory(tradeRecord);
-  alert(`Trade imehifadhiwa! P&L: $${pnl} (≈ TZS ${(pnl * TZS_RATE).toLocaleString()})`);
-  navigate('history');
-}
-
 function saveToHistory(tradeData) {
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.unshift(tradeData);
@@ -1190,7 +1204,7 @@ function loadTradeHistory() {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const container = document.getElementById('historyListContainer');
   if (history.length === 0) {
-    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado. Fanya uchambuzi kupitia 7 Masters ili uone kumbukumbu hapa.</div>`;
+    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
     return;
   }
 
@@ -1215,7 +1229,7 @@ function loadTradeHistory() {
 }
 
 function clearAllHistory() {
-  if (confirm("Je, una uhakika unataka kufuta historia yote ya biashara na uchambuzi?")) {
+  if (confirm("Je, una uhakika unataka kufuta historia yote?")) {
     localStorage.removeItem('lutynoel_history');
     loadTradeHistory();
     updateStatsOverview();
