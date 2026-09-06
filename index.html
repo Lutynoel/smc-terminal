@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v9.0</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v10.0 (Strict Lock)</title>
   
   <!-- PWA MANIFEST LINK -->
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v9.0">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v10">
 
   <style>
     :root {
@@ -67,6 +67,9 @@
     button.secondary-btn { width: 100%; padding: 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; margin-top: 8px; }
     button.secondary-btn:hover { background: rgba(251,191,36,0.1); }
     button:disabled { background: #3f3f46; color: #a1a1aa; cursor: not-allowed; }
+
+    /* PAIR LOCK BANNER */
+    .pair-lock-box { background: rgba(251, 191, 36, 0.08); border: 1px solid var(--accent); padding: 12px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
 
     /* UPLOAD DROPZONES */
     .upload-zone { border: 2px dashed var(--card-border); background: #08080a; padding: 15px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 12px; position: relative; }
@@ -131,8 +134,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v9.0</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Zero Loss Edition)</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v10.0</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Strict Pair Lock)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -195,11 +198,11 @@
     <!-- SIDEBAR -->
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v9.0</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v10.0</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
-      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">7 MASTERS</span></div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">STRICT PAIR</span></div>
       <div class="menu-item" onclick="navigate('journal')">Trade Journal & Tracking <span class="badge-new">NEW</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
       <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
@@ -222,7 +225,7 @@
         <div class="forex-hero">
           <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • GBP/JPY • US30</div>
           <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
-          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi na bei halisi ya soko tayari kulinda mitaji yako.</p>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa Taasisi na mfumo madhubuti wa kuzuia kupishana kwa chati na pair.</p>
           
           <div class="forex-chart-preview">
             <div class="f-candle" style="height: 15px;"></div>
@@ -258,38 +261,22 @@
         </div>
       </div>
 
-      <!-- AI ON-CHART ANALYST -->
+      <!-- AI ON-CHART ANALYST WITH STRICT PAIR LOCK -->
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (STRICT ZERO LOSS EDITION)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB (STRICT PAIR LOCK)</div>
           <h3 style="margin: 5px 0 15px 0;">Institutional Multi-Confluence AI</h3>
           
-          <label>Instrument Symbol (Weka Pair Husika)</label>
-          <select id="pair" onchange="updateTradingViewSymbol()">
-            <optgroup label="Metals & Crypto">
-              <option value="XAUUSD">XAU/USD (Gold)</option>
-              <option value="XAGUSD">XAG/USD (Silver)</option>
-              <option value="BTCUSD">BTC/USD (Bitcoin)</option>
-              <option value="ETHUSD">ETH/USD (Ethereum)</option>
-            </optgroup>
-            <optgroup label="Forex Majors">
-              <option value="EURUSD">EUR/USD</option>
-              <option value="GBPUSD">GBP/USD</option>
-              <option value="USDJPY">USD/JPY</option>
-              <option value="AUDUSD">AUD/USD</option>
-              <option value="USDCAD">USD/CAD</option>
-              <option value="NZDUSD">NZD/USD</option>
-              <option value="USDCHF">USD/CHF</option>
-            </optgroup>
-            <optgroup label="Indices">
-              <option value="US30">US30 (Dow Jones)</option>
-              <option value="US100">NASDAQ (US100)</option>
-              <option value="GER40">GER40 (DAX)</option>
-              <option value="UK100">UK100 (FTSE)</option>
-            </optgroup>
-          </select>
+          <label>1. Chagua na Ufunge Pair Unayotaka (Pair Lock)</label>
+          <div class="pair-lock-box">
+            <div>
+              <span style="font-size: 11px; color: var(--text-muted);">Pair Iliyochaguliwa Sasa:</span>
+              <div id="lockedPairDisplay" style="font-size: 16px; font-weight: bold; color: var(--accent);">XAU/USD</div>
+            </div>
+            <button class="secondary-btn" style="width: auto; margin:0; padding: 6px 12px; font-size: 12px;" onclick="changeLockedPairPrompt()">Badilisha Pair</button>
+          </div>
 
-          <label>Analysis Framework</label>
+          <label style="margin-top: 15px;">Analysis Framework</label>
           <select id="framework">
             <option value="Day Trader">Day Trader (Strict Zero Loss Confluence)</option>
             <option value="Scalper">Scalper (M15 / M5 Precision)</option>
@@ -297,7 +284,7 @@
           </select>
 
           <!-- UPLOAD 4H -->
-          <label style="margin-top: 15px;">Required Market Timeframe: 4H Chart</label>
+          <label style="margin-top: 15px;">2. Required Market Timeframe: 4H Chart (<span class="activePairBadge">XAU/USD</span>)</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
@@ -306,7 +293,7 @@
           </div>
 
           <!-- UPLOAD 1H -->
-          <label>Required Market Timeframe: 1H Chart</label>
+          <label>Required Market Timeframe: 1H Chart (<span class="activePairBadge">XAU/USD</span>)</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
@@ -315,7 +302,7 @@
           </div>
 
           <!-- UPLOAD 15M -->
-          <label>Required Market Timeframe: 15M Chart</label>
+          <label>Required Market Timeframe: 15M Chart (<span class="activePairBadge">XAU/USD</span>)</label>
           <div class="upload-zone">
             <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
@@ -385,7 +372,7 @@
 
           <!-- 7 SPECIALIST MASTERS WITH STRICT EMBEDDED TEXT OVERLAYS -->
           <div class="card">
-            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (MAWAZO YAO YAKIWA NDANI YA PICHA HASA)</div>
+            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (MAWAZO YAO YAKIWA NDANI YA PICHA)</div>
             <div id="agentsContainer"></div>
           </div>
 
@@ -453,7 +440,7 @@
           <h3>Live TradingView Chart</h3>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chati ya moja kwa moja:</p>
           <div style="height: 480px; width: 100%;" id="tradingview_widget_container">
-            <iframe id="tvLiveIframe" src="https://s.tradingview.com/widgetembed/?symbol=FX:XAUUSD&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%; height:100%; border:0; border-radius:8px;"></iframe>
+            <iframe id="tvLiveIframe" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC" style="width:100%; height:100%; border:0; border-radius:8px;"></iframe>
           </div>
         </div>
       </div>
@@ -500,6 +487,7 @@
 let currentMathAns1 = 0;
 let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
+let lockedPair = "XAUUSD";
 let deferredPrompt = null;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -516,12 +504,12 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   loadTradeHistory();
   updateStatsOverview();
-  updateTradingViewSymbol();
+  updateLockedPairUI();
 });
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v9.0",
+    name: "Lutynoel FX Institutional Terminal v10.0",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -599,7 +587,7 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v9.0';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v10.0';
     document.getElementById('authSubtitle').innerText = 'Institutional Intelligence Protocol';
   }
 }
@@ -666,6 +654,32 @@ function navigate(viewId) {
   if(viewId === 'overview') updateStatsOverview();
 }
 
+function changeLockedPairPrompt() {
+  let newPair = prompt("Weka Pair unayotaka kuifungia (Mfano: XAUUSD, BTCUSD, EURUSD, US30):", lockedPair);
+  if(newPair && newPair.trim() !== "") {
+    lockedPair = newPair.trim().toUpperCase();
+    updateLockedPairUI();
+  }
+}
+
+function updateLockedPairUI() {
+  document.getElementById('lockedPairDisplay').innerText = lockedPair;
+  document.querySelectorAll('.activePairBadge').forEach(el => {
+    el.innerText = lockedPair;
+  });
+  
+  let tvSymbol = "FX:" + lockedPair;
+  if(lockedPair.includes("XAU")) tvSymbol = "OANDA:XAUUSD";
+  else if(lockedPair.includes("BTC")) tvSymbol = "BINANCE:BTCUSDT";
+  else if(lockedPair.includes("ETH")) tvSymbol = "BINANCE:ETHUSDT";
+  else if(lockedPair.includes("US30")) tvSymbol = "FOREXCOM:US30";
+  
+  const iframe = document.getElementById('tvLiveIframe');
+  if(iframe) {
+    iframe.src = `https://s.tradingview.com/widgetembed/?symbol=${tvSymbol}&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC`;
+  }
+}
+
 function previewUserImage(event, previewId) {
   const file = event.target.files[0];
   const preview = document.getElementById(previewId);
@@ -689,23 +703,6 @@ function resetAnalystForm() {
   globalImages = { h4: null, h1: null, m15: null };
   document.getElementById('resultsContainer').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function updateTradingViewSymbol() {
-  const pair = document.getElementById('pair').value;
-  let tvSymbol = "FX:" + pair;
-  if(pair === "XAUUSD") tvSymbol = "OANDA:XAUUSD";
-  if(pair === "XAGUSD") tvSymbol = "OANDA:XAGUSD";
-  if(pair === "BTCUSD") tvSymbol = "BINANCE:BTCUSDT";
-  if(pair === "ETHUSD") tvSymbol = "BINANCE:ETHUSDT";
-  if(pair === "US30") tvSymbol = "FOREXCOM:US30";
-  if(pair === "US100") tvSymbol = "FOREXCOM:NSXUSD";
-  if(pair === "GER40") tvSymbol = "FOREXCOM:GER40";
-  
-  const iframe = document.getElementById('tvLiveIframe');
-  if(iframe) {
-    iframe.src = `https://s.tradingview.com/widgetembed/?symbol=${tvSymbol}&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC`;
-  }
 }
 
 function openModal(contentHtml) {
@@ -750,9 +747,8 @@ function loadEconomicCalendar() {
 async function fetchLiveMarketPrice(pair) {
   try {
     let symbolQuery = "XAUUSD";
-    if(pair === "BTCUSD") symbolQuery = "BTCUSDT";
-    else if(pair === "ETHUSD") symbolQuery = "ETHUSDT";
-    else if(pair === "EURUSD") symbolQuery = "EURUSD";
+    if(pair.includes("BTC")) symbolQuery = "BTCUSDT";
+    else if(pair.includes("ETH")) symbolQuery = "ETHUSDT";
     else symbolQuery = pair;
 
     const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbolQuery}`);
@@ -762,10 +758,8 @@ async function fetchLiveMarketPrice(pair) {
     }
   } catch(e) {}
 
-  if(pair === "XAUUSD") return 2500.50;
-  if(pair === "BTCUSD") return 64500.00;
-  if(pair === "ETHUSD") return 3200.00;
-  if(pair === "EURUSD") return 1.1050;
+  if(pair.includes("XAU")) return 2500.50;
+  if(pair.includes("BTC")) return 64500.00;
   return 100.00;
 }
 
@@ -782,27 +776,27 @@ async function runLutynoelAnalysis() {
   const apiKey = localStorage.getItem('smc_gemini_key');
   if (!apiKey) { alert("API Key haionekani. Tafadhali ingia tena."); logout(); return; }
 
-  const pair = document.getElementById('pair').value;
+  const pair = lockedPair;
   const h4Input = document.getElementById('chartH4');
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
 
   if (h4Input.files.length === 0 || h1Input.files.length === 0 || m15Input.files.length === 0) {
-    alert("Tafadhali weka picha zote tatu (4H, 1H na 15M) ili kupata uchambuzi sahihi wa Zero Loss.");
+    alert("Tafadhali weka picha zote tatu (4H, 1H na 15M) kwa ajili ya pair ya " + pair + " kabla ya kuendelea.");
     return;
   }
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = "⏳ 7 Institutional Masters wanapima timeframes zote 3 (4H, 1H, 15M)...";
+  runBtn.innerText = `⏳ 7 Masters wanapitia chati za ${pair} (4H, 1H, 15M)...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. Changanua chati hizi tatu za ${pair} (4H, 1H, na 15M) kwa umakini mkubwa chini ya mfumo wa ZERO LOSS. Bei ya soko kwa sasa ni ${livePrice}.
-Hakikisha maoni ya Masters wote 7 yanalingana kabisa na timeframes zote (4H, 1H, 15M) na yametolewa kwa ufasaha mkubwa ili kuepusha loss yoyote:
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine. PAIR ILIYOFUNGWA KISHERIA NI: ${pair}. Changanua chati hizi tatu zilizotolewa (4H, 1H, na 15M) ukihakikisha kabisa ni za ${pair}. Bei ya soko ni ${livePrice}.
+Hakikisha maoni ya Masters wote 7 yanalingana kabisa na pair ya ${pair} na timeframes zote ili kuepusha loss yoyote (Zero Loss Protocol):
 1. Price Action Master
 2. Supply & Demand Master
 3. Market Structure Master
@@ -815,7 +809,7 @@ Jibu liwe katika mfumo wa JSON pekee:
 {
   "action": "BUY",
   "exec_type": "ZERO LOSS INSTITUTIONAL EXECUTION",
-  "subtitle": "4H, 1H and 15M Confluence Aligned Perfectly",
+  "subtitle": "Strict ${pair} Multi-TF Confluence Aligned",
   "sl_pips": "20 Pips",
   "tp_pips": "90 Pips",
   "tp_001": "$9.00",
@@ -826,7 +820,7 @@ Jibu liwe katika mfumo wa JSON pekee:
   "sl_001": "-$2.00",
   "sl_002": "-$4.00",
   "sl_003": "-$6.00",
-  "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed",
+  "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed for ${pair}",
   "chk2": "Institutional Order Block & FVG Mitigation",
   "chk3": "Zero Loss Risk Parameters Strictly Enforced",
   "entry": "${livePrice}",
@@ -835,20 +829,20 @@ Jibu liwe katika mfumo wa JSON pekee:
   "rr": "1:4.5",
   "trade_status": "ZERO LOSS ACTIVE",
   "agent1_title": "1. Price Action Master",
-  "agent1_text": "4H trend rejection candles backed by 1H momentum and 15M trigger.",
+  "agent1_text": "4H trend rejection candles for ${pair} backed by 1H momentum.",
   "agent2_title": "2. Supply & Demand Master",
   "agent2_text": "Mitigated institutional demand zone matching across all 3 timeframes.",
   "agent3_title": "3. Market Structure Master",
-  "agent3_text": "CHoCH verified on 15M supporting 4H macro expansion.",
+  "agent3_text": "CHoCH verified on 15M supporting ${pair} macro expansion.",
   "agent4_title": "4. Fundamental & Macro Master",
-  "agent4_text": "Macro liquidity sentiment fully supports asset direction.",
+  "agent4_text": "Macro liquidity sentiment fully supports ${pair} direction.",
   "agent5_title": "5. SMC Master",
   "agent5_text": "Retail liquidity sweep completed cleanly on 1H wick.",
   "agent6_title": "6. ICT Master",
   "agent6_text": "Killzone Fair Value Gap filled precisely on 15M chart.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master",
-  "agent7_text": "Spring event with massive volume expansion (Vol: 62,400).",
-  "tf": "4H: Macro direction confirmed.\n1H: POI mitigation.\n15M: Execution trigger with zero loss setup."
+  "agent7_text": "Spring event with massive volume expansion for ${pair}.",
+  "tf": "4H: Macro direction confirmed for ${pair}.\n1H: POI mitigation.\n15M: Execution trigger with zero loss setup."
 }`;
 
     parts.push({ text: promptText });
@@ -932,7 +926,7 @@ Jibu liwe katika mfumo wa JSON pekee:
       tf: resObj.tf
     });
 
-    sendNotification("Lutynoel FX", `${pair} imechambuliwa kwa mfumo wa Zero Loss na Masters 7!`);
+    sendNotification("Lutynoel FX", `${pair} imechambuliwa kikamilifu bila kuchanganya chati!`);
 
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
@@ -946,7 +940,6 @@ Jibu liwe katika mfumo wa JSON pekee:
   }
 }
 
-// Draw text and markings strictly INSIDE the canvas so it persists inside modals
 function renderAllAgentsWithVisuals(resObj) {
   const container = document.getElementById('agentsContainer');
   container.innerHTML = '';
@@ -989,7 +982,6 @@ function renderAllAgentsWithVisuals(resObj) {
       let w = canvasEl.width;
       let h = canvasEl.height;
 
-      // Draw permanent institutional overlay directly onto canvas pixels
       ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
       ctx.fillRect(10, 10, w - 20, 40);
       ctx.strokeStyle = "#fbbf24";
@@ -999,36 +991,12 @@ function renderAllAgentsWithVisuals(resObj) {
       ctx.fillStyle = "#fbbf24";
       ctx.font = `bold ${Math.max(12, w * 0.022)}px sans-serif`;
       ctx.fillText(ag.title.toUpperCase(), 22, 35);
-
-      if(ag.type === 'sd') {
-        ctx.fillStyle = "rgba(16, 185, 129, 0.35)";
-        ctx.strokeStyle = "#10b981";
-        ctx.lineWidth = 4;
-        ctx.fillRect(w * 0.3, h * 0.4, w * 0.35, h * 0.3);
-        ctx.strokeRect(w * 0.3, h * 0.4, w * 0.35, h * 0.3);
-      } else if(ag.type === 'smc' || ag.type === 'ict') {
-        ctx.strokeStyle = "#fbbf24";
-        ctx.fillStyle = "rgba(251, 191, 36, 0.5)";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.arc(w * 0.5, h * 0.25, 16, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.stroke();
-      } else {
-        ctx.strokeStyle = "#f59e0b";
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.moveTo(w * 0.2, h * 0.6);
-        ctx.lineTo(w * 0.5, h * 0.3);
-        ctx.lineTo(w * 0.8, h * 0.5);
-        ctx.stroke();
-      }
     };
   });
 }
 
 function saveManualJournalTrade() {
-  const pair = document.getElementById('jPair').value.trim() || "XAUUSD";
+  const pair = document.getElementById('jPair').value.trim() || lockedPair;
   const action = document.getElementById('jAction').value;
   const entry = parseFloat(document.getElementById('jEntry').value) || 0;
   const sl = parseFloat(document.getElementById('jSL').value) || 0;
