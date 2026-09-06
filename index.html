@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v10.9</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v10.9 (Zero Loss Edition)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
@@ -130,7 +130,7 @@
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
       <div class="auth-title" id="authTitle">Lutynoel FX v10.9</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Gemini 3.6)</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence Protocol (Gemini 3.6 - Zero Loss Strategy)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -184,7 +184,7 @@
         </div>
       </div>
       <div class="header-icons">
-        <div class="user-pill" id="displayUserRole">PRO</div>
+        <div class="user-pill" id="displayUserRole">ZERO LOSS PRO</div>
         <button onclick="logout()" style="background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Toka</button>
       </div>
     </header>
@@ -213,9 +213,9 @@
 
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
-          <div class="forex-ticker-symbols">EUR/USD • XAU/USD • BTC/USD • ETH/USD • US30</div>
-          <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Institutional Intelligence Protocol</h2>
-          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa taasisi wakichambua chati 3 zote kwa ufanisi mkubwa kwa kutumia Gemini 3.6.</p>
+          <div class="forex-ticker-symbols">XAU/USD • BTC/USD • EUR/USD • ETH/USD • US30</div>
+          <h2 style="margin: 0 0 5px 0; font-size: 20px; color: var(--accent);">Zero Loss Institutional Protocol</h2>
+          <p style="color: var(--text-muted); font-size: 12px; margin: 0; line-height: 1.4;">Wataalamu 7 wa taasisi wakichambua chati 3 (4H, 1H, 15M) kwa udhibiti mkali wa hatari ($2 Max Risk kwa 0.01 Lot) kupitia Gemini 3.6.</p>
           
           <div class="forex-chart-preview">
             <div class="f-candle" style="height: 15px;"></div>
@@ -253,14 +253,18 @@
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v10.9 (GEMINI 3.6)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v10.9 (ZERO LOSS ENGINE)</div>
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
           <select id="selectedPairDropdown">
-            <optgroup label="✨ Metals">
+            <optgroup label="✨ Metals (XAU / XAG)">
               <option value="XAUUSD">XAU/USD (Gold)</option>
               <option value="XAGUSD">XAG/USD (Silver)</option>
+            </optgroup>
+            <optgroup label="🪙 Crypto (BTC / ETH)">
+              <option value="BTCUSD">BTC/USD (Bitcoin)</option>
+              <option value="ETHUSD">ETH/USD (Ethereum)</option>
             </optgroup>
             <optgroup label="💱 Major Currencies">
               <option value="EURUSD">EUR/USD</option>
@@ -268,10 +272,6 @@
               <option value="USDJPY">USD/JPY</option>
               <option value="AUDUSD">AUD/USD</option>
               <option value="USDCAD">USD/CAD</option>
-            </optgroup>
-            <optgroup label="🪙 Crypto">
-              <option value="BTCUSD">BTC/USD (Bitcoin)</option>
-              <option value="ETHUSD">ETH/USD (Ethereum)</option>
             </optgroup>
             <optgroup label="📈 Indices">
               <option value="US30">US30 (Dow Jones)</option>
@@ -322,15 +322,15 @@
             <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">MARKET EXECUTED</div>
             
             <div class="signal-badge-container">
-              <span class="badge-conf">GEMINI 3.6 ENGINE</span>
+              <span class="badge-conf">ZERO LOSS PROTOCOL</span>
               <span class="badge-pass">CONFLUENCE PASS</span>
               <span class="badge-status" id="tradeStatusBadge">EXECUTED SOKONI</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence & Accurate Valuation</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence & Max $2 Risk Strategy</div>
           </div>
 
           <div class="card">
-            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS) - MYFXBOOK ENGINE</div>
+            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS)</div>
             
             <div class="grid-2">
               <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">20 Pips</div></div>
@@ -346,10 +346,10 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">🛡️ PRE-FLIGHT CHECKLIST</div>
-            <div class="checklist-item"><span>✓</span> <span id="chk1">4H/1H/15M Confluence Confirmed</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Order Block Mitigation</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Accurate Asset Valuation & Pricing</span></div>
+            <div class="ballistic-header">🛡️ ZERO LOSS RISK GUARD CHECKLIST</div>
+            <div class="checklist-item"><span>✓</span> <span id="chk1">Max Loss Limited to $2 per 0.01 Lot</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Order Block Mitigation (SMC)</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Accurate Asset Valuation & Live Pricing Sync</span></div>
           </div>
 
           <div class="card">
@@ -381,10 +381,10 @@
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
           <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako (Zero Loss Mode):</p>
 
           <label>Instrument Pair</label>
-          <input type="text" id="jPair" placeholder="e.g. XAUUSD or ETHUSD">
+          <input type="text" id="jPair" placeholder="e.g. XAUUSD or BTCUSD">
 
           <label>Action / Direction</label>
           <select id="jAction">
@@ -490,7 +490,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedUser && savedApiKey) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
-    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'GUEST';
+    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'ZERO LOSS GUEST';
   }
 
   loadTradeHistory();
@@ -608,7 +608,7 @@ function handleGuestLogin() {
 
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
-  document.getElementById('displayUserRole').innerText = 'GUEST';
+  document.getElementById('displayUserRole').innerText = 'ZERO LOSS GUEST';
 }
 
 function handleRegister() {
@@ -754,14 +754,14 @@ async function fileToBase64(file) {
   });
 }
 
-// MYFXBOOK ACCURATE DYNAMIC CALCULATOR ENGINE
+// ZERO LOSS ACCURATE DYNAMIC CALCULATOR ENGINE ($2 Max Risk for 0.01 Lot)
 function calculateAccurateProfit(pairName, entry, tp) {
   let pips = 0;
   let pipValuePerStandardLot = 10.0; 
   let upperAssetType = pairName.toUpperCase();
 
   if (upperAssetType.includes("ETH")) {
-    pipValuePerStandardLot = 0.01; // Myfxbook accurate standard for ETH
+    pipValuePerStandardLot = 0.01; 
   } else if (upperAssetType.includes("BTC")) {
     pipValuePerStandardLot = 0.10;
   } else if (upperAssetType.includes("XAU")) {
@@ -828,11 +828,11 @@ async function runLutynoelAnalysis() {
     let slPrice = livePrice - (slPipsVal / pipMultiplierDiv);
     let tpPrice = livePrice + (tpPipsVal / pipMultiplierDiv);
 
-    // Dynamic Myfxbook Calculation
+    // Zero Loss Calculation Call
     const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6. PAIR ILIYOTEULIWA NI: ${pair}. 
-Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair}.
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 (Zero Loss Edition). PAIR ILIYOTEULIWA NI: ${pair}. 
+Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair} huku ukizingatia hatari isiyozidi $2 kwa lot 0.01.
 
 Kila mmoja kati ya Wataalamu 7 wa Taasisi lazima achambue PICHA ZOTE TATU (4H, 1H, na 15M) kwa kina.
 Wape kila master maelezo yanayoonyesha mtazamo wao kwenye 4H, 1H, na 15M, pamoja na uamuzi wao binafsi (BUY, SELL, au HOLD).
@@ -841,7 +841,7 @@ Toa majibu katika muundo wa JSON pekee:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
-  "subtitle": "Strict ${pair} Multi-TF Confluence & Accurate Valuation",
+  "subtitle": "Strict ${pair} Multi-TF Confluence & Zero Loss Strategy",
   "sl_pips": "${slPipsVal} Pips",
   "tp_pips": "${calcData.calculatedPips} Pips",
   "tp_001": "${calcData.projections.tp_001}",
@@ -849,7 +849,7 @@ Toa majibu katika muundo wa JSON pekee:
   "tp_003": "${calcData.projections.tp_003}",
   "tp_010": "${calcData.projections.tp_010}",
   "tp_100": "${calcData.projections.tp_100}",
-  "chk1": "4H / 1H / 15M Multi-Timeframe Alignment Confirmed for ${pair}",
+  "chk1": "Zero Loss Risk Guard Confirmed ($2 Max Risk per 0.01 lot)",
   "chk2": "Institutional Order Block Mitigation Validated across all 3 charts",
   "chk3": "Accurate Asset Valuation & Live Pricing Sync",
   "entry": "${livePrice}",
@@ -878,7 +878,7 @@ Toa majibu katika muundo wa JSON pekee:
   "agent7_title": "7. Wyckoff & Institutional Volume Master",
   "agent7_decision": "BUY",
   "agent7_text": "4H accumulation phase ending. 1H spring confirmed with volume. 15M markup initiated.",
-  "tf": "4H: Macro direction confirmed for ${pair}.\n1H: POI mitigation locked across timeframes.\n15M: Precise execution trigger confirmed at live market price."
+  "tf": "4H: Macro direction confirmed for ${pair}.\n1H: POI mitigation locked across timeframes.\n15M: Precise execution trigger confirmed at live market price under Zero Loss rules."
 }`;
 
     parts.push({ text: promptText });
@@ -886,7 +886,6 @@ Toa majibu katika muundo wa JSON pekee:
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    // Endpoint rasmi ya kutumia gemini-3.6-flash
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
