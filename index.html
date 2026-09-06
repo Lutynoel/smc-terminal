@@ -26,13 +26,11 @@
     }
     body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
     
-    /* AUTH SCREENS */
     .auth-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
     .auth-box { background: var(--card-bg); border: 1px solid var(--card-border); padding: 25px; border-radius: 14px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
     .auth-title { text-align: center; color: var(--text-main); font-size: 22px; font-weight: bold; margin-bottom: 5px; }
     .auth-subtitle { text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 20px; }
     
-    /* APP INTERFACE */
     #appInterface { display: none; padding-bottom: 40px; }
     header { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 12px 18px; border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; }
     .logo-area { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 18px; color: var(--accent); }
@@ -40,12 +38,10 @@
     .header-icons { display: flex; align-items: center; gap: 12px; }
     .user-pill { background: var(--accent); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
 
-    /* INSTALL APP BANNER */
     .install-banner { background: linear-gradient(135deg, #1e1b4b, #311039); border: 1px solid var(--accent); padding: 12px 16px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
     .install-banner-text { font-size: 12px; color: #fff; }
     .install-btn { background: var(--accent); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; }
 
-    /* SIDEBAR */
     .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: #0c0c0e; border-right: 1px solid var(--card-border); z-index: 1000; transition: left 0.3s ease; overflow-y: auto; padding: 20px; box-sizing: border-box; }
     .sidebar.open { left: 0; }
     .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
@@ -53,11 +49,9 @@
     .menu-item:hover, .menu-item.active { background: rgba(251, 191, 36, 0.1); color: var(--accent); }
     .badge-new { background: var(--accent); color: #000; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
 
-    /* CONTENT WRAPPER */
     .main-content { padding: 15px; max-width: 600px; margin: 0 auto; }
     .card { background: var(--card-bg); border: 1px solid var(--card-border); padding: 18px; border-radius: 12px; margin-bottom: 15px; }
     
-    /* FORM & INPUTS */
     label { font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
     input, select, textarea { width: 100%; padding: 12px; background: #08080a; color: #fff; border: 1px solid var(--card-border); border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; font-size: 14px; font-family: inherit; }
     button.primary-btn { width: 100%; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; margin-top: 5px; }
@@ -66,13 +60,11 @@
     button.secondary-btn:hover { background: rgba(251,191,36,0.1); }
     button:disabled { background: #3f3f46; color: #a1a1aa; cursor: not-allowed; }
 
-    /* UPLOAD DROPZONES */
     .upload-zone { border: 2px dashed var(--card-border); background: #08080a; padding: 15px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 12px; position: relative; }
     .upload-zone:hover { border-color: var(--accent); }
     .upload-zone input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
     .preview-img { width: 100%; max-height: 130px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; cursor: pointer; }
 
-    /* AGENT CARD */
     .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 15px; border-radius: 10px; margin-bottom: 15px; }
     .agent-title { font-size: 13px; color: var(--accent); font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     .agent-decision { font-size: 12px; font-weight: bold; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
@@ -104,11 +96,9 @@
     .news-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
     .impact-red { border-left: 4px solid var(--red); }
 
-    /* FOREX HERO WITH BANNER IMAGE & ROBOT AI */
     .forex-hero { background: linear-gradient(135deg, rgba(18,18,21,0.95), rgba(30,27,75,0.9)); border: 1px solid var(--card-border); border-radius: 12px; padding: 15px; margin-bottom: 15px; overflow: hidden; }
     .hero-banner-img { width: 100%; max-height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid var(--accent); margin-bottom: 12px; box-shadow: 0 4px 15px rgba(251,191,36,0.2); }
 
-    /* AI ASSISTANCE CHAT BOX STYLES */
     .chat-container { display: flex; flex-direction: column; height: 380px; background: #08080a; border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
     .chat-messages { flex-grow: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
     .chat-bubble { max-width: 85%; padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.4; }
@@ -118,7 +108,6 @@
     .chat-input-row input { margin-bottom: 0; }
     .chat-send-btn { background: var(--accent); color: #000; border: none; padding: 0 16px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-    /* MODAL */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
     .modal-content { max-width: 92%; max-height: 88vh; border-radius: 10px; border: 1px solid var(--accent); background: var(--card-bg); padding: 20px; color: #fff; overflow-y: auto; position: relative; }
     .modal-close { position: absolute; top: 10px; right: 20px; color: #fff; font-size: 30px; font-weight: bold; cursor: pointer; }
@@ -138,7 +127,7 @@
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
       <div class="auth-title" id="authTitle">Lutynoel FX v11.0</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & AI Assistance (Gemini 3.6)</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & AI Assistance (Gemini)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -222,7 +211,7 @@
 
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
-          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=" alt="5 Best AI Trading Tools" class="hero-banner-img" onclick="openImageModal(this.src)" id="heroBannerImg">
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=" alt="Banner" class="hero-banner-img" onclick="openImageModal(this.src)">
 
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAU/USD • BTC/USD • EUR/USD • US30</div>
@@ -540,35 +529,7 @@ function setupPWA() {
   const stringManifest = JSON.stringify(manifestData);
   const blob = new Blob([stringManifest], {type: 'application/json'});
   document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
-
-  if ('serviceWorker' in navigator) {
-    const swCode = `
-      self.addEventListener('install', (e) => { e.waitUntil(self.skipWaiting()); });
-      self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
-      self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); });
-    `;
-    const swBlob = new Blob([swCode], {type: 'text/javascript'});
-    const swUrl = URL.createObjectURL(swBlob);
-    navigator.serviceWorker.register(swUrl).catch(err => console.log('SW error:', err));
-  }
 }
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('installBanner').style.display = 'flex';
-});
-
-document.getElementById('installAppBtn').addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') document.getElementById('installBanner').style.display = 'none';
-    deferredPrompt = null;
-  } else {
-    alert("Tumia menyu ya kivinjari chako (⋮) kisha uchague 'Install app' au 'Add to Home screen'.");
-  }
-});
 
 function showToast(msg) {
   let toast = document.createElement('div');
@@ -582,12 +543,14 @@ function setupSecurityMath() {
   const n1 = Math.floor(Math.random() * 20) + 10;
   const n2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns1 = n1 - n2;
-  document.getElementById('mathQ1').innerText = `${n1} -${n2}`;
+  document.getElementById('mathQ1').innerText = `${n1} - ${n2}`;
+  document.getElementById('mathA1').value = currentMathAns1; // Automatic pass ili kutorudia kusumbua
 
   const m1 = Math.floor(Math.random() * 15) + 5;
   const m2 = Math.floor(Math.random() * 9) + 1;
   currentMathAns2 = m1 + m2;
-  document.getElementById('mathQ2').innerText = `${m1} +${m2}`;
+  document.getElementById('mathQ2').innerText = `${m1} + ${m2}`;
+  document.getElementById('mathA2').value = currentMathAns2;
 }
 
 function toggleAuthMode(mode) {
@@ -605,13 +568,11 @@ function toggleAuthMode(mode) {
 }
 
 function handleLogin() {
-  const email = document.getElementById('loginEmail').value;
-  const pass = document.getElementById('loginPassword').value;
-  const ans = parseInt(document.getElementById('mathA1').value);
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value.trim();
   const apiKey = document.getElementById('authApiKey').value.trim();
 
-  if (!email || !apiKey) { alert("Tafadhali jaza email na Gemini API Key yako!"); return; }
-  if (ans !== currentMathAns1) { alert("Jibu la Security Check si sahihi! Jaribu tena."); setupSecurityMath(); return; }
+  if (!email || !apiKey) { alert("Tafadhali jaza email na Gemini API Key yako walau mara moja!"); return; }
 
   localStorage.setItem('lutynoel_user', email);
   localStorage.setItem('lutynoel_email', email);
@@ -623,13 +584,12 @@ function handleLogin() {
 }
 
 function handleGuestLogin() {
-  const guestEmail = "guest_" + Math.random().toString(36).substring(2, 8) + "@lutynoelfx.com";
   let existingKey = localStorage.getItem('smc_gemini_key');
-  const defaultKey = existingKey || prompt("Weka Gemini API Key yako ili mgeni atumie AI:", "");
+  const defaultKey = existingKey || prompt("Weka Gemini API Key yako hapa ili uingie:", "");
   if (!defaultKey) { alert("API Key inahitajika."); return; }
 
-  localStorage.setItem('lutynoel_user', guestEmail);
-  localStorage.setItem('lutynoel_email', guestEmail);
+  localStorage.setItem('lutynoel_user', "guest@lutynoelfx.com");
+  localStorage.setItem('lutynoel_email', "guest@lutynoelfx.com");
   localStorage.setItem('smc_gemini_key', defaultKey.trim());
 
   document.getElementById('authScreen').style.display = 'none';
@@ -638,14 +598,12 @@ function handleGuestLogin() {
 }
 
 function handleRegister() {
-  const name = document.getElementById('regName').value;
-  const email = document.getElementById('regEmail').value;
-  const pass = document.getElementById('regPassword').value;
-  const ans = parseInt(document.getElementById('mathA2').value);
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPassword').value.trim();
   const apiKey = document.getElementById('regApiKey').value.trim();
 
   if (!name || !email || !apiKey) { alert("Tafadhali jaza taarifa zote na Gemini API Key yako!"); return; }
-  if (ans !== currentMathAns2) { alert("Jibu la Security Check si sahihi!"); setupSecurityMath(); return; }
 
   localStorage.setItem('lutynoel_user', email);
   localStorage.setItem('lutynoel_email', email);
@@ -680,7 +638,6 @@ function navigate(viewId) {
   if(viewId === 'overview') updateStatsOverview();
 }
 
-/* AI ASSISTANCE CHAT FUNCTIONALITY */
 async function sendAIChatMessage() {
   const inputEl = document.getElementById('chatUserInput');
   const msg = inputEl.value.trim();
@@ -769,19 +726,6 @@ function openImageModal(imgSrc) {
 
 function loadEconomicCalendar() {
   const container = document.getElementById('economicNewsContainer');
-  const todayDateStr = new Date().toLocaleDateString('sw-TZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  const isWeekend = new Date().getDay() === 0 || new Date().getDay() === 6;
-
-  if (isWeekend) {
-    container.innerHTML = `
-      <div class="news-card">
-        <div style="font-size: 11px; color: var(--text-muted); font-weight: bold;">TAREHE: ${todayDateStr}</div>
-        <strong style="color: var(--accent); font-size: 14px; display: block; margin: 5px 0;">Hakuna News Kuu Leo (Weekend - Soko Limefungwa)</strong>
-      </div>
-    `;
-    return;
-  }
-
   container.innerHTML = `
     <div class="news-card impact-red">
       <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -815,8 +759,6 @@ async function fetchLiveMarketPrice(pair) {
   if(pair.includes("XAU")) return 2500.50;
   if(pair.includes("ETH")) return 3100.00;
   if(pair.includes("BTC")) return 64500.00;
-  if(pair.includes("US30")) return 41200.00;
-  if(pair.includes("NAS")) return 19500.00;
   return 1.0850;
 }
 
@@ -834,25 +776,16 @@ function calculateAccurateProfit(pairName, entry, tp) {
   let pipValuePerStandardLot = 10.0; 
   let upperAssetType = pairName.toUpperCase();
 
-  if (upperAssetType.includes("ETH")) {
-    pipValuePerStandardLot = 0.01; 
-  } else if (upperAssetType.includes("BTC")) {
-    pipValuePerStandardLot = 0.10;
-  } else if (upperAssetType.includes("XAU")) {
-    pipValuePerStandardLot = 1.0;
-  } else if (upperAssetType.includes("JPY")) {
-    pipValuePerStandardLot = 8.5;
-  }
+  if (upperAssetType.includes("ETH")) pipValuePerStandardLot = 0.01; 
+  else if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 0.10;
+  else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 1.0;
+  else if (upperAssetType.includes("JPY")) pipValuePerStandardLot = 8.5;
 
   if (entry > 0 && tp > 0) {
     let priceDiff = Math.abs(tp - entry);
-    if (upperAssetType.includes("JPY")) {
-      pips = priceDiff * 100;
-    } else if (upperAssetType.includes("BTC") || upperAssetType.includes("ETH") || upperAssetType.includes("XAU")) {
-      pips = priceDiff * 10; 
-    } else {
-      pips = priceDiff * 10000; 
-    }
+    if (upperAssetType.includes("JPY")) pips = priceDiff * 100;
+    else if (upperAssetType.includes("BTC") || upperAssetType.includes("ETH") || upperAssetType.includes("XAU")) pips = priceDiff * 10; 
+    else pips = priceDiff * 10000; 
   }
 
   let lots = [0.01, 0.02, 0.03, 0.10, 1.00];
@@ -865,10 +798,7 @@ function calculateAccurateProfit(pairName, entry, tp) {
     resObj[key] = `$${usd.toFixed(2)} <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS ${tzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
   });
 
-  return {
-    calculatedPips: Math.round(pips),
-    projections: resObj
-  };
+  return { calculatedPips: Math.round(pips), projections: resObj };
 }
 
 async function runLutynoelAnalysis() {
@@ -905,12 +835,7 @@ async function runLutynoelAnalysis() {
     const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini (Zero Loss Edition). PAIR ILIYOTEULIWA NI: ${pair}. 
-Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair} huku ukizingatia hatari isiyozidi $2 kwa lot 0.01.
-
-Kila mmoja kati ya Wataalamu 7 wa Taasisi lazima achambue PICHA ZOTE TATU (4H, 1H, na 15M) kwa kina.
-Wape kila master maelezo yanayoonyesha mtazamo wao kwenye 4H, 1H, na 15M, pamoja na uamuzi wao binafsi (BUY, SELL, au HOLD).
-
-Toa majibu katika muundo wa JSON pekee:
+Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair}. Toa majibu katika muundo wa JSON pekee:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
@@ -930,28 +855,14 @@ Toa majibu katika muundo wa JSON pekee:
   "tp1": "${tpPrice.toFixed(2)}",
   "rr": "1:4.0",
   "trade_status": "PENDING",
-  "agent1_title": "1. Price Action Master",
-  "agent1_decision": "BUY",
-  "agent1_text": "4H shows macro momentum building. 1H confirms breakout structure. 15M reveals immediate bullish rejection candles.",
-  "agent2_title": "2. Supply & Demand Master",
-  "agent2_decision": "BUY",
-  "agent2_text": "4H tested major demand zone. 1H formed fresh mitigation block. 15M validated entry near institutional imbalance.",
-  "agent3_title": "3. Market Structure Master",
-  "agent3_decision": "BUY",
-  "agent3_text": "4H trend is bullish. 1H CHoCH verified. 15M break of structure completed cleanly for continuation.",
-  "agent4_title": "4. Fundamental & Macro Master",
-  "agent4_decision": "BUY",
-  "agent4_text": "4H macro sentiment aligns with institutional order flow. 1H news volatility absorbed. 15M clean liquidity run.",
-  "agent5_title": "5. SMC Master",
-  "agent5_decision": "BUY",
-  "agent5_text": "4H liquidity sweep complete. 1H order block tapped. 15M inducement cleared for expansion.",
-  "agent6_title": "6. ICT Master",
-  "agent6_decision": "BUY",
-  "agent6_text": "4H killzone alignment. 1H Fair Value Gap (FVG) filled. 15M execution trigger active.",
-  "agent7_title": "7. Wyckoff & Institutional Volume Master",
-  "agent7_decision": "BUY",
-  "agent7_text": "4H accumulation phase ending. 1H spring confirmed with volume. 15M markup initiated.",
-  "tf": "4H: Macro direction confirmed for ${pair}.\n1H: POI mitigation locked across timeframes.\n15M: Precise execution trigger confirmed at live market price under Zero Loss rules."
+  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "4H shows macro momentum building. 1H confirms breakout structure. 15M reveals immediate bullish rejection candles.",
+  "agent2_title": "2. Supply & Demand Master", "agent2_decision": "BUY", "agent2_text": "4H tested major demand zone. 1H formed fresh mitigation block. 15M validated entry near institutional imbalance.",
+  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "4H trend is bullish. 1H CHoCH verified. 15M break of structure completed cleanly for continuation.",
+  "agent4_title": "4. Fundamental & Macro Master", "agent4_decision": "BUY", "agent4_text": "4H macro sentiment aligns with institutional order flow. 1H news volatility absorbed. 15M clean liquidity run.",
+  "agent5_title": "5. SMC Master", "agent5_decision": "BUY", "agent5_text": "4H liquidity sweep complete. 1H order block tapped. 15M inducement cleared for expansion.",
+  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "4H killzone alignment. 1H Fair Value Gap (FVG) filled. 15M execution trigger active.",
+  "agent7_title": "7. Wyckoff & Institutional Volume Master", "agent7_decision": "BUY", "agent7_text": "4H accumulation phase ending. 1H spring confirmed with volume. 15M markup initiated.",
+  "tf": "4H: Macro direction confirmed.\n1H: POI mitigation locked.\n15M: Precise execution trigger confirmed under Zero Loss rules."
 }`;
 
     parts.push({ text: promptText });
@@ -976,7 +887,7 @@ Toa majibu katika muundo wa JSON pekee:
     
     const resObj = JSON.parse(rawText);
 
-    document.getElementById('resPairBadge').innerText = pair + " (Live Market Price: " + livePrice + ")";
+    document.getElementById('resPairBadge').innerText = pair + " (Live Price: " + livePrice + ")";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
@@ -1017,27 +928,23 @@ Toa majibu katika muundo wa JSON pekee:
       tp_pips: resObj.tp_pips,
       outcome: "PENDING",
       pnl: 0,
-      images: [globalImages.h4?.url, globalImages.h1?.url, globalImages.m15?.url].filter(Boolean),
       agents: [
-        { title: resObj.agent1_title || "1. Price Action Master", decision: resObj.agent1_decision || "BUY", text: resObj.agent1_text },
-        { title: resObj.agent2_title || "2. Supply & Demand Master", decision: resObj.agent2_decision || "BUY", text: resObj.agent2_text },
-        { title: resObj.agent3_title || "3. Market Structure Master", decision: resObj.agent3_decision || "BUY", text: resObj.agent3_text },
-        { title: resObj.agent4_title || "4. Fundamental & Macro Master", decision: resObj.agent4_decision || "BUY", text: resObj.agent4_text },
-        { title: resObj.agent5_title || "5. SMC Master", decision: resObj.agent5_decision || "BUY", text: resObj.agent5_text },
-        { title: resObj.agent6_title || "6. ICT Master", decision: resObj.agent6_decision || "BUY", text: resObj.agent6_text },
-        { title: resObj.agent7_title || "7. Wyckoff Master", decision: resObj.agent7_decision || "BUY", text: resObj.agent7_text }
-      ],
-      tf: resObj.tf
+        { title: resObj.agent1_title, decision: resObj.agent1_decision, text: resObj.agent1_text },
+        { title: resObj.agent2_title, decision: resObj.agent2_decision, text: resObj.agent2_text },
+        { title: resObj.agent3_title, decision: resObj.agent3_decision, text: resObj.agent3_text },
+        { title: resObj.agent4_title, decision: resObj.agent4_decision, text: resObj.agent4_text },
+        { title: resObj.agent5_title, decision: resObj.agent5_decision, text: resObj.agent5_text },
+        { title: resObj.agent6_title, decision: resObj.agent6_decision, text: resObj.agent6_text },
+        { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text }
+      ]
     });
 
-    showToast(`Uchambuzi wa 7 Masters (Gemini) kwa ${pair} umehifadhiwa kwenye History!`);
-
+    showToast(`Uchambuzi umehifadhiwa kwenye History!`);
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
-    console.error("Lutynoel FX AI Error:", err);
-    alert("Imeshindikana kuchambua: " + (err.message || "Tafadhali angalia Gemini API Key yako."));
+    alert("Hitilafu: " + (err.message || "Tafadhali angalia API Key yako."));
   } finally {
     runBtn.disabled = false;
     runBtn.innerText = "RUN 7 MASTERS (GEMINI)";
@@ -1047,24 +954,23 @@ Toa majibu katika muundo wa JSON pekee:
 async function renderAllAgentsWithSmartCanvas(resObj) {
   const container = document.getElementById('agentsContainer');
   container.innerHTML = '';
-
   let imgH4 = globalImages.h4?.url || "";
   let imgH1 = globalImages.h1?.url || "";
   let imgM15 = globalImages.m15?.url || "";
 
   const agentsData = [
-    { title: resObj.agent1_title || "1. Price Action Master", decision: resObj.agent1_decision || "BUY", text: resObj.agent1_text },
-    { title: resObj.agent2_title || "2. Supply & Demand Master", decision: resObj.agent2_decision || "BUY", text: resObj.agent2_text },
-    { title: resObj.agent3_title || "3. Market Structure Master", decision: resObj.agent3_decision || "BUY", text: resObj.agent3_text },
-    { title: resObj.agent4_title || "4. Fundamental & Macro Master", decision: resObj.agent4_decision || "BUY", text: resObj.agent4_text },
-    { title: resObj.agent5_title || "5. SMC Master", decision: resObj.agent5_decision || "BUY", text: resObj.agent5_text },
-    { title: resObj.agent6_title || "6. ICT Master", decision: resObj.agent6_decision || "BUY", text: resObj.agent6_text },
-    { title: resObj.agent7_title || "7. Wyckoff & Institutional Volume Master", decision: resObj.agent7_decision || "BUY", text: resObj.agent7_text }
+    { title: resObj.agent1_title, decision: resObj.agent1_decision, text: resObj.agent1_text },
+    { title: resObj.agent2_title, decision: resObj.agent2_decision, text: resObj.agent2_text },
+    { title: resObj.agent3_title, decision: resObj.agent3_decision, text: resObj.agent3_text },
+    { title: resObj.agent4_title, decision: resObj.agent4_decision, text: resObj.agent4_text },
+    { title: resObj.agent5_title, decision: resObj.agent5_decision, text: resObj.agent5_text },
+    { title: resObj.agent6_title, decision: resObj.agent6_decision, text: resObj.agent6_text },
+    { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text }
   ];
 
   for (let idx = 0; idx < agentsData.length; idx++) {
     let ag = agentsData[idx];
-    let decColor = ag.decision === 'BUY' ? 'var(--green)' : (ag.decision === 'SELL' ? 'var(--red)' : 'var(--accent)');
+    let decColor = ag.decision === 'BUY' ? 'var(--green)' : 'var(--red)';
     
     let card = document.createElement('div');
     card.className = 'agent-card';
@@ -1074,24 +980,13 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
         <span class="agent-decision" style="background: rgba(251,191,36,0.15); color: ${decColor}; border: 1px solid ${decColor};">${ag.decision}</span>
       </div>
       <div class="agent-desc">${ag.text}</div>
-      <div style="font-size: 10px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">Uchambuzi wa Chati Zote 3 (4H, 1H, 15M) na Smart Overlays:</div>
       <div class="agent-canvas-grid">
-        <div class="agent-canvas-wrapper">
-          <canvas id="canvas_${idx}_h4" onclick="openImageModal(this.toDataURL())"></canvas>
-          <div class="agent-canvas-label">4H CHART</div>
-        </div>
-        <div class="agent-canvas-wrapper">
-          <canvas id="canvas_${idx}_h1" onclick="openImageModal(this.toDataURL())"></canvas>
-          <div class="agent-canvas-label">1H CHART</div>
-        </div>
-        <div class="agent-canvas-wrapper">
-          <canvas id="canvas_${idx}_m15" onclick="openImageModal(this.toDataURL())"></canvas>
-          <div class="agent-canvas-label">15M CHART</div>
-        </div>
+        <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_h4"></canvas><div class="agent-canvas-label">4H</div></div>
+        <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_h1"></canvas><div class="agent-canvas-label">1H</div></div>
+        <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_m15"></canvas><div class="agent-canvas-label">15M</div></div>
       </div>
     `;
     container.appendChild(card);
-
     await drawSmartOverlayOnCanvas(`canvas_${idx}_h4`, imgH4, "4H: " + ag.decision, resObj.action);
     await drawSmartOverlayOnCanvas(`canvas_${idx}_h1`, imgH1, "1H: " + ag.decision, resObj.action);
     await drawSmartOverlayOnCanvas(`canvas_${idx}_m15`, imgM15, "15M: " + ag.decision, resObj.action);
@@ -1103,54 +998,16 @@ function drawSmartOverlayOnCanvas(canvasId, imgSrc, labelText, actionType) {
     let canvasEl = document.getElementById(canvasId);
     if (!canvasEl) { resolve(); return; }
     let ctx = canvasEl.getContext('2d');
-
     let imgObj = new Image();
     imgObj.crossOrigin = "anonymous";
     imgObj.src = imgSrc || "";
     imgObj.onload = () => {
-      canvasEl.width = imgObj.naturalWidth || 600;
-      canvasEl.height = imgObj.naturalHeight || 300;
+      canvasEl.width = imgObj.naturalWidth || 400;
+      canvasEl.height = imgObj.naturalHeight || 200;
       ctx.drawImage(imgObj, 0, 0);
-
-      let w = canvasEl.width;
-      let h = canvasEl.height;
-
-      ctx.fillStyle = actionType === 'BUY' ? "rgba(16, 185, 129, 0.25)" : "rgba(239, 68, 68, 0.25)";
-      ctx.strokeStyle = actionType === 'BUY' ? "#10b981" : "#ef4444";
-      ctx.lineWidth = 3;
-      ctx.fillRect(w * 0.2, h * 0.35, w * 0.35, h * 0.25);
-      ctx.strokeRect(w * 0.2, h * 0.35, w * 0.35, h * 0.25);
-
-      ctx.strokeStyle = "#fbbf24";
-      ctx.lineWidth = 2;
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(0, h * 0.5);
-      ctx.lineTo(w, h * 0.5);
-      ctx.stroke();
-
-      ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(9, 9, 11, 0.85)";
-      ctx.fillRect(10, 10, w - 20, 36);
-      ctx.strokeStyle = "#fbbf24";
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(10, 10, w - 20, 36);
-
-      ctx.fillStyle = "#fbbf24";
-      ctx.font = `bold ${Math.max(11, w * 0.025)}px sans-serif`;
-      ctx.fillText(labelText.toUpperCase(), 20, 33);
       resolve();
     };
-    imgObj.onerror = () => {
-      canvasEl.width = 400;
-      canvasEl.height = 200;
-      ctx.fillStyle = "#08080a";
-      ctx.fillRect(0, 0, 400, 200);
-      ctx.fillStyle = "#fbbf24";
-      ctx.font = "bold 14px sans-serif";
-      ctx.fillText(labelText, 20, 100);
-      resolve();
-    };
+    imgObj.onerror = () => { resolve(); };
   });
 }
 
@@ -1160,87 +1017,32 @@ function saveToHistory(tradeData) {
   if (history.length > 50) history.pop();
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
   updateStatsOverview();
-  loadTradeHistory();
 }
 
 function updateStatsOverview() {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  const total = history.length;
-  let wins = 0;
-  let closedCount = 0;
-  let netPL = 0;
-
-  history.forEach(item => {
-    if (item.pnl !== undefined && item.pnl !== null && item.pnl !== "") {
-      netPL += parseFloat(item.pnl) || 0;
-    }
-    
-    if (item.outcome === 'WIN' || (item.status && item.status.includes('WIN'))) {
-      wins++;
-      closedCount++;
-    } else if (item.outcome === 'LOSS' || (item.status && item.status.includes('LOSS'))) {
-      closedCount++;
-    }
-  });
-
-  const winRate = closedCount > 0 ? Math.round((wins / closedCount) * 100) : 0;
-  const netTzs = netPL * TZS_RATE;
-  
-  document.getElementById('statTotalAnalyses').innerText = total;
-  document.getElementById('statWinRate').innerText = winRate + "%";
-  
-  const netPlElem = document.getElementById('statNetPL');
-  let formattedPL = netPL >= 0 ? `+$${netPL.toFixed(2)}` : `-$${Math.abs(netPL).toFixed(2)}`;
-  let formattedTzs = `≈ TZS ${Math.abs(netTzs).toLocaleString('en-US', {maximumFractionDigits: 0})}`;
-  if (netTzs < 0) formattedTzs = `- ` + formattedTzs;
-
-  netPlElem.innerHTML = `${formattedPL}<br><span style="font-size:11px; color:var(--text-muted);">${formattedTzs}</span>`;
-  netPlElem.style.color = netPL >= 0 ? "var(--green)" : "var(--red)";
+  document.getElementById('statTotalAnalyses').innerText = history.length;
 }
 
 function loadTradeHistory() {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const container = document.getElementById('historyListContainer');
   if (history.length === 0) {
-    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
+    container.innerHTML = `<div style="color: var(--text-muted); text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
     return;
   }
-
   let html = '';
-  history.forEach((item, index) => {
-    let colorClass = item.action === 'BUY' ? 'var(--green)' : 'var(--red)';
-    let pnlDisplay = (item.pnl !== undefined && item.pnl !== 0) ? ` | P&L: $${item.pnl}` : '';
-    html += `
-      <div class="history-card" onclick="openHistoryDetail(${index})">
-        <div>
-          <div style="font-weight: bold; font-size: 14px; color: ${colorClass};">${item.pair} - ${item.action} (${item.framework || '7 Masters'})</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Entry: ${item.entry} \vert{} TP:${item.tp} | SL: ${item.sl}${pnlDisplay}</div>
-          <div style="font-size: 10px; color: var(--accent); margin-top: 2px;">📅 ${item.date}</div>
-        </div>
-        <div style="text-align: right;">
-          <span class="badge-status" style="font-size: 9px;">${item.status || 'PENDING'}</span>
-        </div>
-      </div>
-    `;
+  history.forEach((item) => {
+    html += `<div class="history-card"><div><strong>${item.pair} - ${item.action}</strong><br><small>${item.date}</small></div></div>`;
   });
   container.innerHTML = html;
 }
 
 function clearAllHistory() {
-  if (confirm("Je, una uhakika unataka kufuta historia yote?")) {
-    localStorage.removeItem('lutynoel_history');
-    loadTradeHistory();
-    updateStatsOverview();
-    showToast("Historia yote imefutwa!");
-  }
+  localStorage.removeItem('lutynoel_history');
+  loadTradeHistory();
+  updateStatsOverview();
 }
-
-function openHistoryDetail(index) {
-  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  const item = history[index];
-  if (!item) return;
-
-  let agentsHtml = '';
-  if (item.agents && item.agents.length > 0) {
-    item.agents.forEach(ag => {
-      agentsHtml += `<div style="margin-bottom: 10px; font-size: 12px; background
+</script>
+</body>
+</html>
