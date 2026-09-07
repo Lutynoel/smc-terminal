@@ -481,7 +481,7 @@
             <h3 style="margin: 0;">Trade History Archive</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita (Bonyeza kadi kuona maelezo):</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>
           </div>
@@ -1073,7 +1073,12 @@ function drawSmartOverlayOnCanvas(canvasId, imgSrc, labelText, actionType) {
 }
 
 function saveToHistory(tradeData) {
-  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  } catch(e) {
+    history = [];
+  }
   history.unshift(tradeData);
   if (history.length > 50) history.pop();
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
@@ -1081,28 +1086,89 @@ function saveToHistory(tradeData) {
 }
 
 function updateStatsOverview() {
-  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  document.getElementById('statTotalAnalyses').innerText = history.length;
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  } catch(e) {
+    history = [];
+  }
+  const totalEl = document.getElementById('statTotalAnalyses');
+  if(totalEl) totalEl.innerText = history.length;
 }
 
 function loadTradeHistory() {
-  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const container = document.getElementById('historyListContainer');
+  if(!container) return;
+  
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  } catch (e) {
+    localStorage.removeItem('lutynoel_history');
+    history = [];
+  }
+  
   if (history.length === 0) {
-    container.innerHTML = `<div style="color: var(--text-muted); text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
+    container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
     return;
   }
+  
   let html = '';
-  history.forEach((item) => {
-    html += `<div class="history-card"><div><strong>${item.pair} - ${item.action}</strong><br><small>${item.date}</small></div></div>`;
+  history.forEach((item, index) => {
+    let outcomeColor = item.outcome === 'WIN' ? 'var(--green)' : (item.outcome === 'LOSS' ? 'var(--red)' : 'var(--accent)');
+    html += `
+      <div class="history-card" onclick="openHistoryDetails(${index})" style="cursor: pointer;">
+        <div>
+          <strong>${item.pair || 'XAUUSD'} - ${item.action || 'BUY'}</strong><br>
+          <small style="color: var(--text-muted);">${item.date || ''} | ${item.framework || 'Manual'}</small>
+        </div>
+        <div style="text-align: right;">
+          <span style="color: ${outcomeColor}; font-weight: bold; font-size: 12px;">${item.outcome || item.status || 'PENDING'}</span>
+        </div>
+      </div>
+    `;
   });
   container.innerHTML = html;
+}
+
+function openHistoryDetails(index) {
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  } catch(e) {
+    history = [];
+  }
+  
+  const item = history[index];
+  if (!item) return;
+
+  let agentsHtml = '';
+  if(item.agents && item.agents.length > 0) {
+    item.agents.forEach(ag => {
+      agentsHtml += `<div style="margin-bottom: 8px; font-size: 12px; background: #08080a; padding: 8px; border-radius: 6px;"><strong style="color:var(--accent);">${ag.title} (${ag.decision}):</strong> ${ag.text}</div>`;
+    });
+  } else {
+    agentsHtml = `<div style="font-size:12px; color:var(--text-muted);">Manual Journal Entry</div>`;
+  }
+
+  let content = `
+    <h3 style="color: var(--accent); margin-top:0;">${item.pair} - ${item.action} (${item.outcome || 'PENDING'})</h3>
+    <p style="font-size: 12px; color: var(--text-muted);">Tarehe: ${item.date}</p>
+    <div style="font-size: 13px; margin-bottom: 10px; background: #141418; padding: 10px; border-radius: 6px;">
+      <strong>Entry:</strong> ${item.entry} | <strong>SL:</strong> ${item.sl} | <strong>TP:</strong> ${item.tp}<br>
+      <strong>SL Pips:</strong> ${item.sl_pips || '-'} | <strong>TP Pips:</strong> ${item.tp_pips || '-'}
+    </div>
+    <h4 style="margin-bottom: 5px; font-size: 13px; color: var(--accent);">Uchambuzi wa 7 Masters:</h4>
+    <div style="max-height: 280px; overflow-y: auto;">${agentsHtml}</div>
+  `;
+  openModal(content);
 }
 
 function clearAllHistory() {
   localStorage.removeItem('lutynoel_history');
   loadTradeHistory();
   updateStatsOverview();
+  showToast("Historia imefutwa yote!");
 }
 
 function saveManualJournalTrade() {
