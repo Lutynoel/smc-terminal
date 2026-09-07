@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v11.0 (Zero Loss Edition)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v11.1 (Zero Loss Edition)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
@@ -126,7 +126,7 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v11.0</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v11.1</div>
       <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & AI Assistance (Gemini 3.6 Flash)</div>
 
       <div id="loginFormSection">
@@ -188,7 +188,7 @@
 
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.0</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.1</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
@@ -270,7 +270,7 @@
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.0 (ZERO LOSS ENGINE)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.1 (ZERO LOSS ENGINE)</div>
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
@@ -481,7 +481,7 @@
             <h3 style="margin: 0;">Trade History Archive</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita (Bonyeza kadi kuona maelezo):</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita (Bonyeza kadi kuona maelezo, au futa moja moja):</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>
           </div>
@@ -531,7 +531,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v11.0",
+    name: "Lutynoel FX Institutional Terminal v11.1",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -577,7 +577,7 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v11.0';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v11.1';
     document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & AI Assistance (Gemini 3.6 Flash)';
   }
 }
@@ -879,7 +879,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma chati zote 3 za ${pair}...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
@@ -895,8 +895,10 @@ async function runLutynoelAnalysis() {
 
     const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash (Zero Loss Edition). PAIR ILIYOTEULIWA NI: ${pair}. 
-Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pips ni sahihi kabisa kwa ${pair}. Toa majibu katika muundo wa JSON pekee:
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. 
+Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Tafadhali soma picha hizo kwa makini ili kutoa tathmini kulingana na muonekano wa chati husika.
+Bei halisi ya soko kwa sasa ni ${livePrice}. Tumia bei hii au soma bei sahihi kutoka kwenye picha ulizopewa kwa ajili ya Entry, Stop Loss (${slPrice.toFixed(2)}), na Take Profit (${tpPrice.toFixed(2)}).
+Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
@@ -923,7 +925,7 @@ Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pip
   "agent5_title": "5. SMC Master", "agent5_decision": "BUY", "agent5_text": "4H liquidity sweep complete. 1H order block tapped. 15M inducement cleared for expansion.",
   "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "4H killzone alignment. 1H Fair Value Gap (FVG) filled. 15M execution trigger active.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master", "agent7_decision": "BUY", "agent7_text": "4H accumulation phase ending. 1H spring confirmed with volume. 15M markup initiated.",
-  "tf": "4H: Macro direction confirmed.\n1H: POI mitigation locked.\n15M: Precise execution trigger confirmed under Zero Loss rules."
+  "tf": "4H: Macro direction confirmed from chart analysis.\n1H: POI mitigation locked.\n15M: Precise execution trigger confirmed under Zero Loss rules."
 }`;
 
     parts.push({ text: promptText });
@@ -1048,13 +1050,13 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
       </div>
     `;
     container.appendChild(card);
-    await drawSmartOverlayOnCanvas(`canvas_${idx}_h4`, imgH4, "4H: " + ag.decision, resObj.action);
-    await drawSmartOverlayOnCanvas(`canvas_${idx}_h1`, imgH1, "1H: " + ag.decision, resObj.action);
-    await drawSmartOverlayOnCanvas(`canvas_${idx}_m15`, imgM15, "15M: " + ag.decision, resObj.action);
+    await drawSmartOverlayOnCanvas(`canvas_${idx}_h4`, imgH4);
+    await drawSmartOverlayOnCanvas(`canvas_${idx}_h1`, imgH1);
+    await drawSmartOverlayOnCanvas(`canvas_${idx}_m15`, imgM15);
   }
 }
 
-function drawSmartOverlayOnCanvas(canvasId, imgSrc, labelText, actionType) {
+function drawSmartOverlayOnCanvas(canvasId, imgSrc) {
   return new Promise((resolve) => {
     let canvasEl = document.getElementById(canvasId);
     if (!canvasEl) { resolve(); return; }
@@ -1117,18 +1119,34 @@ function loadTradeHistory() {
   history.forEach((item, index) => {
     let outcomeColor = item.outcome === 'WIN' ? 'var(--green)' : (item.outcome === 'LOSS' ? 'var(--red)' : 'var(--accent)');
     html += `
-      <div class="history-card" onclick="openHistoryDetails(${index})" style="cursor: pointer;">
-        <div>
+      <div class="history-card">
+        <div onclick="openHistoryDetails(${index})" style="flex-grow: 1; cursor: pointer;">
           <strong>${item.pair || 'XAUUSD'} - ${item.action || 'BUY'}</strong><br>
           <small style="color: var(--text-muted);">${item.date || ''} | ${item.framework || 'Manual'}</small>
         </div>
-        <div style="text-align: right;">
-          <span style="color: ${outcomeColor}; font-weight: bold; font-size: 12px;">${item.outcome || item.status || 'PENDING'}</span>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="color: ${outcomeColor}; font-weight: bold; font-size: 12px; cursor: pointer;" onclick="openHistoryDetails(${index})">${item.outcome || item.status || 'PENDING'}</span>
+          <button onclick="deleteSingleHistory(${index})" style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;" title="Futa hii pekee">🗑️</button>
         </div>
       </div>
     `;
   });
   container.innerHTML = html;
+}
+
+function deleteSingleHistory(index) {
+  let history = [];
+  try {
+    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  } catch(e) {
+    history = [];
+  }
+  
+  history.splice(index, 1);
+  localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  loadTradeHistory();
+  updateStatsOverview();
+  showToast("Uchambuzi umehifadhiwa / umefutwa!");
 }
 
 function openHistoryDetails(index) {
