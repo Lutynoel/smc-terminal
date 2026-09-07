@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v11.2 (Zero Loss Edition)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v11.2 (Dynamic SL/TP Engine)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
@@ -181,7 +181,7 @@
         </div>
       </div>
       <div class="header-icons">
-        <div class="user-pill" id="displayUserRole">ZERO LOSS PRO</div>
+        <div class="user-pill" id="displayUserRole">DYNAMIC SL/TP PRO</div>
         <button onclick="logout()" style="background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Toka</button>
       </div>
     </header>
@@ -223,9 +223,9 @@
           
           <h2 style="margin: 0 0 5px 0; font-size: 19px;">
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
-            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Institutional Intelligence & AI Tools)</span>
+            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Dynamic SL/TP Protocol)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Zero Loss Institutional Intelligence Protocol powered by Gemini 3.6 Flash.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Institutional Intelligence & AI Tools powered by Gemini 3.6 Flash.</p>
         </div>
 
         <div class="grid-3">
@@ -254,11 +254,11 @@
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL</div>
           <h3 style="margin: 0 0 12px 0; font-size: 16px;">Chat na Mtaalamu Wako wa AI</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu biashara ya forex, uchambuzi wa XAUUSD, Bitcoin, au ushauri wa mikakati ya Zero Loss.</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu biashara ya forex, uchambuzi wa XAUUSD, Bitcoin, au ushauri wa mikakati ya Dynamic SL/TP kulingana na Order Blocks.</p>
 
           <div class="chat-container">
             <div id="chatMessages" class="chat-messages">
-              <div class="chat-bubble ai">Habari! Mimi ni Lutynoel FX AI Assistant wako wa Gemini 3.6 Flash. Nipo hapa kukusaidia na maswali yako yote ya biashara, mikakati ya hatari (Risk Management), na uchambuzi wa soko. Niambie nikupe msaada gani leo?</div>
+              <div class="chat-bubble ai">Habari! Mimi ni Lutynoel FX AI Assistant wako wa Gemini 3.6 Flash. Nipo hapa kukusaidia na maswali yako yote ya biashara, kuweka SL ya kihalisisia (Order Block / Retracement), na TP kubwa. Niambie nikupe msaada gani leo?</div>
             </div>
             <div class="chat-input-row">
               <input type="text" id="chatUserInput" placeholder="Andika swali lako hapa..." onkeydown="if(event.key === 'Enter') sendAIChatMessage()">
@@ -270,7 +270,7 @@
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.2 (ZERO LOSS ENGINE)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.2 (DYNAMIC SL/TP ENGINE)</div>
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
@@ -339,19 +339,19 @@
             <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">MARKET EXECUTED</div>
             
             <div class="signal-badge-container">
-              <span class="badge-conf">ZERO LOSS PROTOCOL</span>
+              <span class="badge-conf">DYNAMIC SL/TP ENGINE</span>
               <span class="badge-pass">CONFLUENCE PASS</span>
               <span class="badge-status" id="tradeStatusBadge">EXECUTED SOKONI</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence & Max $2 Risk Strategy</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence & Order Block Strategy</div>
           </div>
 
           <div class="card">
             <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS)</div>
             
             <div class="grid-2">
-              <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">20 Pips</div></div>
-              <div class="mini-box"><label>TAKE PROFIT (VAL)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">90 Pips</div></div>
+              <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">0 Pips</div></div>
+              <div class="mini-box"><label>TAKE PROFIT (VAL)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">0 Pips</div></div>
             </div>
 
             <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP)</div>
@@ -363,10 +363,10 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">🛡️ ZERO LOSS RISK GUARD CHECKLIST</div>
-            <div class="checklist-item"><span>✓</span> <span id="chk1">Max Loss Limited to $2 per 0.01 Lot</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Order Block Mitigation (SMC)</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Accurate Asset Valuation & Live Pricing Sync from Chart Images</span></div>
+            <div class="ballistic-header">🛡️ MARKET STRUCTURE RISK GUARD CHECKLIST</div>
+            <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss placed accurately below/above structural Order Block</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Liquidity Sweep & Target Mitigation (SMC)</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TP set to capture full expansion move (e.g. 300 - 500 Pips)</span></div>
           </div>
 
           <div class="card">
@@ -376,7 +376,7 @@
             </div>
             <div class="grid-2">
               <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT</label><div id="valTP1" style="font-size: 16px; font-weight: bold; color: var(--green);">0.00</div></div>
-              <div class="mini-box"><label style="color: var(--green);">R:R RATIO</label><div id="valRR" style="font-size: 16px; font-weight: bold; color: var(--accent);">1:4.5</div></div>
+              <div class="mini-box"><label style="color: var(--green);">R:R RATIO</label><div id="valRR" style="font-size: 16px; font-weight: bold; color: var(--accent);">1:5.0</div></div>
             </div>
           </div>
 
@@ -398,7 +398,7 @@
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
           <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako (Zero Loss Mode):</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako (Dynamic Mode):</p>
 
           <label>Instrument Pair</label>
           <input type="text" id="jPair" placeholder="e.g. XAUUSD or BTCUSD">
@@ -522,7 +522,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedUser && savedApiKey) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
-    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'ZERO LOSS GUEST';
+    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'DYNAMIC SL/TP GUEST';
   }
 
   loadTradeHistory();
@@ -609,7 +609,7 @@ function handleGuestLogin() {
 
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
-  document.getElementById('displayUserRole').innerText = 'ZERO LOSS GUEST';
+  document.getElementById('displayUserRole').innerText = 'DYNAMIC SL/TP GUEST';
 }
 
 function handleRegister() {
@@ -723,7 +723,7 @@ async function sendAIChatMessage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{
-          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya Forex, XAUUSD, Bitcoin, na mikakati ya Zero Loss ukitumia Gemini 3.6 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
+          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya Forex, XAUUSD, Bitcoin, na mikakati ya Dynamic SL/TP kulingana na Order Blocks na Retracements kwa kutumia Gemini 3.6 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
         }]
       })
     });
@@ -879,43 +879,38 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kuweka SL/TP ya kibenki...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    let slPipsVal = pair.includes("BTC") || pair.includes("ETH") ? 45 : (pair.includes("XAU") ? 25 : 20);
-    let tpPipsVal = slPipsVal * 4;
-
-    let pipMultiplierDiv = pair.includes("JPY") ? 100 : (pair.includes("BTC") || pair.includes("ETH") || pair.includes("XAU") || pair.includes("US30") ? 10 : 10000);
-    let slPrice = livePrice - (slPipsVal / pipMultiplierDiv);
-    let tpPrice = livePrice + (tpPipsVal / pipMultiplierDiv);
-
-    const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
-
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. 
-Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma picha hizi kwa umakini mkubwa ili kugundua bei halisi ya soko (Current Market Price / Entry Price) iliyoandikwa au kuoneshwa kwenye chati hizo badala ya kukisia.
+    // Maelekezo mapya kwa AI: Amua SL kulingana na Order Block / Retracement halisi na TP iwe kubwa hadi pips 300-500 kulingana na soko.
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
+Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma picha hizi kwa umakini mkubwa ili kugundua miundo ya soko (Order Block, Retracement, au Liquidity Zones). 
+USIWEKE kiwango cha kudumu (kama pips 100). Badala yake, fanya hivi:
+1. Weka STOP LOSS (SL) ya kihalisi kulingana na mahali ambapo Order Block au Retracement itavunjika kwenye chati hizo (inaweza kuwa pips 30, 45, 60, au zaidi kutegemea na ukubwa wa chati).
+2. Weka TAKE PROFIT (TP) kubwa ya kutosha kulingana na soko (inaweza kuwa pips 250, 400, au 500+ pips) kulenga malengo ya mbali (Liquidity pools).
 Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
-  "subtitle": "Strict ${pair} Multi-TF Confluence & Zero Loss Strategy",
-  "sl_pips": "${slPipsVal} Pips",
-  "tp_pips": "${calcData.calculatedPips} Pips",
-  "tp_001": "${calcData.projections.tp_001}",
-  "tp_002": "${calcData.projections.tp_002}",
-  "tp_003": "${calcData.projections.tp_003}",
-  "tp_010": "${calcData.projections.tp_010}",
-  "tp_100": "${calcData.projections.tp_100}",
-  "chk1": "Zero Loss Risk Guard Confirmed ($2 Max Risk per 0.01 lot)",
-  "chk2": "Institutional Order Block Mitigation Validated across all 3 charts",
-  "chk3": "Accurate Asset Valuation & Live Pricing Sync from Chart Images",
+  "subtitle": "Strict ${pair} Multi-TF Confluence & Dynamic Order Block SL/TP",
+  "sl_pips": "45 Pips",
+  "tp_pips": "450 Pips",
+  "tp_001": "",
+  "tp_002": "",
+  "tp_003": "",
+  "tp_010": "",
+  "tp_100": "",
+  "chk1": "Stop Loss placed accurately below structural Order Block / Retracement",
+  "chk2": "Institutional Liquidity Sweep & Target Mitigation (SMC)",
+  "chk3": "Dynamic TP set to capture full expansion move (e.g. 300 - 500 Pips)",
   "entry": "${livePrice}",
-  "sl": "${slPrice.toFixed(2)}",
-  "tp1": "${tpPrice.toFixed(2)}",
-  "rr": "1:4.0",
+  "sl": "",
+  "tp1": "",
+  "rr": "1:10.0",
   "trade_status": "PENDING",
   "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "4H shows macro momentum building. 1H confirms breakout structure. 15M reveals immediate bullish rejection candles.",
   "agent2_title": "2. Supply & Demand Master", "agent2_decision": "BUY", "agent2_text": "4H tested major demand zone. 1H formed fresh mitigation block. 15M validated entry near institutional imbalance.",
@@ -924,7 +919,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
   "agent5_title": "5. SMC Master", "agent5_decision": "BUY", "agent5_text": "4H liquidity sweep complete. 1H order block tapped. 15M inducement cleared for expansion.",
   "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "4H killzone alignment. 1H Fair Value Gap (FVG) filled. 15M execution trigger active.",
   "agent7_title": "7. Wyckoff & Institutional Volume Master", "agent7_decision": "BUY", "agent7_text": "4H accumulation phase ending. 1H spring confirmed with volume. 15M markup initiated.",
-  "tf": "4H: Macro direction confirmed from chart analysis.\n1H: POI mitigation locked.\n15M: Precise execution trigger confirmed under Zero Loss rules."
+  "tf": "4H: Macro direction confirmed from chart analysis.\n1H: POI mitigation locked.\n15M: Precise execution trigger confirmed under Dynamic Order Block rules."
 }`;
 
     parts.push({ text: promptText });
@@ -949,29 +944,44 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     
     const resObj = JSON.parse(rawText);
 
-    document.getElementById('resPairBadge').innerText = pair + " (Live Price: " + resObj.entry + ")";
+    // Kama AI imerudisha bei za SL/TP moja kwa moja au kama inahitaji hesabu za ziada
+    let parsedSLPrice = parseFloat(resObj.sl);
+    let parsedTPPrice = parseFloat(resObj.tp1);
+    
+    let pipDiv = pair.includes("JPY") ? 100 : (pair.includes("BTC") || pair.includes("ETH") || pair.includes("XAU") || pair.includes("US30") ? 10 : 10000);
+
+    if (!parsedSLPrice || isNaN(parsedSLPrice)) {
+      parsedSLPrice = resObj.action === "BUY" ? livePrice - (50 / pipDiv) : livePrice + (50 / pipDiv);
+    }
+    if (!parsedTPPrice || isNaN(parsedTPPrice)) {
+      parsedTPPrice = resObj.action === "BUY" ? livePrice + (350 / pipDiv) : livePrice - (350 / pipDiv);
+    }
+
+    const calcData = calculateAccurateProfit(pair, livePrice, parsedTPPrice);
+
+    document.getElementById('resPairBadge').innerText = pair + " (Live Price: " + livePrice + ")";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
     document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "PENDING";
     
-    document.getElementById('valSLPips').innerText = resObj.sl_pips;
-    document.getElementById('valTPPIps').innerText = resObj.tp_pips;
+    document.getElementById('valSLPips').innerText = resObj.sl_pips || "50 Pips";
+    document.getElementById('valTPPIps').innerText = calcData.calculatedPips + " Pips";
 
-    document.getElementById('tp_lot001').innerHTML = resObj.tp_001;
-    document.getElementById('tp_lot002').innerHTML = resObj.tp_002;
-    document.getElementById('tp_lot003').innerHTML = resObj.tp_003;
-    document.getElementById('tp_lot010').innerHTML = resObj.tp_010;
-    document.getElementById('tp_lot100').innerHTML = resObj.tp_100;
+    document.getElementById('tp_lot001').innerHTML = calcData.projections.tp_001;
+    document.getElementById('tp_lot002').innerHTML = calcData.projections.tp_002;
+    document.getElementById('tp_lot003').innerHTML = calcData.projections.tp_003;
+    document.getElementById('tp_lot010').innerHTML = calcData.projections.tp_010;
+    document.getElementById('tp_lot100').innerHTML = calcData.projections.tp_100;
 
     document.getElementById('chk1').innerText = resObj.chk1;
     document.getElementById('chk2').innerText = resObj.chk2;
     document.getElementById('chk3').innerText = resObj.chk3;
 
-    document.getElementById('valEntry').innerText = resObj.entry;
-    document.getElementById('valSL').innerText = resObj.sl;
-    document.getElementById('valTP1').innerText = resObj.tp1;
-    document.getElementById('valRR').innerText = resObj.rr;
+    document.getElementById('valEntry').innerText = livePrice;
+    document.getElementById('valSL').innerText = parsedSLPrice.toFixed(2);
+    document.getElementById('valTP1').innerText = parsedTPPrice.toFixed(2);
+    document.getElementById('valRR').innerText = resObj.rr || "1:7.0";
 
     await renderAllAgentsWithSmartCanvas(resObj);
     document.getElementById('tfOutput').innerText = resObj.tf;
@@ -981,13 +991,13 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
       pair: pair,
       framework: framework,
       action: resObj.action,
-      entry: resObj.entry,
-      tp: resObj.tp1,
-      sl: resObj.sl,
+      entry: livePrice,
+      tp: parsedTPPrice.toFixed(2),
+      sl: parsedSLPrice.toFixed(2),
       status: "PENDING",
-      rr: resObj.rr,
-      sl_pips: resObj.sl_pips,
-      tp_pips: resObj.tp_pips,
+      rr: resObj.rr || "1:7.0",
+      sl_pips: resObj.sl_pips || "50 Pips",
+      tp_pips: calcData.calculatedPips + " Pips",
       outcome: "PENDING",
       pnl: 0,
       agents: [
@@ -1001,7 +1011,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
       ]
     });
 
-    showToast(`Uchambuzi umehifadhiwa kwenye History!`);
+    showToast(`Uchambuzi wenye Dynamic SL/TP umehifadhiwa kwenye History!`);
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
@@ -1210,7 +1220,7 @@ function saveManualJournalTrade() {
     sl_pips: "-",
     tp_pips: "-",
     outcome: outcome,
-    pnl: outcome === 'WIN' ? 20 : (outcome === 'LOSS' ? -2 : 0),
+    pnl: 0,
     agents: []
   });
 
