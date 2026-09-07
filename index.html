@@ -351,10 +351,10 @@
             
             <div class="grid-2">
               <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">0 Pips</div></div>
-              <div class="mini-box"><label>TAKE PROFIT (VAL)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">0 Pips</div></div>
+              <div class="mini-box"><label>TAKE PROFIT 3 (VAL)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">0 Pips</div></div>
             </div>
 
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP)</div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP3)</div>
             <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot001">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
             <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot002">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
             <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot003">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
@@ -366,18 +366,20 @@
             <div class="ballistic-header">🛡️ MARKET STRUCTURE RISK GUARD CHECKLIST</div>
             <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss placed accurately below/above structural Order Block</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Liquidity Sweep & Target Mitigation (SMC)</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TP set to capture full expansion move (e.g. 300 - 500 Pips)</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)</span></div>
           </div>
 
           <div class="card">
             <div class="grid-2">
-              <div class="mini-box"><label>LIVE ENTRY</label><div id="valEntry" style="font-size: 16px; font-weight: bold; color: var(--accent);">0.00</div></div>
-              <div class="mini-box"><label style="color: var(--red);">STOP LOSS</label><div id="valSL" style="font-size: 16px; font-weight: bold; color: var(--red);">0.00</div></div>
+              <div class="mini-box"><label>LIVE ENTRY (CHART)</label><div id="valEntry" style="font-size: 16px; font-weight: bold; color: var(--accent);">0.00</div></div>
+              <div class="mini-box"><label style="color: var(--red);">STOP LOSS (CHART)</label><div id="valSL" style="font-size: 16px; font-weight: bold; color: var(--red);">0.00</div></div>
             </div>
-            <div class="grid-2">
-              <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT</label><div id="valTP1" style="font-size: 16px; font-weight: bold; color: var(--green);">0.00</div></div>
-              <div class="mini-box"><label style="color: var(--green);">R:R RATIO</label><div id="valRR" style="font-size: 16px; font-weight: bold; color: var(--accent);">1:5.0</div></div>
+            <div class="grid-3">
+              <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT 1</label><div id="valTP1" style="font-size: 14px; font-weight: bold; color: var(--green);">0.00</div></div>
+              <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT 2</label><div id="valTP2" style="font-size: 14px; font-weight: bold; color: var(--green);">0.00</div></div>
+              <div class="mini-box"><label style="color: var(--green);">TAKE PROFIT 3</label><div id="valTP3" style="font-size: 14px; font-weight: bold; color: var(--green);">0.00</div></div>
             </div>
+            <div class="mini-box" style="margin-top: 10px; text-align: center;"><label style="color: var(--accent);">R:R RATIO</label><div id="valRR" style="font-size: 16px; font-weight: bold; color: var(--accent);">1:5.0</div></div>
           </div>
 
           <div class="card">
@@ -426,7 +428,7 @@
               <input type="number" step="any" id="jSL" placeholder="0.00">
             </div>
             <div>
-              <label>Take Profit (TP)</label>
+              <label>Take Profit 3 (TP3)</label>
               <input type="number" step="any" id="jTP" placeholder="0.00">
             </div>
           </div>
@@ -820,7 +822,7 @@ async function fetchLiveMarketPrice(pair) {
   if(pair.includes("XAU")) return 2500.50;
   if(pair.includes("ETH")) return 3100.00;
   if(pair.includes("BTC")) return 64500.00;
-  return 1.0850;
+  return 1.3520;
 }
 
 async function fileToBase64(file) {
@@ -832,7 +834,7 @@ async function fileToBase64(file) {
   });
 }
 
-function calculateAccurateProfit(pairName, entry, tp) {
+function calculateAccurateProfit(pairName, entry, tp3) {
   let pips = 0;
   let pipValuePerStandardLot = 10.0; 
   let upperAssetType = pairName.toUpperCase();
@@ -842,8 +844,8 @@ function calculateAccurateProfit(pairName, entry, tp) {
   else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 1.0;
   else if (upperAssetType.includes("JPY")) pipValuePerStandardLot = 8.5;
 
-  if (entry > 0 && tp > 0) {
-    let priceDiff = Math.abs(tp - entry);
+  if (entry > 0 && tp3 > 0) {
+    let priceDiff = Math.abs(tp3 - entry);
     if (upperAssetType.includes("JPY")) pips = priceDiff * 100;
     else if (upperAssetType.includes("BTC") || upperAssetType.includes("ETH") || upperAssetType.includes("XAU")) pips = priceDiff * 10; 
     else pips = priceDiff * 10000; 
@@ -879,19 +881,20 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kuweka SL/TP ya kibenki...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kuweka bei halisi za Entry, SL na TP1, TP2, TP3...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    // Maelekezo mapya kwa AI: Amua SL kulingana na Order Block / Retracement halisi na TP iwe kubwa hadi pips 300-500 kulingana na soko.
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
-Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma picha hizi kwa umakini mkubwa ili kugundua miundo ya soko (Order Block, Retracement, au Liquidity Zones). 
-USIWEKE kiwango cha kudumu (kama pips 100). Badala yake, fanya hivi:
-1. Weka STOP LOSS (SL) ya kihalisi kulingana na mahali ambapo Order Block au Retracement itavunjika kwenye chati hizo (inaweza kuwa pips 30, 45, 60, au zaidi kutegemea na ukubwa wa chati).
-2. Weka TAKE PROFIT (TP) kubwa ya kutosha kulingana na soko (inaweza kuwa pips 250, 400, au 500+ pips) kulenga malengo ya mbali (Liquidity pools).
+Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na utoe BEI HALISI (Actual Market Prices kutoka kwenye chati hizi):
+1. 'entry': Bei halisi ya kuingilia kwenye chati (Entry Price, mfano 1.3500 au kulingana na picha ulizopewa).
+2. 'sl': Bei halisi ya Stop Loss chini/juu ya Order Block kwenye chati.
+3. 'tp1': Take Profit ya kwanza (karibu na muundo wa kwanza).
+4. 'tp2': Take Profit ya pili (kwenye katikati ya Liquidity pool).
+5. 'tp3': Take Profit ya tatu (lengo la mwisho la mbali / expansion).
 Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
@@ -899,18 +902,15 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
   "subtitle": "Strict ${pair} Multi-TF Confluence & Dynamic Order Block SL/TP",
   "sl_pips": "45 Pips",
   "tp_pips": "450 Pips",
-  "tp_001": "",
-  "tp_002": "",
-  "tp_003": "",
-  "tp_010": "",
-  "tp_100": "",
   "chk1": "Stop Loss placed accurately below structural Order Block / Retracement",
   "chk2": "Institutional Liquidity Sweep & Target Mitigation (SMC)",
-  "chk3": "Dynamic TP set to capture full expansion move (e.g. 300 - 500 Pips)",
+  "chk3": "Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)",
   "entry": "${livePrice}",
-  "sl": "",
-  "tp1": "",
-  "rr": "1:10.0",
+  "sl": "${(livePrice - 0.0050).toFixed(4)}",
+  "tp1": "${(livePrice + 0.0080).toFixed(4)}",
+  "tp2": "${(livePrice + 0.0150).toFixed(4)}",
+  "tp3": "${(livePrice + 0.0300).toFixed(4)}",
+  "rr": "1:8.5",
   "trade_status": "PENDING",
   "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "4H shows macro momentum building. 1H confirms breakout structure. 15M reveals immediate bullish rejection candles.",
   "agent2_title": "2. Supply & Demand Master", "agent2_decision": "BUY", "agent2_text": "4H tested major demand zone. 1H formed fresh mitigation block. 15M validated entry near institutional imbalance.",
@@ -944,29 +944,22 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     
     const resObj = JSON.parse(rawText);
 
-    // Kama AI imerudisha bei za SL/TP moja kwa moja au kama inahitaji hesabu za ziada
-    let parsedSLPrice = parseFloat(resObj.sl);
-    let parsedTPPrice = parseFloat(resObj.tp1);
-    
-    let pipDiv = pair.includes("JPY") ? 100 : (pair.includes("BTC") || pair.includes("ETH") || pair.includes("XAU") || pair.includes("US30") ? 10 : 10000);
+    let entryPrice = parseFloat(resObj.entry) || livePrice;
+    let slPrice = parseFloat(resObj.sl) || (resObj.action === "BUY" ? entryPrice - 0.0050 : entryPrice + 0.0050);
+    let tp1Price = parseFloat(resObj.tp1) || (resObj.action === "BUY" ? entryPrice + 0.0080 : entryPrice - 0.0080);
+    let tp2Price = parseFloat(resObj.tp2) || (resObj.action === "BUY" ? entryPrice + 0.0150 : entryPrice - 0.0150);
+    let tp3Price = parseFloat(resObj.tp3) || (resObj.action === "BUY" ? entryPrice + 0.0300 : entryPrice - 0.0300);
 
-    if (!parsedSLPrice || isNaN(parsedSLPrice)) {
-      parsedSLPrice = resObj.action === "BUY" ? livePrice - (50 / pipDiv) : livePrice + (50 / pipDiv);
-    }
-    if (!parsedTPPrice || isNaN(parsedTPPrice)) {
-      parsedTPPrice = resObj.action === "BUY" ? livePrice + (350 / pipDiv) : livePrice - (350 / pipDiv);
-    }
+    const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price);
 
-    const calcData = calculateAccurateProfit(pair, livePrice, parsedTPPrice);
-
-    document.getElementById('resPairBadge').innerText = pair + " (Live Price: " + livePrice + ")";
+    document.getElementById('resPairBadge').innerText = pair + " (Chart Entry: " + entryPrice + ")";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
     document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "PENDING";
     
-    document.getElementById('valSLPips').innerText = resObj.sl_pips || "50 Pips";
-    document.getElementById('valTPPIps').innerText = calcData.calculatedPips + " Pips";
+    document.getElementById('valSLPips').innerText = resObj.sl_pips || "45 Pips";
+    document.getElementById('valTPPIps').innerText = calcData.calculatedPips + " Pips (TP3)";
 
     document.getElementById('tp_lot001').innerHTML = calcData.projections.tp_001;
     document.getElementById('tp_lot002').innerHTML = calcData.projections.tp_002;
@@ -978,10 +971,12 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     document.getElementById('chk2').innerText = resObj.chk2;
     document.getElementById('chk3').innerText = resObj.chk3;
 
-    document.getElementById('valEntry').innerText = livePrice;
-    document.getElementById('valSL').innerText = parsedSLPrice.toFixed(2);
-    document.getElementById('valTP1').innerText = parsedTPPrice.toFixed(2);
-    document.getElementById('valRR').innerText = resObj.rr || "1:7.0";
+    document.getElementById('valEntry').innerText = entryPrice;
+    document.getElementById('valSL').innerText = slPrice.toFixed(4);
+    document.getElementById('valTP1').innerText = tp1Price.toFixed(4);
+    document.getElementById('valTP2').innerText = tp2Price.toFixed(4);
+    document.getElementById('valTP3').innerText = tp3Price.toFixed(4);
+    document.getElementById('valRR').innerText = resObj.rr || "1:8.5";
 
     await renderAllAgentsWithSmartCanvas(resObj);
     document.getElementById('tfOutput').innerText = resObj.tf;
@@ -991,12 +986,15 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
       pair: pair,
       framework: framework,
       action: resObj.action,
-      entry: livePrice,
-      tp: parsedTPPrice.toFixed(2),
-      sl: parsedSLPrice.toFixed(2),
+      entry: entryPrice,
+      tp: tp3Price.toFixed(4),
+      tp1: tp1Price.toFixed(4),
+      tp2: tp2Price.toFixed(4),
+      tp3: tp3Price.toFixed(4),
+      sl: slPrice.toFixed(4),
       status: "PENDING",
-      rr: resObj.rr || "1:7.0",
-      sl_pips: resObj.sl_pips || "50 Pips",
+      rr: resObj.rr || "1:8.5",
+      sl_pips: resObj.sl_pips || "45 Pips",
       tp_pips: calcData.calculatedPips + " Pips",
       outcome: "PENDING",
       pnl: 0,
@@ -1011,7 +1009,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
       ]
     });
 
-    showToast(`Uchambuzi wenye Dynamic SL/TP umehifadhiwa kwenye History!`);
+    showToast(`Uchambuzi wenye TP1, TP2, TP3 na bei sahihi za chati umehifadhiwa!`);
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
@@ -1182,7 +1180,8 @@ function openHistoryDetails(index) {
     <h3 style="color: var(--accent); margin-top:0;">${item.pair} - ${item.action} (${item.outcome || 'PENDING'})</h3>
     <p style="font-size: 12px; color: var(--text-muted);">Tarehe: ${item.date}</p>
     <div style="font-size: 13px; margin-bottom: 10px; background: #141418; padding: 10px; border-radius: 6px;">
-      <strong>Entry:</strong> ${item.entry} | <strong>SL:</strong> ${item.sl} | <strong>TP:</strong> ${item.tp}<br>
+      <strong>Entry:</strong> ${item.entry} | <strong>SL:</strong> ${item.sl}<br>
+      <strong>TP1:</strong> ${item.tp1 || '-'} | <strong>TP2:</strong> ${item.tp2 || '-'} | <strong>TP3:</strong> ${item.tp3 || item.tp}<br>
       <strong>SL Pips:</strong> ${item.sl_pips || '-'} | <strong>TP Pips:</strong> ${item.tp_pips || '-'}
     </div>
     <h4 style="margin-bottom: 5px; font-size: 13px; color: var(--accent);">Uchambuzi wa 7 Masters:</h4>
@@ -1214,6 +1213,7 @@ function saveManualJournalTrade() {
     action: action,
     entry: entry,
     tp: tp,
+    tp3: tp,
     sl: sl,
     status: outcome,
     rr: "Custom",
