@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v11.1 (Zero Loss Edition)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v11.2 (Zero Loss Edition)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
@@ -126,7 +126,7 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v11.1</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v11.2</div>
       <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & AI Assistance (Gemini 3.6 Flash)</div>
 
       <div id="loginFormSection">
@@ -188,7 +188,7 @@
 
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.1</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.2</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
@@ -270,7 +270,7 @@
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.1 (ZERO LOSS ENGINE)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.2 (ZERO LOSS ENGINE)</div>
           <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
@@ -366,7 +366,7 @@
             <div class="ballistic-header">🛡️ ZERO LOSS RISK GUARD CHECKLIST</div>
             <div class="checklist-item"><span>✓</span> <span id="chk1">Max Loss Limited to $2 per 0.01 Lot</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Order Block Mitigation (SMC)</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Accurate Asset Valuation & Live Pricing Sync</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Accurate Asset Valuation & Live Pricing Sync from Chart Images</span></div>
           </div>
 
           <div class="card">
@@ -531,7 +531,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v11.1",
+    name: "Lutynoel FX Institutional Terminal v11.2",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -577,7 +577,7 @@ function toggleAuthMode(mode) {
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v11.1';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v11.2';
     document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & AI Assistance (Gemini 3.6 Flash)';
   }
 }
@@ -896,8 +896,7 @@ async function runLutynoelAnalysis() {
     const calcData = calculateAccurateProfit(pair, livePrice, tpPrice);
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. 
-Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Tafadhali soma picha hizo kwa makini ili kutoa tathmini kulingana na muonekano wa chati husika.
-Bei halisi ya soko kwa sasa ni ${livePrice}. Tumia bei hii au soma bei sahihi kutoka kwenye picha ulizopewa kwa ajili ya Entry, Stop Loss (${slPrice.toFixed(2)}), na Take Profit (${tpPrice.toFixed(2)}).
+Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma picha hizi kwa umakini mkubwa ili kugundua bei halisi ya soko (Current Market Price / Entry Price) iliyoandikwa au kuoneshwa kwenye chati hizo badala ya kukisia.
 Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
@@ -912,7 +911,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
   "tp_100": "${calcData.projections.tp_100}",
   "chk1": "Zero Loss Risk Guard Confirmed ($2 Max Risk per 0.01 lot)",
   "chk2": "Institutional Order Block Mitigation Validated across all 3 charts",
-  "chk3": "Accurate Asset Valuation & Live Pricing Sync",
+  "chk3": "Accurate Asset Valuation & Live Pricing Sync from Chart Images",
   "entry": "${livePrice}",
   "sl": "${slPrice.toFixed(2)}",
   "tp1": "${tpPrice.toFixed(2)}",
@@ -950,7 +949,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     
     const resObj = JSON.parse(rawText);
 
-    document.getElementById('resPairBadge').innerText = pair + " (Live Price: " + livePrice + ")";
+    document.getElementById('resPairBadge').innerText = pair + " (Live Price: " + resObj.entry + ")";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
