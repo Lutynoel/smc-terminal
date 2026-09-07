@@ -717,7 +717,6 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    // UPDATED TO GEMINI 3.6 FLASH MODEL
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -932,7 +931,6 @@ Bei ya soko ya sasa ni ${livePrice}. Hakikisha mahesabu ya bei ya SL, TP, na pip
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    // UPDATED TO GEMINI 3.6 FLASH MODEL
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -1105,6 +1103,36 @@ function clearAllHistory() {
   localStorage.removeItem('lutynoel_history');
   loadTradeHistory();
   updateStatsOverview();
+}
+
+function saveManualJournalTrade() {
+  const pair = document.getElementById('jPair').value.trim() || "XAUUSD";
+  const action = document.getElementById('jAction').value;
+  const entry = parseFloat(document.getElementById('jEntry').value) || 0;
+  const lot = parseFloat(document.getElementById('jLot').value) || 0.01;
+  const sl = parseFloat(document.getElementById('jSL').value) || 0;
+  const tp = parseFloat(document.getElementById('jTP').value) || 0;
+  const outcome = document.getElementById('jOutcome').value;
+
+  saveToHistory({
+    date: new Date().toLocaleString(),
+    pair: pair,
+    framework: "Manual Journal",
+    action: action,
+    entry: entry,
+    tp: tp,
+    sl: sl,
+    status: outcome,
+    rr: "Custom",
+    sl_pips: "-",
+    tp_pips: "-",
+    outcome: outcome,
+    pnl: outcome === 'WIN' ? 20 : (outcome === 'LOSS' ? -2 : 0),
+    agents: []
+  });
+
+  showToast("Biashara imehifadhiwa kwenye Journal & Historia!");
+  navigate('history');
 }
 </script>
 </body>
