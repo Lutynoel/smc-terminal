@@ -409,6 +409,7 @@
           <select id="jAction">
             <option value="BUY">BUY</option>
             <option value="SELL">SELL</option>
+            <option value="WAIT">WAIT (Subiri)</option>
           </select>
 
           <div class="grid-2">
@@ -438,6 +439,7 @@
             <option value="WIN">WIN (Take Profit Hit)</option>
             <option value="LOSS">LOSS (Stop Loss Hit)</option>
             <option value="PENDING">PENDING (Bado inaendelea)</option>
+            <option value="WAIT">WAIT (Kaghazi / Imesubiriwa)</option>
           </select>
 
           <button class="primary-btn" onclick="saveManualJournalTrade()">Hifadhi kwenye Journal & Historia</button>
@@ -881,7 +883,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kuweka bei halisi za Entry, SL na TP1, TP2, TP3...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kukagua uaminifu wa soko...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
@@ -889,20 +891,18 @@ async function runLutynoelAnalysis() {
     const parts = [];
 
     const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
-Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na utoe BEI HALISI (Actual Market Prices kutoka kwenye chati hizi):
-1. 'entry': Bei halisi ya kuingilia kwenye chati (Entry Price).
-2. 'sl': Bei halisi ya Stop Loss chini/juu ya Order Block kwenye chati.
-3. 'tp1': Take Profit ya kwanza.
-4. 'tp2': Take Profit ya pili.
-5. 'tp3': Take Profit ya tatu.
-Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
+Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na ufanye yafuatayo:
+1. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa Order Blocks na Market Structure.
+2. Kama soko lipo katika hali ya kujichanganya (consolidation/sideways) au hakuna ushahidi wa kutosha, lazima 'action' iwe 'WAIT' na uweke alama za chini ya 60.
+3. Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
-  "subtitle": "Strict ${pair} Multi-TF Confluence & Dynamic Order Block SL/TP",
+  "confidence_score": 85,
+  "subtitle": "Strict ${pair} Multi-TF Confluence & Order Block Strategy",
   "sl_pips": "45 Pips",
   "tp_pips": "450 Pips",
-  "chk1": "Stop Loss placed accurately below structural Order Block / Retracement",
+  "chk1": "Stop Loss placed accurately below structural Order Block",
   "chk2": "Institutional Liquidity Sweep & Target Mitigation (SMC)",
   "chk3": "Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)",
   "entry": "${livePrice}",
@@ -911,7 +911,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
   "tp2": "${(livePrice + 0.0150).toFixed(4)}",
   "tp3": "${(livePrice + 0.0300).toFixed(4)}",
   "rr": "1:8.5",
-  "trade_status": "PENDING",
+  "trade_status": "EXECUTED SOKONI",
   "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "4H shows macro momentum building. 1H confirms breakout structure. 15M reveals immediate bullish rejection candles.",
   "agent2_title": "2. Supply & Demand Master", "agent2_decision": "BUY", "agent2_text": "4H tested major demand zone. 1H formed fresh mitigation block. 15M validated entry near institutional imbalance.",
   "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "4H trend is bullish. 1H CHoCH verified. 15M break of structure completed cleanly for continuation.",
@@ -942,7 +942,15 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     if (jsonMatch) rawText = jsonMatch[0];
     else rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
     
-    const resObj = JSON.parse(rawText);
+    let resObj = JSON.parse(rawText);
+
+    // THRESHOLD GUARD: Kama confidence score ipo chini ya 60, tunabadilisha kuwa WAIT
+    let confidenceScore = parseInt(resObj.confidence_score) || 70;
+    if (confidenceScore < 60) {
+      resObj.action = "WAIT";
+      resObj.exec_type = "SUBIRI / KAGHAZI (LOW CONFIDENCE)";
+      resObj.trade_status = "WAIT / STAND ASIDE";
+    }
 
     let entryPrice = parseFloat(resObj.entry) || livePrice;
     let slPrice = parseFloat(resObj.sl) || (resObj.action === "BUY" ? entryPrice - 0.0050 : entryPrice + 0.0050);
@@ -952,7 +960,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 
     const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price);
 
-    document.getElementById('resPairBadge').innerText = pair + " (Chart Entry: " + entryPrice + ")";
+    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + confidenceScore + "%)";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
@@ -992,11 +1000,11 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
       tp2: tp2Price.toFixed(4),
       tp3: tp3Price.toFixed(4),
       sl: slPrice.toFixed(4),
-      status: "PENDING",
+      status: resObj.trade_status,
       rr: resObj.rr || "1:8.5",
       sl_pips: resObj.sl_pips || "45 Pips",
       tp_pips: calcData.calculatedPips + " Pips",
-      outcome: "PENDING",
+      outcome: resObj.action === "WAIT" ? "WAIT" : "PENDING",
       pnl: 0,
       agents: [
         { title: resObj.agent1_title, decision: resObj.agent1_decision, text: resObj.agent1_text },
@@ -1009,7 +1017,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
       ]
     });
 
-    showToast(`Uchambuzi wenye TP1, TP2, TP3 na bei sahihi za chati umehifadhiwa!`);
+    showToast(`Uchambuzi umekamilika (Confidence: ${confidenceScore}%)!`);
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
@@ -1040,7 +1048,7 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
 
   for (let idx = 0; idx < agentsData.length; idx++) {
     let ag = agentsData[idx];
-    let decColor = ag.decision === 'BUY' ? 'var(--green)' : 'var(--red)';
+    let decColor = ag.decision === 'BUY' ? 'var(--green)' : (ag.decision === 'SELL' ? 'var(--red)' : 'var(--accent)');
     
     let card = document.createElement('div');
     card.className = 'agent-card';
