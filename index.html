@@ -719,13 +719,13 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{
-          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya Forex, XAUUSD, Bitcoin, na mikakati ya Dynamic SL/TP kulingana na Order Blocks na Retracements kwa kutumia Gemini 3.6 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
+          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya Forex, XAUUSD, Bitcoin, na mikakati ya Dynamic SL/TP kulingana na Order Blocks na Retracements kwa kutumia Gemini 2.5 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
         }]
       })
     });
@@ -881,20 +881,20 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kuweka bei halisi za Entry, SL na TP1, TP2, TP3...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 2.5) wanasoma picha zote 3 za ${pair} na kuweka bei halisi za Entry, SL na TP1, TP2, TP3...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
+    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 2.5 Flash. PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
 Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na utoe BEI HALISI (Actual Market Prices kutoka kwenye chati hizi):
-1. 'entry': Bei halisi ya kuingilia kwenye chati (Entry Price, mfano 1.3500 au kulingana na picha ulizopewa).
+1. 'entry': Bei halisi ya kuingilia kwenye chati (Entry Price).
 2. 'sl': Bei halisi ya Stop Loss chini/juu ya Order Block kwenye chati.
-3. 'tp1': Take Profit ya kwanza (karibu na muundo wa kwanza).
-4. 'tp2': Take Profit ya pili (kwenye katikati ya Liquidity pool).
-5. 'tp3': Take Profit ya tatu (lengo la mwisho la mbali / expansion).
+3. 'tp1': Take Profit ya kwanza.
+4. 'tp2': Take Profit ya pili.
+5. 'tp3': Take Profit ya tatu.
 Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
@@ -927,7 +927,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1017,7 +1017,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
     alert("Hitilafu: " + (err.message || "Tafadhali angalia API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "RUN 7 MASTERS (GEMINI 3.6)";
+    runBtn.innerText = "RUN 7 MASTERS (GEMINI 2.5)";
   }
 }
 
