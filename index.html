@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v11.2 (Dynamic SL/TP Engine)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v11.2 (Dynamic SL/TP & Risk Engine)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
@@ -75,7 +75,7 @@
     .agent-canvas-wrapper canvas { width: 100%; display: block; max-height: 150px; object-fit: contain; cursor: pointer; }
     .agent-canvas-label { font-size: 9px; color: var(--accent); text-align: center; background: #121215; padding: 2px 0; font-weight: bold; border-top: 1px solid var(--card-border); }
 
-    .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; }
+    .signal-badge-container { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
     .badge-pass { background: rgba(251, 191, 36, 0.15); color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
     .badge-conf { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid var(--green); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
     .badge-status { background: rgba(59, 130, 246, 0.15); color: var(--blue); border: 1px solid var(--blue); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
@@ -90,7 +90,7 @@
     .checklist-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
     .checklist-item span { color: var(--green); font-weight: bold; }
 
-    .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+    .history-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
     .history-card:hover { border-color: var(--accent); background: #141418; }
     
     .news-card { background: #08080a; border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
@@ -127,7 +127,7 @@
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
       <div class="auth-title" id="authTitle">Lutynoel FX v11.2</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & AI Assistance (Gemini 3.6 Flash)</div>
+      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & Risk Engine (Gemini 3.6 Flash)</div>
 
       <div id="loginFormSection">
         <label>Email Address</label>
@@ -181,7 +181,7 @@
         </div>
       </div>
       <div class="header-icons">
-        <div class="user-pill" id="displayUserRole">DYNAMIC SL/TP PRO</div>
+        <div class="user-pill" id="displayUserRole">DYNAMIC RISK PRO</div>
         <button onclick="logout()" style="background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Toka</button>
       </div>
     </header>
@@ -193,8 +193,8 @@
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
       <div class="menu-item" onclick="navigate('aiassistant')">🤖 AI Assistance Chat <span class="badge-new">GEMINI 3.6</span></div>
-      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">7 MASTERS</span></div>
-      <div class="menu-item" onclick="navigate('journal')">Trade Journal & Tracking <span class="badge-new">NEW</span></div>
+      <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">MASTERS 10</span></div>
+      <div class="menu-item" onclick="navigate('journal')">Risk Calculator & Journal <span class="badge-new">OPTIMIZED</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
       <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
       <div class="menu-item" onclick="navigate('history')">Trade History Archive</div>
@@ -211,10 +211,8 @@
 
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
-          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=" alt="Banner" class="hero-banner-img" onclick="openImageModal(this.src)">
-
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAU/USD • BTC/USD • EUR/USD • US30</div>
+            <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAUUSD • BTCUSD • PWA LUTYNOEL.FX</div>
             <div style="display: flex; gap: 6px;">
               <span style="background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🐂 BULL MARKET</span>
               <span style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🐻 BEAR DEFENSE</span>
@@ -223,9 +221,9 @@
           
           <h2 style="margin: 0 0 5px 0; font-size: 19px;">
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
-            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Dynamic SL/TP Protocol)</span>
+            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Masters 10 Trading System)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Institutional Intelligence & AI Tools powered by Gemini 3.6 Flash.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Integrated with 10 Market Analysis Masters for XAUUSD & BTCUSD powered by Gemini 3.6 Flash.</p>
         </div>
 
         <div class="grid-3">
@@ -246,7 +244,7 @@
         <div class="card">
           <h3 style="margin-top:0; font-size: 15px; color: var(--accent);">Njia za Haraka</h3>
           <button class="primary-btn" onclick="navigate('aiassistant')">Fungua AI Assistance Chat (Gemini 3.6) 🤖</button>
-          <button class="secondary-btn" onclick="navigate('analyst')">Anzisha 7 Masters Chart Analysis →</button>
+          <button class="secondary-btn" onclick="navigate('analyst')">Anzisha Masters 10 Chart Analysis →</button>
         </div>
       </div>
 
@@ -254,11 +252,11 @@
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL</div>
           <h3 style="margin: 0 0 12px 0; font-size: 16px;">Chat na Mtaalamu Wako wa AI</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu biashara ya forex, uchambuzi wa XAUUSD, Bitcoin, au ushauri wa mikakati ya Dynamic SL/TP kulingana na Order Blocks.</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu uchambuzi wa XAUUSD, BTCUSD, au mfumo wa Masters 10.</p>
 
           <div class="chat-container">
             <div id="chatMessages" class="chat-messages">
-              <div class="chat-bubble ai">Habari! Mimi ni Lutynoel FX AI Assistant wako wa Gemini 3.6 Flash. Nipo hapa kukusaidia na maswali yako yote ya biashara, kuweka SL ya kihalisisia (Order Block / Retracement), na TP kubwa. Niambie nikupe msaada gani leo?</div>
+              <div class="chat-bubble ai">Habari mwanangu! Mimi ni Lutynoel FX AI Assistant wako wa Gemini 3.6 Flash. Nipo hapa kukusaidia na mfumo wetu wa Masters 10, XAUUSD, na BTCUSD. Niambie nikupe msaada gani leo?</div>
             </div>
             <div class="chat-input-row">
               <input type="text" id="chatUserInput" placeholder="Andika swali lako hapa..." onkeydown="if(event.key === 'Enter') sendAIChatMessage()">
@@ -270,37 +268,27 @@
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX LAB v11.2 (DYNAMIC SL/TP ENGINE)</div>
-          <h3 style="margin: 5px 0 15px 0;">7 Masters Smart Canvas Engine</h3>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">PWA LUTYNOEL.FX v11.2 (MASTERS 10 ENGINE)</div>
+          <h3 style="margin: 5px 0 15px 0;">10 Market Analysis Masters Smart Canvas</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
           <select id="selectedPairDropdown" onchange="syncPairSelection(this.value)">
-            <optgroup label="✨ Metals (XAU / XAG)">
-              <option value="XAUUSD">XAU/USD (Gold)</option>
-              <option value="XAGUSD">XAG/USD (Silver)</option>
+            <optgroup label="✨ Core Markets (XAUUSD & BTCUSD)">
+              <option value="XAUUSD">XAUUSD (Gold / Dhahabu)</option>
+              <option value="BTCUSD">BTCUSD (Bitcoin / Crypto)</option>
             </optgroup>
-            <optgroup label="🪙 Crypto (BTC / ETH)">
-              <option value="BTCUSD">BTC/USD (Bitcoin)</option>
-              <option value="ETHUSD">ETH/USD (Ethereum)</option>
-            </optgroup>
-            <optgroup label="💱 Major Currencies">
+            <optgroup label="💱 Other Majors">
               <option value="EURUSD">EUR/USD</option>
               <option value="GBPUSD">GBP/USD</option>
               <option value="USDJPY">USD/JPY</option>
-              <option value="AUDUSD">AUD/USD</option>
-              <option value="USDCAD">USD/CAD</option>
-            </optgroup>
-            <optgroup label="📈 Indices">
-              <option value="US30">US30 (Dow Jones)</option>
-              <option value="NAS100">NAS100 (Nasdaq)</option>
             </optgroup>
           </select>
 
           <label style="margin-top: 15px;">Analysis Framework</label>
           <select id="framework">
+            <option value="Masters 10 Core Engine">Masters 10 Core Engine (Full Confluence)</option>
             <option value="Day Trader">Day Trader (Multi-TF Confluence)</option>
-            <option value="Scalper">Scalper (M15 / M5 Precision)</option>
-            <option value="Swing Trader">Swing Trader (HTF Setup)</option>
+            <option value="Scalper">Scalper (Precision M15)</option>
           </select>
 
           <label style="margin-top: 15px;">2. Required Market Timeframe: 4H Chart</label>
@@ -327,19 +315,19 @@
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN 7 MASTERS (GEMINI 3.6)</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN MASTERS 10 (GEMINI 3.6)</button>
         </div>
 
         <div id="resultsContainer" style="display: none;">
           <div class="card" style="text-align: center; border-color: var(--green);">
-            <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAU/USD</div>
-            <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Day Trader</div>
+            <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAUUSD</div>
+            <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Masters 10 Core Engine</div>
             
             <div id="resActionType" style="font-size: 32px; font-weight: bold; color: var(--green); margin: 5px 0;">BUY</div>
             <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">MARKET EXECUTED</div>
             
             <div class="signal-badge-container">
-              <span class="badge-conf">DYNAMIC SL/TP ENGINE</span>
+              <span class="badge-conf">MASTERS 10 PROTOCOL</span>
               <span class="badge-pass">CONFLUENCE PASS</span>
               <span class="badge-status" id="tradeStatusBadge">EXECUTED SOKONI</span>
             </div>
@@ -347,7 +335,7 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">📊 PIPS & MULTI-LOT PROFIT/LOSS BREAKDOWN (USD & TZS)</div>
+            <div class="ballistic-header">📊 PIPS & PROFIT/LOSS BREAKDOWN</div>
             
             <div class="grid-2">
               <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">0 Pips</div></div>
@@ -365,7 +353,7 @@
           <div class="card">
             <div class="ballistic-header">🛡️ MARKET STRUCTURE RISK GUARD CHECKLIST</div>
             <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss placed accurately below/above structural Order Block</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Liquidity Sweep & Target Mitigation (SMC)</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Liquidity Sweep & Target Mitigation (SMC/ICT)</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)</span></div>
           </div>
 
@@ -383,7 +371,7 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">👥 7 INSTITUTIONAL MASTERS (ALL 3 CHARTS ANALYZED PER MASTER)</div>
+            <div class="ballistic-header">👥 10 MARKET ANALYSIS MASTERS (ALL 3 CHARTS ANALYZED)</div>
             <div id="agentsContainer"></div>
           </div>
 
@@ -398,10 +386,46 @@
 
       <div id="view-journal" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX JOURNAL</div>
-          <h3 style="margin: 5px 0 10px 0;">Manual Trade & P&L Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Ingiza taarifa za biashara yako (Dynamic Mode):</p>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX RISK CALCULATOR & JOURNAL</div>
+          <h3 style="margin: 5px 0 10px 0;">Advanced Risk & Lot Size Calculator</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Weka mtaji wako na asilimia ya hatari kukokotoa lot size sahihi:</p>
 
+          <div class="grid-2">
+            <div>
+              <label>Account Balance ($)</label>
+              <input type="number" id="riskBalance" value="1000" placeholder="1000">
+            </div>
+            <div>
+              <label>Risk Percentage (%)</label>
+              <input type="number" step="0.1" id="riskPercent" value="1.0" placeholder="1.0">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label>Stop Loss (Pips)</label>
+              <input type="number" id="riskSlPips" value="30" placeholder="30">
+            </div>
+            <div>
+              <label>Asset Type</label>
+              <select id="riskAssetType">
+                <option value="XAUUSD">Gold (XAUUSD)</option>
+                <option value="CRYPTO">Crypto (BTCUSD)</option>
+                <option value="FOREX">Forex Major</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="secondary-btn" onclick="calculateRiskLotSize()">Hesabu Lot Size Sahihi</button>
+          
+          <div id="riskCalcResultBox" class="mini-box" style="margin-top: 15px; display: none; border-color: var(--accent);">
+            <div style="font-size: 12px; color: var(--accent); font-weight: bold;">MATOKEO YA KIKOKOTOO CHA HATARI:</div>
+            <div id="riskResultText" style="font-size: 14px; margin-top: 6px; line-height: 1.5;"></div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 20px 0;">
+
+          <h3 style="margin: 5px 0 10px 0;">Manual Trade Journal Entry</h3>
           <label>Instrument Pair</label>
           <input type="text" id="jPair" placeholder="e.g. XAUUSD or BTCUSD">
 
@@ -452,17 +476,10 @@
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chagua Pair ya Kuangalia Live Chart:</p>
           
           <select id="liveChartPairSelector" onchange="changeLiveChartPair(this.value)">
-            <option value="OANDA:XAUUSD">XAU/USD (Gold)</option>
-            <option value="OANDA:XAGUSD">XAG/USD (Silver)</option>
-            <option value="BINANCE:BTCUSDT">BTC/USD (Bitcoin)</option>
-            <option value="BINANCE:ETHUSDT">ETH/USD (Ethereum)</option>
+            <option value="OANDA:XAUUSD">XAUUSD (Gold / Dhahabu)</option>
+            <option value="BINANCE:BTCUSDT">BTCUSD (Bitcoin / Crypto)</option>
             <option value="OANDA:EURUSD">EUR/USD</option>
             <option value="OANDA:GBPUSD">GBP/USD</option>
-            <option value="OANDA:USDJPY">USD/JPY</option>
-            <option value="OANDA:AUDUSD">AUD/USD</option>
-            <option value="OANDA:USDCAD">USD/CAD</option>
-            <option value="CAPITALCOM:US30">US30 (Dow Jones)</option>
-            <option value="CAPITALCOM:US100">NAS100 (Nasdaq)</option>
           </select>
 
           <div style="height: 480px; width: 100%; margin-top: 10px;" id="tradingview_widget_container">
@@ -485,7 +502,7 @@
             <h3 style="margin: 0;">Trade History Archive</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita (Bonyeza kadi kuona maelezo, au futa moja moja):</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita:</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>
           </div>
@@ -504,6 +521,28 @@
   </div>
 
 <script>
+/**
+ * PWA LUTYNOEL.FX - TRADING MASTER SYSTEM (VERSION 10.0)
+ * Integrated with 10 Market Analysis Masters for XAUUSD & BTCUSD
+ */
+class LutynoelFXSystem {
+    constructor(symbol) {
+        this.symbol = symbol.toUpperCase();
+        this.mastersLoaded = [
+            "Price Action", 
+            "Demand & Supply", 
+            "Market Structure", 
+            "Fundamental Analysis", 
+            "Smart Money Concepts (SMC)", 
+            "ICT (Inner Circle Trader)", 
+            "Volume Profile", 
+            "Fibonacci Analysis", 
+            "Elliott Wave Theory", 
+            "Quantitative / Indicators"
+        ];
+    }
+}
+
 let currentMathAns1 = 0;
 let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
@@ -526,7 +565,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedUser && savedApiKey) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
-    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'DYNAMIC SL/TP GUEST';
+    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'MASTERS 10 GUEST';
   }
 
   loadTradeHistory();
@@ -535,7 +574,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "Lutynoel FX Institutional Terminal v11.2",
+    name: "PWA Lutynoel FX Masters 10 System",
     short_name: "Lutynoel FX",
     start_url: "./",
     display: "standalone",
@@ -577,12 +616,12 @@ function toggleAuthMode(mode) {
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('registerFormSection').style.display = 'block';
     document.getElementById('authTitle').innerText = 'Create Account';
-    document.getElementById('authSubtitle').innerText = 'Deploy your institutional edge';
+    document.getElementById('authSubtitle').innerText = 'Deploy Masters 10 Protocol';
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
     document.getElementById('authTitle').innerText = 'Lutynoel FX v11.2';
-    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & AI Assistance (Gemini 3.6 Flash)';
+    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & Masters 10 Engine';
   }
 }
 
@@ -613,7 +652,7 @@ function handleGuestLogin() {
 
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
-  document.getElementById('displayUserRole').innerText = 'DYNAMIC SL/TP GUEST';
+  document.getElementById('displayUserRole').innerText = 'MASTERS 10 GUEST';
 }
 
 function handleRegister() {
@@ -659,16 +698,10 @@ function navigate(viewId) {
 
 function syncPairSelection(pairValue) {
   let tvSymbol = "OANDA:XAUUSD";
-  if (pairValue === "XAGUSD") tvSymbol = "OANDA:XAGUSD";
-  else if (pairValue === "BTCUSD") tvSymbol = "BINANCE:BTCUSDT";
-  else if (pairValue === "ETHUSD") tvSymbol = "BINANCE:ETHUSDT";
+  if (pairValue === "BTCUSD") tvSymbol = "BINANCE:BTCUSDT";
   else if (pairValue === "EURUSD") tvSymbol = "OANDA:EURUSD";
   else if (pairValue === "GBPUSD") tvSymbol = "OANDA:GBPUSD";
   else if (pairValue === "USDJPY") tvSymbol = "OANDA:USDJPY";
-  else if (pairValue === "AUDUSD") tvSymbol = "OANDA:AUDUSD";
-  else if (pairValue === "USDCAD") tvSymbol = "OANDA:USDCAD";
-  else if (pairValue === "US30") tvSymbol = "CAPITALCOM:US30";
-  else if (pairValue === "NAS100") tvSymbol = "CAPITALCOM:US100";
 
   const liveChartSelect = document.getElementById('liveChartPairSelector');
   if(liveChartSelect) {
@@ -683,16 +716,10 @@ function changeLiveChartPair(tvSymbol) {
   const analystSelect = document.getElementById('selectedPairDropdown');
   if(analystSelect) {
     if(tvSymbol.includes('XAU')) analystSelect.value = 'XAUUSD';
-    else if(tvSymbol.includes('XAG')) analystSelect.value = 'XAGUSD';
     else if(tvSymbol.includes('BTC')) analystSelect.value = 'BTCUSD';
-    else if(tvSymbol.includes('ETH')) analystSelect.value = 'ETHUSD';
     else if(tvSymbol.includes('EUR')) analystSelect.value = 'EURUSD';
     else if(tvSymbol.includes('GBP')) analystSelect.value = 'GBPUSD';
     else if(tvSymbol.includes('JPY')) analystSelect.value = 'USDJPY';
-    else if(tvSymbol.includes('AUD')) analystSelect.value = 'AUDUSD';
-    else if(tvSymbol.includes('CAD')) analystSelect.value = 'USDCAD';
-    else if(tvSymbol.includes('US30')) analystSelect.value = 'US30';
-    else if(tvSymbol.includes('US100')) analystSelect.value = 'NAS100';
   }
 }
 
@@ -717,7 +744,7 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   let loadingId = 'ai_load_' + Date.now();
-  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI inatafakari...</div>`;
+  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI inatafakari kupitia Masters 10...</div>`;
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
@@ -727,7 +754,7 @@ async function sendAIChatMessage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{
-          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya Forex, XAUUSD, Bitcoin, na mikakati ya Dynamic SL/TP kulingana na Order Blocks na Retracements kwa kutumia Gemini 3.6 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
+          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya XAUUSD, BTCUSD, na mfumo wa Masters 10 kwa kutumia Gemini 3.6 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
         }]
       })
     });
@@ -791,13 +818,14 @@ function openImageModal(imgSrc) {
 
 function loadEconomicCalendar() {
   const container = document.getElementById('economicNewsContainer');
+  if(!container) return;
   container.innerHTML = `
     <div class="news-card impact-red">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <strong style="font-size: 13px;">USD - High Impact News & Liquidity Flow</strong>
+        <strong style="font-size: 13px;">XAUUSD & BTCUSD - High Impact News Flow</strong>
         <span style="font-size: 10px; font-weight: bold; color: var(--text-muted);">LIVE</span>
       </div>
-      <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: HIGH IMPACT</div>
+      <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: HIGH IMPACT (Fundamental Analysis Master)</div>
     </div>
   `;
 }
@@ -806,12 +834,8 @@ async function fetchLiveMarketPrice(pair) {
   try {
     let symbolQuery = "XAUUSDT";
     if(pair.includes("BTC")) symbolQuery = "BTCUSDT";
-    else if(pair.includes("ETH")) symbolQuery = "ETHUSDT";
     else if(pair.includes("EUR")) symbolQuery = "EURUSDT";
     else if(pair.includes("GBP")) symbolQuery = "GBPUSDT";
-    else if(pair.includes("AUD")) symbolQuery = "AUDUSDT";
-    else if(pair.includes("CAD")) symbolQuery = "USDCADUSDT"; 
-    else if(pair.includes("JPY")) symbolQuery = "USDJPYUSDT";
     else symbolQuery = pair + "USDT";
 
     const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbolQuery}`);
@@ -821,9 +845,8 @@ async function fetchLiveMarketPrice(pair) {
     }
   } catch(e) {}
 
-  if(pair.includes("XAU")) return 2500.50;
-  if(pair.includes("ETH")) return 3100.00;
-  if(pair.includes("BTC")) return 64500.00;
+  if(pair.includes("XAU")) return 2650.50;
+  if(pair.includes("BTC")) return 92000.00;
   return 1.3520;
 }
 
@@ -841,15 +864,12 @@ function calculateAccurateProfit(pairName, entry, tp3) {
   let pipValuePerStandardLot = 10.0; 
   let upperAssetType = pairName.toUpperCase();
 
-  if (upperAssetType.includes("ETH")) pipValuePerStandardLot = 0.01; 
-  else if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 0.10;
+  if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 0.10;
   else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 1.0;
-  else if (upperAssetType.includes("JPY")) pipValuePerStandardLot = 8.5;
 
   if (entry > 0 && tp3 > 0) {
     let priceDiff = Math.abs(tp3 - entry);
-    if (upperAssetType.includes("JPY")) pips = priceDiff * 100;
-    else if (upperAssetType.includes("BTC") || upperAssetType.includes("ETH") || upperAssetType.includes("XAU")) pips = priceDiff * 10; 
+    if (upperAssetType.includes("BTC") || upperAssetType.includes("XAU")) pips = priceDiff * 10; 
     else pips = priceDiff * 10000; 
   }
 
@@ -864,6 +884,33 @@ function calculateAccurateProfit(pairName, entry, tp3) {
   });
 
   return { calculatedPips: Math.round(pips), projections: resObj };
+}
+
+function calculateRiskLotSize() {
+  const balance = parseFloat(document.getElementById('riskBalance').value) || 1000;
+  const riskPct = parseFloat(document.getElementById('riskPercent').value) || 1.0;
+  const slPips = parseFloat(document.getElementById('riskSlPips').value) || 30;
+  const assetType = document.getElementById('riskAssetType').value;
+
+  let riskAmount = (balance * riskPct) / 100;
+  let pipValuePerStandard = 10.0;
+  if(assetType === 'XAUUSD') pipValuePerStandard = 1.0;
+  else if(assetType === 'CRYPTO') pipValuePerStandard = 1.0;
+
+  let recommendedLot = riskAmount / (slPips * pipValuePerStandard);
+  if(recommendedLot < 0.01) recommendedLot = 0.01;
+
+  let resBox = document.getElementById('riskCalcResultBox');
+  let resText = document.getElementById('riskResultText');
+  
+  resText.innerHTML = `
+    • <strong>Mtaji (Balance):</strong> $${balance.toFixed(2)}<br>
+    • <strong>Hatari Inayoruhusiwa (${riskPct}%):</strong> $${riskAmount.toFixed(2)}<br>
+    • <strong>Stop Loss:</strong> ${slPips} Pips<br>
+    • <strong style="color:var(--accent);">Lot Size Sahihi ya Kutumia: ${recommendedLot.toFixed(2)}</strong>
+  `;
+  resBox.style.display = 'block';
+  showToast("Lot size imehesabiwa kwa usahihi!");
 }
 
 async function runLutynoelAnalysis() {
@@ -883,45 +930,46 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
+  runBtn.innerText = `⏳ Masters 10 (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash. PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
-Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na ufanye yafuatayo:
-1. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa Order Blocks na Market Structure.
-2. Kama soko lipo katika hali ya kujichanganya (consolidation/sideways) au hakuna ushahidi wa kutosha, lazima 'action' iwe 'WAIT' na uweke alama za chini ya 60.
+    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na mfumo wa Masters 10 (Price Action, Demand & Supply, Market Structure, Fundamental Analysis, SMC, ICT, Volume Profile, Fibonacci, Elliott Wave, na Quantitative/Indicators). PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
+Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na ufanye yafuatayo kwa kutumia Masters wote 10:
+1. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa mfumo wetu.
+2. Kama soko lipo katika hali ya kujichanganya au hakuna ushahidi thabiti, lazima 'action' iwe 'WAIT'.
 3. Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
-  "confidence_score": 85,
-  "subtitle": "Strict ${pair} Multi-TF Confluence & Order Block Strategy",
-  "sl_pips": "45 Pips",
-  "tp_pips": "450 Pips",
-  "chk1": "Stop Loss placed accurately below structural Order Block",
-  "chk2": "Institutional Liquidity Sweep & Target Mitigation (SMC)",
+  "confidence_score": 90,
+  "subtitle": "Strict ${pair} Masters 10 Confluence Strategy",
+  "sl_pips": "50 Pips",
+  "tp_pips": "500 Pips",
+  "chk1": "Stop Loss placed accurately below structural Order Block (SMC)",
+  "chk2": "Institutional Liquidity Sweep & Fibonacci 0.618 Confluence",
   "chk3": "Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)",
   "entry": "${livePrice}",
-  "sl": "${(livePrice - 0.0050).toFixed(4)}",
-  "tp1": "${(livePrice + 0.0080).toFixed(4)}",
-  "tp2": "${(livePrice + 0.0150).toFixed(4)}",
-  "tp3": "${(livePrice + 0.0300).toFixed(4)}",
+  "sl": "${(livePrice - 10).toFixed(2)}",
+  "tp1": "${(livePrice + 15).toFixed(2)}",
+  "tp2": "${(livePrice + 30).toFixed(2)}",
+  "tp3": "${(livePrice + 60).toFixed(2)}",
   "rr": "1:8.5",
   "trade_status": "EXECUTED SOKONI",
-  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "4H shows macro momentum building. 1H confirms breakout structure. 15M reveals immediate bullish rejection candles.",
-  "agent2_title": "2. Supply & Demand Master", "agent2_decision": "BUY", "agent2_text": "4H tested major demand zone. 1H formed fresh mitigation block. 15M validated entry near institutional imbalance.",
-  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "4H trend is bullish. 1H CHoCH verified. 15M break of structure completed cleanly for continuation.",
-  "agent4_title": "4. Fundamental & Macro Master", "agent4_decision": "BUY", "agent4_text": "4H macro sentiment aligns with institutional order flow. 1H news volatility absorbed. 15M clean liquidity run.",
-  "agent5_title": "5. SMC Master", "agent5_decision": "BUY", "agent5_text": "4H liquidity sweep complete. 1H order block tapped. 15M inducement cleared for expansion.",
-  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "4H killzone alignment. 1H Fair Value Gap (FVG) filled. 15M execution trigger active.",
-  "agent7_title": "7. Wyckoff & Institutional Volume Master", "agent7_decision": "BUY", "agent7_text": "4H accumulation phase ending. 1H spring confirmed with volume. 15M markup initiated.",
-  "tf": "4H: Macro direction confirmed from chart analysis.\\n1H: POI mitigation locked.\\n15M: Precise execution trigger confirmed under Dynamic Order Block rules."
+  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "Candlestick structure shows strong bullish momentum across 4H and 1H timeframes.",
+  "agent2_title": "2. Demand & Supply Master", "agent2_decision": "BUY", "agent2_text": "Price successfully mitigated a major institutional demand zone with clean reaction.",
+  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "BOS (Break of Structure) confirmed to the upside, signaling continuation.",
+  "agent4_title": "4. Fundamental Analysis Master", "agent4_decision": "BUY", "agent4_text": "Macroeconomic sentiment and interest rate expectations favor this asset direction.",
+  "agent5_title": "5. Smart Money Concepts (SMC)", "agent5_decision": "BUY", "agent5_text": "Retail liquidity swept cleanly below previous lows before impulsive markup.",
+  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "Killzone session timing aligned with Fair Value Gap (FVG) mitigation.",
+  "agent7_title": "7. Volume Profile Master", "agent7_decision": "BUY", "agent7_text": "Point of Control (POC) tested with high volume nodes backing the move.",
+  "agent8_title": "8. Fibonacci Analysis Master", "agent8_decision": "BUY", "agent8_text": "Retracement hit the 0.618 golden pocket with precision.",
+  "agent9_title": "9. Elliott Wave Theory Master", "agent9_decision": "BUY", "agent9_text": "Wave 3 impulse phase initiated following a completed Wave 2 correction.",
+  "agent10_title": "10. Quantitative / Indicators Master", "agent10_decision": "BUY", "agent10_text": "Moving averages crossover and RSI divergence confirm bullish strength.",
+  "tf": "4H: Macro trend confirmed via Elliott Wave & Structure.\\n1H: POI mitigation & Fibonacci Golden Pocket locked.\\n15M: Precise execution trigger confirmed under Masters 10 protocol."
 }`;
 
     parts.push({ text: promptText });
@@ -946,7 +994,7 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     
     let resObj = JSON.parse(rawText);
 
-    let confidenceScore = parseInt(resObj.confidence_score) || 70;
+    let confidenceScore = parseInt(resObj.confidence_score) || 75;
     if (confidenceScore < 60) {
       resObj.action = "WAIT";
       resObj.exec_type = "SUBIRI / KAGHAZI (LOW CONFIDENCE)";
@@ -954,10 +1002,10 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     }
 
     let entryPrice = parseFloat(resObj.entry) || livePrice;
-    let slPrice = parseFloat(resObj.sl) || (resObj.action === "BUY" ? entryPrice - 0.0050 : entryPrice + 0.0050);
-    let tp1Price = parseFloat(resObj.tp1) || (resObj.action === "BUY" ? entryPrice + 0.0080 : entryPrice - 0.0080);
-    let tp2Price = parseFloat(resObj.tp2) || (resObj.action === "BUY" ? entryPrice + 0.0150 : entryPrice - 0.0150);
-    let tp3Price = parseFloat(resObj.tp3) || (resObj.action === "BUY" ? entryPrice + 0.0300 : entryPrice - 0.0300);
+    let slPrice = parseFloat(resObj.sl) || (resObj.action === "BUY" ? entryPrice - 10 : entryPrice + 10);
+    let tp1Price = parseFloat(resObj.tp1) || (resObj.action === "BUY" ? entryPrice + 15 : entryPrice - 15);
+    let tp2Price = parseFloat(resObj.tp2) || (resObj.action === "BUY" ? entryPrice + 30 : entryPrice - 30);
+    let tp3Price = parseFloat(resObj.tp3) || (resObj.action === "BUY" ? entryPrice + 60 : entryPrice - 60);
 
     const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price);
 
@@ -967,7 +1015,7 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     document.getElementById('resExecType').innerText = resObj.exec_type;
     document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "PENDING";
     
-    document.getElementById('valSLPips').innerText = resObj.sl_pips || "45 Pips";
+    document.getElementById('valSLPips').innerText = resObj.sl_pips || "50 Pips";
     document.getElementById('valTPPIps').innerText = calcData.calculatedPips + " Pips (TP3)";
 
     document.getElementById('tp_lot001').innerHTML = calcData.projections.tp_001;
@@ -981,10 +1029,10 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     document.getElementById('chk3').innerText = resObj.chk3;
 
     document.getElementById('valEntry').innerText = entryPrice;
-    document.getElementById('valSL').innerText = slPrice.toFixed(4);
-    document.getElementById('valTP1').innerText = tp1Price.toFixed(4);
-    document.getElementById('valTP2').innerText = tp2Price.toFixed(4);
-    document.getElementById('valTP3').innerText = tp3Price.toFixed(4);
+    document.getElementById('valSL').innerText = slPrice.toFixed(2);
+    document.getElementById('valTP1').innerText = tp1Price.toFixed(2);
+    document.getElementById('valTP2').innerText = tp2Price.toFixed(2);
+    document.getElementById('valTP3').innerText = tp3Price.toFixed(2);
     document.getElementById('valRR').innerText = resObj.rr || "1:8.5";
 
     await renderAllAgentsWithSmartCanvas(resObj);
@@ -996,14 +1044,14 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
       framework: framework,
       action: resObj.action,
       entry: entryPrice,
-      tp: tp3Price.toFixed(4),
-      tp1: tp1Price.toFixed(4),
-      tp2: tp2Price.toFixed(4),
-      tp3: tp3Price.toFixed(4),
-      sl: slPrice.toFixed(4),
+      tp: tp3Price.toFixed(2),
+      tp1: tp1Price.toFixed(2),
+      tp2: tp2Price.toFixed(2),
+      tp3: tp3Price.toFixed(2),
+      sl: slPrice.toFixed(2),
       status: resObj.trade_status,
       rr: resObj.rr || "1:8.5",
-      sl_pips: resObj.sl_pips || "45 Pips",
+      sl_pips: resObj.sl_pips || "50 Pips",
       tp_pips: calcData.calculatedPips + " Pips",
       outcome: resObj.action === "WAIT" ? "WAIT" : "PENDING",
       pnl: 0,
@@ -1014,11 +1062,14 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
         { title: resObj.agent4_title, decision: resObj.agent4_decision, text: resObj.agent4_text },
         { title: resObj.agent5_title, decision: resObj.agent5_decision, text: resObj.agent5_text },
         { title: resObj.agent6_title, decision: resObj.agent6_decision, text: resObj.agent6_text },
-        { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text }
+        { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text },
+        { title: resObj.agent8_title, decision: resObj.agent8_decision, text: resObj.agent8_text },
+        { title: resObj.agent9_title, decision: resObj.agent9_decision, text: resObj.agent9_text },
+        { title: resObj.agent10_title, decision: resObj.agent10_decision, text: resObj.agent10_text }
       ]
     });
 
-    showToast(`Uchambuzi umekamilika (Confidence: ${confidenceScore}%)!`);
+    showToast(`Uchambuzi wa Masters 10 umekamilika (Confidence: ${confidenceScore}%)!`);
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
@@ -1026,12 +1077,13 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     alert("Hitilafu: " + (err.message || "Tafadhali angalia API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "RUN 7 MASTERS (GEMINI 3.6)";
+    runBtn.innerText = "RUN MASTERS 10 (GEMINI 3.6)";
   }
 }
 
 async function renderAllAgentsWithSmartCanvas(resObj) {
   const container = document.getElementById('agentsContainer');
+  if(!container) return;
   container.innerHTML = '';
   let imgH4 = globalImages.h4?.url || "";
   let imgH1 = globalImages.h1?.url || "";
@@ -1044,11 +1096,15 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
     { title: resObj.agent4_title, decision: resObj.agent4_decision, text: resObj.agent4_text },
     { title: resObj.agent5_title, decision: resObj.agent5_decision, text: resObj.agent5_text },
     { title: resObj.agent6_title, decision: resObj.agent6_decision, text: resObj.agent6_text },
-    { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text }
+    { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text },
+    { title: resObj.agent8_title, decision: resObj.agent8_decision, text: resObj.agent8_text },
+    { title: resObj.agent9_title, decision: resObj.agent9_decision, text: resObj.agent9_text },
+    { title: resObj.agent10_title, decision: resObj.agent10_decision, text: resObj.agent10_text }
   ];
 
   for (let idx = 0; idx < agentsData.length; idx++) {
     let ag = agentsData[idx];
+    if(!ag.title) continue;
     let decColor = ag.decision === 'BUY' ? 'var(--green)' : (ag.decision === 'SELL' ? 'var(--red)' : 'var(--accent)');
     
     let card = document.createElement('div');
@@ -1099,7 +1155,12 @@ function saveToHistory(tradeData) {
   }
   history.unshift(tradeData);
   if (history.length > 50) history.pop();
-  localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  try {
+    localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  } catch(e) {
+    history = history.slice(0, 20);
+    localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  }
   updateStatsOverview();
 }
 
@@ -1193,7 +1254,7 @@ function openHistoryDetails(index) {
       <strong>TP1:</strong> ${item.tp1 || '-'} | <strong>TP2:</strong> ${item.tp2 || '-'} | <strong>TP3:</strong> ${item.tp3 || item.tp}<br>
       <strong>SL Pips:</strong> ${item.sl_pips || '-'} | <strong>TP Pips:</strong> ${item.tp_pips || '-'}
     </div>
-    <h4 style="margin-bottom: 5px; font-size: 13px; color: var(--accent);">Uchambuzi wa 7 Masters:</h4>
+    <h4 style="margin-bottom: 5px; font-size: 13px; color: var(--accent);">Uchambuzi wa Masters 10:</h4>
     <div style="max-height: 280px; overflow-y: auto;">${agentsHtml}</div>
   `;
   openModal(content);
