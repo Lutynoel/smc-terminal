@@ -886,7 +886,6 @@ async function runLutynoelAnalysis() {
   runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
 
   try {
-    // Kuzuia kuganda kwa UI na kuongeza Delay thabiti ya sekunde 1
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     const livePrice = await fetchLiveMarketPrice(pair);
