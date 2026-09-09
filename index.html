@@ -883,9 +883,12 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair} na kukagua uaminifu wa soko...`;
+  runBtn.innerText = `⏳ 7 Masters (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
 
   try {
+    // Kuzuia kuganda kwa UI na kuongeza Delay thabiti ya sekunde 1
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
@@ -944,7 +947,6 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     
     let resObj = JSON.parse(rawText);
 
-    // THRESHOLD GUARD: Kama confidence score ipo chini ya 60, tunabadilisha kuwa WAIT
     let confidenceScore = parseInt(resObj.confidence_score) || 70;
     if (confidenceScore < 60) {
       resObj.action = "WAIT";
