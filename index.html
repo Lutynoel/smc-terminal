@@ -826,24 +826,22 @@ function loadEconomicCalendar() {
   `;
 }
 
+/**
+ * FETCH LIVE MARKET PRICE VIA WEBSOCKET/REST STREAM (NO HARDCODED FALLBACKS)
+ */
 async function fetchLiveMarketPrice(pair) {
-  try {
-    let symbolQuery = "XAUUSDT";
-    if(pair.includes("BTC")) symbolQuery = "BTCUSDT";
-    else if(pair.includes("EUR")) symbolQuery = "EURUSDT";
-    else if(pair.includes("GBP")) symbolQuery = "GBPUSDT";
-    else symbolQuery = pair + "USDT";
+  let symbolQuery = "XAUUSDT";
+  if(pair.includes("BTC")) symbolQuery = "BTCUSDT";
+  else if(pair.includes("EUR")) symbolQuery = "EURUSDT";
+  else if(pair.includes("GBP")) symbolQuery = "GBPUSDT";
+  else symbolQuery = pair + "USDT";
 
-    const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbolQuery}`);
-    const data = await res.json();
-    if(data && data.price) {
-      return parseFloat(data.price);
-    }
-  } catch(e) {}
-
-  if(pair.includes("XAU")) return 2650.50;
-  if(pair.includes("BTC")) return 92000.00;
-  return 1.3520;
+  const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbolQuery}`);
+  const data = await res.json();
+  if(data && data.price) {
+    return parseFloat(data.price);
+  }
+  throw new Error("Imeshindikana kupata bei ya moja kwa moja (Live Price Stream) kutoka sokoni.");
 }
 
 async function fileToBase64(file) {
@@ -925,7 +923,7 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ Masters 10 (Gemini 3.6) wanasoma picha zote 3 za ${pair}...`;
+  runBtn.innerText = `⏳ Inavuta Live Price na Kusoma Chati za ${pair}...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
@@ -934,7 +932,7 @@ async function runLutynoelAnalysis() {
 
     const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na mfumo wa Masters 10 (Price Action, Demand & Supply, Market Structure, Fundamental Analysis, SMC, ICT, Volume Profile, Fibonacci, Elliott Wave, na Quantitative/Indicators). PAIR ILIYOTEULIWA NI: ${pair}. Bei halisi ya sasa kwenye soko ni ${livePrice}.
 Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na ufanye yafuatayo kwa kutumia Masters wote 10:
-1. Tumia bei halisi ya sasa (${livePrice}) kama 'entry' ya biashara.
+1. Lazima utumie bei halisi ya sasa (${livePrice}) kama 'entry' ya biashara.
 2. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa mfumo wetu.
 3. Kama soko lipo katika hali ya kujichanganya au hakuna ushahidi thabiti, lazima 'action' iwe 'WAIT'.
 4. Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
@@ -1070,7 +1068,7 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
-    alert("Hitilafu: " + (err.message || "Tafadhali angalia API Key yako."));
+    alert("Hitilafu: " + (err.message || "Tafadhali angalia mtandao wako au API Key."));
   } finally {
     runBtn.disabled = false;
     runBtn.innerText = "ANZA MASTERS 10 (GEMINI 3.6)";
