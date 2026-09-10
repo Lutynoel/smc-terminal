@@ -975,10 +975,10 @@ Toa majibu katika muundo wa JSON pekee:
 }
 
 async function displayAnalysisResults(resObj, pair, framework, entryPrice, slPrice, tp1Price, tp2Price, tp3Price, calcData) {
-    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + resObj.confidence_score + "%)";
+    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + (resObj.confidence_score || 90) + "%)";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
-    document.getElementById('resExecType').innerText = resObj.exec_type;
+    document.getElementById('resExecType').innerText = resObj.exec_type || "MARKET EXECUTED";
     document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "PENDING";
     
     document.getElementById('valSLPips').innerText = resObj.sl_pips || "50 Pips";
@@ -991,14 +991,14 @@ async function displayAnalysisResults(resObj, pair, framework, entryPrice, slPri
     document.getElementById('tp_lot100').innerHTML = calcData.projections.tp_100;
 
     document.getElementById('valEntry').innerText = entryPrice;
-    document.getElementById('valSL').innerText = slPrice.toFixed(2);
-    document.getElementById('valTP1').innerText = tp1Price.toFixed(2);
-    document.getElementById('valTP2').innerText = tp2Price.toFixed(2);
-    document.getElementById('valTP3').innerText = tp3Price.toFixed(2);
+    document.getElementById('valSL').innerText = slPrice;
+    document.getElementById('valTP1').innerText = tp1Price;
+    document.getElementById('valTP2').innerText = tp2Price;
+    document.getElementById('valTP3').innerText = tp3Price;
     document.getElementById('valRR').innerText = resObj.rr || "1:8.0";
 
     await renderAllAgentsWithSmartCanvas(resObj);
-    document.getElementById('tfOutput').innerText = resObj.tf;
+    document.getElementById('tfOutput').innerText = resObj.tf || "Uchambuzi umehifadhiwa kutoka kwenye historia.";
 }
 
 async function renderAllAgentsWithSmartCanvas(resObj) {
@@ -1024,14 +1024,14 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
 
   for (let idx = 0; idx < agentsData.length; idx++) {
     let ag = agentsData[idx];
-    if(!ag.title) continue;
+    if(!ag || !ag.title) continue;
     let decColor = ag.decision === 'BUY' ? 'var(--green)' : (ag.decision === 'SELL' ? 'var(--red)' : 'var(--accent)');
     
     let card = document.createElement('div');
     card.className = 'agent-card';
     card.innerHTML = `
-      <div class="agent-title"><span>${ag.title}</span> <span class="agent-decision" style="color: ${decColor};">${ag.decision}</span></div>
-      <div class="agent-desc">${ag.text}</div>
+      <div class="agent-title"><span>${ag.title}</span> <span class="agent-decision" style="color: ${decColor};">${ag.decision || 'BUY'}</span></div>
+      <div class="agent-desc">${ag.text || ''}</div>
       <div class="agent-canvas-grid">
         <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_h4"></canvas><div class="agent-canvas-label">4H</div></div>
         <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_h1"></canvas><div class="agent-canvas-label">1H</div></div>
@@ -1120,7 +1120,9 @@ function viewHistoryItem(index) {
   let calcData = calculateAccurateProfit(item.pair, entryPrice, tp3Price);
 
   navigate('analyst');
-  displayAnalysisResults(resObj, item.pair, item.framework || "Masters 10 Core Engine", entryPrice, slPrice, entryPrice + 10, entryPrice + 20, tp3Price, calcData);
+  displayAnalysisResults(resObj, item.pair, item.framework || "Masters 10 Core Engine", entryPrice, slPrice, parseFloat(resObj.tp1 || entryPrice), parseFloat(resObj.tp2 || entryPrice), tp3Price, calcData);
+  document.getElementById('resultsContainer').style.display = 'block';
+  document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 }
 
 function deleteSingleHistory(index) {
