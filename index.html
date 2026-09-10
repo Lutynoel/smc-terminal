@@ -741,7 +741,7 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -973,7 +973,7 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     parts.push({ inline_data: { mime_type: h1Input.files[0].type || "image/png", data: await fileToBase64(h1Input.files[0]) } });
     parts.push({ inline_data: { mime_type: m15Input.files[0].type || "image/png", data: await fileToBase64(m15Input.files[0]) } });
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
