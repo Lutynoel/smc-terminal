@@ -522,7 +522,7 @@
 
 <script>
 /**
- * PWA LUTYNOEL.FX - TRADING MASTER SYSTEM (VERSION 10.0)
+ * PWA LUTYNOEL.FX - TRADING MASTER SYSTEM (VERSION 11.2)
  * Integrated with 10 Market Analysis Masters for XAUUSD & BTCUSD
  */
 class LutynoelFXSystem {
@@ -937,11 +937,13 @@ async function runLutynoelAnalysis() {
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na mfumo wa Masters 10 (Price Action, Demand & Supply, Market Structure, Fundamental Analysis, SMC, ICT, Volume Profile, Fibonacci, Elliott Wave, na Quantitative/Indicators). PAIR ILIYOTEULIWA NI: ${pair}. Bei ya sasa kwenye soko ni takriban ${livePrice}.
+    // Prompt updated with explicit instruction to use the exact livePrice fetched from the market api
+    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na mfumo wa Masters 10 (Price Action, Demand & Supply, Market Structure, Fundamental Analysis, SMC, ICT, Volume Profile, Fibonacci, Elliott Wave, na Quantitative/Indicators). PAIR ILIYOTEULIWA NI: ${pair}. Bei halisi ya sasa kwenye soko ni ${livePrice}.
 Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na ufanye yafuatayo kwa kutumia Masters wote 10:
-1. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa mfumo wetu.
-2. Kama soko lipo katika hali ya kujichanganya au hakuna ushahidi thabiti, lazima 'action' iwe 'WAIT'.
-3. Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
+1. Tumia bei halisi ya sasa (${livePrice}) kama 'entry' ya biashara.
+2. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa mfumo wetu.
+3. Kama soko lipo katika hali ya kujichanganya au hakuna ushahidi thabiti, lazima 'action' iwe 'WAIT'.
+4. Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
