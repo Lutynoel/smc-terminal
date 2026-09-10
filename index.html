@@ -488,7 +488,7 @@
             <h3 style="margin: 0;">Historia ya Biashara (Trade History Archive)</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Bofya uchambuzi wowote kuona matokeo yake kamili:</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>
           </div>
@@ -947,6 +947,34 @@ Toa majibu katika muundo wa JSON pekee:
 
     const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price);
 
+    displayAnalysisResults(resObj, pair, framework, entryPrice, slPrice, tp1Price, tp2Price, tp3Price, calcData);
+
+    saveToHistory({
+      date: new Date().toLocaleString(),
+      pair: pair,
+      framework: framework,
+      action: resObj.action,
+      entry: entryPrice,
+      tp: tp3Price.toFixed(2),
+      sl: slPrice.toFixed(2),
+      status: resObj.trade_status,
+      outcome: "PENDING",
+      fullData: resObj
+    });
+
+    showToast("Uchambuzi umekamilika kikamilifu!");
+    document.getElementById('resultsContainer').style.display = 'block';
+    document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+
+  } catch (err) {
+    alert("Hitilafu: " + (err.message || "Tafadhali angalia mtandao wako au API Key."));
+  } finally {
+    runBtn.disabled = false;
+    runBtn.innerText = "ANZA MASTERS 10 (GEMINI 3.6)";
+  }
+}
+
+async function displayAnalysisResults(resObj, pair, framework, entryPrice, slPrice, tp1Price, tp2Price, tp3Price, calcData) {
     document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + resObj.confidence_score + "%)";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
@@ -971,29 +999,6 @@ Toa majibu katika muundo wa JSON pekee:
 
     await renderAllAgentsWithSmartCanvas(resObj);
     document.getElementById('tfOutput').innerText = resObj.tf;
-
-    saveToHistory({
-      date: new Date().toLocaleString(),
-      pair: pair,
-      framework: framework,
-      action: resObj.action,
-      entry: entryPrice,
-      tp: tp3Price.toFixed(2),
-      sl: slPrice.toFixed(2),
-      status: resObj.trade_status,
-      outcome: "PENDING"
-    });
-
-    showToast("Uchambuzi umekamilika kikamilifu!");
-    document.getElementById('resultsContainer').style.display = 'block';
-    document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
-
-  } catch (err) {
-    alert("Hitilafu: " + (err.message || "Tafadhali angalia mtandao wako au API Key."));
-  } finally {
-    runBtn.disabled = false;
-    runBtn.innerText = "ANZA MASTERS 10 (GEMINI 3.6)";
-  }
 }
 
 async function renderAllAgentsWithSmartCanvas(resObj) {
@@ -1086,12 +1091,36 @@ function loadTradeHistory() {
   history.forEach((item, index) => {
     html += `
       <div class="history-card">
-        <div><strong>${item.pair} - ${item.action}</strong><br><small style="color: var(--text-muted);">${item.date}</small></div>
-        <button onclick="deleteSingleHistory(${index})" style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">🗑️</button>
+        <div style="cursor: pointer; flex-grow: 1;" onclick="viewHistoryItem(${index})">
+          <strong>${item.pair} - ${item.action}</strong> (${item.framework || 'Masters 10'})<br>
+          <small style="color: var(--text-muted);">${item.date}</small>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="viewHistoryItem(${index})" style="background: rgba(59, 130, 246, 0.2); color: var(--blue); border: 1px solid var(--blue); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;">Fungua</button>
+          <button onclick="deleteSingleHistory(${index})" style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">🗑️</button>
+        </div>
       </div>
     `;
   });
   container.innerHTML = html;
+}
+
+function viewHistoryItem(index) {
+  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  let item = history[index];
+  if(!item || !item.fullData) {
+    alert("Samahani, taarifa kamili za uchambuzi huu hazipatikani.");
+    return;
+  }
+
+  let resObj = item.fullData;
+  let entryPrice = parseFloat(item.entry) || 0;
+  let slPrice = parseFloat(item.sl) || 0;
+  let tp3Price = parseFloat(item.tp) || 0;
+  let calcData = calculateAccurateProfit(item.pair, entryPrice, tp3Price);
+
+  navigate('analyst');
+  displayAnalysisResults(resObj, item.pair, item.framework || "Masters 10 Core Engine", entryPrice, slPrice, entryPrice + 10, entryPrice + 20, tp3Price, calcData);
 }
 
 function deleteSingleHistory(index) {
@@ -1126,7 +1155,21 @@ function saveManualJournalTrade() {
     entry: entry,
     tp: tp,
     sl: sl,
-    outcome: outcome
+    outcome: outcome,
+    fullData: {
+      action: action,
+      exec_type: "MANUAL JOURNAL ENTRY",
+      confidence_score: 85,
+      sl_pips: "30 Pips",
+      tp_pips: "60 Pips",
+      entry: entry,
+      sl: sl,
+      tp3: tp,
+      rr: "1:2.0",
+      trade_status: outcome,
+      tf: "Manual logged trade entry.",
+      agent1_title: "Manual Journal Entry", agent1_decision: action, agent1_text: "Manually recorded setup."
+    }
   });
 
   showToast("Imehifadhiwa kwenye Journal!");
