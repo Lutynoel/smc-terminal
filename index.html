@@ -195,13 +195,6 @@
     </div>
 
     <div class="main-content">
-      <div id="installBanner" class="install-banner" style="display: none;">
-        <div class="install-banner-text">
-          <strong>Weka App kwenye Simu</strong><br>Wezesha iwe app kamili kwenye simu yako.
-        </div>
-        <button class="install-btn" id="installAppBtn">INSTALL</button>
-      </div>
-
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -514,25 +507,13 @@
   </div>
 
 <script>
-/**
- * PWA LUTYNOEL.FX - TRADING MASTER SYSTEM (VERSION 11.2)
- * Integrated with 10 Market Analysis Masters for XAUUSD & BTCUSD
- * Powered by Gemini 3.6 Flash Engine
- */
 class LutynoelFXSystem {
     constructor(symbol) {
         this.symbol = symbol.toUpperCase();
         this.mastersLoaded = [
-            "Price Action", 
-            "Demand & Supply", 
-            "Market Structure", 
-            "Fundamental Analysis", 
-            "Smart Money Concepts (SMC)", 
-            "ICT (Inner Circle Trader)", 
-            "Volume Profile", 
-            "Fibonacci Analysis", 
-            "Elliott Wave Theory", 
-            "Quantitative / Indicators"
+            "Price Action", "Demand & Supply", "Market Structure", "Fundamental Analysis", 
+            "Smart Money Concepts (SMC)", "ICT", "Volume Profile", "Fibonacci Analysis", 
+            "Elliott Wave Theory", "Quantitative / Indicators"
         ];
     }
 }
@@ -573,9 +554,7 @@ function setupPWA() {
     display: "standalone",
     background_color: "#09090b",
     theme_color: "#fbbf24",
-    icons: [
-      { src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }
-    ]
+    icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
   const stringManifest = JSON.stringify(manifestData);
   const blob = new Blob([stringManifest], {type: 'application/json'});
@@ -665,11 +644,7 @@ function handleRegister() {
   document.getElementById('appInterface').style.display = 'block';
 }
 
-function logout() { 
-  localStorage.removeItem('lutynoel_user'); 
-  location.reload(); 
-}
-
+function logout() { localStorage.removeItem('lutynoel_user'); location.reload(); }
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
 function goBackToOverview() { navigate('overview'); }
 
@@ -697,15 +672,12 @@ function syncPairSelection(pairValue) {
   else if (pairValue === "USDJPY") tvSymbol = "OANDA:USDJPY";
 
   const liveChartSelect = document.getElementById('liveChartPairSelector');
-  if(liveChartSelect) {
-    liveChartSelect.value = tvSymbol;
-  }
+  if(liveChartSelect) liveChartSelect.value = tvSymbol;
   updateTradingViewIframe(tvSymbol);
 }
 
 function changeLiveChartPair(tvSymbol) {
   updateTradingViewIframe(tvSymbol);
-  
   const analystSelect = document.getElementById('selectedPairDropdown');
   if(analystSelect) {
     if(tvSymbol.includes('XAU')) analystSelect.value = 'XAUUSD';
@@ -729,7 +701,7 @@ async function sendAIChatMessage() {
   if (!msg) return;
 
   const apiKey = localStorage.getItem('smc_gemini_key');
-  if (!apiKey) { alert("Gemini API Key haionekani. Tafadhali ingia tena."); logout(); return; }
+  if (!apiKey) { alert("Gemini API Key haionekani."); logout(); return; }
 
   const chatMessages = document.getElementById('chatMessages');
   chatMessages.innerHTML += `<div class="chat-bubble user">${escapeHtml(msg)}</div>`;
@@ -737,7 +709,7 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   let loadingId = 'ai_load_' + Date.now();
-  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI (Gemini 3.6 Flash) inatafakari kupitia Masters 10...</div>`;
+  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI inatafakari kupitia Masters 10...</div>`;
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
@@ -746,15 +718,12 @@ async function sendAIChatMessage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{
-          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya XAUUSD, BTCUSD, na mfumo wa Masters 10 kupitia Gemini 3.6 Flash. Jibu swali hili kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
-        }]
+        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD na Masters 10. Jibu kwa Kiswahili fasaha na kwa kifupi: ${msg}` }] }]
       })
     });
 
     const data = await response.json();
     document.getElementById(loadingId).remove();
-
     if (data.error) throw new Error(data.error.message);
     const aiReply = data.candidates[0].content.parts[0].text;
 
@@ -762,7 +731,7 @@ async function sendAIChatMessage() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   } catch (err) {
     document.getElementById(loadingId).remove();
-    chatMessages.innerHTML += `<div class="chat-bubble ai" style="color:var(--red);">Hitilafu: ${err.message || "Imeshindikana kuunganisha na Gemini API."}</div>`;
+    chatMessages.innerHTML += `<div class="chat-bubble ai" style="color:var(--red);">Hitilafu: ${err.message}</div>`;
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 }
@@ -778,9 +747,9 @@ function previewUserImage(event, previewId) {
     const url = URL.createObjectURL(file);
     preview.src = url;
     preview.style.display = 'block';
-    if (previewId === 'previewH4') globalImages.h4 = { url, name: file.name, file };
-    if (previewId === 'previewH1') globalImages.h1 = { url, name: file.name, file };
-    if (previewId === 'previewM15') globalImages.m15 = { url, name: file.name, file };
+    if (previewId === 'previewH4') globalImages.h4 = { url, file };
+    if (previewId === 'previewH1') globalImages.h1 = { url, file };
+    if (previewId === 'previewM15') globalImages.m15 = { url, file };
   }
 }
 
@@ -824,23 +793,6 @@ function loadEconomicCalendar() {
 }
 
 async function fetchLiveMarketPrice(pair) {
-  let symbol = "XAU/USD";
-  if(pair.includes("BTC")) symbol = "BTC/USD";
-  else if(pair.includes("EUR")) symbol = "EUR/USD";
-  else if(pair.includes("GBP")) symbol = "GBP/USD";
-  else if(pair.includes("USDJPY")) symbol = "USD/JPY";
-  else symbol = pair.replace("USD", "/USD");
-
-  try {
-    const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`);
-    const data = await res.json();
-    if(data && data.price) {
-      return parseFloat(data.price);
-    }
-  } catch(e) {
-    console.warn("Hitilafu kwenye Twelve Data API, inatumia bei mbadala...", e);
-  }
-
   if(pair.includes("XAU")) return 2650.50;
   if(pair.includes("BTC")) return 92000.00;
   return 1.0850;
@@ -860,12 +812,13 @@ function calculateAccurateProfit(pairName, entry, tp3) {
   let pipValuePerStandardLot = 10.0; 
   let upperAssetType = pairName.toUpperCase();
 
-  if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 0.10;
-  else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 1.0;
+  if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 1.0;
+  else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 10.0; // 1 pip on Gold (0.1 move) for 1 lot = $10 (Standard), 0.01 lot = $0.10 per pip
 
   if (entry > 0 && tp3 > 0) {
     let priceDiff = Math.abs(tp3 - entry);
-    if (upperAssetType.includes("BTC") || upperAssetType.includes("XAU")) pips = priceDiff * 10; 
+    if (upperAssetType.includes("BTC")) pips = priceDiff; 
+    else if (upperAssetType.includes("XAU")) pips = priceDiff * 10; 
     else pips = priceDiff * 10000; 
   }
 
@@ -873,7 +826,7 @@ function calculateAccurateProfit(pairName, entry, tp3) {
   let resObj = {};
 
   lots.forEach(l => {
-    let usd = pips * pipValuePerStandardLot * l;
+    let usd = pips * (pipValuePerStandardLot * l);
     let key = 'tp_' + l.toString().replace('.', '');
     resObj[key] = `$${usd.toFixed(2)}`;
   });
@@ -889,7 +842,7 @@ function calculateRiskLotSize() {
 
   let riskAmount = (balance * riskPct) / 100;
   let pipValuePerStandard = 10.0;
-  if(assetType === 'XAUUSD') pipValuePerStandard = 1.0;
+  if(assetType === 'XAUUSD') pipValuePerStandard = 10.0;
   else if(assetType === 'CRYPTO') pipValuePerStandard = 1.0;
 
   let recommendedLot = riskAmount / (slPips * pipValuePerStandard);
@@ -910,7 +863,7 @@ function calculateRiskLotSize() {
 
 async function runLutynoelAnalysis() {
   const apiKey = localStorage.getItem('smc_gemini_key');
-  if (!apiKey) { alert("API Key haionekani. Tafadhali ingia tena."); logout(); return; }
+  if (!apiKey) { alert("API Key haionekani."); logout(); return; }
 
   const pairSelect = document.getElementById('selectedPairDropdown');
   const pair = pairSelect.value;
@@ -919,53 +872,49 @@ async function runLutynoelAnalysis() {
   const m15Input = document.getElementById('chartM15');
 
   if (h4Input.files.length === 0 || h1Input.files.length === 0 || m15Input.files.length === 0) {
-    alert("Tafadhali weka picha zote tatu (4H, 1H na 15M) kwa ajili ya pair ya " + pair + " kabla ya kuendelea.");
+    alert("Tafadhali weka picha zote tatu (4H, 1H na 15M) kwa ajili ya pair ya " + pair + ".");
     return;
   }
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ Inavuta Live Price na Kusoma Chati za ${pair} (Gemini 3.6)...`;
+  runBtn.innerText = `⏳ Inachambua Chati za ${pair} (Gemini 3.6)...`;
 
   try {
     const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na mfumo wa Masters 10 (Price Action, Demand & Supply, Market Structure, Fundamental Analysis, SMC, ICT, Volume Profile, Fibonacci, Elliott Wave, na Quantitative/Indicators). PAIR ILIYOTEULIWA NI: ${pair}. Bei halisi ya sasa kwenye soko ni ${livePrice}.
-Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na ufanye yafuatayo kwa kutumia Masters wote 10:
-1. Lazima utumie bei halisi ya sasa (${livePrice}) kama 'entry' ya biashara.
-2. Pima kiwango cha uhakika (confidence_score kutoka 0 hadi 100) kulingana na muunganiko wa mfumo wetu.
-3. Kama soko lipo katika hali ya kujichanganya au hakuna ushahidi thabiti, lazima 'action' iwe 'WAIT'.
-4. Toa majibu katika muundo wa JSON pekee bila maandishi ya ziada nje ya JSON:
+    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Masters 10. PAIR: ${pair}. Bei ya sasa: ${livePrice}. 
+Toa majibu katika muundo wa JSON pekee:
 {
   "action": "BUY",
   "exec_type": "MARKET EXECUTED SOKONI",
   "confidence_score": 90,
   "subtitle": "Strict ${pair} Masters 10 Confluence Strategy",
   "sl_pips": "50 Pips",
-  "tp_pips": "500 Pips",
-  "chk1": "Stop Loss placed accurately below structural Order Block (SMC)",
-  "chk2": "Institutional Liquidity Sweep & Fibonacci 0.618 Confluence",
-  "chk3": "Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)",
+  "tp_pips": "200 Pips",
+  "chk1": "Stop Loss placed accurately below structural Order Block",
+  "chk2": "Institutional Liquidity Sweep & Fibonacci Confluence",
+  "chk3": "Dynamic TPs set to capture multi-stage expansion moves",
   "entry": "${livePrice}",
-  "sl": "${(livePrice - 10).toFixed(2)}",
-  "tp1": "${(livePrice + 15).toFixed(2)}",
-  "tp2": "${(livePrice + 30).toFixed(2)}",
-  "tp3": "${(livePrice + 60).toFixed(2)}",
-  "rr": "1:8.5",
+  "sl": "${(livePrice - 5).toFixed(2)}",
+  "tp1": "${(livePrice + 10).toFixed(2)}",
+  "tp2": "${(livePrice + 20).toFixed(2)}",
+  "tp3": "${(livePrice + 40).toFixed(2)}",
+  "rr": "1:8.0",
   "trade_status": "EXECUTED SOKONI",
-  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "Candlestick structure shows strong bullish momentum across 4H and 1H timeframes.",
-  "agent2_title": "2. Demand & Supply Master", "agent2_decision": "BUY", "agent2_text": "Price successfully mitigated a major institutional demand zone with clean reaction.",
-  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "BOS (Break of Structure) confirmed to the upside, signaling continuation.",
-  "agent4_title": "4. Fundamental Analysis Master", "agent4_decision": "BUY", "agent4_text": "Macroeconomic sentiment and interest rate expectations favor this asset direction.",
-  "agent5_title": "5. Smart Money Concepts (SMC)", "agent5_decision": "BUY", "agent5_text": "Retail liquidity swept cleanly below previous lows before impulsive markup.",
-  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "Killzone session timing aligned with Fair Value Gap (FVG) mitigation.",
-  "agent7_title": "7. Volume Profile Master", "agent7_decision": "BUY", "agent7_text": "Point of Control (POC) tested with high volume nodes backing the move.",
-  "agent8_title": "8. Fibonacci Analysis Master", "agent8_decision": "BUY", "agent8_text": "Retracement hit the 0.618 golden pocket with precision.",
-  "agent9_title": "9. Elliott Wave Theory Master", "agent9_decision": "BUY", "agent9_text": "Wave 3 impulse phase initiated following a completed Wave 2 correction.",
-  "agent10_title": "10. Quantitative / Indicators Master", "agent10_decision": "BUY", "agent10_text": "Moving averages crossover and RSI divergence confirm bullish strength.",
-  "tf": "4H: Macro trend confirmed via Elliott Wave & Structure.\\n1H: POI mitigation & Fibonacci Golden Pocket locked.\\n15M: Precise execution trigger confirmed under Masters 10 protocol."
+  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "Candlestick structure shows strong bullish momentum.",
+  "agent2_title": "2. Demand & Supply Master", "agent2_decision": "BUY", "agent2_text": "Price successfully mitigated a major institutional demand zone.",
+  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "BOS confirmed to the upside.",
+  "agent4_title": "4. Fundamental Analysis Master", "agent4_decision": "BUY", "agent4_text": "Macroeconomic sentiment favors this asset.",
+  "agent5_title": "5. Smart Money Concepts", "agent5_decision": "BUY", "agent5_text": "Retail liquidity swept cleanly below previous lows.",
+  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "Killzone session timing aligned with Fair Value Gap.",
+  "agent7_title": "7. Volume Profile Master", "agent7_decision": "BUY", "agent7_text": "Point of Control tested with high volume nodes.",
+  "agent8_title": "8. Fibonacci Analysis", "agent8_decision": "BUY", "agent8_text": "Retracement hit the golden pocket with precision.",
+  "agent9_title": "9. Elliott Wave Theory", "agent9_decision": "BUY", "agent9_text": "Wave 3 impulse phase initiated.",
+  "agent10_title": "10. Quantitative Master", "agent10_decision": "BUY", "agent10_text": "Moving averages crossover confirm bullish strength.",
+  "tf": "4H: Macro trend confirmed.\\n1H: POI mitigation locked.\\n15M: Precise execution trigger confirmed."
 }`;
 
     parts.push({ text: promptText });
@@ -990,22 +939,15 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     
     let resObj = JSON.parse(rawText);
 
-    let confidenceScore = parseInt(resObj.confidence_score) || 75;
-    if (confidenceScore < 60) {
-      resObj.action = "WAIT";
-      resObj.exec_type = "SUBIRI / KAGHAZI (LOW CONFIDENCE)";
-      resObj.trade_status = "WAIT / STAND ASIDE";
-    }
-
     let entryPrice = parseFloat(resObj.entry) || livePrice;
-    let slPrice = parseFloat(resObj.sl) || (resObj.action === "BUY" ? entryPrice - 10 : entryPrice + 10);
-    let tp1Price = parseFloat(resObj.tp1) || (resObj.action === "BUY" ? entryPrice + 15 : entryPrice - 15);
-    let tp2Price = parseFloat(resObj.tp2) || (resObj.action === "BUY" ? entryPrice + 30 : entryPrice - 30);
-    let tp3Price = parseFloat(resObj.tp3) || (resObj.action === "BUY" ? entryPrice + 60 : entryPrice - 60);
+    let slPrice = parseFloat(resObj.sl) || (resObj.action === "BUY" ? entryPrice - 5 : entryPrice + 5);
+    let tp1Price = parseFloat(resObj.tp1) || (resObj.action === "BUY" ? entryPrice + 10 : entryPrice - 10);
+    let tp2Price = parseFloat(resObj.tp2) || (resObj.action === "BUY" ? entryPrice + 20 : entryPrice - 20);
+    let tp3Price = parseFloat(resObj.tp3) || (resObj.action === "BUY" ? entryPrice + 40 : entryPrice - 40);
 
     const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price);
 
-    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + confidenceScore + "%)";
+    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + resObj.confidence_score + "%)";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
     document.getElementById('resExecType').innerText = resObj.exec_type;
@@ -1020,16 +962,12 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     document.getElementById('tp_lot010').innerHTML = calcData.projections.tp_010;
     document.getElementById('tp_lot100').innerHTML = calcData.projections.tp_100;
 
-    document.getElementById('chk1').innerText = resObj.chk1;
-    document.getElementById('chk2').innerText = resObj.chk2;
-    document.getElementById('chk3').innerText = resObj.chk3;
-
     document.getElementById('valEntry').innerText = entryPrice;
     document.getElementById('valSL').innerText = slPrice.toFixed(2);
     document.getElementById('valTP1').innerText = tp1Price.toFixed(2);
     document.getElementById('valTP2').innerText = tp2Price.toFixed(2);
     document.getElementById('valTP3').innerText = tp3Price.toFixed(2);
-    document.getElementById('valRR').innerText = resObj.rr || "1:8.5";
+    document.getElementById('valRR').innerText = resObj.rr || "1:8.0";
 
     await renderAllAgentsWithSmartCanvas(resObj);
     document.getElementById('tfOutput').innerText = resObj.tf;
@@ -1041,31 +979,12 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
       action: resObj.action,
       entry: entryPrice,
       tp: tp3Price.toFixed(2),
-      tp1: tp1Price.toFixed(2),
-      tp2: tp2Price.toFixed(2),
-      tp3: tp3Price.toFixed(2),
       sl: slPrice.toFixed(2),
       status: resObj.trade_status,
-      rr: resObj.rr || "1:8.5",
-      sl_pips: resObj.sl_pips || "50 Pips",
-      tp_pips: calcData.calculatedPips + " Pips",
-      outcome: resObj.action === "WAIT" ? "WAIT" : "PENDING",
-      pnl: 0,
-      agents: [
-        { title: resObj.agent1_title, decision: resObj.agent1_decision, text: resObj.agent1_text },
-        { title: resObj.agent2_title, decision: resObj.agent2_decision, text: resObj.agent2_text },
-        { title: resObj.agent3_title, decision: resObj.agent3_decision, text: resObj.agent3_text },
-        { title: resObj.agent4_title, decision: resObj.agent4_decision, text: resObj.agent4_text },
-        { title: resObj.agent5_title, decision: resObj.agent5_decision, text: resObj.agent5_text },
-        { title: resObj.agent6_title, decision: resObj.agent6_decision, text: resObj.agent6_text },
-        { title: resObj.agent7_title, decision: resObj.agent7_decision, text: resObj.agent7_text },
-        { title: resObj.agent8_title, decision: resObj.agent8_decision, text: resObj.agent8_text },
-        { title: resObj.agent9_title, decision: resObj.agent9_decision, text: resObj.agent9_text },
-        { title: resObj.agent10_title, decision: resObj.agent10_decision, text: resObj.agent10_text }
-      ]
+      outcome: "PENDING"
     });
 
-    showToast(`Uchambuzi wa Masters 10 umekamilika (Confidence: ${confidenceScore}%)!`);
+    showToast("Uchambuzi umekamilika kikamilifu!");
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
@@ -1106,10 +1025,7 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
     let card = document.createElement('div');
     card.className = 'agent-card';
     card.innerHTML = `
-      <div class="agent-title">
-        <span>${ag.title}</span> 
-        <span class="agent-decision" style="background: rgba(251,191,36,0.15); color: ${decColor}; border: 1px solid ${decColor};">${ag.decision}</span>
-      </div>
+      <div class="agent-title"><span>${ag.title}</span> <span class="agent-decision" style="color: ${decColor};">${ag.decision}</span></div>
       <div class="agent-desc">${ag.text}</div>
       <div class="agent-canvas-grid">
         <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_h4"></canvas><div class="agent-canvas-label">4H</div></div>
@@ -1143,30 +1059,15 @@ function drawSmartOverlayOnCanvas(canvasId, imgSrc) {
 }
 
 function saveToHistory(tradeData) {
-  let history = [];
-  try {
-    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  } catch(e) {
-    history = [];
-  }
+  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.unshift(tradeData);
   if (history.length > 50) history.pop();
-  try {
-    localStorage.setItem('lutynoel_history', JSON.stringify(history));
-  } catch(e) {
-    history = history.slice(0, 20);
-    localStorage.setItem('lutynoel_history', JSON.stringify(history));
-  }
+  localStorage.setItem('lutynoel_history', JSON.stringify(history));
   updateStatsOverview();
 }
 
 function updateStatsOverview() {
-  let history = [];
-  try {
-    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  } catch(e) {
-    history = [];
-  }
+  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const totalEl = document.getElementById('statTotalAnalyses');
   if(totalEl) totalEl.innerText = history.length;
 }
@@ -1174,14 +1075,7 @@ function updateStatsOverview() {
 function loadTradeHistory() {
   const container = document.getElementById('historyListContainer');
   if(!container) return;
-  
-  let history = [];
-  try {
-    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  } catch (e) {
-    localStorage.removeItem('lutynoel_history');
-    history = [];
-  }
+  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   
   if (history.length === 0) {
     container.innerHTML = `<div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>`;
@@ -1190,17 +1084,10 @@ function loadTradeHistory() {
   
   let html = '';
   history.forEach((item, index) => {
-    let outcomeColor = item.outcome === 'WIN' ? 'var(--green)' : (item.outcome === 'LOSS' ? 'var(--red)' : 'var(--accent)');
     html += `
       <div class="history-card">
-        <div onclick="openHistoryDetails(${index})" style="flex-grow: 1; cursor: pointer;">
-          <strong>${item.pair || 'XAUUSD'} - ${item.action || 'BUY'}</strong><br>
-          <small style="color: var(--text-muted);">${item.date || ''} | ${item.framework || 'Manual'}</small>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="color: ${outcomeColor}; font-weight: bold; font-size: 12px; cursor: pointer;" onclick="openHistoryDetails(${index})">${item.outcome || item.status || 'PENDING'}</span>
-          <button onclick="deleteSingleHistory(${index})" style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;" title="Futa hii pekee">🗑️</button>
-        </div>
+        <div><strong>${item.pair} - ${item.action}</strong><br><small style="color: var(--text-muted);">${item.date}</small></div>
+        <button onclick="deleteSingleHistory(${index})" style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">🗑️</button>
       </div>
     `;
   });
@@ -1208,52 +1095,12 @@ function loadTradeHistory() {
 }
 
 function deleteSingleHistory(index) {
-  let history = [];
-  try {
-    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  } catch(e) {
-    history = [];
-  }
-  
+  let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.splice(index, 1);
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
   loadTradeHistory();
   updateStatsOverview();
   showToast("Uchambuzi umefutwa!");
-}
-
-function openHistoryDetails(index) {
-  let history = [];
-  try {
-    history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  } catch(e) {
-    history = [];
-  }
-  
-  const item = history[index];
-  if (!item) return;
-
-  let agentsHtml = '';
-  if(item.agents && item.agents.length > 0) {
-    item.agents.forEach(ag => {
-      agentsHtml += `<div style="margin-bottom: 8px; font-size: 12px; background: #08080a; padding: 8px; border-radius: 6px;"><strong style="color:var(--accent);">${ag.title} (${ag.decision}):</strong> ${ag.text}</div>`;
-    });
-  } else {
-    agentsHtml = `<div style="font-size:12px; color:var(--text-muted);">Manual Journal Entry</div>`;
-  }
-
-  let content = `
-    <h3 style="color: var(--accent); margin-top:0;">${item.pair} - ${item.action} (${item.outcome || 'PENDING'})</h3>
-    <p style="font-size: 12px; color: var(--text-muted);">Tarehe: ${item.date}</p>
-    <div style="font-size: 13px; margin-bottom: 10px; background: #141418; padding: 10px; border-radius: 6px;">
-      <strong>Entry:</strong> ${item.entry} | <strong>SL:</strong> ${item.sl}<br>
-      <strong>TP1:</strong> ${item.tp1 || '-'} | <strong>TP2:</strong> ${item.tp2 || '-'} | <strong>TP3:</strong> ${item.tp3 || item.tp}<br>
-      <strong>SL Pips:</strong> ${item.sl_pips || '-'} | <strong>TP Pips:</strong> ${item.tp_pips || '-'}
-    </div>
-    <h4 style="margin-bottom: 5px; font-size: 13px; color: var(--accent);">Uchambuzi wa Masters 10:</h4>
-    <div style="max-height: 280px; overflow-y: auto;">${agentsHtml}</div>
-  `;
-  openModal(content);
 }
 
 function clearAllHistory() {
@@ -1267,9 +1114,8 @@ function saveManualJournalTrade() {
   const pair = document.getElementById('jPair').value.trim() || "XAUUSD";
   const action = document.getElementById('jAction').value;
   const entry = parseFloat(document.getElementById('jEntry').value) || 0;
-  const lot = parseFloat(document.getElementById('jLot').value) || 0.01;
-  const sl = parseFloat(document.getElementById('jSL').value) || 0;
   const tp = parseFloat(document.getElementById('jTP').value) || 0;
+  const sl = parseFloat(document.getElementById('jSL').value) || 0;
   const outcome = document.getElementById('jOutcome').value;
 
   saveToHistory({
@@ -1279,18 +1125,11 @@ function saveManualJournalTrade() {
     action: action,
     entry: entry,
     tp: tp,
-    tp3: tp,
     sl: sl,
-    status: outcome,
-    rr: "Custom",
-    sl_pips: "-",
-    tp_pips: "-",
-    outcome: outcome,
-    pnl: 0,
-    agents: []
+    outcome: outcome
   });
 
-  showToast("Biashara imehifadhiwa kwenye Journal & Historia!");
+  showToast("Imehifadhiwa kwenye Journal!");
   navigate('history');
 }
 </script>
