@@ -129,43 +129,41 @@
       <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & Risk Engine (Gemini 3.6 Flash)</div>
 
       <div id="loginFormSection">
-        <label>Email Address</label>
+        <label>Barua Pepe (Email)</label>
         <input type="email" id="loginEmail" placeholder="trader@lutynoelfx.com">
-        <label>Password</label>
+        <label>Neno la Siri (Password)</label>
         <input type="password" id="loginPassword" placeholder="********">
         
-        <label>Security Check (<span id="mathQ1">14 - 8</span> = ?)</label>
+        <label>Uhakiki wa Usalama (<span id="mathQ1">14 - 8</span> = ?)</label>
         <input type="number" id="mathA1" placeholder="Weka jibu hapa">
 
         <label>Gemini API Key (API Token):</label>
         <input type="text" id="authApiKey" placeholder="Weka API Key hapa (AIzaSy...)">
 
-        <button class="primary-btn" onclick="handleLogin()">Sign In</button>
+        <button class="primary-btn" onclick="handleLogin()">Ingia</button>
         <button class="secondary-btn" onclick="handleGuestLogin()">Ingia Kama Mgeni (Guest)</button>
 
         <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
-          Don't have an account? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('register')">Create Account</span>
+          Huna akaunti? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('register')">Unda Akaunti</span>
         </div>
       </div>
 
       <div id="registerFormSection" style="display: none;">
-        <label>Full Name</label>
+        <label>Jina Kamili</label>
         <input type="text" id="regName" placeholder="John Doe">
-        <label>Email Address</label>
+        <label>Barua Pepe (Email)</label>
         <input type="email" id="regEmail" placeholder="trader@lutynoelfx.com">
-        <label>Password</label>
+        <label>Neno la Siri (Password)</label>
         <input type="password" id="regPassword" placeholder="********">
 
-        <label>Security Check (<span id="mathQ2">12 + 2</span> = ?)</label>
+        <label>Uhakiki wa Usalama (<span id="mathQ2">12 + 2</span> = ?)</label>
         <input type="number" id="mathA2" placeholder="Weka jibu hapa">
 
         <label>Gemini API Key (API Token):</label>
         <input type="text" id="regApiKey" placeholder="Weka API Key hapa (AIzaSy...)">
 
-        <button class="primary-btn" onclick="handleRegister()">Create Account</button>
-        <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
-          Already registered? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('login')">Sign In Instead</span>
-        </div>
+        <button class="primary-btn" onclick="handleRegister()">Unda Akaunti</button>
+        <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">Tayari una akaunti? <span style="color: var(--accent); cursor: pointer; font-weight: bold;" onclick="toggleAuthMode('login')">Ingia Hapa</span></div>
       </div>
     </div>
   </div>
@@ -190,20 +188,20 @@
         <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.2</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
-      <div class="menu-item active" onclick="navigate('overview')">Overview Dashboard</div>
+      <div class="menu-item active" onclick="navigate('overview')">Dashibodi Kuu (Overview)</div>
       <div class="menu-item" onclick="navigate('aiassistant')">🤖 AI Assistance Chat <span class="badge-new">GEMINI 3.6</span></div>
       <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">MASTERS 10</span></div>
       <div class="menu-item" onclick="navigate('journal')">Risk Calculator & Journal <span class="badge-new">OPTIMIZED</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
-      <div class="menu-item" onclick="navigate('news')">Economic Calendar / News <span class="badge-new">LIVE</span></div>
-      <div class="menu-item" onclick="navigate('history')">Trade History Archive</div>
+      <div class="menu-item" onclick="navigate('news')">Economic Calendar / Habari <span class="badge-new">LIVE</span></div>
+      <div class="menu-item" onclick="navigate('history')">Historia ya Biashara (Archive)</div>
       <div class="menu-item" onclick="navigate('broker')">Broker Sync & API</div>
     </div>
 
     <div class="main-content">
       <div id="installBanner" class="install-banner" style="display: none;">
         <div class="install-banner-text">
-          <strong>Install App</strong><br>Wezesha iwe app kamili kwenye simu yako.
+          <strong>Weka App kwenye Simu</strong><br>Wezesha iwe app kamili kwenye simu yako.
         </div>
         <button class="install-btn" id="installAppBtn">INSTALL</button>
       </div>
@@ -222,7 +220,7 @@
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
             <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Masters 10 Trading System)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Integrated with 10 Market Analysis Masters for XAUUSD & BTCUSD powered by Gemini 3.6 Flash.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Imeunganishwa na Wataalamu 10 wa Masoko ya XAUUSD na BTCUSD ikiongozwa na Gemini 3.6 Flash.</p>
         </div>
 
         <div class="grid-3">
@@ -250,7 +248,7 @@
       <div id="view-aiassistant" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL</div>
-          <h3 style="margin: 0 0 12px 0; font-size: 16px;">Chat na Mtaalamu Wako wa AI</h3>
+          <h3 style="margin: 0 0 12px 0; font-size: 16px;">Mazungumzo na Mtaalamu Wako wa AI</h3>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu uchambuzi wa XAUUSD, BTCUSD, au mfumo wa Masters 10.</p>
 
           <div class="chat-container">
@@ -283,38 +281,38 @@
             </optgroup>
           </select>
 
-          <label style="margin-top: 15px;">Analysis Framework</label>
+          <label style="margin-top: 15px;">Mfumo wa Uchambuzi (Framework)</label>
           <select id="framework">
             <option value="Masters 10 Core Engine">Masters 10 Core Engine (Full Confluence)</option>
             <option value="Day Trader">Day Trader (Multi-TF Confluence)</option>
             <option value="Scalper">Scalper (Precision M15)</option>
           </select>
 
-          <label style="margin-top: 15px;">2. Required Market Timeframe: 4H Chart</label>
+          <label style="margin-top: 15px;">2. Pakia Chati ya 4H</label>
           <div class="upload-zone">
-            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 4H CHART</div>
-            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
+            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ WEKA PICHA YA 4H</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bofya auweke picha hapa</div>
             <input type="file" id="chartH4" accept="image/*" onchange="previewUserImage(event, 'previewH4')">
             <img id="previewH4" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <label>Required Market Timeframe: 1H Chart</label>
+          <label>Pakia Chati ya 1H</label>
           <div class="upload-zone">
-            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 1H CHART</div>
-            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
+            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ WEKA PICHA YA 1H</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bofya auweke picha hapa</div>
             <input type="file" id="chartH1" accept="image/*" onchange="previewUserImage(event, 'previewH1')">
             <img id="previewH1" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <label>Required Market Timeframe: 15M Chart</label>
+          <label>Pakia Chati ya 15M</label>
           <div class="upload-zone">
-            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ UPLOAD 15M CHART</div>
-            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Click or drop screenshot</div>
+            <div style="color: var(--accent); font-weight: bold; font-size: 13px;">⬆ WEKA PICHA YA 15M</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Bofya auweke picha hapa</div>
             <input type="file" id="chartM15" accept="image/*" onchange="previewUserImage(event, 'previewM15')">
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">RUN MASTERS 10 (GEMINI 3.6)</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">ANZA MASTERS 10 (GEMINI 3.6)</button>
         </div>
 
         <div id="resultsContainer" style="display: none;">
@@ -330,30 +328,30 @@
               <span class="badge-pass">CONFLUENCE PASS</span>
               <span class="badge-status" id="tradeStatusBadge">EXECUTED SOKONI</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Strict Multi-TF Confluence & Order Block Strategy</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Mkakati wa Multi-TF Confluence & Order Block</div>
           </div>
 
           <div class="card">
-            <div class="ballistic-header">📊 PIPS & PROFIT/LOSS BREAKDOWN</div>
+            <div class="ballistic-header">📊 PIPS & MAPATO / HASARA (P&L BREAKDOWN)</div>
             
             <div class="grid-2">
               <div class="mini-box"><label>STOP LOSS (VAL)</label><div id="valSLPips" style="font-size: 16px; font-weight: bold; color: var(--red);">0 Pips</div></div>
               <div class="mini-box"><label>TAKE PROFIT 3 (VAL)</label><div id="valTPPIps" style="font-size: 16px; font-weight: bold; color: var(--green);">0 Pips</div></div>
             </div>
 
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">LOT SIZE PROFIT PROJECTIONS (TP3)</div>
-            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot001">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
-            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot002">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
-            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot003">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
-            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot010">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
-            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot100">$0.00 <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS 0</span></div></div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: bold; margin: 10px 0 5px 0;">MAKADIRIO YA FAIDA KWA LOT SIZE (TP3)</div>
+            <div class="lot-row"><div><strong>Lot 0.01</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot001">$0.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.02</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot002">$0.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.03</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot003">$0.00</div></div>
+            <div class="lot-row"><div><strong>Lot 0.10</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot010">$0.00</div></div>
+            <div class="lot-row"><div><strong>Lot 1.00</strong></div><div style="color: var(--green); text-align: right;" id="tp_lot100">$0.00</div></div>
           </div>
 
           <div class="card">
-            <div class="ballistic-header">🛡️ MARKET STRUCTURE RISK GUARD CHECKLIST</div>
-            <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss placed accurately below/above structural Order Block</span></div>
+            <div class="ballistic-header">🛡️ UKAGUZI WA HATARI (RISK GUARD CHECKLIST)</div>
+            <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss imewekwa kwa usahihi chini/juu ya Order Block ya kistakili</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Liquidity Sweep & Target Mitigation (SMC/ICT)</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TPs set to capture multi-stage expansion moves (TP1, TP2, TP3)</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TPs zimewekwa kukamata hatua za upanuzi (TP1, TP2, TP3)</span></div>
           </div>
 
           <div class="card">
@@ -370,32 +368,32 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">👥 10 MARKET ANALYSIS MASTERS (ALL 3 CHARTS ANALYZED)</div>
+            <div class="ballistic-header">👥 10 MARKET ANALYSIS MASTERS (CHATI ZOTE 3 ZIMECHAMBULIWA)</div>
             <div id="agentsContainer"></div>
           </div>
 
           <div class="card">
-            <div class="ballistic-header">⏳ MULTI-TIMEFRAME CONFLUENCE (4H, 1H, 15M)</div>
+            <div class="ballistic-header">⏳ MUUNGANISHO WA MUDA (4H, 1H, 15M)</div>
             <div id="tfOutput" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;"></div>
           </div>
 
-          <button class="primary-btn" onclick="resetAnalystForm()">ANALYZE AGAIN</button>
+          <button class="primary-btn" onclick="resetAnalystForm()">CHAMBUA TENA</button>
         </div>
       </div>
 
       <div id="view-journal" class="view-section" style="display: none;">
         <div class="card">
           <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX RISK CALCULATOR & JOURNAL</div>
-          <h3 style="margin: 5px 0 10px 0;">Advanced Risk & Lot Size Calculator</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Weka mtaji wako na asilimia ya hatari kukokotoa lot size sahihi:</p>
+          <h3 style="margin: 5px 0 10px 0;">Kikokotoo cha Hatari na Lot Size (Risk & Lot Calculator)</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Weka mtaji wako na asilimia ya hatari ili ukokotoe lot size sahihi:</p>
 
           <div class="grid-2">
             <div>
-              <label>Account Balance ($)</label>
+              <label>Mtaji wa Akaunti ($)</label>
               <input type="number" id="riskBalance" value="1000" placeholder="1000">
             </div>
             <div>
-              <label>Risk Percentage (%)</label>
+              <label>Asilimia ya Hatari (%)</label>
               <input type="number" step="0.1" id="riskPercent" value="1.0" placeholder="1.0">
             </div>
           </div>
@@ -406,7 +404,7 @@
               <input type="number" id="riskSlPips" value="30" placeholder="30">
             </div>
             <div>
-              <label>Asset Type</label>
+              <label>Aina ya Mali (Asset Type)</label>
               <select id="riskAssetType">
                 <option value="XAUUSD">Gold (XAUUSD)</option>
                 <option value="CRYPTO">Crypto (BTCUSD)</option>
@@ -424,11 +422,11 @@
 
           <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 20px 0;">
 
-          <h3 style="margin: 5px 0 10px 0;">Manual Trade Journal Entry</h3>
-          <label>Instrument Pair</label>
-          <input type="text" id="jPair" placeholder="e.g. XAUUSD or BTCUSD">
+          <h3 style="margin: 5px 0 10px 0;">Andika Kwenye Journal ya Biashara (Manual Trade Journal)</h3>
+          <label>Pair ya Biashara</label>
+          <input type="text" id="jPair" placeholder="mf. XAUUSD au BTCUSD">
 
-          <label>Action / Direction</label>
+          <label>Uelekeo (Action / Direction)</label>
           <select id="jAction">
             <option value="BUY">BUY</option>
             <option value="SELL">SELL</option>
@@ -437,7 +435,7 @@
 
           <div class="grid-2">
             <div>
-              <label>Entry Price</label>
+              <label>Bei ya Kuingilia (Entry Price)</label>
               <input type="number" step="any" id="jEntry" placeholder="0.00">
             </div>
             <div>
@@ -457,12 +455,12 @@
             </div>
           </div>
 
-          <label>Outcome Status</label>
+          <label>Hali ya Mwisho (Outcome Status)</label>
           <select id="jOutcome">
-            <option value="WIN">WIN (Take Profit Hit)</option>
-            <option value="LOSS">LOSS (Stop Loss Hit)</option>
-            <option value="PENDING">PENDING (Bado inaendelea)</option>
-            <option value="WAIT">WAIT (Kaghazi / Imesubiriwa)</option>
+            <option value="WIN">WIN (Take Profit Imefikiwa)</option>
+            <option value="LOSS">LOSS (Stop Loss Imegongwa)</option>
+            <option value="PENDING">PENDING (Inaendelea)</option>
+            <option value="WAIT">WAIT (Imesubiriwa)</option>
           </select>
 
           <button class="primary-btn" onclick="saveManualJournalTrade()">Hifadhi kwenye Journal & Historia</button>
@@ -471,7 +469,7 @@
 
       <div id="view-livechart" class="view-section" style="display: none;">
         <div class="card">
-          <h3>Live TradingView Chart</h3>
+          <h3>Chati ya Moja kwa Moja (Live TradingView Chart)</h3>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Chagua Pair ya Kuangalia Live Chart:</p>
           
           <select id="liveChartPairSelector" onchange="changeLiveChartPair(this.value)">
@@ -489,7 +487,7 @@
 
       <div id="view-news" class="view-section" style="display: none;">
         <div class="card">
-          <h3>Live Economic Calendar & News</h3>
+          <h3>Kalenda ya Kiuchumi na Habari (Economic Calendar & News)</h3>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa za leo:</p>
           <div id="economicNewsContainer"></div>
         </div>
@@ -498,7 +496,7 @@
       <div id="view-history" class="view-section" style="display: none;">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <h3 style="margin: 0;">Trade History Archive</h3>
+            <h3 style="margin: 0;">Historia ya Biashara (Trade History Archive)</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Orodha ya uchambuzi uliopita:</p>
@@ -510,7 +508,7 @@
 
       <div id="view-broker" class="view-section" style="display: none;">
         <div class="card">
-          <h3>Broker Sync & API</h3>
+          <h3>Ulinganishaji wa Broker na API (Broker Sync & API)</h3>
           <label>Broker API Key / Token</label>
           <input type="text" id="brokerApiKey" placeholder="Weka Broker Token hapa">
           <button class="primary-btn" onclick="alert('Broker Sync Token imehifadhiwa!')">Hifadhi Token</button>
@@ -545,7 +543,6 @@ class LutynoelFXSystem {
 let currentMathAns1 = 0;
 let currentMathAns2 = 0;
 let globalImages = { h4: null, h1: null, m15: null };
-const TZS_RATE = 2600;
 
 window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
@@ -614,8 +611,8 @@ function toggleAuthMode(mode) {
   if (mode === 'register') {
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('registerFormSection').style.display = 'block';
-    document.getElementById('authTitle').innerText = 'Create Account';
-    document.getElementById('authSubtitle').innerText = 'Deploy Masters 10 Protocol';
+    document.getElementById('authTitle').innerText = 'Unda Akaunti';
+    document.getElementById('authSubtitle').innerText = 'Weka Itifaki ya Masters 10';
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
@@ -629,7 +626,7 @@ function handleLogin() {
   const pass = document.getElementById('loginPassword').value.trim();
   const apiKey = document.getElementById('authApiKey').value.trim();
 
-  if (!email || !apiKey) { alert("Tafadhali jaza email na Gemini API Key yako walau mara moja!"); return; }
+  if (!email || !apiKey) { alert("Tafadhali jaza barua pepe na Gemini API Key yako!"); return; }
 
   localStorage.setItem('lutynoel_user', email);
   localStorage.setItem('lutynoel_email', email);
@@ -753,7 +750,7 @@ async function sendAIChatMessage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{
-          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya XAUUSD, BTCUSD, na mfumo wa Masters 10 kwa kutumia Gemini 3.6 Flash. Jibu swali hili la mtumiaji kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
+          parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa biashara ya XAUUSD, BTCUSD, na mfumo wa Masters 10 kupitia Gemini 3.6 Flash. Jibu swali hili kwa Kiswahili fasaha, kitaalamu, na kwa kifupi: ${msg}` }]
         }]
       })
     });
@@ -821,7 +818,7 @@ function loadEconomicCalendar() {
   container.innerHTML = `
     <div class="news-card impact-red">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <strong style="font-size: 13px;">XAUUSD & BTCUSD - High Impact News Flow</strong>
+        <strong style="font-size: 13px;">XAUUSD & BTCUSD - Taarifa za Muhimu (High Impact)</strong>
         <span style="font-size: 10px; font-weight: bold; color: var(--text-muted);">LIVE</span>
       </div>
       <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: HIGH IMPACT (Fundamental Analysis Master)</div>
@@ -877,9 +874,8 @@ function calculateAccurateProfit(pairName, entry, tp3) {
 
   lots.forEach(l => {
     let usd = pips * pipValuePerStandardLot * l;
-    let tzs = usd * TZS_RATE;
     let key = 'tp_' + l.toString().replace('.', '');
-    resObj[key] = `$${usd.toFixed(2)} <br><span style="font-size:10px; color:var(--text-muted);">≈ TZS ${tzs.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
+    resObj[key] = `$${usd.toFixed(2)}`;
   });
 
   return { calculatedPips: Math.round(pips), projections: resObj };
@@ -1077,7 +1073,7 @@ Mtumiaji ameweka picha za chati za 4H, 1H na 15M. Soma kwa makini picha hizi na 
     alert("Hitilafu: " + (err.message || "Tafadhali angalia API Key yako."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "RUN MASTERS 10 (GEMINI 3.6)";
+    runBtn.innerText = "ANZA MASTERS 10 (GEMINI 3.6)";
   }
 }
 
@@ -1223,7 +1219,7 @@ function deleteSingleHistory(index) {
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
   loadTradeHistory();
   updateStatsOverview();
-  showToast("Uchambuzi umehifadhiwa / umefutwa!");
+  showToast("Uchambuzi umefutwa!");
 }
 
 function openHistoryDetails(index) {
