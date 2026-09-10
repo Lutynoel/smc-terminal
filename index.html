@@ -813,7 +813,7 @@ function calculateAccurateProfit(pairName, entry, tp3) {
   let upperAssetType = pairName.toUpperCase();
 
   if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 1.0;
-  else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 10.0; // 1 pip on Gold (0.1 move) for 1 lot = $10 (Standard), 0.01 lot = $0.10 per pip
+  else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 10.0;
 
   if (entry > 0 && tp3 > 0) {
     let priceDiff = Math.abs(tp3 - entry);
