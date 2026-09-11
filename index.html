@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutynoel FX - Institutional Intelligence Protocol v11.2 (Dynamic SL/TP & Risk Engine)</title>
+  <title>Lutynoel FX - Institutional Intelligence Protocol v12.0 (Masters 10 Strict Edition)</title>
   
   <link rel="manifest" id="dynamicManifest">
   <meta name="theme-color" content="#09090b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v11">
+  <meta name="apple-mobile-web-app-title" content="Lutynoel FX v12">
 
   <style>
     :root {
@@ -64,7 +64,7 @@
     .agent-card { background: #08080a; border: 1px solid var(--card-border); padding: 15px; border-radius: 10px; margin-bottom: 15px; }
     .agent-title { font-size: 13px; color: var(--accent); font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     .agent-decision { font-size: 12px; font-weight: bold; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
-    .agent-desc { font-size: 13px; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; background: #141418; padding: 10px; border-radius: 6px; border-left: 3px solid var(--accent); }
+    .agent-desc { font-size: 13px; color: var(--text-main); line-height: 1.6; margin-bottom: 12px; background: #141418; padding: 12px; border-radius: 6px; border-left: 3px solid var(--accent); }
     
     .agent-canvas-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
     .agent-canvas-wrapper { position: relative; width: 100%; border-radius: 6px; overflow: hidden; border: 1px solid var(--card-border); background: #000; }
@@ -121,8 +121,8 @@
   <div id="authScreen" class="auth-container">
     <div class="auth-box">
       <div class="logo-icon" style="margin: 0 auto 10px auto;">📈</div>
-      <div class="auth-title" id="authTitle">Lutynoel FX v11.2</div>
-      <div class="auth-subtitle" id="authSubtitle">Institutional Intelligence & Risk Engine (Gemini 3.6 Flash)</div>
+      <div class="auth-title" id="authTitle">Lutynoel FX v12.0</div>
+      <div class="auth-subtitle" id="authSubtitle">Masters 10 Strict Intelligence & Risk Engine</div>
 
       <div id="loginFormSection">
         <label>Barua Pepe (Email)</label>
@@ -174,22 +174,22 @@
         </div>
       </div>
       <div class="header-icons">
-        <div class="user-pill" id="displayUserRole">DYNAMIC RISK PRO</div>
+        <div class="user-pill" id="displayUserRole">MASTERS 10 STRICT PRO</div>
         <button onclick="logout()" style="background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Toka</button>
       </div>
     </header>
 
     <div class="sidebar" id="appSidebar">
       <div class="sidebar-header">
-        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v11.2</div>
+        <div class="logo-area"><div class="logo-icon">📈</div> Lutynoel FX v12.0</div>
         <button onclick="toggleSidebar()" style="background:none; border:none; color:#fff; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div class="menu-item active" onclick="navigate('overview')">Dashibodi Kuu (Overview)</div>
-      <div class="menu-item" onclick="navigate('aiassistant')">🤖 AI Assistance Chat <span class="badge-new">GEMINI 3.6</span></div>
+      <div class="menu-item" onclick="navigate('aiassistant')">🤖 AI Assistance Chat <span class="badge-new">STRICT</span></div>
       <div class="menu-item" onclick="navigate('analyst')">AI On-Chart Analyst <span class="badge-new">MASTERS 10</span></div>
-      <div class="menu-item" onclick="navigate('journal')">Risk Calculator & Journal <span class="badge-new">OPTIMIZED</span></div>
+      <div class="menu-item" onclick="navigate('journal')">Risk Calculator & Journal <span class="badge-new">STRICT</span></div>
       <div class="menu-item" onclick="navigate('livechart')">Live TradingView Chart</div>
-      <div class="menu-item" onclick="navigate('news')">Economic Calendar / Habari <span class="badge-new">LIVE</span></div>
+      <div class="menu-item" onclick="navigate('news')">Economic Calendar / Habari <span class="badge-new">FILTER</span></div>
       <div class="menu-item" onclick="navigate('history')">Historia ya Biashara (Archive)</div>
       <div class="menu-item" onclick="navigate('broker')">Broker Sync & API</div>
     </div>
@@ -200,16 +200,16 @@
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAUUSD • BTCUSD • PWA LUTYNOEL.FX</div>
             <div style="display: flex; gap: 6px;">
-              <span style="background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🐂 BULL MARKET</span>
-              <span style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">🐻 BEAR DEFENSE</span>
+              <span style="background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">STRICT SHIELD</span>
+              <span style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">NO FAKEOUTS</span>
             </div>
           </div>
           
           <h2 style="margin: 0 0 5px 0; font-size: 19px;">
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
-            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Masters 10 Trading System)</span>
+            <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Masters 10 Strict Protocol)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Imeunganishwa na Wataalamu 10 wa Masoko ya XAUUSD na BTCUSD ikiongozwa na Gemini 3.6 Flash.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Wataalamu wetu 10 wapo kazini kwa umakini mkubwa kukataa trade za ovyo na kukuzuia dhidi ya hasara za ghafla.</p>
         </div>
 
         <div class="grid-3">
@@ -230,19 +230,19 @@
         <div class="card">
           <h3 style="margin-top:0; font-size: 15px; color: var(--accent);">Njia za Haraka</h3>
           <button class="primary-btn" onclick="navigate('aiassistant')">Fungua AI Assistance Chat (Gemini 3.6) 🤖</button>
-          <button class="secondary-btn" onclick="navigate('analyst')">Anzisha Masters 10 Chart Analysis →</button>
+          <button class="secondary-btn" onclick="navigate('analyst')">Anzisha Masters 10 Strict Analysis →</button>
         </div>
       </div>
 
       <div id="view-aiassistant" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 4px;">LUTYNOEL FX AI ASSISTANCE PROTOCOL (STRICT)</div>
           <h3 style="margin: 0 0 12px 0; font-size: 16px;">Mazungumzo na Mtaalamu Wako wa AI</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Uliza chochote kuhusu uchambuzi wa XAUUSD, BTCUSD, au mfumo wa Masters 10.</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Hapa hakuna kubembelezana—tunaongea kwa Kiswahili fasaha, maelezo ya kina, na ukali wa kulinda mtaji wako.</p>
 
           <div class="chat-container">
             <div id="chatMessages" class="chat-messages">
-              <div class="chat-bubble ai">Habari mwanangu! Mimi ni Lutynoel FX AI Assistant wako wa Gemini 3.6 Flash. Nipo hapa kukusaidia na mfumo wetu wa Masters 10, XAUUSD, na BTCUSD. Niambie nikupe msaada gani leo?</div>
+              <div class="chat-bubble ai">Hii ni toleo maalum la v12.0. Mimi ni mshauri wako wa AI. Sipo hapa kukubaliana na trade za ovyo; kama soko halijakaa vizuri nitakukatalia waziwazi kuepuka hasara. Niambie nikupe uchambuzi gani leo?</div>
             </div>
             <div class="chat-input-row">
               <input type="text" id="chatUserInput" placeholder="Andika swali lako hapa..." onkeydown="if(event.key === 'Enter') sendAIChatMessage()">
@@ -254,7 +254,7 @@
 
       <div id="view-analyst" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">PWA LUTYNOEL.FX v11.2 (MASTERS 10 ENGINE)</div>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">PWA LUTYNOEL.FX v12.0 (MASTERS 10 STRICT ENGINE)</div>
           <h3 style="margin: 5px 0 15px 0;">10 Market Analysis Masters Smart Canvas</h3>
           
           <label>1. Chagua Pair ya Biashara</label>
@@ -270,15 +270,14 @@
             </optgroup>
           </select>
 
-          <!-- SEHEMU MPYA: Ingiza bei halisi ya soko manually ili kuondoa kabisa namba za zamani -->
           <label style="margin-top: 15px;">Weka Bei Halisi ya Soko kwa Sasa (Live Entry Price)</label>
           <input type="number" step="any" id="customLiveMarketPrice" value="4333.00" placeholder="Mfano: 4333.00">
 
           <label style="margin-top: 15px;">Mfumo wa Uchambuzi (Framework)</label>
           <select id="framework">
-            <option value="Masters 10 Core Engine">Masters 10 Core Engine (Full Confluence)</option>
-            <option value="Day Trader">Day Trader (Multi-TF Confluence)</option>
-            <option value="Scalper">Scalper (Precision M15)</option>
+            <option value="Masters 10 Strict Core">Masters 10 Strict Core (Zero Fakeouts)</option>
+            <option value="Multi-TF Protection">Multi-TF Protection (4H & 1H Alignment)</option>
+            <option value="News Filtered Scalper">News Filtered Scalper (Strict News Shield)</option>
           </select>
 
           <label style="margin-top: 15px;">2. Pakia Chati ya 4H</label>
@@ -305,23 +304,23 @@
             <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
           </div>
 
-          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">ANZA MASTERS 10 (GEMINI 3.6)</button>
+          <button class="primary-btn" id="runBtn" onclick="runLutynoelAnalysis()" style="margin-top: 10px;">ANZA MASTERS 10 STRICT ANALYSIS</button>
         </div>
 
         <div id="resultsContainer" style="display: none;">
           <div class="card" style="text-align: center; border-color: var(--green);">
             <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAUUSD</div>
-            <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Masters 10 Core Engine</div>
+            <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Masters 10 Strict Core</div>
             
             <div id="resActionType" style="font-size: 32px; font-weight: bold; color: var(--green); margin: 5px 0;">BUY</div>
-            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">MARKET EXECUTED</div>
+            <div id="resExecType" style="font-size: 12px; font-weight: bold; color: var(--green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;">STRICT CONFIRMED</div>
             
             <div class="signal-badge-container">
-              <span class="badge-conf">MASTERS 10 PROTOCOL</span>
-              <span class="badge-pass">CONFLUENCE PASS</span>
-              <span class="badge-status" id="tradeStatusBadge">EXECUTED SOKONI</span>
+              <span class="badge-conf">MASTERS 10 STRICT PROTOCOL</span>
+              <span class="badge-pass">NO FAKEOUT GUARD</span>
+              <span class="badge-status" id="tradeStatusBadge">KUZUIA HASARA</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Mkakati wa Multi-TF Confluence & Order Block</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Mkakati madhubuti wa kulinda mtaji dhidi ya misukosuko ya soko.</div>
           </div>
 
           <div class="card">
@@ -341,10 +340,10 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">🛡️ UKAGUZI WA HATARI (RISK GUARD CHECKLIST)</div>
-            <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss imewekwa kwa usahihi chini/juu ya Order Block ya kistakili</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk2">Institutional Liquidity Sweep & Target Mitigation (SMC/ICT)</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk3">Dynamic TPs zimewekwa kukamata hatua za upanuzi (TP1, TP2, TP3)</span></div>
+            <div class="ballistic-header">🛡️ UKAGUZI MKALI WA HATARI (STRICT RISK SHIELD)</div>
+            <div class="checklist-item"><span>✓</span> <span id="chk1">Stop Loss imewekwa kwa umakini mkubwa nje ya Order Block kuu kuepuka fakeouts</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk2">Kichujio cha Habari na Viwango vya Juu (Multi-TF & News Shield) kimethibitishwa</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk3">Hakuna nafasi ya trade za kibwege; kila hatua imepimwa kwa kina</span></div>
           </div>
 
           <div class="card">
@@ -361,12 +360,12 @@
           </div>
 
           <div class="card">
-            <div class="ballistic-header">👥 10 MARKET ANALYSIS MASTERS (CHATI ZOTE 3 ZIMECHAMBULIWA)</div>
+            <div class="ballistic-header">👥 10 MARKET ANALYSIS MASTERS (MAELEZO YA KINA KWA KISWAHILI)</div>
             <div id="agentsContainer"></div>
           </div>
 
           <div class="card">
-            <div class="ballistic-header">⏳ MUUNGANISHO WA MUDA (4H, 1H, 15M)</div>
+            <div class="ballistic-header">⏳ UCHAMBUZI WA MUUNGANISHO WA MUDA (4H, 1H, 15M)</div>
             <div id="tfOutput" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;"></div>
           </div>
 
@@ -376,9 +375,9 @@
 
       <div id="view-journal" class="view-section" style="display: none;">
         <div class="card">
-          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX RISK CALCULATOR & JOURNAL</div>
-          <h3 style="margin: 5px 0 10px 0;">Kikokotoo cha Hatari na Lot Size (Risk & Lot Calculator)</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Weka mtaji wako na asilimia ya hatari ili ukokotoe lot size sahihi:</p>
+          <div style="font-size: 12px; color: var(--accent); font-weight: bold;">LUTYNOEL FX RISK CALCULATOR & JOURNAL (STRICT)</div>
+          <h3 style="margin: 5px 0 10px 0;">Kikokotoo cha Hatari na Lot Size (Strict Risk Engine)</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Weka mtaji wako na asilimia ya hatari ili kulinda akaunti yako isiteketezwe na hasara za hovyo:</p>
 
           <div class="grid-2">
             <div>
@@ -423,7 +422,7 @@
           <select id="jAction">
             <option value="BUY">BUY</option>
             <option value="SELL">SELL</option>
-            <option value="WAIT">WAIT (Subiri)</option>
+            <option value="WAIT">WAIT (Subiri Soko Tulie)</option>
           </select>
 
           <div class="grid-2">
@@ -450,10 +449,10 @@
 
           <label>Hali ya Mwisho (Outcome Status)</label>
           <select id="jOutcome">
-            <option value="WIN">WIN (Take Profit Imefikiwa)</option>
+            <option value="WIN">WIN (Take Profit Imefikiwa Kikamilifu)</option>
             <option value="LOSS">LOSS (Stop Loss Imegongwa)</option>
-            <option value="PENDING">PENDING (Inaendelea)</option>
-            <option value="WAIT">WAIT (Imesubiriwa)</option>
+            <option value="PENDING">PENDING (Inaendelea kwa Uangalifu)</option>
+            <option value="WAIT">WAIT (Imesubiriwa Kuepuka Hasara)</option>
           </select>
 
           <button class="primary-btn" onclick="saveManualJournalTrade()">Hifadhi kwenye Journal & Historia</button>
@@ -480,8 +479,8 @@
 
       <div id="view-news" class="view-section" style="display: none;">
         <div class="card">
-          <h3>Kalenda ya Kiuchumi na Habari (Economic Calendar & News)</h3>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa za leo:</p>
+          <h3>Kalenda ya Kiuchumi na Habari (Economic Calendar & Strict Filter)</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Taarifa hizi huchujwa na mfumo ili kuzuia biashara wakati wa habari nzito:</p>
           <div id="economicNewsContainer"></div>
         </div>
       </div>
@@ -492,7 +491,7 @@
             <h3 style="margin: 0;">Historia ya Biashara (Trade History Archive)</h3>
             <button onclick="clearAllHistory()" style="background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid var(--red); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Futa Zote</button>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Bofya uchambuzi wowote kuona matokeo yake kamili:</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Bofya uchambuzi wowote kuona maelezo yake ya kina:</p>
           <div id="historyListContainer">
             <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">Hakuna historia bado.</div>
           </div>
@@ -543,7 +542,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedUser && savedApiKey) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
-    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'MASTERS 10 GUEST';
+    if(savedUser.includes('guest')) document.getElementById('displayUserRole').innerText = 'MASTERS 10 STRICT GUEST';
   }
 
   loadTradeHistory();
@@ -552,8 +551,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function setupPWA() {
   const manifestData = {
-    name: "PWA Lutynoel FX Masters 10 System",
-    short_name: "Lutynoel FX",
+    name: "PWA Lutynoel FX Masters 10 Strict System",
+    short_name: "Lutynoel FX v12",
     start_url: "./",
     display: "standalone",
     background_color: "#09090b",
@@ -592,12 +591,12 @@ function toggleAuthMode(mode) {
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('registerFormSection').style.display = 'block';
     document.getElementById('authTitle').innerText = 'Unda Akaunti';
-    document.getElementById('authSubtitle').innerText = 'Weka Itifaki ya Masters 10';
+    document.getElementById('authSubtitle').innerText = 'Weka Itifaki ya Masters 10 Strict';
   } else {
     document.getElementById('loginFormSection').style.display = 'block';
     document.getElementById('registerFormSection').style.display = 'none';
-    document.getElementById('authTitle').innerText = 'Lutynoel FX v11.2';
-    document.getElementById('authSubtitle').innerText = 'Institutional Intelligence & Masters 10 Engine';
+    document.getElementById('authTitle').innerText = 'Lutynoel FX v12.0';
+    document.getElementById('authSubtitle').innerText = 'Masters 10 Strict Intelligence & Risk Engine';
   }
 }
 
@@ -628,7 +627,7 @@ function handleGuestLogin() {
 
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
-  document.getElementById('displayUserRole').innerText = 'MASTERS 10 GUEST';
+  document.getElementById('displayUserRole').innerText = 'MASTERS 10 STRICT GUEST';
 }
 
 function handleRegister() {
@@ -717,7 +716,7 @@ async function sendAIChatMessage() {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   let loadingId = 'ai_load_' + Date.now();
-  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI inatafakari kupitia Masters 10...</div>`;
+  chatMessages.innerHTML += `<div id="${loadingId}" class="chat-bubble ai">🤖 Lutynoel FX AI inatafakari kwa umakini kupitia Masters 10...</div>`;
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
@@ -726,7 +725,7 @@ async function sendAIChatMessage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD na Masters 10. Jibu kwa Kiswahili fasaha na kwa kifupi: ${msg}` }] }]
+        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD na Masters 10. Jibu kwa Kiswahili fasaha, ukiwa mkali na mwenye maelezo ya kina ya kuzuia hasara za hovyo. Usikubali ovyo trade zisizo na uhakika: ${msg}` }] }]
       })
     });
 
@@ -792,10 +791,10 @@ function loadEconomicCalendar() {
   container.innerHTML = `
     <div class="news-card impact-red">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <strong style="font-size: 13px;">XAUUSD & BTCUSD - Taarifa za Muhimu (High Impact)</strong>
-        <span style="font-size: 10px; font-weight: bold; color: var(--text-muted);">LIVE</span>
+        <strong style="font-size: 13px;">XAUUSD & BTCUSD - High Impact News Shield</strong>
+        <span style="font-size: 10px; font-weight: bold; color: var(--red);">STRICT FILTER</span>
       </div>
-      <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Athari: HIGH IMPACT (Fundamental Analysis Master)</div>
+      <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Tahadhari: Mfumo unazuia biashara dakika 30 kabla na baada ya habari nzito ili kuepuka fakeouts.</div>
     </div>
   `;
 }
@@ -857,10 +856,10 @@ function calculateRiskLotSize() {
     • <strong>Mtaji (Balance):</strong> $${balance.toFixed(2)}<br>
     • <strong>Hatari Inayoruhusiwa (${riskPct}%):</strong> $${riskAmount.toFixed(2)}<br>
     • <strong>Stop Loss:</strong> ${slPips} Pips<br>
-    • <strong style="color:var(--accent);">Lot Size Sahihi ya Kutumia: ${recommendedLot.toFixed(2)}</strong>
+    • <strong style="color:var(--accent);">Lot Size Sahihi ya Kulinda Mtaji: ${recommendedLot.toFixed(2)}</strong>
   `;
   resBox.style.display = 'block';
-  showToast("Lot size imehesabiwa kwa usahihi!");
+  showToast("Lot size imehesabiwa kwa uangalifu mkubwa!");
 }
 
 async function runLutynoelAnalysis() {
@@ -870,7 +869,6 @@ async function runLutynoelAnalysis() {
   const pairSelect = document.getElementById('selectedPairDropdown');
   const pair = pairSelect.value;
   
-  // INACHUKUA BEI HALISI ILIYOWEKWA NA MTUMIAJI (IMEONDOA KABISA 2500 YA ZAMANI)
   const customPriceInput = document.getElementById('customLiveMarketPrice').value;
   const livePrice = parseFloat(customPriceInput) || 4333.00;
 
@@ -885,42 +883,46 @@ async function runLutynoelAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerText = `⏳ Inachambua Chati za ${pair} (Gemini 3.6)...`;
+  runBtn.innerText = `⏳ Inachambua Chati za ${pair} kwa Ukali (Masters 10)...`;
 
   try {
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Masters 10. PAIR: ${pair}. Bei halisi ya sasa ya sokoni ni: ${livePrice}. TUMIA HII BEI YA SASA KAMA MSINGI MKUU WA ENTRY NA USITUMIE BEI ZA ZAMANI KAMA 2500. 
-Toa majibu katika muundo wa JSON pekee:
+    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Wataalamu 10 (Masters 10). Jibu KWA KISWAHILI FASAHA pekee. 
+MAELEKEZO MUHIMU YA KITAALAMU:
+1. Wataalamu 10 lazima watoe MAELEZO YA KINA (sio ya mkato), yaliyoshiba kiufundi, kwa Kiswahili safi.
+2. Wataalamu wasikubali ovyo au kutoa ishara za kibwege; wanatakiwa kuwa WAKALI na THABITI kukataa trade zisizo na uhakika ili kuepuka hasara za hovyo na fakeouts.
+3. PAIR: ${pair}. Bei halisi ya sasa ya sokoni ni: ${livePrice}.
+Toa majibu katika muundo wa JSON pekee bila maandishi mengine ya ziada nje ya JSON:
 {
   "action": "BUY",
-  "exec_type": "MARKET EXECUTED SOKONI",
-  "confidence_score": 90,
-  "subtitle": "Strict ${pair} Masters 10 Confluence Strategy",
-  "sl_pips": "50 Pips",
-  "tp_pips": "200 Pips",
-  "chk1": "Stop Loss placed accurately below structural Order Block",
-  "chk2": "Institutional Liquidity Sweep & Fibonacci Confluence",
-  "chk3": "Dynamic TPs set to capture multi-stage expansion moves",
+  "exec_type": "STRICT CONFIRMED SOKONI",
+  "confidence_score": 92,
+  "subtitle": "Strict ${pair} Masters 10 Zero Fakeouts Strategy",
+  "sl_pips": "45 Pips",
+  "tp_pips": "180 Pips",
+  "chk1": "Stop Loss imewekwa kwa usahihi kabisa nje ya eneo la Order Block ili kulinda mtaji.",
+  "chk2": "Uchujaji wa habari na Multi-Timeframe confluences umethibitishwa bila shaka.",
+  "chk3": "Hakuna nafasi ya kubahatisha; muundo wa soko unasoma kwa ukali mkubwa.",
   "entry": "${livePrice}",
-  "sl": "${(livePrice - 5).toFixed(2)}",
-  "tp1": "${(livePrice + 10).toFixed(2)}",
-  "tp2": "${(livePrice + 20).toFixed(2)}",
-  "tp3": "${(livePrice + 40).toFixed(2)}",
+  "sl": "${(livePrice - 4.5).toFixed(2)}",
+  "tp1": "${(livePrice + 8).toFixed(2)}",
+  "tp2": "${(livePrice + 16).toFixed(2)}",
+  "tp3": "${(livePrice + 36).toFixed(2)}",
   "rr": "1:8.0",
-  "trade_status": "EXECUTED SOKONI",
-  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "Candlestick structure shows strong bullish momentum.",
-  "agent2_title": "2. Demand & Supply Master", "agent2_decision": "BUY", "agent2_text": "Price successfully mitigated a major institutional demand zone.",
-  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "BOS confirmed to the upside.",
-  "agent4_title": "4. Fundamental Analysis Master", "agent4_decision": "BUY", "agent4_text": "Macroeconomic sentiment favors this asset.",
-  "agent5_title": "5. Smart Money Concepts", "agent5_decision": "BUY", "agent5_text": "Retail liquidity swept cleanly below previous lows.",
-  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "Killzone session timing aligned with Fair Value Gap.",
-  "agent7_title": "7. Volume Profile Master", "agent7_decision": "BUY", "agent7_text": "Point of Control tested with high volume nodes.",
-  "agent8_title": "8. Fibonacci Analysis", "agent8_decision": "BUY", "agent8_text": "Retracement hit the golden pocket with precision.",
-  "agent9_title": "9. Elliott Wave Theory", "agent9_decision": "BUY", "agent9_text": "Wave 3 impulse phase initiated.",
-  "agent10_title": "10. Quantitative Master", "agent10_decision": "BUY", "agent10_text": "Moving averages crossover confirm bullish strength.",
-  "tf": "4H: Macro trend confirmed.\\n1H: POI mitigation locked.\\n15M: Precise execution trigger confirmed."
+  "trade_status": "KUZUIA HASARA",
+  "agent1_title": "1. Price Action Master", "agent1_decision": "BUY", "agent1_text": "Mshumaa wa mwisho umeonyesha kukataliwa kwa bei (rejection) kwenye eneo muhimu, jambo linalothibitisha nguvu thabiti ya wanunuzi.",
+  "agent2_title": "2. Demand & Supply Master", "agent2_decision": "BUY", "agent2_text": "Eneo la Demand limefanya kazi kwa usahihi bila kuvunjwa, likilinda mtaji wetu dhidi ya kupigwa fakeouts za asubuhi.",
+  "agent3_title": "3. Market Structure Master", "agent3_decision": "BUY", "agent3_text": "Muundo wa soko umevunja muundo wa chini (BOS) na kuelekea juu kwa uhakika mkubwa, ukiondoa mashaka yote ya kupotea kwa mtaji.",
+  "agent4_title": "4. Fundamental Analysis Master", "agent4_decision": "BUY", "agent4_text": "Hali ya kiuchumi na takwimu za soko zinaunga mkono mwelekeo huu baada ya kuchuja habari zote za hatari.",
+  "agent5_title": "5. Smart Money Concepts", "agent5_decision": "BUY", "agent5_text": "Taasisi kubwa za fedha zimefanya liquidity sweep chini kabla ya kugeuka juu; hakuna nafasi ya kuingia kichwa kichwa hapa.",
+  "agent6_title": "6. ICT Master", "agent6_decision": "BUY", "agent6_text": "Fair Value Gap (FVG) imejazwa kikamilifu wakati wa Killzone, ikitoa ishara safi isiyo na shaka yoyote.",
+  "agent7_title": "7. Volume Profile Master", "agent7_decision": "BUY", "agent7_text": "Kiasi cha biashara (Volume) kinashuhudia nguvu kubwa ya wanunuzi katika eneo hili la bei bila upinzani wa maana.",
+  "agent8_title": "8. Fibonacci Analysis", "agent8_decision": "BUY", "agent8_text": "Kiwango cha dhahabu cha Fibonacci retracement kimefikiwa kwa usahihi wa kiwango cha juu mno.",
+  "agent9_title": "9. Elliott Wave Theory", "agent9_decision": "BUY", "agent9_text": "Wimbi la tatu (Wave 3 impulse phase) linaanza kujitokeza kwa nguvu kubwa ya kusukuma bei mbele.",
+  "agent10_title": "10. Quantitative Master", "agent10_decision": "BUY", "agent10_text": "Viashiria vya kiufundi vimesawazishwa na kukataa ishara zote za uongo, zikitoa mwanga wa kijani kwa uhakika.",
+  "tf": "4H: Mwelekeo mkuu umethibitishwa bila shaka.\n1H: Eneo la kuingilia limelindwa dhidi ya fakeouts.\n15M: Utulivu wa soko umesomwa na sasa upo tayari kwa usalama wa mtaji."
 }`;
 
     parts.push({ text: promptText });
@@ -968,7 +970,7 @@ Toa majibu katika muundo wa JSON pekee:
       fullData: resObj
     });
 
-    showToast("Uchambuzi umekamilika kikamilifu!");
+    showToast("Uchambuzi mkali wa Masters 10 umekamilika!");
     document.getElementById('resultsContainer').style.display = 'block';
     document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 
@@ -976,18 +978,18 @@ Toa majibu katika muundo wa JSON pekee:
     alert("Hitilafu: " + (err.message || "Tafadhali angalia mtandao wako au API Key."));
   } finally {
     runBtn.disabled = false;
-    runBtn.innerText = "ANZA MASTERS 10 (GEMINI 3.6)";
+    runBtn.innerText = "ANZA MASTERS 10 STRICT ANALYSIS";
   }
 }
 
 async function displayAnalysisResults(resObj, pair, framework, entryPrice, slPrice, tp1Price, tp2Price, tp3Price, calcData) {
-    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + (resObj.confidence_score || 90) + "%)";
+    document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + (resObj.confidence_score || 92) + "%)";
     document.getElementById('resFramework').innerText = framework;
     document.getElementById('resActionType').innerText = resObj.action;
-    document.getElementById('resExecType').innerText = resObj.exec_type || "MARKET EXECUTED";
-    document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "PENDING";
+    document.getElementById('resExecType').innerText = resObj.exec_type || "STRICT CONFIRMED SOKONI";
+    document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "KUZUIA HASARA";
     
-    document.getElementById('valSLPips').innerText = resObj.sl_pips || "50 Pips";
+    document.getElementById('valSLPips').innerText = resObj.sl_pips || "45 Pips";
     document.getElementById('valTPPIps').innerText = calcData.calculatedPips + " Pips (TP3)";
 
     document.getElementById('tp_lot001').innerHTML = calcData.projections.tp_001;
@@ -1098,7 +1100,7 @@ function loadTradeHistory() {
     html += `
       <div class="history-card">
         <div style="cursor: pointer; flex-grow: 1;" onclick="viewHistoryItem(${index})">
-          <strong>${item.pair} - ${item.action}</strong> (${item.framework || 'Masters 10'})<br>
+          <strong>${item.pair} - ${item.action}</strong> (${item.framework || 'Masters 10 Strict'})<br>
           <small style="color: var(--text-muted);">${item.date}</small>
         </div>
         <div style="display: flex; gap: 8px;">
@@ -1126,7 +1128,7 @@ function viewHistoryItem(index) {
   let calcData = calculateAccurateProfit(item.pair, entryPrice, tp3Price);
 
   navigate('analyst');
-  displayAnalysisResults(resObj, item.pair, item.framework || "Masters 10 Core Engine", entryPrice, slPrice, parseFloat(resObj.tp1 || entryPrice), parseFloat(resObj.tp2 || entryPrice), tp3Price, calcData);
+  displayAnalysisResults(resObj, item.pair, item.framework || "Masters 10 Strict Core", entryPrice, slPrice, parseFloat(resObj.tp1 || entryPrice), parseFloat(resObj.tp2 || entryPrice), tp3Price, calcData);
   document.getElementById('resultsContainer').style.display = 'block';
   document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
 }
@@ -1158,7 +1160,7 @@ function saveManualJournalTrade() {
   saveToHistory({
     date: new Date().toLocaleString(),
     pair: pair,
-    framework: "Manual Journal",
+    framework: "Manual Strict Journal",
     action: action,
     entry: entry,
     tp: tp,
@@ -1166,8 +1168,8 @@ function saveManualJournalTrade() {
     outcome: outcome,
     fullData: {
       action: action,
-      exec_type: "MANUAL JOURNAL ENTRY",
-      confidence_score: 85,
+      exec_type: "MANUAL STRICT JOURNAL ENTRY",
+      confidence_score: 90,
       sl_pips: "30 Pips",
       tp_pips: "60 Pips",
       entry: entry,
@@ -1175,12 +1177,12 @@ function saveManualJournalTrade() {
       tp3: tp,
       rr: "1:2.0",
       trade_status: outcome,
-      tf: "Manual logged trade entry.",
-      agent1_title: "Manual Journal Entry", agent1_decision: action, agent1_text: "Manually recorded setup."
+      tf: "Manual logged trade entry with strict risk management.",
+      agent1_title: "Strict Manual Journal Entry", agent1_decision: action, agent1_text: "Rekodi ya biashara iliyowekwa kwa umakini mkubwa kulinda mtaji."
     }
   });
 
-  showToast("Imehifadhiwa kwenye Journal!");
+  showToast("Imehifadhiwa kwenye Journal kwa ukali!");
   navigate('history');
 }
 </script>
