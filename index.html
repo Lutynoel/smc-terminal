@@ -270,6 +270,10 @@
             </optgroup>
           </select>
 
+          <!-- SEHEMU MPYA: Ingiza bei halisi ya soko manually ili kuondoa kabisa namba za zamani -->
+          <label style="margin-top: 15px;">Weka Bei Halisi ya Soko kwa Sasa (Live Entry Price)</label>
+          <input type="number" step="any" id="customLiveMarketPrice" value="4333.00" placeholder="Mfano: 4333.00">
+
           <label style="margin-top: 15px;">Mfumo wa Uchambuzi (Framework)</label>
           <select id="framework">
             <option value="Masters 10 Core Engine">Masters 10 Core Engine (Full Confluence)</option>
@@ -666,25 +670,29 @@ function navigate(viewId) {
 
 function syncPairSelection(pairValue) {
   let tvSymbol = "OANDA:XAUUSD";
-  if (pairValue === "BTCUSD") tvSymbol = "BINANCE:BTCUSDT";
-  else if (pairValue === "EURUSD") tvSymbol = "OANDA:EURUSD";
-  else if (pairValue === "GBPUSD") tvSymbol = "OANDA:GBPUSD";
-  else if (pairValue === "USDJPY") tvSymbol = "OANDA:USDJPY";
+  let defaultPrice = "4333.00";
+  if (pairValue === "BTCUSD") { tvSymbol = "BINANCE:BTCUSDT"; defaultPrice = "92000.00"; }
+  else if (pairValue === "EURUSD") { tvSymbol = "OANDA:EURUSD"; defaultPrice = "1.0850"; }
+  else if (pairValue === "GBPUSD") { tvSymbol = "OANDA:GBPUSD"; defaultPrice = "1.2750"; }
+  else if (pairValue === "USDJPY") { tvSymbol = "OANDA:USDJPY"; defaultPrice = "155.00"; }
 
   const liveChartSelect = document.getElementById('liveChartPairSelector');
   if(liveChartSelect) liveChartSelect.value = tvSymbol;
   updateTradingViewIframe(tvSymbol);
+
+  const priceInput = document.getElementById('customLiveMarketPrice');
+  if(priceInput) priceInput.value = defaultPrice;
 }
 
 function changeLiveChartPair(tvSymbol) {
   updateTradingViewIframe(tvSymbol);
   const analystSelect = document.getElementById('selectedPairDropdown');
   if(analystSelect) {
-    if(tvSymbol.includes('XAU')) analystSelect.value = 'XAUUSD';
-    else if(tvSymbol.includes('BTC')) analystSelect.value = 'BTCUSD';
-    else if(tvSymbol.includes('EUR')) analystSelect.value = 'EURUSD';
-    else if(tvSymbol.includes('GBP')) analystSelect.value = 'GBPUSD';
-    else if(tvSymbol.includes('JPY')) analystSelect.value = 'USDJPY';
+    if(tvSymbol.includes('XAU')) { analystSelect.value = 'XAUUSD'; document.getElementById('customLiveMarketPrice').value = "4333.00"; }
+    else if(tvSymbol.includes('BTC')) { analystSelect.value = 'BTCUSD'; document.getElementById('customLiveMarketPrice').value = "92000.00"; }
+    else if(tvSymbol.includes('EUR')) { analystSelect.value = 'EURUSD'; document.getElementById('customLiveMarketPrice').value = "1.0850"; }
+    else if(tvSymbol.includes('GBP')) { analystSelect.value = 'GBPUSD'; document.getElementById('customLiveMarketPrice').value = "1.2750"; }
+    else if(tvSymbol.includes('JPY')) { analystSelect.value = 'USDJPY'; document.getElementById('customLiveMarketPrice').value = "155.00"; }
   }
 }
 
@@ -792,12 +800,6 @@ function loadEconomicCalendar() {
   `;
 }
 
-async function fetchLiveMarketPrice(pair) {
-  if(pair.includes("XAU")) return 2650.50;
-  if(pair.includes("BTC")) return 92000.00;
-  return 1.0850;
-}
-
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -867,6 +869,11 @@ async function runLutynoelAnalysis() {
 
   const pairSelect = document.getElementById('selectedPairDropdown');
   const pair = pairSelect.value;
+  
+  // INACHUKUA BEI HALISI ILIYOWEKWA NA MTUMIAJI (IMEONDOA KABISA 2500 YA ZAMANI)
+  const customPriceInput = document.getElementById('customLiveMarketPrice').value;
+  const livePrice = parseFloat(customPriceInput) || 4333.00;
+
   const h4Input = document.getElementById('chartH4');
   const h1Input = document.getElementById('chartH1');
   const m15Input = document.getElementById('chartM15');
@@ -881,11 +888,10 @@ async function runLutynoelAnalysis() {
   runBtn.innerText = `⏳ Inachambua Chati za ${pair} (Gemini 3.6)...`;
 
   try {
-    const livePrice = await fetchLiveMarketPrice(pair);
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Masters 10. PAIR: ${pair}. Bei ya sasa: ${livePrice}. 
+    const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Masters 10. PAIR: ${pair}. Bei halisi ya sasa ya sokoni ni: ${livePrice}. TUMIA HII BEI YA SASA KAMA MSINGI MKUU WA ENTRY NA USITUMIE BEI ZA ZAMANI KAMA 2500. 
 Toa majibu katika muundo wa JSON pekee:
 {
   "action": "BUY",
