@@ -209,7 +209,7 @@
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
             <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Masters 12 Strict Protocol)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Wataalamu wetu 12 (wakiongozwa na Chief Master na Support & Resistance Master ya 4H/1H) wapo kazini kukataa trade za ovyo.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Wataalamu wetu 12 (wakiongozwa na Chief Master na Support & Resistance Master ya 4H/1H) wapo kazini kuchambua soko kwa uhalisia (BUY au SELL).</p>
         </div>
 
         <div class="grid-3">
@@ -242,7 +242,7 @@
 
           <div class="chat-container">
             <div id="chatMessages" class="chat-messages">
-              <div class="chat-bubble ai">Hii ni toleo maalum la v12.0 lenye Wataalamu 12 kamili. Sipo hapa kukubaliana na trade za ovyo; kama soko ni Sell, tunatoa Sell tu. Niambie nikupe uchambuzi gani leo?</div>
+              <div class="chat-bubble ai">Hii ni toleo maalum la v12.0 lenye Wataalamu 12 kamili. Sipo hapa kupendelea upande mmoja; kama soko ni Buy au Sell, tutatoa majibu sahihi kulingana na uhalisia wa chati. Niambie nikupe uchambuzi gani leo?</div>
             </div>
             <div class="chat-input-row">
               <input type="text" id="chatUserInput" placeholder="Andika swali lako hapa..." onkeydown="if(event.key === 'Enter') sendAIChatMessage()">
@@ -308,7 +308,7 @@
         </div>
 
         <div id="resultsContainer" style="display: none;">
-          <div class="card" style="text-align: center; border-color: var(--green);">
+          <div class="card" style="text-align: center; border-color: var(--green);" id="resultCardHeaderBox">
             <div id="resPairBadge" style="font-size: 13px; color: var(--accent); font-weight: bold;">XAUUSD</div>
             <div id="resFramework" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Masters 12 Strict Core</div>
             
@@ -320,7 +320,7 @@
               <span class="badge-pass">CHIEF MASTER & S&R 4H/1H</span>
               <span class="badge-status" id="tradeStatusBadge">KUZUIA HASARA</span>
             </div>
-            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Mkakati madhubuti wa mwelekeo mmoja (Hakuna kuchanganya Buy na Sell).</div>
+            <div id="resSummarySubtitle" style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Mkakati thabiti wa uchambuzi wa kiufundi.</div>
           </div>
 
           <div class="card">
@@ -342,7 +342,7 @@
           <div class="card">
             <div class="ballistic-header">🛡️ UKAGUZI MKALI WA HATARI (STRICT RISK SHIELD)</div>
             <div class="checklist-item"><span>✓</span> <span id="chk1">Support & Resistance (4H/1H) imethibitisha eneo muhimu bila kuvunjwa</span></div>
-            <div class="checklist-item"><span>✓</span> <span id="chk2">Chief Master ametoa uamuzi wa mwisho wa mwelekeo mmoja (Hakuna mchanganyiko)</span></div>
+            <div class="checklist-item"><span>✓</span> <span id="chk2">Chief Master ametoa uamuzi sahihi kulingana na muundo wa chati</span></div>
             <div class="checklist-item"><span>✓</span> <span id="chk3">Hakuna nafasi ya trade za kibwege; kila hatua imepimwa kwa kina</span></div>
           </div>
 
@@ -725,7 +725,7 @@ async function sendAIChatMessage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD na Masters 12 (Chief Master + S&R 4H/1H). Jibu kwa Kiswahili fasaha, ukiwa mkali na mwenye maelezo ya kina ya kuzuia hasara za hovyo. Usikubali ovyo trade zisizo na uhakika, na hakikisha hakuna kuchanganya Buy na Sell: ${msg}` }] }]
+        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD na Masters 12 (Chief Master + S&R 4H/1H). Jibu kwa Kiswahili fasaha, ukiwa mkali na mwenye maelezo ya kina ya kuzuia hasara za hovyo. Changanua soko kihalisia ama kwa BUY au SELL kulingana na swali: ${msg}` }] }]
       })
     });
 
@@ -808,7 +808,7 @@ async function fileToBase64(file) {
   });
 }
 
-function calculateAccurateProfit(pairName, entry, tp3) {
+function calculateAccurateProfit(pairName, entry, tp3, action) {
   let pips = 0;
   let pipValuePerStandardLot = 10.0; 
   let upperAssetType = pairName.toUpperCase();
@@ -889,22 +889,23 @@ async function runLutynoelAnalysis() {
     const framework = document.getElementById('framework').value;
     const parts = [];
 
+    // PROMPT ILIYOBORESHWA: AI sasa inatathmini chati kuamua BUY au SELL kihalisia bila kulazimishwa upande mmoja
     const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Wataalamu 12 (Masters 12), wakiwemo Chief Master na Support & Resistance Master (4H/1H). Jibu KWA KISWAHILI FASAHA pekee. 
 MAELEKEZO MUHIMU YA KITAALAMU:
-1. Wataalamu 12 wote lazima watoe MAELEZO YA KINA, yaliyoshiba kiufundi, kwa Kiswahili safi.
-2. SHERIA YA MWELEKEO MMOJA: Chief Master na S&R Master wanatakiwa kutoa mwelekeo mmoja tu (kama soko ni BUY, wote waseme BUY; kama ni SELL, wote waseme SELL). Hakuna kuchanganya Buy na Sell!
+1. Chunguza picha za chati za 4H, 1H na 15M kwa makini ukitumia uchambuzi wa kiufundi.
+2. AMUA KATI YA "BUY" AU "SELL": Kulingana na muundo wa soko kwenye picha, kama soko linapanda toa "BUY", kama soko linashuka toa "SELL". Hakikisha wataalamu wote 12 wanakubaliana kwenye mwelekeo huo mmoja ili kuzuia kuchanganya amri.
 3. PAIR: ${pair}. Bei halisi ya sasa ya sokoni ni: ${livePrice}.
 Toa majibu katika muundo wa JSON pekee bila maandishi mengine ya ziada nje ya JSON:
 {
-  "action": "BUY",
+  "action": "BUY", 
   "exec_type": "CHIEF MASTER APPROVED",
   "confidence_score": 95,
   "subtitle": "Strict ${pair} Masters 12 Zero Fakeouts Strategy",
   "sl_pips": "45 Pips",
   "tp_pips": "180 Pips",
-  "chk1": "Support & Resistance (4H/1H) imethibitisha eneo muhimu bila kuvunjwa.",
-  "chk2": "Chief Master ametoa mwelekeo mmoja thabiti bila kuchanganya ishara.",
-  "chk3": "Hakuna nafasi ya kubahatisha; muundo wa soko unasoma kwa ukali mkubwa.",
+  "chk1": "Support & Resistance (4H/1H) imethibitisha eneo muhimu la soko.",
+  "chk2": "Chief Master amethibitisha uamuzi thabiti wa mwelekeo wa soko.",
+  "chk3": "Hakuna nafasi ya kubahatisha; muundo wa soko umesomwa kwa usahihi.",
   "entry": "${livePrice}",
   "sl": "${(livePrice - 4.5).toFixed(2)}",
   "tp1": "${(livePrice + 8).toFixed(2)}",
@@ -912,19 +913,19 @@ Toa majibu katika muundo wa JSON pekee bila maandishi mengine ya ziada nje ya JS
   "tp3": "${(livePrice + 36).toFixed(2)}",
   "rr": "1:8.0",
   "trade_status": "KUZUIA HASARA",
-  "agent1_title": "1. Chief Master (Mkuu)", "agent1_decision": "BUY", "agent1_text": "Amethibitisha mwelekeo wa soko na kuzuia kabisa kuchanganya amri za Buy na Sell.",
-  "agent2_title": "2. Support & Resistance (4H/1H)", "agent2_decision": "BUY", "agent2_text": "Maeneo ya Support kwenye 4H na 1H yamefanya kazi kikamilifu kulinda mtaji dhidi ya fakeouts.",
-  "agent3_title": "3. Price Action Master", "agent3_decision": "BUY", "agent3_text": "Mshumaa wa mwisho umeonyesha kukataliwa kwa bei (rejection) kwenye eneo muhimu.",
-  "agent4_title": "4. Demand & Supply Master", "agent4_decision": "BUY", "agent4_text": "Eneo la Demand limefanya kazi kwa usahihi bila kuvunjwa.",
-  "agent5_title": "5. Market Structure Master", "agent5_decision": "BUY", "agent5_text": "Muundo wa soko umevunja muundo wa chini (BOS) na kuelekea juu kwa uhakika.",
-  "agent6_title": "6. Fundamental Analysis Master", "agent6_decision": "BUY", "agent6_text": "Hali ya kiuchumi na takwimu za soko zinaunga mkono mwelekeo huu.",
-  "agent7_title": "7. Smart Money Concepts", "agent7_decision": "BUY", "agent7_text": "Taasisi kubwa za fedha zimefanya liquidity sweep chini kabla ya kugeuka juu.",
-  "agent8_title": "8. ICT Master", "agent8_decision": "BUY", "agent8_text": "Fair Value Gap (FVG) imejazwa kikamilifu wakati wa Killzone.",
-  "agent9_title": "9. Volume Profile Master", "agent9_decision": "BUY", "agent9_text": "Kiasi cha biashara (Volume) kinashuhudia nguvu kubwa ya wanunuzi.",
-  "agent10_title": "10. Fibonacci Analysis", "agent10_decision": "BUY", "agent10_text": "Kiwango cha dhahabu cha Fibonacci retracement kimefikiwa kwa usahihi.",
-  "agent11_title": "11. Elliott Wave Theory", "agent11_decision": "BUY", "agent11_text": "Wimbi la tatu (Wave 3 impulse phase) linaanza kujitokeza kwa nguvu.",
-  "agent12_title": "12. Quantitative / Indicators", "agent12_decision": "BUY", "agent12_text": "Viashiria vya kiufundi vimesawazishwa na kukataa ishara zote za uongo.",
-  "tf": "4H: Support/Resistance kuu imesomwa kwa ufasaha.\n1H: Eneo la utekelezaji limelindwa dhidi ya fakeouts.\n15M: Soko lipo tayari kwa usalama wa mtaji chini ya Chief Master."
+  "agent1_title": "1. Chief Master (Mkuu)", "agent1_decision": "BUY", "agent1_text": "Amethibitisha mwelekeo halisi wa soko kutoka kwenye chati zilizowasilishwa.",
+  "agent2_title": "2. Support & Resistance (4H/1H)", "agent2_decision": "BUY", "agent2_text": "Viwango vya Support na Resistance vimefanya kazi kulinda mtaji dhidi ya fakeouts.",
+  "agent3_title": "3. Price Action Master", "agent3_decision": "BUY", "agent3_text": "Mshumaa wa mwisho umeonyesha mwelekeo sahihi wa soko.",
+  "agent4_title": "4. Demand & Supply Master", "agent4_decision": "BUY", "agent4_text": "Eneo la Demand/Supply limefanya kazi kwa usahihi mkubwa.",
+  "agent5_title": "5. Market Structure Master", "agent5_decision": "BUY", "agent5_text": "Muundo wa soko unafuata mtiririko thabiti wa biashara.",
+  "agent6_title": "6. Fundamental Analysis Master", "agent6_decision": "BUY", "agent6_text": "Hali ya kiuchumi inaunga mkono mwelekeo huu.",
+  "agent7_title": "7. Smart Money Concepts", "agent7_decision": "BUY", "agent7_text": "Taasisi kubwa za fedha zimetoa ishara wazi kupitia chati.",
+  "agent8_title": "8. ICT Master", "agent8_decision": "BUY", "agent8_text": "Fair Value Gap (FVG) imetumika ipasavyo.",
+  "agent9_title": "9. Volume Profile Master", "agent9_decision": "BUY", "agent9_text": "Kiasi cha biashara kinashuhudia nguvu ya upande huu.",
+  "agent10_title": "10. Fibonacci Analysis", "agent10_decision": "BUY", "agent10_text": "Viwango vya Fibonacci vimefikiwa kwa usahihi.",
+  "agent11_title": "11. Elliott Wave Theory", "agent11_decision": "BUY", "agent11_text": "Wimbi la soko linaendelea vizuri kulingana na mpangilio.",
+  "agent12_title": "12. Quantitative / Indicators", "agent12_decision": "BUY", "agent12_text": "Viashiria vya kiufundi vimesawazishwa kikamilifu.",
+  "tf": "4H: Eneo kuu la S&R limesomwa vizuri.\n1H: Utekelezaji wa trade umelindwa.\n15M: Soko lipo tayari kwa usalama wa mtaji."
 }`;
 
     parts.push({ text: promptText });
@@ -955,7 +956,7 @@ Toa majibu katika muundo wa JSON pekee bila maandishi mengine ya ziada nje ya JS
     let tp2Price = parseFloat(resObj.tp2) || (resObj.action === "BUY" ? entryPrice + 20 : entryPrice - 20);
     let tp3Price = parseFloat(resObj.tp3) || (resObj.action === "BUY" ? entryPrice + 40 : entryPrice - 40);
 
-    const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price);
+    const calcData = calculateAccurateProfit(pair, entryPrice, tp3Price, resObj.action);
 
     displayAnalysisResults(resObj, pair, framework, entryPrice, slPrice, tp1Price, tp2Price, tp3Price, calcData);
 
@@ -985,10 +986,26 @@ Toa majibu katika muundo wa JSON pekee bila maandishi mengine ya ziada nje ya JS
 }
 
 async function displayAnalysisResults(resObj, pair, framework, entryPrice, slPrice, tp1Price, tp2Price, tp3Price, calcData) {
+    const actionType = (resObj.action || "BUY").toUpperCase();
+    const isSell = actionType === "SELL";
+    
+    // Badilisha rangi ya kadi za matokeo kulingana na BUY (Kijani) au SELL (Nyekundu)
+    const resultHeaderBox = document.getElementById('resultCardHeaderBox');
+    if(resultHeaderBox) {
+      resultHeaderBox.style.borderColor = isSell ? 'var(--red)' : 'var(--green)';
+    }
+
+    const actionEl = document.getElementById('resActionType');
+    actionEl.innerText = actionType;
+    actionEl.style.color = isSell ? 'var(--red)' : 'var(--green)';
+
+    const execTypeEl = document.getElementById('resExecType');
+    execTypeEl.innerText = resObj.exec_type || "CHIEF MASTER APPROVED";
+    execTypeEl.style.color = isSell ? 'var(--red)' : 'var(--green)';
+    execTypeEl.style.background = isSell ? 'rgba(239,68,68,0.1)' : 'rgba(16,185,129,0.1)';
+
     document.getElementById('resPairBadge').innerText = pair + " (Confidence: " + (resObj.confidence_score || 95) + "%)";
     document.getElementById('resFramework').innerText = framework;
-    document.getElementById('resActionType').innerText = resObj.action;
-    document.getElementById('resExecType').innerText = resObj.exec_type || "CHIEF MASTER APPROVED";
     document.getElementById('tradeStatusBadge').innerText = resObj.trade_status || "KUZUIA HASARA";
     
     document.getElementById('valSLPips').innerText = resObj.sl_pips || "45 Pips";
@@ -1037,12 +1054,13 @@ async function renderAllAgentsWithSmartCanvas(resObj) {
   for (let idx = 0; idx < agentsData.length; idx++) {
     let ag = agentsData[idx];
     if(!ag || !ag.title) continue;
-    let decColor = ag.decision === 'BUY' ? 'var(--green)' : (ag.decision === 'SELL' ? 'var(--red)' : 'var(--accent)');
+    let decAction = (ag.decision || 'BUY').toUpperCase();
+    let decColor = decAction === 'BUY' ? 'var(--green)' : (decAction === 'SELL' ? 'var(--red)' : 'var(--accent)');
     
     let card = document.createElement('div');
     card.className = 'agent-card';
     card.innerHTML = `
-      <div class="agent-title"><span>${ag.title}</span> <span class="agent-decision" style="color: ${decColor};">${ag.decision || 'BUY'}</span></div>
+      <div class="agent-title"><span>${ag.title}</span> <span class="agent-decision" style="color: ${decColor};">${decAction}</span></div>
       <div class="agent-desc">${ag.text || ''}</div>
       <div class="agent-canvas-grid">
         <div class="agent-canvas-wrapper"><canvas id="canvas_${idx}_h4"></canvas><div class="agent-canvas-label">4H</div></div>
@@ -1129,7 +1147,7 @@ function viewHistoryItem(index) {
   let entryPrice = parseFloat(item.entry) || 0;
   let slPrice = parseFloat(item.sl) || 0;
   let tp3Price = parseFloat(item.tp) || 0;
-  let calcData = calculateAccurateProfit(item.pair, entryPrice, tp3Price);
+  let calcData = calculateAccurateProfit(item.pair, entryPrice, tp3Price, resObj.action);
 
   navigate('analyst');
   displayAnalysisResults(resObj, item.pair, item.framework || "Masters 12 Strict Core", entryPrice, slPrice, parseFloat(resObj.tp1 || entryPrice), parseFloat(resObj.tp2 || entryPrice), tp3Price, calcData);
