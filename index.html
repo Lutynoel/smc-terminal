@@ -198,7 +198,7 @@
       <div id="view-overview" class="view-section">
         <div class="forex-hero">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAUUSD • BTCUSD • PWA LUTYNOEL.FX</div>
+            <div style="font-size: 10px; color: var(--accent); font-weight: bold; letter-spacing: 2px;">XAUUSD • BTCUSD • NAS100 • FOREX • PWA</div>
             <div style="display: flex; gap: 6px;">
               <span style="background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">STRICT SHIELD</span>
               <span style="background: rgba(239, 68, 68, 0.2); color: var(--red); border: 1px solid var(--red); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">NO FAKEOUTS</span>
@@ -209,7 +209,7 @@
             <span style="color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(251,191,36,0.4);">Lutynoel FX</span> 
             <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">(Masters 12 Strict Protocol)</span>
           </h2>
-          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Wataalamu wetu 12 (wakiongozwa na Chief Master na Support & Resistance Master ya 4H/1H) wapo kazini kuchambua soko kwa uhalisia (BUY au SELL).</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin: 0 0 10px 0; line-height: 1.4;">Wataalamu wetu 12 wapo kazini kuchambua soko kwa uhalisia (BUY au SELL) kwenye masoko yote ya Forex, Crypto, na NASDAQ.</p>
         </div>
 
         <div class="grid-3">
@@ -259,14 +259,23 @@
           
           <label>1. Chagua Pair ya Biashara</label>
           <select id="selectedPairDropdown" onchange="syncPairSelection(this.value)">
-            <optgroup label="✨ Core Markets (XAUUSD & BTCUSD)">
+            <optgroup label="✨ Core Markets (XAUUSD, BTCUSD & NASDAQ)">
               <option value="XAUUSD">XAUUSD (Gold / Dhahabu)</option>
               <option value="BTCUSD">BTCUSD (Bitcoin / Crypto)</option>
+              <option value="NAS100">NAS100 (NASDAQ 100 Index)</option>
             </optgroup>
-            <optgroup label="💱 Other Majors">
+            <optgroup label="💱 Forex Majors & Crosses">
               <option value="EURUSD">EUR/USD</option>
               <option value="GBPUSD">GBP/USD</option>
               <option value="USDJPY">USD/JPY</option>
+              <option value="AUDUSD">AUD/USD</option>
+              <option value="USDCAD">USD/CAD</option>
+              <option value="EURJPY">EUR/JPY</option>
+              <option value="GBPJPY">GBP/JPY</option>
+            </optgroup>
+            <optgroup label="🪙 Crypto Additional">
+              <option value="ETHUSD">ETHUSD (Ethereum)</option>
+              <option value="SOLUSD">SOLUSD (Solana)</option>
             </optgroup>
           </select>
 
@@ -400,6 +409,7 @@
               <select id="riskAssetType">
                 <option value="XAUUSD">Gold (XAUUSD)</option>
                 <option value="CRYPTO">Crypto (BTCUSD)</option>
+                <option value="INDEX">Index (NAS100)</option>
                 <option value="FOREX">Forex Major</option>
               </select>
             </div>
@@ -416,7 +426,7 @@
 
           <h3 style="margin: 5px 0 10px 0;">Andika Kwenye Journal ya Biashara (Manual Trade Journal)</h3>
           <label>Pair ya Biashara</label>
-          <input type="text" id="jPair" placeholder="mf. XAUUSD au BTCUSD">
+          <input type="text" id="jPair" placeholder="mf. XAUUSD, NAS100 au BTCUSD">
 
           <label>Uelekeo (Action / Direction)</label>
           <select id="jAction">
@@ -467,8 +477,14 @@
           <select id="liveChartPairSelector" onchange="changeLiveChartPair(this.value)">
             <option value="OANDA:XAUUSD">XAUUSD (Gold / Dhahabu)</option>
             <option value="BINANCE:BTCUSDT">BTCUSD (Bitcoin / Crypto)</option>
+            <option value="CAPITALCOM:US100">NAS100 (NASDAQ 100 Index)</option>
             <option value="OANDA:EURUSD">EUR/USD</option>
             <option value="OANDA:GBPUSD">GBP/USD</option>
+            <option value="OANDA:USDJPY">USD/JPY</option>
+            <option value="OANDA:AUDUSD">AUD/USD</option>
+            <option value="OANDA:USDCAD">USD/CAD</option>
+            <option value="BINANCE:ETHUSDT">ETHUSD (Ethereum)</option>
+            <option value="BINANCE:SOLUSDT">SOLUSD (Solana)</option>
           </select>
 
           <div style="height: 480px; width: 100%; margin-top: 10px;" id="tradingview_widget_container">
@@ -670,10 +686,18 @@ function navigate(viewId) {
 function syncPairSelection(pairValue) {
   let tvSymbol = "OANDA:XAUUSD";
   let defaultPrice = "4333.00";
+  
   if (pairValue === "BTCUSD") { tvSymbol = "BINANCE:BTCUSDT"; defaultPrice = "92000.00"; }
+  else if (pairValue === "NAS100") { tvSymbol = "CAPITALCOM:US100"; defaultPrice = "20000.00"; }
   else if (pairValue === "EURUSD") { tvSymbol = "OANDA:EURUSD"; defaultPrice = "1.0850"; }
   else if (pairValue === "GBPUSD") { tvSymbol = "OANDA:GBPUSD"; defaultPrice = "1.2750"; }
   else if (pairValue === "USDJPY") { tvSymbol = "OANDA:USDJPY"; defaultPrice = "155.00"; }
+  else if (pairValue === "AUDUSD") { tvSymbol = "OANDA:AUDUSD"; defaultPrice = "0.6500"; }
+  else if (pairValue === "USDCAD") { tvSymbol = "OANDA:USDCAD"; defaultPrice = "1.3500"; }
+  else if (pairValue === "EURJPY") { tvSymbol = "OANDA:EURJPY"; defaultPrice = "165.00"; }
+  else if (pairValue === "GBPJPY") { tvSymbol = "OANDA:GBPJPY"; defaultPrice = "198.00"; }
+  else if (pairValue === "ETHUSD") { tvSymbol = "BINANCE:ETHUSDT"; defaultPrice = "3200.00"; }
+  else if (pairValue === "SOLUSD") { tvSymbol = "BINANCE:SOLUSDT"; defaultPrice = "180.00"; }
 
   const liveChartSelect = document.getElementById('liveChartPairSelector');
   if(liveChartSelect) liveChartSelect.value = tvSymbol;
@@ -689,9 +713,16 @@ function changeLiveChartPair(tvSymbol) {
   if(analystSelect) {
     if(tvSymbol.includes('XAU')) { analystSelect.value = 'XAUUSD'; document.getElementById('customLiveMarketPrice').value = "4333.00"; }
     else if(tvSymbol.includes('BTC')) { analystSelect.value = 'BTCUSD'; document.getElementById('customLiveMarketPrice').value = "92000.00"; }
-    else if(tvSymbol.includes('EUR')) { analystSelect.value = 'EURUSD'; document.getElementById('customLiveMarketPrice').value = "1.0850"; }
-    else if(tvSymbol.includes('GBP')) { analystSelect.value = 'GBPUSD'; document.getElementById('customLiveMarketPrice').value = "1.2750"; }
-    else if(tvSymbol.includes('JPY')) { analystSelect.value = 'USDJPY'; document.getElementById('customLiveMarketPrice').value = "155.00"; }
+    else if(tvSymbol.includes('US100')) { analystSelect.value = 'NAS100'; document.getElementById('customLiveMarketPrice').value = "20000.00"; }
+    else if(tvSymbol.includes('EURUSD')) { analystSelect.value = 'EURUSD'; document.getElementById('customLiveMarketPrice').value = "1.0850"; }
+    else if(tvSymbol.includes('GBPUSD')) { analystSelect.value = 'GBPUSD'; document.getElementById('customLiveMarketPrice').value = "1.2750"; }
+    else if(tvSymbol.includes('USDJPY')) { analystSelect.value = 'USDJPY'; document.getElementById('customLiveMarketPrice').value = "155.00"; }
+    else if(tvSymbol.includes('AUDUSD')) { analystSelect.value = 'AUDUSD'; document.getElementById('customLiveMarketPrice').value = "0.6500"; }
+    else if(tvSymbol.includes('USDCAD')) { analystSelect.value = 'USDCAD'; document.getElementById('customLiveMarketPrice').value = "1.3500"; }
+    else if(tvSymbol.includes('EURJPY')) { analystSelect.value = 'EURJPY'; document.getElementById('customLiveMarketPrice').value = "165.00"; }
+    else if(tvSymbol.includes('GBPJPY')) { analystSelect.value = 'GBPJPY'; document.getElementById('customLiveMarketPrice').value = "198.00"; }
+    else if(tvSymbol.includes('ETH')) { analystSelect.value = 'ETHUSD'; document.getElementById('customLiveMarketPrice').value = "3200.00"; }
+    else if(tvSymbol.includes('SOL')) { analystSelect.value = 'SOLUSD'; document.getElementById('customLiveMarketPrice').value = "180.00"; }
   }
 }
 
@@ -725,7 +756,7 @@ async function sendAIChatMessage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD na Masters 12 (Chief Master + S&R 4H/1H). Jibu kwa Kiswahili fasaha, ukiwa mkali na mwenye maelezo ya kina ya kuzuia hasara za hovyo. Changanua soko kihalisia ama kwa BUY au SELL kulingana na swali: ${msg}` }] }]
+        contents: [{ parts: [{ text: `Wewe ni Lutynoel FX AI Assistant, mtaalamu wa XAUUSD, BTCUSD, NAS100 na Masters 12 (Chief Master + S&R 4H/1H). Jibu kwa Kiswahili fasaha, ukiwa mkali na mwenye maelezo ya kina ya kuzuia hasara za hovyo. Changanua soko kihalisia ama kwa BUY au SELL kulingana na swali: ${msg}` }] }]
       })
     });
 
@@ -791,7 +822,7 @@ function loadEconomicCalendar() {
   container.innerHTML = `
     <div class="news-card impact-red">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <strong style="font-size: 13px;">XAUUSD & BTCUSD - High Impact News Shield</strong>
+        <strong style="font-size: 13px;">XAUUSD, BTCUSD & NAS100 - High Impact News Shield</strong>
         <span style="font-size: 10px; font-weight: bold; color: var(--red);">STRICT FILTER</span>
       </div>
       <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Tahadhari: Mfumo unazuia biashara dakika 30 kabla na baada ya habari nzito chini ya maelekezo ya Chief Master.</div>
@@ -815,11 +846,13 @@ function calculateAccurateProfit(pairName, entry, tp3, action) {
 
   if (upperAssetType.includes("BTC")) pipValuePerStandardLot = 1.0;
   else if (upperAssetType.includes("XAU")) pipValuePerStandardLot = 10.0;
+  else if (upperAssetType.includes("NAS")) pipValuePerStandardLot = 2.0;
 
   if (entry > 0 && tp3 > 0) {
     let priceDiff = Math.abs(tp3 - entry);
     if (upperAssetType.includes("BTC")) pips = priceDiff; 
     else if (upperAssetType.includes("XAU")) pips = priceDiff * 10; 
+    else if (upperAssetType.includes("NAS")) pips = priceDiff; 
     else pips = priceDiff * 10000; 
   }
 
@@ -845,6 +878,7 @@ function calculateRiskLotSize() {
   let pipValuePerStandard = 10.0;
   if(assetType === 'XAUUSD') pipValuePerStandard = 10.0;
   else if(assetType === 'CRYPTO') pipValuePerStandard = 1.0;
+  else if(assetType === 'INDEX') pipValuePerStandard = 2.0;
 
   let recommendedLot = riskAmount / (slPips * pipValuePerStandard);
   if(recommendedLot < 0.01) recommendedLot = 0.01;
@@ -889,7 +923,6 @@ async function runLutynoelAnalysis() {
     const framework = document.getElementById('framework').value;
     const parts = [];
 
-    // PROMPT ILIYOBORESHWA: AI sasa inatathmini chati kuamua BUY au SELL kihalisia bila kulazimishwa upande mmoja
     const promptText = `Wewe ni PWA Lutynoel FX Institutional AI Engine inayotumia Gemini 3.6 Flash na Wataalamu 12 (Masters 12), wakiwemo Chief Master na Support & Resistance Master (4H/1H). Jibu KWA KISWAHILI FASAHA pekee. 
 MAELEKEZO MUHIMU YA KITAALAMU:
 1. Chunguza picha za chati za 4H, 1H na 15M kwa makini ukitumia uchambuzi wa kiufundi.
@@ -989,7 +1022,6 @@ async function displayAnalysisResults(resObj, pair, framework, entryPrice, slPri
     const actionType = (resObj.action || "BUY").toUpperCase();
     const isSell = actionType === "SELL";
     
-    // Badilisha rangi ya kadi za matokeo kulingana na BUY (Kijani) au SELL (Nyekundu)
     const resultHeaderBox = document.getElementById('resultCardHeaderBox');
     if(resultHeaderBox) {
       resultHeaderBox.style.borderColor = isSell ? 'var(--red)' : 'var(--green)';
