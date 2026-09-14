@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v15.5 — History Detail Edition</title>
+<title>Lutynoel FX v15.6 — Smart Signal Grading</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Lutynoel FX">
 <style>
-:root{--bg:#09090b;--card:#121215;--border:#222228;--accent:#fbbf24;--accentH:#f59e0b;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7}
+:root{--bg:#09090b;--card:#121215;--border:#222228;--accent:#fbbf24;--accentH:#f59e0b;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px}
 .auth-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
@@ -69,12 +69,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .confidence-bar{width:100%;height:4px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
 .confidence-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));transition:width .5s}
 .signal-badge-container{display:flex;justify-content:center;gap:6px;margin:10px 0;flex-wrap:wrap}
-.badge-pass,.badge-conf,.badge-status,.badge-warn,.badge-shield{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold}
+.badge-pass,.badge-conf,.badge-status,.badge-warn,.badge-shield,.badge-wait{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold}
 .badge-pass{background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent)}
 .badge-conf{background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green)}
 .badge-status{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .badge-warn{background:rgba(249,115,22,.15);color:var(--orange);border:1px solid var(--orange)}
 .badge-shield{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
+.badge-wait{background:rgba(250,204,21,.15);color:var(--yellow);border:1px solid var(--yellow)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .mini-box{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px}
@@ -83,6 +84,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .checklist-item{display:flex;gap:8px;font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.5}
 .checklist-item.pass span:first-child{color:var(--green);font-weight:bold;flex-shrink:0}
 .checklist-item.fail span:first-child{color:var(--red);font-weight:bold;flex-shrink:0}
+.checklist-item.warn span:first-child{color:var(--yellow);font-weight:bold;flex-shrink:0}
 .history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:.2s;cursor:pointer}
 .history-card:hover{border-color:var(--accent);background:#141418}
 .history-card .chevron{color:var(--accent);font-size:20px;font-weight:bold}
@@ -94,11 +96,23 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .disclaimer-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .info-box{background:rgba(59,130,246,.1);border:1px solid var(--blue);color:#93c5fd;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .shield-box{background:rgba(168,85,247,.1);border:1px solid var(--purple);color:#d8b4fe;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-bottom:12px}
+.wait-box{background:rgba(250,204,21,.1);border:1px solid var(--yellow);color:#fef08a;padding:12px;border-radius:8px;font-size:13px;line-height:1.6;margin-bottom:12px;text-align:center}
 .toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:380px;margin:0 auto;background:var(--accent);color:#000;padding:12px 20px;border-radius:8px;z-index:9999;font-weight:bold;font-size:13px;box-shadow:0 5px 15px rgba(0,0,0,.5);animation:slideUp .3s}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
 .spinner-white{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
+.signal-hero{text-align:center;padding:20px;border-radius:12px;margin-bottom:15px}
+.signal-hero.strong-buy{background:linear-gradient(135deg,rgba(16,185,129,.25),rgba(16,185,129,.1));border:2px solid var(--green)}
+.signal-hero.buy{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:2px solid var(--green)}
+.signal-hero.weak-buy{background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(250,204,21,.08));border:1px dashed var(--green)}
+.signal-hero.strong-sell{background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(239,68,68,.1));border:2px solid var(--red)}
+.signal-hero.sell{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.05));border:2px solid var(--red)}
+.signal-hero.weak-sell{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(250,204,21,.08));border:1px dashed var(--red)}
+.signal-hero.wait{background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05));border:2px solid var(--yellow)}
+.signal-hero.no-trade{background:linear-gradient(135deg,rgba(148,163,184,.15),rgba(148,163,184,.05));border:2px solid var(--muted)}
+.signal-label{font-size:28px;font-weight:900;letter-spacing:1px;margin:5px 0}
+.signal-reason{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -113,8 +127,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v15.5</div>
-    <div class="auth-subtitle">History Detail Edition</div>
+    <div class="auth-title">Lutynoel FX v15.6</div>
+    <div class="auth-subtitle">Smart Signal Grading Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -153,14 +167,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v15.5</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.6</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 <span class="badge-new">WIDE TP</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 <span class="badge-new">SMART</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
-    <div class="menu-item" onclick="navigate('history')">📁 Historia <span class="badge-new">CLICK</span></div>
+    <div class="menu-item" onclick="navigate('history')">📁 Historia</div>
     <div class="menu-item" onclick="navigate('settings')">⚙️ Settings</div>
   </div>
 
@@ -169,13 +183,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">WIDE TP</span>
+          <span class="badge-shield">SMART SIGNALS</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Wide TP Edition (50-300+)</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Smart Signal Grading</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">SL inafuata muundo wa soko. TP inafuata volatility kwa faida kubwa.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Masters wanapopishana → WAIT. Wanapokubaliana → STRONG BUY/SELL au BUY/SELL.</p>
       </div>
 
       <div class="grid-3">
@@ -190,10 +204,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="info-box">
-        📊 <strong>Wide TP Logic:</strong><br>
-        • <strong>SL</strong> = Key levels za masters (30-50 pips)<br>
-        • <strong>TP1</strong> = 2× SL • <strong>TP2</strong> = 4× SL • <strong>TP3</strong> = 6× SL<br>
-        <em>Mfano: SL 30 pips → TP1 60, TP2 120, TP3 180 (R:R = 1:6)</em>
+        📊 <strong>Signal Grading Logic:</strong><br>
+        • <strong>STRONG BUY/SELL</strong>: Confidence ≥ 80% + Dominance ≥ 4 + RRR ≥ 1:3<br>
+        • <strong>BUY/SELL</strong>: Confidence 70-79% + Dominance ≥ 2<br>
+        • <strong>WEAK BUY/SELL</strong>: Confidence 60-69% (tahadhari)<br>
+        • <strong>WAIT</strong>: Confidence < 60% au masters wanapishana<br>
+        • <strong>NO TRADE</strong>: Hakuna consensus kabisa
       </div>
     </div>
 
@@ -333,7 +349,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="clearHistory()" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">Futa Zote</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;">
-          👆 <strong>Bofya analysis yoyote</strong> kuona maelezo kamili (masters 12, SL/TP, projections)
+          👆 <strong>Bofya analysis yoyote</strong> kuona maelezo kamili
         </div>
         <div id="historyList">
           <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>
@@ -345,10 +361,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v15.5 (Clickable History)<br>
+          <strong>Version:</strong> v15.6 (Smart Grading)<br>
           <strong>Model:</strong> Gemini 3.6 Flash<br>
           <strong>SL:</strong> Market-based<br>
-          <strong>TP:</strong> 2× / 4× / 6× SL (min 50, max 300)
+          <strong>TP:</strong> 2× / 4× / 6× SL<br>
+          <strong>Signals:</strong> Strong / Normal / Weak / Wait
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
@@ -362,8 +379,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v15.5 — CLICKABLE HISTORY EDITION
-   Same analysis engine as v15.4 + history detail modal
+   LUTYNOEL FX v15.6 — SMART SIGNAL GRADING
+   STRONG BUY/SELL | BUY/SELL | WEAK | WAIT | NO TRADE
    ===================================================== */
 
 const MODELS_CHAIN = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-2.0-flash'];
@@ -400,7 +417,7 @@ const MASTERS_12 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v15.5", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v15.6", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -410,8 +427,7 @@ function setupPWA() {
 
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
-  t.className = 'toast';
-  t.innerText = msg;
+  t.className = 'toast'; t.innerText = msg;
   document.body.appendChild(t);
   setTimeout(() => t.remove(), duration);
 }
@@ -428,25 +444,17 @@ function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const apiKey = document.getElementById('authApiKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
-
   if (!name) { alert("Weka jina lako."); return; }
   const validation = validateApiKey(apiKey);
-  if (!validation.valid) {
-    alert(`⚠️ Gemini API Key si sahihi.\n\n${validation.reason}\n\nPata key: https://aistudio.google.com/apikey`);
-    return;
-  }
-
+  if (!validation.valid) { alert(`⚠️ Gemini API Key si sahihi.\n\n${validation.reason}`); return; }
   sessionStorage.setItem('lutynoel_name', name);
   sessionStorage.setItem('lutynoel_apiKey', apiKey);
   if (twelveKey) sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
-
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
   document.getElementById('settingsTwelveKey').value = twelveKey;
-
-  loadHistory();
-  updateStats();
+  loadHistory(); updateStats();
   showToast(`Karibu ${name}! 🚀`);
   setTimeout(() => fetchLivePrice(), 1000);
 }
@@ -469,10 +477,7 @@ async function testApiKey() {
         body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
       });
       const data = await response.json();
-      if (!data.error && data.candidates && data.candidates[0]) {
-        alert(`✅ Key inafanya kazi!\n\nModel: ${model}`);
-        return;
-      }
+      if (!data.error && data.candidates && data.candidates[0]) { alert(`✅ Key inafanya kazi!\n\nModel: ${model}`); return; }
     } catch (e) { continue; }
   }
   alert(`❌ Hakuna model iliyofanya kazi.`);
@@ -485,9 +490,7 @@ function navigate(view) {
   document.getElementById('view-' + view).style.display = 'block';
   document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.menu-item').forEach(item => {
-    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(view)) {
-      item.classList.add('active');
-    }
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(view)) item.classList.add('active');
   });
   document.getElementById('appSidebar').classList.remove('open');
   if (view === 'history') loadHistory();
@@ -580,9 +583,7 @@ function openImageModal(src) {
   document.getElementById('universalModal').style.display = 'flex';
 }
 
-function closeUniversalModal() {
-  document.getElementById('universalModal').style.display = 'none';
-}
+function closeUniversalModal() { document.getElementById('universalModal').style.display = 'none'; }
 
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -645,6 +646,7 @@ Rules:
   throw new Error(`${master.name}: ${lastError || "All models failed"}`);
 }
 
+// ============ CONFLUENCE + SIGNAL GRADING ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
   masterResults.forEach(r => {
@@ -654,25 +656,111 @@ function computeConfluence(masterResults) {
     else if (r.vote === 'SELL') sellWeight += weighted;
     else holdWeight += weighted;
   });
+
+  const buyCount = masterResults.filter(r => r.vote === 'BUY').length;
+  const sellCount = masterResults.filter(r => r.vote === 'SELL').length;
+  const holdCount = masterResults.filter(r => r.vote === 'HOLD').length;
+
   const maxScore = Math.max(buyWeight, sellWeight, holdWeight);
   const consensusStrength = totalWeight > 0 ? (maxScore / totalWeight) : 0;
-  let action = 'HOLD';
-  if (buyWeight > sellWeight && buyWeight > holdWeight) action = 'BUY';
-  else if (sellWeight > buyWeight && sellWeight > holdWeight) action = 'SELL';
+  const confidence = Math.round(consensusStrength * 100);
+
+  // ============ SIGNAL GRADING LOGIC ============
+  let direction = 'HOLD';
+  if (buyWeight > sellWeight && buyWeight > holdWeight) direction = 'BUY';
+  else if (sellWeight > buyWeight && sellWeight > holdWeight) direction = 'SELL';
+
+  const dominance = Math.abs(buyCount - sellCount);
+  const totalVoted = buyCount + sellCount;
+  const tie = buyCount === sellCount && buyCount > 0;
+
+  let signal = 'NO_TRADE';
+  let signalLabel = 'NO TRADE';
+  let signalColor = 'muted';
+  let signalReason = '';
+  let tradable = false;
+
+  // Rule 1: Hakuna kura za kutosha au ni tie
+  if (totalVoted < 6 || tie) {
+    signal = 'WAIT';
+    signalLabel = '⏸ WAIT';
+    signalColor = 'wait';
+    signalReason = tie 
+      ? `Masters wanapishana (${buyCount} BUY vs ${sellCount} SELL). Subiri muundo uwe wazi.`
+      : `Masters ${totalVoted}/12 wamepiga kura. Subiri consensus zaidi.`;
+    tradable = false;
+  }
+  // Rule 2: Consensus dhaifu sana
+  else if (confidence < 60) {
+    signal = 'WAIT';
+    signalLabel = '⏸ WAIT';
+    signalColor = 'wait';
+    signalReason = `Confidence ni ${confidence}% — chini ya 60%. Soko halieleweki. Subiri.`;
+    tradable = false;
+  }
+  // Rule 3: Direction haipo
+  else if (direction === 'HOLD') {
+    signal = 'NO_TRADE';
+    signalLabel = '⏸ NO TRADE';
+    signalColor = 'no-trade';
+    signalReason = `Hakuna uelekeo wa wazi. Masters wanashindwa kuamua.`;
+    tradable = false;
+  }
+  // Rule 4: STRONG BUY/SELL
+  else if (confidence >= 80 && dominance >= 4) {
+    signal = direction === 'BUY' ? 'STRONG_BUY' : 'STRONG_SELL';
+    signalLabel = direction === 'BUY' ? '🟢 STRONG BUY' : '🔴 STRONG SELL';
+    signalColor = direction === 'BUY' ? 'strong-buy' : 'strong-sell';
+    signalReason = `Masters ${direction === 'BUY' ? buyCount : sellCount}/12 wamekubaliana kwa nguvu. Confidence ${confidence}% + Dominance ${dominance}. Uhakika mkubwa.`;
+    tradable = true;
+  }
+  // Rule 5: Normal BUY/SELL
+  else if (confidence >= 70 && dominance >= 2) {
+    signal = direction === 'BUY' ? 'BUY' : 'SELL';
+    signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
+    signalColor = direction === 'BUY' ? 'buy' : 'sell';
+    signalReason = `Consensus nzuri. Confidence ${confidence}% + Dominance ${dominance}. Trade inaruhusiwa.`;
+    tradable = true;
+  }
+  // Rule 6: Weak BUY/SELL
+  else if (confidence >= 60) {
+    signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
+    signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
+    signalColor = direction === 'BUY' ? 'weak-buy' : 'weak-sell';
+    signalReason = `Tahadhari: Confidence ${confidence}% + Dominance ${dominance}. Masters hawakubaliani vya kutosha. Fanya trade kwa lot ndogo tu.`;
+    tradable = true;
+  }
+  // Rule 7: Fallback
+  else {
+    signal = 'WAIT';
+    signalLabel = '⏸ WAIT';
+    signalColor = 'wait';
+    signalReason = `Masharti hayakidhi. Subiri muundo wazi.`;
+    tradable = false;
+  }
+
   return {
-    action,
-    confidence: Math.round(consensusStrength * 100),
-    buyCount: masterResults.filter(r => r.vote === 'BUY').length,
-    sellCount: masterResults.filter(r => r.vote === 'SELL').length,
-    holdCount: masterResults.filter(r => r.vote === 'HOLD').length
+    action: direction,
+    signal,
+    signalLabel,
+    signalColor,
+    signalReason,
+    tradable,
+    confidence,
+    dominance,
+    buyCount, sellCount, holdCount,
+    buyWeight, sellWeight, holdWeight
   };
 }
 
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
+  // Capital Shield: Only approve if tradable AND RRR ≥ 1:2
   const checks = {
     consensus: confluence.confidence >= 60,
-    dominance: Math.abs(confluence.buyCount - confluence.sellCount) >= 2,
-    alignment: confluence.buyCount + confluence.sellCount >= 6,
+    dominance: confluence.dominance >= 2,
+    alignment: (confluence.buyCount + confluence.sellCount) >= 6,
+    notTie: confluence.buyCount !== confluence.sellCount,
+    tradable: confluence.tradable,
     rrr: false
   };
   if (entryPrice && slPrice && tpPrice) {
@@ -684,10 +772,15 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
       checks.rrrValue = rrr.toFixed(2);
     }
   }
-  const allPass = Object.values(checks).every(v => v === true || v === undefined);
+  const allPass = checks.consensus && checks.dominance && checks.alignment && checks.notTie && checks.tradable && checks.rrr;
   return {
-    approved: allPass, checks,
-    message: allPass ? "✅ CAPITAL SHIELD: Trade approved." : "🛡️ CAPITAL SHIELD: Trade BLOCKED."
+    approved: allPass,
+    checks,
+    message: allPass 
+      ? "✅ CAPITAL SHIELD: Trade approved." 
+      : confluence.tradable === false
+        ? "⏸ CAPITAL SHIELD: Subiri — masters hawakubaliani."
+        : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR haitoshi."
   };
 }
 
@@ -727,21 +820,42 @@ async function runAnalysis() {
     );
     const masterResults = await Promise.all(promises);
     const confluence = computeConfluence(masterResults);
-    const sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
+
+    // Compute SL/TP only if direction is clear
+    let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0 };
+    if (confluence.tradable && confluence.action !== 'HOLD') {
+      sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
+    }
+
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
 
     const record = {
       id: Date.now(),
       date: new Date().toLocaleString(),
-      pair, action: confluence.action, confidence: confluence.confidence,
+      pair,
+      action: confluence.action,
+      signal: confluence.signal,
+      signalLabel: confluence.signalLabel,
+      signalColor: confluence.signalColor,
+      signalReason: confluence.signalReason,
+      tradable: confluence.tradable,
+      confidence: confluence.confidence,
+      dominance: confluence.dominance,
       entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
-      shield: shield.approved, masters: masterResults, confluence
+      shield: shield.approved,
+      masters: masterResults,
+      confluence
     };
 
     saveToHistory(record);
     renderFinalResults(record, shield);
-    showToast(shield.approved ? "✅ Signal imeidhinishwa!" : "🛡️ Signal imezuiwa", 4000);
+
+    const toastMsg = confluence.tradable 
+      ? (confluence.signal.startsWith('STRONG') ? "✅ STRONG SIGNAL!" : "✅ Signal tayari")
+      : "⏸ WAIT — Subiri muundo wazi";
+    showToast(toastMsg, 4000);
+
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
       <h3 style="color:var(--red);">❌ Hitilafu</h3>
@@ -798,8 +912,6 @@ function updateMasterCard(result) {
 
 function computeSLTP(masters, action, livePrice, pair) {
   const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
-  if (action === 'HOLD') return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0 };
-
   const isBuy = action === 'BUY';
   const keyLevels = masters.filter(m => m.key_level && !isNaN(parseFloat(m.key_level))).map(m => parseFloat(m.key_level));
 
@@ -841,10 +953,7 @@ function computeSLTP(masters, action, livePrice, pair) {
     tp1: parseFloat(tp1.toFixed(spec.decimals)),
     tp2: parseFloat(tp2.toFixed(spec.decimals)),
     tp3: parseFloat(tp3.toFixed(spec.decimals)),
-    slPips: Math.round(slPips),
-    tp1Pips: Math.round(tp1Pips),
-    tp2Pips: Math.round(tp2Pips),
-    tp3Pips: Math.round(tp3Pips)
+    slPips: Math.round(slPips), tp1Pips: Math.round(tp1Pips), tp2Pips: Math.round(tp2Pips), tp3Pips: Math.round(tp3Pips)
   };
 }
 
@@ -853,19 +962,15 @@ function renderFinalResults(record, shield) {
   container.innerHTML = buildAnalysisHTML(record, shield);
 }
 
-// ============ CORE: BUILD ANALYSIS HTML (reused for current + history) ============
 function buildAnalysisHTML(record, shield) {
-  const { action, confidence, entry, sl, tp1, tp2, tp3, pair } = record;
+  const { signal, signalLabel, signalColor, signalReason, tradable, confidence, entry, sl, tp1, tp2, tp3, pair, dominance } = record;
   const spec = PAIR_SPECS[pair];
-  const isBuy = action === 'BUY', isSell = action === 'SELL';
-  const actionColor = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--orange)';
 
-  // Use stored pips or recompute
-  const slPips = record.slPips || Math.abs((entry - sl) / spec.pipSize).toFixed(0);
-  const tp1Pips = record.tp1Pips || Math.abs((tp1 - entry) / spec.pipSize).toFixed(0);
-  const tp2Pips = record.tp2Pips || Math.abs((tp2 - entry) / spec.pipSize).toFixed(0);
-  const tp3Pips = record.tp3Pips || Math.abs((tp3 - entry) / spec.pipSize).toFixed(0);
-  const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '0';
+  const slPips = record.slPips || 0;
+  const tp1Pips = record.tp1Pips || 0;
+  const tp2Pips = record.tp2Pips || 0;
+  const tp3Pips = record.tp3Pips || 0;
+  const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '—';
 
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
   const projections = lots.map(lot => ({
@@ -875,78 +980,74 @@ function buildAnalysisHTML(record, shield) {
   }));
 
   let html = `
-    <div class="card" style="text-align:center;border-color:${actionColor};">
+    <div class="signal-hero ${signalColor}">
       <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
-      <div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${action}</div>
+      <div class="signal-label" style="color:${signalColor.includes('buy') ? 'var(--green)' : signalColor.includes('sell') ? 'var(--red)' : 'var(--yellow)'};">${signalLabel}</div>
       <div class="signal-badge-container">
         <span class="badge-conf">${confidence}% CONFIDENCE</span>
         <span class="badge-status">${record.confluence.buyCount}B / ${record.confluence.sellCount}S / ${record.confluence.holdCount}H</span>
-        <span class="badge-${shield.approved ? 'conf' : 'warn'}">${shield.approved ? '✅ APPROVED' : '🛡️ BLOCKED'}</span>
+        <span class="badge-warn">DOMINANCE: ${dominance}</span>
+        <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;">
-        📊 R:R = <strong style="color:var(--accent);">1 : ${rrr}</strong> • ${record.date || ''}
-      </div>
+      <div class="signal-reason">${signalReason}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''}</div>
     </div>
 
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
       <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
       <div class="shield-box">${shield.message}</div>
       <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Consensus ≥ 60% (Sasa: ${confidence}%)</span></div>
-      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span></div>
+      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Sasa: ${dominance})</span></div>
       <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>Masters 6+ wamepiga kura (Sasa: ${record.confluence.buyCount + record.confluence.sellCount})</span></div>
+      <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>Hakuna tie (BUY vs SELL)</span></div>
+      <div class="checklist-item ${shield.checks.tradable ? 'pass' : 'fail'}"><span>${shield.checks.tradable ? '✓' : '✗'}</span><span>Signal tradable</span></div>
       <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span></div>
     </div>
   `;
 
-  if (action !== 'HOLD') {
+  // ============ WAIT MESSAGE if NOT tradable ============
+  if (!tradable) {
+    html += `
+      <div class="card" style="border-color:var(--yellow);">
+        <div class="ballistic-header" style="color:var(--yellow);">⏸ KWA NINI TUNASEMA WAIT?</div>
+        <div class="wait-box">
+          <strong>${signalReason}</strong>
+        </div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px;">
+          📌 <strong>Ushauri:</strong><br>
+          • Usifanye trade wakati masters wanapishana<br>
+          • Subiri chati iwe wazi zaidi (muda mwingine dakika 15-30)<br>
+          • Kama una trade iliyofunguliwa, fikiria kufunga au kuweka breakeven<br>
+          • Fanya analysis mpya baada ya muda
+        </div>
+      </div>
+    `;
+  }
+
+  // ============ SL/TP if tradable ============
+  if (tradable && slPips > 0) {
     html += `
       <div class="card">
-        <div class="ballistic-header">📊 TRADE PARAMETERS (SL ya Soko • TP Wide)</div>
+        <div class="ballistic-header">📊 TRADE PARAMETERS</div>
         <div class="grid-2">
-          <div class="mini-box">
-            <label>Entry</label>
-            <div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div>
-          </div>
-          <div class="mini-box">
-            <label style="color:var(--red);">Stop Loss</label>
-            <div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div>
-            <div style="font-size:11px;color:var(--red);margin-top:4px;">${slPips} pips</div>
-          </div>
+          <div class="mini-box"><label>Entry</label><div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div></div>
+          <div class="mini-box"><label style="color:var(--red);">Stop Loss</label><div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div><div style="font-size:11px;color:var(--red);margin-top:4px;">${slPips} pips</div></div>
         </div>
         <div class="grid-3">
-          <div class="mini-box">
-            <label style="color:var(--green);">TP1 (2R)</label>
-            <div style="font-size:14px;font-weight:bold;color:var(--green);">${tp1}</div>
-            <div style="font-size:11px;color:var(--green);margin-top:4px;">${tp1Pips} pips</div>
-          </div>
-          <div class="mini-box">
-            <label style="color:var(--green);">TP2 (4R)</label>
-            <div style="font-size:14px;font-weight:bold;color:var(--green);">${tp2}</div>
-            <div style="font-size:11px;color:var(--green);margin-top:4px;">${tp2Pips} pips</div>
-          </div>
-          <div class="mini-box">
-            <label style="color:var(--green);">TP3 (6R)</label>
-            <div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div>
-            <div style="font-size:11px;color:var(--green);margin-top:4px;">${tp3Pips} pips</div>
-          </div>
+          <div class="mini-box"><label style="color:var(--green);">TP1 (2R)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp1}</div><div style="font-size:11px;color:var(--green);margin-top:4px;">${tp1Pips} pips</div></div>
+          <div class="mini-box"><label style="color:var(--green);">TP2 (4R)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp2}</div><div style="font-size:11px;color:var(--green);margin-top:4px;">${tp2Pips} pips</div></div>
+          <div class="mini-box"><label style="color:var(--green);">TP3 (6R)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div><div style="font-size:11px;color:var(--green);margin-top:4px;">${tp3Pips} pips</div></div>
         </div>
         <div class="mini-box" style="margin-top:10px;text-align:center;">
           <label style="color:var(--accent);">Risk : Reward (TP3)</label>
           <div style="font-size:22px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;">SL ${slPips} pips → TP3 ${tp3Pips} pips</div>
         </div>
       </div>
 
       <div class="card">
         <div class="ballistic-header">💵 PROFIT PROJECTIONS (USD)</div>
         ${projections.map(p => `
-          <div class="lot-row">
-            <strong>Lot ${p.lot}</strong>
-            <span>
-              <span style="color:var(--orange);">TP1: $${p.tp1}</span>
-              <span style="color:var(--green);margin-left:8px;">TP3: $${p.tp3}</span>
-            </span>
-          </div>
+          <div class="lot-row"><strong>Lot ${p.lot}</strong><span><span style="color:var(--orange);">TP1: $${p.tp1}</span><span style="color:var(--green);margin-left:8px;">TP3: $${p.tp3}</span></span></div>
         `).join('')}
       </div>
     `;
@@ -998,7 +1099,6 @@ function calculateRisk() {
   const spec = PAIR_SPECS[pair];
   const riskAmount = balance * (riskPct / 100);
   const lotSize = riskAmount / (slPips * spec.pipValueStdLot);
-
   document.getElementById('riskResultBox').style.display = 'block';
   document.getElementById('riskResultText').innerHTML = `
     • <strong>Balance:</strong> $${balance.toFixed(2)}<br>
@@ -1011,9 +1111,7 @@ function calculateRisk() {
 
 function saveJournalTrade() {
   const trade = {
-    id: Date.now(),
-    date: new Date().toLocaleString(),
-    type: 'manual',
+    id: Date.now(), date: new Date().toLocaleString(), type: 'manual',
     pair: document.getElementById('jPair').value,
     action: document.getElementById('jAction').value,
     entry: parseFloat(document.getElementById('jEntry').value) || 0,
@@ -1036,7 +1134,6 @@ function saveToHistory(record) {
   updateStats();
 }
 
-// ============ HISTORY: CLICKABLE CARDS ============
 function loadHistory() {
   const container = document.getElementById('historyList');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
@@ -1045,14 +1142,19 @@ function loadHistory() {
     return;
   }
   container.innerHTML = history.map((h, i) => {
-    const color = h.action === 'BUY' ? 'var(--green)' : h.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
+    const label = h.signalLabel || (h.action === 'BUY' ? '🟢 BUY' : h.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD');
+    let color = 'var(--muted)';
+    if (h.signalColor) {
+      if (h.signalColor.includes('strong-buy') || h.signalColor.includes('buy')) color = 'var(--green)';
+      else if (h.signalColor.includes('sell')) color = 'var(--red)';
+      else if (h.signalColor.includes('wait')) color = 'var(--yellow)';
+    }
     return `
       <div class="history-card" onclick="viewHistoryDetail(${i})">
         <div style="flex-grow:1;">
-          <strong>${h.pair} <span style="color:${color};">${h.action}</span></strong>
+          <strong>${h.pair} <span style="color:${color};">${label}</span></strong>
           ${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br>
           <small style="color:var(--muted);">${h.date}</small>
-          ${h.outcome ? `<span style="color:var(--blue);font-size:11px;"> • ${h.outcome}</span>` : ''}
         </div>
         <div class="chevron">›</div>
         <button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button>
@@ -1061,13 +1163,11 @@ function loadHistory() {
   }).join('');
 }
 
-// ============ OPEN HISTORY DETAIL MODAL ============
 function viewHistoryDetail(index) {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const record = history[index];
   if (!record) { alert("Haipatikani."); return; }
 
-  // Handle manual journal entries (no masters)
   if (!record.masters || !record.confluence) {
     document.getElementById('modalInnerContent').innerHTML = `
       <h2 style="color:var(--accent);margin:0 0 15px;">📝 Manual Trade</h2>
@@ -1085,26 +1185,24 @@ function viewHistoryDetail(index) {
           <div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div>
         </div>
         <div class="mini-box" style="margin-top:10px;"><label>Outcome</label><div>${record.outcome}</div></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:10px;">📅 ${record.date}</div>
       </div>
     `;
     document.getElementById('universalModal').style.display = 'flex';
     return;
   }
 
-  // Full analysis with masters
   const shield = {
     approved: record.shield,
     checks: {
       consensus: record.confidence >= 60,
-      dominance: Math.abs(record.confluence.buyCount - record.confluence.sellCount) >= 2,
+      dominance: (record.dominance || 0) >= 2,
       alignment: (record.confluence.buyCount + record.confluence.sellCount) >= 6,
+      notTie: record.confluence.buyCount !== record.confluence.sellCount,
+      tradable: record.tradable,
       rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
       rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
     },
-    message: record.shield 
-      ? "✅ CAPITAL SHIELD: Trade ilikuwa approved." 
-      : "🛡️ CAPITAL SHIELD: Trade ilikuwa blocked."
+    message: record.shield ? "✅ CAPITAL SHIELD: Trade ilikuwa approved." : "🛡️ CAPITAL SHIELD: Trade ilikuwa blocked."
   };
 
   document.getElementById('modalInnerContent').innerHTML = `
@@ -1147,7 +1245,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "15.5"
+    version: "15.6"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
