@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v14.0 — Institutional Edition</title>
+<title>Lutynoel FX v14.1 — Institutional Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -96,8 +96,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
-.pulse{animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 </style>
 </head>
 <body>
@@ -113,8 +111,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v14.0</div>
-    <div class="auth-subtitle">Institutional Edition — Masters 12 Real Engine</div>
+    <div class="auth-title">Lutynoel FX v14.1</div>
+    <div class="auth-subtitle">Institutional Edition — Fixed API Validation</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Hii ni tool ya <strong>elimu na uchambuzi</strong>. Haifai kwa trading ya pesa halisi bila backtesting. AI inaweza kukosea. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako mwenyewe.
@@ -124,10 +122,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <input type="text" id="loginName" placeholder="mf. Noel Nkungu" maxlength="30">
 
     <label>Gemini API Key</label>
-    <input type="password" id="authApiKey" placeholder="AIzaSy..." autocomplete="off">
+    <input type="password" id="authApiKey" placeholder="AIza... au AQ..." autocomplete="off">
 
     <div class="info-box">
       🔒 Key inahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
+      ✅ Inakubali: <strong>AIza...</strong>, <strong>AQ...</strong>, na formats zozote za Google (20+ chars).<br>
       <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Pata API Key bure →</a>
     </div>
 
@@ -151,7 +150,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v14.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v14.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
@@ -174,7 +173,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
           <span style="font-size:12px;color:var(--muted);font-weight:600;">Institutional Edition</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Wataalamu 12 wa AI wanachambua kwa frameworks tofauti, kisha Confluence Engine inahesabu consensus na Capital Shield inalinda mtaji.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 12 wa AI wanachambua kwa frameworks tofauti, kisha Confluence Engine inahesabu consensus na Capital Shield inalinda mtaji.</p>
       </div>
 
       <div class="grid-3">
@@ -351,15 +350,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v14.0 Institutional<br>
+          <strong>Version:</strong> v14.1 (Fixed API Validation)<br>
           <strong>Engine:</strong> Gemini 2.0 Flash Experimental<br>
           <strong>Masters:</strong> 12 frameworks<br>
+          <strong>API Key Formats:</strong> AIza*, AQ*, na nyingine<br>
           <strong>Data Storage:</strong> LocalStorage (browser yako)
         </div>
         <div class="disclaimer-box">
           <strong>Kumbuka:</strong> App hii haitumii backend. Data yako iko kwenye browser yako pekee. Ukifuta cache, data inaenda.
         </div>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data (JSON)</button>
+        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu API Key Yangu</button>
       </div>
     </div>
   </div>
@@ -367,11 +368,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v14.0 — INSTITUTIONAL EDITION
-   Masters 12 Real Engine + Capital Shield
+   LUTYNOEL FX v14.1 — INSTITUTIONAL EDITION
+   Fixed: API Key validation (supports AIza, AQ, etc.)
    ===================================================== */
 
-// ============ PAIR SPECIFICATIONS (Real Pip Values) ============
+// ============ PAIR SPECIFICATIONS ============
 const PAIR_SPECS = {
   XAUUSD: { pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2 },
   BTCUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2 },
@@ -385,7 +386,7 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2 }
 };
 
-// ============ MASTERS 12 DEFINITIONS ============
+// ============ MASTERS 12 ============
 const MASTERS_12 = [
   { id: 1, name: "Chief Master", weight: 0.15, lens: "Overall trend alignment and final decision authority" },
   { id: 2, name: "Support & Resistance", weight: 0.12, lens: "Key horizontal levels across 4H and 1H" },
@@ -404,7 +405,7 @@ const MASTERS_12 = [
 // ============ PWA SETUP ============
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v14",
+    name: "Lutynoel FX v14.1",
     short_name: "LutynoelFX",
     start_url: "./",
     display: "standalone",
@@ -425,14 +426,33 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-// ============ LOGIN ============
+// ============ VALIDATE API KEY (v14.1 FIX) ============
+function validateApiKey(key) {
+  if (!key) return { valid: false, reason: "Key haipo" };
+  const trimmed = key.trim();
+  if (trimmed.length < 20) {
+    return { valid: false, reason: `Key ni fupi mno (${trimmed.length} chars). Inapaswa kuwa 20+ characters.` };
+  }
+  if (/\s/.test(trimmed)) {
+    return { valid: false, reason: "Key ina nafasi (spaces). Ondoa nafasi zote." };
+  }
+  return { valid: true, reason: "Key inaonekana sahihi" };
+}
+
+// ============ LOGIN (v14.1 — Flexible Validation) ============
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const apiKey = document.getElementById('authApiKey').value.trim();
 
-  if (!name) { alert("Tafadhali weka jina lako."); return; }
-  if (!apiKey || !apiKey.startsWith('AIza')) {
-    alert("API Key si sahihi. Inapaswa kuanza na 'AIza'.\n\nPata key bure: https://aistudio.google.com/apikey");
+  if (!name) {
+    alert("Tafadhali weka jina lako.");
+    return;
+  }
+
+  // ✅ v14.1: Flexible validation — inakubali AIza, AQ, na nyingine
+  const validation = validateApiKey(apiKey);
+  if (!validation.valid) {
+    alert(`⚠️ API Key si sahihi.\n\nSababu: ${validation.reason}\n\nPata key bure: https://aistudio.google.com/apikey\n\nInakubali: AIza..., AQ..., na formats zozote za Google zenye 20+ characters.`);
     return;
   }
 
@@ -446,6 +466,35 @@ function handleLogin() {
   loadHistory();
   updateStats();
   showToast(`Karibu ${name}! 🚀`);
+}
+
+// ============ TEST API KEY ============
+async function testApiKey() {
+  const apiKey = sessionStorage.getItem('lutynoel_apiKey');
+  if (!apiKey) { alert("Hakuna API key."); return; }
+
+  showToast("🧪 Inajaribu API key...", 2000);
+
+  try {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
+    });
+    const data = await response.json();
+
+    if (data.error) {
+      alert(`❌ API Key Haifanyi Kazi\n\nError: ${data.error.message}\n\nSababu zinazowezekana:\n1. Key imefutwa au haija-activate\n2. Gemini API haijawashwa kwenye project yako\n3. Key ina vikwazo (restrictions)\n\nTafadhali tengeneza key mpya: https://aistudio.google.com/apikey`);
+      return;
+    }
+
+    if (data.candidates && data.candidates[0]) {
+      alert(`✅ API Key Inafanya Kazi Vizuri!\n\nJibu la AI: "${data.candidates[0].content.parts[0].text.trim()}"\n\nUnaweza kuanza kutumia app.`);
+    }
+  } catch (err) {
+    alert(`❌ Hitilafu ya Mtandao\n\n${err.message}\n\nAngalia internet yako kisha ujaribu tena.`);
+  }
 }
 
 function logout() {
@@ -483,7 +532,7 @@ function changeLiveChart(symbol) {
   document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${symbol}&interval=15&theme=dark&style=1`;
 }
 
-// ============ IMAGE HANDLING ============
+// ============ IMAGES ============
 let globalImages = { h4: null, h1: null, m15: null };
 
 function previewImage(event, previewId, key) {
@@ -507,7 +556,6 @@ function closeUniversalModal() {
   document.getElementById('universalModal').style.display = 'none';
 }
 
-// ============ FILE TO BASE64 ============
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -517,7 +565,7 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL SINGLE MASTER (Gemini Vision) ============
+// ============ CALL SINGLE MASTER ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
 
@@ -560,7 +608,7 @@ Rules:
 
   const data = await response.json();
   if (data.error) throw new Error(`${master.name}: ${data.error.message}`);
-  if (!data.candidates || !data.candidates[0]) throw new Error(`${master.name}: No response`);
+  if (!data.candidates || !data.candidates[0]) throw new Error(`${master.name}: No response from AI`);
 
   let text = data.candidates[0].content.parts[0].text.trim();
   text = text.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -613,7 +661,7 @@ function computeConfluence(masterResults) {
 }
 
 // ============ CAPITAL SHIELD ============
-function capitalShield(confluence, entryPrice, slPrice, tpPrice, maxRiskPercent = 2) {
+function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const checks = {
     consensus: confluence.confidence >= 60,
     dominance: Math.abs(confluence.buyCount - confluence.sellCount) >= 2,
@@ -642,7 +690,7 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice, maxRiskPercent 
   };
 }
 
-// ============ MAIN ANALYSIS ============
+// ============ RUN ANALYSIS ============
 async function runAnalysis() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("API Key haipo. Ingia tena."); logout(); return; }
@@ -664,16 +712,15 @@ async function runAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
+  runBtn.innerHTML = '<span class="spinner"></span> Inachambua...';
 
   const resultsContainer = document.getElementById('resultsContainer');
   resultsContainer.style.display = 'block';
 
-  // Render loading state with all 12 masters
   renderLoadingState(pair, livePrice, MASTERS_12);
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   try {
-    // Call all 12 masters IN PARALLEL
     const promises = MASTERS_12.map(master => 
       callMaster(master, images, pair, livePrice, apiKey)
         .then(result => {
@@ -688,17 +735,10 @@ async function runAnalysis() {
     );
 
     const masterResults = await Promise.all(promises);
-
-    // Compute confluence
     const confluence = computeConfluence(masterResults);
-
-    // Compute SL/TP from the highest confidence masters that agree with consensus
     const sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
-
-    // Capital Shield check
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
 
-    // Save to history
     const analysisRecord = {
       id: Date.now(),
       date: new Date().toLocaleString(),
@@ -728,13 +768,14 @@ async function runAnalysis() {
     </div>`;
   } finally {
     runBtn.disabled = false;
+    runBtn.innerHTML = '🚀 ANZA MASTERS 12 ANALYSIS';
   }
 }
 
-// ============ RENDER LOADING STATE ============
+// ============ LOADING STATE ============
 function renderLoadingState(pair, livePrice, masters) {
   const container = document.getElementById('resultsContainer');
-  let html = `
+  container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 12 WANACHAMBUA ${pair}</div>
       <div style="font-size:12px;color:var(--muted);">Wataalamu 12 wanachambua chati kwa wakati mmoja...</div>
@@ -744,7 +785,6 @@ function renderLoadingState(pair, livePrice, masters) {
       <div id="mastersLiveContainer"></div>
     </div>
   `;
-  container.innerHTML = html;
 
   const mContainer = document.getElementById('mastersLiveContainer');
   masters.forEach(m => {
@@ -784,14 +824,13 @@ function updateMasterCard(result) {
 
 // ============ COMPUTE SL/TP ============
 function computeSLTP(masters, action, livePrice, pair) {
+  const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
+
   if (action === 'HOLD') {
     return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice };
   }
 
-  const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
   const isBuy = action === 'BUY';
-
-  // Aggregate key levels from masters
   const keyLevels = masters
     .filter(m => m.key_level && !isNaN(parseFloat(m.key_level)))
     .map(m => parseFloat(m.key_level));
@@ -799,10 +838,9 @@ function computeSLTP(masters, action, livePrice, pair) {
   let sl, tp1, tp2, tp3;
 
   if (isBuy) {
-    // SL below entry; TP above
     const slCandidates = keyLevels.filter(l => l < livePrice);
     sl = slCandidates.length > 0 ? Math.max(...slCandidates) : livePrice - 30 * spec.pipSize;
-    sl = sl - 5 * spec.pipSize; // Buffer
+    sl = sl - 5 * spec.pipSize;
     
     const risk = livePrice - sl;
     tp1 = livePrice + risk * 1;
@@ -828,7 +866,7 @@ function computeSLTP(masters, action, livePrice, pair) {
   };
 }
 
-// ============ RENDER FINAL RESULTS ============
+// ============ FINAL RESULTS ============
 function renderFinalResults(record, shield) {
   const container = document.getElementById('resultsContainer');
   const { action, confidence, entry, sl, tp1, tp2, tp3, pair } = record;
@@ -839,9 +877,8 @@ function renderFinalResults(record, shield) {
   const actionColor = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--orange)';
   const riskPips = Math.abs((entry - sl) / spec.pipSize).toFixed(1);
   const rewardPips = Math.abs((tp3 - entry) / spec.pipSize).toFixed(1);
-  const rrr = (rewardPips / riskPips).toFixed(2);
+  const rrr = riskPips > 0 ? (rewardPips / riskPips).toFixed(2) : '0';
 
-  // Pip profit projections
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
   const projections = lots.map(lot => {
     const usd = rewardPips * spec.pipValueStdLot * lot;
@@ -871,7 +908,7 @@ function renderFinalResults(record, shield) {
       </div>
       <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}">
         <span>${shield.checks.dominance ? '✓' : '✗'}</span>
-        <span>Dominance ya masters ≥ 2 (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span>
+        <span>Dominance ≥ 2 masters (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span>
       </div>
       <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}">
         <span>${shield.checks.alignment ? '✓' : '✗'}</span>
@@ -908,7 +945,7 @@ function renderFinalResults(record, shield) {
       </div>
 
       <div class="card">
-        <div class="ballistic-header">💵 PROFIT PROJECTIONS (at TP3 = ${rewardPips} pips)</div>
+        <div class="ballistic-header">💵 PROFIT PROJECTIONS (TP3 = ${rewardPips} pips)</div>
         ${projections.map(p => `
           <div class="lot-row">
             <strong>Lot ${p.lot}</strong>
@@ -933,7 +970,6 @@ function renderFinalResults(record, shield) {
 
   container.innerHTML = html;
 
-  // Render final master cards
   const mContainer = document.getElementById('mastersFinalContainer');
   record.masters.forEach(m => {
     const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
@@ -988,7 +1024,7 @@ function calculateRisk() {
     • <strong>Pair:</strong> ${pair} (pip value: $${pipValuePerLot}/lot)<br>
     <br>
     <strong style="color:var(--accent);font-size:15px;">📊 LOT SIZE: ${lotSize.toFixed(3)}</strong>
-    <div style="font-size:11px;color:var(--muted);margin-top:6px;">(Round to broker's minimum: ${Math.max(0.01, lotSize).toFixed(2)})</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px;">(Round to broker minimum: ${Math.max(0.01, lotSize).toFixed(2)})</div>
   `;
   showToast("Lot size imehesabiwa!");
 }
@@ -1082,11 +1118,12 @@ function updateStats() {
   }
 }
 
-// ============ EXPORT DATA ============
+// ============ EXPORT ============
 function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
-    exportedAt: new Date().toISOString()
+    exportedAt: new Date().toISOString(),
+    version: "14.1"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
