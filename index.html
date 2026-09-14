@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v15.4 — Wide TP Edition</title>
+<title>Lutynoel FX v15.5 — History Detail Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -83,10 +83,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .checklist-item{display:flex;gap:8px;font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.5}
 .checklist-item.pass span:first-child{color:var(--green);font-weight:bold;flex-shrink:0}
 .checklist-item.fail span:first-child{color:var(--red);font-weight:bold;flex-shrink:0}
-.history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:.2s;cursor:pointer}
+.history-card:hover{border-color:var(--accent);background:#141418}
+.history-card .chevron{color:var(--accent);font-size:20px;font-weight:bold}
 .forex-hero{background:linear-gradient(135deg,rgba(18,18,21,.95),rgba(30,27,75,.9));border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:15px}
-.modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:20px}
-.modal-content{max-width:92%;max-height:88vh;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;overflow-y:auto;position:relative}
+.modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.modal-content{max-width:92%;width:100%;max-width:600px;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;position:relative;margin:20px 0}
 .modal-close{position:absolute;top:10px;right:20px;color:#fff;font-size:30px;font-weight:bold;cursor:pointer;line-height:1}
 .nav-btn{background:none;border:none;color:#fff;font-size:20px;padding:4px}
 .disclaimer-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
@@ -111,8 +113,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v15.4</div>
-    <div class="auth-subtitle">Wide TP Edition — SL ya Soko, TP Kubwa</div>
+    <div class="auth-title">Lutynoel FX v15.5</div>
+    <div class="auth-subtitle">History Detail Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -129,8 +131,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
     <div class="info-box">
       🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
-      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a><br>
-      📊 Bila key, app inatumia bei ya demo.
+      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a>
     </div>
 
     <button class="primary-btn" onclick="handleLogin()">Ingia Salama</button>
@@ -152,14 +153,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v15.4</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.5</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 <span class="badge-new">WIDE TP</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
-    <div class="menu-item" onclick="navigate('history')">📁 Historia</div>
+    <div class="menu-item" onclick="navigate('history')">📁 Historia <span class="badge-new">CLICK</span></div>
     <div class="menu-item" onclick="navigate('settings')">⚙️ Settings</div>
   </div>
 
@@ -191,9 +192,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="info-box">
         📊 <strong>Wide TP Logic:</strong><br>
         • <strong>SL</strong> = Key levels za masters (30-50 pips)<br>
-        • <strong>TP1</strong> = 2× SL<br>
-        • <strong>TP2</strong> = 4× SL<br>
-        • <strong>TP3</strong> = 6× SL (minimum 50 pips, max 300)<br>
+        • <strong>TP1</strong> = 2× SL • <strong>TP2</strong> = 4× SL • <strong>TP3</strong> = 6× SL<br>
         <em>Mfano: SL 30 pips → TP1 60, TP2 120, TP3 180 (R:R = 1:6)</em>
       </div>
     </div>
@@ -333,6 +332,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <h3 style="margin:0;">📁 Historia</h3>
           <button onclick="clearHistory()" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">Futa Zote</button>
         </div>
+        <div class="info-box" style="margin-bottom:12px;">
+          👆 <strong>Bofya analysis yoyote</strong> kuona maelezo kamili (masters 12, SL/TP, projections)
+        </div>
         <div id="historyList">
           <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>
         </div>
@@ -343,10 +345,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v15.4 (Wide TP)<br>
+          <strong>Version:</strong> v15.5 (Clickable History)<br>
           <strong>Model:</strong> Gemini 3.6 Flash<br>
-          <strong>SL:</strong> Market-based (30-50 pips)<br>
-          <strong>TP:</strong> 2×, 4×, 6× SL (min 50, max 300)
+          <strong>SL:</strong> Market-based<br>
+          <strong>TP:</strong> 2× / 4× / 6× SL (min 50, max 300)
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
@@ -360,86 +362,25 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v15.4 — WIDE TP EDITION
-   SL = Market structure | TP = 2x, 4x, 6x SL (min 50, max 300)
+   LUTYNOEL FX v15.5 — CLICKABLE HISTORY EDITION
+   Same analysis engine as v15.4 + history detail modal
    ===================================================== */
 
 const MODELS_CHAIN = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-2.0-flash'];
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
-// ============ PAIR SPECS (Wide TP config) ============
 const PAIR_SPECS = {
-  XAUUSD: {
-    pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2,
-    source: 'twelve', twelveSymbol: 'XAU/USD',
-    slDefault: 40, slMin: 25, slMax: 60,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 50, tp3Max: 300
-  },
-  BTCUSD: {
-    pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2,
-    source: 'binance', binanceSymbol: 'BTCUSDT',
-    slDefault: 800, slMin: 500, slMax: 1500,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 1000, tp3Max: 5000
-  },
-  NAS100: {
-    pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2,
-    source: 'twelve', twelveSymbol: 'NDX',
-    slDefault: 80, slMin: 50, slMax: 150,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 100, tp3Max: 500
-  },
-  EURUSD: {
-    pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4,
-    source: 'twelve', twelveSymbol: 'EUR/USD',
-    slDefault: 30, slMin: 20, slMax: 50,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 50, tp3Max: 200
-  },
-  GBPUSD: {
-    pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4,
-    source: 'twelve', twelveSymbol: 'GBP/USD',
-    slDefault: 35, slMin: 20, slMax: 60,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 50, tp3Max: 200
-  },
-  USDJPY: {
-    pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3,
-    source: 'twelve', twelveSymbol: 'USD/JPY',
-    slDefault: 30, slMin: 20, slMax: 50,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 50, tp3Max: 200
-  },
-  AUDUSD: {
-    pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4,
-    source: 'twelve', twelveSymbol: 'AUD/USD',
-    slDefault: 30, slMin: 20, slMax: 50,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 50, tp3Max: 200
-  },
-  USDCAD: {
-    pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4,
-    source: 'twelve', twelveSymbol: 'USD/CAD',
-    slDefault: 30, slMin: 20, slMax: 50,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 50, tp3Max: 200
-  },
-  ETHUSD: {
-    pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2,
-    source: 'binance', binanceSymbol: 'ETHUSDT',
-    slDefault: 50, slMin: 30, slMax: 100,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 100, tp3Max: 500
-  },
-  SOLUSD: {
-    pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2,
-    source: 'binance', binanceSymbol: 'SOLUSDT',
-    slDefault: 3, slMin: 2, slMax: 6,
-    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
-    tp3Min: 10, tp3Max: 50
-  }
+  XAUUSD: { pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300 },
+  BTCUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000 },
+  NAS100: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500 },
+  EURUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
+  GBPUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
+  USDJPY: { pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
+  AUDUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
+  USDCAD: { pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
+  ETHUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', slDefault: 50, slMin: 30, slMax: 100, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500 },
+  SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50 }
 };
 
 const MASTERS_12 = [
@@ -459,12 +400,8 @@ const MASTERS_12 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v15.4",
-    short_name: "LutynoelFX",
-    start_url: "./",
-    display: "standalone",
-    background_color: "#09090b",
-    theme_color: "#fbbf24",
+    name: "Lutynoel FX v15.5", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
   const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
@@ -482,8 +419,8 @@ function showToast(msg, duration = 3500) {
 function validateApiKey(key) {
   if (!key) return { valid: false, reason: "Key haipo" };
   const trimmed = key.trim();
-  if (trimmed.length < 20) return { valid: false, reason: `Key ni fupi (${trimmed.length} chars). Inapaswa 20+.` };
-  if (/\s/.test(trimmed)) return { valid: false, reason: "Key ina nafasi. Ondoa nafasi." };
+  if (trimmed.length < 20) return { valid: false, reason: `Key ni fupi (${trimmed.length} chars).` };
+  if (/\s/.test(trimmed)) return { valid: false, reason: "Key ina nafasi." };
   return { valid: true };
 }
 
@@ -493,10 +430,9 @@ function handleLogin() {
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
 
   if (!name) { alert("Weka jina lako."); return; }
-
   const validation = validateApiKey(apiKey);
   if (!validation.valid) {
-    alert(`⚠️ Gemini API Key si sahihi.\n\nSababu: ${validation.reason}\n\nPata key: https://aistudio.google.com/apikey`);
+    alert(`⚠️ Gemini API Key si sahihi.\n\n${validation.reason}\n\nPata key: https://aistudio.google.com/apikey`);
     return;
   }
 
@@ -517,26 +453,19 @@ function handleLogin() {
 
 function saveTwelveKey() {
   const key = document.getElementById('settingsTwelveKey').value.trim();
-  if (key) {
-    sessionStorage.setItem('lutynoel_twelveKey', key);
-    showToast("TwelveData key imehifadhiwa!");
-  } else {
-    sessionStorage.removeItem('lutynoel_twelveKey');
-    showToast("TwelveData key imeondolewa.");
-  }
+  if (key) { sessionStorage.setItem('lutynoel_twelveKey', key); showToast("Imehifadhiwa!"); }
+  else { sessionStorage.removeItem('lutynoel_twelveKey'); showToast("Imeondolewa."); }
 }
 
 async function testApiKey() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("Hakuna API key."); return; }
-  showToast("🧪 Inajaribu models...", 2000);
-
+  showToast("🧪 Inajaribu...", 2000);
   for (const model of MODELS_CHAIN) {
     try {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
       });
       const data = await response.json();
@@ -549,10 +478,7 @@ async function testApiKey() {
   alert(`❌ Hakuna model iliyofanya kazi.`);
 }
 
-function logout() {
-  sessionStorage.clear();
-  location.reload();
-}
+function logout() { sessionStorage.clear(); location.reload(); }
 
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -592,25 +518,20 @@ async function fetchLivePrice() {
   const pair = document.getElementById('selectedPair').value;
   const spec = PAIR_SPECS[pair];
   if (!spec) return;
-
   const refreshBtn = document.getElementById('refreshBtn');
   refreshBtn.disabled = true;
   refreshBtn.innerHTML = '<span class="spinner-white"></span>';
   setPriceStatus('loading', '⏳ Inapakua bei...');
-
   try {
     let price = null;
     if (spec.source === 'binance') price = await fetchBinancePrice(spec.binanceSymbol);
     else if (spec.source === 'twelve') price = await fetchTwelveDataPrice(spec.twelveSymbol);
-
     if (price !== null && price > 0) {
       document.getElementById('livePrice').value = price.toFixed(spec.decimals);
       const time = new Date().toLocaleTimeString('sw-TZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
       setPriceStatus('live', `🟢 Bei halisi (${spec.source.toUpperCase()})`, time);
       showToast(`✅ ${price.toFixed(spec.decimals)}`, 2000);
-    } else {
-      throw new Error("Haikupatikana");
-    }
+    } else throw new Error("Haikupatikana");
   } catch (err) {
     document.getElementById('livePrice').value = spec.defaultPrice;
     setPriceStatus('error', `🔴 Bei ya demo`, '');
@@ -692,40 +613,24 @@ Rules:
 
   const parts = [{ text: prompt }];
   for (const img of images) {
-    parts.push({
-      inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) }
-    });
+    parts.push({ inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) } });
   }
 
   let lastError = null;
-
   for (const model of MODELS_CHAIN) {
     try {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts }],
-          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
-        })
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts }], generationConfig: { temperature: 0.3, responseMimeType: "application/json" } })
       });
-
       const data = await response.json();
-      if (data.error) {
-        lastError = data.error.message;
-        continue;
-      }
-      if (!data.candidates || !data.candidates[0]) {
-        lastError = "No response";
-        continue;
-      }
-
+      if (data.error) { lastError = data.error.message; continue; }
+      if (!data.candidates || !data.candidates[0]) { lastError = "No response"; continue; }
       let text = data.candidates[0].content.parts[0].text.trim();
       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
       const match = text.match(/\{[\s\S]*\}/);
       if (match) text = match[0];
-
       const result = JSON.parse(text);
       return {
         ...master,
@@ -735,10 +640,7 @@ Rules:
         key_level: result.key_level || null,
         model_used: model
       };
-    } catch (e) {
-      lastError = e.message;
-      continue;
-    }
+    } catch (e) { lastError = e.message; continue; }
   }
   throw new Error(`${master.name}: ${lastError || "All models failed"}`);
 }
@@ -784,11 +686,8 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   }
   const allPass = Object.values(checks).every(v => v === true || v === undefined);
   return {
-    approved: allPass,
-    checks,
-    message: allPass 
-      ? "✅ CAPITAL SHIELD: Trade approved." 
-      : "🛡️ CAPITAL SHIELD: Trade BLOCKED."
+    approved: allPass, checks,
+    message: allPass ? "✅ CAPITAL SHIELD: Trade approved." : "🛡️ CAPITAL SHIELD: Trade BLOCKED."
   };
 }
 
@@ -826,7 +725,6 @@ async function runAnalysis() {
           return failed;
         })
     );
-
     const masterResults = await Promise.all(promises);
     const confluence = computeConfluence(masterResults);
     const sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
@@ -837,13 +735,13 @@ async function runAnalysis() {
       date: new Date().toLocaleString(),
       pair, action: confluence.action, confidence: confluence.confidence,
       entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
+      slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
       shield: shield.approved, masters: masterResults, confluence
     };
 
     saveToHistory(record);
     renderFinalResults(record, shield);
     showToast(shield.approved ? "✅ Signal imeidhinishwa!" : "🛡️ Signal imezuiwa", 4000);
-
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
       <h3 style="color:var(--red);">❌ Hitilafu</h3>
@@ -861,7 +759,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 12 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Model: Gemini 3.6 Flash</div>
+      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice}</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 12 — LIVE VOTING</div>
@@ -889,30 +787,22 @@ function updateMasterCard(result) {
   const voteEl = document.getElementById(`vote-${result.id}`);
   const descEl = document.getElementById(`desc-${result.id}`);
   const confEl = document.getElementById(`conf-${result.id}`);
-
   card.classList.remove('pending');
   const voteClass = result.vote === 'BUY' ? 'buy' : result.vote === 'SELL' ? 'sell' : 'hold';
   card.classList.add(voteClass);
-
   voteEl.className = `master-vote vote-${result.vote.toLowerCase()}`;
   voteEl.innerText = result.vote === 'BUY' ? '📈 BUY' : result.vote === 'SELL' ? '📉 SELL' : '⏸ HOLD';
   descEl.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key Level: ${result.key_level}</strong>` : '');
   confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%)<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
-// ============ WIDE TP SL/TP CALCULATION ============
 function computeSLTP(masters, action, livePrice, pair) {
   const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
-  if (action === 'HOLD') {
-    return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp3Pips: 0 };
-  }
+  if (action === 'HOLD') return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0 };
 
   const isBuy = action === 'BUY';
-  const keyLevels = masters
-    .filter(m => m.key_level && !isNaN(parseFloat(m.key_level)))
-    .map(m => parseFloat(m.key_level));
+  const keyLevels = masters.filter(m => m.key_level && !isNaN(parseFloat(m.key_level))).map(m => parseFloat(m.key_level));
 
-  // ============ SL: Bado inafuata soko (kama ilivyo) ============
   let sl;
   if (isBuy) {
     const slCandidates = keyLevels.filter(l => l < livePrice);
@@ -924,36 +814,21 @@ function computeSLTP(masters, action, livePrice, pair) {
     sl = sl + 5 * spec.pipSize;
   }
 
-  // Ensure SL is within bounds
   let slPips = Math.abs((livePrice - sl) / spec.pipSize);
-  if (slPips < spec.slMin) {
-    slPips = spec.slMin;
-    sl = isBuy ? livePrice - slPips * spec.pipSize : livePrice + slPips * spec.pipSize;
-  } else if (slPips > spec.slMax) {
-    slPips = spec.slMax;
-    sl = isBuy ? livePrice - slPips * spec.pipSize : livePrice + slPips * spec.pipSize;
-  }
+  if (slPips < spec.slMin) { slPips = spec.slMin; sl = isBuy ? livePrice - slPips * spec.pipSize : livePrice + slPips * spec.pipSize; }
+  else if (slPips > spec.slMax) { slPips = spec.slMax; sl = isBuy ? livePrice - slPips * spec.pipSize : livePrice + slPips * spec.pipSize; }
 
-  // ============ TP: WIDE (2x, 4x, 6x SL) ============
-  // TP1 = 2× SL, TP2 = 4× SL, TP3 = 6× SL
   let tp1Pips = slPips * spec.tp1Multiplier;
   let tp2Pips = slPips * spec.tp2Multiplier;
   let tp3Pips = slPips * spec.tp3Multiplier;
 
-  // Ensure TP3 meets minimum
   if (tp3Pips < spec.tp3Min) {
     const scale = spec.tp3Min / tp3Pips;
-    tp1Pips *= scale;
-    tp2Pips *= scale;
-    tp3Pips = spec.tp3Min;
+    tp1Pips *= scale; tp2Pips *= scale; tp3Pips = spec.tp3Min;
   }
-
-  // Cap TP3 at maximum
   if (tp3Pips > spec.tp3Max) {
     const scale = spec.tp3Max / tp3Pips;
-    tp1Pips *= scale;
-    tp2Pips *= scale;
-    tp3Pips = spec.tp3Max;
+    tp1Pips *= scale; tp2Pips *= scale; tp3Pips = spec.tp3Max;
   }
 
   const tp1 = isBuy ? livePrice + tp1Pips * spec.pipSize : livePrice - tp1Pips * spec.pipSize;
@@ -975,22 +850,26 @@ function computeSLTP(masters, action, livePrice, pair) {
 
 function renderFinalResults(record, shield) {
   const container = document.getElementById('resultsContainer');
+  container.innerHTML = buildAnalysisHTML(record, shield);
+}
+
+// ============ CORE: BUILD ANALYSIS HTML (reused for current + history) ============
+function buildAnalysisHTML(record, shield) {
   const { action, confidence, entry, sl, tp1, tp2, tp3, pair } = record;
   const spec = PAIR_SPECS[pair];
   const isBuy = action === 'BUY', isSell = action === 'SELL';
   const actionColor = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--orange)';
 
-  // Compute pips dynamically (recompute here for display)
-  const sltp = computeSLTP(record.masters, action, entry, pair);
-  const slPips = sltp.slPips;
-  const tp1Pips = sltp.tp1Pips;
-  const tp2Pips = sltp.tp2Pips;
-  const tp3Pips = sltp.tp3Pips;
+  // Use stored pips or recompute
+  const slPips = record.slPips || Math.abs((entry - sl) / spec.pipSize).toFixed(0);
+  const tp1Pips = record.tp1Pips || Math.abs((tp1 - entry) / spec.pipSize).toFixed(0);
+  const tp2Pips = record.tp2Pips || Math.abs((tp2 - entry) / spec.pipSize).toFixed(0);
+  const tp3Pips = record.tp3Pips || Math.abs((tp3 - entry) / spec.pipSize).toFixed(0);
   const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '0';
 
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
   const projections = lots.map(lot => ({
-    lot, 
+    lot,
     tp1: (tp1Pips * spec.pipValueStdLot * lot).toFixed(2),
     tp3: (tp3Pips * spec.pipValueStdLot * lot).toFixed(2)
   }));
@@ -1005,7 +884,7 @@ function renderFinalResults(record, shield) {
         <span class="badge-${shield.approved ? 'conf' : 'warn'}">${shield.approved ? '✅ APPROVED' : '🛡️ BLOCKED'}</span>
       </div>
       <div style="font-size:11px;color:var(--muted);margin-top:8px;">
-        📊 R:R = <strong style="color:var(--accent);">1 : ${rrr}</strong> • Wide TP Strategy
+        📊 R:R = <strong style="color:var(--accent);">1 : ${rrr}</strong> • ${record.date || ''}
       </div>
     </div>
 
@@ -1031,7 +910,7 @@ function renderFinalResults(record, shield) {
           <div class="mini-box">
             <label style="color:var(--red);">Stop Loss</label>
             <div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div>
-            <div style="font-size:11px;color:var(--red);margin-top:4px;">${slPips} pips (soko)</div>
+            <div style="font-size:11px;color:var(--red);margin-top:4px;">${slPips} pips</div>
           </div>
         </div>
         <div class="grid-3">
@@ -1060,7 +939,6 @@ function renderFinalResults(record, shield) {
 
       <div class="card">
         <div class="ballistic-header">💵 PROFIT PROJECTIONS (USD)</div>
-        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Kila lot inaonyesha faida kwa TP1 na TP3:</div>
         ${projections.map(p => `
           <div class="lot-row">
             <strong>Lot ${p.lot}</strong>
@@ -1076,32 +954,28 @@ function renderFinalResults(record, shield) {
 
   html += `
     <div class="card">
-      <div class="ballistic-header">👥 MASTERS 12 — FINAL VOTES</div>
-      <div id="mastersFinalContainer"></div>
+      <div class="ballistic-header">👥 MASTERS 12 — VOTES</div>
+      ${record.masters.map(m => {
+        const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
+        const cardClass = m.vote.toLowerCase();
+        return `
+          <div class="master-card ${cardClass}">
+            <div class="master-header">
+              <div class="master-name">${m.id}. ${m.name}</div>
+              <div class="master-vote ${voteClass}">${m.vote}</div>
+            </div>
+            <div class="master-desc">${m.reasoning}</div>
+            <div class="master-confidence">
+              Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
+              <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
+            </div>
+          </div>
+        `;
+      }).join('')}
     </div>
-    <button class="primary-btn" onclick="resetAnalysis()" style="margin-top:10px;">🔄 CHAMBUA TENA</button>
   `;
 
-  container.innerHTML = html;
-
-  const mContainer = document.getElementById('mastersFinalContainer');
-  record.masters.forEach(m => {
-    const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
-    const cardClass = m.vote.toLowerCase();
-    mContainer.innerHTML += `
-      <div class="master-card ${cardClass}">
-        <div class="master-header">
-          <div class="master-name">${m.id}. ${m.name}</div>
-          <div class="master-vote ${voteClass}">${m.vote}</div>
-        </div>
-        <div class="master-desc">${m.reasoning}</div>
-        <div class="master-confidence">
-          Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
-          <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
-        </div>
-      </div>
-    `;
-  });
+  return html;
 }
 
 function resetAnalysis() {
@@ -1162,6 +1036,7 @@ function saveToHistory(record) {
   updateStats();
 }
 
+// ============ HISTORY: CLICKABLE CARDS ============
 function loadHistory() {
   const container = document.getElementById('historyList');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
@@ -1172,19 +1047,76 @@ function loadHistory() {
   container.innerHTML = history.map((h, i) => {
     const color = h.action === 'BUY' ? 'var(--green)' : h.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
     return `
-      <div class="history-card">
+      <div class="history-card" onclick="viewHistoryDetail(${i})">
         <div style="flex-grow:1;">
           <strong>${h.pair} <span style="color:${color};">${h.action}</span></strong>
           ${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br>
           <small style="color:var(--muted);">${h.date}</small>
+          ${h.outcome ? `<span style="color:var(--blue);font-size:11px;"> • ${h.outcome}</span>` : ''}
         </div>
-        <button onclick="deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">🗑️</button>
+        <div class="chevron">›</div>
+        <button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button>
       </div>
     `;
   }).join('');
 }
 
+// ============ OPEN HISTORY DETAIL MODAL ============
+function viewHistoryDetail(index) {
+  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const record = history[index];
+  if (!record) { alert("Haipatikani."); return; }
+
+  // Handle manual journal entries (no masters)
+  if (!record.masters || !record.confluence) {
+    document.getElementById('modalInnerContent').innerHTML = `
+      <h2 style="color:var(--accent);margin:0 0 15px;">📝 Manual Trade</h2>
+      <div class="card">
+        <div class="grid-2">
+          <div class="mini-box"><label>Pair</label><div style="font-size:15px;font-weight:bold;color:var(--accent);">${record.pair}</div></div>
+          <div class="mini-box"><label>Action</label><div style="font-size:15px;font-weight:bold;">${record.action}</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="mini-box"><label>Entry</label><div>${record.entry}</div></div>
+          <div class="mini-box"><label>Lot</label><div>${record.lot || 0.01}</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl}</div></div>
+          <div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div>
+        </div>
+        <div class="mini-box" style="margin-top:10px;"><label>Outcome</label><div>${record.outcome}</div></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;">📅 ${record.date}</div>
+      </div>
+    `;
+    document.getElementById('universalModal').style.display = 'flex';
+    return;
+  }
+
+  // Full analysis with masters
+  const shield = {
+    approved: record.shield,
+    checks: {
+      consensus: record.confidence >= 60,
+      dominance: Math.abs(record.confluence.buyCount - record.confluence.sellCount) >= 2,
+      alignment: (record.confluence.buyCount + record.confluence.sellCount) >= 6,
+      rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
+      rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
+    },
+    message: record.shield 
+      ? "✅ CAPITAL SHIELD: Trade ilikuwa approved." 
+      : "🛡️ CAPITAL SHIELD: Trade ilikuwa blocked."
+  };
+
+  document.getElementById('modalInnerContent').innerHTML = `
+    <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
+    ${buildAnalysisHTML(record, shield)}
+  `;
+  document.getElementById('universalModal').style.display = 'flex';
+  document.getElementById('universalModal').scrollTop = 0;
+}
+
 function deleteHistory(index) {
+  if (!confirm("Futa analysis hii?")) return;
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.splice(index, 1);
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
@@ -1215,7 +1147,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "15.4"
+    version: "15.5"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
