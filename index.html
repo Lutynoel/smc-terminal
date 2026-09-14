@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v19.3 — English Masters + Fixed Projections</title>
+<title>Lutynoel FX v20.0 — Production Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -136,6 +136,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .news-impact-badge.holiday{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue);}
 .calc-result-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:18px;margin-top:15px;}
 .calc-big-value{font-size:32px;font-weight:900;color:var(--accent);text-align:center;margin:8px 0;}
+.diagnostic-box{background:rgba(251,191,36,.1);border:1px solid var(--accent);color:#fde68a;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.6;margin-bottom:12px;font-family:monospace;}
 </style>
 </head>
 <body>
@@ -150,11 +151,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v19.3</div>
-    <div class="auth-subtitle">English Masters + Fixed Projections</div>
+    <div class="auth-title">Lutynoel FX v20.0</div>
+    <div class="auth-subtitle">Production Edition — Timeout + Retry + Validation</div>
 
     <div class="disclaimer-box">
-      ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. <strong>No profit guarantee.</strong> Trade at your own risk.
+      ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
     </div>
 
     <label>Your Name</label>
@@ -164,13 +165,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
 
     <label>Gemini API Key</label>
-    <input type="password" id="authGeminiKey" placeholder="AIza... au AQ..." autocomplete="off">
+    <input type="password" id="authGeminiKey" placeholder="AIza... or AQ..." autocomplete="off">
 
     <label>TwelveData API Key (Optional)</label>
     <input type="text" id="authTwelveKey" placeholder="Optional" autocomplete="off">
 
     <div class="info-box">
-      🔒 Keys stored in <strong>sessionStorage</strong> only.<br>
+      🔒 Keys stored in sessionStorage only.<br>
       🆓 <a href="https://console.mistral.ai" target="_blank" style="color:var(--accent);">Get Mistral key free →</a><br>
       🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Get Gemini key free →</a>
     </div>
@@ -194,15 +195,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v19.3</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v20.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">DUAL</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">PRO</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('news')">📰 News Live <span class="badge-live">LIVE</span></div>
-    <div class="menu-item" onclick="navigate('pips')">🧮 Pips Calculator <span class="badge-new">NEW</span></div>
+    <div class="menu-item" onclick="navigate('pips')">🧮 Pips Calculator</div>
     <div class="menu-item" onclick="navigate('history')">📁 History</div>
     <div class="menu-item" onclick="navigate('settings')">⚙️ Settings</div>
   </div>
@@ -212,13 +213,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">ENGLISH</span>
+          <span class="badge-shield">v20.0 PRO</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Mistral + Gemini Multi-Provider</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Production Edition</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">English-only masters. Clear, fast, professional.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Timeout + Retry + Validation + Calibrated Confidence.</p>
       </div>
 
       <div class="grid-3">
@@ -235,17 +236,20 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>Multi-Provider Logic:</strong><br>
-        • Each master tries <strong>Mistral</strong> first<br>
-        • If Mistral fails → <strong>Gemini</strong> takes over<br>
-        • If both fail → master returns "HOLD"<br>
-        • Each master card shows the provider used
+        ⚙️ <strong>v20.0 Improvements:</strong><br>
+        • 60s timeout per master<br>
+        • 3 retry attempts per Gemini model<br>
+        • Safe JSON validation<br>
+        • Calibrated confidence (margin-based)<br>
+        • Chart image validation<br>
+        • Outlier detection<br>
+        • Independent master prompts
       </div>
     </div>
 
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Dual-Provider Analysis</h3>
+        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Production Analysis</h3>
 
         <label>1. Choose Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
@@ -450,10 +454,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v19.3 (English Masters)<br>
+          <strong>Version:</strong> v20.0 (Production)<br>
           <strong>Primary:</strong> Mistral (Pixtral)<br>
           <strong>Fallback:</strong> Gemini 3.6/3.8/3.5<br>
-          <strong>Masters:</strong> 6 (Merged)<br>
+          <strong>Timeout:</strong> 60s per master, 30s per API<br>
+          <strong>Retry:</strong> 3 attempts per Gemini model<br>
+          <strong>Masters:</strong> 6 (Independent)<br>
           <strong>Language:</strong> English<br>
           <strong>News:</strong> Forex Factory RSS
         </div>
@@ -469,7 +475,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v19.3 — ENGLISH MASTERS + FIXED PROJECTIONS
+   LUTYNOEL FX v20.0 — PRODUCTION EDITION
+   All Fixes: Timeout, Retry, Validation, Calibration
    ===================================================== */
 
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
@@ -479,7 +486,12 @@ const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
-// ============ PAIR SPECS WITH ACCURATE PIP VALUE TABLE ============
+// ============ TIMEOUTS ============
+const MASTER_TIMEOUT = 60000;  // 60s per master
+const API_TIMEOUT = 30000;     // 30s per API call
+const RETRY_ATTEMPTS = 3;       // Retry attempts
+
+// ============ PAIR SPECS ============
 const PAIR_SPECS = {
   XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
   BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
@@ -493,18 +505,43 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
+// ============ MASTERS 6 WITH INDEPENDENT FOCUS ============
 const MASTERS_6 = [
-  { id: 1, name: "Chief Master", weight: 0.20, lens: "Overall trend alignment, higher timeframe bias, and final decision authority. You look at the big picture across 4H, 1H, and 15M charts and determine whether the market is trending up, down, or consolidating." },
-  { id: 2, name: "Support, Resistance & Supply/Demand Master", weight: 0.20, lens: "Key horizontal support and resistance levels across 4H and 1H. Institutional order blocks, imbalance zones, and liquidity sweeps." },
-  { id: 3, name: "Price Action & Market Structure Master", weight: 0.20, lens: "Candlestick patterns (engulfing, rejection wicks, pin bars), break of structure (BOS), change of character (CHoCH), higher highs, and lower lows." },
-  { id: 4, name: "Smart Money Concepts & ICT Master", weight: 0.15, lens: "Institutional order flow, liquidity pools, Fair Value Gaps (FVG), killzones, and optimal trade entry." },
-  { id: 5, name: "Fundamental Analyst", weight: 0.10, lens: "Economic news, central bank bias, DXY correlation, and macroeconomic drivers." },
-  { id: 6, name: "Fibonacci, Elliott Wave & Quantitative Master", weight: 0.15, lens: "Fibonacci retracement and extension levels, Elliott Wave count, RSI, MACD, moving averages, and ATR." }
+  {
+    id: 1, name: "Chief Master", weight: 0.20,
+    lens: "Overall trend direction ONLY. Look at 4H and 1H charts. Determine if the market is in uptrend, downtrend, or ranging. Do NOT focus on specific levels. Focus on the BIG PICTURE.",
+    focus: "Trend direction"
+  },
+  {
+    id: 2, name: "Support, Resistance & Supply/Demand Master", weight: 0.20,
+    lens: "Horizontal S/R levels and Order Blocks ONLY. Identify the KEY price zones where price has reacted before. Look for institutional order blocks, imbalance zones, and liquidity sweeps. Do NOT analyze candlesticks or momentum.",
+    focus: "Key levels & zones"
+  },
+  {
+    id: 3, name: "Price Action & Market Structure Master", weight: 0.20,
+    lens: "Candlestick patterns and structure ONLY. Look for: engulfing patterns, rejection wicks, pin bars, break of structure (BOS), change of character (CHoCH). Do NOT analyze horizontal S/R levels or news.",
+    focus: "Candlesticks & structure"
+  },
+  {
+    id: 4, name: "Smart Money Concepts & ICT Master", weight: 0.15,
+    lens: "Institutional order flow ONLY. Look for: Fair Value Gaps (FVG), liquidity pools, killzones, optimal trade entry patterns. Do NOT duplicate S/R Master's analysis.",
+    focus: "Smart money flow"
+  },
+  {
+    id: 5, name: "Fundamental Analyst", weight: 0.10,
+    lens: "Macro factors and economic news. Consider: central bank bias, DXY correlation, upcoming economic events. If you cannot see fundamental news in the chart, vote HOLD with low confidence.",
+    focus: "Macro & news"
+  },
+  {
+    id: 6, name: "Fibonacci, Elliott Wave & Quantitative Master", weight: 0.15,
+    lens: "Mathematical and statistical analysis ONLY. Consider: Fibonacci retracement/extension levels (0.382, 0.5, 0.618, 1.618), Elliott Wave counts, RSI, MACD, moving averages. Do NOT analyze raw price action patterns.",
+    focus: "Math & statistics"
+  }
 ];
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v19.3", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v20.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -524,6 +561,68 @@ function getPipValue(spec, lot) {
   if (lot >= 1.0) return spec.pipValue.standard;
   if (lot >= 0.10) return spec.pipValue.mini;
   return spec.pipValue.micro;
+}
+
+// ============ SAFE JSON PARSE (FIX #1) ============
+function safeJsonParse(text) {
+  if (!text) return null;
+  try {
+    // Try direct parse
+    return JSON.parse(text);
+  } catch (e1) {
+    try {
+      // Try to extract JSON from text
+      const match = text.match(/\{[\s\S]*\}/);
+      if (match) {
+        return JSON.parse(match[0]);
+      }
+    } catch (e2) {
+      console.warn("JSON parse failed:", e2.message);
+    }
+  }
+  return null;
+}
+
+// ============ FETCH WITH TIMEOUT (FIX #2) ============
+async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(id);
+    return response;
+  } catch (err) {
+    clearTimeout(id);
+    if (err.name === 'AbortError') {
+      throw new Error(`Request timeout after ${timeout}ms`);
+    }
+    throw err;
+  }
+}
+
+// ============ WITH RETRY (FIX #3) ============
+async function withRetry(fn, attempts = RETRY_ATTEMPTS, delayMs = 1500) {
+  let lastError = null;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastError = err;
+      console.warn(`Attempt ${i + 1}/${attempts} failed:`, err.message);
+      if (i < attempts - 1) {
+        await new Promise(r => setTimeout(r, delayMs * (i + 1))); // Exponential backoff
+      }
+    }
+  }
+  throw lastError;
+}
+
+// ============ WITH MASTER TIMEOUT (FIX #4) ============
+async function withTimeout(promise, timeoutMs, errorMessage) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(errorMessage || `Timeout after ${timeoutMs}ms`)), timeoutMs))
+  ]);
 }
 
 function handleLogin() {
@@ -562,21 +661,21 @@ async function testApiKeys() {
   let results = [];
   if (mistralKey) {
     try {
-      const r = await fetch(`${MISTRAL_BASE_URL}/chat/completions`, {
+      const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
         body: JSON.stringify({ model: MISTRAL_MODEL, messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
-      });
+      }, 15000);
       const d = await r.json();
       results.push(d.error ? `❌ Mistral: ${d.error.message}` : `✅ Mistral: OK`);
     } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
   }
   if (geminiKey) {
     try {
-      const r = await fetch(`${GEMINI_BASE_URL}/models/gemini-3.6-flash:generateContent?key=${geminiKey}`, {
+      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/gemini-3.6-flash:generateContent?key=${geminiKey}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
-      });
+      }, 15000);
       const d = await r.json();
       results.push(d.error ? `❌ Gemini: ${d.error.message}` : `✅ Gemini: OK`);
     } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
@@ -649,7 +748,7 @@ async function fetchLivePrice() {
 
 async function fetchBinancePrice(symbol) {
   try {
-    const r = await fetch(`${BINANCE_API}?symbol=${symbol}`);
+    const r = await fetchWithTimeout(`${BINANCE_API}?symbol=${symbol}`, {}, 10000);
     if (!r.ok) return null;
     const d = await r.json();
     return parseFloat(d.price);
@@ -660,7 +759,7 @@ async function fetchTwelveDataPrice(symbol) {
   const key = sessionStorage.getItem('lutynoel_twelveKey');
   if (!key) return null;
   try {
-    const r = await fetch(`${TWELVEDATA_API}?symbol=${encodeURIComponent(symbol)}&apikey=${key}`);
+    const r = await fetchWithTimeout(`${TWELVEDATA_API}?symbol=${encodeURIComponent(symbol)}&apikey=${key}`, {}, 10000);
     if (!r.ok) return null;
     const d = await r.json();
     if (d.status === 'error') return null;
@@ -697,32 +796,35 @@ function fileToBase64(file) {
   });
 }
 
-// ============ ENGLISH PROMPT BUILDER ============
+// ============ PROMPT BUILDER WITH CHART VALIDATION (FIX #5) ============
 function buildPrompt(master, pair, livePrice) {
-  return `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
+  return `You are the "${master.name}" trading master. Your focus: ${master.focus}.
+
+YOUR LENS (only analyze this): ${master.lens}
 
 Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
+
+CRITICAL RULES:
+1. FIRST, verify the images are actual TRADING CHARTS. If they are NOT charts (e.g., photos, text, random images), respond with:
+   {"vote":"HOLD","confidence":0,"reasoning":"Invalid image - not a trading chart","key_level":null}
+2. If charts are valid, analyze ONLY through YOUR lens. Do NOT duplicate other masters' analysis.
+3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance.
+4. Be specific with price levels (e.g., "at 4,278").
+5. Maximum 2-3 sentences in SIMPLE, CLEAR English.
+6. If your lens sees nothing clear, vote HOLD with low confidence.
 
 Respond ONLY in valid JSON:
 {
   "vote": "BUY" | "SELL" | "HOLD",
   "confidence": <number 0-100>,
-  "reasoning": "<2-3 sentences in SIMPLE English>",
+  "reasoning": "<2-3 sentences in simple English>",
   "key_level": "<price level or null>"
 }
 
-REASONING RULES:
-- Write SIMPLE, CLEAR English like a professional trader explaining to another trader
-- Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance
-- Be specific with price levels (e.g., "at 4,278")
-- Maximum 2-3 sentences. No fluff.
-- BAD: "Price has mitigated below upper portion of FVG" ❌ (too technical)
-- GOOD: "Price entered FVG zone (4,323-4,355) and rejected from PDL. Watch for BUY setup at 4,278 support." ✅
-
-Vote based ONLY on your assigned lens. If unclear, vote "HOLD" with low confidence. Be honest.`;
+Be honest. Vote based ONLY on your assigned lens.`;
 }
 
-// ============ CALL MISTRAL ============
+// ============ CALL MISTRAL WITH TIMEOUT + RETRY ============
 async function callMistral(master, images, pair, livePrice, apiKey) {
   const prompt = buildPrompt(master, pair, livePrice);
 
@@ -733,38 +835,39 @@ async function callMistral(master, images, pair, livePrice, apiKey) {
     content.push({ type: "image_url", image_url: `data:${mimeType};base64,${base64}` });
   }
 
-  const response = await fetch(`${MISTRAL_BASE_URL}/chat/completions`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model: MISTRAL_MODEL,
-      messages: [{ role: 'user', content: content }],
-      temperature: 0.4,
-      max_tokens: 1000
-    })
-  });
+  return await withRetry(async () => {
+    const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model: MISTRAL_MODEL,
+        messages: [{ role: 'user', content: content }],
+        temperature: 0.4,
+        max_tokens: 1000
+      })
+    }, API_TIMEOUT);
 
-  const data = await response.json();
-  if (data.error) throw new Error(`Mistral: ${data.error.message}`);
-  if (!data.choices || !data.choices[0]) throw new Error("Mistral: No response");
+    const data = await response.json();
+    if (data.error) throw new Error(`Mistral: ${data.error.message}`);
+    if (!data.choices || !data.choices[0]) throw new Error("Mistral: No response");
 
-  let text = data.choices[0].message.content.trim();
-  text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-  const match = text.match(/\{[\s\S]*\}/);
-  if (match) text = match[0];
+    let text = data.choices[0].message.content.trim();
+    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    const result = safeJsonParse(text);
+    if (!result) throw new Error("Mistral: Invalid JSON response");
 
-  const result = JSON.parse(text);
-  return {
-    ...master,
-    vote: (result.vote || 'HOLD').toUpperCase(),
-    confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-    reasoning: result.reasoning || 'No analysis.',
-    key_level: result.key_level || null,
-    provider: 'Mistral'
-  };
+    return {
+      ...master,
+      vote: (result.vote || 'HOLD').toUpperCase(),
+      confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+      reasoning: result.reasoning || 'No analysis.',
+      key_level: result.key_level || null,
+      provider: 'Mistral'
+    };
+  }, 2, 2000); // 2 attempts for Mistral
 }
 
-// ============ CALL GEMINI ============
+// ============ CALL GEMINI WITH TIMEOUT + RETRY ============
 async function callGemini(master, images, pair, livePrice, apiKey) {
   const prompt = buildPrompt(master, pair, livePrice);
 
@@ -776,117 +879,142 @@ async function callGemini(master, images, pair, livePrice, apiKey) {
   let lastError = null;
   for (const model of GEMINI_MODELS) {
     try {
-      const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts }],
-          generationConfig: { temperature: 0.4, responseMimeType: "application/json" }
-        })
-      });
+      return await withRetry(async () => {
+        const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
+        const response = await fetchWithTimeout(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts }],
+            generationConfig: { temperature: 0.4, responseMimeType: "application/json" }
+          })
+        }, API_TIMEOUT);
 
-      const data = await response.json();
-      if (data.error) { lastError = data.error.message; continue; }
-      if (!data.candidates || !data.candidates[0]) { lastError = "No response"; continue; }
+        const data = await response.json();
+        if (data.error) throw new Error(`Gemini: ${data.error.message}`);
+        if (!data.candidates || !data.candidates[0]) throw new Error("Gemini: No response");
 
-      let text = data.candidates[0].content.parts[0].text.trim();
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const match = text.match(/\{[\s\S]*\}/);
-      if (match) text = match[0];
+        let text = data.candidates[0].content.parts[0].text.trim();
+        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+        const result = safeJsonParse(text);
+        if (!result) throw new Error("Gemini: Invalid JSON");
 
-      const result = JSON.parse(text);
-      return {
-        ...master,
-        vote: (result.vote || 'HOLD').toUpperCase(),
-        confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-        reasoning: result.reasoning || 'No analysis.',
-        key_level: result.key_level || null,
-        provider: 'Gemini'
-      };
-    } catch (e) { lastError = e.message; continue; }
+        return {
+          ...master,
+          vote: (result.vote || 'HOLD').toUpperCase(),
+          confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+          reasoning: result.reasoning || 'No analysis.',
+          key_level: result.key_level || null,
+          provider: `Gemini (${model})`
+        };
+      }, RETRY_ATTEMPTS, 1500);
+    } catch (e) {
+      lastError = e;
+      console.warn(`[${master.name}] Model ${model} failed: ${e.message}`);
+      continue;
+    }
   }
-  throw new Error(`Gemini: ${lastError || "All models failed"}`);
+  throw new Error(`Gemini: ${lastError?.message || "All models failed"}`);
 }
 
+// ============ CALL MASTER WITH TIMEOUT (FIX #6) ============
 async function callMaster(master, images, pair, livePrice) {
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
 
-  if (mistralKey) {
-    try { return await callMistral(master, images, pair, livePrice, mistralKey); }
-    catch (err) { console.warn(`[${master.name}] Mistral failed: ${err.message}`); }
-  }
+  const masterCall = async () => {
+    if (mistralKey) {
+      try { return await callMistral(master, images, pair, livePrice, mistralKey); }
+      catch (err) { console.warn(`[${master.name}] Mistral failed: ${err.message}`); }
+    }
 
-  if (geminiKey) {
-    try { return await callGemini(master, images, pair, livePrice, geminiKey); }
-    catch (err) { console.warn(`[${master.name}] Gemini failed: ${err.message}`); }
-  }
+    if (geminiKey) {
+      try { return await callGemini(master, images, pair, livePrice, geminiKey); }
+      catch (err) { console.warn(`[${master.name}] Gemini failed: ${err.message}`); }
+    }
 
-  throw new Error("Both Mistral + Gemini failed");
+    throw new Error("Both Mistral + Gemini failed");
+  };
+
+  return withTimeout(masterCall(), MASTER_TIMEOUT, `${master.name}: Timeout after ${MASTER_TIMEOUT/1000}s`);
 }
 
+// ============ CALIBRATED CONFIDENCE (FIX #7) ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
+
   masterResults.forEach(r => {
+    const w = r.weight * (r.confidence / 100);
     totalWeight += r.weight;
-    const weighted = r.weight * (r.confidence / 100);
-    if (r.vote === 'BUY') buyWeight += weighted;
-    else if (r.vote === 'SELL') sellWeight += weighted;
-    else holdWeight += weighted;
+    if (r.vote === 'BUY') buyWeight += w;
+    else if (r.vote === 'SELL') sellWeight += w;
+    else holdWeight += w;
   });
+
   const buyCount = masterResults.filter(r => r.vote === 'BUY').length;
   const sellCount = masterResults.filter(r => r.vote === 'SELL').length;
   const holdCount = masterResults.filter(r => r.vote === 'HOLD').length;
-  const maxScore = Math.max(buyWeight, sellWeight, holdWeight);
-  const consensusStrength = totalWeight > 0 ? (maxScore / totalWeight) : 0;
-  const confidence = Math.round(consensusStrength * 100);
+
+  // ============ CALIBRATED CONFIDENCE = MARGIN-BASED ============
+  // Confidence = how much the winning side beats the 2nd place side
+  const scores = [buyWeight, sellWeight, holdWeight].sort((a, b) => b - a);
+  const margin = scores[0] - scores[1];
+  const confidence = totalWeight > 0 ? Math.round((margin / totalWeight) * 100) : 0;
+
   let direction = 'HOLD';
   if (buyWeight > sellWeight && buyWeight > holdWeight) direction = 'BUY';
   else if (sellWeight > buyWeight && sellWeight > holdWeight) direction = 'SELL';
+
   const dominance = Math.abs(buyCount - sellCount);
   const totalVoted = buyCount + sellCount;
   const tie = buyCount === sellCount && buyCount > 0;
+
   let signal = 'NO_TRADE', signalLabel = 'NO TRADE', signalColor = 'no-trade', signalReason = '', tradable = false;
+
   if (totalVoted < 3 || tie) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
     signalReason = tie ? `Masters split (${buyCount} BUY vs ${sellCount} SELL).` : `Only ${totalVoted}/6 masters voted.`;
     tradable = false;
-  } else if (confidence < 60) {
+  } else if (confidence < 30) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = `Confidence ${confidence}% — below 60%.`;
+    signalReason = `Confidence margin too small (${confidence}%). Masters disagree.`;
     tradable = false;
   } else if (direction === 'HOLD') {
     signal = 'NO_TRADE'; signalLabel = '⏸ NO TRADE'; signalColor = 'no-trade';
     signalReason = `No clear direction.`; tradable = false;
-  } else if (confidence >= 80 && dominance >= 3) {
+  } else if (confidence >= 60 && dominance >= 3) {
     signal = direction === 'BUY' ? 'STRONG_BUY' : 'STRONG_SELL';
     signalLabel = direction === 'BUY' ? '🟢 STRONG BUY' : '🔴 STRONG SELL';
     signalColor = direction === 'BUY' ? 'strong-buy' : 'strong-sell';
-    signalReason = `${direction === 'BUY' ? buyCount : sellCount}/6 masters strongly agree.`;
+    signalReason = `${direction === 'BUY' ? buyCount : sellCount}/6 masters strongly agree. Margin: ${confidence}%.`;
     tradable = true;
-  } else if (confidence >= 70 && dominance >= 2) {
+  } else if (confidence >= 40 && dominance >= 2) {
     signal = direction === 'BUY' ? 'BUY' : 'SELL';
     signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
     signalColor = direction === 'BUY' ? 'buy' : 'sell';
-    signalReason = `Good consensus. Confidence ${confidence}% + Dominance ${dominance}.`;
+    signalReason = `Good consensus. Margin ${confidence}% + Dominance ${dominance}.`;
     tradable = true;
-  } else if (confidence >= 60) {
+  } else if (confidence >= 30) {
     signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
     signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
     signalColor = direction === 'BUY' ? 'weak-buy' : 'weak-sell';
-    signalReason = `Caution: Confidence ${confidence}% + Dominance ${dominance}. Use small lots.`;
+    signalReason = `Caution: Low margin ${confidence}%. Use small lots.`;
     tradable = true;
   } else {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = `Conditions not met.`; tradable = false;
+    signalReason = `Conditions not met. Margin: ${confidence}%.`; tradable = false;
   }
-  return { action: direction, signal, signalLabel, signalColor, signalReason, tradable, confidence, dominance, buyCount, sellCount, holdCount };
+
+  return {
+    action: direction, signal, signalLabel, signalColor, signalReason, tradable,
+    confidence, dominance, buyCount, sellCount, holdCount,
+    buyWeight, sellWeight, holdWeight, margin
+  };
 }
 
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const checks = {
-    consensus: confluence.confidence >= 60,
+    consensus: confluence.confidence >= 30,
     dominance: confluence.dominance >= 2,
     alignment: (confluence.buyCount + confluence.sellCount) >= 3,
     notTie: confluence.buyCount !== confluence.sellCount,
@@ -907,6 +1035,17 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
     approved: allPass, checks,
     message: allPass ? "✅ CAPITAL SHIELD: Trade approved." : confluence.tradable === false ? "⏸ CAPITAL SHIELD: Wait — masters not aligned." : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR insufficient."
   };
+}
+
+// ============ DETECT OUTLIERS (FIX #8) ============
+function detectOutliers(masterResults, action) {
+  const outliers = masterResults.filter(r => 
+    r.vote !== action && 
+    r.vote !== 'HOLD' && 
+    r.confidence >= 50 && 
+    r.confidence < 70
+  );
+  return outliers;
 }
 
 async function runAnalysis() {
@@ -935,19 +1074,33 @@ async function runAnalysis() {
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const masterResults = [];
+  const startTime = Date.now();
+
   for (let i = 0; i < MASTERS_6.length; i++) {
     const master = MASTERS_6[i];
+    const masterStart = Date.now();
     try {
       const result = await callMaster(master, images, pair, livePrice);
+      result.duration = Date.now() - masterStart;
       updateMasterCard(result);
       masterResults.push(result);
     } catch (err) {
-      const failed = { ...master, vote: 'HOLD', confidence: 0, reasoning: `⚠️ ${err.message}`, error: true, provider: 'Failed' };
+      const failed = {
+        ...master,
+        vote: 'HOLD',
+        confidence: 0,
+        reasoning: `⚠️ ${err.message}`,
+        error: true,
+        provider: 'Failed',
+        duration: Date.now() - masterStart
+      };
       updateMasterCard(failed);
       masterResults.push(failed);
     }
     if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 1500));
   }
+
+  const totalDuration = Date.now() - startTime;
 
   try {
     const confluence = computeConfluence(masterResults);
@@ -956,6 +1109,7 @@ async function runAnalysis() {
       sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
     }
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
+    const outliers = detectOutliers(masterResults, confluence.action);
 
     const record = {
       id: Date.now(), date: new Date().toLocaleString(), pair,
@@ -964,12 +1118,14 @@ async function runAnalysis() {
       tradable: confluence.tradable, confidence: confluence.confidence, dominance: confluence.dominance,
       entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
-      shield: shield.approved, masters: masterResults, confluence
+      shield: shield.approved, masters: masterResults, confluence,
+      outliers: outliers.map(o => ({ name: o.name, vote: o.vote, confidence: o.confidence })),
+      totalDuration
     };
 
     saveToHistory(record);
-    renderFinalResults(record, shield);
-    showToast(confluence.tradable ? "✅ Signal ready" : "⏸ WAIT — not tradable", 4000);
+    renderFinalResults(record, shield, outliers);
+    showToast(confluence.tradable ? `✅ Signal ready (${totalDuration}ms)` : "⏸ WAIT — not tradable", 4000);
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
       <h3 style="color:var(--red);">❌ Error</h3>
@@ -987,7 +1143,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 ANALYZING ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Price: ${livePrice} • Providers: Mistral + Gemini</div>
+      <div style="font-size:12px;color:var(--muted);">Price: ${livePrice} • Timeout: 60s/master • Retry: 3x</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
@@ -1023,11 +1179,12 @@ function updateMasterCard(result) {
   
   let providerBadge = '';
   if (result.provider === 'Mistral') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
-  else if (result.provider === 'Gemini') providerBadge = `<span class="provider-badge provider-gemini">Gemini</span>`;
+  else if (result.provider?.startsWith('Gemini')) providerBadge = `<span class="provider-badge provider-gemini">${result.provider}</span>`;
   else if (result.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
   
+  const durationText = result.duration ? ` • ${(result.duration/1000).toFixed(1)}s` : '';
   descEl.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key Level: ${result.key_level}</strong>` : '');
-  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%) ${providerBadge}<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
+  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%) ${providerBadge}${durationText}<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
 function computeSLTP(masters, action, livePrice, pair) {
@@ -1069,12 +1226,12 @@ function computeSLTP(masters, action, livePrice, pair) {
   };
 }
 
-function renderFinalResults(record, shield) {
-  document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield);
+function renderFinalResults(record, shield, outliers = []) {
+  document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield, outliers);
 }
 
-function buildAnalysisHTML(record, shield) {
-  const { signalLabel, signalColor, signalReason, tradable, confidence, entry, sl, tp1, tp2, tp3, pair, dominance } = record;
+function buildAnalysisHTML(record, shield, outliers = []) {
+  const { signalLabel, signalColor, signalReason, tradable, confidence, entry, sl, tp1, tp2, tp3, pair, dominance, margin } = record;
   const spec = PAIR_SPECS[pair];
   const slPips = record.slPips || 0;
   const tp1Pips = record.tp1Pips || 0;
@@ -1082,13 +1239,11 @@ function buildAnalysisHTML(record, shield) {
   const tp3Pips = record.tp3Pips || 0;
   const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '—';
 
-  // ============ FIXED: PROFIT PROJECTIONS WITH ACCURATE PIP VALUE ============
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
   const projections = lots.map(lot => {
     const pipValue = getPipValue(spec, lot);
     return {
-      lot,
-      pipValue: pipValue,
+      lot, pipValue,
       tp1: (tp1Pips * pipValue).toFixed(2),
       tp3: (tp3Pips * pipValue).toFixed(2)
     };
@@ -1101,19 +1256,19 @@ function buildAnalysisHTML(record, shield) {
       <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
       <div class="signal-label" style="color:${signalTextColor};">${signalLabel}</div>
       <div class="signal-badge-container">
-        <span class="badge-conf">${confidence}% CONFIDENCE</span>
+        <span class="badge-conf">${confidence}% MARGIN</span>
         <span class="badge-status">${record.confluence?.buyCount || 0}B / ${record.confluence?.sellCount || 0}S / ${record.confluence?.holdCount || 0}H</span>
         <span class="badge-warn">DOM: ${dominance || 0}</span>
         <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
       <div class="signal-reason">${signalReason || ''}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • 🤖 Mistral + Gemini</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • ${record.totalDuration ? (record.totalDuration/1000).toFixed(1) + 's' : ''}</div>
     </div>
 
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
       <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
       <div class="shield-box">${shield.message}</div>
-      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Consensus ≥ 60% (Current: ${confidence}%)</span></div>
+      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Margin ≥ 30% (Current: ${confidence}%)</span></div>
       <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Current: ${dominance || 0})</span></div>
       <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>3+ masters voted</span></div>
       <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>No tie</span></div>
@@ -1121,6 +1276,20 @@ function buildAnalysisHTML(record, shield) {
       <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Current: 1:${shield.checks.rrrValue || rrr})</span></div>
     </div>
   `;
+
+  // ============ OUTLIER WARNING (FIX #8) ============
+  if (outliers.length > 0 && tradable) {
+    html += `
+      <div class="card" style="border-color:var(--yellow);">
+        <div class="ballistic-header" style="color:var(--yellow);">⚠️ OUTLIER DETECTED</div>
+        <div class="wait-box" style="text-align:left;">
+          <strong>${outliers.length} master(s) voted against consensus:</strong><br>
+          ${outliers.map(o => `• ${o.name}: ${o.vote} (${o.confidence}%)`).join('<br>')}
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:8px;">Outliers have low-medium confidence. Consensus still holds but be cautious.</div>
+      </div>
+    `;
+  }
 
   if (!tradable) {
     html += `
@@ -1177,8 +1346,9 @@ function buildAnalysisHTML(record, shield) {
           const cardClass = m.vote.toLowerCase();
           let providerBadge = '';
           if (m.provider === 'Mistral') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
-          else if (m.provider === 'Gemini') providerBadge = `<span class="provider-badge provider-gemini">Gemini</span>`;
+          else if (m.provider?.startsWith('Gemini')) providerBadge = `<span class="provider-badge provider-gemini">${m.provider}</span>`;
           else if (m.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
+          const durationText = m.duration ? ` • ${(m.duration/1000).toFixed(1)}s` : '';
           return `
             <div class="master-card ${cardClass}">
               <div class="master-header">
@@ -1187,7 +1357,7 @@ function buildAnalysisHTML(record, shield) {
               </div>
               <div class="master-desc">${m.reasoning}</div>
               <div class="master-confidence">
-                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}% ${providerBadge}
+                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}% ${providerBadge}${durationText}
                 <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
               </div>
             </div>
@@ -1267,7 +1437,7 @@ async function fetchLiveNews() {
   const ffUrl = `https://www.forexfactory.com/calendar?day=today`;
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(ffUrl)}`;
   try {
-    const response = await fetch(proxyUrl);
+    const response = await fetchWithTimeout(proxyUrl, {}, 20000);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const html = await response.text();
     const parser = new DOMParser();
@@ -1371,7 +1541,7 @@ function viewHistoryDetail(index) {
       const shield = {
         approved: record.shield === true,
         checks: {
-          consensus: (record.confidence || 0) >= 60,
+          consensus: (record.confidence || 0) >= 30,
           dominance: (record.dominance || 0) >= 2,
           alignment: ((record.confluence.buyCount || 0) + (record.confluence.sellCount || 0)) >= 3,
           notTie: (record.confluence.buyCount || 0) !== (record.confluence.sellCount || 0),
@@ -1381,9 +1551,10 @@ function viewHistoryDetail(index) {
         },
         message: record.shield ? "✅ CAPITAL SHIELD: Trade was approved." : "🛡️ CAPITAL SHIELD: Trade was blocked."
       };
+      const outliers = record.outliers || [];
       document.getElementById('modalInnerContent').innerHTML = `
         <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
-        ${buildAnalysisHTML(record, shield)}
+        ${buildAnalysisHTML(record, shield, outliers)}
         <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
       `;
       document.getElementById('universalModal').style.display = 'flex';
@@ -1435,7 +1606,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "19.3" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "20.0" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
