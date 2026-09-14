@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v17.0 — DeepSeek Edition</title>
+<title>Lutynoel FX v18.0 — Groq Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -146,8 +146,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v17.0</div>
-    <div class="auth-subtitle">DeepSeek Edition — Masters 6 + Live News + Pips Calc</div>
+    <div class="auth-title">Lutynoel FX v18.0</div>
+    <div class="auth-subtitle">Groq Edition — Masters 6 + Live News + Pips Calc</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -156,15 +156,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Jina Lako</label>
     <input type="text" id="loginName" placeholder="mf. Noel Nkungu" maxlength="30">
 
-    <label>DeepSeek API Key</label>
-    <input type="password" id="authApiKey" placeholder="sk-..." autocomplete="off">
+    <label>Groq API Key</label>
+    <input type="password" id="authApiKey" placeholder="gsk_..." autocomplete="off">
 
     <label>TwelveData API Key (Optional)</label>
     <input type="text" id="authTwelveKey" placeholder="Weka kama una" autocomplete="off">
 
     <div class="info-box">
       🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
-      🆓 <a href="https://platform.deepseek.com" target="_blank" style="color:var(--accent);">Pata DeepSeek key bure</a> ($5 credits)<br>
+      🆓 <a href="https://console.groq.com" target="_blank" style="color:var(--accent);">Pata Groq key bure</a> (bila kadi)<br>
       🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a>
     </div>
 
@@ -187,11 +187,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v17.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v18.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">DEEPSEEK</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">GROQ</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('news')">📰 News Live <span class="badge-live">LIVE</span></div>
@@ -205,7 +205,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">DEEPSEEK</span>
+          <span class="badge-shield">GROQ</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
@@ -435,8 +435,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v17.0 (DeepSeek Edition)<br>
-          <strong>Provider:</strong> DeepSeek (deepseek-flash)<br>
+          <strong>Version:</strong> v18.0 (Groq Edition)<br>
+          <strong>Provider:</strong> Groq (Qwen 3.6 27B)<br>
           <strong>Masters:</strong> 6 (Merged)<br>
           <strong>News:</strong> Forex Factory RSS<br>
           <strong>Pips Calc:</strong> Offline
@@ -444,7 +444,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
         <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveKey</button>
-        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu DeepSeek Key</button>
+        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Groq Key</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
       </div>
     </div>
@@ -453,13 +453,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v17.0 — DEEPSEEK EDITION
+   LUTYNOEL FX v18.0 — GROQ EDITION
    Masters 6 + Live News + Pips Calculator
    ===================================================== */
 
-// ============ DEEPSEEK CONFIG ============
-const DEEPSEEK_BASE_URL = 'https://api.deepseek.com';
-const DEEPSEEK_MODEL = 'deepseek-flash'; // Inaunga mkono vision [citation:3]
+// ============ GROQ CONFIG ============
+const GROQ_BASE_URL = 'https://api.groq.com/openai/v1';
+const GROQ_MODEL = 'qwen/qwen3.6-27b'; // Inaunga mkono vision 
 
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
@@ -488,7 +488,7 @@ const MASTERS_6 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v17.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v18.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -517,7 +517,7 @@ function handleLogin() {
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
   if (!name) { alert("Weka jina lako."); return; }
   const validation = validateApiKey(apiKey);
-  if (!validation.valid) { alert(`⚠️ DeepSeek API Key si sahihi.\n\n${validation.reason}`); return; }
+  if (!validation.valid) { alert(`⚠️ Groq API Key si sahihi.\n\n${validation.reason}`); return; }
   sessionStorage.setItem('lutynoel_name', name);
   sessionStorage.setItem('lutynoel_apiKey', apiKey);
   if (twelveKey) sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
@@ -539,13 +539,13 @@ function saveTwelveKey() {
 async function testApiKey() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("Hakuna API key."); return; }
-  showToast("🧪 Inajaribu DeepSeek...", 2000);
+  showToast("🧪 Inajaribu Groq...", 2000);
   try {
-    const response = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
+    const response = await fetch(`${GROQ_BASE_URL}/chat/completions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: DEEPSEEK_MODEL,
+        model: GROQ_MODEL,
         messages: [{ role: 'user', content: 'Say OK' }],
         max_tokens: 10
       })
@@ -553,7 +553,7 @@ async function testApiKey() {
     const data = await response.json();
     if (data.error) { alert(`❌ Key haifanyi kazi: ${data.error.message}`); return; }
     if (data.choices && data.choices[0]) {
-      alert(`✅ DeepSeek Key inafanya kazi!\n\nModel: ${DEEPSEEK_MODEL}\nJibu: "${data.choices[0].message.content}"`);
+      alert(`✅ Groq Key inafanya kazi!\n\nModel: ${GROQ_MODEL}\nJibu: "${data.choices[0].message.content}"`);
     }
   } catch (err) {
     alert(`❌ Hitilafu: ${err.message}`);
@@ -673,13 +673,13 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL MASTER — DEEPSEEK VERSION ============
+// ============ CALL MASTER — GROQ VERSION ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
 
 Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
 
-Respond in valid JSON only:
+You MUST respond in valid JSON only. No markdown, no code fences, no extra text. Just the JSON object:
 {
   "vote": "BUY" | "SELL" | "HOLD",
   "confidence": <number 0-100>,
@@ -701,25 +701,24 @@ Rules:
     content.push({
       type: "image_url",
       image_url: {
-        url: `data:${mimeType};base64,${base64}`,
-        detail: "high"
+        url: `data:${mimeType};base64,${base64}`
       }
     });
   }
 
   try {
-    const response = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
+    const response = await fetch(`${GROQ_BASE_URL}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: DEEPSEEK_MODEL,
+        model: GROQ_MODEL,
         messages: [{ role: 'user', content: content }],
         temperature: 0.3,
-        max_tokens: 1000,
-        response_format: { type: "json_object" }
+        max_tokens: 1000
+        // Tumeondoa response_format kwa sababu Groq vision model haitumii JSON mode
       })
     });
 
@@ -730,7 +729,7 @@ Rules:
     }
     
     if (!data.choices || !data.choices[0]) {
-      throw new Error(`${master.name}: No response from DeepSeek`);
+      throw new Error(`${master.name}: No response from Groq`);
     }
 
     let text = data.choices[0].message.content.trim();
@@ -745,7 +744,7 @@ Rules:
       confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
       reasoning: result.reasoning || 'Hakuna maelezo.',
       key_level: result.key_level || null,
-      model_used: DEEPSEEK_MODEL
+      model_used: GROQ_MODEL
     };
   } catch (err) {
     throw new Error(`${master.name}: ${err.message}`);
@@ -869,7 +868,7 @@ async function runAnalysis() {
 
   const masterResults = [];
 
-  // DeepSeek ina 60 req/min — tunaweza kutuma 6 kwa pamoja bila shida
+  // Groq ina 30 req/min — tunaweza kutuma 6 kwa pamoja bila shida
   // Lakini kwa usalama, tunatuma kwa mpangilio
   for (let i = 0; i < MASTERS_6.length; i++) {
     const master = MASTERS_6[i];
@@ -882,8 +881,8 @@ async function runAnalysis() {
       updateMasterCard(failed);
       masterResults.push(failed);
     }
-    // Subiri 1.5s tu (DeepSeek ina 60 req/min = 1 req/sec)
-    if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 1500));
+    // Subiri 2s tu (Groq ina 30 req/min = 2 req/sec)
+    if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 2000));
   }
 
   try {
@@ -932,7 +931,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Provider: DeepSeek</div>
+      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Provider: Groq</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
@@ -1039,7 +1038,7 @@ function buildAnalysisHTML(record, shield) {
         <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
       <div class="signal-reason">${signalReason || ''}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • 🤖 DeepSeek</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • 🤖 Groq</div>
     </div>
 
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
@@ -1452,7 +1451,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "17.0"
+    version: "18.0"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
