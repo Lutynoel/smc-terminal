@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v15.7 — Gemini 3.x Edition</title>
+<title>Lutynoel FX v15.8 — Full Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -87,7 +87,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .checklist-item.warn span:first-child{color:var(--yellow);font-weight:bold;flex-shrink:0}
 .history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:.2s;cursor:pointer}
 .history-card:hover{border-color:var(--accent);background:#141418}
-.history-card .chevron{color:var(--accent);font-size:20px;font-weight:bold}
+.history-card .chevron{color:var(--accent);font-size:22px;font-weight:bold;flex-shrink:0}
 .forex-hero{background:linear-gradient(135deg,rgba(18,18,21,.95),rgba(30,27,75,.9));border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:15px}
 .modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .modal-content{max-width:92%;width:100%;max-width:600px;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;position:relative;margin:20px 0}
@@ -127,8 +127,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v15.7</div>
-    <div class="auth-subtitle">Gemini 3.x Edition</div>
+    <div class="auth-title">Lutynoel FX v15.8</div>
+    <div class="auth-subtitle">Full Edition — Gemini 3.x + Smart Grading</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -167,7 +167,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v15.7</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.8</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
@@ -205,11 +205,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="info-box">
         📊 <strong>Signal Grading Logic:</strong><br>
-        • <strong>STRONG BUY/SELL</strong>: Confidence ≥ 80% + Dominance ≥ 4 + RRR ≥ 1:3<br>
+        • <strong>STRONG BUY/SELL</strong>: Confidence ≥ 80% + Dominance ≥ 4<br>
         • <strong>BUY/SELL</strong>: Confidence 70-79% + Dominance ≥ 2<br>
         • <strong>WEAK BUY/SELL</strong>: Confidence 60-69% (tahadhari)<br>
-        • <strong>WAIT</strong>: Confidence < 60% au masters wanapishana<br>
-        • <strong>NO TRADE</strong>: Hakuna consensus kabisa
+        • <strong>WAIT</strong>: Confidence < 60% au masters wanapishana
       </div>
     </div>
 
@@ -361,11 +360,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v15.7 (Gemini 3.x)<br>
+          <strong>Version:</strong> v15.8<br>
           <strong>Model Chain:</strong> 3.6 → 3.8 → 3.5<br>
           <strong>SL:</strong> Market-based<br>
-          <strong>TP:</strong> 2× / 4× / 6× SL<br>
-          <strong>Signals:</strong> Strong / Normal / Weak / Wait
+          <strong>TP:</strong> 2× / 4× / 6× SL
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
@@ -379,16 +377,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v15.7 — GEMINI 3.x EDITION
-   Removed gemini-2.0-flash (deprecated by Google)
+   LUTYNOEL FX v15.8 — FULL EDITION
+   Gemini 3.x + Smart Grading + Clickable History
    ===================================================== */
 
-// ============ MODEL CHAIN (Gemini 3.x ONLY) ============
-// ONYO: gemini-2.0-flash imeondolewa na Google. Usiirudishe.
 const MODELS_CHAIN = [
-  'gemini-3.6-flash',   // ✅ Google recommended (primary)
-  'gemini-3.8-flash',   // ✅ Latest
-  'gemini-3.5-flash'    // ✅ Fallback
+  'gemini-3.6-flash',
+  'gemini-3.8-flash',
+  'gemini-3.5-flash'
 ];
 
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
@@ -424,7 +420,7 @@ const MASTERS_12 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v15.7", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v15.8", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -490,7 +486,7 @@ async function testApiKey() {
       }
     } catch (e) { continue; }
   }
-  alert(`❌ Hakuna model iliyofanya kazi.\n\nModels zilizojaribiwa:\n${MODELS_CHAIN.join(', ')}\n\nJaribu tena baadaye au angalia API key yako.`);
+  alert(`❌ Hakuna model iliyofanya kazi.\n\nZilizojaribiwa:\n${MODELS_CHAIN.join(', ')}`);
 }
 
 function logout() { sessionStorage.clear(); location.reload(); }
@@ -604,7 +600,6 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL MASTER (Gemini 3.x chain) ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}.
 
@@ -645,13 +640,10 @@ Rules:
       const data = await response.json();
       if (data.error) {
         lastError = data.error.message;
-        console.warn(`[${master.name}] Model ${model} failed: ${data.error.message}`);
+        console.warn(`[${master.name}] ${model} failed: ${data.error.message}`);
         continue;
       }
-      if (!data.candidates || !data.candidates[0]) {
-        lastError = "No response";
-        continue;
-      }
+      if (!data.candidates || !data.candidates[0]) { lastError = "No response"; continue; }
 
       let text = data.candidates[0].content.parts[0].text.trim();
       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -667,15 +659,11 @@ Rules:
         key_level: result.key_level || null,
         model_used: model
       };
-    } catch (e) {
-      lastError = e.message;
-      continue;
-    }
+    } catch (e) { lastError = e.message; continue; }
   }
-  throw new Error(`${master.name}: ${lastError || "All Gemini 3.x models failed"}`);
+  throw new Error(`${master.name}: ${lastError || "All Gemini 3.x failed"}`);
 }
 
-// ============ CONFLUENCE + SIGNAL GRADING ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
   masterResults.forEach(r => {
@@ -704,7 +692,7 @@ function computeConfluence(masterResults) {
 
   let signal = 'NO_TRADE';
   let signalLabel = 'NO TRADE';
-  let signalColor = 'muted';
+  let signalColor = 'no-trade';
   let signalReason = '';
   let tradable = false;
 
@@ -721,14 +709,14 @@ function computeConfluence(masterResults) {
     signal = 'WAIT';
     signalLabel = '⏸ WAIT';
     signalColor = 'wait';
-    signalReason = `Confidence ni ${confidence}% — chini ya 60%. Soko halieleweki. Subiri.`;
+    signalReason = `Confidence ${confidence}% — chini ya 60%. Soko halieleweki.`;
     tradable = false;
   }
   else if (direction === 'HOLD') {
     signal = 'NO_TRADE';
     signalLabel = '⏸ NO TRADE';
     signalColor = 'no-trade';
-    signalReason = `Hakuna uelekeo wa wazi. Masters wanashindwa kuamua.`;
+    signalReason = `Hakuna uelekeo wa wazi.`;
     tradable = false;
   }
   else if (confidence >= 80 && dominance >= 4) {
@@ -742,21 +730,21 @@ function computeConfluence(masterResults) {
     signal = direction === 'BUY' ? 'BUY' : 'SELL';
     signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
     signalColor = direction === 'BUY' ? 'buy' : 'sell';
-    signalReason = `Consensus nzuri. Confidence ${confidence}% + Dominance ${dominance}. Trade inaruhusiwa.`;
+    signalReason = `Consensus nzuri. Confidence ${confidence}% + Dominance ${dominance}.`;
     tradable = true;
   }
   else if (confidence >= 60) {
     signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
     signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
     signalColor = direction === 'BUY' ? 'weak-buy' : 'weak-sell';
-    signalReason = `Tahadhari: Confidence ${confidence}% + Dominance ${dominance}. Masters hawakubaliani vya kutosha. Fanya trade kwa lot ndogo tu.`;
+    signalReason = `Tahadhari: Confidence ${confidence}% + Dominance ${dominance}. Masters hawakubaliani vya kutosha. Lot ndogo tu.`;
     tradable = true;
   }
   else {
     signal = 'WAIT';
     signalLabel = '⏸ WAIT';
     signalColor = 'wait';
-    signalReason = `Masharti hayakidhi. Subiri muundo wazi.`;
+    signalReason = `Masharti hayakidhi. Subiri.`;
     tradable = false;
   }
 
@@ -1001,11 +989,11 @@ function buildAnalysisHTML(record, shield) {
       <div class="signal-label" style="color:${signalTextColor};">${signalLabel}</div>
       <div class="signal-badge-container">
         <span class="badge-conf">${confidence}% CONFIDENCE</span>
-        <span class="badge-status">${record.confluence.buyCount}B / ${record.confluence.sellCount}S / ${record.confluence.holdCount}H</span>
-        <span class="badge-warn">DOMINANCE: ${dominance}</span>
+        <span class="badge-status">${record.confluence?.buyCount || 0}B / ${record.confluence?.sellCount || 0}S / ${record.confluence?.holdCount || 0}H</span>
+        <span class="badge-warn">DOMINANCE: ${dominance || 0}</span>
         <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
-      <div class="signal-reason">${signalReason}</div>
+      <div class="signal-reason">${signalReason || ''}</div>
       <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''}</div>
     </div>
 
@@ -1013,8 +1001,8 @@ function buildAnalysisHTML(record, shield) {
       <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
       <div class="shield-box">${shield.message}</div>
       <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Consensus ≥ 60% (Sasa: ${confidence}%)</span></div>
-      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Sasa: ${dominance})</span></div>
-      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>Masters 6+ wamepiga kura (Sasa: ${record.confluence.buyCount + record.confluence.sellCount})</span></div>
+      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Sasa: ${dominance || 0})</span></div>
+      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>Masters 6+ wamepiga kura</span></div>
       <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>Hakuna tie (BUY vs SELL)</span></div>
       <div class="checklist-item ${shield.checks.tradable ? 'pass' : 'fail'}"><span>${shield.checks.tradable ? '✓' : '✗'}</span><span>Signal tradable</span></div>
       <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span></div>
@@ -1024,12 +1012,12 @@ function buildAnalysisHTML(record, shield) {
   if (!tradable) {
     html += `
       <div class="card" style="border-color:var(--yellow);">
-        <div class="ballistic-header" style="color:var(--yellow);">⏸ KWA NINI TUNASEMA WAIT?</div>
-        <div class="wait-box"><strong>${signalReason}</strong></div>
+        <div class="ballistic-header" style="color:var(--yellow);">⏸ KWA NINI WAIT?</div>
+        <div class="wait-box"><strong>${signalReason || 'Subiri muundo wazi.'}</strong></div>
         <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px;">
           📌 <strong>Ushauri:</strong><br>
           • Usifanye trade wakati masters wanapishana<br>
-          • Subiri chati iwe wazi zaidi (dakika 15-30)<br>
+          • Subiri chati iwe wazi (dakika 15-30)<br>
           • Kama una trade, fikiria kufunga au breakeven<br>
           • Fanya analysis mpya baada ya muda
         </div>
@@ -1065,28 +1053,30 @@ function buildAnalysisHTML(record, shield) {
     `;
   }
 
-  html += `
-    <div class="card">
-      <div class="ballistic-header">👥 MASTERS 12 — VOTES</div>
-      ${record.masters.map(m => {
-        const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
-        const cardClass = m.vote.toLowerCase();
-        return `
-          <div class="master-card ${cardClass}">
-            <div class="master-header">
-              <div class="master-name">${m.id}. ${m.name}</div>
-              <div class="master-vote ${voteClass}">${m.vote}</div>
+  if (record.masters && record.masters.length > 0) {
+    html += `
+      <div class="card">
+        <div class="ballistic-header">👥 MASTERS 12 — VOTES</div>
+        ${record.masters.map(m => {
+          const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
+          const cardClass = m.vote.toLowerCase();
+          return `
+            <div class="master-card ${cardClass}">
+              <div class="master-header">
+                <div class="master-name">${m.id}. ${m.name}</div>
+                <div class="master-vote ${voteClass}">${m.vote}</div>
+              </div>
+              <div class="master-desc">${m.reasoning}</div>
+              <div class="master-confidence">
+                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
+                <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
+              </div>
             </div>
-            <div class="master-desc">${m.reasoning}</div>
-            <div class="master-confidence">
-              Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
-              <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
 
   return html;
 }
@@ -1160,13 +1150,14 @@ function loadHistory() {
       if (h.signalColor.includes('buy')) color = 'var(--green)';
       else if (h.signalColor.includes('sell')) color = 'var(--red)';
       else if (h.signalColor.includes('wait')) color = 'var(--yellow)';
-    }
+    } else if (h.action === 'BUY') color = 'var(--green)';
+    else if (h.action === 'SELL') color = 'var(--red)';
     return `
       <div class="history-card" onclick="viewHistoryDetail(${i})">
         <div style="flex-grow:1;">
-          <strong>${h.pair} <span style="color:${color};">${label}</span></strong>
+          <strong>${h.pair || '—'} <span style="color:${color};">${label}</span></strong>
           ${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br>
-          <small style="color:var(--muted);">${h.date}</small>
+          <small style="color:var(--muted);">${h.date || ''}</small>
         </div>
         <div class="chevron">›</div>
         <button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button>
@@ -1175,18 +1166,20 @@ function loadHistory() {
   }).join('');
 }
 
+// ============ FIXED: viewHistoryDetail — Inashughulikia cases zote ============
 function viewHistoryDetail(index) {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const record = history[index];
-  if (!record) { alert("Haipatikani."); return; }
+  if (!record) { alert("Analysis haipatikani."); return; }
 
-  if (!record.masters || !record.confluence) {
+  // ============ CASE 1: Manual journal entry ============
+  if (record.type === 'manual') {
     document.getElementById('modalInnerContent').innerHTML = `
       <h2 style="color:var(--accent);margin:0 0 15px;">📝 Manual Trade</h2>
       <div class="card">
         <div class="grid-2">
           <div class="mini-box"><label>Pair</label><div style="font-size:15px;font-weight:bold;color:var(--accent);">${record.pair}</div></div>
-          <div class="mini-box"><label>Action</label><div style="font-size:15px;font-weight:bold;">${record.action}</div></div>
+          <div class="mini-box"><label>Action</label><div style="font-size:15px;font-weight:bold;color:${record.action === 'BUY' ? 'var(--green)' : 'var(--red)'};">${record.action}</div></div>
         </div>
         <div class="grid-2">
           <div class="mini-box"><label>Entry</label><div>${record.entry}</div></div>
@@ -1197,29 +1190,73 @@ function viewHistoryDetail(index) {
           <div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div>
         </div>
         <div class="mini-box" style="margin-top:10px;"><label>Outcome</label><div>${record.outcome}</div></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;">📅 ${record.date}</div>
       </div>
+      <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:10px;">Funga</button>
     `;
     document.getElementById('universalModal').style.display = 'flex';
+    document.getElementById('universalModal').scrollTop = 0;
     return;
   }
 
-  const shield = {
-    approved: record.shield,
-    checks: {
-      consensus: record.confidence >= 60,
-      dominance: (record.dominance || 0) >= 2,
-      alignment: (record.confluence.buyCount + record.confluence.sellCount) >= 6,
-      notTie: record.confluence.buyCount !== record.confluence.sellCount,
-      tradable: record.tradable,
-      rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
-      rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
-    },
-    message: record.shield ? "✅ CAPITAL SHIELD: Trade ilikuwa approved." : "🛡️ CAPITAL SHIELD: Trade ilikuwa blocked."
-  };
+  // ============ CASE 2: Analysis MPYA (v15.5+) — masters 12 kamili ============
+  if (record.masters && record.confluence) {
+    try {
+      const shield = {
+        approved: record.shield === true,
+        checks: {
+          consensus: (record.confidence || 0) >= 60,
+          dominance: (record.dominance || 0) >= 2,
+          alignment: ((record.confluence.buyCount || 0) + (record.confluence.sellCount || 0)) >= 6,
+          notTie: (record.confluence.buyCount || 0) !== (record.confluence.sellCount || 0),
+          tradable: record.tradable === true,
+          rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
+          rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
+        },
+        message: record.shield 
+          ? "✅ CAPITAL SHIELD: Trade ilikuwa approved." 
+          : "🛡️ CAPITAL SHIELD: Trade ilikuwa blocked."
+      };
 
+      document.getElementById('modalInnerContent').innerHTML = `
+        <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
+        ${buildAnalysisHTML(record, shield)}
+        <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Funga</button>
+      `;
+      document.getElementById('universalModal').style.display = 'flex';
+      document.getElementById('universalModal').scrollTop = 0;
+    } catch (err) {
+      console.error("Modal error:", err);
+      alert(`❌ Imeshindwa kufungua: ${err.message}`);
+    }
+    return;
+  }
+
+  // ============ CASE 3: Analysis ya zamani (v14-v15.4) ============
+  const actionColor = record.action === 'BUY' ? 'var(--green)' : record.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
   document.getElementById('modalInnerContent').innerHTML = `
-    <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
-    ${buildAnalysisHTML(record, shield)}
+    <h2 style="color:var(--accent);margin:0 0 15px;">📊 Analysis ya Zamani</h2>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:13px;color:var(--accent);font-weight:bold;">${record.pair || '—'}</div>
+      <div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${record.action || 'HOLD'}</div>
+      ${record.confidence ? `<div style="font-size:14px;color:var(--muted);">Confidence: ${record.confidence}%</div>` : ''}
+    </div>
+    <div class="card">
+      <div class="grid-2">
+        <div class="mini-box"><label>Entry</label><div style="font-weight:bold;">${record.entry || '—'}</div></div>
+        <div class="mini-box"><label>SL</label><div style="font-weight:bold;color:var(--red);">${record.sl || '—'}</div></div>
+      </div>
+      <div class="grid-3">
+        <div class="mini-box"><label>TP1</label><div style="color:var(--green);">${record.tp1 || '—'}</div></div>
+        <div class="mini-box"><label>TP2</label><div style="color:var(--green);">${record.tp2 || '—'}</div></div>
+        <div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div>
+      </div>
+    </div>
+    <div class="info-box" style="font-size:11px;">
+      ⚠️ <strong>Analysis ya zamani:</strong> Haikuwa na data kamili ya masters 12. Kuanzia v15.6, analysis mpya zina masters wote na zinafunguka kikamilifu.
+    </div>
+    <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;">📅 ${record.date || '—'}</div>
+    <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Funga</button>
   `;
   document.getElementById('universalModal').style.display = 'flex';
   document.getElementById('universalModal').scrollTop = 0;
@@ -1257,7 +1294,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "15.7"
+    version: "15.8"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
