@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v15.0 — Auto Price Edition</title>
+<title>Lutynoel FX v15.2 — Gemini 3.6 Flash Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -43,7 +43,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .refresh-btn{background:var(--green);color:#fff;border:none;padding:12px 16px;border-radius:8px;font-weight:bold;font-size:13px;white-space:nowrap;height:46px}
 .refresh-btn:hover{background:#059669}
 .refresh-btn:disabled{background:#3f3f46!important;color:#a1a1aa!important}
-.price-status{font-size:11px;padding:6px 10px;border-radius:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.price-status{font-size:11px;padding:6px 10px;border-radius:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .price-status.live{background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green)}
 .price-status.manual{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .price-status.error{background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red)}
@@ -112,8 +112,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v15.0</div>
-    <div class="auth-subtitle">Auto Price Edition — Real-Time Data</div>
+    <div class="auth-title">Lutynoel FX v15.2</div>
+    <div class="auth-subtitle">Gemini 3.6 Flash + Auto Price Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -125,13 +125,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Gemini API Key</label>
     <input type="password" id="authApiKey" placeholder="AIza... au AQ..." autocomplete="off">
 
-    <label>TwelveData API Key (Optional)</label>
-    <input type="text" id="authTwelveKey" placeholder="Weka kama una — kwa real-time price" autocomplete="off">
+    <label>TwelveData API Key (Optional — kwa real-time price)</label>
+    <input type="text" id="authTwelveKey" placeholder="Weka kama una" autocomplete="off">
 
     <div class="info-box">
       🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
       🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a> (800 req/day)<br>
-      📊 Bila key ya TwelveData, app inatumia bei ya demo.
+      📊 Bila key, app inatumia bei ya demo. Crypto inafanya kazi bila key.
     </div>
 
     <button class="primary-btn" onclick="handleLogin()">Ingia Salama</button>
@@ -154,7 +154,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v15.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
@@ -166,33 +166,23 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 
   <div class="main-content">
-    <!-- OVERVIEW -->
     <div id="view-overview" class="view-section">
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">AUTO PRICE</span>
+          <span class="badge-shield">GEMINI 3.6</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Auto Price Edition</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Auto Price + Masters 12</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Bei inajipanga yenyewe kutoka soko halisi. Masters 12 + Capital Shield.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Bei inajipanga yenyewe. Wataalamu 12 wanachambua kwa frameworks tofauti.</p>
       </div>
 
       <div class="grid-3">
-        <div class="mini-box" style="text-align:center;">
-          <label>Analiza</label>
-          <div id="statTotalAnalyses" style="font-size:20px;font-weight:bold;color:var(--accent);">0</div>
-        </div>
-        <div class="mini-box" style="text-align:center;">
-          <label>Win Rate</label>
-          <div id="statWinRate" style="font-size:20px;font-weight:bold;color:var(--green);">—</div>
-        </div>
-        <div class="mini-box" style="text-align:center;">
-          <label>Net Pips</label>
-          <div id="statNetPips" style="font-size:18px;font-weight:bold;color:var(--blue);">0</div>
-        </div>
+        <div class="mini-box" style="text-align:center;"><label>Analiza</label><div id="statTotalAnalyses" style="font-size:20px;font-weight:bold;color:var(--accent);">0</div></div>
+        <div class="mini-box" style="text-align:center;"><label>Win Rate</label><div id="statWinRate" style="font-size:20px;font-weight:bold;color:var(--green);">—</div></div>
+        <div class="mini-box" style="text-align:center;"><label>Closed</label><div id="statNetPips" style="font-size:18px;font-weight:bold;color:var(--blue);">0</div></div>
       </div>
 
       <div class="card">
@@ -201,7 +191,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ANALYST -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🎯 Masters 12 Real Analysis</h3>
@@ -226,7 +215,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button class="refresh-btn" id="refreshBtn" onclick="fetchLivePrice()">🔄 Refresh</button>
         </div>
         <div id="priceStatus" class="price-status manual">
-          <span id="priceStatusText">⚪ Bei ya manual — bonyeza Refresh kupata live</span>
+          <span id="priceStatusText">⚪ Bonyeza Refresh kupata bei halisi</span>
           <span id="priceTime">—</span>
         </div>
 
@@ -253,7 +242,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- JOURNAL -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
@@ -315,7 +303,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- LIVE CHART -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -333,7 +320,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- HISTORY -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -346,18 +332,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- SETTINGS -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v15.0 (Auto Price)<br>
-          <strong>Model:</strong> Gemini 2.5 Flash<br>
-          <strong>Price APIs:</strong> TwelveData + Binance<br>
-          <strong>Data Storage:</strong> LocalStorage
+          <strong>Version:</strong> v15.2<br>
+          <strong>Model:</strong> Gemini 3.6 Flash<br>
+          <strong>Fallback:</strong> 3.8, 3.5, 2.0<br>
+          <strong>Price:</strong> TwelveData + Binance
         </div>
-        <label>TwelveData API Key (kwa real-time price)</label>
-        <input type="text" id="settingsTwelveKey" placeholder="Weka key yako hapa">
+        <label>TwelveData API Key</label>
+        <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
         <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveData Key</button>
         <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Gemini API Key</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
@@ -368,12 +353,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v15.0 — AUTO PRICE EDITION
-   Gemini 2.5 Flash + TwelveData + Binance
+   LUTYNOEL FX v15.2 — Gemini 3.6 Flash Edition
+   Auto Price + Masters 12 + Capital Shield
    ===================================================== */
 
-// ============ CONFIG ============
-const GEMINI_MODEL = 'gemini-2.5-flash';
+// ============ MODEL FALLBACK CHAIN ============
+const MODELS_CHAIN = [
+  'gemini-3.6-flash',
+  'gemini-3.8-flash',
+  'gemini-3.5-flash',
+  'gemini-2.0-flash'
+];
+
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
@@ -410,7 +401,7 @@ const MASTERS_12 = [
 // ============ PWA ============
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v15",
+    name: "Lutynoel FX v15.2",
     short_name: "LutynoelFX",
     start_url: "./",
     display: "standalone",
@@ -431,12 +422,12 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-// ============ VALIDATE KEYS ============
+// ============ VALIDATE ============
 function validateApiKey(key) {
   if (!key) return { valid: false, reason: "Key haipo" };
   const trimmed = key.trim();
   if (trimmed.length < 20) return { valid: false, reason: `Key ni fupi (${trimmed.length} chars). Inapaswa 20+.` };
-  if (/\s/.test(trimmed)) return { valid: false, reason: "Key ina nafasi (spaces). Ondoa nafasi." };
+  if (/\s/.test(trimmed)) return { valid: false, reason: "Key ina nafasi. Ondoa nafasi." };
   return { valid: true };
 }
 
@@ -466,8 +457,6 @@ function handleLogin() {
   loadHistory();
   updateStats();
   showToast(`Karibu ${name}! 🚀`);
-
-  // Auto-fetch price on login
   setTimeout(() => fetchLivePrice(), 1000);
 }
 
@@ -485,25 +474,24 @@ function saveTwelveKey() {
 async function testApiKey() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("Hakuna API key."); return; }
-  showToast("🧪 Inajaribu...", 2000);
-  try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
-    });
-    const data = await response.json();
-    if (data.error) {
-      alert(`❌ Key haifanyi kazi.\n\nError: ${data.error.message}`);
-      return;
-    }
-    if (data.candidates && data.candidates[0]) {
-      alert(`✅ Key inafanya kazi!\n\nModel: ${GEMINI_MODEL}\nJibu: "${data.candidates[0].content.parts[0].text.trim()}"`);
-    }
-  } catch (err) {
-    alert(`❌ Hitilafu: ${err.message}`);
+  showToast("🧪 Inajaribu models...", 2000);
+
+  for (const model of MODELS_CHAIN) {
+    try {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
+      });
+      const data = await response.json();
+      if (!data.error && data.candidates && data.candidates[0]) {
+        alert(`✅ Key inafanya kazi!\n\nModel: ${model}\nJibu: "${data.candidates[0].content.parts[0].text.trim()}"`);
+        return;
+      }
+    } catch (e) { continue; }
   }
+  alert(`❌ Hakuna model iliyofanya kazi.\n\nJaribu models zote zilishindwa. Angalia key yako au jaribu tena baadaye.`);
 }
 
 function logout() {
@@ -534,12 +522,12 @@ function onPairChange(pair) {
   const spec = PAIR_SPECS[pair];
   if (spec) {
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('loading', '⏳ Inapakua bei ya soko...');
+    setPriceStatus('loading', '⏳ Inapakua bei...');
     fetchLivePrice();
   }
 }
 
-// ============ PRICE FETCHING ============
+// ============ PRICE ============
 function setPriceStatus(type, text, time = '') {
   const status = document.getElementById('priceStatus');
   status.className = `price-status ${type}`;
@@ -555,30 +543,24 @@ async function fetchLivePrice() {
   const refreshBtn = document.getElementById('refreshBtn');
   refreshBtn.disabled = true;
   refreshBtn.innerHTML = '<span class="spinner-white"></span>';
-  setPriceStatus('loading', '⏳ Inapakua bei ya soko...');
+  setPriceStatus('loading', '⏳ Inapakua bei...');
 
   try {
     let price = null;
-
-    if (spec.source === 'binance') {
-      price = await fetchBinancePrice(spec.binanceSymbol);
-    } else if (spec.source === 'twelve') {
-      price = await fetchTwelveDataPrice(spec.twelveSymbol);
-    }
+    if (spec.source === 'binance') price = await fetchBinancePrice(spec.binanceSymbol);
+    else if (spec.source === 'twelve') price = await fetchTwelveDataPrice(spec.twelveSymbol);
 
     if (price !== null && price > 0) {
       document.getElementById('livePrice').value = price.toFixed(spec.decimals);
       const time = new Date().toLocaleTimeString('sw-TZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      setPriceStatus('live', `🟢 Bei ya soko halisi (${spec.source.toUpperCase()})`, time);
-      showToast(`✅ Bei imepakuliwa: ${price.toFixed(spec.decimals)}`, 2000);
+      setPriceStatus('live', `🟢 Bei halisi (${spec.source.toUpperCase()})`, time);
+      showToast(`✅ ${price.toFixed(spec.decimals)}`, 2000);
     } else {
-      throw new Error("Bei haikupatikana");
+      throw new Error("Haikupatikana");
     }
   } catch (err) {
-    // Fallback to default price
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('error', `🔴 Hitilafu — tumia bei ya demo`, '');
-    console.warn("Price fetch failed:", err);
+    setPriceStatus('error', `🔴 Bei ya demo (TwelveData key inahitajika)`, '');
   } finally {
     refreshBtn.disabled = false;
     refreshBtn.innerHTML = '🔄 Refresh';
@@ -587,34 +569,23 @@ async function fetchLivePrice() {
 
 async function fetchBinancePrice(symbol) {
   try {
-    const response = await fetch(`${BINANCE_API}?symbol=${symbol}`);
-    if (!response.ok) throw new Error(`Binance HTTP ${response.status}`);
-    const data = await response.json();
-    return parseFloat(data.price);
-  } catch (err) {
-    console.warn("Binance fetch failed:", err);
-    return null;
-  }
+    const r = await fetch(`${BINANCE_API}?symbol=${symbol}`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    return parseFloat(d.price);
+  } catch { return null; }
 }
 
 async function fetchTwelveDataPrice(symbol) {
   const key = sessionStorage.getItem('lutynoel_twelveKey');
-  if (!key) {
-    console.info("TwelveData key haipo — tumia demo key");
-    // Bila key, hatuwezi kuchukua
-    return null;
-  }
+  if (!key) return null;
   try {
-    const url = `${TWELVEDATA_API}?symbol=${encodeURIComponent(symbol)}&apikey=${key}`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`TwelveData HTTP ${response.status}`);
-    const data = await response.json();
-    if (data.status === 'error') throw new Error(data.message);
-    return parseFloat(data.price);
-  } catch (err) {
-    console.warn("TwelveData fetch failed:", err);
-    return null;
-  }
+    const r = await fetch(`${TWELVEDATA_API}?symbol=${encodeURIComponent(symbol)}&apikey=${key}`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    if (d.status === 'error') return null;
+    return parseFloat(d.price);
+  } catch { return null; }
 }
 
 // ============ IMAGES ============
@@ -623,7 +594,7 @@ let globalImages = { h4: null, h1: null, m15: null };
 function previewImage(event, previewId, key) {
   const file = event.target.files[0];
   if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { alert("Picha ni kubwa mno. Max 5MB."); return; }
+  if (file.size > 5 * 1024 * 1024) { alert("Picha ni kubwa. Max 5MB."); return; }
   const url = URL.createObjectURL(file);
   document.getElementById(previewId).src = url;
   document.getElementById(previewId).style.display = 'block';
@@ -642,17 +613,15 @@ function closeUniversalModal() {
 
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(',')[1]);
+    r.onerror = reject;
+    r.readAsDataURL(file);
   });
 }
 
-// ============ CALL MASTER ============
+// ============ CALL MASTER (with model fallback) ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}.
 
 Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
@@ -677,39 +646,57 @@ Rules:
     });
   }
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts }],
-      generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
-    })
-  });
+  let lastError = null;
 
-  const data = await response.json();
-  if (data.error) throw new Error(`${master.name}: ${data.error.message}`);
-  if (!data.candidates || !data.candidates[0]) throw new Error(`${master.name}: No response`);
+  for (const model of MODELS_CHAIN) {
+    try {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
+        })
+      });
 
-  let text = data.candidates[0].content.parts[0].text.trim();
-  text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-  const match = text.match(/\{[\s\S]*\}/);
-  if (match) text = match[0];
+      const data = await response.json();
+      if (data.error) {
+        lastError = data.error.message;
+        console.warn(`[${master.name}] Model ${model} failed: ${data.error.message}`);
+        continue;
+      }
+      if (!data.candidates || !data.candidates[0]) {
+        lastError = "No response from AI";
+        continue;
+      }
 
-  const result = JSON.parse(text);
-  return {
-    ...master,
-    vote: (result.vote || 'HOLD').toUpperCase(),
-    confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-    reasoning: result.reasoning || 'Hakuna maelezo.',
-    key_level: result.key_level || null
-  };
+      let text = data.candidates[0].content.parts[0].text.trim();
+      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      const match = text.match(/\{[\s\S]*\}/);
+      if (match) text = match[0];
+
+      const result = JSON.parse(text);
+      return {
+        ...master,
+        vote: (result.vote || 'HOLD').toUpperCase(),
+        confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+        reasoning: result.reasoning || 'Hakuna maelezo.',
+        key_level: result.key_level || null,
+        model_used: model
+      };
+    } catch (e) {
+      lastError = e.message;
+      continue;
+    }
+  }
+
+  throw new Error(`${master.name}: ${lastError || "Models zote zimeshindwa"}`);
 }
 
 // ============ CONFLUENCE ============
 function computeConfluence(masterResults) {
-  let buyWeight = 0, sellWeight = 0, holdWeight = 0;
-  let totalWeight = 0;
-
+  let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
   masterResults.forEach(r => {
     totalWeight += r.weight;
     const weighted = r.weight * (r.confidence / 100);
@@ -717,14 +704,11 @@ function computeConfluence(masterResults) {
     else if (r.vote === 'SELL') sellWeight += weighted;
     else holdWeight += weighted;
   });
-
   const maxScore = Math.max(buyWeight, sellWeight, holdWeight);
   const consensusStrength = totalWeight > 0 ? (maxScore / totalWeight) : 0;
-
   let action = 'HOLD';
   if (buyWeight > sellWeight && buyWeight > holdWeight) action = 'BUY';
   else if (sellWeight > buyWeight && sellWeight > holdWeight) action = 'SELL';
-
   return {
     action,
     confidence: Math.round(consensusStrength * 100),
@@ -742,7 +726,6 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
     alignment: confluence.buyCount + confluence.sellCount >= 6,
     rrr: false
   };
-
   if (entryPrice && slPrice && tpPrice) {
     const risk = Math.abs(entryPrice - slPrice);
     const reward = Math.abs(tpPrice - entryPrice);
@@ -752,14 +735,12 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
       checks.rrrValue = rrr.toFixed(2);
     }
   }
-
   const allPass = Object.values(checks).every(v => v === true || v === undefined);
-
   return {
     approved: allPass,
     checks,
     message: allPass 
-      ? "✅ CAPITAL SHIELD: Trade approved — consensus imara, RRR inakidhi kiwango." 
+      ? "✅ CAPITAL SHIELD: Trade approved." 
       : "🛡️ CAPITAL SHIELD: Trade BLOCKED — consensus dhaifu au RRR haitoshi."
   };
 }
@@ -778,11 +759,7 @@ async function runAnalysis() {
   if (!livePrice) { alert("Weka bei halisi."); return; }
   if (!h4 || !h1 || !m15) { alert("Pakia picha zote 3."); return; }
 
-  const images = [
-    { file: h4, tf: '4H' },
-    { file: h1, tf: '1H' },
-    { file: m15, tf: '15M' }
-  ];
+  const images = [{ file: h4, tf: '4H' }, { file: h1, tf: '1H' }, { file: m15, tf: '15M' }];
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
@@ -838,7 +815,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 12 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice}</div>
+      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Model: Gemini 3.6 Flash</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 12 — LIVE VOTING</div>
@@ -853,7 +830,7 @@ function renderLoadingState(pair, livePrice, masters) {
           <div class="master-name">${m.id}. ${m.name}</div>
           <div class="master-vote vote-pending" id="vote-${m.id}">⏳ PENDING</div>
         </div>
-        <div class="master-desc" id="desc-${m.id}">Inachambua kwa lens: <em>${m.lens}</em>...</div>
+        <div class="master-desc" id="desc-${m.id}">Inachambua...</div>
         <div class="master-confidence" id="conf-${m.id}">Confidence: —</div>
       </div>
     `;
@@ -874,39 +851,27 @@ function updateMasterCard(result) {
   voteEl.className = `master-vote vote-${result.vote.toLowerCase()}`;
   voteEl.innerText = result.vote === 'BUY' ? '📈 BUY' : result.vote === 'SELL' ? '📉 SELL' : '⏸ HOLD';
   descEl.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key Level: ${result.key_level}</strong>` : '');
-  confEl.innerHTML = `
-    Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%)
-    <div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>
-  `;
+  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%)<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
 function computeSLTP(masters, action, livePrice, pair) {
   const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
-  if (action === 'HOLD') {
-    return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice };
-  }
+  if (action === 'HOLD') return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice };
   const isBuy = action === 'BUY';
-  const keyLevels = masters
-    .filter(m => m.key_level && !isNaN(parseFloat(m.key_level)))
-    .map(m => parseFloat(m.key_level));
-
+  const keyLevels = masters.filter(m => m.key_level && !isNaN(parseFloat(m.key_level))).map(m => parseFloat(m.key_level));
   let sl, tp1, tp2, tp3;
   if (isBuy) {
-    const slCandidates = keyLevels.filter(l => l < livePrice);
-    sl = slCandidates.length > 0 ? Math.max(...slCandidates) : livePrice - 30 * spec.pipSize;
+    const slC = keyLevels.filter(l => l < livePrice);
+    sl = slC.length > 0 ? Math.max(...slC) : livePrice - 30 * spec.pipSize;
     sl = sl - 5 * spec.pipSize;
     const risk = livePrice - sl;
-    tp1 = livePrice + risk * 1;
-    tp2 = livePrice + risk * 2;
-    tp3 = livePrice + risk * 3;
+    tp1 = livePrice + risk * 1; tp2 = livePrice + risk * 2; tp3 = livePrice + risk * 3;
   } else {
-    const slCandidates = keyLevels.filter(l => l > livePrice);
-    sl = slCandidates.length > 0 ? Math.min(...slCandidates) : livePrice + 30 * spec.pipSize;
+    const slC = keyLevels.filter(l => l > livePrice);
+    sl = slC.length > 0 ? Math.min(...slC) : livePrice + 30 * spec.pipSize;
     sl = sl + 5 * spec.pipSize;
     const risk = sl - livePrice;
-    tp1 = livePrice - risk * 1;
-    tp2 = livePrice - risk * 2;
-    tp3 = livePrice - risk * 3;
+    tp1 = livePrice - risk * 1; tp2 = livePrice - risk * 2; tp3 = livePrice - risk * 3;
   }
   return {
     entry: parseFloat(livePrice.toFixed(spec.decimals)),
@@ -921,17 +886,13 @@ function renderFinalResults(record, shield) {
   const container = document.getElementById('resultsContainer');
   const { action, confidence, entry, sl, tp1, tp2, tp3, pair } = record;
   const spec = PAIR_SPECS[pair];
-  const isBuy = action === 'BUY';
-  const isSell = action === 'SELL';
+  const isBuy = action === 'BUY', isSell = action === 'SELL';
   const actionColor = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--orange)';
   const riskPips = Math.abs((entry - sl) / spec.pipSize).toFixed(1);
   const rewardPips = Math.abs((tp3 - entry) / spec.pipSize).toFixed(1);
   const rrr = riskPips > 0 ? (rewardPips / riskPips).toFixed(2) : '0';
-
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
-  const projections = lots.map(lot => ({
-    lot, usd: (rewardPips * spec.pipValueStdLot * lot).toFixed(2)
-  }));
+  const projections = lots.map(lot => ({ lot, usd: (rewardPips * spec.pipValueStdLot * lot).toFixed(2) }));
 
   let html = `
     <div class="card" style="text-align:center;border-color:${actionColor};">
@@ -947,22 +908,10 @@ function renderFinalResults(record, shield) {
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
       <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
       <div class="shield-box">${shield.message}</div>
-      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}">
-        <span>${shield.checks.consensus ? '✓' : '✗'}</span>
-        <span>Consensus ≥ 60% (Sasa: ${confidence}%)</span>
-      </div>
-      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}">
-        <span>${shield.checks.dominance ? '✓' : '✗'}</span>
-        <span>Dominance ≥ 2 (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span>
-      </div>
-      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}">
-        <span>${shield.checks.alignment ? '✓' : '✗'}</span>
-        <span>Masters 6+ wamepiga kura (Sasa: ${record.confluence.buyCount + record.confluence.sellCount})</span>
-      </div>
-      <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}">
-        <span>${shield.checks.rrr ? '✓' : '✗'}</span>
-        <span>RRR ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span>
-      </div>
+      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Consensus ≥ 60% (Sasa: ${confidence}%)</span></div>
+      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span></div>
+      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>Masters 6+ wamepiga kura (Sasa: ${record.confluence.buyCount + record.confluence.sellCount})</span></div>
+      <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span></div>
     </div>
   `;
 
@@ -991,9 +940,7 @@ function renderFinalResults(record, shield) {
 
       <div class="card">
         <div class="ballistic-header">💵 PROFIT PROJECTIONS (TP3)</div>
-        ${projections.map(p => `
-          <div class="lot-row"><strong>Lot ${p.lot}</strong><span style="color:var(--green);font-weight:bold;">$${p.usd}</span></div>
-        `).join('')}
+        ${projections.map(p => `<div class="lot-row"><strong>Lot ${p.lot}</strong><span style="color:var(--green);font-weight:bold;">$${p.usd}</span></div>`).join('')}
       </div>
     `;
   }
@@ -1021,6 +968,7 @@ function renderFinalResults(record, shield) {
         <div class="master-desc">${m.reasoning}</div>
         <div class="master-confidence">
           Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
+          ${m.model_used ? `<span style="color:var(--muted);font-size:10px;"> • ${m.model_used}</span>` : ''}
           <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
         </div>
       </div>
@@ -1055,8 +1003,7 @@ function calculateRisk() {
     • <strong>Balance:</strong> $${balance.toFixed(2)}<br>
     • <strong>Risk (${riskPct}%):</strong> $${riskAmount.toFixed(2)}<br>
     • <strong>SL:</strong> ${slPips} pips<br>
-    • <strong>Pair:</strong> ${pair}<br>
-    <br>
+    • <strong>Pair:</strong> ${pair}<br><br>
     <strong style="color:var(--accent);font-size:15px;">📊 LOT SIZE: ${lotSize.toFixed(3)}</strong>
   `;
 }
@@ -1116,15 +1063,13 @@ function deleteHistory(index) {
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.splice(index, 1);
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
-  loadHistory();
-  updateStats();
+  loadHistory(); updateStats();
 }
 
 function clearHistory() {
   if (!confirm("Futa historia yote?")) return;
   localStorage.removeItem('lutynoel_history');
-  loadHistory();
-  updateStats();
+  loadHistory(); updateStats();
 }
 
 function updateStats() {
@@ -1145,7 +1090,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "15.0"
+    version: "15.2"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -1165,8 +1110,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
     document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
-    loadHistory();
-    updateStats();
+    loadHistory(); updateStats();
     setTimeout(() => fetchLivePrice(), 1500);
   }
 });
