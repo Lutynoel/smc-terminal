@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v15.2 — Gemini 3.6 Flash Edition</title>
+<title>Lutynoel FX v15.4 — Wide TP Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -108,12 +108,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 </div>
 
-<!-- AUTH -->
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v15.2</div>
-    <div class="auth-subtitle">Gemini 3.6 Flash + Auto Price Edition</div>
+    <div class="auth-title">Lutynoel FX v15.4</div>
+    <div class="auth-subtitle">Wide TP Edition — SL ya Soko, TP Kubwa</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -125,20 +124,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Gemini API Key</label>
     <input type="password" id="authApiKey" placeholder="AIza... au AQ..." autocomplete="off">
 
-    <label>TwelveData API Key (Optional — kwa real-time price)</label>
+    <label>TwelveData API Key (Optional)</label>
     <input type="text" id="authTwelveKey" placeholder="Weka kama una" autocomplete="off">
 
     <div class="info-box">
       🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
-      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a> (800 req/day)<br>
-      📊 Bila key, app inatumia bei ya demo. Crypto inafanya kazi bila key.
+      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a><br>
+      📊 Bila key, app inatumia bei ya demo.
     </div>
 
     <button class="primary-btn" onclick="handleLogin()">Ingia Salama</button>
   </div>
 </div>
 
-<!-- APP -->
 <div id="appInterface">
   <header>
     <div style="display:flex;align-items:center;gap:8px;">
@@ -154,11 +152,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v15.2</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.4</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 Engine <span class="badge-new">AUTO</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 <span class="badge-new">WIDE TP</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('history')">📁 Historia</div>
@@ -170,13 +168,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">GEMINI 3.6</span>
+          <span class="badge-shield">WIDE TP</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Auto Price + Masters 12</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Wide TP Edition (50-300+)</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Bei inajipanga yenyewe. Wataalamu 12 wanachambua kwa frameworks tofauti.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">SL inafuata muundo wa soko. TP inafuata volatility kwa faida kubwa.</p>
       </div>
 
       <div class="grid-3">
@@ -188,6 +186,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Njia za Haraka</h3>
         <button class="primary-btn" onclick="navigate('analyst')">🎯 Anzisha Masters 12 Analysis</button>
+      </div>
+
+      <div class="info-box">
+        📊 <strong>Wide TP Logic:</strong><br>
+        • <strong>SL</strong> = Key levels za masters (30-50 pips)<br>
+        • <strong>TP1</strong> = 2× SL<br>
+        • <strong>TP2</strong> = 4× SL<br>
+        • <strong>TP3</strong> = 6× SL (minimum 50 pips, max 300)<br>
+        <em>Mfano: SL 30 pips → TP1 60, TP2 120, TP3 180 (R:R = 1:6)</em>
       </div>
     </div>
 
@@ -336,15 +343,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v15.2<br>
+          <strong>Version:</strong> v15.4 (Wide TP)<br>
           <strong>Model:</strong> Gemini 3.6 Flash<br>
-          <strong>Fallback:</strong> 3.8, 3.5, 2.0<br>
-          <strong>Price:</strong> TwelveData + Binance
+          <strong>SL:</strong> Market-based (30-50 pips)<br>
+          <strong>TP:</strong> 2×, 4×, 6× SL (min 50, max 300)
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
-        <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveData Key</button>
-        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Gemini API Key</button>
+        <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveKey</button>
+        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Gemini Key</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
       </div>
     </div>
@@ -353,36 +360,88 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v15.2 — Gemini 3.6 Flash Edition
-   Auto Price + Masters 12 + Capital Shield
+   LUTYNOEL FX v15.4 — WIDE TP EDITION
+   SL = Market structure | TP = 2x, 4x, 6x SL (min 50, max 300)
    ===================================================== */
 
-// ============ MODEL FALLBACK CHAIN ============
-const MODELS_CHAIN = [
-  'gemini-3.6-flash',
-  'gemini-3.8-flash',
-  'gemini-3.5-flash',
-  'gemini-2.0-flash'
-];
-
+const MODELS_CHAIN = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-2.0-flash'];
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
-// ============ PAIR SPECS ============
+// ============ PAIR SPECS (Wide TP config) ============
 const PAIR_SPECS = {
-  XAUUSD: { pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD' },
-  BTCUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT' },
-  NAS100: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX' },
-  EURUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD' },
-  GBPUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD' },
-  USDJPY: { pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY' },
-  AUDUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD' },
-  USDCAD: { pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD' },
-  ETHUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT' },
-  SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT' }
+  XAUUSD: {
+    pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2,
+    source: 'twelve', twelveSymbol: 'XAU/USD',
+    slDefault: 40, slMin: 25, slMax: 60,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 50, tp3Max: 300
+  },
+  BTCUSD: {
+    pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2,
+    source: 'binance', binanceSymbol: 'BTCUSDT',
+    slDefault: 800, slMin: 500, slMax: 1500,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 1000, tp3Max: 5000
+  },
+  NAS100: {
+    pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2,
+    source: 'twelve', twelveSymbol: 'NDX',
+    slDefault: 80, slMin: 50, slMax: 150,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 100, tp3Max: 500
+  },
+  EURUSD: {
+    pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4,
+    source: 'twelve', twelveSymbol: 'EUR/USD',
+    slDefault: 30, slMin: 20, slMax: 50,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 50, tp3Max: 200
+  },
+  GBPUSD: {
+    pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4,
+    source: 'twelve', twelveSymbol: 'GBP/USD',
+    slDefault: 35, slMin: 20, slMax: 60,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 50, tp3Max: 200
+  },
+  USDJPY: {
+    pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3,
+    source: 'twelve', twelveSymbol: 'USD/JPY',
+    slDefault: 30, slMin: 20, slMax: 50,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 50, tp3Max: 200
+  },
+  AUDUSD: {
+    pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4,
+    source: 'twelve', twelveSymbol: 'AUD/USD',
+    slDefault: 30, slMin: 20, slMax: 50,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 50, tp3Max: 200
+  },
+  USDCAD: {
+    pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4,
+    source: 'twelve', twelveSymbol: 'USD/CAD',
+    slDefault: 30, slMin: 20, slMax: 50,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 50, tp3Max: 200
+  },
+  ETHUSD: {
+    pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2,
+    source: 'binance', binanceSymbol: 'ETHUSDT',
+    slDefault: 50, slMin: 30, slMax: 100,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 100, tp3Max: 500
+  },
+  SOLUSD: {
+    pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2,
+    source: 'binance', binanceSymbol: 'SOLUSDT',
+    slDefault: 3, slMin: 2, slMax: 6,
+    tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6,
+    tp3Min: 10, tp3Max: 50
+  }
 };
 
-// ============ MASTERS 12 ============
 const MASTERS_12 = [
   { id: 1, name: "Chief Master", weight: 0.15, lens: "Overall trend alignment and final decision authority" },
   { id: 2, name: "Support & Resistance", weight: 0.12, lens: "Key horizontal levels across 4H and 1H" },
@@ -398,10 +457,9 @@ const MASTERS_12 = [
   { id: 12, name: "Quantitative", weight: 0.05, lens: "RSI, MACD, moving averages, ATR" }
 ];
 
-// ============ PWA ============
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v15.2",
+    name: "Lutynoel FX v15.4",
     short_name: "LutynoelFX",
     start_url: "./",
     display: "standalone",
@@ -413,7 +471,6 @@ function setupPWA() {
   document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
 }
 
-// ============ TOAST ============
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
   t.className = 'toast';
@@ -422,7 +479,6 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-// ============ VALIDATE ============
 function validateApiKey(key) {
   if (!key) return { valid: false, reason: "Key haipo" };
   const trimmed = key.trim();
@@ -431,7 +487,6 @@ function validateApiKey(key) {
   return { valid: true };
 }
 
-// ============ LOGIN ============
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const apiKey = document.getElementById('authApiKey').value.trim();
@@ -486,12 +541,12 @@ async function testApiKey() {
       });
       const data = await response.json();
       if (!data.error && data.candidates && data.candidates[0]) {
-        alert(`✅ Key inafanya kazi!\n\nModel: ${model}\nJibu: "${data.candidates[0].content.parts[0].text.trim()}"`);
+        alert(`✅ Key inafanya kazi!\n\nModel: ${model}`);
         return;
       }
     } catch (e) { continue; }
   }
-  alert(`❌ Hakuna model iliyofanya kazi.\n\nJaribu models zote zilishindwa. Angalia key yako au jaribu tena baadaye.`);
+  alert(`❌ Hakuna model iliyofanya kazi.`);
 }
 
 function logout() {
@@ -499,7 +554,6 @@ function logout() {
   location.reload();
 }
 
-// ============ NAVIGATION ============
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
   document.getElementById('view-' + view).style.display = 'block';
@@ -527,7 +581,6 @@ function onPairChange(pair) {
   }
 }
 
-// ============ PRICE ============
 function setPriceStatus(type, text, time = '') {
   const status = document.getElementById('priceStatus');
   status.className = `price-status ${type}`;
@@ -560,7 +613,7 @@ async function fetchLivePrice() {
     }
   } catch (err) {
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('error', `🔴 Bei ya demo (TwelveData key inahitajika)`, '');
+    setPriceStatus('error', `🔴 Bei ya demo`, '');
   } finally {
     refreshBtn.disabled = false;
     refreshBtn.innerHTML = '🔄 Refresh';
@@ -588,7 +641,6 @@ async function fetchTwelveDataPrice(symbol) {
   } catch { return null; }
 }
 
-// ============ IMAGES ============
 let globalImages = { h4: null, h1: null, m15: null };
 
 function previewImage(event, previewId, key) {
@@ -620,7 +672,6 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL MASTER (with model fallback) ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}.
 
@@ -663,11 +714,10 @@ Rules:
       const data = await response.json();
       if (data.error) {
         lastError = data.error.message;
-        console.warn(`[${master.name}] Model ${model} failed: ${data.error.message}`);
         continue;
       }
       if (!data.candidates || !data.candidates[0]) {
-        lastError = "No response from AI";
+        lastError = "No response";
         continue;
       }
 
@@ -690,11 +740,9 @@ Rules:
       continue;
     }
   }
-
-  throw new Error(`${master.name}: ${lastError || "Models zote zimeshindwa"}`);
+  throw new Error(`${master.name}: ${lastError || "All models failed"}`);
 }
 
-// ============ CONFLUENCE ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
   masterResults.forEach(r => {
@@ -718,7 +766,6 @@ function computeConfluence(masterResults) {
   };
 }
 
-// ============ CAPITAL SHIELD ============
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const checks = {
     consensus: confluence.confidence >= 60,
@@ -741,11 +788,10 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
     checks,
     message: allPass 
       ? "✅ CAPITAL SHIELD: Trade approved." 
-      : "🛡️ CAPITAL SHIELD: Trade BLOCKED — consensus dhaifu au RRR haitoshi."
+      : "🛡️ CAPITAL SHIELD: Trade BLOCKED."
   };
 }
 
-// ============ RUN ANALYSIS ============
 async function runAnalysis() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("API Key haipo."); logout(); return; }
@@ -854,31 +900,76 @@ function updateMasterCard(result) {
   confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%)<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
+// ============ WIDE TP SL/TP CALCULATION ============
 function computeSLTP(masters, action, livePrice, pair) {
   const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
-  if (action === 'HOLD') return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice };
-  const isBuy = action === 'BUY';
-  const keyLevels = masters.filter(m => m.key_level && !isNaN(parseFloat(m.key_level))).map(m => parseFloat(m.key_level));
-  let sl, tp1, tp2, tp3;
-  if (isBuy) {
-    const slC = keyLevels.filter(l => l < livePrice);
-    sl = slC.length > 0 ? Math.max(...slC) : livePrice - 30 * spec.pipSize;
-    sl = sl - 5 * spec.pipSize;
-    const risk = livePrice - sl;
-    tp1 = livePrice + risk * 1; tp2 = livePrice + risk * 2; tp3 = livePrice + risk * 3;
-  } else {
-    const slC = keyLevels.filter(l => l > livePrice);
-    sl = slC.length > 0 ? Math.min(...slC) : livePrice + 30 * spec.pipSize;
-    sl = sl + 5 * spec.pipSize;
-    const risk = sl - livePrice;
-    tp1 = livePrice - risk * 1; tp2 = livePrice - risk * 2; tp3 = livePrice - risk * 3;
+  if (action === 'HOLD') {
+    return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp3Pips: 0 };
   }
+
+  const isBuy = action === 'BUY';
+  const keyLevels = masters
+    .filter(m => m.key_level && !isNaN(parseFloat(m.key_level)))
+    .map(m => parseFloat(m.key_level));
+
+  // ============ SL: Bado inafuata soko (kama ilivyo) ============
+  let sl;
+  if (isBuy) {
+    const slCandidates = keyLevels.filter(l => l < livePrice);
+    sl = slCandidates.length > 0 ? Math.max(...slCandidates) : livePrice - spec.slDefault * spec.pipSize;
+    sl = sl - 5 * spec.pipSize;
+  } else {
+    const slCandidates = keyLevels.filter(l => l > livePrice);
+    sl = slCandidates.length > 0 ? Math.min(...slCandidates) : livePrice + spec.slDefault * spec.pipSize;
+    sl = sl + 5 * spec.pipSize;
+  }
+
+  // Ensure SL is within bounds
+  let slPips = Math.abs((livePrice - sl) / spec.pipSize);
+  if (slPips < spec.slMin) {
+    slPips = spec.slMin;
+    sl = isBuy ? livePrice - slPips * spec.pipSize : livePrice + slPips * spec.pipSize;
+  } else if (slPips > spec.slMax) {
+    slPips = spec.slMax;
+    sl = isBuy ? livePrice - slPips * spec.pipSize : livePrice + slPips * spec.pipSize;
+  }
+
+  // ============ TP: WIDE (2x, 4x, 6x SL) ============
+  // TP1 = 2× SL, TP2 = 4× SL, TP3 = 6× SL
+  let tp1Pips = slPips * spec.tp1Multiplier;
+  let tp2Pips = slPips * spec.tp2Multiplier;
+  let tp3Pips = slPips * spec.tp3Multiplier;
+
+  // Ensure TP3 meets minimum
+  if (tp3Pips < spec.tp3Min) {
+    const scale = spec.tp3Min / tp3Pips;
+    tp1Pips *= scale;
+    tp2Pips *= scale;
+    tp3Pips = spec.tp3Min;
+  }
+
+  // Cap TP3 at maximum
+  if (tp3Pips > spec.tp3Max) {
+    const scale = spec.tp3Max / tp3Pips;
+    tp1Pips *= scale;
+    tp2Pips *= scale;
+    tp3Pips = spec.tp3Max;
+  }
+
+  const tp1 = isBuy ? livePrice + tp1Pips * spec.pipSize : livePrice - tp1Pips * spec.pipSize;
+  const tp2 = isBuy ? livePrice + tp2Pips * spec.pipSize : livePrice - tp2Pips * spec.pipSize;
+  const tp3 = isBuy ? livePrice + tp3Pips * spec.pipSize : livePrice - tp3Pips * spec.pipSize;
+
   return {
     entry: parseFloat(livePrice.toFixed(spec.decimals)),
     sl: parseFloat(sl.toFixed(spec.decimals)),
     tp1: parseFloat(tp1.toFixed(spec.decimals)),
     tp2: parseFloat(tp2.toFixed(spec.decimals)),
-    tp3: parseFloat(tp3.toFixed(spec.decimals))
+    tp3: parseFloat(tp3.toFixed(spec.decimals)),
+    slPips: Math.round(slPips),
+    tp1Pips: Math.round(tp1Pips),
+    tp2Pips: Math.round(tp2Pips),
+    tp3Pips: Math.round(tp3Pips)
   };
 }
 
@@ -888,11 +979,21 @@ function renderFinalResults(record, shield) {
   const spec = PAIR_SPECS[pair];
   const isBuy = action === 'BUY', isSell = action === 'SELL';
   const actionColor = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--orange)';
-  const riskPips = Math.abs((entry - sl) / spec.pipSize).toFixed(1);
-  const rewardPips = Math.abs((tp3 - entry) / spec.pipSize).toFixed(1);
-  const rrr = riskPips > 0 ? (rewardPips / riskPips).toFixed(2) : '0';
+
+  // Compute pips dynamically (recompute here for display)
+  const sltp = computeSLTP(record.masters, action, entry, pair);
+  const slPips = sltp.slPips;
+  const tp1Pips = sltp.tp1Pips;
+  const tp2Pips = sltp.tp2Pips;
+  const tp3Pips = sltp.tp3Pips;
+  const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '0';
+
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
-  const projections = lots.map(lot => ({ lot, usd: (rewardPips * spec.pipValueStdLot * lot).toFixed(2) }));
+  const projections = lots.map(lot => ({
+    lot, 
+    tp1: (tp1Pips * spec.pipValueStdLot * lot).toFixed(2),
+    tp3: (tp3Pips * spec.pipValueStdLot * lot).toFixed(2)
+  }));
 
   let html = `
     <div class="card" style="text-align:center;border-color:${actionColor};">
@@ -902,6 +1003,9 @@ function renderFinalResults(record, shield) {
         <span class="badge-conf">${confidence}% CONFIDENCE</span>
         <span class="badge-status">${record.confluence.buyCount}B / ${record.confluence.sellCount}S / ${record.confluence.holdCount}H</span>
         <span class="badge-${shield.approved ? 'conf' : 'warn'}">${shield.approved ? '✅ APPROVED' : '🛡️ BLOCKED'}</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">
+        📊 R:R = <strong style="color:var(--accent);">1 : ${rrr}</strong> • Wide TP Strategy
       </div>
     </div>
 
@@ -918,29 +1022,54 @@ function renderFinalResults(record, shield) {
   if (action !== 'HOLD') {
     html += `
       <div class="card">
-        <div class="ballistic-header">📊 TRADE PARAMETERS</div>
+        <div class="ballistic-header">📊 TRADE PARAMETERS (SL ya Soko • TP Wide)</div>
         <div class="grid-2">
-          <div class="mini-box"><label>Entry</label><div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div></div>
-          <div class="mini-box"><label style="color:var(--red);">Stop Loss</label><div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div></div>
+          <div class="mini-box">
+            <label>Entry</label>
+            <div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div>
+          </div>
+          <div class="mini-box">
+            <label style="color:var(--red);">Stop Loss</label>
+            <div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div>
+            <div style="font-size:11px;color:var(--red);margin-top:4px;">${slPips} pips (soko)</div>
+          </div>
         </div>
         <div class="grid-3">
-          <div class="mini-box"><label style="color:var(--green);">TP1</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp1}</div></div>
-          <div class="mini-box"><label style="color:var(--green);">TP2</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp2}</div></div>
-          <div class="mini-box"><label style="color:var(--green);">TP3</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div></div>
-        </div>
-        <div class="grid-2" style="margin-top:10px;">
-          <div class="mini-box" style="text-align:center;"><label>Risk</label><div style="font-size:14px;font-weight:bold;color:var(--red);">${riskPips} pips</div></div>
-          <div class="mini-box" style="text-align:center;"><label>Reward</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${rewardPips} pips</div></div>
+          <div class="mini-box">
+            <label style="color:var(--green);">TP1 (2R)</label>
+            <div style="font-size:14px;font-weight:bold;color:var(--green);">${tp1}</div>
+            <div style="font-size:11px;color:var(--green);margin-top:4px;">${tp1Pips} pips</div>
+          </div>
+          <div class="mini-box">
+            <label style="color:var(--green);">TP2 (4R)</label>
+            <div style="font-size:14px;font-weight:bold;color:var(--green);">${tp2}</div>
+            <div style="font-size:11px;color:var(--green);margin-top:4px;">${tp2Pips} pips</div>
+          </div>
+          <div class="mini-box">
+            <label style="color:var(--green);">TP3 (6R)</label>
+            <div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div>
+            <div style="font-size:11px;color:var(--green);margin-top:4px;">${tp3Pips} pips</div>
+          </div>
         </div>
         <div class="mini-box" style="margin-top:10px;text-align:center;">
-          <label style="color:var(--accent);">R:R</label>
-          <div style="font-size:18px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div>
+          <label style="color:var(--accent);">Risk : Reward (TP3)</label>
+          <div style="font-size:22px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">SL ${slPips} pips → TP3 ${tp3Pips} pips</div>
         </div>
       </div>
 
       <div class="card">
-        <div class="ballistic-header">💵 PROFIT PROJECTIONS (TP3)</div>
-        ${projections.map(p => `<div class="lot-row"><strong>Lot ${p.lot}</strong><span style="color:var(--green);font-weight:bold;">$${p.usd}</span></div>`).join('')}
+        <div class="ballistic-header">💵 PROFIT PROJECTIONS (USD)</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Kila lot inaonyesha faida kwa TP1 na TP3:</div>
+        ${projections.map(p => `
+          <div class="lot-row">
+            <strong>Lot ${p.lot}</strong>
+            <span>
+              <span style="color:var(--orange);">TP1: $${p.tp1}</span>
+              <span style="color:var(--green);margin-left:8px;">TP3: $${p.tp3}</span>
+            </span>
+          </div>
+        `).join('')}
       </div>
     `;
   }
@@ -968,7 +1097,6 @@ function renderFinalResults(record, shield) {
         <div class="master-desc">${m.reasoning}</div>
         <div class="master-confidence">
           Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
-          ${m.model_used ? `<span style="color:var(--muted);font-size:10px;"> • ${m.model_used}</span>` : ''}
           <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
         </div>
       </div>
@@ -988,7 +1116,6 @@ function resetAnalysis() {
   window.scrollTo(0, 0);
 }
 
-// ============ RISK ============
 function calculateRisk() {
   const balance = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const riskPct = parseFloat(document.getElementById('riskPercent').value) || 1;
@@ -1008,7 +1135,6 @@ function calculateRisk() {
   `;
 }
 
-// ============ JOURNAL ============
 function saveJournalTrade() {
   const trade = {
     id: Date.now(),
@@ -1028,7 +1154,6 @@ function saveJournalTrade() {
   navigate('history');
 }
 
-// ============ HISTORY ============
 function saveToHistory(record) {
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.unshift(record);
@@ -1090,7 +1215,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "15.2"
+    version: "15.4"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -1101,7 +1226,6 @@ function exportData() {
   showToast("Data imeexport!");
 }
 
-// ============ INIT ============
 window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   const name = sessionStorage.getItem('lutynoel_name');
