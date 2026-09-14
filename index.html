@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v15.6 — Smart Signal Grading</title>
+<title>Lutynoel FX v15.7 — Gemini 3.x Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -127,8 +127,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v15.6</div>
-    <div class="auth-subtitle">Smart Signal Grading Edition</div>
+    <div class="auth-title">Lutynoel FX v15.7</div>
+    <div class="auth-subtitle">Gemini 3.x Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -167,7 +167,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v15.6</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.7</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
@@ -183,7 +183,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">SMART SIGNALS</span>
+          <span class="badge-shield">GEMINI 3.x</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
@@ -361,8 +361,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v15.6 (Smart Grading)<br>
-          <strong>Model:</strong> Gemini 3.6 Flash<br>
+          <strong>Version:</strong> v15.7 (Gemini 3.x)<br>
+          <strong>Model Chain:</strong> 3.6 → 3.8 → 3.5<br>
           <strong>SL:</strong> Market-based<br>
           <strong>TP:</strong> 2× / 4× / 6× SL<br>
           <strong>Signals:</strong> Strong / Normal / Weak / Wait
@@ -379,11 +379,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v15.6 — SMART SIGNAL GRADING
-   STRONG BUY/SELL | BUY/SELL | WEAK | WAIT | NO TRADE
+   LUTYNOEL FX v15.7 — GEMINI 3.x EDITION
+   Removed gemini-2.0-flash (deprecated by Google)
    ===================================================== */
 
-const MODELS_CHAIN = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-2.0-flash'];
+// ============ MODEL CHAIN (Gemini 3.x ONLY) ============
+// ONYO: gemini-2.0-flash imeondolewa na Google. Usiirudishe.
+const MODELS_CHAIN = [
+  'gemini-3.6-flash',   // ✅ Google recommended (primary)
+  'gemini-3.8-flash',   // ✅ Latest
+  'gemini-3.5-flash'    // ✅ Fallback
+];
+
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
@@ -417,7 +424,7 @@ const MASTERS_12 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v15.6", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v15.7", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -468,7 +475,7 @@ function saveTwelveKey() {
 async function testApiKey() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("Hakuna API key."); return; }
-  showToast("🧪 Inajaribu...", 2000);
+  showToast("🧪 Inajaribu models...", 2000);
   for (const model of MODELS_CHAIN) {
     try {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
@@ -477,10 +484,13 @@ async function testApiKey() {
         body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
       });
       const data = await response.json();
-      if (!data.error && data.candidates && data.candidates[0]) { alert(`✅ Key inafanya kazi!\n\nModel: ${model}`); return; }
+      if (!data.error && data.candidates && data.candidates[0]) {
+        alert(`✅ Key inafanya kazi!\n\nModel inayofanya kazi: ${model}`);
+        return;
+      }
     } catch (e) { continue; }
   }
-  alert(`❌ Hakuna model iliyofanya kazi.`);
+  alert(`❌ Hakuna model iliyofanya kazi.\n\nModels zilizojaribiwa:\n${MODELS_CHAIN.join(', ')}\n\nJaribu tena baadaye au angalia API key yako.`);
 }
 
 function logout() { sessionStorage.clear(); location.reload(); }
@@ -594,6 +604,7 @@ function fileToBase64(file) {
   });
 }
 
+// ============ CALL MASTER (Gemini 3.x chain) ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}.
 
@@ -618,20 +629,35 @@ Rules:
   }
 
   let lastError = null;
+
   for (const model of MODELS_CHAIN) {
     try {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       const response = await fetch(endpoint, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts }], generationConfig: { temperature: 0.3, responseMimeType: "application/json" } })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
+        })
       });
+
       const data = await response.json();
-      if (data.error) { lastError = data.error.message; continue; }
-      if (!data.candidates || !data.candidates[0]) { lastError = "No response"; continue; }
+      if (data.error) {
+        lastError = data.error.message;
+        console.warn(`[${master.name}] Model ${model} failed: ${data.error.message}`);
+        continue;
+      }
+      if (!data.candidates || !data.candidates[0]) {
+        lastError = "No response";
+        continue;
+      }
+
       let text = data.candidates[0].content.parts[0].text.trim();
       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
       const match = text.match(/\{[\s\S]*\}/);
       if (match) text = match[0];
+
       const result = JSON.parse(text);
       return {
         ...master,
@@ -641,9 +667,12 @@ Rules:
         key_level: result.key_level || null,
         model_used: model
       };
-    } catch (e) { lastError = e.message; continue; }
+    } catch (e) {
+      lastError = e.message;
+      continue;
+    }
   }
-  throw new Error(`${master.name}: ${lastError || "All models failed"}`);
+  throw new Error(`${master.name}: ${lastError || "All Gemini 3.x models failed"}`);
 }
 
 // ============ CONFLUENCE + SIGNAL GRADING ============
@@ -665,7 +694,6 @@ function computeConfluence(masterResults) {
   const consensusStrength = totalWeight > 0 ? (maxScore / totalWeight) : 0;
   const confidence = Math.round(consensusStrength * 100);
 
-  // ============ SIGNAL GRADING LOGIC ============
   let direction = 'HOLD';
   if (buyWeight > sellWeight && buyWeight > holdWeight) direction = 'BUY';
   else if (sellWeight > buyWeight && sellWeight > holdWeight) direction = 'SELL';
@@ -680,7 +708,6 @@ function computeConfluence(masterResults) {
   let signalReason = '';
   let tradable = false;
 
-  // Rule 1: Hakuna kura za kutosha au ni tie
   if (totalVoted < 6 || tie) {
     signal = 'WAIT';
     signalLabel = '⏸ WAIT';
@@ -690,7 +717,6 @@ function computeConfluence(masterResults) {
       : `Masters ${totalVoted}/12 wamepiga kura. Subiri consensus zaidi.`;
     tradable = false;
   }
-  // Rule 2: Consensus dhaifu sana
   else if (confidence < 60) {
     signal = 'WAIT';
     signalLabel = '⏸ WAIT';
@@ -698,7 +724,6 @@ function computeConfluence(masterResults) {
     signalReason = `Confidence ni ${confidence}% — chini ya 60%. Soko halieleweki. Subiri.`;
     tradable = false;
   }
-  // Rule 3: Direction haipo
   else if (direction === 'HOLD') {
     signal = 'NO_TRADE';
     signalLabel = '⏸ NO TRADE';
@@ -706,7 +731,6 @@ function computeConfluence(masterResults) {
     signalReason = `Hakuna uelekeo wa wazi. Masters wanashindwa kuamua.`;
     tradable = false;
   }
-  // Rule 4: STRONG BUY/SELL
   else if (confidence >= 80 && dominance >= 4) {
     signal = direction === 'BUY' ? 'STRONG_BUY' : 'STRONG_SELL';
     signalLabel = direction === 'BUY' ? '🟢 STRONG BUY' : '🔴 STRONG SELL';
@@ -714,7 +738,6 @@ function computeConfluence(masterResults) {
     signalReason = `Masters ${direction === 'BUY' ? buyCount : sellCount}/12 wamekubaliana kwa nguvu. Confidence ${confidence}% + Dominance ${dominance}. Uhakika mkubwa.`;
     tradable = true;
   }
-  // Rule 5: Normal BUY/SELL
   else if (confidence >= 70 && dominance >= 2) {
     signal = direction === 'BUY' ? 'BUY' : 'SELL';
     signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
@@ -722,7 +745,6 @@ function computeConfluence(masterResults) {
     signalReason = `Consensus nzuri. Confidence ${confidence}% + Dominance ${dominance}. Trade inaruhusiwa.`;
     tradable = true;
   }
-  // Rule 6: Weak BUY/SELL
   else if (confidence >= 60) {
     signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
     signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
@@ -730,7 +752,6 @@ function computeConfluence(masterResults) {
     signalReason = `Tahadhari: Confidence ${confidence}% + Dominance ${dominance}. Masters hawakubaliani vya kutosha. Fanya trade kwa lot ndogo tu.`;
     tradable = true;
   }
-  // Rule 7: Fallback
   else {
     signal = 'WAIT';
     signalLabel = '⏸ WAIT';
@@ -741,20 +762,13 @@ function computeConfluence(masterResults) {
 
   return {
     action: direction,
-    signal,
-    signalLabel,
-    signalColor,
-    signalReason,
-    tradable,
-    confidence,
-    dominance,
-    buyCount, sellCount, holdCount,
+    signal, signalLabel, signalColor, signalReason, tradable,
+    confidence, dominance, buyCount, sellCount, holdCount,
     buyWeight, sellWeight, holdWeight
   };
 }
 
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
-  // Capital Shield: Only approve if tradable AND RRR ≥ 1:2
   const checks = {
     consensus: confluence.confidence >= 60,
     dominance: confluence.dominance >= 2,
@@ -821,7 +835,6 @@ async function runAnalysis() {
     const masterResults = await Promise.all(promises);
     const confluence = computeConfluence(masterResults);
 
-    // Compute SL/TP only if direction is clear
     let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0 };
     if (confluence.tradable && confluence.action !== 'HOLD') {
       sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
@@ -830,9 +843,7 @@ async function runAnalysis() {
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
 
     const record = {
-      id: Date.now(),
-      date: new Date().toLocaleString(),
-      pair,
+      id: Date.now(), date: new Date().toLocaleString(), pair,
       action: confluence.action,
       signal: confluence.signal,
       signalLabel: confluence.signalLabel,
@@ -979,10 +990,15 @@ function buildAnalysisHTML(record, shield) {
     tp3: (tp3Pips * spec.pipValueStdLot * lot).toFixed(2)
   }));
 
+  const signalTextColor = signalColor.includes('buy') ? 'var(--green)' 
+    : signalColor.includes('sell') ? 'var(--red)' 
+    : signalColor.includes('wait') ? 'var(--yellow)' 
+    : 'var(--muted)';
+
   let html = `
     <div class="signal-hero ${signalColor}">
       <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
-      <div class="signal-label" style="color:${signalColor.includes('buy') ? 'var(--green)' : signalColor.includes('sell') ? 'var(--red)' : 'var(--yellow)'};">${signalLabel}</div>
+      <div class="signal-label" style="color:${signalTextColor};">${signalLabel}</div>
       <div class="signal-badge-container">
         <span class="badge-conf">${confidence}% CONFIDENCE</span>
         <span class="badge-status">${record.confluence.buyCount}B / ${record.confluence.sellCount}S / ${record.confluence.holdCount}H</span>
@@ -1005,26 +1021,22 @@ function buildAnalysisHTML(record, shield) {
     </div>
   `;
 
-  // ============ WAIT MESSAGE if NOT tradable ============
   if (!tradable) {
     html += `
       <div class="card" style="border-color:var(--yellow);">
         <div class="ballistic-header" style="color:var(--yellow);">⏸ KWA NINI TUNASEMA WAIT?</div>
-        <div class="wait-box">
-          <strong>${signalReason}</strong>
-        </div>
+        <div class="wait-box"><strong>${signalReason}</strong></div>
         <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px;">
           📌 <strong>Ushauri:</strong><br>
           • Usifanye trade wakati masters wanapishana<br>
-          • Subiri chati iwe wazi zaidi (muda mwingine dakika 15-30)<br>
-          • Kama una trade iliyofunguliwa, fikiria kufunga au kuweka breakeven<br>
+          • Subiri chati iwe wazi zaidi (dakika 15-30)<br>
+          • Kama una trade, fikiria kufunga au breakeven<br>
           • Fanya analysis mpya baada ya muda
         </div>
       </div>
     `;
   }
 
-  // ============ SL/TP if tradable ============
   if (tradable && slPips > 0) {
     html += `
       <div class="card">
@@ -1145,7 +1157,7 @@ function loadHistory() {
     const label = h.signalLabel || (h.action === 'BUY' ? '🟢 BUY' : h.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD');
     let color = 'var(--muted)';
     if (h.signalColor) {
-      if (h.signalColor.includes('strong-buy') || h.signalColor.includes('buy')) color = 'var(--green)';
+      if (h.signalColor.includes('buy')) color = 'var(--green)';
       else if (h.signalColor.includes('sell')) color = 'var(--red)';
       else if (h.signalColor.includes('wait')) color = 'var(--yellow)';
     }
@@ -1245,7 +1257,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "15.6"
+    version: "15.7"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
