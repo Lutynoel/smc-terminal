@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v16.1 — Live News + Pips Calculator</title>
+<title>Lutynoel FX v17.0 — DeepSeek Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -115,7 +115,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .signal-hero.no-trade{background:linear-gradient(135deg,rgba(148,163,184,.15),rgba(148,163,184,.05));border:2px solid var(--muted)}
 .signal-label{font-size:28px;font-weight:900;letter-spacing:1px;margin:5px 0}
 .signal-reason{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
-/* NEWS */
 .news-item{background:#08080a;border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
 .news-item.impact-high{border-left:4px solid var(--red)}
 .news-item.impact-medium{border-left:4px solid var(--orange)}
@@ -131,7 +130,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .news-impact-badge.medium{background:rgba(249,115,22,.2);color:var(--orange);border:1px solid var(--orange);}
 .news-impact-badge.low{background:rgba(250,204,21,.2);color:var(--yellow);border:1px solid var(--yellow);}
 .news-impact-badge.holiday{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue);}
-/* PIPS CALCULATOR */
 .calc-result-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:18px;margin-top:15px;}
 .calc-big-value{font-size:32px;font-weight:900;color:var(--accent);text-align:center;margin:8px 0;}
 </style>
@@ -148,8 +146,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v16.1</div>
-    <div class="auth-subtitle">Masters 6 + Live News + Pips Calculator</div>
+    <div class="auth-title">Lutynoel FX v17.0</div>
+    <div class="auth-subtitle">DeepSeek Edition — Masters 6 + Live News + Pips Calc</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -158,14 +156,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Jina Lako</label>
     <input type="text" id="loginName" placeholder="mf. Noel Nkungu" maxlength="30">
 
-    <label>Gemini API Key</label>
-    <input type="password" id="authApiKey" placeholder="AIza... au AQ..." autocomplete="off">
+    <label>DeepSeek API Key</label>
+    <input type="password" id="authApiKey" placeholder="sk-..." autocomplete="off">
 
     <label>TwelveData API Key (Optional)</label>
     <input type="text" id="authTwelveKey" placeholder="Weka kama una" autocomplete="off">
 
     <div class="info-box">
       🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
+      🆓 <a href="https://platform.deepseek.com" target="_blank" style="color:var(--accent);">Pata DeepSeek key bure</a> ($5 credits)<br>
       🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a>
     </div>
 
@@ -188,11 +187,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v16.1</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v17.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">MERGED</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">DEEPSEEK</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('news')">📰 News Live <span class="badge-live">LIVE</span></div>
@@ -206,7 +205,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v16.1</span>
+          <span class="badge-shield">DEEPSEEK</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
@@ -358,7 +357,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ============ NEWS LIVE ============ -->
     <div id="view-news" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -366,7 +364,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="fetchLiveNews()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;font-size:11px;">
-          📡 News zinatoka Forex Factory (real-time). Zinaonyesha matukio ya kiuchumi muhimu kwa wiki hii.
+          📡 News zinatoka Forex Factory (real-time). Zinaonyesha matukio ya kiuchumi muhimu kwa leo.
         </div>
         <div id="newsContainer">
           <div style="text-align:center;padding:30px;color:var(--muted);">
@@ -376,7 +374,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ============ PIPS CALCULATOR ============ -->
     <div id="view-pips" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator (Huru)</h3>
@@ -399,23 +396,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </select>
 
         <div class="grid-2">
-          <div>
-            <label>Bei ya Kuingia (Entry)</label>
-            <input type="number" step="any" id="pipsEntry" value="2650.00">
-          </div>
-          <div>
-            <label>Bei ya Toka (Exit)</label>
-            <input type="number" step="any" id="pipsExit" value="2660.00">
-          </div>
+          <div><label>Bei ya Kuingia (Entry)</label><input type="number" step="any" id="pipsEntry" value="2650.00"></div>
+          <div><label>Bei ya Toka (Exit)</label><input type="number" step="any" id="pipsExit" value="2660.00"></div>
         </div>
 
         <div class="grid-2">
-          <div>
-            <label>Lot Size</label>
-            <input type="number" step="0.01" id="pipsLot" value="0.01">
-          </div>
-          <div>
-            <label>Uelekeo (Direction)</label>
+          <div><label>Lot Size</label><input type="number" step="0.01" id="pipsLot" value="0.01"></div>
+          <div><label>Uelekeo (Direction)</label>
             <select id="pipsDirection">
               <option value="BUY">BUY (Nunua)</option>
               <option value="SELL">SELL (Uza)</option>
@@ -448,16 +435,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v16.1<br>
+          <strong>Version:</strong> v17.0 (DeepSeek Edition)<br>
+          <strong>Provider:</strong> DeepSeek (deepseek-flash)<br>
           <strong>Masters:</strong> 6 (Merged)<br>
-          <strong>Model Chain:</strong> 3.6 → 3.8 → 3.5<br>
-          <strong>News:</strong> Forex Factory RSS (live)<br>
+          <strong>News:</strong> Forex Factory RSS<br>
           <strong>Pips Calc:</strong> Offline
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
         <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveKey</button>
-        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Gemini Key</button>
+        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu DeepSeek Key</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
       </div>
     </div>
@@ -466,10 +453,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v16.1 — Masters 6 + Live News + Pips Calc
+   LUTYNOEL FX v17.0 — DEEPSEEK EDITION
+   Masters 6 + Live News + Pips Calculator
    ===================================================== */
 
-const MODELS_CHAIN = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash'];
+// ============ DEEPSEEK CONFIG ============
+const DEEPSEEK_BASE_URL = 'https://api.deepseek.com';
+const DEEPSEEK_MODEL = 'deepseek-flash'; // Inaunga mkono vision [citation:3]
+
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
@@ -486,49 +477,18 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50 }
 };
 
-// ============ MASTERS 6 (MERGED) ============
 const MASTERS_6 = [
-  { 
-    id: 1, 
-    name: "Chief Master", 
-    weight: 0.20, 
-    lens: "Overall trend alignment, higher timeframe bias, and final decision authority. You look at the big picture across 4H, 1H, and 15M charts and determine whether the market is trending up, down, or consolidating." 
-  },
-  { 
-    id: 2, 
-    name: "Support, Resistance & Supply/Demand Master", 
-    weight: 0.20, 
-    lens: "Key horizontal support and resistance levels across 4H and 1H. Institutional order blocks, imbalance zones, and liquidity sweeps. You identify where price has reacted before and where institutional orders are likely placed." 
-  },
-  { 
-    id: 3, 
-    name: "Price Action & Market Structure Master", 
-    weight: 0.20, 
-    lens: "Candlestick patterns (engulfing, rejection wicks, pin bars), break of structure (BOS), change of character (CHoCH), higher highs, and lower lows. You read the raw price action without indicators." 
-  },
-  { 
-    id: 4, 
-    name: "Smart Money Concepts & ICT Master", 
-    weight: 0.15, 
-    lens: "Institutional order flow, liquidity pools, Fair Value Gaps (FVG), killzones, and optimal trade entry. You identify where smart money is accumulating or distributing." 
-  },
-  { 
-    id: 5, 
-    name: "Fundamental Analyst", 
-    weight: 0.10, 
-    lens: "Economic news, central bank bias, DXY correlation, and macroeconomic drivers. You assess whether fundamentals support the technical setup." 
-  },
-  { 
-    id: 6, 
-    name: "Fibonacci, Elliott Wave & Quantitative Master", 
-    weight: 0.15, 
-    lens: "Fibonacci retracement and extension levels, Elliott Wave count and impulse/corrective phases, plus RSI, MACD, moving averages, and ATR. You provide the mathematical/statistical view." 
-  }
+  { id: 1, name: "Chief Master", weight: 0.20, lens: "Overall trend alignment, higher timeframe bias, and final decision authority. You look at the big picture across 4H, 1H, and 15M charts and determine whether the market is trending up, down, or consolidating." },
+  { id: 2, name: "Support, Resistance & Supply/Demand Master", weight: 0.20, lens: "Key horizontal support and resistance levels across 4H and 1H. Institutional order blocks, imbalance zones, and liquidity sweeps. You identify where price has reacted before and where institutional orders are likely placed." },
+  { id: 3, name: "Price Action & Market Structure Master", weight: 0.20, lens: "Candlestick patterns (engulfing, rejection wicks, pin bars), break of structure (BOS), change of character (CHoCH), higher highs, and lower lows. You read the raw price action without indicators." },
+  { id: 4, name: "Smart Money Concepts & ICT Master", weight: 0.15, lens: "Institutional order flow, liquidity pools, Fair Value Gaps (FVG), killzones, and optimal trade entry. You identify where smart money is accumulating or distributing." },
+  { id: 5, name: "Fundamental Analyst", weight: 0.10, lens: "Economic news, central bank bias, DXY correlation, and macroeconomic drivers. You assess whether fundamentals support the technical setup." },
+  { id: 6, name: "Fibonacci, Elliott Wave & Quantitative Master", weight: 0.15, lens: "Fibonacci retracement and extension levels, Elliott Wave count and impulse/corrective phases, plus RSI, MACD, moving averages, and ATR. You provide the mathematical/statistical view." }
 ];
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v16.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v17.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -557,7 +517,7 @@ function handleLogin() {
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
   if (!name) { alert("Weka jina lako."); return; }
   const validation = validateApiKey(apiKey);
-  if (!validation.valid) { alert(`⚠️ Gemini API Key si sahihi.\n\n${validation.reason}`); return; }
+  if (!validation.valid) { alert(`⚠️ DeepSeek API Key si sahihi.\n\n${validation.reason}`); return; }
   sessionStorage.setItem('lutynoel_name', name);
   sessionStorage.setItem('lutynoel_apiKey', apiKey);
   if (twelveKey) sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
@@ -579,22 +539,25 @@ function saveTwelveKey() {
 async function testApiKey() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("Hakuna API key."); return; }
-  showToast("🧪 Inajaribu models...", 2000);
-  for (const model of MODELS_CHAIN) {
-    try {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(endpoint, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
-      });
-      const data = await response.json();
-      if (!data.error && data.candidates && data.candidates[0]) {
-        alert(`✅ Key inafanya kazi!\n\nModel: ${model}`);
-        return;
-      }
-    } catch (e) { continue; }
+  showToast("🧪 Inajaribu DeepSeek...", 2000);
+  try {
+    const response = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model: DEEPSEEK_MODEL,
+        messages: [{ role: 'user', content: 'Say OK' }],
+        max_tokens: 10
+      })
+    });
+    const data = await response.json();
+    if (data.error) { alert(`❌ Key haifanyi kazi: ${data.error.message}`); return; }
+    if (data.choices && data.choices[0]) {
+      alert(`✅ DeepSeek Key inafanya kazi!\n\nModel: ${DEEPSEEK_MODEL}\nJibu: "${data.choices[0].message.content}"`);
+    }
+  } catch (err) {
+    alert(`❌ Hitilafu: ${err.message}`);
   }
-  alert(`❌ Hakuna model iliyofanya kazi.`);
 }
 
 function logout() { sessionStorage.clear(); location.reload(); }
@@ -710,6 +673,7 @@ function fileToBase64(file) {
   });
 }
 
+// ============ CALL MASTER — DEEPSEEK VERSION ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
 
@@ -728,42 +692,64 @@ Rules:
 - Vote based ONLY on your assigned lens.
 - Be honest.`;
 
-  const parts = [{ text: prompt }];
+  // Tengeneza content array na maandishi + picha
+  const content = [{ type: "text", text: prompt }];
+  
   for (const img of images) {
-    parts.push({ inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) } });
+    const base64 = await fileToBase64(img.file);
+    const mimeType = img.file.type || 'image/png';
+    content.push({
+      type: "image_url",
+      image_url: {
+        url: `data:${mimeType};base64,${base64}`,
+        detail: "high"
+      }
+    });
   }
 
-  let lastError = null;
-  for (const model of MODELS_CHAIN) {
-    try {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts }],
-          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
-        })
-      });
-      const data = await response.json();
-      if (data.error) { lastError = data.error.message; continue; }
-      if (!data.candidates || !data.candidates[0]) { lastError = "No response"; continue; }
-      let text = data.candidates[0].content.parts[0].text.trim();
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const match = text.match(/\{[\s\S]*\}/);
-      if (match) text = match[0];
-      const result = JSON.parse(text);
-      return {
-        ...master,
-        vote: (result.vote || 'HOLD').toUpperCase(),
-        confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-        reasoning: result.reasoning || 'Hakuna maelezo.',
-        key_level: result.key_level || null,
-        model_used: model
-      };
-    } catch (e) { lastError = e.message; continue; }
+  try {
+    const response = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: DEEPSEEK_MODEL,
+        messages: [{ role: 'user', content: content }],
+        temperature: 0.3,
+        max_tokens: 1000,
+        response_format: { type: "json_object" }
+      })
+    });
+
+    const data = await response.json();
+    
+    if (data.error) {
+      throw new Error(`${master.name}: ${data.error.message}`);
+    }
+    
+    if (!data.choices || !data.choices[0]) {
+      throw new Error(`${master.name}: No response from DeepSeek`);
+    }
+
+    let text = data.choices[0].message.content.trim();
+    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    const match = text.match(/\{[\s\S]*\}/);
+    if (match) text = match[0];
+
+    const result = JSON.parse(text);
+    return {
+      ...master,
+      vote: (result.vote || 'HOLD').toUpperCase(),
+      confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+      reasoning: result.reasoning || 'Hakuna maelezo.',
+      key_level: result.key_level || null,
+      model_used: DEEPSEEK_MODEL
+    };
+  } catch (err) {
+    throw new Error(`${master.name}: ${err.message}`);
   }
-  throw new Error(`${master.name}: ${lastError || "All failed"}`);
 }
 
 function computeConfluence(masterResults) {
@@ -792,44 +778,37 @@ function computeConfluence(masterResults) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
     signalReason = tie ? `Masters wanapishana (${buyCount} BUY vs ${sellCount} SELL).` : `Masters ${totalVoted}/6 wamepiga kura.`;
     tradable = false;
-  }
-  else if (confidence < 60) {
+  } else if (confidence < 60) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
     signalReason = `Confidence ${confidence}% — chini ya 60%.`;
     tradable = false;
-  }
-  else if (direction === 'HOLD') {
+  } else if (direction === 'HOLD') {
     signal = 'NO_TRADE'; signalLabel = '⏸ NO TRADE'; signalColor = 'no-trade';
     signalReason = `Hakuna uelekeo wa wazi.`; tradable = false;
-  }
-  else if (confidence >= 80 && dominance >= 3) {
+  } else if (confidence >= 80 && dominance >= 3) {
     signal = direction === 'BUY' ? 'STRONG_BUY' : 'STRONG_SELL';
     signalLabel = direction === 'BUY' ? '🟢 STRONG BUY' : '🔴 STRONG SELL';
     signalColor = direction === 'BUY' ? 'strong-buy' : 'strong-sell';
     signalReason = `Masters ${direction === 'BUY' ? buyCount : sellCount}/6 wamekubaliana kwa nguvu.`;
     tradable = true;
-  }
-  else if (confidence >= 70 && dominance >= 2) {
+  } else if (confidence >= 70 && dominance >= 2) {
     signal = direction === 'BUY' ? 'BUY' : 'SELL';
     signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
     signalColor = direction === 'BUY' ? 'buy' : 'sell';
     signalReason = `Consensus nzuri. Confidence ${confidence}% + Dominance ${dominance}.`;
     tradable = true;
-  }
-  else if (confidence >= 60) {
+  } else if (confidence >= 60) {
     signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
     signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
     signalColor = direction === 'BUY' ? 'weak-buy' : 'weak-sell';
     signalReason = `Tahadhari: Confidence ${confidence}% + Dominance ${dominance}. Lot ndogo tu.`;
     tradable = true;
-  }
-  else {
+  } else {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
     signalReason = `Masharti hayakidhi.`; tradable = false;
   }
   return {
-    action: direction,
-    signal, signalLabel, signalColor, signalReason, tradable,
+    action: direction, signal, signalLabel, signalColor, signalReason, tradable,
     confidence, dominance, buyCount, sellCount, holdCount
   };
 }
@@ -864,8 +843,6 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   };
 }
 
-function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
-
 async function runAnalysis() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("API Key haipo."); logout(); return; }
@@ -892,7 +869,8 @@ async function runAnalysis() {
 
   const masterResults = [];
 
-  // Tuma requests moja moja kwa delay ndogo (Masters 6 → ~15s total)
+  // DeepSeek ina 60 req/min — tunaweza kutuma 6 kwa pamoja bila shida
+  // Lakini kwa usalama, tunatuma kwa mpangilio
   for (let i = 0; i < MASTERS_6.length; i++) {
     const master = MASTERS_6[i];
     try {
@@ -904,7 +882,8 @@ async function runAnalysis() {
       updateMasterCard(failed);
       masterResults.push(failed);
     }
-    if (i < MASTERS_6.length - 1) await sleep(2500);
+    // Subiri 1.5s tu (DeepSeek ina 60 req/min = 1 req/sec)
+    if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 1500));
   }
 
   try {
@@ -953,7 +932,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice}</div>
+      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Provider: DeepSeek</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
@@ -1060,7 +1039,7 @@ function buildAnalysisHTML(record, shield) {
         <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
       <div class="signal-reason">${signalReason || ''}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • 🤖 DeepSeek</div>
     </div>
 
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
@@ -1170,7 +1149,6 @@ function calculateRisk() {
   `;
 }
 
-// ============ PIPS CALCULATOR ============
 function updatePipsPairInfo() {
   const pair = document.getElementById('pipsPair').value;
   const spec = PAIR_SPECS[pair];
@@ -1216,38 +1194,22 @@ function calculatePips() {
       <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:4px;">${label} • ${lot} lot • ${pair}</div>
     </div>
     <div class="grid-2" style="margin-top:15px;">
-      <div class="mini-box">
-        <label>Pip Size</label>
-        <div style="font-size:13px;font-weight:bold;">${spec.pipSize}</div>
-      </div>
-      <div class="mini-box">
-        <label>Pip Value (1 lot)</label>
-        <div style="font-size:13px;font-weight:bold;">$${spec.pipValueStdLot}</div>
-      </div>
+      <div class="mini-box"><label>Pip Size</label><div style="font-size:13px;font-weight:bold;">${spec.pipSize}</div></div>
+      <div class="mini-box"><label>Pip Value (1 lot)</label><div style="font-size:13px;font-weight:bold;">$${spec.pipValueStdLot}</div></div>
     </div>
     <div class="grid-2">
-      <div class="mini-box">
-        <label>Bei ya Kuingia</label>
-        <div style="font-size:13px;font-weight:bold;">${entry}</div>
-      </div>
-      <div class="mini-box">
-        <label>Bei ya Kutoka</label>
-        <div style="font-size:13px;font-weight:bold;">${exit}</div>
-      </div>
+      <div class="mini-box"><label>Bei ya Kuingia</label><div style="font-size:13px;font-weight:bold;">${entry}</div></div>
+      <div class="mini-box"><label>Bei ya Kutoka</label><div style="font-size:13px;font-weight:bold;">${exit}</div></div>
     </div>
   `;
   showToast(isProfit ? `✅ Faida: $${usdValue.toFixed(2)}` : `❌ Hasara: $${usdValue.toFixed(2)}`, 3000);
 }
 
-// ============ LIVE NEWS (Forex Factory) ============
 async function fetchLiveNews() {
   const container = document.getElementById('newsContainer');
   container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Inapakia news...</div>`;
 
   const today = new Date();
-  const todayStr = today.toISOString().split('T')[0];
-
-  // Tumia AllOrigins proxy kwa CORS
   const ffUrl = `https://www.forexfactory.com/calendar?day=today`;
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(ffUrl)}`;
 
@@ -1255,8 +1217,6 @@ async function fetchLiveNews() {
     const response = await fetch(proxyUrl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const html = await response.text();
-
-    // Parse HTML kwa news
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const rows = doc.querySelectorAll('.calendar__row');
@@ -1281,25 +1241,17 @@ async function fetchLiveNews() {
         else if (impactClass.includes('holiday')) impact = 'holiday';
         else impact = 'low';
       }
-
       news.push({ time, currency, impact, event, actual, forecast, previous });
     });
 
     if (news.length === 0) {
-      container.innerHTML = `
-        <div class="info-box">
-          ⚠️ News hazipatikani kwa sasa. Forex Factory inaweza kuwa inazuia proxy.<br>
-          Jaribu tena baada ya dakika 1, au fungua <a href="https://www.forexfactory.com/calendar" target="_blank" style="color:var(--accent);">Forex Factory</a> moja kwa moja.
-        </div>
-      `;
+      container.innerHTML = `<div class="info-box">⚠️ News hazipatikani kwa sasa. Jaribu tena baada ya dakika 1.</div>`;
       return;
     }
 
-    // Onyesha news
     container.innerHTML = `
       <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">
-        📅 ${today.toLocaleDateString('sw-TZ', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-        • ${news.length} events
+        📅 ${today.toLocaleDateString('sw-TZ', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} • ${news.length} events
       </div>
       ${news.map(n => {
         const flag = getFlag(n.currency);
@@ -1322,32 +1274,16 @@ async function fetchLiveNews() {
         `;
       }).join('')}
     `;
-
   } catch (err) {
-    console.error("News fetch error:", err);
-    container.innerHTML = `
-      <div class="info-box">
-        ⚠️ Imeshindwa kupakia news: ${err.message}<br><br>
-        <strong>Sababu zinazowezekana:</strong><br>
-        • Proxy imezuiwa na Forex Factory<br>
-        • Internet yako haifanyi kazi<br>
-        • Forex Factory wamebadilisha muundo<br><br>
-        <a href="https://www.forexfactory.com/calendar" target="_blank" style="color:var(--accent);">Fungua Forex Factory moja kwa moja →</a>
-      </div>
-    `;
+    container.innerHTML = `<div class="info-box">⚠️ Imeshindwa kupakia news: ${err.message}<br><br><a href="https://www.forexfactory.com/calendar" target="_blank" style="color:var(--accent);">Fungua Forex Factory moja kwa moja →</a></div>`;
   }
 }
 
 function getFlag(currency) {
-  const flags = {
-    USD: '🇺🇸', EUR: '🇪🇺', GBP: '🇬🇧', JPY: '🇯🇵',
-    AUD: '🇦🇺', CAD: '🇨🇦', CHF: '🇨🇭', NZD: '🇳🇿',
-    CNY: '🇨🇳', XAU: '🥇', BTC: '₿'
-  };
+  const flags = { USD: '🇺🇸', EUR: '🇪🇺', GBP: '🇬🇧', JPY: '🇯🇵', AUD: '🇦🇺', CAD: '🇨🇦', CHF: '🇨🇭', NZD: '🇳🇿', CNY: '🇨🇳', XAU: '🥇', BTC: '₿' };
   return flags[currency] || '🌍';
 }
 
-// ============ HISTORY ============
 function saveJournalTrade() {
   const trade = {
     id: Date.now(), date: new Date().toLocaleString(), type: 'manual',
@@ -1460,7 +1396,6 @@ function viewHistoryDetail(index) {
     return;
   }
 
-  // Analysis ya zamani
   const actionColor = record.action === 'BUY' ? 'var(--green)' : record.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
   document.getElementById('modalInnerContent').innerHTML = `
     <h2 style="color:var(--accent);margin:0 0 15px;">📊 Analysis ya Zamani</h2>
@@ -1479,7 +1414,6 @@ function viewHistoryDetail(index) {
         <div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div>
       </div>
     </div>
-    <div class="info-box" style="font-size:11px;">⚠️ Analysis ya zamani haikuwa na data kamili ya masters.</div>
     <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Funga</button>
   `;
   document.getElementById('universalModal').style.display = 'flex';
@@ -1518,7 +1452,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "16.1"
+    version: "17.0"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
