@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v14.1 — Institutional Edition</title>
+<title>Lutynoel FX v15.0 — Auto Price Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,11 +38,21 @@ button.primary-btn{width:100%;padding:14px;background:var(--accent);color:#000;b
 button.primary-btn:hover{background:var(--accentH)}
 button.secondary-btn{width:100%;padding:12px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:8px;font-weight:bold;font-size:14px;margin-top:8px}
 button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-allowed}
+.price-row{display:flex;gap:8px;align-items:flex-end;margin-bottom:12px}
+.price-row input{flex:1;margin-bottom:0}
+.refresh-btn{background:var(--green);color:#fff;border:none;padding:12px 16px;border-radius:8px;font-weight:bold;font-size:13px;white-space:nowrap;height:46px}
+.refresh-btn:hover{background:#059669}
+.refresh-btn:disabled{background:#3f3f46!important;color:#a1a1aa!important}
+.price-status{font-size:11px;padding:6px 10px;border-radius:6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.price-status.live{background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green)}
+.price-status.manual{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
+.price-status.error{background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red)}
+.price-status.loading{background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent)}
 .upload-zone{border:2px dashed var(--border);background:#08080a;padding:15px;text-align:center;border-radius:10px;cursor:pointer;margin-bottom:12px;position:relative}
 .upload-zone:hover{border-color:var(--accent)}
 .upload-zone input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
 .preview-img{width:100%;max-height:130px;object-fit:cover;border-radius:6px;margin-top:10px;display:none;cursor:pointer}
-.master-card{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:10px;transition:.3s}
+.master-card{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:10px}
 .master-card.buy{border-left:4px solid var(--green)}
 .master-card.sell{border-left:4px solid var(--red)}
 .master-card.hold{border-left:4px solid var(--orange)}
@@ -74,27 +84,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .checklist-item.pass span:first-child{color:var(--green);font-weight:bold;flex-shrink:0}
 .checklist-item.fail span:first-child{color:var(--red);font-weight:bold;flex-shrink:0}
 .history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.history-card:hover{border-color:var(--accent)}
 .forex-hero{background:linear-gradient(135deg,rgba(18,18,21,.95),rgba(30,27,75,.9));border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:15px}
-.chat-container{display:flex;flex-direction:column;height:400px;background:#08080a;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
-.chat-messages{flex-grow:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
-.chat-bubble{max-width:88%;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
-.chat-bubble.user{background:var(--accent);color:#000;align-self:flex-end;font-weight:500}
-.chat-bubble.ai{background:#1a1a20;border:1px solid var(--border);align-self:flex-start}
-.chat-input-row{display:flex;padding:8px;background:var(--card);border-top:1px solid var(--border);gap:8px}
-.chat-input-row input{margin-bottom:0}
-.chat-send-btn{background:var(--accent);color:#000;border:none;padding:0 16px;border-radius:8px;font-weight:bold}
 .modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:20px}
 .modal-content{max-width:92%;max-height:88vh;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;overflow-y:auto;position:relative}
 .modal-close{position:absolute;top:10px;right:20px;color:#fff;font-size:30px;font-weight:bold;cursor:pointer;line-height:1}
 .nav-btn{background:none;border:none;color:#fff;font-size:20px;padding:4px}
 .disclaimer-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .info-box{background:rgba(59,130,246,.1);border:1px solid var(--blue);color:#93c5fd;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
-.success-box{background:rgba(16,185,129,.1);border:1px solid var(--green);color:#6ee7b7;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .shield-box{background:rgba(168,85,247,.1);border:1px solid var(--purple);color:#d8b4fe;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-bottom:12px}
 .toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:380px;margin:0 auto;background:var(--accent);color:#000;padding:12px 20px;border-radius:8px;z-index:9999;font-weight:bold;font-size:13px;box-shadow:0 5px 15px rgba(0,0,0,.5);animation:slideUp .3s}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
+.spinner-white{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -111,11 +112,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v14.1</div>
-    <div class="auth-subtitle">Institutional Edition — Fixed API Validation</div>
+    <div class="auth-title">Lutynoel FX v15.0</div>
+    <div class="auth-subtitle">Auto Price Edition — Real-Time Data</div>
 
     <div class="disclaimer-box">
-      ⚠️ <strong>ONYO LA KISHERIA:</strong> Hii ni tool ya <strong>elimu na uchambuzi</strong>. Haifai kwa trading ya pesa halisi bila backtesting. AI inaweza kukosea. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako mwenyewe.
+      ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
     </div>
 
     <label>Jina Lako</label>
@@ -124,10 +125,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Gemini API Key</label>
     <input type="password" id="authApiKey" placeholder="AIza... au AQ..." autocomplete="off">
 
+    <label>TwelveData API Key (Optional)</label>
+    <input type="text" id="authTwelveKey" placeholder="Weka kama una — kwa real-time price" autocomplete="off">
+
     <div class="info-box">
-      🔒 Key inahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
-      ✅ Inakubali: <strong>AIza...</strong>, <strong>AQ...</strong>, na formats zozote za Google (20+ chars).<br>
-      <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Pata API Key bure →</a>
+      🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
+      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a> (800 req/day)<br>
+      📊 Bila key ya TwelveData, app inatumia bei ya demo.
     </div>
 
     <button class="primary-btn" onclick="handleLogin()">Ingia Salama</button>
@@ -150,11 +154,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v14.1</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v15.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 Engine <span class="badge-new">REAL</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 12 Engine <span class="badge-new">AUTO</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('history')">📁 Historia</div>
@@ -167,13 +171,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">MASTERS 12</span>
+          <span class="badge-shield">AUTO PRICE</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Institutional Edition</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Auto Price Edition</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 12 wa AI wanachambua kwa frameworks tofauti, kisha Confluence Engine inahesabu consensus na Capital Shield inalinda mtaji.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Bei inajipanga yenyewe kutoka soko halisi. Masters 12 + Capital Shield.</p>
       </div>
 
       <div class="grid-3">
@@ -194,15 +198,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Njia za Haraka</h3>
         <button class="primary-btn" onclick="navigate('analyst')">🎯 Anzisha Masters 12 Analysis</button>
-      </div>
-
-      <div class="info-box">
-        💡 <strong>Jinsi Engine Inavyofanya Kazi:</strong><br>
-        1. AI inachambua chati yako kwa <strong>lenses 12 tofauti</strong> (Masters 12)<br>
-        2. Kila master anatoa <strong>vote + confidence %</strong><br>
-        3. <strong>Confluence Engine</strong> inahesabu weighted consensus<br>
-        4. <strong>Capital Shield</strong> inazuia trade kama consensus ni dhaifu<br>
-        5. Unapata signal iliyoiva kwa uangalifu mkubwa
       </div>
     </div>
 
@@ -225,11 +220,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="SOLUSD">SOLUSD</option>
         </select>
 
-        <label>2. Bei ya Sasa ya Soko</label>
-        <input type="number" step="any" id="livePrice" value="2650.00">
+        <label>2. Bei ya Sasa (Auto-Fetch)</label>
+        <div class="price-row">
+          <input type="number" step="any" id="livePrice" value="2650.00">
+          <button class="refresh-btn" id="refreshBtn" onclick="fetchLivePrice()">🔄 Refresh</button>
+        </div>
+        <div id="priceStatus" class="price-status manual">
+          <span id="priceStatusText">⚪ Bei ya manual — bonyeza Refresh kupata live</span>
+          <span id="priceTime">—</span>
+        </div>
 
         <label>3. Pakia Chati (Zote 3)</label>
-
         <div class="upload-zone">
           <div style="color:var(--accent);font-weight:bold;font-size:13px;">⬆ 4H CHART</div>
           <input type="file" id="chartH4" accept="image/*" onchange="previewImage(event,'previewH4','h4')">
@@ -255,7 +256,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <!-- JOURNAL -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 10px;">💰 Risk Calculator (Real Pip Values)</h3>
+        <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
         <div class="grid-2">
           <div><label>Balance ($)</label><input type="number" id="riskBalance" value="1000"></div>
           <div><label>Risk (%)</label><input type="number" step="0.1" id="riskPercent" value="1.0"></div>
@@ -350,17 +351,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v14.1 (Fixed API Validation)<br>
-          <strong>Engine:</strong> Gemini 2.0 Flash Experimental<br>
-          <strong>Masters:</strong> 12 frameworks<br>
-          <strong>API Key Formats:</strong> AIza*, AQ*, na nyingine<br>
-          <strong>Data Storage:</strong> LocalStorage (browser yako)
+          <strong>Version:</strong> v15.0 (Auto Price)<br>
+          <strong>Model:</strong> Gemini 2.5 Flash<br>
+          <strong>Price APIs:</strong> TwelveData + Binance<br>
+          <strong>Data Storage:</strong> LocalStorage
         </div>
-        <div class="disclaimer-box">
-          <strong>Kumbuka:</strong> App hii haitumii backend. Data yako iko kwenye browser yako pekee. Ukifuta cache, data inaenda.
-        </div>
-        <button class="secondary-btn" onclick="exportData()">📥 Export Data (JSON)</button>
-        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu API Key Yangu</button>
+        <label>TwelveData API Key (kwa real-time price)</label>
+        <input type="text" id="settingsTwelveKey" placeholder="Weka key yako hapa">
+        <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveData Key</button>
+        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Gemini API Key</button>
+        <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
       </div>
     </div>
   </div>
@@ -368,22 +368,27 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v14.1 — INSTITUTIONAL EDITION
-   Fixed: API Key validation (supports AIza, AQ, etc.)
+   LUTYNOEL FX v15.0 — AUTO PRICE EDITION
+   Gemini 2.5 Flash + TwelveData + Binance
    ===================================================== */
 
-// ============ PAIR SPECIFICATIONS ============
+// ============ CONFIG ============
+const GEMINI_MODEL = 'gemini-2.5-flash';
+const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
+const TWELVEDATA_API = 'https://api.twelvedata.com/price';
+
+// ============ PAIR SPECS ============
 const PAIR_SPECS = {
-  XAUUSD: { pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2 },
-  BTCUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2 },
-  NAS100: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2 },
-  EURUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4 },
-  GBPUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4 },
-  USDJPY: { pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3 },
-  AUDUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4 },
-  USDCAD: { pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4 },
-  ETHUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2 },
-  SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2 }
+  XAUUSD: { pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD' },
+  BTCUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT' },
+  NAS100: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX' },
+  EURUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD' },
+  GBPUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD' },
+  USDJPY: { pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY' },
+  AUDUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD' },
+  USDCAD: { pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD' },
+  ETHUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT' },
+  SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT' }
 };
 
 // ============ MASTERS 12 ============
@@ -402,10 +407,10 @@ const MASTERS_12 = [
   { id: 12, name: "Quantitative", weight: 0.05, lens: "RSI, MACD, moving averages, ATR" }
 ];
 
-// ============ PWA SETUP ============
+// ============ PWA ============
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v14.1",
+    name: "Lutynoel FX v15",
     short_name: "LutynoelFX",
     start_url: "./",
     display: "standalone",
@@ -426,74 +431,78 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-// ============ VALIDATE API KEY (v14.1 FIX) ============
+// ============ VALIDATE KEYS ============
 function validateApiKey(key) {
   if (!key) return { valid: false, reason: "Key haipo" };
   const trimmed = key.trim();
-  if (trimmed.length < 20) {
-    return { valid: false, reason: `Key ni fupi mno (${trimmed.length} chars). Inapaswa kuwa 20+ characters.` };
-  }
-  if (/\s/.test(trimmed)) {
-    return { valid: false, reason: "Key ina nafasi (spaces). Ondoa nafasi zote." };
-  }
-  return { valid: true, reason: "Key inaonekana sahihi" };
+  if (trimmed.length < 20) return { valid: false, reason: `Key ni fupi (${trimmed.length} chars). Inapaswa 20+.` };
+  if (/\s/.test(trimmed)) return { valid: false, reason: "Key ina nafasi (spaces). Ondoa nafasi." };
+  return { valid: true };
 }
 
-// ============ LOGIN (v14.1 — Flexible Validation) ============
+// ============ LOGIN ============
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const apiKey = document.getElementById('authApiKey').value.trim();
+  const twelveKey = document.getElementById('authTwelveKey').value.trim();
 
-  if (!name) {
-    alert("Tafadhali weka jina lako.");
-    return;
-  }
+  if (!name) { alert("Weka jina lako."); return; }
 
-  // ✅ v14.1: Flexible validation — inakubali AIza, AQ, na nyingine
   const validation = validateApiKey(apiKey);
   if (!validation.valid) {
-    alert(`⚠️ API Key si sahihi.\n\nSababu: ${validation.reason}\n\nPata key bure: https://aistudio.google.com/apikey\n\nInakubali: AIza..., AQ..., na formats zozote za Google zenye 20+ characters.`);
+    alert(`⚠️ Gemini API Key si sahihi.\n\nSababu: ${validation.reason}\n\nPata key: https://aistudio.google.com/apikey`);
     return;
   }
 
   sessionStorage.setItem('lutynoel_name', name);
   sessionStorage.setItem('lutynoel_apiKey', apiKey);
+  if (twelveKey) sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
 
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
+  document.getElementById('settingsTwelveKey').value = twelveKey;
 
   loadHistory();
   updateStats();
   showToast(`Karibu ${name}! 🚀`);
+
+  // Auto-fetch price on login
+  setTimeout(() => fetchLivePrice(), 1000);
 }
 
-// ============ TEST API KEY ============
+function saveTwelveKey() {
+  const key = document.getElementById('settingsTwelveKey').value.trim();
+  if (key) {
+    sessionStorage.setItem('lutynoel_twelveKey', key);
+    showToast("TwelveData key imehifadhiwa!");
+  } else {
+    sessionStorage.removeItem('lutynoel_twelveKey');
+    showToast("TwelveData key imeondolewa.");
+  }
+}
+
 async function testApiKey() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
   if (!apiKey) { alert("Hakuna API key."); return; }
-
-  showToast("🧪 Inajaribu API key...", 2000);
-
+  showToast("🧪 Inajaribu...", 2000);
   try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ contents: [{ parts: [{ text: "Say OK" }] }] })
     });
     const data = await response.json();
-
     if (data.error) {
-      alert(`❌ API Key Haifanyi Kazi\n\nError: ${data.error.message}\n\nSababu zinazowezekana:\n1. Key imefutwa au haija-activate\n2. Gemini API haijawashwa kwenye project yako\n3. Key ina vikwazo (restrictions)\n\nTafadhali tengeneza key mpya: https://aistudio.google.com/apikey`);
+      alert(`❌ Key haifanyi kazi.\n\nError: ${data.error.message}`);
       return;
     }
-
     if (data.candidates && data.candidates[0]) {
-      alert(`✅ API Key Inafanya Kazi Vizuri!\n\nJibu la AI: "${data.candidates[0].content.parts[0].text.trim()}"\n\nUnaweza kuanza kutumia app.`);
+      alert(`✅ Key inafanya kazi!\n\nModel: ${GEMINI_MODEL}\nJibu: "${data.candidates[0].content.parts[0].text.trim()}"`);
     }
   } catch (err) {
-    alert(`❌ Hitilafu ya Mtandao\n\n${err.message}\n\nAngalia internet yako kisha ujaribu tena.`);
+    alert(`❌ Hitilafu: ${err.message}`);
   }
 }
 
@@ -503,7 +512,6 @@ function logout() {
 }
 
 // ============ NAVIGATION ============
-let currentView = 'overview';
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
   document.getElementById('view-' + view).style.display = 'block';
@@ -514,7 +522,6 @@ function navigate(view) {
     }
   });
   document.getElementById('appSidebar').classList.remove('open');
-  currentView = view;
   if (view === 'history') loadHistory();
   if (view === 'overview') updateStats();
   window.scrollTo(0, 0);
@@ -525,11 +532,89 @@ function goBack() { navigate('overview'); }
 
 function onPairChange(pair) {
   const spec = PAIR_SPECS[pair];
-  if (spec) document.getElementById('livePrice').value = spec.defaultPrice;
+  if (spec) {
+    document.getElementById('livePrice').value = spec.defaultPrice;
+    setPriceStatus('loading', '⏳ Inapakua bei ya soko...');
+    fetchLivePrice();
+  }
 }
 
-function changeLiveChart(symbol) {
-  document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${symbol}&interval=15&theme=dark&style=1`;
+// ============ PRICE FETCHING ============
+function setPriceStatus(type, text, time = '') {
+  const status = document.getElementById('priceStatus');
+  status.className = `price-status ${type}`;
+  document.getElementById('priceStatusText').innerText = text;
+  document.getElementById('priceTime').innerText = time;
+}
+
+async function fetchLivePrice() {
+  const pair = document.getElementById('selectedPair').value;
+  const spec = PAIR_SPECS[pair];
+  if (!spec) return;
+
+  const refreshBtn = document.getElementById('refreshBtn');
+  refreshBtn.disabled = true;
+  refreshBtn.innerHTML = '<span class="spinner-white"></span>';
+  setPriceStatus('loading', '⏳ Inapakua bei ya soko...');
+
+  try {
+    let price = null;
+
+    if (spec.source === 'binance') {
+      price = await fetchBinancePrice(spec.binanceSymbol);
+    } else if (spec.source === 'twelve') {
+      price = await fetchTwelveDataPrice(spec.twelveSymbol);
+    }
+
+    if (price !== null && price > 0) {
+      document.getElementById('livePrice').value = price.toFixed(spec.decimals);
+      const time = new Date().toLocaleTimeString('sw-TZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      setPriceStatus('live', `🟢 Bei ya soko halisi (${spec.source.toUpperCase()})`, time);
+      showToast(`✅ Bei imepakuliwa: ${price.toFixed(spec.decimals)}`, 2000);
+    } else {
+      throw new Error("Bei haikupatikana");
+    }
+  } catch (err) {
+    // Fallback to default price
+    document.getElementById('livePrice').value = spec.defaultPrice;
+    setPriceStatus('error', `🔴 Hitilafu — tumia bei ya demo`, '');
+    console.warn("Price fetch failed:", err);
+  } finally {
+    refreshBtn.disabled = false;
+    refreshBtn.innerHTML = '🔄 Refresh';
+  }
+}
+
+async function fetchBinancePrice(symbol) {
+  try {
+    const response = await fetch(`${BINANCE_API}?symbol=${symbol}`);
+    if (!response.ok) throw new Error(`Binance HTTP ${response.status}`);
+    const data = await response.json();
+    return parseFloat(data.price);
+  } catch (err) {
+    console.warn("Binance fetch failed:", err);
+    return null;
+  }
+}
+
+async function fetchTwelveDataPrice(symbol) {
+  const key = sessionStorage.getItem('lutynoel_twelveKey');
+  if (!key) {
+    console.info("TwelveData key haipo — tumia demo key");
+    // Bila key, hatuwezi kuchukua
+    return null;
+  }
+  try {
+    const url = `${TWELVEDATA_API}?symbol=${encodeURIComponent(symbol)}&apikey=${key}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`TwelveData HTTP ${response.status}`);
+    const data = await response.json();
+    if (data.status === 'error') throw new Error(data.message);
+    return parseFloat(data.price);
+  } catch (err) {
+    console.warn("TwelveData fetch failed:", err);
+    return null;
+  }
 }
 
 // ============ IMAGES ============
@@ -540,9 +625,8 @@ function previewImage(event, previewId, key) {
   if (!file) return;
   if (file.size > 5 * 1024 * 1024) { alert("Picha ni kubwa mno. Max 5MB."); return; }
   const url = URL.createObjectURL(file);
-  const preview = document.getElementById(previewId);
-  preview.src = url;
-  preview.style.display = 'block';
+  document.getElementById(previewId).src = url;
+  document.getElementById(previewId).style.display = 'block';
   globalImages[key] = { url, file };
 }
 
@@ -565,35 +649,31 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL SINGLE MASTER ============
+// ============ CALL MASTER ============
 async function callMaster(master, images, pair, livePrice, apiKey) {
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
 
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}.
 
-Analyze the 3 chart images provided (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
+Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
 
-You MUST respond in valid JSON only (no markdown, no code fences, no extra text):
+Respond in valid JSON only:
 {
   "vote": "BUY" | "SELL" | "HOLD",
   "confidence": <number 0-100>,
-  "reasoning": "<2-3 sentences in Swahili explaining your analysis from your specific lens>",
-  "key_level": "<specific price level you identified if any, or null>"
+  "reasoning": "<2-3 sentences in Swahili>",
+  "key_level": "<price level or null>"
 }
 
 Rules:
-- If the chart is unclear or you cannot identify a clear setup, vote "HOLD" with low confidence.
-- Confidence should reflect how certain you are based on YOUR specific lens only.
-- Vote based ONLY on your assigned lens, not other frameworks.
-- Be honest. If your lens doesn't see anything clear, say HOLD.`;
+- If chart is unclear, vote "HOLD" with low confidence.
+- Vote based ONLY on your assigned lens.
+- Be honest.`;
 
   const parts = [{ text: prompt }];
   for (const img of images) {
     parts.push({
-      inline_data: {
-        mime_type: img.file.type || 'image/png',
-        data: await fileToBase64(img.file)
-      }
+      inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) }
     });
   }
 
@@ -608,7 +688,7 @@ Rules:
 
   const data = await response.json();
   if (data.error) throw new Error(`${master.name}: ${data.error.message}`);
-  if (!data.candidates || !data.candidates[0]) throw new Error(`${master.name}: No response from AI`);
+  if (!data.candidates || !data.candidates[0]) throw new Error(`${master.name}: No response`);
 
   let text = data.candidates[0].content.parts[0].text.trim();
   text = text.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -625,7 +705,7 @@ Rules:
   };
 }
 
-// ============ CONFLUENCE ENGINE ============
+// ============ CONFLUENCE ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0;
   let totalWeight = 0;
@@ -645,15 +725,9 @@ function computeConfluence(masterResults) {
   if (buyWeight > sellWeight && buyWeight > holdWeight) action = 'BUY';
   else if (sellWeight > buyWeight && sellWeight > holdWeight) action = 'SELL';
 
-  const confidence = Math.round(consensusStrength * 100);
-
   return {
     action,
-    confidence,
-    buyScore: buyWeight,
-    sellScore: sellWeight,
-    holdScore: holdWeight,
-    consensusStrength,
+    confidence: Math.round(consensusStrength * 100),
     buyCount: masterResults.filter(r => r.vote === 'BUY').length,
     sellCount: masterResults.filter(r => r.vote === 'SELL').length,
     holdCount: masterResults.filter(r => r.vote === 'HOLD').length
@@ -693,7 +767,7 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
 // ============ RUN ANALYSIS ============
 async function runAnalysis() {
   const apiKey = sessionStorage.getItem('lutynoel_apiKey');
-  if (!apiKey) { alert("API Key haipo. Ingia tena."); logout(); return; }
+  if (!apiKey) { alert("API Key haipo."); logout(); return; }
 
   const pair = document.getElementById('selectedPair').value;
   const livePrice = parseFloat(document.getElementById('livePrice').value);
@@ -701,8 +775,8 @@ async function runAnalysis() {
   const h1 = document.getElementById('chartH1').files[0];
   const m15 = document.getElementById('chartM15').files[0];
 
-  if (!livePrice) { alert("Weka bei halisi ya soko."); return; }
-  if (!h4 || !h1 || !m15) { alert("Pakia picha zote 3 (4H, 1H, 15M)."); return; }
+  if (!livePrice) { alert("Weka bei halisi."); return; }
+  if (!h4 || !h1 || !m15) { alert("Pakia picha zote 3."); return; }
 
   const images = [
     { file: h4, tf: '4H' },
@@ -716,19 +790,15 @@ async function runAnalysis() {
 
   const resultsContainer = document.getElementById('resultsContainer');
   resultsContainer.style.display = 'block';
-
   renderLoadingState(pair, livePrice, MASTERS_12);
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   try {
     const promises = MASTERS_12.map(master => 
       callMaster(master, images, pair, livePrice, apiKey)
-        .then(result => {
-          updateMasterCard(result);
-          return result;
-        })
+        .then(result => { updateMasterCard(result); return result; })
         .catch(err => {
-          const failed = { ...master, vote: 'HOLD', confidence: 0, reasoning: `⚠️ Hitilafu: ${err.message}`, error: true };
+          const failed = { ...master, vote: 'HOLD', confidence: 0, reasoning: `⚠️ ${err.message}`, error: true };
           updateMasterCard(failed);
           return failed;
         })
@@ -739,26 +809,17 @@ async function runAnalysis() {
     const sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
 
-    const analysisRecord = {
+    const record = {
       id: Date.now(),
       date: new Date().toLocaleString(),
-      pair,
-      action: confluence.action,
-      confidence: confluence.confidence,
-      entry: sltp.entry,
-      sl: sltp.sl,
-      tp1: sltp.tp1,
-      tp2: sltp.tp2,
-      tp3: sltp.tp3,
-      shield: shield.approved,
-      masters: masterResults,
-      confluence
+      pair, action: confluence.action, confidence: confluence.confidence,
+      entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
+      shield: shield.approved, masters: masterResults, confluence
     };
 
-    saveToHistory(analysisRecord);
-    renderFinalResults(analysisRecord, shield);
-
-    showToast(shield.approved ? "✅ Signal imeidhinishwa!" : "🛡️ Signal imezuiwa na Capital Shield", 4000);
+    saveToHistory(record);
+    renderFinalResults(record, shield);
+    showToast(shield.approved ? "✅ Signal imeidhinishwa!" : "🛡️ Signal imezuiwa", 4000);
 
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
@@ -772,20 +833,18 @@ async function runAnalysis() {
   }
 }
 
-// ============ LOADING STATE ============
 function renderLoadingState(pair, livePrice, masters) {
   const container = document.getElementById('resultsContainer');
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 12 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Wataalamu 12 wanachambua chati kwa wakati mmoja...</div>
+      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice}</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 12 — LIVE VOTING</div>
       <div id="mastersLiveContainer"></div>
     </div>
   `;
-
   const mContainer = document.getElementById('mastersLiveContainer');
   masters.forEach(m => {
     mContainer.innerHTML += `
@@ -804,7 +863,6 @@ function renderLoadingState(pair, livePrice, masters) {
 function updateMasterCard(result) {
   const card = document.getElementById(`master-${result.id}`);
   if (!card) return;
-  
   const voteEl = document.getElementById(`vote-${result.id}`);
   const descEl = document.getElementById(`desc-${result.id}`);
   const confEl = document.getElementById(`conf-${result.id}`);
@@ -822,26 +880,21 @@ function updateMasterCard(result) {
   `;
 }
 
-// ============ COMPUTE SL/TP ============
 function computeSLTP(masters, action, livePrice, pair) {
   const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
-
   if (action === 'HOLD') {
     return { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice };
   }
-
   const isBuy = action === 'BUY';
   const keyLevels = masters
     .filter(m => m.key_level && !isNaN(parseFloat(m.key_level)))
     .map(m => parseFloat(m.key_level));
 
   let sl, tp1, tp2, tp3;
-
   if (isBuy) {
     const slCandidates = keyLevels.filter(l => l < livePrice);
     sl = slCandidates.length > 0 ? Math.max(...slCandidates) : livePrice - 30 * spec.pipSize;
     sl = sl - 5 * spec.pipSize;
-    
     const risk = livePrice - sl;
     tp1 = livePrice + risk * 1;
     tp2 = livePrice + risk * 2;
@@ -850,13 +903,11 @@ function computeSLTP(masters, action, livePrice, pair) {
     const slCandidates = keyLevels.filter(l => l > livePrice);
     sl = slCandidates.length > 0 ? Math.min(...slCandidates) : livePrice + 30 * spec.pipSize;
     sl = sl + 5 * spec.pipSize;
-    
     const risk = sl - livePrice;
     tp1 = livePrice - risk * 1;
     tp2 = livePrice - risk * 2;
     tp3 = livePrice - risk * 3;
   }
-
   return {
     entry: parseFloat(livePrice.toFixed(spec.decimals)),
     sl: parseFloat(sl.toFixed(spec.decimals)),
@@ -866,12 +917,10 @@ function computeSLTP(masters, action, livePrice, pair) {
   };
 }
 
-// ============ FINAL RESULTS ============
 function renderFinalResults(record, shield) {
   const container = document.getElementById('resultsContainer');
   const { action, confidence, entry, sl, tp1, tp2, tp3, pair } = record;
   const spec = PAIR_SPECS[pair];
-
   const isBuy = action === 'BUY';
   const isSell = action === 'SELL';
   const actionColor = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--orange)';
@@ -880,18 +929,14 @@ function renderFinalResults(record, shield) {
   const rrr = riskPips > 0 ? (rewardPips / riskPips).toFixed(2) : '0';
 
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
-  const projections = lots.map(lot => {
-    const usd = rewardPips * spec.pipValueStdLot * lot;
-    return { lot, usd: usd.toFixed(2) };
-  });
+  const projections = lots.map(lot => ({
+    lot, usd: (rewardPips * spec.pipValueStdLot * lot).toFixed(2)
+  }));
 
   let html = `
     <div class="card" style="text-align:center;border-color:${actionColor};">
       <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
       <div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${action}</div>
-      <div style="font-size:12px;font-weight:bold;color:${actionColor};background:${actionColor}22;padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:10px;">
-        ${action === 'HOLD' ? 'HAKUNA SETUP WAZI' : 'CONSENSUS SIGNAL'}
-      </div>
       <div class="signal-badge-container">
         <span class="badge-conf">${confidence}% CONFIDENCE</span>
         <span class="badge-status">${record.confluence.buyCount}B / ${record.confluence.sellCount}S / ${record.confluence.holdCount}H</span>
@@ -908,7 +953,7 @@ function renderFinalResults(record, shield) {
       </div>
       <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}">
         <span>${shield.checks.dominance ? '✓' : '✗'}</span>
-        <span>Dominance ≥ 2 masters (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span>
+        <span>Dominance ≥ 2 (Sasa: ${Math.abs(record.confluence.buyCount - record.confluence.sellCount)})</span>
       </div>
       <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}">
         <span>${shield.checks.alignment ? '✓' : '✗'}</span>
@@ -916,7 +961,7 @@ function renderFinalResults(record, shield) {
       </div>
       <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}">
         <span>${shield.checks.rrr ? '✓' : '✗'}</span>
-        <span>Risk:Reward ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span>
+        <span>RRR ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span>
       </div>
     </div>
   `;
@@ -930,31 +975,25 @@ function renderFinalResults(record, shield) {
           <div class="mini-box"><label style="color:var(--red);">Stop Loss</label><div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div></div>
         </div>
         <div class="grid-3">
-          <div class="mini-box"><label style="color:var(--green);">TP1 (1R)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp1}</div></div>
-          <div class="mini-box"><label style="color:var(--green);">TP2 (2R)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp2}</div></div>
-          <div class="mini-box"><label style="color:var(--green);">TP3 (3R)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div></div>
+          <div class="mini-box"><label style="color:var(--green);">TP1</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp1}</div></div>
+          <div class="mini-box"><label style="color:var(--green);">TP2</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp2}</div></div>
+          <div class="mini-box"><label style="color:var(--green);">TP3</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div></div>
         </div>
         <div class="grid-2" style="margin-top:10px;">
           <div class="mini-box" style="text-align:center;"><label>Risk</label><div style="font-size:14px;font-weight:bold;color:var(--red);">${riskPips} pips</div></div>
-          <div class="mini-box" style="text-align:center;"><label>Reward (TP3)</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${rewardPips} pips</div></div>
+          <div class="mini-box" style="text-align:center;"><label>Reward</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${rewardPips} pips</div></div>
         </div>
         <div class="mini-box" style="margin-top:10px;text-align:center;">
-          <label style="color:var(--accent);">Risk : Reward</label>
+          <label style="color:var(--accent);">R:R</label>
           <div style="font-size:18px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div>
         </div>
       </div>
 
       <div class="card">
-        <div class="ballistic-header">💵 PROFIT PROJECTIONS (TP3 = ${rewardPips} pips)</div>
+        <div class="ballistic-header">💵 PROFIT PROJECTIONS (TP3)</div>
         ${projections.map(p => `
-          <div class="lot-row">
-            <strong>Lot ${p.lot}</strong>
-            <span style="color:var(--green);font-weight:bold;">$${p.usd}</span>
-          </div>
+          <div class="lot-row"><strong>Lot ${p.lot}</strong><span style="color:var(--green);font-weight:bold;">$${p.usd}</span></div>
         `).join('')}
-        <div style="font-size:10px;color:var(--muted);margin-top:8px;text-align:center;">
-          ⚠️ Projections ni kwa standard account. Broker wako anaweza kuwa tofauti.
-        </div>
       </div>
     `;
   }
@@ -964,7 +1003,6 @@ function renderFinalResults(record, shield) {
       <div class="ballistic-header">👥 MASTERS 12 — FINAL VOTES</div>
       <div id="mastersFinalContainer"></div>
     </div>
-
     <button class="primary-btn" onclick="resetAnalysis()" style="margin-top:10px;">🔄 CHAMBUA TENA</button>
   `;
 
@@ -1002,31 +1040,25 @@ function resetAnalysis() {
   window.scrollTo(0, 0);
 }
 
-// ============ RISK CALCULATOR ============
+// ============ RISK ============
 function calculateRisk() {
   const balance = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const riskPct = parseFloat(document.getElementById('riskPercent').value) || 1;
   const slPips = parseFloat(document.getElementById('riskSlPips').value) || 30;
   const pair = document.getElementById('riskPair').value;
-
   const spec = PAIR_SPECS[pair];
   const riskAmount = balance * (riskPct / 100);
-  const pipValuePerLot = spec.pipValueStdLot;
-  const lotSize = riskAmount / (slPips * pipValuePerLot);
+  const lotSize = riskAmount / (slPips * spec.pipValueStdLot);
 
-  const box = document.getElementById('riskResultBox');
-  const text = document.getElementById('riskResultText');
-  box.style.display = 'block';
-  text.innerHTML = `
+  document.getElementById('riskResultBox').style.display = 'block';
+  document.getElementById('riskResultText').innerHTML = `
     • <strong>Balance:</strong> $${balance.toFixed(2)}<br>
     • <strong>Risk (${riskPct}%):</strong> $${riskAmount.toFixed(2)}<br>
     • <strong>SL:</strong> ${slPips} pips<br>
-    • <strong>Pair:</strong> ${pair} (pip value: $${pipValuePerLot}/lot)<br>
+    • <strong>Pair:</strong> ${pair}<br>
     <br>
     <strong style="color:var(--accent);font-size:15px;">📊 LOT SIZE: ${lotSize.toFixed(3)}</strong>
-    <div style="font-size:11px;color:var(--muted);margin-top:6px;">(Round to broker minimum: ${Math.max(0.01, lotSize).toFixed(2)})</div>
   `;
-  showToast("Lot size imehesabiwa!");
 }
 
 // ============ JOURNAL ============
@@ -1043,7 +1075,6 @@ function saveJournalTrade() {
     tp: parseFloat(document.getElementById('jTP').value) || 0,
     outcome: document.getElementById('jOutcome').value
   };
-
   if (!trade.entry) { alert("Weka entry price."); return; }
   saveToHistory(trade);
   showToast("Trade imehifadhiwa!");
@@ -1062,12 +1093,10 @@ function saveToHistory(record) {
 function loadHistory() {
   const container = document.getElementById('historyList');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-
   if (history.length === 0) {
     container.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>`;
     return;
   }
-
   container.innerHTML = history.map((h, i) => {
     const color = h.action === 'BUY' ? 'var(--green)' : h.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
     return `
@@ -1076,7 +1105,6 @@ function loadHistory() {
           <strong>${h.pair} <span style="color:${color};">${h.action}</span></strong>
           ${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br>
           <small style="color:var(--muted);">${h.date}</small>
-          ${h.outcome ? `<span style="color:var(--blue);font-size:11px;"> • ${h.outcome}</span>` : ''}
         </div>
         <button onclick="deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">🗑️</button>
       </div>
@@ -1090,7 +1118,6 @@ function deleteHistory(index) {
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
   loadHistory();
   updateStats();
-  showToast("Imeondolewa!");
 }
 
 function clearHistory() {
@@ -1098,32 +1125,27 @@ function clearHistory() {
   localStorage.removeItem('lutynoel_history');
   loadHistory();
   updateStats();
-  showToast("Historia imefutwa!");
 }
 
-// ============ STATS ============
 function updateStats() {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   document.getElementById('statTotalAnalyses').innerText = history.length;
-
   const closed = history.filter(t => t.outcome === 'WIN' || t.outcome === 'LOSS');
   if (closed.length === 0) {
     document.getElementById('statWinRate').innerText = '—';
     document.getElementById('statNetPips').innerText = '0';
   } else {
     const wins = closed.filter(t => t.outcome === 'WIN').length;
-    const winRate = ((wins / closed.length) * 100).toFixed(0) + '%';
-    document.getElementById('statWinRate').innerText = winRate;
+    document.getElementById('statWinRate').innerText = ((wins / closed.length) * 100).toFixed(0) + '%';
     document.getElementById('statNetPips').innerText = closed.length;
   }
 }
 
-// ============ EXPORT ============
 function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "14.1"
+    version: "15.0"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -1145,6 +1167,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
     loadHistory();
     updateStats();
+    setTimeout(() => fetchLivePrice(), 1500);
   }
 });
 </script>
