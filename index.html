@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v19.1 — Fixed Profit Projections</title>
+<title>Lutynoel FX v19.3 — English Masters + Fixed Projections</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -150,32 +150,32 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v19.1</div>
-    <div class="auth-subtitle">Fixed Profit Projections</div>
+    <div class="auth-title">Lutynoel FX v19.3</div>
+    <div class="auth-subtitle">English Masters + Fixed Projections</div>
 
     <div class="disclaimer-box">
-      ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
+      ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. <strong>No profit guarantee.</strong> Trade at your own risk.
     </div>
 
-    <label>Jina Lako</label>
-    <input type="text" id="loginName" placeholder="mf. Noel Nkungu" maxlength="30">
+    <label>Your Name</label>
+    <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
 
     <label>Mistral API Key</label>
-    <input type="password" id="authMistralKey" placeholder="Weka Mistral key hapa" autocomplete="off">
+    <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
 
     <label>Gemini API Key</label>
     <input type="password" id="authGeminiKey" placeholder="AIza... au AQ..." autocomplete="off">
 
     <label>TwelveData API Key (Optional)</label>
-    <input type="text" id="authTwelveKey" placeholder="Weka kama una" autocomplete="off">
+    <input type="text" id="authTwelveKey" placeholder="Optional" autocomplete="off">
 
     <div class="info-box">
-      🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
-      🆓 <a href="https://console.mistral.ai" target="_blank" style="color:var(--accent);">Pata Mistral key bure →</a><br>
-      🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Pata Gemini key bure →</a>
+      🔒 Keys stored in <strong>sessionStorage</strong> only.<br>
+      🆓 <a href="https://console.mistral.ai" target="_blank" style="color:var(--accent);">Get Mistral key free →</a><br>
+      🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Get Gemini key free →</a>
     </div>
 
-    <button class="primary-btn" onclick="handleLogin()">Ingia Salama</button>
+    <button class="primary-btn" onclick="handleLogin()">Login</button>
   </div>
 </div>
 
@@ -188,22 +188,22 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     </div>
     <div class="header-icons">
       <div class="user-pill" id="displayUserName">TRADER</div>
-      <button onclick="logout()" style="background:#ef4444;color:white;border:none;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:bold;">Toka</button>
+      <button onclick="logout()" style="background:#ef4444;color:white;border:none;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:bold;">Logout</button>
     </div>
   </header>
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v19.1</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v19.3</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
-    <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
+    <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">DUAL</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('news')">📰 News Live <span class="badge-live">LIVE</span></div>
     <div class="menu-item" onclick="navigate('pips')">🧮 Pips Calculator <span class="badge-new">NEW</span></div>
-    <div class="menu-item" onclick="navigate('history')">📁 Historia</div>
+    <div class="menu-item" onclick="navigate('history')">📁 History</div>
     <div class="menu-item" onclick="navigate('settings')">⚙️ Settings</div>
   </div>
 
@@ -212,34 +212,34 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">DUAL AI</span>
+          <span class="badge-shield">ENGLISH</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
           <span style="font-size:12px;color:var(--muted);font-weight:600;">Mistral + Gemini Multi-Provider</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 6 wanatumia Mistral kwanza, Gemini kama fallback.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">English-only masters. Clear, fast, professional.</p>
       </div>
 
       <div class="grid-3">
-        <div class="mini-box" style="text-align:center;"><label>Analiza</label><div id="statTotalAnalyses" style="font-size:20px;font-weight:bold;color:var(--accent);">0</div></div>
+        <div class="mini-box" style="text-align:center;"><label>Analysis</label><div id="statTotalAnalyses" style="font-size:20px;font-weight:bold;color:var(--accent);">0</div></div>
         <div class="mini-box" style="text-align:center;"><label>Win Rate</label><div id="statWinRate" style="font-size:20px;font-weight:bold;color:var(--green);">—</div></div>
         <div class="mini-box" style="text-align:center;"><label>Closed</label><div id="statNetPips" style="font-size:18px;font-weight:bold;color:var(--blue);">0</div></div>
       </div>
 
       <div class="card">
-        <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Njia za Haraka</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Anzisha Masters 6 Analysis</button>
-        <button class="secondary-btn" onclick="navigate('news')">📰 Tazama News Live</button>
+        <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
+        <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Masters 6 Analysis</button>
+        <button class="secondary-btn" onclick="navigate('news')">📰 Live News</button>
         <button class="secondary-btn" onclick="navigate('pips')">🧮 Pips Calculator</button>
       </div>
 
       <div class="info-box">
         ⚙️ <strong>Multi-Provider Logic:</strong><br>
-        • Kila master anajaribu <strong>Mistral</strong> kwanza<br>
-        • Kama Mistral inagoma → <strong>Gemini</strong> inachukua<br>
-        • Kama zote zinagoma → master anarudi "HOLD"<br>
-        • Kila master card inaonyesha provider iliyotumika
+        • Each master tries <strong>Mistral</strong> first<br>
+        • If Mistral fails → <strong>Gemini</strong> takes over<br>
+        • If both fail → master returns "HOLD"<br>
+        • Each master card shows the provider used
       </div>
     </div>
 
@@ -247,7 +247,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin:5px 0 15px;">🎯 Masters 6 Dual-Provider Analysis</h3>
 
-        <label>1. Chagua Pair</label>
+        <label>1. Choose Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
           <option value="XAUUSD">XAUUSD (Gold)</option>
           <option value="BTCUSD">BTCUSD (Bitcoin)</option>
@@ -261,17 +261,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="SOLUSD">SOLUSD</option>
         </select>
 
-        <label>2. Bei ya Sasa (Auto-Fetch)</label>
+        <label>2. Current Price (Auto-Fetch)</label>
         <div class="price-row">
           <input type="number" step="any" id="livePrice" value="2650.00">
           <button class="refresh-btn" id="refreshBtn" onclick="fetchLivePrice()">🔄 Refresh</button>
         </div>
         <div id="priceStatus" class="price-status manual">
-          <span id="priceStatusText">⚪ Bonyeza Refresh kupata bei halisi</span>
+          <span id="priceStatusText">⚪ Click Refresh to get live price</span>
           <span id="priceTime">—</span>
         </div>
 
-        <label>3. Pakia Chati (Zote 3)</label>
+        <label>3. Upload Charts (All 3)</label>
         <div class="upload-zone">
           <div style="color:var(--accent);font-weight:bold;font-size:13px;">⬆ 4H CHART</div>
           <input type="file" id="chartH4" accept="image/*" onchange="previewImage(event,'previewH4','h4')">
@@ -288,7 +288,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
         </div>
 
-        <button class="primary-btn" id="runBtn" onclick="runAnalysis()">🚀 ANZA MASTERS 6 ANALYSIS</button>
+        <button class="primary-btn" id="runBtn" onclick="runAnalysis()">🚀 START MASTERS 6 ANALYSIS</button>
       </div>
 
       <div id="resultsContainer" style="display:none;"></div>
@@ -314,7 +314,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
             </select>
           </div>
         </div>
-        <button class="secondary-btn" onclick="calculateRisk()">Hesabu Lot Size</button>
+        <button class="secondary-btn" onclick="calculateRisk()">Calculate Lot Size</button>
         <div id="riskResultBox" class="mini-box" style="margin-top:15px;display:none;border-color:var(--accent);">
           <div id="riskResultText" style="font-size:13px;line-height:1.6;"></div>
         </div>
@@ -351,7 +351,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="LOSS">LOSS</option>
           <option value="BREAKEVEN">BREAKEVEN</option>
         </select>
-        <button class="primary-btn" onclick="saveJournalTrade()">💾 Hifadhi Trade</button>
+        <button class="primary-btn" onclick="saveJournalTrade()">💾 Save Trade</button>
       </div>
     </div>
 
@@ -379,11 +379,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="fetchLiveNews()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;font-size:11px;">
-          📡 News zinatoka Forex Factory (real-time).
+          📡 News from Forex Factory (real-time).
         </div>
         <div id="newsContainer">
           <div style="text-align:center;padding:30px;color:var(--muted);">
-            <div class="spinner-white"></div> Inapakia news...
+            <div class="spinner-white"></div> Loading news...
           </div>
         </div>
       </div>
@@ -391,12 +391,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
     <div id="view-pips" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🧮 Pips Calculator (Huru)</h3>
+        <h3 style="margin:5px 0 15px;">🧮 Pips Calculator</h3>
         <div class="info-box" style="margin-bottom:15px;font-size:11px;">
-          💡 Kikokotoo hiki kinahesabu pips, thamani ya pips kwa lot, faida/hasara. Kinajitegemea.
+          💡 Calculates pips, pip value per lot, profit/loss. Offline tool.
         </div>
 
-        <label>Chagua Pair</label>
+        <label>Choose Pair</label>
         <select id="pipsPair" onchange="updatePipsPairInfo()">
           <option value="XAUUSD">XAUUSD (Gold)</option>
           <option value="BTCUSD">BTCUSD (Bitcoin)</option>
@@ -411,21 +411,21 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </select>
 
         <div class="grid-2">
-          <div><label>Bei ya Kuingia (Entry)</label><input type="number" step="any" id="pipsEntry" value="2650.00"></div>
-          <div><label>Bei ya Toka (Exit)</label><input type="number" step="any" id="pipsExit" value="2660.00"></div>
+          <div><label>Entry Price</label><input type="number" step="any" id="pipsEntry" value="2650.00"></div>
+          <div><label>Exit Price</label><input type="number" step="any" id="pipsExit" value="2660.00"></div>
         </div>
 
         <div class="grid-2">
           <div><label>Lot Size</label><input type="number" step="0.01" id="pipsLot" value="0.01"></div>
-          <div><label>Uelekeo (Direction)</label>
+          <div><label>Direction</label>
             <select id="pipsDirection">
-              <option value="BUY">BUY (Nunua)</option>
-              <option value="SELL">SELL (Uza)</option>
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
             </select>
           </div>
         </div>
 
-        <button class="primary-btn" onclick="calculatePips()">🧮 Hesabu Pips & Faida</button>
+        <button class="primary-btn" onclick="calculatePips()">🧮 Calculate Pips & Profit</button>
 
         <div id="pipsResultBox" style="display:none;"></div>
       </div>
@@ -434,14 +434,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">📁 Historia</h3>
-          <button onclick="clearHistory()" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">Futa Zote</button>
+          <h3 style="margin:0;">📁 History</h3>
+          <button onclick="clearHistory()" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">Clear All</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;">
-          👆 <strong>Bofya analysis yoyote</strong> kuona maelezo kamili
+          👆 <strong>Tap any analysis</strong> to view full details
         </div>
         <div id="historyList">
-          <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>
+          <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">No history yet.</div>
         </div>
       </div>
     </div>
@@ -450,17 +450,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v19.1 (Fixed Profit Projections)<br>
+          <strong>Version:</strong> v19.3 (English Masters)<br>
           <strong>Primary:</strong> Mistral (Pixtral)<br>
           <strong>Fallback:</strong> Gemini 3.6/3.8/3.5<br>
           <strong>Masters:</strong> 6 (Merged)<br>
-          <strong>News:</strong> Forex Factory RSS<br>
-          <strong>Pips Calc:</strong> Offline
+          <strong>Language:</strong> English<br>
+          <strong>News:</strong> Forex Factory RSS
         </div>
         <label>TwelveData API Key</label>
-        <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
-        <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveKey</button>
-        <button class="secondary-btn" onclick="testApiKeys()">🧪 Jaribu API Keys</button>
+        <input type="text" id="settingsTwelveKey" placeholder="Your key">
+        <button class="secondary-btn" onclick="saveTwelveKey()">💾 Save TwelveKey</button>
+        <button class="secondary-btn" onclick="testApiKeys()">🧪 Test API Keys</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
       </div>
     </div>
@@ -469,7 +469,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v19.1 — FIXED PROFIT PROJECTIONS
+   LUTYNOEL FX v19.3 — ENGLISH MASTERS + FIXED PROJECTIONS
    ===================================================== */
 
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
@@ -479,58 +479,18 @@ const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
-// ============ PAIR SPECS — WITH ACCURATE PIP VALUE TABLE ============
+// ============ PAIR SPECS WITH ACCURATE PIP VALUE TABLE ============
 const PAIR_SPECS = {
-  XAUUSD: {
-    pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD',
-    slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300,
-    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
-  },
-  BTCUSD: {
-    pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT',
-    slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000,
-    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
-  },
-  NAS100: {
-    pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX',
-    slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500,
-    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
-  },
-  EURUSD: {
-    pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD',
-    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
-    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
-  },
-  GBPUSD: {
-    pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD',
-    slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
-    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
-  },
-  USDJPY: {
-    pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY',
-    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
-    pipValue: { micro: 0.091, mini: 0.91, standard: 9.10 }
-  },
-  AUDUSD: {
-    pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD',
-    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
-    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
-  },
-  USDCAD: {
-    pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD',
-    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
-    pipValue: { micro: 0.074, mini: 0.74, standard: 7.40 }
-  },
-  ETHUSD: {
-    pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT',
-    slDefault: 50, slMin: 30, slMax: 100, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500,
-    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
-  },
-  SOLUSD: {
-    pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT',
-    slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50,
-    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
-  }
+  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
+  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
+  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.091, mini: 0.91, standard: 9.10 } },
+  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.074, mini: 0.74, standard: 7.40 } },
+  ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', slDefault: 50, slMin: 30, slMax: 100, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
+  SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
 const MASTERS_6 = [
@@ -544,7 +504,7 @@ const MASTERS_6 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v19.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v19.3", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -572,8 +532,8 @@ function handleLogin() {
   const geminiKey = document.getElementById('authGeminiKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
 
-  if (!name) { alert("Weka jina lako."); return; }
-  if (!mistralKey && !geminiKey) { alert("Weka angalau API key moja (Mistral au Gemini)."); return; }
+  if (!name) { alert("Enter your name."); return; }
+  if (!mistralKey && !geminiKey) { alert("Enter at least one API key (Mistral or Gemini)."); return; }
 
   sessionStorage.setItem('lutynoel_name', name);
   if (mistralKey) sessionStorage.setItem('lutynoel_mistralKey', mistralKey);
@@ -585,20 +545,20 @@ function handleLogin() {
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
   document.getElementById('settingsTwelveKey').value = twelveKey;
   loadHistory(); updateStats();
-  showToast(`Karibu ${name}! 🚀`);
+  showToast(`Welcome ${name}! 🚀`);
   setTimeout(() => fetchLivePrice(), 1000);
 }
 
 function saveTwelveKey() {
   const key = document.getElementById('settingsTwelveKey').value.trim();
-  if (key) { sessionStorage.setItem('lutynoel_twelveKey', key); showToast("Imehifadhiwa!"); }
-  else { sessionStorage.removeItem('lutynoel_twelveKey'); showToast("Imeondolewa."); }
+  if (key) { sessionStorage.setItem('lutynoel_twelveKey', key); showToast("Saved!"); }
+  else { sessionStorage.removeItem('lutynoel_twelveKey'); showToast("Removed."); }
 }
 
 async function testApiKeys() {
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
-  showToast("🧪 Inajaribu...", 2000);
+  showToast("🧪 Testing...", 2000);
   let results = [];
   if (mistralKey) {
     try {
@@ -648,7 +608,7 @@ function onPairChange(pair) {
   const spec = PAIR_SPECS[pair];
   if (spec) {
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('loading', '⏳ Inapakua bei...');
+    setPriceStatus('loading', '⏳ Loading price...');
     fetchLivePrice();
   }
 }
@@ -667,20 +627,20 @@ async function fetchLivePrice() {
   const refreshBtn = document.getElementById('refreshBtn');
   refreshBtn.disabled = true;
   refreshBtn.innerHTML = '<span class="spinner-white"></span>';
-  setPriceStatus('loading', '⏳ Inapakua bei...');
+  setPriceStatus('loading', '⏳ Loading price...');
   try {
     let price = null;
     if (spec.source === 'binance') price = await fetchBinancePrice(spec.binanceSymbol);
     else if (spec.source === 'twelve') price = await fetchTwelveDataPrice(spec.twelveSymbol);
     if (price !== null && price > 0) {
       document.getElementById('livePrice').value = price.toFixed(spec.decimals);
-      const time = new Date().toLocaleTimeString('sw-TZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      setPriceStatus('live', `🟢 Bei halisi (${spec.source.toUpperCase()})`, time);
+      const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      setPriceStatus('live', `🟢 Live price (${spec.source.toUpperCase()})`, time);
       showToast(`✅ ${price.toFixed(spec.decimals)}`, 2000);
-    } else throw new Error("Haikupatikana");
+    } else throw new Error("Not found");
   } catch (err) {
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('error', `🔴 Bei ya demo`, '');
+    setPriceStatus('error', `🔴 Demo price`, '');
   } finally {
     refreshBtn.disabled = false;
     refreshBtn.innerHTML = '🔄 Refresh';
@@ -713,7 +673,7 @@ let globalImages = { h4: null, h1: null, m15: null };
 function previewImage(event, previewId, key) {
   const file = event.target.files[0];
   if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { alert("Picha ni kubwa. Max 5MB."); return; }
+  if (file.size > 5 * 1024 * 1024) { alert("Image too large. Max 5MB."); return; }
   const url = URL.createObjectURL(file);
   document.getElementById(previewId).src = url;
   document.getElementById(previewId).style.display = 'block';
@@ -737,18 +697,34 @@ function fileToBase64(file) {
   });
 }
 
-async function callMistral(master, images, pair, livePrice, apiKey) {
-  const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
+// ============ ENGLISH PROMPT BUILDER ============
+function buildPrompt(master, pair, livePrice) {
+  return `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
 
 Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
 
-Respond in valid JSON only:
+Respond ONLY in valid JSON:
 {
   "vote": "BUY" | "SELL" | "HOLD",
   "confidence": <number 0-100>,
-  "reasoning": "<2-3 sentences in Swahili>",
+  "reasoning": "<2-3 sentences in SIMPLE English>",
   "key_level": "<price level or null>"
-}`;
+}
+
+REASONING RULES:
+- Write SIMPLE, CLEAR English like a professional trader explaining to another trader
+- Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance
+- Be specific with price levels (e.g., "at 4,278")
+- Maximum 2-3 sentences. No fluff.
+- BAD: "Price has mitigated below upper portion of FVG" ❌ (too technical)
+- GOOD: "Price entered FVG zone (4,323-4,355) and rejected from PDL. Watch for BUY setup at 4,278 support." ✅
+
+Vote based ONLY on your assigned lens. If unclear, vote "HOLD" with low confidence. Be honest.`;
+}
+
+// ============ CALL MISTRAL ============
+async function callMistral(master, images, pair, livePrice, apiKey) {
+  const prompt = buildPrompt(master, pair, livePrice);
 
   const content = [{ type: "text", text: prompt }];
   for (const img of images) {
@@ -763,7 +739,8 @@ Respond in valid JSON only:
     body: JSON.stringify({
       model: MISTRAL_MODEL,
       messages: [{ role: 'user', content: content }],
-      temperature: 0.3, max_tokens: 1000
+      temperature: 0.4,
+      max_tokens: 1000
     })
   });
 
@@ -781,24 +758,15 @@ Respond in valid JSON only:
     ...master,
     vote: (result.vote || 'HOLD').toUpperCase(),
     confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-    reasoning: result.reasoning || 'Hakuna maelezo.',
+    reasoning: result.reasoning || 'No analysis.',
     key_level: result.key_level || null,
     provider: 'Mistral'
   };
 }
 
+// ============ CALL GEMINI ============
 async function callGemini(master, images, pair, livePrice, apiKey) {
-  const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
-
-Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
-
-Respond in valid JSON only:
-{
-  "vote": "BUY" | "SELL" | "HOLD",
-  "confidence": <number 0-100>,
-  "reasoning": "<2-3 sentences in Swahili>",
-  "key_level": "<price level or null>"
-}`;
+  const prompt = buildPrompt(master, pair, livePrice);
 
   const parts = [{ text: prompt }];
   for (const img of images) {
@@ -814,7 +782,7 @@ Respond in valid JSON only:
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts }],
-          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
+          generationConfig: { temperature: 0.4, responseMimeType: "application/json" }
         })
       });
 
@@ -832,7 +800,7 @@ Respond in valid JSON only:
         ...master,
         vote: (result.vote || 'HOLD').toUpperCase(),
         confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-        reasoning: result.reasoning || 'Hakuna maelezo.',
+        reasoning: result.reasoning || 'No analysis.',
         key_level: result.key_level || null,
         provider: 'Gemini'
       };
@@ -855,7 +823,7 @@ async function callMaster(master, images, pair, livePrice) {
     catch (err) { console.warn(`[${master.name}] Gemini failed: ${err.message}`); }
   }
 
-  throw new Error("Zote mbili (Mistral + Gemini) zimeshindwa");
+  throw new Error("Both Mistral + Gemini failed");
 }
 
 function computeConfluence(masterResults) {
@@ -882,36 +850,36 @@ function computeConfluence(masterResults) {
   let signal = 'NO_TRADE', signalLabel = 'NO TRADE', signalColor = 'no-trade', signalReason = '', tradable = false;
   if (totalVoted < 3 || tie) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = tie ? `Masters wanapishana (${buyCount} BUY vs ${sellCount} SELL).` : `Masters ${totalVoted}/6 wamepiga kura.`;
+    signalReason = tie ? `Masters split (${buyCount} BUY vs ${sellCount} SELL).` : `Only ${totalVoted}/6 masters voted.`;
     tradable = false;
   } else if (confidence < 60) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = `Confidence ${confidence}% — chini ya 60%.`;
+    signalReason = `Confidence ${confidence}% — below 60%.`;
     tradable = false;
   } else if (direction === 'HOLD') {
     signal = 'NO_TRADE'; signalLabel = '⏸ NO TRADE'; signalColor = 'no-trade';
-    signalReason = `Hakuna uelekeo wa wazi.`; tradable = false;
+    signalReason = `No clear direction.`; tradable = false;
   } else if (confidence >= 80 && dominance >= 3) {
     signal = direction === 'BUY' ? 'STRONG_BUY' : 'STRONG_SELL';
     signalLabel = direction === 'BUY' ? '🟢 STRONG BUY' : '🔴 STRONG SELL';
     signalColor = direction === 'BUY' ? 'strong-buy' : 'strong-sell';
-    signalReason = `Masters ${direction === 'BUY' ? buyCount : sellCount}/6 wamekubaliana kwa nguvu.`;
+    signalReason = `${direction === 'BUY' ? buyCount : sellCount}/6 masters strongly agree.`;
     tradable = true;
   } else if (confidence >= 70 && dominance >= 2) {
     signal = direction === 'BUY' ? 'BUY' : 'SELL';
     signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
     signalColor = direction === 'BUY' ? 'buy' : 'sell';
-    signalReason = `Consensus nzuri. Confidence ${confidence}% + Dominance ${dominance}.`;
+    signalReason = `Good consensus. Confidence ${confidence}% + Dominance ${dominance}.`;
     tradable = true;
   } else if (confidence >= 60) {
     signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
     signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
     signalColor = direction === 'BUY' ? 'weak-buy' : 'weak-sell';
-    signalReason = `Tahadhari: Confidence ${confidence}% + Dominance ${dominance}. Lot ndogo tu.`;
+    signalReason = `Caution: Confidence ${confidence}% + Dominance ${dominance}. Use small lots.`;
     tradable = true;
   } else {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = `Masharti hayakidhi.`; tradable = false;
+    signalReason = `Conditions not met.`; tradable = false;
   }
   return { action: direction, signal, signalLabel, signalColor, signalReason, tradable, confidence, dominance, buyCount, sellCount, holdCount };
 }
@@ -937,14 +905,14 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const allPass = checks.consensus && checks.dominance && checks.alignment && checks.notTie && checks.tradable && checks.rrr;
   return {
     approved: allPass, checks,
-    message: allPass ? "✅ CAPITAL SHIELD: Trade approved." : confluence.tradable === false ? "⏸ CAPITAL SHIELD: Subiri — masters hawakubaliani." : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR haitoshi."
+    message: allPass ? "✅ CAPITAL SHIELD: Trade approved." : confluence.tradable === false ? "⏸ CAPITAL SHIELD: Wait — masters not aligned." : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR insufficient."
   };
 }
 
 async function runAnalysis() {
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
-  if (!mistralKey && !geminiKey) { alert("Hakuna API key."); logout(); return; }
+  if (!mistralKey && !geminiKey) { alert("No API key."); logout(); return; }
 
   const pair = document.getElementById('selectedPair').value;
   const livePrice = parseFloat(document.getElementById('livePrice').value);
@@ -952,14 +920,14 @@ async function runAnalysis() {
   const h1 = document.getElementById('chartH1').files[0];
   const m15 = document.getElementById('chartM15').files[0];
 
-  if (!livePrice) { alert("Weka bei halisi."); return; }
-  if (!h4 || !h1 || !m15) { alert("Pakia picha zote 3."); return; }
+  if (!livePrice) { alert("Enter live price."); return; }
+  if (!h4 || !h1 || !m15) { alert("Upload all 3 charts."); return; }
 
   const images = [{ file: h4, tf: '4H' }, { file: h1, tf: '1H' }, { file: m15, tf: '15M' }];
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerHTML = '<span class="spinner"></span> Inachambua...';
+  runBtn.innerHTML = '<span class="spinner"></span> Analyzing...';
 
   const resultsContainer = document.getElementById('resultsContainer');
   resultsContainer.style.display = 'block';
@@ -1001,16 +969,16 @@ async function runAnalysis() {
 
     saveToHistory(record);
     renderFinalResults(record, shield);
-    showToast(confluence.tradable ? "✅ Signal tayari" : "⏸ WAIT — Subiri", 4000);
+    showToast(confluence.tradable ? "✅ Signal ready" : "⏸ WAIT — not tradable", 4000);
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
-      <h3 style="color:var(--red);">❌ Hitilafu</h3>
+      <h3 style="color:var(--red);">❌ Error</h3>
       <p style="font-size:13px;">${err.message}</p>
-      <button class="secondary-btn" onclick="runAnalysis()">Jaribu Tena</button>
+      <button class="secondary-btn" onclick="runAnalysis()">Retry</button>
     </div>`;
   } finally {
     runBtn.disabled = false;
-    runBtn.innerHTML = '🚀 ANZA MASTERS 6 ANALYSIS';
+    runBtn.innerHTML = '🚀 START MASTERS 6 ANALYSIS';
   }
 }
 
@@ -1018,8 +986,8 @@ function renderLoadingState(pair, livePrice, masters) {
   const container = document.getElementById('resultsContainer');
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
-      <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Providers: Mistral + Gemini</div>
+      <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 ANALYZING ${pair}</div>
+      <div style="font-size:12px;color:var(--muted);">Price: ${livePrice} • Providers: Mistral + Gemini</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
@@ -1034,7 +1002,7 @@ function renderLoadingState(pair, livePrice, masters) {
           <div class="master-name">${m.id}. ${m.name}</div>
           <div class="master-vote vote-pending" id="vote-${m.id}">⏳ PENDING</div>
         </div>
-        <div class="master-desc" id="desc-${m.id}">Inachambua...</div>
+        <div class="master-desc" id="desc-${m.id}">Analyzing...</div>
         <div class="master-confidence" id="conf-${m.id}">Confidence: —</div>
       </div>
     `;
@@ -1145,20 +1113,20 @@ function buildAnalysisHTML(record, shield) {
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
       <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
       <div class="shield-box">${shield.message}</div>
-      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Consensus ≥ 60% (Sasa: ${confidence}%)</span></div>
-      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Sasa: ${dominance || 0})</span></div>
-      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>Masters 3+ wamepiga kura</span></div>
-      <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>Hakuna tie</span></div>
-      <div class="checklist-item ${shield.checks.tradable ? 'pass' : 'fail'}"><span>${shield.checks.tradable ? '✓' : '✗'}</span><span>Signal tradable</span></div>
-      <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Sasa: 1:${shield.checks.rrrValue || rrr})</span></div>
+      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Consensus ≥ 60% (Current: ${confidence}%)</span></div>
+      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 2 (Current: ${dominance || 0})</span></div>
+      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>3+ masters voted</span></div>
+      <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>No tie</span></div>
+      <div class="checklist-item ${shield.checks.tradable ? 'pass' : 'fail'}"><span>${shield.checks.tradable ? '✓' : '✗'}</span><span>Tradable signal</span></div>
+      <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Current: 1:${shield.checks.rrrValue || rrr})</span></div>
     </div>
   `;
 
   if (!tradable) {
     html += `
       <div class="card" style="border-color:var(--yellow);">
-        <div class="ballistic-header" style="color:var(--yellow);">⏸ KWA NINI WAIT?</div>
-        <div class="wait-box"><strong>${signalReason || 'Subiri.'}</strong></div>
+        <div class="ballistic-header" style="color:var(--yellow);">⏸ WHY WAIT?</div>
+        <div class="wait-box"><strong>${signalReason || 'Wait for clear setup.'}</strong></div>
       </div>
     `;
   }
@@ -1177,14 +1145,13 @@ function buildAnalysisHTML(record, shield) {
           <div class="mini-box"><label style="color:var(--green);">TP3</label><div style="font-size:14px;font-weight:bold;color:var(--green);">${tp3}</div><div style="font-size:11px;color:var(--green);">${tp3Pips} pips</div></div>
         </div>
         <div class="mini-box" style="margin-top:10px;text-align:center;">
-          <label style="color:var(--accent);">R:R (TP3)</label>
+          <label style="color:var(--accent);">Risk : Reward (TP3)</label>
           <div style="font-size:22px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div>
         </div>
       </div>
 
       <div class="card">
         <div class="ballistic-header">💵 PROFIT PROJECTIONS</div>
-        <div style="font-size:10px;color:var(--muted);margin-bottom:8px;">📊 Pip values: micro=$0.10, mini=$1.00, standard=$10.00 (kwa XAUUSD/EURUSD/GBPUSD)</div>
         ${projections.map(p => `
           <div class="lot-row">
             <div>
@@ -1268,7 +1235,7 @@ function calculatePips() {
   const lot = parseFloat(document.getElementById('pipsLot').value) || 0.01;
   const direction = document.getElementById('pipsDirection').value;
   const spec = PAIR_SPECS[pair];
-  if (!entry || !exit) { alert("Weka bei."); return; }
+  if (!entry || !exit) { alert("Enter prices."); return; }
 
   let pipsDiff = 0, isProfit = false;
   if (direction === 'BUY') { pipsDiff = (exit - entry) / spec.pipSize; isProfit = pipsDiff > 0; }
@@ -1278,24 +1245,24 @@ function calculatePips() {
   const pipValue = getPipValue(spec, lot);
   const usdValue = absPips * pipValue;
   const color = isProfit ? 'var(--green)' : 'var(--red)';
-  const label = isProfit ? 'FAIDA' : 'HASARA';
+  const label = isProfit ? 'PROFIT' : 'LOSS';
   const sign = isProfit ? '+' : '-';
 
   document.getElementById('pipsResultBox').style.display = 'block';
   document.getElementById('pipsResultBox').innerHTML = `
     <div class="calc-result-box">
-      <div style="text-align:center;font-size:12px;color:var(--muted);text-transform:uppercase;">Matokeo</div>
+      <div style="text-align:center;font-size:12px;color:var(--muted);text-transform:uppercase;">Result</div>
       <div class="calc-big-value" style="color:${color};">${sign}${absPips.toFixed(1)} PIPS</div>
       <div style="text-align:center;font-size:24px;font-weight:bold;color:${color};">${sign}$${usdValue.toFixed(2)}</div>
       <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:4px;">${label} • ${lot} lot • $${pipValue.toFixed(3)}/pip • ${pair}</div>
     </div>
   `;
-  showToast(isProfit ? `✅ Faida: $${usdValue.toFixed(2)}` : `❌ Hasara: $${usdValue.toFixed(2)}`, 3000);
+  showToast(isProfit ? `✅ Profit: $${usdValue.toFixed(2)}` : `❌ Loss: $${usdValue.toFixed(2)}`, 3000);
 }
 
 async function fetchLiveNews() {
   const container = document.getElementById('newsContainer');
-  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Inapakia news...</div>`;
+  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Loading news...</div>`;
   const today = new Date();
   const ffUrl = `https://www.forexfactory.com/calendar?day=today`;
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(ffUrl)}`;
@@ -1325,16 +1292,16 @@ async function fetchLiveNews() {
       }
       news.push({ time, currency, impact, event, actual, forecast, previous });
     });
-    if (news.length === 0) { container.innerHTML = `<div class="info-box">⚠️ News hazipatikani. Jaribu tena.</div>`; return; }
+    if (news.length === 0) { container.innerHTML = `<div class="info-box">⚠️ News unavailable. Try again.</div>`; return; }
     container.innerHTML = `
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">📅 ${today.toLocaleDateString('sw-TZ')} • ${news.length} events</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">📅 ${today.toLocaleDateString('en-US')} • ${news.length} events</div>
       ${news.map(n => {
         const flag = getFlag(n.currency);
         const impactLabel = n.impact === 'high' ? 'HIGH' : n.impact === 'medium' ? 'MEDIUM' : n.impact === 'holiday' ? 'HOLIDAY' : 'LOW';
         return `<div class="news-item impact-${n.impact}"><div class="news-time">${n.time || '—'}</div><div class="news-content"><div class="news-title">${flag} ${n.currency} <span class="news-impact-badge ${n.impact}">${impactLabel}</span></div><div class="news-meta">${n.event}</div>${n.actual || n.forecast || n.previous ? `<div class="news-meta" style="margin-top:6px;">${n.actual ? `<strong style="color:var(--green);">Actual: ${n.actual}</strong>` : ''}${n.forecast ? ` • Forecast: ${n.forecast}` : ''}${n.previous ? ` • Previous: ${n.previous}` : ''}</div>` : ''}</div></div>`;
       }).join('')}
     `;
-  } catch (err) { container.innerHTML = `<div class="info-box">⚠️ Imeshindwa: ${err.message}</div>`; }
+  } catch (err) { container.innerHTML = `<div class="info-box">⚠️ Failed: ${err.message}</div>`; }
 }
 
 function getFlag(currency) {
@@ -1350,8 +1317,8 @@ function saveJournalTrade() {
     sl: parseFloat(document.getElementById('jSL').value) || 0, tp: parseFloat(document.getElementById('jTP').value) || 0,
     outcome: document.getElementById('jOutcome').value
   };
-  if (!trade.entry) { alert("Weka entry price."); return; }
-  saveToHistory(trade); showToast("Trade imehifadhiwa!"); navigate('history');
+  if (!trade.entry) { alert("Enter entry price."); return; }
+  saveToHistory(trade); showToast("Trade saved!"); navigate('history');
 }
 
 function saveToHistory(record) {
@@ -1365,7 +1332,7 @@ function saveToHistory(record) {
 function loadHistory() {
   const container = document.getElementById('historyList');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  if (history.length === 0) { container.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>`; return; }
+  if (history.length === 0) { container.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">No history yet.</div>`; return; }
   container.innerHTML = history.map((h, i) => {
     const label = h.signalLabel || (h.action === 'BUY' ? '🟢 BUY' : h.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD');
     let color = 'var(--muted)';
@@ -1382,7 +1349,7 @@ function loadHistory() {
 function viewHistoryDetail(index) {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const record = history[index];
-  if (!record) { alert("Analysis haipatikani."); return; }
+  if (!record) { alert("Analysis not found."); return; }
 
   if (record.type === 'manual') {
     document.getElementById('modalInnerContent').innerHTML = `
@@ -1393,7 +1360,7 @@ function viewHistoryDetail(index) {
         <div class="grid-2"><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl}</div></div><div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div></div>
         <div class="mini-box" style="margin-top:10px;"><label>Outcome</label><div>${record.outcome}</div></div>
       </div>
-      <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:10px;">Funga</button>
+      <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:10px;">Close</button>
     `;
     document.getElementById('universalModal').style.display = 'flex';
     return;
@@ -1412,35 +1379,35 @@ function viewHistoryDetail(index) {
           rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
           rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
         },
-        message: record.shield ? "✅ CAPITAL SHIELD: Trade ilikuwa approved." : "🛡️ CAPITAL SHIELD: Trade ilikuwa blocked."
+        message: record.shield ? "✅ CAPITAL SHIELD: Trade was approved." : "🛡️ CAPITAL SHIELD: Trade was blocked."
       };
       document.getElementById('modalInnerContent').innerHTML = `
         <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
         ${buildAnalysisHTML(record, shield)}
-        <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Funga</button>
+        <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
       `;
       document.getElementById('universalModal').style.display = 'flex';
       document.getElementById('universalModal').scrollTop = 0;
-    } catch (err) { alert(`❌ Imeshindwa kufungua: ${err.message}`); }
+    } catch (err) { alert(`❌ Failed: ${err.message}`); }
     return;
   }
 
   const actionColor = record.action === 'BUY' ? 'var(--green)' : record.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
   document.getElementById('modalInnerContent').innerHTML = `
-    <h2 style="color:var(--accent);margin:0 0 15px;">📊 Analysis ya Zamani</h2>
+    <h2 style="color:var(--accent);margin:0 0 15px;">📊 Old Analysis</h2>
     <div class="card" style="text-align:center;"><div style="font-size:13px;color:var(--accent);font-weight:bold;">${record.pair || '—'}</div><div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${record.action || 'HOLD'}</div></div>
     <div class="card">
       <div class="grid-2"><div class="mini-box"><label>Entry</label><div>${record.entry || '—'}</div></div><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl || '—'}</div></div></div>
       <div class="grid-3"><div class="mini-box"><label>TP1</label><div style="color:var(--green);">${record.tp1 || '—'}</div></div><div class="mini-box"><label>TP2</label><div style="color:var(--green);">${record.tp2 || '—'}</div></div><div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div></div>
     </div>
-    <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Funga</button>
+    <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
   `;
   document.getElementById('universalModal').style.display = 'flex';
   document.getElementById('universalModal').scrollTop = 0;
 }
 
 function deleteHistory(index) {
-  if (!confirm("Futa analysis hii?")) return;
+  if (!confirm("Delete this analysis?")) return;
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.splice(index, 1);
   localStorage.setItem('lutynoel_history', JSON.stringify(history));
@@ -1448,7 +1415,7 @@ function deleteHistory(index) {
 }
 
 function clearHistory() {
-  if (!confirm("Futa historia yote?")) return;
+  if (!confirm("Clear all history?")) return;
   localStorage.removeItem('lutynoel_history');
   loadHistory(); updateStats();
 }
@@ -1468,14 +1435,14 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "19.1" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "19.3" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = `lutynoel-fx-backup-${Date.now()}.json`;
   a.click();
-  showToast("Data imeexport!");
+  showToast("Data exported!");
 }
 
 function changeLiveChart(symbol) {
