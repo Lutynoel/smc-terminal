@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v18.0 — Groq Edition</title>
+<title>Lutynoel FX v19.0 — Mistral + Gemini</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px}
 .auth-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.auth-box{background:var(--card);border:1px solid var(--border);padding:25px;border-radius:14px;width:100%;max-width:440px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.auth-box{background:var(--card);border:1px solid var(--border);padding:25px;border-radius:14px;width:100%;max-width:460px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
 .auth-title{text-align:center;font-size:22px;font-weight:bold;margin-bottom:5px}
 .auth-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:20px}
 #appInterface{display:none;padding-bottom:40px}
@@ -68,6 +68,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .vote-pending{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .master-desc{font-size:12px;color:var(--text);line-height:1.6;background:#141418;padding:10px;border-radius:6px;border-left:2px solid var(--accent)}
 .master-confidence{font-size:11px;color:var(--muted);margin-top:6px}
+.provider-badge{display:inline-block;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-left:4px}
+.provider-mistral{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue)}
+.provider-gemini{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
+.provider-failed{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 .confidence-bar{width:100%;height:4px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
 .confidence-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));transition:width .5s}
 .signal-badge-container{display:flex;justify-content:center;gap:6px;margin:10px 0;flex-wrap:wrap}
@@ -146,8 +150,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v18.0</div>
-    <div class="auth-subtitle">Groq Edition — Masters 6 + Live News + Pips Calc</div>
+    <div class="auth-title">Lutynoel FX v19.0</div>
+    <div class="auth-subtitle">Multi-Provider — Mistral + Gemini</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -156,16 +160,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Jina Lako</label>
     <input type="text" id="loginName" placeholder="mf. Noel Nkungu" maxlength="30">
 
-    <label>Groq API Key</label>
-    <input type="password" id="authApiKey" placeholder="gsk_..." autocomplete="off">
+    <label>Mistral API Key</label>
+    <input type="password" id="authMistralKey" placeholder="Weka Mistral key hapa" autocomplete="off">
+
+    <label>Gemini API Key</label>
+    <input type="password" id="authGeminiKey" placeholder="AIza... au AQ..." autocomplete="off">
 
     <label>TwelveData API Key (Optional)</label>
     <input type="text" id="authTwelveKey" placeholder="Weka kama una" autocomplete="off">
 
     <div class="info-box">
       🔒 Keys zinahifadhiwa kwenye <strong>sessionStorage</strong> tu.<br>
-      🆓 <a href="https://console.groq.com" target="_blank" style="color:var(--accent);">Pata Groq key bure</a> (bila kadi)<br>
-      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Pata TwelveData key bure</a>
+      🆓 <a href="https://console.mistral.ai" target="_blank" style="color:var(--accent);">Pata Mistral key bure →</a><br>
+      🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Pata Gemini key bure →</a>
     </div>
 
     <button class="primary-btn" onclick="handleLogin()">Ingia Salama</button>
@@ -187,11 +194,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v18.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v19.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">GROQ</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">DUAL</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('news')">📰 News Live <span class="badge-live">LIVE</span></div>
@@ -205,13 +212,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">GROQ</span>
+          <span class="badge-shield">DUAL AI</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Masters 6 + Live News + Pips Calc</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Mistral + Gemini Multi-Provider</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 6 wameunganishwa, news za soko live, na calculator ya pips.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 6 wanatumia Mistral kwanza, Gemini kama fallback.</p>
       </div>
 
       <div class="grid-3">
@@ -226,11 +233,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="secondary-btn" onclick="navigate('news')">📰 Tazama News Live</button>
         <button class="secondary-btn" onclick="navigate('pips')">🧮 Pips Calculator</button>
       </div>
+
+      <div class="info-box">
+        ⚙️ <strong>Multi-Provider Logic:</strong><br>
+        • Kila master anajaribu <strong>Mistral</strong> kwanza (bure, tokens bilioni 1/mwezi)<br>
+        • Kama Mistral inagoma → <strong>Gemini</strong> inachukua<br>
+        • Kama zote zinagoma → master anarudi "HOLD"<br>
+        • Kila master card inaonyesha provider iliyotumika
+      </div>
     </div>
 
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Merged Analysis</h3>
+        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Dual-Provider Analysis</h3>
 
         <label>1. Chagua Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
@@ -364,7 +379,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="fetchLiveNews()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;font-size:11px;">
-          📡 News zinatoka Forex Factory (real-time). Zinaonyesha matukio ya kiuchumi muhimu kwa leo.
+          📡 News zinatoka Forex Factory (real-time).
         </div>
         <div id="newsContainer">
           <div style="text-align:center;padding:30px;color:var(--muted);">
@@ -378,7 +393,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator (Huru)</h3>
         <div class="info-box" style="margin-bottom:15px;font-size:11px;">
-          💡 Kikokotoo hiki kinahesabu pips, thamani ya pips kwa lot, faida/hasara kwa kila pair. Kinajitegemea — hakitumii internet.
+          💡 Kikokotoo hiki kinahesabu pips, thamani ya pips kwa lot, faida/hasara. Kinajitegemea — hakitumii internet.
         </div>
 
         <label>Chagua Pair</label>
@@ -435,8 +450,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v18.0 (Groq Edition)<br>
-          <strong>Provider:</strong> Groq (Qwen 3.6 27B)<br>
+          <strong>Version:</strong> v19.0 (Multi-Provider)<br>
+          <strong>Primary:</strong> Mistral (Pixtral)<br>
+          <strong>Fallback:</strong> Gemini 3.7 Flash<br>
           <strong>Masters:</strong> 6 (Merged)<br>
           <strong>News:</strong> Forex Factory RSS<br>
           <strong>Pips Calc:</strong> Offline
@@ -444,7 +460,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Weka key yako">
         <button class="secondary-btn" onclick="saveTwelveKey()">💾 Hifadhi TwelveKey</button>
-        <button class="secondary-btn" onclick="testApiKey()">🧪 Jaribu Groq Key</button>
+        <button class="secondary-btn" onclick="testApiKeys()">🧪 Jaribu API Keys</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
       </div>
     </div>
@@ -453,14 +469,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v18.0 — GROQ EDITION
+   LUTYNOEL FX v19.0 — MULTI-PROVIDER (MISTRAL + GEMINI)
    Masters 6 + Live News + Pips Calculator
    ===================================================== */
 
-// ============ GROQ CONFIG ============
-const GROQ_BASE_URL = 'https://api.groq.com/openai/v1';
-const GROQ_MODEL = 'qwen/qwen3.6-27b'; // Inaunga mkono vision 
+// ============ MISTRAL CONFIG ============
+const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
+const MISTRAL_MODEL = 'pixtral-12b-2409'; // Inaunga mkono vision
 
+// ============ GEMINI CONFIG ============
+const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
+const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash'];
+
+// ============ DATA APIS ============
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
@@ -479,16 +500,16 @@ const PAIR_SPECS = {
 
 const MASTERS_6 = [
   { id: 1, name: "Chief Master", weight: 0.20, lens: "Overall trend alignment, higher timeframe bias, and final decision authority. You look at the big picture across 4H, 1H, and 15M charts and determine whether the market is trending up, down, or consolidating." },
-  { id: 2, name: "Support, Resistance & Supply/Demand Master", weight: 0.20, lens: "Key horizontal support and resistance levels across 4H and 1H. Institutional order blocks, imbalance zones, and liquidity sweeps. You identify where price has reacted before and where institutional orders are likely placed." },
-  { id: 3, name: "Price Action & Market Structure Master", weight: 0.20, lens: "Candlestick patterns (engulfing, rejection wicks, pin bars), break of structure (BOS), change of character (CHoCH), higher highs, and lower lows. You read the raw price action without indicators." },
-  { id: 4, name: "Smart Money Concepts & ICT Master", weight: 0.15, lens: "Institutional order flow, liquidity pools, Fair Value Gaps (FVG), killzones, and optimal trade entry. You identify where smart money is accumulating or distributing." },
-  { id: 5, name: "Fundamental Analyst", weight: 0.10, lens: "Economic news, central bank bias, DXY correlation, and macroeconomic drivers. You assess whether fundamentals support the technical setup." },
-  { id: 6, name: "Fibonacci, Elliott Wave & Quantitative Master", weight: 0.15, lens: "Fibonacci retracement and extension levels, Elliott Wave count and impulse/corrective phases, plus RSI, MACD, moving averages, and ATR. You provide the mathematical/statistical view." }
+  { id: 2, name: "Support, Resistance & Supply/Demand Master", weight: 0.20, lens: "Key horizontal support and resistance levels across 4H and 1H. Institutional order blocks, imbalance zones, and liquidity sweeps." },
+  { id: 3, name: "Price Action & Market Structure Master", weight: 0.20, lens: "Candlestick patterns (engulfing, rejection wicks, pin bars), break of structure (BOS), change of character (CHoCH), higher highs, and lower lows." },
+  { id: 4, name: "Smart Money Concepts & ICT Master", weight: 0.15, lens: "Institutional order flow, liquidity pools, Fair Value Gaps (FVG), killzones, and optimal trade entry." },
+  { id: 5, name: "Fundamental Analyst", weight: 0.10, lens: "Economic news, central bank bias, DXY correlation, and macroeconomic drivers." },
+  { id: 6, name: "Fibonacci, Elliott Wave & Quantitative Master", weight: 0.15, lens: "Fibonacci retracement and extension levels, Elliott Wave count, RSI, MACD, moving averages, and ATR." }
 ];
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v18.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v19.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -503,24 +524,21 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-function validateApiKey(key) {
-  if (!key) return { valid: false, reason: "Key haipo" };
-  const trimmed = key.trim();
-  if (trimmed.length < 20) return { valid: false, reason: `Key ni fupi (${trimmed.length} chars).` };
-  if (/\s/.test(trimmed)) return { valid: false, reason: "Key ina nafasi." };
-  return { valid: true };
-}
-
+// ============ LOGIN ============
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
-  const apiKey = document.getElementById('authApiKey').value.trim();
+  const mistralKey = document.getElementById('authMistralKey').value.trim();
+  const geminiKey = document.getElementById('authGeminiKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
+
   if (!name) { alert("Weka jina lako."); return; }
-  const validation = validateApiKey(apiKey);
-  if (!validation.valid) { alert(`⚠️ Groq API Key si sahihi.\n\n${validation.reason}`); return; }
+  if (!mistralKey && !geminiKey) { alert("Weka angalau API key moja (Mistral au Gemini)."); return; }
+
   sessionStorage.setItem('lutynoel_name', name);
-  sessionStorage.setItem('lutynoel_apiKey', apiKey);
+  if (mistralKey) sessionStorage.setItem('lutynoel_mistralKey', mistralKey);
+  if (geminiKey) sessionStorage.setItem('lutynoel_geminiKey', geminiKey);
   if (twelveKey) sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
+
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
@@ -536,28 +554,38 @@ function saveTwelveKey() {
   else { sessionStorage.removeItem('lutynoel_twelveKey'); showToast("Imeondolewa."); }
 }
 
-async function testApiKey() {
-  const apiKey = sessionStorage.getItem('lutynoel_apiKey');
-  if (!apiKey) { alert("Hakuna API key."); return; }
-  showToast("🧪 Inajaribu Groq...", 2000);
-  try {
-    const response = await fetch(`${GROQ_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify({
-        model: GROQ_MODEL,
-        messages: [{ role: 'user', content: 'Say OK' }],
-        max_tokens: 10
-      })
-    });
-    const data = await response.json();
-    if (data.error) { alert(`❌ Key haifanyi kazi: ${data.error.message}`); return; }
-    if (data.choices && data.choices[0]) {
-      alert(`✅ Groq Key inafanya kazi!\n\nModel: ${GROQ_MODEL}\nJibu: "${data.choices[0].message.content}"`);
-    }
-  } catch (err) {
-    alert(`❌ Hitilafu: ${err.message}`);
+async function testApiKeys() {
+  const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
+  const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
+  showToast("🧪 Inajaribu...", 2000);
+
+  let results = [];
+
+  if (mistralKey) {
+    try {
+      const r = await fetch(`${MISTRAL_BASE_URL}/chat/completions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
+        body: JSON.stringify({ model: MISTRAL_MODEL, messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
+      });
+      const d = await r.json();
+      results.push(d.error ? `❌ Mistral: ${d.error.message}` : `✅ Mistral: OK`);
+    } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
   }
+
+  if (geminiKey) {
+    try {
+      const r = await fetch(`${GEMINI_BASE_URL}/models/gemini-3.6-flash:generateContent?key=${geminiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
+      });
+      const d = await r.json();
+      results.push(d.error ? `❌ Gemini: ${d.error.message}` : `✅ Gemini: OK`);
+    } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
+  }
+
+  alert(results.join('\n\n'));
 }
 
 function logout() { sessionStorage.clear(); location.reload(); }
@@ -673,84 +701,141 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL MASTER — GROQ VERSION ============
-async function callMaster(master, images, pair, livePrice, apiKey) {
+// ============ CALL MISTRAL ============
+async function callMistral(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
 
 Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
 
-You MUST respond in valid JSON only. No markdown, no code fences, no extra text. Just the JSON object:
+Respond in valid JSON only:
 {
   "vote": "BUY" | "SELL" | "HOLD",
   "confidence": <number 0-100>,
   "reasoning": "<2-3 sentences in Swahili>",
   "key_level": "<price level or null>"
-}
+}`;
 
-Rules:
-- If chart is unclear, vote "HOLD" with low confidence.
-- Vote based ONLY on your assigned lens.
-- Be honest.`;
-
-  // Tengeneza content array na maandishi + picha
   const content = [{ type: "text", text: prompt }];
-  
   for (const img of images) {
     const base64 = await fileToBase64(img.file);
     const mimeType = img.file.type || 'image/png';
-    content.push({
-      type: "image_url",
-      image_url: {
-        url: `data:${mimeType};base64,${base64}`
-      }
-    });
+    content.push({ type: "image_url", image_url: `data:${mimeType};base64,${base64}` });
   }
 
-  try {
-    const response = await fetch(`${GROQ_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: GROQ_MODEL,
-        messages: [{ role: 'user', content: content }],
-        temperature: 0.3,
-        max_tokens: 1000
-        // Tumeondoa response_format kwa sababu Groq vision model haitumii JSON mode
-      })
-    });
+  const response = await fetch(`${MISTRAL_BASE_URL}/chat/completions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: MISTRAL_MODEL,
+      messages: [{ role: 'user', content: content }],
+      temperature: 0.3,
+      max_tokens: 1000
+    })
+  });
 
-    const data = await response.json();
-    
-    if (data.error) {
-      throw new Error(`${master.name}: ${data.error.message}`);
-    }
-    
-    if (!data.choices || !data.choices[0]) {
-      throw new Error(`${master.name}: No response from Groq`);
-    }
+  const data = await response.json();
+  if (data.error) throw new Error(`Mistral: ${data.error.message}`);
+  if (!data.choices || !data.choices[0]) throw new Error("Mistral: No response");
 
-    let text = data.choices[0].message.content.trim();
-    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-    const match = text.match(/\{[\s\S]*\}/);
-    if (match) text = match[0];
+  let text = data.choices[0].message.content.trim();
+  text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+  const match = text.match(/\{[\s\S]*\}/);
+  if (match) text = match[0];
 
-    const result = JSON.parse(text);
-    return {
-      ...master,
-      vote: (result.vote || 'HOLD').toUpperCase(),
-      confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-      reasoning: result.reasoning || 'Hakuna maelezo.',
-      key_level: result.key_level || null,
-      model_used: GROQ_MODEL
-    };
-  } catch (err) {
-    throw new Error(`${master.name}: ${err.message}`);
-  }
+  const result = JSON.parse(text);
+  return {
+    ...master,
+    vote: (result.vote || 'HOLD').toUpperCase(),
+    confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+    reasoning: result.reasoning || 'Hakuna maelezo.',
+    key_level: result.key_level || null,
+    provider: 'Mistral'
+  };
 }
 
+// ============ CALL GEMINI ============
+async function callGemini(master, images, pair, livePrice, apiKey) {
+  const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
+
+Analyze the 3 chart images (4H, 1H, 15M) for ${pair} at current price ${livePrice}.
+
+Respond in valid JSON only:
+{
+  "vote": "BUY" | "SELL" | "HOLD",
+  "confidence": <number 0-100>,
+  "reasoning": "<2-3 sentences in Swahili>",
+  "key_level": "<price level or null>"
+}`;
+
+  const parts = [{ text: prompt }];
+  for (const img of images) {
+    parts.push({ inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) } });
+  }
+
+  let lastError = null;
+  for (const model of GEMINI_MODELS) {
+    try {
+      const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
+        })
+      });
+
+      const data = await response.json();
+      if (data.error) { lastError = data.error.message; continue; }
+      if (!data.candidates || !data.candidates[0]) { lastError = "No response"; continue; }
+
+      let text = data.candidates[0].content.parts[0].text.trim();
+      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      const match = text.match(/\{[\s\S]*\}/);
+      if (match) text = match[0];
+
+      const result = JSON.parse(text);
+      return {
+        ...master,
+        vote: (result.vote || 'HOLD').toUpperCase(),
+        confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+        reasoning: result.reasoning || 'Hakuna maelezo.',
+        key_level: result.key_level || null,
+        provider: 'Gemini'
+      };
+    } catch (e) { lastError = e.message; continue; }
+  }
+  throw new Error(`Gemini: ${lastError || "All models failed"}`);
+}
+
+// ============ CALL MASTER (with fallback) ============
+async function callMaster(master, images, pair, livePrice) {
+  const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
+  const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
+
+  // Jaribu Mistral kwanza
+  if (mistralKey) {
+    try {
+      return await callMistral(master, images, pair, livePrice, mistralKey);
+    } catch (err) {
+      console.warn(`[${master.name}] Mistral failed: ${err.message}`);
+    }
+  }
+
+  // Kama Mistral imeshindwa, jaribu Gemini
+  if (geminiKey) {
+    try {
+      return await callGemini(master, images, pair, livePrice, geminiKey);
+    } catch (err) {
+      console.warn(`[${master.name}] Gemini failed: ${err.message}`);
+    }
+  }
+
+  // Zote zimeshindwa
+  throw new Error("Zote mbili (Mistral + Gemini) zimeshindwa");
+}
+
+// ============ CONFLUENCE ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
   masterResults.forEach(r => {
@@ -843,8 +928,9 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
 }
 
 async function runAnalysis() {
-  const apiKey = sessionStorage.getItem('lutynoel_apiKey');
-  if (!apiKey) { alert("API Key haipo."); logout(); return; }
+  const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
+  const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
+  if (!mistralKey && !geminiKey) { alert("Hakuna API key. Ingia tena."); logout(); return; }
 
   const pair = document.getElementById('selectedPair').value;
   const livePrice = parseFloat(document.getElementById('livePrice').value);
@@ -868,21 +954,19 @@ async function runAnalysis() {
 
   const masterResults = [];
 
-  // Groq ina 30 req/min — tunaweza kutuma 6 kwa pamoja bila shida
-  // Lakini kwa usalama, tunatuma kwa mpangilio
   for (let i = 0; i < MASTERS_6.length; i++) {
     const master = MASTERS_6[i];
     try {
-      const result = await callMaster(master, images, pair, livePrice, apiKey);
+      const result = await callMaster(master, images, pair, livePrice);
       updateMasterCard(result);
       masterResults.push(result);
     } catch (err) {
-      const failed = { ...master, vote: 'HOLD', confidence: 0, reasoning: `⚠️ ${err.message}`, error: true };
+      const failed = { ...master, vote: 'HOLD', confidence: 0, reasoning: `⚠️ ${err.message}`, error: true, provider: 'Failed' };
       updateMasterCard(failed);
       masterResults.push(failed);
     }
-    // Subiri 2s tu (Groq ina 30 req/min = 2 req/sec)
-    if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 2000));
+    // Subiri 1.5s kati ya masters
+    if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 1500));
   }
 
   try {
@@ -931,7 +1015,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 WANACHAMBUA ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Provider: Groq</div>
+      <div style="font-size:12px;color:var(--muted);">Bei: ${livePrice} • Providers: Mistral + Gemini</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
@@ -964,8 +1048,14 @@ function updateMasterCard(result) {
   card.classList.add(voteClass);
   voteEl.className = `master-vote vote-${result.vote.toLowerCase()}`;
   voteEl.innerText = result.vote === 'BUY' ? '📈 BUY' : result.vote === 'SELL' ? '📉 SELL' : '⏸ HOLD';
+  
+  let providerBadge = '';
+  if (result.provider === 'Mistral') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
+  else if (result.provider === 'Gemini') providerBadge = `<span class="provider-badge provider-gemini">Gemini</span>`;
+  else if (result.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
+  
   descEl.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key Level: ${result.key_level}</strong>` : '');
-  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%)<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
+  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%) ${providerBadge}<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
 function computeSLTP(masters, action, livePrice, pair) {
@@ -1038,7 +1128,7 @@ function buildAnalysisHTML(record, shield) {
         <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
       <div class="signal-reason">${signalReason || ''}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • 🤖 Groq</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • 🤖 Mistral + Gemini</div>
     </div>
 
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
@@ -1097,6 +1187,10 @@ function buildAnalysisHTML(record, shield) {
         ${record.masters.map(m => {
           const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
           const cardClass = m.vote.toLowerCase();
+          let providerBadge = '';
+          if (m.provider === 'Mistral') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
+          else if (m.provider === 'Gemini') providerBadge = `<span class="provider-badge provider-gemini">Gemini</span>`;
+          else if (m.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
           return `
             <div class="master-card ${cardClass}">
               <div class="master-header">
@@ -1105,7 +1199,7 @@ function buildAnalysisHTML(record, shield) {
               </div>
               <div class="master-desc">${m.reasoning}</div>
               <div class="master-confidence">
-                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}%
+                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}% ${providerBadge}
                 <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
               </div>
             </div>
@@ -1116,18 +1210,6 @@ function buildAnalysisHTML(record, shield) {
   }
 
   return html;
-}
-
-function resetAnalysis() {
-  document.getElementById('chartH4').value = '';
-  document.getElementById('chartH1').value = '';
-  document.getElementById('chartM15').value = '';
-  document.getElementById('previewH4').style.display = 'none';
-  document.getElementById('previewH1').style.display = 'none';
-  document.getElementById('previewM15').style.display = 'none';
-  globalImages = { h4: null, h1: null, m15: null };
-  document.getElementById('resultsContainer').style.display = 'none';
-  window.scrollTo(0, 0);
 }
 
 function calculateRisk() {
@@ -1164,19 +1246,11 @@ function calculatePips() {
   const lot = parseFloat(document.getElementById('pipsLot').value) || 0.01;
   const direction = document.getElementById('pipsDirection').value;
   const spec = PAIR_SPECS[pair];
+  if (!entry || !exit) { alert("Weka bei."); return; }
 
-  if (!entry || !exit) { alert("Weka bei ya kuingia na kutoka."); return; }
-
-  let pipsDiff = 0;
-  let isProfit = false;
-
-  if (direction === 'BUY') {
-    pipsDiff = (exit - entry) / spec.pipSize;
-    isProfit = pipsDiff > 0;
-  } else {
-    pipsDiff = (entry - exit) / spec.pipSize;
-    isProfit = pipsDiff > 0;
-  }
+  let pipsDiff = 0, isProfit = false;
+  if (direction === 'BUY') { pipsDiff = (exit - entry) / spec.pipSize; isProfit = pipsDiff > 0; }
+  else { pipsDiff = (entry - exit) / spec.pipSize; isProfit = pipsDiff > 0; }
 
   const absPips = Math.abs(pipsDiff);
   const usdValue = absPips * spec.pipValueStdLot * lot;
@@ -1187,18 +1261,10 @@ function calculatePips() {
   document.getElementById('pipsResultBox').style.display = 'block';
   document.getElementById('pipsResultBox').innerHTML = `
     <div class="calc-result-box">
-      <div style="text-align:center;font-size:12px;color:var(--muted);text-transform:uppercase;">Matokeo ya Hesabu</div>
+      <div style="text-align:center;font-size:12px;color:var(--muted);text-transform:uppercase;">Matokeo</div>
       <div class="calc-big-value" style="color:${color};">${sign}${absPips.toFixed(1)} PIPS</div>
       <div style="text-align:center;font-size:24px;font-weight:bold;color:${color};">${sign}$${usdValue.toFixed(2)}</div>
       <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:4px;">${label} • ${lot} lot • ${pair}</div>
-    </div>
-    <div class="grid-2" style="margin-top:15px;">
-      <div class="mini-box"><label>Pip Size</label><div style="font-size:13px;font-weight:bold;">${spec.pipSize}</div></div>
-      <div class="mini-box"><label>Pip Value (1 lot)</label><div style="font-size:13px;font-weight:bold;">$${spec.pipValueStdLot}</div></div>
-    </div>
-    <div class="grid-2">
-      <div class="mini-box"><label>Bei ya Kuingia</label><div style="font-size:13px;font-weight:bold;">${entry}</div></div>
-      <div class="mini-box"><label>Bei ya Kutoka</label><div style="font-size:13px;font-weight:bold;">${exit}</div></div>
     </div>
   `;
   showToast(isProfit ? `✅ Faida: $${usdValue.toFixed(2)}` : `❌ Hasara: $${usdValue.toFixed(2)}`, 3000);
@@ -1207,11 +1273,9 @@ function calculatePips() {
 async function fetchLiveNews() {
   const container = document.getElementById('newsContainer');
   container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Inapakia news...</div>`;
-
   const today = new Date();
   const ffUrl = `https://www.forexfactory.com/calendar?day=today`;
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(ffUrl)}`;
-
   try {
     const response = await fetch(proxyUrl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -1219,7 +1283,6 @@ async function fetchLiveNews() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const rows = doc.querySelectorAll('.calendar__row');
-
     const news = [];
     rows.forEach(row => {
       const time = row.querySelector('.calendar__time')?.textContent?.trim() || '';
@@ -1229,28 +1292,23 @@ async function fetchLiveNews() {
       const actual = row.querySelector('.calendar__actual')?.textContent?.trim() || '';
       const forecast = row.querySelector('.calendar__forecast')?.textContent?.trim() || '';
       const previous = row.querySelector('.calendar__previous')?.textContent?.trim() || '';
-
-      if (!event || event === '') return;
-
+      if (!event) return;
       let impact = 'low';
       if (impactEl) {
-        const impactClass = impactEl.className || '';
-        if (impactClass.includes('high')) impact = 'high';
-        else if (impactClass.includes('medium')) impact = 'medium';
-        else if (impactClass.includes('holiday')) impact = 'holiday';
-        else impact = 'low';
+        const cls = impactEl.className || '';
+        if (cls.includes('high')) impact = 'high';
+        else if (cls.includes('medium')) impact = 'medium';
+        else if (cls.includes('holiday')) impact = 'holiday';
       }
       news.push({ time, currency, impact, event, actual, forecast, previous });
     });
-
     if (news.length === 0) {
-      container.innerHTML = `<div class="info-box">⚠️ News hazipatikani kwa sasa. Jaribu tena baada ya dakika 1.</div>`;
+      container.innerHTML = `<div class="info-box">⚠️ News hazipatikani. Jaribu tena.</div>`;
       return;
     }
-
     container.innerHTML = `
       <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">
-        📅 ${today.toLocaleDateString('sw-TZ', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} • ${news.length} events
+        📅 ${today.toLocaleDateString('sw-TZ')} • ${news.length} events
       </div>
       ${news.map(n => {
         const flag = getFlag(n.currency);
@@ -1261,20 +1319,14 @@ async function fetchLiveNews() {
             <div class="news-content">
               <div class="news-title">${flag} ${n.currency} <span class="news-impact-badge ${n.impact}">${impactLabel}</span></div>
               <div class="news-meta">${n.event}</div>
-              ${n.actual || n.forecast || n.previous ? `
-                <div class="news-meta" style="margin-top:6px;">
-                  ${n.actual ? `<strong style="color:var(--green);">Actual: ${n.actual}</strong>` : ''}
-                  ${n.forecast ? ` • Forecast: ${n.forecast}` : ''}
-                  ${n.previous ? ` • Previous: ${n.previous}` : ''}
-                </div>
-              ` : ''}
+              ${n.actual || n.forecast || n.previous ? `<div class="news-meta" style="margin-top:6px;">${n.actual ? `<strong style="color:var(--green);">Actual: ${n.actual}</strong>` : ''}${n.forecast ? ` • Forecast: ${n.forecast}` : ''}${n.previous ? ` • Previous: ${n.previous}` : ''}</div>` : ''}
             </div>
           </div>
         `;
       }).join('')}
     `;
   } catch (err) {
-    container.innerHTML = `<div class="info-box">⚠️ Imeshindwa kupakia news: ${err.message}<br><br><a href="https://www.forexfactory.com/calendar" target="_blank" style="color:var(--accent);">Fungua Forex Factory moja kwa moja →</a></div>`;
+    container.innerHTML = `<div class="info-box">⚠️ Imeshindwa kupakia: ${err.message}</div>`;
   }
 }
 
@@ -1347,18 +1399,9 @@ function viewHistoryDetail(index) {
     document.getElementById('modalInnerContent').innerHTML = `
       <h2 style="color:var(--accent);margin:0 0 15px;">📝 Manual Trade</h2>
       <div class="card">
-        <div class="grid-2">
-          <div class="mini-box"><label>Pair</label><div style="font-size:15px;font-weight:bold;color:var(--accent);">${record.pair}</div></div>
-          <div class="mini-box"><label>Action</label><div style="font-size:15px;font-weight:bold;">${record.action}</div></div>
-        </div>
-        <div class="grid-2">
-          <div class="mini-box"><label>Entry</label><div>${record.entry}</div></div>
-          <div class="mini-box"><label>Lot</label><div>${record.lot || 0.01}</div></div>
-        </div>
-        <div class="grid-2">
-          <div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl}</div></div>
-          <div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div>
-        </div>
+        <div class="grid-2"><div class="mini-box"><label>Pair</label><div>${record.pair}</div></div><div class="mini-box"><label>Action</label><div>${record.action}</div></div></div>
+        <div class="grid-2"><div class="mini-box"><label>Entry</label><div>${record.entry}</div></div><div class="mini-box"><label>Lot</label><div>${record.lot}</div></div></div>
+        <div class="grid-2"><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl}</div></div><div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div></div>
         <div class="mini-box" style="margin-top:10px;"><label>Outcome</label><div>${record.outcome}</div></div>
       </div>
       <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:10px;">Funga</button>
@@ -1389,9 +1432,7 @@ function viewHistoryDetail(index) {
       `;
       document.getElementById('universalModal').style.display = 'flex';
       document.getElementById('universalModal').scrollTop = 0;
-    } catch (err) {
-      alert(`❌ Imeshindwa kufungua: ${err.message}`);
-    }
+    } catch (err) { alert(`❌ Imeshindwa kufungua: ${err.message}`); }
     return;
   }
 
@@ -1403,15 +1444,8 @@ function viewHistoryDetail(index) {
       <div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${record.action || 'HOLD'}</div>
     </div>
     <div class="card">
-      <div class="grid-2">
-        <div class="mini-box"><label>Entry</label><div>${record.entry || '—'}</div></div>
-        <div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl || '—'}</div></div>
-      </div>
-      <div class="grid-3">
-        <div class="mini-box"><label>TP1</label><div style="color:var(--green);">${record.tp1 || '—'}</div></div>
-        <div class="mini-box"><label>TP2</label><div style="color:var(--green);">${record.tp2 || '—'}</div></div>
-        <div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div>
-      </div>
+      <div class="grid-2"><div class="mini-box"><label>Entry</label><div>${record.entry || '—'}</div></div><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl || '—'}</div></div></div>
+      <div class="grid-3"><div class="mini-box"><label>TP1</label><div style="color:var(--green);">${record.tp1 || '—'}</div></div><div class="mini-box"><label>TP2</label><div style="color:var(--green);">${record.tp2 || '—'}</div></div><div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div></div>
     </div>
     <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Funga</button>
   `;
@@ -1451,7 +1485,7 @@ function exportData() {
   const data = {
     history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
     exportedAt: new Date().toISOString(),
-    version: "18.0"
+    version: "19.0"
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -1469,8 +1503,7 @@ function changeLiveChart(symbol) {
 window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   const name = sessionStorage.getItem('lutynoel_name');
-  const key = sessionStorage.getItem('lutynoel_apiKey');
-  if (name && key) {
+  if (name) {
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appInterface').style.display = 'block';
     document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
