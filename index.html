@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v19.0 — Mistral + Gemini</title>
+<title>Lutynoel FX v19.1 — Fixed Profit Projections</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -150,8 +150,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v19.0</div>
-    <div class="auth-subtitle">Multi-Provider — Mistral + Gemini</div>
+    <div class="auth-title">Lutynoel FX v19.1</div>
+    <div class="auth-subtitle">Fixed Profit Projections</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>ONYO LA KISHERIA:</strong> Tool ya <strong>elimu</strong> tu. Haifai kwa trading halisi bila backtesting. <strong>Hakuna guarantee ya faida.</strong> Trade kwa hatari yako.
@@ -194,7 +194,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v19.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v19.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashibodi</div>
@@ -236,7 +236,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="info-box">
         ⚙️ <strong>Multi-Provider Logic:</strong><br>
-        • Kila master anajaribu <strong>Mistral</strong> kwanza (bure, tokens bilioni 1/mwezi)<br>
+        • Kila master anajaribu <strong>Mistral</strong> kwanza<br>
         • Kama Mistral inagoma → <strong>Gemini</strong> inachukua<br>
         • Kama zote zinagoma → master anarudi "HOLD"<br>
         • Kila master card inaonyesha provider iliyotumika
@@ -393,7 +393,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator (Huru)</h3>
         <div class="info-box" style="margin-bottom:15px;font-size:11px;">
-          💡 Kikokotoo hiki kinahesabu pips, thamani ya pips kwa lot, faida/hasara. Kinajitegemea — hakitumii internet.
+          💡 Kikokotoo hiki kinahesabu pips, thamani ya pips kwa lot, faida/hasara. Kinajitegemea.
         </div>
 
         <label>Chagua Pair</label>
@@ -450,9 +450,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v19.0 (Multi-Provider)<br>
+          <strong>Version:</strong> v19.1 (Fixed Profit Projections)<br>
           <strong>Primary:</strong> Mistral (Pixtral)<br>
-          <strong>Fallback:</strong> Gemini 3.7 Flash<br>
+          <strong>Fallback:</strong> Gemini 3.6/3.8/3.5<br>
           <strong>Masters:</strong> 6 (Merged)<br>
           <strong>News:</strong> Forex Factory RSS<br>
           <strong>Pips Calc:</strong> Offline
@@ -469,33 +469,68 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v19.0 — MULTI-PROVIDER (MISTRAL + GEMINI)
-   Masters 6 + Live News + Pips Calculator
+   LUTYNOEL FX v19.1 — FIXED PROFIT PROJECTIONS
    ===================================================== */
 
-// ============ MISTRAL CONFIG ============
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
-const MISTRAL_MODEL = 'pixtral-12b-2409'; // Inaunga mkono vision
-
-// ============ GEMINI CONFIG ============
+const MISTRAL_MODEL = 'pixtral-12b-2409';
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-3.8-flash', 'gemini-3.5-flash'];
-
-// ============ DATA APIS ============
 const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price';
 const TWELVEDATA_API = 'https://api.twelvedata.com/price';
 
+// ============ PAIR SPECS — WITH ACCURATE PIP VALUE TABLE ============
 const PAIR_SPECS = {
-  XAUUSD: { pipSize: 0.1, pipValueStdLot: 10, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300 },
-  BTCUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000 },
-  NAS100: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500 },
-  EURUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
-  GBPUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
-  USDJPY: { pipSize: 0.01, pipValueStdLot: 9.1, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
-  AUDUSD: { pipSize: 0.0001, pipValueStdLot: 10, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
-  USDCAD: { pipSize: 0.0001, pipValueStdLot: 7.4, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200 },
-  ETHUSD: { pipSize: 1, pipValueStdLot: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', slDefault: 50, slMin: 30, slMax: 100, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500 },
-  SOLUSD: { pipSize: 0.01, pipValueStdLot: 1, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50 }
+  XAUUSD: {
+    pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD',
+    slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300,
+    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
+  },
+  BTCUSD: {
+    pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT',
+    slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000,
+    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
+  },
+  NAS100: {
+    pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX',
+    slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500,
+    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
+  },
+  EURUSD: {
+    pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD',
+    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
+    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
+  },
+  GBPUSD: {
+    pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD',
+    slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
+    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
+  },
+  USDJPY: {
+    pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY',
+    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
+    pipValue: { micro: 0.091, mini: 0.91, standard: 9.10 }
+  },
+  AUDUSD: {
+    pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD',
+    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
+    pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 }
+  },
+  USDCAD: {
+    pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD',
+    slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200,
+    pipValue: { micro: 0.074, mini: 0.74, standard: 7.40 }
+  },
+  ETHUSD: {
+    pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT',
+    slDefault: 50, slMin: 30, slMax: 100, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500,
+    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
+  },
+  SOLUSD: {
+    pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT',
+    slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50,
+    pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 }
+  }
 };
 
 const MASTERS_6 = [
@@ -509,7 +544,7 @@ const MASTERS_6 = [
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v19.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v19.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -524,7 +559,13 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-// ============ LOGIN ============
+// ============ PIP VALUE HELPER ============
+function getPipValue(spec, lot) {
+  if (lot >= 1.0) return spec.pipValue.standard;
+  if (lot >= 0.10) return spec.pipValue.mini;
+  return spec.pipValue.micro;
+}
+
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const mistralKey = document.getElementById('authMistralKey').value.trim();
@@ -558,9 +599,7 @@ async function testApiKeys() {
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
   showToast("🧪 Inajaribu...", 2000);
-
   let results = [];
-
   if (mistralKey) {
     try {
       const r = await fetch(`${MISTRAL_BASE_URL}/chat/completions`, {
@@ -572,19 +611,16 @@ async function testApiKeys() {
       results.push(d.error ? `❌ Mistral: ${d.error.message}` : `✅ Mistral: OK`);
     } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
   }
-
   if (geminiKey) {
     try {
       const r = await fetch(`${GEMINI_BASE_URL}/models/gemini-3.6-flash:generateContent?key=${geminiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
       });
       const d = await r.json();
       results.push(d.error ? `❌ Gemini: ${d.error.message}` : `✅ Gemini: OK`);
     } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
   }
-
   alert(results.join('\n\n'));
 }
 
@@ -701,7 +737,6 @@ function fileToBase64(file) {
   });
 }
 
-// ============ CALL MISTRAL ============
 async function callMistral(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
 
@@ -728,8 +763,7 @@ Respond in valid JSON only:
     body: JSON.stringify({
       model: MISTRAL_MODEL,
       messages: [{ role: 'user', content: content }],
-      temperature: 0.3,
-      max_tokens: 1000
+      temperature: 0.3, max_tokens: 1000
     })
   });
 
@@ -753,7 +787,6 @@ Respond in valid JSON only:
   };
 }
 
-// ============ CALL GEMINI ============
 async function callGemini(master, images, pair, livePrice, apiKey) {
   const prompt = `You are the "${master.name}" trading master. Your analytical lens: ${master.lens}
 
@@ -808,34 +841,23 @@ Respond in valid JSON only:
   throw new Error(`Gemini: ${lastError || "All models failed"}`);
 }
 
-// ============ CALL MASTER (with fallback) ============
 async function callMaster(master, images, pair, livePrice) {
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
 
-  // Jaribu Mistral kwanza
   if (mistralKey) {
-    try {
-      return await callMistral(master, images, pair, livePrice, mistralKey);
-    } catch (err) {
-      console.warn(`[${master.name}] Mistral failed: ${err.message}`);
-    }
+    try { return await callMistral(master, images, pair, livePrice, mistralKey); }
+    catch (err) { console.warn(`[${master.name}] Mistral failed: ${err.message}`); }
   }
 
-  // Kama Mistral imeshindwa, jaribu Gemini
   if (geminiKey) {
-    try {
-      return await callGemini(master, images, pair, livePrice, geminiKey);
-    } catch (err) {
-      console.warn(`[${master.name}] Gemini failed: ${err.message}`);
-    }
+    try { return await callGemini(master, images, pair, livePrice, geminiKey); }
+    catch (err) { console.warn(`[${master.name}] Gemini failed: ${err.message}`); }
   }
 
-  // Zote zimeshindwa
   throw new Error("Zote mbili (Mistral + Gemini) zimeshindwa");
 }
 
-// ============ CONFLUENCE ============
 function computeConfluence(masterResults) {
   let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
   masterResults.forEach(r => {
@@ -891,10 +913,7 @@ function computeConfluence(masterResults) {
     signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
     signalReason = `Masharti hayakidhi.`; tradable = false;
   }
-  return {
-    action: direction, signal, signalLabel, signalColor, signalReason, tradable,
-    confidence, dominance, buyCount, sellCount, holdCount
-  };
+  return { action: direction, signal, signalLabel, signalColor, signalReason, tradable, confidence, dominance, buyCount, sellCount, holdCount };
 }
 
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
@@ -917,20 +936,15 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   }
   const allPass = checks.consensus && checks.dominance && checks.alignment && checks.notTie && checks.tradable && checks.rrr;
   return {
-    approved: allPass,
-    checks,
-    message: allPass 
-      ? "✅ CAPITAL SHIELD: Trade approved." 
-      : confluence.tradable === false
-        ? "⏸ CAPITAL SHIELD: Subiri — masters hawakubaliani."
-        : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR haitoshi."
+    approved: allPass, checks,
+    message: allPass ? "✅ CAPITAL SHIELD: Trade approved." : confluence.tradable === false ? "⏸ CAPITAL SHIELD: Subiri — masters hawakubaliani." : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR haitoshi."
   };
 }
 
 async function runAnalysis() {
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
-  if (!mistralKey && !geminiKey) { alert("Hakuna API key. Ingia tena."); logout(); return; }
+  if (!mistralKey && !geminiKey) { alert("Hakuna API key."); logout(); return; }
 
   const pair = document.getElementById('selectedPair').value;
   const livePrice = parseFloat(document.getElementById('livePrice').value);
@@ -953,7 +967,6 @@ async function runAnalysis() {
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const masterResults = [];
-
   for (let i = 0; i < MASTERS_6.length; i++) {
     const master = MASTERS_6[i];
     try {
@@ -965,7 +978,6 @@ async function runAnalysis() {
       updateMasterCard(failed);
       masterResults.push(failed);
     }
-    // Subiri 1.5s kati ya masters
     if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 1500));
   }
 
@@ -979,25 +991,17 @@ async function runAnalysis() {
 
     const record = {
       id: Date.now(), date: new Date().toLocaleString(), pair,
-      action: confluence.action,
-      signal: confluence.signal,
-      signalLabel: confluence.signalLabel,
-      signalColor: confluence.signalColor,
-      signalReason: confluence.signalReason,
-      tradable: confluence.tradable,
-      confidence: confluence.confidence,
-      dominance: confluence.dominance,
+      action: confluence.action, signal: confluence.signal, signalLabel: confluence.signalLabel,
+      signalColor: confluence.signalColor, signalReason: confluence.signalReason,
+      tradable: confluence.tradable, confidence: confluence.confidence, dominance: confluence.dominance,
       entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
-      shield: shield.approved,
-      masters: masterResults,
-      confluence
+      shield: shield.approved, masters: masterResults, confluence
     };
 
     saveToHistory(record);
     renderFinalResults(record, shield);
     showToast(confluence.tradable ? "✅ Signal tayari" : "⏸ WAIT — Subiri", 4000);
-
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
       <h3 style="color:var(--red);">❌ Hitilafu</h3>
@@ -1109,12 +1113,19 @@ function buildAnalysisHTML(record, shield) {
   const tp2Pips = record.tp2Pips || 0;
   const tp3Pips = record.tp3Pips || 0;
   const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '—';
+
+  // ============ FIXED: PROFIT PROJECTIONS WITH ACCURATE PIP VALUE ============
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
-  const projections = lots.map(lot => ({
-    lot,
-    tp1: (tp1Pips * spec.pipValueStdLot * lot).toFixed(2),
-    tp3: (tp3Pips * spec.pipValueStdLot * lot).toFixed(2)
-  }));
+  const projections = lots.map(lot => {
+    const pipValue = getPipValue(spec, lot);
+    return {
+      lot,
+      pipValue: pipValue,
+      tp1: (tp1Pips * pipValue).toFixed(2),
+      tp3: (tp3Pips * pipValue).toFixed(2)
+    };
+  });
+
   const signalTextColor = signalColor.includes('buy') ? 'var(--green)' : signalColor.includes('sell') ? 'var(--red)' : signalColor.includes('wait') ? 'var(--yellow)' : 'var(--muted)';
 
   let html = `
@@ -1173,8 +1184,18 @@ function buildAnalysisHTML(record, shield) {
 
       <div class="card">
         <div class="ballistic-header">💵 PROFIT PROJECTIONS</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:8px;">📊 Pip values: micro=$0.10, mini=$1.00, standard=$10.00 (kwa XAUUSD/EURUSD/GBPUSD)</div>
         ${projections.map(p => `
-          <div class="lot-row"><strong>Lot ${p.lot}</strong><span><span style="color:var(--orange);">TP1: $${p.tp1}</span><span style="color:var(--green);margin-left:8px;">TP3: $${p.tp3}</span></span></div>
+          <div class="lot-row">
+            <div>
+              <strong>Lot ${p.lot}</strong><br>
+              <small style="color:var(--muted);font-size:10px;">$${p.pipValue.toFixed(3)}/pip</small>
+            </div>
+            <span>
+              <span style="color:var(--orange);">TP1: $${p.tp1}</span>
+              <span style="color:var(--green);margin-left:8px;">TP3: $${p.tp3}</span>
+            </span>
+          </div>
         `).join('')}
       </div>
     `;
@@ -1219,13 +1240,14 @@ function calculateRisk() {
   const pair = document.getElementById('riskPair').value;
   const spec = PAIR_SPECS[pair];
   const riskAmount = balance * (riskPct / 100);
-  const lotSize = riskAmount / (slPips * spec.pipValueStdLot);
+  const pipValue = spec.pipValue.standard;
+  const lotSize = riskAmount / (slPips * pipValue);
   document.getElementById('riskResultBox').style.display = 'block';
   document.getElementById('riskResultText').innerHTML = `
     • <strong>Balance:</strong> $${balance.toFixed(2)}<br>
     • <strong>Risk (${riskPct}%):</strong> $${riskAmount.toFixed(2)}<br>
     • <strong>SL:</strong> ${slPips} pips<br>
-    • <strong>Pair:</strong> ${pair}<br><br>
+    • <strong>Pair:</strong> ${pair} (pip value: $${pipValue}/lot)<br><br>
     <strong style="color:var(--accent);font-size:15px;">📊 LOT SIZE: ${lotSize.toFixed(3)}</strong>
   `;
 }
@@ -1253,7 +1275,8 @@ function calculatePips() {
   else { pipsDiff = (entry - exit) / spec.pipSize; isProfit = pipsDiff > 0; }
 
   const absPips = Math.abs(pipsDiff);
-  const usdValue = absPips * spec.pipValueStdLot * lot;
+  const pipValue = getPipValue(spec, lot);
+  const usdValue = absPips * pipValue;
   const color = isProfit ? 'var(--green)' : 'var(--red)';
   const label = isProfit ? 'FAIDA' : 'HASARA';
   const sign = isProfit ? '+' : '-';
@@ -1264,7 +1287,7 @@ function calculatePips() {
       <div style="text-align:center;font-size:12px;color:var(--muted);text-transform:uppercase;">Matokeo</div>
       <div class="calc-big-value" style="color:${color};">${sign}${absPips.toFixed(1)} PIPS</div>
       <div style="text-align:center;font-size:24px;font-weight:bold;color:${color};">${sign}$${usdValue.toFixed(2)}</div>
-      <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:4px;">${label} • ${lot} lot • ${pair}</div>
+      <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:4px;">${label} • ${lot} lot • $${pipValue.toFixed(3)}/pip • ${pair}</div>
     </div>
   `;
   showToast(isProfit ? `✅ Faida: $${usdValue.toFixed(2)}` : `❌ Hasara: $${usdValue.toFixed(2)}`, 3000);
@@ -1302,32 +1325,16 @@ async function fetchLiveNews() {
       }
       news.push({ time, currency, impact, event, actual, forecast, previous });
     });
-    if (news.length === 0) {
-      container.innerHTML = `<div class="info-box">⚠️ News hazipatikani. Jaribu tena.</div>`;
-      return;
-    }
+    if (news.length === 0) { container.innerHTML = `<div class="info-box">⚠️ News hazipatikani. Jaribu tena.</div>`; return; }
     container.innerHTML = `
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">
-        📅 ${today.toLocaleDateString('sw-TZ')} • ${news.length} events
-      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-align:center;">📅 ${today.toLocaleDateString('sw-TZ')} • ${news.length} events</div>
       ${news.map(n => {
         const flag = getFlag(n.currency);
         const impactLabel = n.impact === 'high' ? 'HIGH' : n.impact === 'medium' ? 'MEDIUM' : n.impact === 'holiday' ? 'HOLIDAY' : 'LOW';
-        return `
-          <div class="news-item impact-${n.impact}">
-            <div class="news-time">${n.time || '—'}</div>
-            <div class="news-content">
-              <div class="news-title">${flag} ${n.currency} <span class="news-impact-badge ${n.impact}">${impactLabel}</span></div>
-              <div class="news-meta">${n.event}</div>
-              ${n.actual || n.forecast || n.previous ? `<div class="news-meta" style="margin-top:6px;">${n.actual ? `<strong style="color:var(--green);">Actual: ${n.actual}</strong>` : ''}${n.forecast ? ` • Forecast: ${n.forecast}` : ''}${n.previous ? ` • Previous: ${n.previous}` : ''}</div>` : ''}
-            </div>
-          </div>
-        `;
+        return `<div class="news-item impact-${n.impact}"><div class="news-time">${n.time || '—'}</div><div class="news-content"><div class="news-title">${flag} ${n.currency} <span class="news-impact-badge ${n.impact}">${impactLabel}</span></div><div class="news-meta">${n.event}</div>${n.actual || n.forecast || n.previous ? `<div class="news-meta" style="margin-top:6px;">${n.actual ? `<strong style="color:var(--green);">Actual: ${n.actual}</strong>` : ''}${n.forecast ? ` • Forecast: ${n.forecast}` : ''}${n.previous ? ` • Previous: ${n.previous}` : ''}</div>` : ''}</div></div>`;
       }).join('')}
     `;
-  } catch (err) {
-    container.innerHTML = `<div class="info-box">⚠️ Imeshindwa kupakia: ${err.message}</div>`;
-  }
+  } catch (err) { container.innerHTML = `<div class="info-box">⚠️ Imeshindwa: ${err.message}</div>`; }
 }
 
 function getFlag(currency) {
@@ -1338,18 +1345,13 @@ function getFlag(currency) {
 function saveJournalTrade() {
   const trade = {
     id: Date.now(), date: new Date().toLocaleString(), type: 'manual',
-    pair: document.getElementById('jPair').value,
-    action: document.getElementById('jAction').value,
-    entry: parseFloat(document.getElementById('jEntry').value) || 0,
-    lot: parseFloat(document.getElementById('jLot').value) || 0.01,
-    sl: parseFloat(document.getElementById('jSL').value) || 0,
-    tp: parseFloat(document.getElementById('jTP').value) || 0,
+    pair: document.getElementById('jPair').value, action: document.getElementById('jAction').value,
+    entry: parseFloat(document.getElementById('jEntry').value) || 0, lot: parseFloat(document.getElementById('jLot').value) || 0.01,
+    sl: parseFloat(document.getElementById('jSL').value) || 0, tp: parseFloat(document.getElementById('jTP').value) || 0,
     outcome: document.getElementById('jOutcome').value
   };
   if (!trade.entry) { alert("Weka entry price."); return; }
-  saveToHistory(trade);
-  showToast("Trade imehifadhiwa!");
-  navigate('history');
+  saveToHistory(trade); showToast("Trade imehifadhiwa!"); navigate('history');
 }
 
 function saveToHistory(record) {
@@ -1363,10 +1365,7 @@ function saveToHistory(record) {
 function loadHistory() {
   const container = document.getElementById('historyList');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  if (history.length === 0) {
-    container.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>`;
-    return;
-  }
+  if (history.length === 0) { container.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">Hakuna historia bado.</div>`; return; }
   container.innerHTML = history.map((h, i) => {
     const label = h.signalLabel || (h.action === 'BUY' ? '🟢 BUY' : h.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD');
     let color = 'var(--muted)';
@@ -1376,17 +1375,7 @@ function loadHistory() {
       else if (h.signalColor.includes('wait')) color = 'var(--yellow)';
     } else if (h.action === 'BUY') color = 'var(--green)';
     else if (h.action === 'SELL') color = 'var(--red)';
-    return `
-      <div class="history-card" onclick="viewHistoryDetail(${i})">
-        <div style="flex-grow:1;">
-          <strong>${h.pair || '—'} <span style="color:${color};">${label}</span></strong>
-          ${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br>
-          <small style="color:var(--muted);">${h.date || ''}</small>
-        </div>
-        <div class="chevron">›</div>
-        <button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button>
-      </div>
-    `;
+    return `<div class="history-card" onclick="viewHistoryDetail(${i})"><div style="flex-grow:1;"><strong>${h.pair || '—'} <span style="color:${color};">${label}</span></strong>${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br><small style="color:var(--muted);">${h.date || ''}</small></div><div class="chevron">›</div><button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button></div>`;
   }).join('');
 }
 
@@ -1439,10 +1428,7 @@ function viewHistoryDetail(index) {
   const actionColor = record.action === 'BUY' ? 'var(--green)' : record.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
   document.getElementById('modalInnerContent').innerHTML = `
     <h2 style="color:var(--accent);margin:0 0 15px;">📊 Analysis ya Zamani</h2>
-    <div class="card" style="text-align:center;">
-      <div style="font-size:13px;color:var(--accent);font-weight:bold;">${record.pair || '—'}</div>
-      <div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${record.action || 'HOLD'}</div>
-    </div>
+    <div class="card" style="text-align:center;"><div style="font-size:13px;color:var(--accent);font-weight:bold;">${record.pair || '—'}</div><div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${record.action || 'HOLD'}</div></div>
     <div class="card">
       <div class="grid-2"><div class="mini-box"><label>Entry</label><div>${record.entry || '—'}</div></div><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl || '—'}</div></div></div>
       <div class="grid-3"><div class="mini-box"><label>TP1</label><div style="color:var(--green);">${record.tp1 || '—'}</div></div><div class="mini-box"><label>TP2</label><div style="color:var(--green);">${record.tp2 || '—'}</div></div><div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div></div>
@@ -1482,11 +1468,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = {
-    history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'),
-    exportedAt: new Date().toISOString(),
-    version: "19.0"
-  };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "19.1" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
