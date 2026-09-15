@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v23.0 — Masters 6 Gemini Primary</title>
+<title>Lutynoel FX v24.0 — Clean Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -72,10 +72,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .provider-mistral{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue)}
 .provider-gemini{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
 .provider-failed{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
-.data-badge{display:inline-block;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-left:4px}
-.data-ohlc{background:rgba(16,185,129,.2);color:var(--green);border:1px solid var(--green)}
-.data-indicators{background:rgba(251,191,36,.2);color:var(--accent);border:1px solid var(--accent)}
-.data-news{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 .confidence-bar{width:100%;height:4px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
 .confidence-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));transition:width .5s}
 .signal-badge-container{display:flex;justify-content:center;gap:6px;margin:10px 0;flex-wrap:wrap}
@@ -108,8 +104,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .success-box{background:rgba(16,185,129,.1);border:1px solid var(--green);color:#6ee7b7;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .shield-box{background:rgba(168,85,247,.1);border:1px solid var(--purple);color:#d8b4fe;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-bottom:12px}
 .wait-box{background:rgba(250,204,21,.1);border:1px solid var(--yellow);color:#fef08a;padding:12px;border-radius:8px;font-size:13px;line-height:1.6;margin-bottom:12px;text-align:center}
-.news-block-box{background:rgba(239,68,68,.15);border:1px solid var(--red);color:#fca5a5;padding:12px;border-radius:8px;font-size:13px;line-height:1.6;margin-bottom:12px;text-align:center}
-.correlation-box{background:rgba(168,85,247,.1);border:1px solid var(--purple);padding:12px;border-radius:8px;font-size:12px;line-height:1.6;margin-bottom:12px;}
 .toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:380px;margin:0 auto;background:var(--accent);color:#000;padding:12px 20px;border-radius:8px;z-index:9999;font-weight:bold;font-size:13px;box-shadow:0 5px 15px rgba(0,0,0,.5);animation:slideUp .3s}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
@@ -147,9 +141,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .stat-box{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:8px;text-align:center;}
 .stat-value{font-size:22px;font-weight:bold;color:var(--accent);}
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;}
-.correlation-item{display:flex;justify-content:space-between;padding:8px 12px;background:#08080a;border-radius:6px;margin-bottom:6px;border-left:3px solid var(--border);}
-.correlation-item.negative{border-left-color:var(--red);}
-.correlation-item.positive{border-left-color:var(--green);}
 </style>
 </head>
 <body>
@@ -164,8 +155,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v23.0</div>
-    <div class="auth-subtitle">Masters 6 + Gemini Primary</div>
+    <div class="auth-title">Lutynoel FX v24.0</div>
+    <div class="auth-subtitle">Clean Edition — Gemini Primary + Masters 6</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
@@ -180,7 +171,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Mistral API Key (Fallback — Optional)</label>
     <input type="password" id="authMistralKey" placeholder="Mistral key (optional)" autocomplete="off">
 
-    <label>TwelveData API Key (Optional — for forex OHLC)</label>
+    <label>TwelveData API Key (Optional — for live price)</label>
     <input type="text" id="authTwelveKey" placeholder="Optional" autocomplete="off">
 
     <div class="info-box">
@@ -208,13 +199,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v23.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v24.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">GEMINI</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">CLEAN</span></div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest <span class="badge-new">NEW</span></div>
-    <div class="menu-item" onclick="navigate('correlation')">🔗 Correlation <span class="badge-new">NEW</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('news')">📰 News Live <span class="badge-live">LIVE</span></div>
@@ -228,13 +218,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v23.0 MASTERS 6</span>
+          <span class="badge-shield">v24.0 CLEAN</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Masters 6 + Gemini Primary</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Clean Edition</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Wataalamu 6 wa AI kwa uchambuzi wa kina. Gemini primary, OHLC ground truth, auto-backtest, correlation.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 6 + Gemini Primary. Rahisi, wazi, kama v19.3.</p>
       </div>
 
       <div class="grid-3">
@@ -247,23 +237,22 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
         <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Masters 6 Analysis</button>
         <button class="secondary-btn" onclick="navigate('backtest')">📊 Auto-Backtest</button>
-        <button class="secondary-btn" onclick="navigate('correlation')">🔗 Correlation Analysis</button>
         <button class="secondary-btn" onclick="navigate('news')">📰 Live News</button>
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>v23.0 Improvements:</strong><br>
-        • <strong>Masters 6</strong> — Chief, S/R, PA, SMC, Fundamental, Fib/Elliott<br>
-        • <strong>Gemini Primary</strong> — Gemini 3.8 Flash inaanza kwanza<br>
+        ⚙️ <strong>v24.0 Clean Edition:</strong><br>
+        • <strong>Gemini Primary</strong> — Gemini 3.8 Flash kwanza<br>
         • <strong>Mistral Fallback</strong> — Inatumika tu Gemini ikigoma<br>
+        • <strong>Masters 6</strong> — Chief, S/R, PA, S&D, SMC, Fib/Elliott<br>
         • <strong>Auto-Backtest</strong> — Inafuatilia signals kiotomatiki<br>
-        • <strong>Correlation Analysis</strong> — DXY, USD, Gold relationships
+        • <strong>Bila OHLC</strong> — AI inaangalia picha pekee (rahisi)
       </div>
     </div>
 
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Gemini-Primary Analysis</h3>
+        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Clean Analysis</h3>
 
         <label>1. Choose Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
@@ -319,28 +308,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="refreshBacktest()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;">
-          📈 <strong>Auto-tracking:</strong> Kila signal inafuatiliwa kiotomatiki. App inahesabu kama SL au TP iligongwa kwa kutegemea bei ya baadaye.
+          📈 Kila signal inafuatiliwa kiotomatiki. App inahesabu kama SL au TP3 iligongwa.
         </div>
         <div id="backtestContainer">
           <div style="text-align:center;padding:30px;color:var(--muted);">
             <div class="spinner-white"></div> Loading backtest...
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="view-correlation" class="view-section" style="display:none;">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">🔗 Correlation Analysis</h3>
-          <button onclick="refreshCorrelation()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
-        </div>
-        <div class="info-box" style="margin-bottom:12px;">
-          📊 <strong>Correlation:</strong> Inaonyesha uhusiano kati ya pairs na DXY/USD.
-        </div>
-        <div id="correlationContainer">
-          <div style="text-align:center;padding:30px;color:var(--muted);">
-            <div class="spinner-white"></div> Loading correlation...
           </div>
         </div>
       </div>
@@ -431,7 +403,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="fetchLiveNews()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <div class="info-box" style="margin-bottom:12px;font-size:11px;">
-          📡 News from Forex Factory. High-impact news within 30 min BLOCKS trades.
+          📡 News from Forex Factory.
         </div>
         <div id="newsContainer">
           <div style="text-align:center;padding:30px;color:var(--muted);">
@@ -445,7 +417,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator</h3>
         <div class="info-box" style="margin-bottom:15px;font-size:11px;">
-          💡 Calculates pips, pip value per lot, profit/loss. Offline tool.
+          💡 Calculates pips, pip value per lot, profit/loss.
         </div>
 
         <label>Choose Pair</label>
@@ -502,13 +474,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v23.0 (Masters 6)<br>
+          <strong>Version:</strong> v24.0 (Clean)<br>
           <strong>Primary:</strong> Gemini 3.8 Flash<br>
           <strong>Fallback:</strong> Gemini 3.6 → Gemini 3.5 → Mistral<br>
-          <strong>Masters:</strong> 6 (Chief, S/R, PA, SMC, Fundamental, Fib/Elliott)<br>
-          <strong>OHLC:</strong> Binance (crypto) + TwelveData (forex)<br>
-          <strong>Auto-Backtest:</strong> Enabled (checks every 5 min)<br>
-          <strong>Correlation:</strong> DXY, USD, Gold, BTC, NAS100
+          <strong>Masters:</strong> 6 (Clean — sio complex)<br>
+          <strong>Auto-Backtest:</strong> Enabled<br>
+          <strong>Bila OHLC</strong> — AI inaangalia picha pekee
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Your key">
@@ -522,7 +493,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v23.0 — MASTERS 6 + GEMINI PRIMARY
+   LUTYNOEL FX v24.0 — CLEAN EDITION
+   Gemini Primary + Masters 6 + Auto-Backtest
+   BILA OHLC — BILA complex prompts
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -534,8 +507,8 @@ const MISTRAL_MODEL = 'pixtral-12b-2409';
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 
-const MASTER_TIMEOUT = 120000;
-const API_TIMEOUT = 60000;
+const MASTER_TIMEOUT = 90000;
+const API_TIMEOUT = 45000;
 const RETRY_ATTEMPTS = 3;
 const AUTO_CHECK_INTERVAL = 300000;
 
@@ -553,49 +526,37 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
-// ============ MASTERS 6 (Original Core) ============
+// ============ MASTERS 6 (Original Clean) ============
 const MASTERS_6 = [
   {
-    id: 1, name: "Chief Master", weight: 0.15,
-    lens: "Overall trend alignment, higher timeframe bias, and final decision authority. Look at the BIG PICTURE across 4H, 1H, and 15M charts and determine whether the market is trending up, down, or consolidating. You are the FINAL DECISION MAKER — weigh all perspectives.",
-    focus: "Overall trend & final decision",
-    dataSource: "ohlc+indicators"
+    id: 1, name: "Chief Master", weight: 0.18,
+    lens: "Overall trend direction. Look at 4H and 1H charts. Determine if market is in uptrend, downtrend, or ranging. Focus on the BIG PICTURE. You are the final decision authority."
   },
   {
-    id: 2, name: "Support & Resistance Master", weight: 0.12,
-    lens: "Key horizontal support and resistance levels across 4H and 1H. Identify where price has reacted before and where institutional orders are likely placed. Use OHLC data to calculate exact levels. Focus on the STRENGTH of each level (how many times it held).",
-    focus: "Key S/R levels",
-    dataSource: "ohlc+indicators"
+    id: 2, name: "Support & Resistance Master", weight: 0.15,
+    lens: "Key horizontal support and resistance levels. Identify where price has reacted before and where institutional orders are likely placed. Focus on the STRENGTH of each level."
   },
   {
-    id: 3, name: "Price Action Master", weight: 0.10,
-    lens: "Candlestick patterns: engulfing, rejection wicks, pin bars, doji, hammer. Read the RAW price action without indicators. Focus on the STORY the candles are telling.",
-    focus: "Candlestick patterns",
-    dataSource: "ohlc"
+    id: 3, name: "Price Action Master", weight: 0.15,
+    lens: "Candlestick patterns: engulfing, rejection wicks, pin bars, doji, hammer. Read the RAW price action without indicators. Focus on the STORY the candles are telling."
   },
   {
-    id: 4, name: "Supply & Demand Master", weight: 0.10,
-    lens: "Institutional order blocks, imbalance zones, and liquidity sweeps. Identify where large institutional orders are placed and where price is likely to reverse. Use OHLC data to find actual zones.",
-    focus: "Order blocks & zones",
-    dataSource: "ohlc+indicators"
+    id: 4, name: "Supply & Demand Master", weight: 0.15,
+    lens: "Institutional order blocks, imbalance zones, and liquidity sweeps. Identify where large institutional orders are placed and where price is likely to reverse."
   },
   {
-    id: 5, name: "Smart Money Concepts (SMC) & ICT Master", weight: 0.15,
-    lens: "Fair Value Gaps (FVG), liquidity pools, killzones, optimal trade entry, Break of Structure (BOS), Change of Character (CHoCH). Focus on institutional order flow.",
-    focus: "SMC & ICT",
-    dataSource: "ohlc+indicators"
+    id: 5, name: "Smart Money Concepts (SMC) & ICT Master", weight: 0.17,
+    lens: "Fair Value Gaps (FVG), liquidity pools, killzones, optimal trade entry, Break of Structure (BOS), Change of Character (CHoCH). Focus on institutional order flow."
   },
   {
-    id: 6, name: "Fundamental & Fibonacci Master", weight: 0.18,
-    lens: "Economic news, central bank bias, DXY correlation, PLUS Fibonacci retracement/extension levels (0.382, 0.5, 0.618, 1.618). Consider macroeconomic drivers AND mathematical levels.",
-    focus: "Fundamental & Fibonacci",
-    dataSource: "ohlc+indicators"
+    id: 6, name: "Fundamental & Fibonacci Master", weight: 0.20,
+    lens: "Economic news, central bank bias, DXY correlation, PLUS Fibonacci retracement/extension levels (0.382, 0.5, 0.618, 1.618). Consider macro drivers AND mathematical levels."
   }
 ];
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v23.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v24.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -614,191 +575,6 @@ function getPipValue(spec, lot) {
   if (lot >= 1.0) return spec.pipValue.standard;
   if (lot >= 0.10) return spec.pipValue.mini;
   return spec.pipValue.micro;
-}
-
-// ============ FETCH OHLC ============
-async function fetchOHLCData(pair, timeframe = '1h', limit = 100) {
-  const spec = PAIR_SPECS[pair];
-  if (!spec) return null;
-  try {
-    if (spec.source === 'binance' && spec.binanceSymbol) {
-      const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
-      const res = await fetchWithTimeout(url, {}, 10000);
-      if (!res.ok) return null;
-      const data = await res.json();
-      return data.map(d => ({
-        time: d[0], open: parseFloat(d[1]), high: parseFloat(d[2]),
-        low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5])
-      }));
-    }
-    if (spec.source === 'twelve') {
-      const key = sessionStorage.getItem('lutynoel_twelveKey');
-      if (!key) return null;
-      const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${timeframe}&outputsize=${limit}&apikey=${key}`;
-      const res = await fetchWithTimeout(url, {}, 15000);
-      if (!res.ok) return null;
-      const data = await res.json();
-      if (data.status === 'error' || !data.values) return null;
-      return data.values.reverse().map(d => ({
-        time: new Date(d.datetime).getTime(),
-        open: parseFloat(d.open), high: parseFloat(d.high),
-        low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0)
-      }));
-    }
-    return null;
-  } catch (err) { console.warn("OHLC fetch failed:", err.message); return null; }
-}
-
-// ============ CALCULATE INDICATORS ============
-function calculateIndicators(ohlcData) {
-  if (!ohlcData || ohlcData.length < 20) return null;
-  const closes = ohlcData.map(d => d.close);
-  const highs = ohlcData.map(d => d.high);
-  const lows = ohlcData.map(d => d.low);
-  const rsi = calculateRSI(closes, 14);
-  const macd = calculateMACD(closes);
-  const atr = calculateATR(highs, lows, closes, 14);
-  const ma20 = calculateSMA(closes, 20);
-  const ma50 = calculateSMA(closes, 50);
-  const ma200 = closes.length >= 200 ? calculateSMA(closes, 200) : null;
-  const recentHigh = Math.max(...highs.slice(-50));
-  const recentLow = Math.min(...lows.slice(-50));
-  const currentPrice = closes[closes.length - 1];
-  let trend = 'RANGING';
-  if (ma20 && ma50 && currentPrice > ma20 && ma20 > ma50) trend = 'UPTREND';
-  else if (ma20 && ma50 && currentPrice < ma20 && ma20 < ma50) trend = 'DOWNTREND';
-  
-  // Fibonacci levels
-  const fibRange = recentHigh - recentLow;
-  const fib = {
-    level_236: (recentHigh - fibRange * 0.236).toFixed(2),
-    level_382: (recentHigh - fibRange * 0.382).toFixed(2),
-    level_500: (recentHigh - fibRange * 0.500).toFixed(2),
-    level_618: (recentHigh - fibRange * 0.618).toFixed(2),
-    level_786: (recentHigh - fibRange * 0.786).toFixed(2),
-    ext_1272: (recentHigh + fibRange * 0.272).toFixed(2),
-    ext_1618: (recentHigh + fibRange * 0.618).toFixed(2)
-  };
-  
-  return {
-    rsi: rsi ? rsi.toFixed(1) : null,
-    macd: macd ? { value: macd.macd.toFixed(4), signal: macd.signal.toFixed(4), histogram: macd.histogram.toFixed(4), crossover: macd.histogram > 0 ? 'BULLISH' : 'BEARISH' } : null,
-    atr: atr ? atr.toFixed(2) : null,
-    ma20: ma20 ? ma20.toFixed(2) : null,
-    ma50: ma50 ? ma50.toFixed(2) : null,
-    ma200: ma200 ? ma200.toFixed(2) : null,
-    recentHigh: recentHigh.toFixed(2),
-    recentLow: recentLow.toFixed(2),
-    currentPrice: currentPrice.toFixed(2),
-    trend: trend,
-    fib: fib,
-    barsCount: ohlcData.length
-  };
-}
-
-function calculateRSI(closes, period = 14) {
-  if (closes.length < period + 1) return null;
-  let gains = 0, losses = 0;
-  for (let i = 1; i <= period; i++) {
-    const diff = closes[i] - closes[i - 1];
-    if (diff > 0) gains += diff; else losses -= diff;
-  }
-  const avgGain = gains / period;
-  const avgLoss = losses / period;
-  if (avgLoss === 0) return 100;
-  const rs = avgGain / avgLoss;
-  return 100 - (100 / (1 + rs));
-}
-
-function calculateSMA(values, period) {
-  if (values.length < period) return null;
-  const slice = values.slice(-period);
-  return slice.reduce((a, b) => a + b, 0) / period;
-}
-
-function calculateEMA(values, period) {
-  if (values.length < period) return null;
-  const k = 2 / (period + 1);
-  let ema = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
-  for (let i = period; i < values.length; i++) ema = values[i] * k + ema * (1 - k);
-  return ema;
-}
-
-function calculateMACD(closes) {
-  if (closes.length < 26) return null;
-  const ema12 = calculateEMA(closes, 12);
-  const ema26 = calculateEMA(closes, 26);
-  if (!ema12 || !ema26) return null;
-  const macd = ema12 - ema26;
-  const signal = macd * 0.2;
-  return { macd, signal, histogram: macd - signal };
-}
-
-function calculateATR(highs, lows, closes, period = 14) {
-  if (highs.length < period + 1) return null;
-  const trueRanges = [];
-  for (let i = 1; i < highs.length; i++) {
-    const tr = Math.max(highs[i] - lows[i], Math.abs(highs[i] - closes[i - 1]), Math.abs(lows[i] - closes[i - 1]));
-    trueRanges.push(tr);
-  }
-  const slice = trueRanges.slice(-period);
-  return slice.reduce((a, b) => a + b, 0) / period;
-}
-
-// ============ NEWS ============
-async function fetchNewsForFilter() {
-  try {
-    const ffUrl = `https://www.forexfactory.com/calendar?day=today`;
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(ffUrl)}`;
-    const response = await fetchWithTimeout(proxyUrl, {}, 15000);
-    if (!response.ok) return [];
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const rows = doc.querySelectorAll('.calendar__row');
-    const news = [];
-    rows.forEach(row => {
-      const time = row.querySelector('.calendar__time')?.textContent?.trim() || '';
-      const currency = row.querySelector('.calendar__currency')?.textContent?.trim() || '';
-      const impactEl = row.querySelector('.calendar__impact span');
-      const event = row.querySelector('.calendar__event-title')?.textContent?.trim() || '';
-      if (!event) return;
-      let impact = 'low';
-      if (impactEl) {
-        const cls = impactEl.className || '';
-        if (cls.includes('high')) impact = 'high';
-        else if (cls.includes('medium')) impact = 'medium';
-      }
-      news.push({ time, currency, impact, event });
-    });
-    return news;
-  } catch (err) { return []; }
-}
-
-function checkNewsBlock(newsItems, pair) {
-  if (!newsItems || newsItems.length === 0) return { blocked: false };
-  const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-  const pairCurrency = pair.slice(0, 3);
-  for (const news of newsItems) {
-    if (news.impact !== 'high') continue;
-    if (!news.currency) continue;
-    const relevant = pair.includes(news.currency) || news.currency === 'USD' || news.currency === pairCurrency;
-    if (!relevant) continue;
-    const timeMatch = news.time.match(/(\d+):(\d+)(am|pm)/i);
-    if (!timeMatch) continue;
-    let hour = parseInt(timeMatch[1]);
-    const minute = parseInt(timeMatch[2]);
-    const ampm = timeMatch[3].toLowerCase();
-    if (ampm === 'pm' && hour !== 12) hour += 12;
-    if (ampm === 'am' && hour === 12) hour = 0;
-    const newsMinutes = hour * 60 + minute;
-    const diff = Math.abs(newsMinutes - currentMinutes);
-    if (diff <= 30) {
-      return { blocked: true, news, message: `High-impact news imminent: ${news.event} (${news.currency}) at ${news.time}` };
-    }
-  }
-  return { blocked: false };
 }
 
 // ============ AUTO-BACKTEST ============
@@ -868,79 +644,6 @@ function runAutoBacktest() {
   });
 }
 
-// ============ CORRELATION ============
-async function fetchCorrelationData() {
-  const pairs = ['XAUUSD', 'BTCUSD', 'NAS100', 'EURUSD', 'GBPUSD', 'USDJPY'];
-  const prices = {};
-  for (const pair of pairs) {
-    const spec = PAIR_SPECS[pair];
-    if (!spec) continue;
-    try {
-      let price = null;
-      if (spec.source === 'binance' && spec.binanceSymbol) {
-        const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
-        if (r.ok) { const d = await r.json(); price = parseFloat(d.price); }
-      } else if (spec.source === 'twelve') {
-        const key = sessionStorage.getItem('lutynoel_twelveKey');
-        if (key) {
-          const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
-          if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
-        }
-      }
-      if (price) prices[pair] = price;
-    } catch (err) { console.warn(`Correlation fetch ${pair} failed`); }
-  }
-  return prices;
-}
-
-async function refreshCorrelation() {
-  const container = document.getElementById('correlationContainer');
-  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Analyzing...</div>`;
-  const prices = await fetchCorrelationData();
-  const pairCorrelations = [
-    { pair: 'XAUUSD', dxy: 'Negative Strong', usd: 'Negative Strong', gold: 'Self' },
-    { pair: 'BTCUSD', dxy: 'Negative Weak', usd: 'Negative Weak', gold: 'Positive Medium' },
-    { pair: 'NAS100', dxy: 'Negative Medium', usd: 'Negative Medium', gold: 'Positive Weak' },
-    { pair: 'EURUSD', dxy: 'Negative Strong', usd: 'Negative Strong', gold: 'Positive Medium' },
-    { pair: 'GBPUSD', dxy: 'Negative Strong', usd: 'Negative Strong', gold: 'Positive Weak' },
-    { pair: 'USDJPY', dxy: 'Positive Strong', usd: 'Positive Strong', gold: 'Negative Weak' }
-  ];
-  
-  let pricesHtml = '';
-  if (Object.keys(prices).length > 0) {
-    pricesHtml = `<div class="mini-box" style="margin-bottom:12px;">
-      <label>Live Prices</label>
-      ${Object.entries(prices).map(([pair, price]) => {
-        const spec = PAIR_SPECS[pair];
-        return `<div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;">
-          <strong>${pair}</strong>
-          <span style="color:var(--accent);">${price.toFixed(spec?.decimals || 2)}</span>
-        </div>`;
-      }).join('')}
-    </div>`;
-  }
-  
-  container.innerHTML = `
-    ${pricesHtml}
-    <div class="ballistic-header">🔗 CORRELATION WITH DXY & USD</div>
-    ${pairCorrelations.map(c => `
-      <div class="correlation-item ${c.dxy.includes('Negative') ? 'negative' : 'positive'}">
-        <div>
-          <strong>${c.pair}</strong><br>
-          <small style="color:var(--muted);font-size:10px;">DXY: ${c.dxy} • USD: ${c.usd} • Gold: ${c.gold}</small>
-        </div>
-      </div>
-    `).join('')}
-    <div class="info-box" style="margin-top:12px;font-size:11px;">
-      💡 <strong>Jinsi ya Kutumia:</strong><br>
-      • <strong>XAUUSD, EURUSD, GBPUSD:</strong> DXY UP = Pair DOWN<br>
-      • <strong>USDJPY, USDCAD:</strong> DXY UP = Pair UP<br>
-      • <strong>BTCUSD:</strong> Correlation hafifu — trade kwa technical pekee<br>
-      • <strong>NAS100:</strong> DXY UP = Stocks DOWN
-    </div>
-  `;
-}
-
 // ============ SAFE JSON ============
 function safeJsonParse(text) {
   if (!text) return null;
@@ -963,7 +666,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
     return response;
   } catch (err) {
     clearTimeout(id);
-    if (err.name === 'AbortError') throw new Error(`Request timeout after ${timeout}ms`);
+    if (err.name === 'AbortError') throw new Error(`Timeout after ${timeout}ms`);
     throw err;
   }
 }
@@ -1071,7 +774,6 @@ function navigate(view) {
   if (view === 'news') fetchLiveNews();
   if (view === 'pips') updatePipsPairInfo();
   if (view === 'backtest') refreshBacktest();
-  if (view === 'correlation') refreshCorrelation();
   window.scrollTo(0, 0);
 }
 
@@ -1159,70 +861,17 @@ function fileToBase64(file) {
   });
 }
 
-// ============ BUILD PROMPT ============
-function buildPrompt(master, pair, livePrice, ohlcData, indicators, newsItems) {
-  let prompt = `You are the "${master.name}" trading master. Your focus: ${master.focus}.
+// ============ SIMPLE PROMPT (like v19.3) ============
+function buildPrompt(master, pair, livePrice) {
+  return `You are the "${master.name}" trading master.
 
-YOUR LENS (only analyze this): ${master.lens}
+YOUR LENS: ${master.lens}
 
-Analyze ${pair} at current price ${livePrice}.
+Analyze ${pair} at current price ${livePrice} based on the 3 chart images (4H, 1H, 15M).
 
-`;
-  
-  if (master.dataSource.includes('ohlc') && ohlcData && ohlcData.length > 0) {
-    const recent = ohlcData.slice(-30);
-    prompt += `RECENT OHLC DATA (last 30 bars, 1H):\n`;
-    recent.forEach(d => {
-      prompt += `O:${d.open.toFixed(4)} H:${d.high.toFixed(4)} L:${d.low.toFixed(4)} C:${d.close.toFixed(4)}\n`;
-    });
-    prompt += `\n`;
-  }
-  
-  if (master.dataSource.includes('indicators') && indicators) {
-    prompt += `CALCULATED INDICATORS:\n`;
-    if (indicators.rsi) prompt += `- RSI(14): ${indicators.rsi}\n`;
-    if (indicators.macd) prompt += `- MACD: ${indicators.macd.value}, Signal: ${indicators.macd.signal}, Histogram: ${indicators.macd.histogram} (${indicators.macd.crossover})\n`;
-    if (indicators.atr) prompt += `- ATR(14): ${indicators.atr}\n`;
-    if (indicators.ma20) prompt += `- MA(20): ${indicators.ma20}\n`;
-    if (indicators.ma50) prompt += `- MA(50): ${indicators.ma50}\n`;
-    if (indicators.ma200) prompt += `- MA(200): ${indicators.ma200}\n`;
-    prompt += `- Recent High (50 bars): ${indicators.recentHigh}\n`;
-    prompt += `- Recent Low (50 bars): ${indicators.recentLow}\n`;
-    prompt += `- Current Trend: ${indicators.trend}\n`;
-    if (indicators.fib) {
-      prompt += `- Fibonacci Levels:\n`;
-      prompt += `  • 23.6%: ${indicators.fib.level_236}\n`;
-      prompt += `  • 38.2%: ${indicators.fib.level_382}\n`;
-      prompt += `  • 50.0%: ${indicators.fib.level_500}\n`;
-      prompt += `  • 61.8%: ${indicators.fib.level_618}\n`;
-      prompt += `  • 78.6%: ${indicators.fib.level_786}\n`;
-      prompt += `  • 127.2% Ext: ${indicators.fib.ext_1272}\n`;
-      prompt += `  • 161.8% Ext: ${indicators.fib.ext_1618}\n`;
-    }
-    prompt += `\n`;
-  }
-  
-  if (newsItems && newsItems.length > 0) {
-    const highImpact = newsItems.filter(n => n.impact === 'high');
-    if (highImpact.length > 0) {
-      prompt += `UPCOMING HIGH-IMPACT NEWS (today):\n`;
-      highImpact.slice(0, 5).forEach(n => {
-        prompt += `- ${n.time}: ${n.event} (${n.currency})\n`;
-      });
-      prompt += `\nCONSIDER: If high-impact news is imminent, be conservative.\n\n`;
-    }
-  }
-  
-  prompt += `CHART IMAGES: Analyze the 3 chart images (4H, 1H, 15M) provided.
+Look at the charts CAREFULLY and determine the direction based on YOUR lens only.
 
-CRITICAL RULES:
-1. FIRST, verify the images are actual TRADING CHARTS. If NOT, respond with:
-   {"vote":"HOLD","confidence":0,"reasoning":"Invalid image - not a trading chart","key_level":null}
-2. Analyze ONLY through YOUR lens. Use OHLC data and indicators provided.
-3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance.
-4. Be specific with price levels.
-5. Maximum 2-3 sentences in SIMPLE, CLEAR English.
-6. If your lens sees nothing clear, vote HOLD with low confidence.
+Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance.
 
 Respond ONLY in valid JSON:
 {
@@ -1230,14 +879,14 @@ Respond ONLY in valid JSON:
   "confidence": <number 0-100>,
   "reasoning": "<2-3 sentences in simple English>",
   "key_level": "<price level or null>"
-}`;
+}
 
-  return prompt;
+Be honest. Vote based on what you SEE in the charts.`;
 }
 
 // ============ CALL GEMINI (PRIMARY) ============
-async function callGemini(master, images, pair, livePrice, ohlcData, indicators, newsItems, apiKey) {
-  const prompt = buildPrompt(master, pair, livePrice, ohlcData, indicators, newsItems);
+async function callGemini(master, images, pair, livePrice, apiKey) {
+  const prompt = buildPrompt(master, pair, livePrice);
   const parts = [{ text: prompt }];
   for (const img of images) {
     parts.push({ inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) } });
@@ -1281,12 +930,12 @@ async function callGemini(master, images, pair, livePrice, ohlcData, indicators,
       continue;
     }
   }
-  throw new Error(`All Gemini models failed: ${lastError?.message || "Unknown"}`);
+  throw new Error(`All Gemini models failed`);
 }
 
 // ============ CALL MISTRAL (FALLBACK) ============
-async function callMistral(master, images, pair, livePrice, ohlcData, indicators, newsItems, apiKey) {
-  const prompt = buildPrompt(master, pair, livePrice, ohlcData, indicators, newsItems);
+async function callMistral(master, images, pair, livePrice, apiKey) {
+  const prompt = buildPrompt(master, pair, livePrice);
   const content = [{ type: "text", text: prompt }];
   for (const img of images) {
     const base64 = await fileToBase64(img.file);
@@ -1302,7 +951,7 @@ async function callMistral(master, images, pair, livePrice, ohlcData, indicators
         model: MISTRAL_MODEL,
         messages: [{ role: 'user', content: content }],
         temperature: 0.3,
-        max_tokens: 1500
+        max_tokens: 1000
       })
     }, API_TIMEOUT);
 
@@ -1313,7 +962,7 @@ async function callMistral(master, images, pair, livePrice, ohlcData, indicators
     let text = data.choices[0].message.content.trim();
     text = text.replace(/```json/g, '').replace(/```/g, '').trim();
     const result = safeJsonParse(text);
-    if (!result) throw new Error("Mistral: Invalid JSON response");
+    if (!result) throw new Error("Mistral: Invalid JSON");
 
     return {
       ...master,
@@ -1326,17 +975,17 @@ async function callMistral(master, images, pair, livePrice, ohlcData, indicators
   }, 2, 2000);
 }
 
-async function callMaster(master, images, pair, livePrice, ohlcData, indicators, newsItems) {
+async function callMaster(master, images, pair, livePrice) {
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
 
   const masterCall = async () => {
     if (geminiKey) {
-      try { return await callGemini(master, images, pair, livePrice, ohlcData, indicators, newsItems, geminiKey); }
+      try { return await callGemini(master, images, pair, livePrice, geminiKey); }
       catch (err) { console.warn(`[${master.name}] Gemini failed: ${err.message}`); }
     }
     if (mistralKey) {
-      try { return await callMistral(master, images, pair, livePrice, ohlcData, indicators, newsItems, mistralKey); }
+      try { return await callMistral(master, images, pair, livePrice, mistralKey); }
       catch (err) { console.warn(`[${master.name}] Mistral failed: ${err.message}`); }
     }
     throw new Error("All providers failed");
@@ -1408,14 +1057,13 @@ function computeConfluence(masterResults) {
   };
 }
 
-function capitalShield(confluence, entryPrice, slPrice, tpPrice, newsCheck) {
+function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const checks = {
     consensus: confluence.confidence >= 30,
     dominance: confluence.dominance >= 1,
     alignment: (confluence.buyCount + confluence.sellCount) >= 3,
     notTie: confluence.buyCount !== confluence.sellCount,
     tradable: confluence.tradable,
-    newsClear: newsCheck ? !newsCheck.blocked : true,
     rrr: false
   };
   if (entryPrice && slPrice && tpPrice) {
@@ -1427,16 +1075,14 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice, newsCheck) {
       checks.rrrValue = rrr.toFixed(2);
     }
   }
-  const allPass = checks.consensus && checks.dominance && checks.alignment && checks.notTie && checks.tradable && checks.newsClear && checks.rrr;
+  const allPass = checks.consensus && checks.dominance && checks.alignment && checks.notTie && checks.tradable && checks.rrr;
   return {
     approved: allPass, checks,
     message: allPass 
       ? "✅ CAPITAL SHIELD: Trade approved." 
-      : !checks.newsClear
-        ? `🛡️ NEWS SHIELD: ${newsCheck.message}`
-        : confluence.tradable === false 
-          ? "⏸ CAPITAL SHIELD: Wait — masters not aligned." 
-          : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR insufficient."
+      : confluence.tradable === false 
+        ? "⏸ CAPITAL SHIELD: Wait — masters not aligned." 
+        : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR insufficient."
   };
 }
 
@@ -1464,26 +1110,12 @@ async function runAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerHTML = '<span class="spinner"></span> Fetching data...';
+  runBtn.innerHTML = '<span class="spinner"></span> Analyzing Masters 6...';
 
   const resultsContainer = document.getElementById('resultsContainer');
   resultsContainer.style.display = 'block';
   renderLoadingState(pair, livePrice, MASTERS_6);
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  showToast("📊 Fetching OHLC data...", 2000);
-  let ohlcData = null, indicators = null;
-  try {
-    ohlcData = await fetchOHLCData(pair, '1h', 100);
-    if (ohlcData) indicators = calculateIndicators(ohlcData);
-  } catch (err) { console.warn("OHLC fetch failed:", err); }
-
-  showToast("📰 Fetching news...", 2000);
-  let newsItems = [];
-  try { newsItems = await fetchNewsForFilter(); } catch (err) { console.warn("News fetch failed:", err); }
-  const newsCheck = checkNewsBlock(newsItems, pair);
-
-  runBtn.innerHTML = '<span class="spinner"></span> Analyzing Masters 6...';
 
   const masterResults = [];
   const startTime = Date.now();
@@ -1492,7 +1124,7 @@ async function runAnalysis() {
     const master = MASTERS_6[i];
     const masterStart = Date.now();
     try {
-      const result = await callMaster(master, images, pair, livePrice, ohlcData, indicators, newsItems);
+      const result = await callMaster(master, images, pair, livePrice);
       result.duration = Date.now() - masterStart;
       updateMasterCard(result);
       masterResults.push(result);
@@ -1517,7 +1149,7 @@ async function runAnalysis() {
     if (confluence.tradable && confluence.action !== 'HOLD') {
       sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
     }
-    const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3, newsCheck);
+    const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
     const outliers = detectOutliers(masterResults, confluence.action);
 
     const record = {
@@ -1529,8 +1161,6 @@ async function runAnalysis() {
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
       shield: shield.approved, masters: masterResults, confluence,
       outliers: outliers.map(o => ({ name: o.name, vote: o.vote, confidence: o.confidence })),
-      newsCheck: newsCheck,
-      indicators: indicators,
       totalDuration,
       currentPriceAtAnalysis: livePrice,
       autoTrackStart: Date.now(),
@@ -1538,8 +1168,8 @@ async function runAnalysis() {
     };
 
     saveToHistory(record);
-    renderFinalResults(record, shield, outliers, newsCheck, indicators);
-    showToast(confluence.tradable && !newsCheck.blocked ? `✅ Signal ready (${totalDuration}ms)` : "⏸ WAIT — not tradable", 4000);
+    renderFinalResults(record, shield, outliers);
+    showToast(confluence.tradable ? `✅ Signal ready (${totalDuration}ms)` : "⏸ WAIT — not tradable", 4000);
     localStorage.setItem(`price_${pair}`, livePrice.toString());
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
@@ -1558,7 +1188,7 @@ function renderLoadingState(pair, livePrice, masters) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 ANALYZING ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Gemini Primary • Fetching OHLC + Indicators + News...</div>
+      <div style="font-size:12px;color:var(--muted);">Gemini Primary • Clean prompts</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
@@ -1595,13 +1225,9 @@ function updateMasterCard(result) {
   if (result.provider === 'Mistral (Fallback)') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
   else if (result.provider?.startsWith('Gemini')) providerBadge = `<span class="provider-badge provider-gemini">${result.provider}</span>`;
   else if (result.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
-  let dataBadge = '';
-  if (result.dataSource === 'ohlc') dataBadge = `<span class="data-badge data-ohlc">OHLC</span>`;
-  else if (result.dataSource === 'ohlc+indicators') dataBadge = `<span class="data-badge data-ohlc">OHLC</span><span class="data-badge data-indicators">IND</span>`;
-  else if (result.dataSource === 'indicators') dataBadge = `<span class="data-badge data-indicators">IND</span>`;
   const durationText = result.duration ? ` • ${(result.duration/1000).toFixed(1)}s` : '';
   descEl.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key Level: ${result.key_level}</strong>` : '');
-  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%) ${providerBadge}${dataBadge}${durationText}<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
+  confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%) ${providerBadge}${durationText}<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
 function computeSLTP(masters, action, livePrice, pair) {
@@ -1639,11 +1265,11 @@ function computeSLTP(masters, action, livePrice, pair) {
   };
 }
 
-function renderFinalResults(record, shield, outliers = [], newsCheck = null, indicators = null) {
-  document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield, outliers, newsCheck, indicators);
+function renderFinalResults(record, shield, outliers = []) {
+  document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield, outliers);
 }
 
-function buildAnalysisHTML(record, shield, outliers = [], newsCheck = null, indicators = null) {
+function buildAnalysisHTML(record, shield, outliers = []) {
   const { signalLabel, signalColor, signalReason, tradable, confidence, entry, sl, tp1, tp2, tp3, pair, dominance } = record;
   const spec = PAIR_SPECS[pair];
   const slPips = record.slPips || 0;
@@ -1666,45 +1292,12 @@ function buildAnalysisHTML(record, shield, outliers = [], newsCheck = null, indi
         <span class="badge-conf">${confidence}% MARGIN</span>
         <span class="badge-status">${record.confluence?.buyCount || 0}B / ${record.confluence?.sellCount || 0}S / ${record.confluence?.holdCount || 0}H</span>
         <span class="badge-warn">DOM: ${dominance || 0}</span>
-        <span class="badge-${tradable && !newsCheck?.blocked ? 'conf' : 'wait'}">${tradable && !newsCheck?.blocked ? '✅ TRADABLE' : '⏸ WAIT'}</span>
+        <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
       </div>
       <div class="signal-reason">${signalReason || ''}</div>
       <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • ${record.totalDuration ? (record.totalDuration/1000).toFixed(1) + 's' : ''}</div>
     </div>
   `;
-  
-  if (newsCheck && newsCheck.blocked) {
-    html += `
-      <div class="card" style="border-color:var(--red);">
-        <div class="ballistic-header" style="color:var(--red);">🚫 NEWS BLOCK</div>
-        <div class="news-block-box"><strong>${newsCheck.message}</strong><br><span style="font-size:11px;">Trading BLOCKED within 30 min of high-impact news.</span></div>
-      </div>
-    `;
-  }
-  
-  if (indicators) {
-    html += `
-      <div class="card" style="border-color:var(--accent);">
-        <div class="ballistic-header">📊 MARKET DATA (Ground Truth)</div>
-        <div class="grid-3">
-          <div class="mini-box"><label>Trend</label><div style="font-size:13px;font-weight:bold;color:var(--accent);">${indicators.trend}</div></div>
-          <div class="mini-box"><label>RSI(14)</label><div style="font-size:13px;font-weight:bold;">${indicators.rsi || '—'}</div></div>
-          <div class="mini-box"><label>ATR(14)</label><div style="font-size:13px;font-weight:bold;">${indicators.atr || '—'}</div></div>
-        </div>
-        <div class="grid-3">
-          <div class="mini-box"><label>MA(20)</label><div style="font-size:12px;">${indicators.ma20 || '—'}</div></div>
-          <div class="mini-box"><label>MA(50)</label><div style="font-size:12px;">${indicators.ma50 || '—'}</div></div>
-          <div class="mini-box"><label>MA(200)</label><div style="font-size:12px;">${indicators.ma200 || '—'}</div></div>
-        </div>
-        <div class="grid-2">
-          <div class="mini-box"><label>Recent High (50 bars)</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${indicators.recentHigh}</div></div>
-          <div class="mini-box"><label>Recent Low (50 bars)</label><div style="font-size:13px;font-weight:bold;color:var(--red);">${indicators.recentLow}</div></div>
-        </div>
-        ${indicators.macd ? `<div class="mini-box" style="margin-top:10px;"><label>MACD</label><div style="font-size:12px;">Value: ${indicators.macd.value} • Signal: ${indicators.macd.signal} • Histogram: ${indicators.macd.histogram} (${indicators.macd.crossover})</div></div>` : ''}
-        ${indicators.fib ? `<div class="mini-box" style="margin-top:10px;"><label>Fibonacci Levels</label><div style="font-size:11px;line-height:1.7;">23.6%: ${indicators.fib.level_236} • 38.2%: ${indicators.fib.level_382} • 50%: ${indicators.fib.level_500}<br>61.8%: ${indicators.fib.level_618} • 78.6%: ${indicators.fib.level_786}</div></div>` : ''}
-      </div>
-    `;
-  }
   
   html += `
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
@@ -1715,7 +1308,6 @@ function buildAnalysisHTML(record, shield, outliers = [], newsCheck = null, indi
       <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>3+ masters voted</span></div>
       <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>No tie</span></div>
       <div class="checklist-item ${shield.checks.tradable ? 'pass' : 'fail'}"><span>${shield.checks.tradable ? '✓' : '✗'}</span><span>Tradable signal</span></div>
-      <div class="checklist-item ${shield.checks.newsClear ? 'pass' : 'fail'}"><span>${shield.checks.newsClear ? '✓' : '✗'}</span><span>News clear</span></div>
       <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Current: 1:${shield.checks.rrrValue || rrr})</span></div>
     </div>
   `;
@@ -1729,7 +1321,7 @@ function buildAnalysisHTML(record, shield, outliers = [], newsCheck = null, indi
     `;
   }
   
-  if (tradable && !newsCheck?.blocked && slPips > 0) {
+  if (tradable && slPips > 0) {
     html += `
       <div class="card">
         <div class="ballistic-header">📊 TRADE PARAMETERS</div>
@@ -1770,10 +1362,6 @@ function buildAnalysisHTML(record, shield, outliers = [], newsCheck = null, indi
           if (m.provider === 'Mistral (Fallback)') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
           else if (m.provider?.startsWith('Gemini')) providerBadge = `<span class="provider-badge provider-gemini">${m.provider}</span>`;
           else if (m.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
-          let dataBadge = '';
-          if (m.dataSource === 'ohlc') dataBadge = `<span class="data-badge data-ohlc">OHLC</span>`;
-          else if (m.dataSource === 'ohlc+indicators') dataBadge = `<span class="data-badge data-ohlc">OHLC</span><span class="data-badge data-indicators">IND</span>`;
-          else if (m.dataSource === 'indicators') dataBadge = `<span class="data-badge data-indicators">IND</span>`;
           const durationText = m.duration ? ` • ${(m.duration/1000).toFixed(1)}s` : '';
           return `
             <div class="master-card ${cardClass}">
@@ -1783,7 +1371,7 @@ function buildAnalysisHTML(record, shield, outliers = [], newsCheck = null, indi
               </div>
               <div class="master-desc">${m.reasoning}</div>
               <div class="master-confidence">
-                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}% ${providerBadge}${dataBadge}${durationText}
+                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}% ${providerBadge}${durationText}
                 <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
               </div>
             </div>
@@ -2028,7 +1616,6 @@ function viewHistoryDetail(index) {
           alignment: ((record.confluence.buyCount || 0) + (record.confluence.sellCount || 0)) >= 3,
           notTie: (record.confluence.buyCount || 0) !== (record.confluence.sellCount || 0),
           tradable: record.tradable === true,
-          newsClear: record.newsCheck ? !record.newsCheck.blocked : true,
           rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
           rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
         },
@@ -2038,7 +1625,7 @@ function viewHistoryDetail(index) {
       document.getElementById('modalInnerContent').innerHTML = `
         <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
         ${record.outcome && record.outcome !== 'PENDING' ? `<div class="info-box"><strong>Auto-Outcome:</strong> ${record.outcome} ${record.autoOutcome ? `— ${record.autoOutcome}` : ''}</div>` : ''}
-        ${buildAnalysisHTML(record, shield, outliers, record.newsCheck, record.indicators)}
+        ${buildAnalysisHTML(record, shield, outliers)}
         <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
       `;
       document.getElementById('universalModal').style.display = 'flex';
@@ -2089,7 +1676,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "23.0" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "24.0" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
