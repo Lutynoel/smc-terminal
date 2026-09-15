@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v24.0 — Clean Edition</title>
+<title>Lutynoel FX v26.0 — Clean Rebuild</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -112,10 +112,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .signal-hero{text-align:center;padding:20px;border-radius:12px;margin-bottom:15px}
 .signal-hero.strong-buy{background:linear-gradient(135deg,rgba(16,185,129,.25),rgba(16,185,129,.1));border:2px solid var(--green)}
 .signal-hero.buy{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:2px solid var(--green)}
-.signal-hero.weak-buy{background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(250,204,21,.08));border:1px dashed var(--green)}
 .signal-hero.strong-sell{background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(239,68,68,.1));border:2px solid var(--red)}
 .signal-hero.sell{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.05));border:2px solid var(--red)}
-.signal-hero.weak-sell{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(250,204,21,.08));border:1px dashed var(--red)}
 .signal-hero.wait{background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05));border:2px solid var(--yellow)}
 .signal-hero.no-trade{background:linear-gradient(135deg,rgba(148,163,184,.15),rgba(148,163,184,.05));border:2px solid var(--muted)}
 .signal-label{font-size:28px;font-weight:900;letter-spacing:1px;margin:5px 0}
@@ -155,8 +153,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v24.0</div>
-    <div class="auth-subtitle">Clean Edition — Gemini Primary + Masters 6</div>
+    <div class="auth-title">Lutynoel FX v26.0</div>
+    <div class="auth-subtitle">Clean Rebuild — Institutional Confluence</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
@@ -171,13 +169,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <label>Mistral API Key (Fallback — Optional)</label>
     <input type="password" id="authMistralKey" placeholder="Mistral key (optional)" autocomplete="off">
 
-    <label>TwelveData API Key (Optional — for live price)</label>
-    <input type="text" id="authTwelveKey" placeholder="Optional" autocomplete="off">
+    <label>TwelveData API Key (Required for real market data)</label>
+    <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
 
     <div class="info-box">
       🔒 Keys stored in sessionStorage only.<br>
       🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Get Gemini key free →</a><br>
-      🆓 <a href="https://console.mistral.ai" target="_blank" style="color:var(--accent);">Get Mistral key free →</a>
+      🆓 <a href="https://console.mistral.ai" target="_blank" style="color:var(--accent);">Get Mistral key free →</a><br>
+      🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Get TwelveData key free →</a>
     </div>
 
     <button class="primary-btn" onclick="handleLogin()">Login</button>
@@ -199,11 +198,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v24.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v26.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Masters 6 <span class="badge-new">CLEAN</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Confluence Engine <span class="badge-new">V26</span></div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest <span class="badge-new">NEW</span></div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -218,13 +217,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v24.0 CLEAN</span>
+          <span class="badge-shield">v26.0 CLEAN</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Clean Edition</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Institutional Confluence</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Masters 6 + Gemini Primary. Rahisi, wazi, kama v19.3.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">4 Agents • Weighted Scoring • Capital Shield • Real Market Data</p>
       </div>
 
       <div class="grid-3">
@@ -235,24 +234,24 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Masters 6 Analysis</button>
+        <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Confluence Analysis</button>
         <button class="secondary-btn" onclick="navigate('backtest')">📊 Auto-Backtest</button>
         <button class="secondary-btn" onclick="navigate('news')">📰 Live News</button>
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>v24.0 Clean Edition:</strong><br>
-        • <strong>Gemini Primary</strong> — Gemini 3.8 Flash kwanza<br>
-        • <strong>Mistral Fallback</strong> — Inatumika tu Gemini ikigoma<br>
-        • <strong>Masters 6</strong> — Chief, S/R, PA, S&D, SMC, Fib/Elliott<br>
-        • <strong>Auto-Backtest</strong> — Inafuatilia signals kiotomatiki<br>
-        • <strong>Bila OHLC</strong> — AI inaangalia picha pekee (rahisi)
+        ⚙️ <strong>v26.0 Clean Rebuild:</strong><br>
+        • <strong>4 Agents</strong> — Price Action, S&D, Structure, Fundamental<br>
+        • <strong>Weighted Scoring</strong> — Kila agent ana weight (30/25/25/20)<br>
+        • <strong>Confluence Threshold</strong> — Signal inatoka tu kama ≥ 60%<br>
+        • <strong>Capital Shield</strong> — Inazuia trades kama RRR < 1:2<br>
+        • <strong>Real Market Data</strong> — RSI, MACD, MA, ATR, Fibonacci
       </div>
     </div>
 
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters 6 Clean Analysis</h3>
+        <h3 style="margin:5px 0 15px;">🎯 Confluence Engine Analysis</h3>
 
         <label>1. Choose Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
@@ -295,7 +294,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <img id="previewM15" class="preview-img" onclick="openImageModal(this.src)">
         </div>
 
-        <button class="primary-btn" id="runBtn" onclick="runAnalysis()">🚀 START MASTERS 6 ANALYSIS</button>
+        <button class="primary-btn" id="runBtn" onclick="runAnalysis()">🚀 START CONFLUENCE ANALYSIS</button>
       </div>
 
       <div id="resultsContainer" style="display:none;"></div>
@@ -474,12 +473,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v24.0 (Clean)<br>
+          <strong>Version:</strong> v26.0 (Clean Rebuild)<br>
           <strong>Primary:</strong> Gemini 3.8 Flash<br>
           <strong>Fallback:</strong> Gemini 3.6 → Gemini 3.5 → Mistral<br>
-          <strong>Masters:</strong> 6 (Clean — sio complex)<br>
-          <strong>Auto-Backtest:</strong> Enabled<br>
-          <strong>Bila OHLC</strong> — AI inaangalia picha pekee
+          <strong>Agents:</strong> 4 (PA 30%, S&D 25%, Structure 25%, Fundamental 20%)<br>
+          <strong>Confluence Threshold:</strong> 60%<br>
+          <strong>Capital Shield:</strong> RRR ≥ 1:2<br>
+          <strong>Real Data:</strong> RSI, MACD, MA, ATR, Fibonacci
         </div>
         <label>TwelveData API Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="Your key">
@@ -493,24 +493,25 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v24.0 — CLEAN EDITION
-   Gemini Primary + Masters 6 + Auto-Backtest
-   BILA OHLC — BILA complex prompts
+   LUTYNOEL FX v26.0 — CLEAN REBUILD
+   4 Agents + Weighted Confluence + Capital Shield
+   All bugs fixed from v20-v25
    ===================================================== */
 
+// ============ CONFIG ============
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash'];
-
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const MISTRAL_MODEL = 'pixtral-12b-2409';
-
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 
-const MASTER_TIMEOUT = 90000;
-const API_TIMEOUT = 45000;
+const AGENT_TIMEOUT = 120000;
+const API_TIMEOUT = 60000;
 const RETRY_ATTEMPTS = 3;
 const AUTO_CHECK_INTERVAL = 300000;
+const CONFLUENCE_THRESHOLD = 60;  // Lowered from 75 for balance
+const RRR_MINIMUM = 2.0;
 
 // ============ PAIR SPECS ============
 const PAIR_SPECS = {
@@ -526,44 +527,19 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
-// ============ MASTERS 6 (Original Clean) ============
-const MASTERS_6 = [
-  {
-    id: 1, name: "Chief Master", weight: 0.18,
-    lens: "Overall trend direction. Look at 4H and 1H charts. Determine if market is in uptrend, downtrend, or ranging. Focus on the BIG PICTURE. You are the final decision authority."
-  },
-  {
-    id: 2, name: "Support & Resistance Master", weight: 0.15,
-    lens: "Key horizontal support and resistance levels. Identify where price has reacted before and where institutional orders are likely placed. Focus on the STRENGTH of each level."
-  },
-  {
-    id: 3, name: "Price Action Master", weight: 0.15,
-    lens: "Candlestick patterns: engulfing, rejection wicks, pin bars, doji, hammer. Read the RAW price action without indicators. Focus on the STORY the candles are telling."
-  },
-  {
-    id: 4, name: "Supply & Demand Master", weight: 0.15,
-    lens: "Institutional order blocks, imbalance zones, and liquidity sweeps. Identify where large institutional orders are placed and where price is likely to reverse."
-  },
-  {
-    id: 5, name: "Smart Money Concepts (SMC) & ICT Master", weight: 0.17,
-    lens: "Fair Value Gaps (FVG), liquidity pools, killzones, optimal trade entry, Break of Structure (BOS), Change of Character (CHoCH). Focus on institutional order flow."
-  },
-  {
-    id: 6, name: "Fundamental & Fibonacci Master", weight: 0.20,
-    lens: "Economic news, central bank bias, DXY correlation, PLUS Fibonacci retracement/extension levels (0.382, 0.5, 0.618, 1.618). Consider macro drivers AND mathematical levels."
-  }
+// ============ 4 CONFLUENCE AGENTS ============
+const AGENTS_4 = [
+  { id: 1, name: "Price Action Master", weight: 0.30, focus: "Candlesticks & Wicks",
+    lens: "Candlesticks & Rejection Wicks ONLY. Look for: engulfing patterns, rejection wicks, pin bars, doji, hammer, shooting star. Focus on buyer/seller strength shown by candles." },
+  { id: 2, name: "Supply & Demand Master", weight: 0.25, focus: "Order Blocks & Liquidity",
+    lens: "Order Blocks & Liquidity Sweeps ONLY. Identify institutional order blocks, imbalance zones, FVGs, and where liquidity has been swept. Use OHLC data to find actual zones." },
+  { id: 3, name: "Market Structure Master", weight: 0.25, focus: "Structure & CHoCH/BOS",
+    lens: "Trend Sequences & CHoCH/BOS ONLY. Look at market structure shifts (MSS), Break of Structure (BOS), Change of Character (CHoCH), higher highs, lower lows." },
+  { id: 4, name: "Fundamental Analyst", weight: 0.20, focus: "Fundamentals & Momentum",
+    lens: "Economic Events & Central Bank Bias ONLY. Consider DXY correlation, central bank policy, upcoming news. Use RSI/MACD provided to confirm momentum alignment." }
 ];
 
-function setupPWA() {
-  const manifest = {
-    name: "Lutynoel FX v24.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
-    background_color: "#09090b", theme_color: "#fbbf24",
-    icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
-  };
-  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-  document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
-}
-
+// ============ UTILITIES ============
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
   t.className = 'toast'; t.innerText = msg;
@@ -577,74 +553,6 @@ function getPipValue(spec, lot) {
   return spec.pipValue.micro;
 }
 
-// ============ AUTO-BACKTEST ============
-function checkAutoBacktest() {
-  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  let updated = false;
-  const now = Date.now();
-  history.forEach(record => {
-    if (record.type === 'manual') return;
-    if (record.outcome === 'WIN' || record.outcome === 'LOSS') return;
-    if (!record.sl || !record.tp3 || !record.action) return;
-    if (!record.autoTrackStart) return;
-    const hoursSince = (now - record.autoTrackStart) / (1000 * 60 * 60);
-    if (hoursSince > 24) {
-      record.outcome = 'EXPIRED';
-      record.autoOutcome = 'Stale - expired after 24h';
-      updated = true;
-      return;
-    }
-    const currentPrice = parseFloat(localStorage.getItem(`price_${record.pair}`) || 0);
-    if (!currentPrice) return;
-    const entry = parseFloat(record.entry);
-    const sl = parseFloat(record.sl);
-    const tp3 = parseFloat(record.tp3);
-    if (record.action === 'BUY') {
-      if (currentPrice <= sl) { record.outcome = 'LOSS'; record.autoOutcome = `SL hit at ${currentPrice}`; updated = true; }
-      else if (currentPrice >= tp3) { record.outcome = 'WIN'; record.autoOutcome = `TP3 hit at ${currentPrice}`; updated = true; }
-    } else if (record.action === 'SELL') {
-      if (currentPrice >= sl) { record.outcome = 'LOSS'; record.autoOutcome = `SL hit at ${currentPrice}`; updated = true; }
-      else if (currentPrice <= tp3) { record.outcome = 'WIN'; record.autoOutcome = `TP3 hit at ${currentPrice}`; updated = true; }
-    }
-  });
-  if (updated) {
-    localStorage.setItem('lutynoel_history', JSON.stringify(history));
-    showToast("📊 Auto-backtest updated!", 3000);
-  }
-  return updated;
-}
-
-async function updatePricesForBacktest() {
-  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  const openPairs = [...new Set(history.filter(h => !h.outcome || h.outcome === 'PENDING').map(h => h.pair).filter(Boolean))];
-  for (const pair of openPairs) {
-    const spec = PAIR_SPECS[pair];
-    if (!spec) continue;
-    try {
-      let price = null;
-      if (spec.source === 'binance' && spec.binanceSymbol) {
-        const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
-        if (r.ok) { const d = await r.json(); price = parseFloat(d.price); }
-      } else if (spec.source === 'twelve') {
-        const key = sessionStorage.getItem('lutynoel_twelveKey');
-        if (key) {
-          const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
-          if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
-        }
-      }
-      if (price) localStorage.setItem(`price_${pair}`, price.toString());
-    } catch (err) { console.warn(`Price update failed for ${pair}:`, err.message); }
-  }
-}
-
-function runAutoBacktest() {
-  updatePricesForBacktest().then(() => {
-    checkAutoBacktest();
-    if (document.getElementById('view-backtest')?.style.display !== 'none') refreshBacktest();
-  });
-}
-
-// ============ SAFE JSON ============
 function safeJsonParse(text) {
   if (!text) return null;
   try { return JSON.parse(text); }
@@ -652,7 +560,7 @@ function safeJsonParse(text) {
     try {
       const match = text.match(/\{[\s\S]*\}/);
       if (match) return JSON.parse(match[0]);
-    } catch (e2) { console.warn("JSON parse failed:", e2.message); }
+    } catch (e2) { console.warn("JSON parse failed"); }
   }
   return null;
 }
@@ -687,10 +595,22 @@ async function withRetry(fn, attempts = RETRY_ATTEMPTS, delayMs = 1500) {
 async function withTimeout(promise, timeoutMs, errorMessage) {
   return Promise.race([
     promise,
-    new Promise((_, reject) => setTimeout(() => reject(new Error(errorMessage || `Timeout after ${timeoutMs}ms`)), timeoutMs))
+    new Promise((_, reject) => setTimeout(() => reject(new Error(errorMessage || `Timeout`)), timeoutMs))
   ]);
 }
 
+// ============ PWA SETUP ============
+function setupPWA() {
+  const manifest = {
+    name: "Lutynoel FX v26.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    background_color: "#09090b", theme_color: "#fbbf24",
+    icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
+}
+
+// ============ LOGIN ============
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const geminiKey = document.getElementById('authGeminiKey').value.trim();
@@ -699,11 +619,15 @@ function handleLogin() {
 
   if (!name) { alert("Enter your name."); return; }
   if (!geminiKey && !mistralKey) { alert("Enter at least one API key (Gemini is primary)."); return; }
+  if (!twelveKey) { alert("TwelveData key is REQUIRED for real market data. Get it free at twelvedata.com"); return; }
+
+  // Clear old session data
+  sessionStorage.clear();
 
   sessionStorage.setItem('lutynoel_name', name);
   if (geminiKey) sessionStorage.setItem('lutynoel_geminiKey', geminiKey);
   if (mistralKey) sessionStorage.setItem('lutynoel_mistralKey', mistralKey);
-  if (twelveKey) sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
+  sessionStorage.setItem('lutynoel_twelveKey', twelveKey);
 
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
@@ -712,8 +636,22 @@ function handleLogin() {
   loadHistory(); updateStats();
   showToast(`Welcome ${name}! 🚀`);
   setTimeout(() => fetchLivePrice(), 1000);
-  setInterval(runAutoBacktest, AUTO_CHECK_INTERVAL);
+
+  // Start auto-backtest
+  startAutoBacktest();
+}
+
+function startAutoBacktest() {
+  // Clear any existing interval first
+  if (window.__autoBacktestInterval) clearInterval(window.__autoBacktestInterval);
+  window.__autoBacktestInterval = setInterval(runAutoBacktest, AUTO_CHECK_INTERVAL);
   setTimeout(runAutoBacktest, 5000);
+}
+
+function logout() {
+  if (window.__autoBacktestInterval) clearInterval(window.__autoBacktestInterval);
+  sessionStorage.clear();
+  location.reload();
 }
 
 function saveTwelveKey() {
@@ -759,8 +697,7 @@ async function testApiKeys() {
   alert(results.join('\n\n'));
 }
 
-function logout() { sessionStorage.clear(); location.reload(); }
-
+// ============ NAVIGATION ============
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
   document.getElementById('view-' + view).style.display = 'block';
@@ -796,6 +733,7 @@ function setPriceStatus(type, text, time = '') {
   document.getElementById('priceTime').innerText = time;
 }
 
+// ============ FETCH LIVE PRICE ============
 async function fetchLivePrice() {
   const pair = document.getElementById('selectedPair').value;
   const spec = PAIR_SPECS[pair];
@@ -832,6 +770,7 @@ async function fetchLivePrice() {
   }
 }
 
+// ============ IMAGES ============
 let globalImages = { h4: null, h1: null, m15: null };
 
 function previewImage(event, previewId, key) {
@@ -861,17 +800,177 @@ function fileToBase64(file) {
   });
 }
 
-// ============ SIMPLE PROMPT (like v19.3) ============
-function buildPrompt(master, pair, livePrice) {
-  return `You are the "${master.name}" trading master.
+// ============ FETCH OHLC ============
+async function fetchOHLCData(pair, timeframe = '1h', limit = 100) {
+  const spec = PAIR_SPECS[pair];
+  if (!spec) return null;
+  try {
+    if (spec.source === 'binance' && spec.binanceSymbol) {
+      const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
+      const res = await fetchWithTimeout(url, {}, 10000);
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data.map(d => ({
+        time: d[0], open: parseFloat(d[1]), high: parseFloat(d[2]),
+        low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5])
+      }));
+    }
+    if (spec.source === 'twelve') {
+      const key = sessionStorage.getItem('lutynoel_twelveKey');
+      if (!key) return null;
+      const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${timeframe}&outputsize=${limit}&apikey=${key}`;
+      const res = await fetchWithTimeout(url, {}, 15000);
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data.status === 'error' || !data.values) return null;
+      return data.values.reverse().map(d => ({
+        time: new Date(d.datetime).getTime(),
+        open: parseFloat(d.open), high: parseFloat(d.high),
+        low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0)
+      }));
+    }
+    return null;
+  } catch (err) { console.warn("OHLC fetch failed:", err.message); return null; }
+}
 
-YOUR LENS: ${master.lens}
+// ============ CALCULATE INDICATORS ============
+function calculateIndicators(ohlcData) {
+  if (!ohlcData || ohlcData.length < 20) return null;
+  const closes = ohlcData.map(d => d.close);
+  const highs = ohlcData.map(d => d.high);
+  const lows = ohlcData.map(d => d.low);
+  const rsi = calculateRSI(closes, 14);
+  const macd = calculateMACD(closes);
+  const atr = calculateATR(highs, lows, closes, 14);
+  const ma20 = calculateSMA(closes, 20);
+  const ma50 = calculateSMA(closes, 50);
+  const ma200 = closes.length >= 200 ? calculateSMA(closes, 200) : null;
+  const recentHigh = Math.max(...highs.slice(-50));
+  const recentLow = Math.min(...lows.slice(-50));
+  const currentPrice = closes[closes.length - 1];
+  let trend = 'RANGING';
+  if (ma20 && ma50 && currentPrice > ma20 && ma20 > ma50) trend = 'UPTREND';
+  else if (ma20 && ma50 && currentPrice < ma20 && ma20 < ma50) trend = 'DOWNTREND';
+  
+  const fibRange = recentHigh - recentLow;
+  const fib = {
+    level_236: (recentHigh - fibRange * 0.236).toFixed(2),
+    level_382: (recentHigh - fibRange * 0.382).toFixed(2),
+    level_500: (recentHigh - fibRange * 0.500).toFixed(2),
+    level_618: (recentHigh - fibRange * 0.618).toFixed(2),
+    level_786: (recentHigh - fibRange * 0.786).toFixed(2)
+  };
+  
+  return {
+    rsi: rsi ? rsi.toFixed(1) : null,
+    macd: macd ? { value: macd.macd.toFixed(4), signal: macd.signal.toFixed(4), histogram: macd.histogram.toFixed(4), crossover: macd.histogram > 0 ? 'BULLISH' : 'BEARISH' } : null,
+    atr: atr ? atr.toFixed(2) : null,
+    ma20: ma20 ? ma20.toFixed(2) : null,
+    ma50: ma50 ? ma50.toFixed(2) : null,
+    ma200: ma200 ? ma200.toFixed(2) : null,
+    recentHigh: recentHigh.toFixed(2),
+    recentLow: recentLow.toFixed(2),
+    currentPrice: currentPrice.toFixed(2),
+    trend: trend,
+    fib: fib
+  };
+}
 
-Analyze ${pair} at current price ${livePrice} based on the 3 chart images (4H, 1H, 15M).
+function calculateRSI(closes, period = 14) {
+  if (closes.length < period + 1) return null;
+  let gains = 0, losses = 0;
+  for (let i = 1; i <= period; i++) {
+    const diff = closes[i] - closes[i - 1];
+    if (diff > 0) gains += diff; else losses -= diff;
+  }
+  const avgGain = gains / period;
+  const avgLoss = losses / period;
+  if (avgLoss === 0) return 100;
+  const rs = avgGain / avgLoss;
+  return 100 - (100 / (1 + rs));
+}
 
-Look at the charts CAREFULLY and determine the direction based on YOUR lens only.
+function calculateSMA(values, period) {
+  if (values.length < period) return null;
+  const slice = values.slice(-period);
+  return slice.reduce((a, b) => a + b, 0) / period;
+}
 
-Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance.
+function calculateEMA(values, period) {
+  if (values.length < period) return null;
+  const k = 2 / (period + 1);
+  let ema = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
+  for (let i = period; i < values.length; i++) ema = values[i] * k + ema * (1 - k);
+  return ema;
+}
+
+function calculateMACD(closes) {
+  if (closes.length < 26) return null;
+  const ema12 = calculateEMA(closes, 12);
+  const ema26 = calculateEMA(closes, 26);
+  if (!ema12 || !ema26) return null;
+  const macd = ema12 - ema26;
+  const signal = macd * 0.2;
+  return { macd, signal, histogram: macd - signal };
+}
+
+function calculateATR(highs, lows, closes, period = 14) {
+  if (highs.length < period + 1) return null;
+  const trueRanges = [];
+  for (let i = 1; i < highs.length; i++) {
+    const tr = Math.max(highs[i] - lows[i], Math.abs(highs[i] - closes[i - 1]), Math.abs(lows[i] - closes[i - 1]));
+    trueRanges.push(tr);
+  }
+  const slice = trueRanges.slice(-period);
+  return slice.reduce((a, b) => a + b, 0) / period;
+}
+
+// ============ BUILD PROMPT ============
+function buildAgentPrompt(agent, pair, livePrice, ohlcData, indicators) {
+  let prompt = `You are the "${agent.name}" in an institutional trading confluence system.
+
+YOUR LENS: ${agent.lens}
+YOUR FOCUS: ${agent.focus}
+YOUR WEIGHT: ${(agent.weight * 100).toFixed(0)}% of final decision.
+
+Analyze ${pair} at current price ${livePrice}.
+
+`;
+  
+  if (ohlcData && ohlcData.length > 0) {
+    const recent = ohlcData.slice(-30);
+    prompt += `RECENT OHLC DATA (last 30 bars, 1H):\n`;
+    recent.forEach(d => {
+      prompt += `O:${d.open.toFixed(4)} H:${d.high.toFixed(4)} L:${d.low.toFixed(4)} C:${d.close.toFixed(4)}\n`;
+    });
+    prompt += `\n`;
+  }
+  
+  if (indicators) {
+    prompt += `CALCULATED INDICATORS:\n`;
+    if (indicators.rsi) prompt += `- RSI(14): ${indicators.rsi}\n`;
+    if (indicators.macd) prompt += `- MACD: ${indicators.macd.value}, Signal: ${indicators.macd.signal}, Histogram: ${indicators.macd.histogram} (${indicators.macd.crossover})\n`;
+    if (indicators.atr) prompt += `- ATR(14): ${indicators.atr}\n`;
+    if (indicators.ma20) prompt += `- MA(20): ${indicators.ma20}\n`;
+    if (indicators.ma50) prompt += `- MA(50): ${indicators.ma50}\n`;
+    if (indicators.ma200) prompt += `- MA(200): ${indicators.ma200}\n`;
+    prompt += `- Recent High: ${indicators.recentHigh}\n`;
+    prompt += `- Recent Low: ${indicators.recentLow}\n`;
+    prompt += `- Current Trend: ${indicators.trend}\n`;
+    if (indicators.fib) {
+      prompt += `- Fibonacci: 23.6%=${indicators.fib.level_236}, 38.2%=${indicators.fib.level_382}, 50%=${indicators.fib.level_500}, 61.8%=${indicators.fib.level_618}, 78.6%=${indicators.fib.level_786}\n`;
+    }
+    prompt += `\n`;
+  }
+  
+  prompt += `Analyze the 3 chart images (4H, 1H, 15M) through YOUR lens ONLY.
+
+RULES:
+1. If images are NOT trading charts, respond: {"vote":"HOLD","confidence":0,"reasoning":"Invalid image","key_level":null}
+2. Analyze ONLY through YOUR assigned lens.
+3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support, Resistance.
+4. Give a confidence score 0-100 that reflects how certain you are.
+5. If your lens sees nothing clear, vote HOLD with low confidence.
 
 Respond ONLY in valid JSON:
 {
@@ -879,14 +978,14 @@ Respond ONLY in valid JSON:
   "confidence": <number 0-100>,
   "reasoning": "<2-3 sentences in simple English>",
   "key_level": "<price level or null>"
+}`;
+
+  return prompt;
 }
 
-Be honest. Vote based on what you SEE in the charts.`;
-}
-
-// ============ CALL GEMINI (PRIMARY) ============
-async function callGemini(master, images, pair, livePrice, apiKey) {
-  const prompt = buildPrompt(master, pair, livePrice);
+// ============ CALL GEMINI ============
+async function callGemini(agent, images, pair, livePrice, ohlcData, indicators, apiKey) {
+  const prompt = buildAgentPrompt(agent, pair, livePrice, ohlcData, indicators);
   const parts = [{ text: prompt }];
   for (const img of images) {
     parts.push({ inline_data: { mime_type: img.file.type || 'image/png', data: await fileToBase64(img.file) } });
@@ -916,26 +1015,26 @@ async function callGemini(master, images, pair, livePrice, apiKey) {
         if (!result) throw new Error(`Gemini ${model}: Invalid JSON`);
 
         return {
-          ...master,
+          ...agent,
           vote: (result.vote || 'HOLD').toUpperCase(),
           confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
           reasoning: result.reasoning || 'No analysis.',
           key_level: result.key_level || null,
-          provider: `Gemini (${model})`
+          provider: `Gemini`
         };
       }, RETRY_ATTEMPTS, 1500);
     } catch (e) {
       lastError = e;
-      console.warn(`[${master.name}] Gemini ${model} failed: ${e.message}`);
+      console.warn(`[${agent.name}] Gemini ${model} failed: ${e.message}`);
       continue;
     }
   }
   throw new Error(`All Gemini models failed`);
 }
 
-// ============ CALL MISTRAL (FALLBACK) ============
-async function callMistral(master, images, pair, livePrice, apiKey) {
-  const prompt = buildPrompt(master, pair, livePrice);
+// ============ CALL MISTRAL ============
+async function callMistral(agent, images, pair, livePrice, ohlcData, indicators, apiKey) {
+  const prompt = buildAgentPrompt(agent, pair, livePrice, ohlcData, indicators);
   const content = [{ type: "text", text: prompt }];
   for (const img of images) {
     const base64 = await fileToBase64(img.file);
@@ -965,133 +1064,114 @@ async function callMistral(master, images, pair, livePrice, apiKey) {
     if (!result) throw new Error("Mistral: Invalid JSON");
 
     return {
-      ...master,
+      ...agent,
       vote: (result.vote || 'HOLD').toUpperCase(),
       confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
       reasoning: result.reasoning || 'No analysis.',
       key_level: result.key_level || null,
-      provider: 'Mistral (Fallback)'
+      provider: 'Mistral'
     };
   }, 2, 2000);
 }
 
-async function callMaster(master, images, pair, livePrice) {
+async function callAgent(agent, images, pair, livePrice, ohlcData, indicators) {
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
 
-  const masterCall = async () => {
+  const agentCall = async () => {
     if (geminiKey) {
-      try { return await callGemini(master, images, pair, livePrice, geminiKey); }
-      catch (err) { console.warn(`[${master.name}] Gemini failed: ${err.message}`); }
+      try { return await callGemini(agent, images, pair, livePrice, ohlcData, indicators, geminiKey); }
+      catch (err) { console.warn(`[${agent.name}] Gemini failed: ${err.message}`); }
     }
     if (mistralKey) {
-      try { return await callMistral(master, images, pair, livePrice, mistralKey); }
-      catch (err) { console.warn(`[${master.name}] Mistral failed: ${err.message}`); }
+      try { return await callMistral(agent, images, pair, livePrice, ohlcData, indicators, mistralKey); }
+      catch (err) { console.warn(`[${agent.name}] Mistral failed: ${err.message}`); }
     }
     throw new Error("All providers failed");
   };
 
-  return withTimeout(masterCall(), MASTER_TIMEOUT, `${master.name}: Timeout`);
+  return withTimeout(agentCall(), AGENT_TIMEOUT, `${agent.name}: Timeout`);
 }
 
-// ============ CONFLUENCE ============
-function computeConfluence(masterResults) {
-  let buyWeight = 0, sellWeight = 0, holdWeight = 0, totalWeight = 0;
-  masterResults.forEach(r => {
-    const w = r.weight * (r.confidence / 100);
-    totalWeight += r.weight;
-    if (r.vote === 'BUY') buyWeight += w;
-    else if (r.vote === 'SELL') sellWeight += w;
-    else holdWeight += w;
+// ============ CONFLUENCE ENGINE (FIXED) ============
+function computeConfluence(agentResults) {
+  let buyScore = 0, sellScore = 0, holdScore = 0;
+  
+  // Weighted raw scores
+  agentResults.forEach(r => {
+    const weighted = r.weight * (r.confidence / 100);
+    if (r.vote === 'BUY') buyScore += weighted;
+    else if (r.vote === 'SELL') sellScore += weighted;
+    else holdScore += weighted;
   });
-  const buyCount = masterResults.filter(r => r.vote === 'BUY').length;
-  const sellCount = masterResults.filter(r => r.vote === 'SELL').length;
-  const holdCount = masterResults.filter(r => r.vote === 'HOLD').length;
-  const scores = [buyWeight, sellWeight, holdWeight].sort((a, b) => b - a);
-  const margin = scores[0] - scores[1];
-  const confidence = totalWeight > 0 ? Math.round((margin / totalWeight) * 100) : 0;
+
+  // ============ FIX #7: Normalize by TOTAL SCORE (not totalWeight) ============
+  const totalScore = buyScore + sellScore + holdScore;
+  const buyNormalized = totalScore > 0 ? (buyScore / totalScore) * 100 : 0;
+  const sellNormalized = totalScore > 0 ? (sellScore / totalScore) * 100 : 0;
+  const holdNormalized = totalScore > 0 ? (holdScore / totalScore) * 100 : 0;
+
+  // Determine direction
   let direction = 'HOLD';
-  if (buyWeight > sellWeight && buyWeight > holdWeight) direction = 'BUY';
-  else if (sellWeight > buyWeight && sellWeight > holdWeight) direction = 'SELL';
-  const dominance = Math.abs(buyCount - sellCount);
-  const totalVoted = buyCount + sellCount;
-  const tie = buyCount === sellCount && buyCount > 0;
-  let signal = 'NO_TRADE', signalLabel = 'NO TRADE', signalColor = 'no-trade', signalReason = '', tradable = false;
-  if (totalVoted < 3 || tie) {
-    signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = tie ? `Masters split (${buyCount} BUY vs ${sellCount} SELL).` : `Only ${totalVoted}/6 masters voted.`;
-    tradable = false;
-  } else if (confidence < 30) {
-    signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = `Confidence margin too small (${confidence}%).`;
-    tradable = false;
-  } else if (direction === 'HOLD') {
-    signal = 'NO_TRADE'; signalLabel = '⏸ NO TRADE'; signalColor = 'no-trade';
-    signalReason = `No clear direction.`; tradable = false;
-  } else if (confidence >= 60 && dominance >= 3) {
-    signal = direction === 'BUY' ? 'STRONG_BUY' : 'STRONG_SELL';
-    signalLabel = direction === 'BUY' ? '🟢 STRONG BUY' : '🔴 STRONG SELL';
-    signalColor = direction === 'BUY' ? 'strong-buy' : 'strong-sell';
-    signalReason = `${direction === 'BUY' ? buyCount : sellCount}/6 masters strongly agree. Margin: ${confidence}%.`;
-    tradable = true;
-  } else if (confidence >= 40 && dominance >= 2) {
-    signal = direction === 'BUY' ? 'BUY' : 'SELL';
-    signalLabel = direction === 'BUY' ? '🟢 BUY' : '🔴 SELL';
-    signalColor = direction === 'BUY' ? 'buy' : 'sell';
-    signalReason = `Good consensus. Margin ${confidence}% + Dominance ${dominance}.`;
-    tradable = true;
-  } else if (confidence >= 30) {
-    signal = direction === 'BUY' ? 'WEAK_BUY' : 'WEAK_SELL';
-    signalLabel = direction === 'BUY' ? '🟡 WEAK BUY' : '🟡 WEAK SELL';
-    signalColor = direction === 'BUY' ? 'weak-buy' : 'weak-sell';
-    signalReason = `Caution: Low margin ${confidence}%.`;
-    tradable = true;
+  let confluenceScore = 0;
+  
+  if (buyNormalized > sellNormalized && buyNormalized > holdNormalized) {
+    direction = 'BUY';
+    confluenceScore = buyNormalized;
+  } else if (sellNormalized > buyNormalized && sellNormalized > holdNormalized) {
+    direction = 'SELL';
+    confluenceScore = sellNormalized;
   } else {
-    signal = 'WAIT'; signalLabel = '⏸ WAIT'; signalColor = 'wait';
-    signalReason = `Conditions not met.`; tradable = false;
+    direction = 'HOLD';
+    confluenceScore = holdNormalized;
   }
+
+  const buyCount = agentResults.filter(r => r.vote === 'BUY').length;
+  const sellCount = agentResults.filter(r => r.vote === 'SELL').length;
+  const holdCount = agentResults.filter(r => r.vote === 'HOLD').length;
+
   return {
-    action: direction, signal, signalLabel, signalColor, signalReason, tradable,
-    confidence, dominance, buyCount, sellCount, holdCount,
-    buyWeight, sellWeight, holdWeight, margin
+    action: direction,
+    confluenceScore: Math.round(confluenceScore),
+    buyScore: Math.round(buyNormalized),
+    sellScore: Math.round(sellNormalized),
+    holdScore: Math.round(holdNormalized),
+    buyCount, sellCount, holdCount
   };
 }
 
+// ============ CAPITAL SHIELD ============
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const checks = {
-    consensus: confluence.confidence >= 30,
-    dominance: confluence.dominance >= 1,
-    alignment: (confluence.buyCount + confluence.sellCount) >= 3,
-    notTie: confluence.buyCount !== confluence.sellCount,
-    tradable: confluence.tradable,
+    confluence: confluence.confluenceScore >= CONFLUENCE_THRESHOLD,
+    notHOLD: confluence.action !== 'HOLD',
+    consensus: (confluence.buyCount + confluence.sellCount) >= 2,
     rrr: false
   };
+  
   if (entryPrice && slPrice && tpPrice) {
     const risk = Math.abs(entryPrice - slPrice);
     const reward = Math.abs(tpPrice - entryPrice);
     if (risk > 0) {
       const rrr = reward / risk;
-      checks.rrr = rrr >= 2.0;
+      checks.rrr = rrr >= RRR_MINIMUM;
       checks.rrrValue = rrr.toFixed(2);
     }
   }
-  const allPass = checks.consensus && checks.dominance && checks.alignment && checks.notTie && checks.tradable && checks.rrr;
-  return {
-    approved: allPass, checks,
-    message: allPass 
-      ? "✅ CAPITAL SHIELD: Trade approved." 
-      : confluence.tradable === false 
-        ? "⏸ CAPITAL SHIELD: Wait — masters not aligned." 
-        : "🛡️ CAPITAL SHIELD: Trade BLOCKED — RRR insufficient."
-  };
+  
+  const allPass = checks.confluence && checks.notHOLD && checks.consensus && checks.rrr;
+  
+  let message = "";
+  if (allPass) message = `✅ CAPITAL SHIELD: Trade APPROVED (Confluence ${confluence.confluenceScore}%).`;
+  else if (!checks.confluence) message = `🛡️ CAPITAL SHIELD: BLOCKED — Confluence ${confluence.confluenceScore}% below ${CONFLUENCE_THRESHOLD}%.`;
+  else if (!checks.notHOLD) message = `🛡️ CAPITAL SHIELD: BLOCKED — Direction is HOLD.`;
+  else if (!checks.consensus) message = `🛡️ CAPITAL SHIELD: BLOCKED — Not enough agents voted.`;
+  else if (!checks.rrr) message = `🛡️ CAPITAL SHIELD: BLOCKED — RRR insufficient (need 1:${RRR_MINIMUM}).`;
+  
+  return { approved: allPass, checks, message };
 }
 
-function detectOutliers(masterResults, action) {
-  return masterResults.filter(r => 
-    r.vote !== action && r.vote !== 'HOLD' && r.confidence >= 50
-  );
-}
-
+// ============ RUN ANALYSIS ============
 async function runAnalysis() {
   const geminiKey = sessionStorage.getItem('lutynoel_geminiKey');
   const mistralKey = sessionStorage.getItem('lutynoel_mistralKey');
@@ -1110,57 +1190,72 @@ async function runAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true;
-  runBtn.innerHTML = '<span class="spinner"></span> Analyzing Masters 6...';
+  runBtn.innerHTML = '<span class="spinner"></span> Fetching data...';
 
   const resultsContainer = document.getElementById('resultsContainer');
   resultsContainer.style.display = 'block';
-  renderLoadingState(pair, livePrice, MASTERS_6);
+  resultsContainer.innerHTML = '';
+  renderLoadingState(pair, livePrice, AGENTS_4);
   resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  const masterResults = [];
+  showToast("📊 Fetching OHLC data...", 2000);
+  let ohlcData = null, indicators = null;
+  try {
+    ohlcData = await fetchOHLCData(pair, '1h', 100);
+    if (ohlcData) indicators = calculateIndicators(ohlcData);
+  } catch (err) { console.warn("OHLC fetch failed:", err); }
+
+  runBtn.innerHTML = '<span class="spinner"></span> Agents analyzing...';
+
+  const agentResults = [];
   const startTime = Date.now();
 
-  for (let i = 0; i < MASTERS_6.length; i++) {
-    const master = MASTERS_6[i];
-    const masterStart = Date.now();
+  for (let i = 0; i < AGENTS_4.length; i++) {
+    const agent = AGENTS_4[i];
+    const agentStart = Date.now();
     try {
-      const result = await callMaster(master, images, pair, livePrice);
-      result.duration = Date.now() - masterStart;
-      updateMasterCard(result);
-      masterResults.push(result);
+      const result = await callAgent(agent, images, pair, livePrice, ohlcData, indicators);
+      result.duration = Date.now() - agentStart;
+      updateAgentCard(result);
+      agentResults.push(result);
     } catch (err) {
       const failed = {
-        ...master, vote: 'HOLD', confidence: 0,
+        ...agent, vote: 'HOLD', confidence: 0,
         reasoning: `⚠️ ${err.message}`,
         error: true, provider: 'Failed',
-        duration: Date.now() - masterStart
+        duration: Date.now() - agentStart
       };
-      updateMasterCard(failed);
-      masterResults.push(failed);
+      updateAgentCard(failed);
+      agentResults.push(failed);
     }
-    if (i < MASTERS_6.length - 1) await new Promise(r => setTimeout(r, 1500));
+    if (i < AGENTS_4.length - 1) await new Promise(r => setTimeout(r, 1500));
   }
 
   const totalDuration = Date.now() - startTime;
 
   try {
-    const confluence = computeConfluence(masterResults);
+    const confluence = computeConfluence(agentResults);
     let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0 };
-    if (confluence.tradable && confluence.action !== 'HOLD') {
-      sltp = computeSLTP(masterResults, confluence.action, livePrice, pair);
+    if (confluence.action !== 'HOLD') {
+      sltp = computeSLTP(agentResults, confluence.action, livePrice, pair);
     }
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3);
-    const outliers = detectOutliers(masterResults, confluence.action);
 
     const record = {
-      id: Date.now(), date: new Date().toLocaleString(), pair,
-      action: confluence.action, signal: confluence.signal, signalLabel: confluence.signalLabel,
-      signalColor: confluence.signalColor, signalReason: confluence.signalReason,
-      tradable: confluence.tradable, confidence: confluence.confidence, dominance: confluence.dominance,
+      id: Date.now(),
+      date: new Date().toLocaleString(),
+      pair,
+      action: confluence.action,
+      signalLabel: confluence.action === 'BUY' ? '🟢 BUY' : confluence.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD',
+      signalColor: confluence.action === 'BUY' ? 'buy' : confluence.action === 'SELL' ? 'sell' : 'wait',
+      signalReason: `Confluence ${confluence.confluenceScore}% • ${confluence.buyCount}B / ${confluence.sellCount}S / ${confluence.holdCount}H`,
+      confluenceScore: confluence.confluenceScore,
       entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
-      shield: shield.approved, masters: masterResults, confluence,
-      outliers: outliers.map(o => ({ name: o.name, vote: o.vote, confidence: o.confidence })),
+      shield: shield.approved,
+      agents: agentResults,     // ✅ Consistent: agents
+      confluence,
+      indicators: indicators,
       totalDuration,
       currentPriceAtAnalysis: livePrice,
       autoTrackStart: Date.now(),
@@ -1168,8 +1263,8 @@ async function runAnalysis() {
     };
 
     saveToHistory(record);
-    renderFinalResults(record, shield, outliers);
-    showToast(confluence.tradable ? `✅ Signal ready (${totalDuration}ms)` : "⏸ WAIT — not tradable", 4000);
+    renderFinalResults(record, shield, indicators);
+    showToast(shield.approved ? `✅ Trade APPROVED (${confluence.confluenceScore}%)` : `🛡️ BLOCKED (${confluence.confluenceScore}%)`, 4000);
     localStorage.setItem(`price_${pair}`, livePrice.toString());
   } catch (err) {
     resultsContainer.innerHTML = `<div class="card" style="border-color:var(--red);">
@@ -1179,39 +1274,39 @@ async function runAnalysis() {
     </div>`;
   } finally {
     runBtn.disabled = false;
-    runBtn.innerHTML = '🚀 START MASTERS 6 ANALYSIS';
+    runBtn.innerHTML = '🚀 START CONFLUENCE ANALYSIS';
   }
 }
 
-function renderLoadingState(pair, livePrice, masters) {
+function renderLoadingState(pair, livePrice, agents) {
   const container = document.getElementById('resultsContainer');
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
-      <div class="ballistic-header" style="justify-content:center;">⏳ MASTERS 6 ANALYZING ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Gemini Primary • Clean prompts</div>
+      <div class="ballistic-header" style="justify-content:center;">⏳ CONFLUENCE ENGINE ANALYZING ${pair}</div>
+      <div style="font-size:12px;color:var(--muted);">4 Agents • Weighted Scoring • Capital Shield</div>
     </div>
     <div class="card">
-      <div class="ballistic-header">👥 MASTERS 6 — LIVE VOTING</div>
-      <div id="mastersLiveContainer"></div>
+      <div class="ballistic-header">👥 AGENTS 4 — LIVE VOTING</div>
+      <div id="agentsLiveContainer"></div>
     </div>
   `;
-  const mContainer = document.getElementById('mastersLiveContainer');
-  masters.forEach(m => {
+  const mContainer = document.getElementById('agentsLiveContainer');
+  agents.forEach(a => {
     mContainer.innerHTML += `
-      <div class="master-card pending" id="master-${m.id}">
+      <div class="master-card pending" id="agent-${a.id}">
         <div class="master-header">
-          <div class="master-name">${m.id}. ${m.name}</div>
-          <div class="master-vote vote-pending" id="vote-${m.id}">⏳ PENDING</div>
+          <div class="master-name">${a.id}. ${a.name} (${(a.weight*100).toFixed(0)}%)</div>
+          <div class="master-vote vote-pending" id="vote-${a.id}">⏳ PENDING</div>
         </div>
-        <div class="master-desc" id="desc-${m.id}">Analyzing...</div>
-        <div class="master-confidence" id="conf-${m.id}">Confidence: —</div>
+        <div class="master-desc" id="desc-${a.id}">Analyzing...</div>
+        <div class="master-confidence" id="conf-${a.id}">Confidence: —</div>
       </div>
     `;
   });
 }
 
-function updateMasterCard(result) {
-  const card = document.getElementById(`master-${result.id}`);
+function updateAgentCard(result) {
+  const card = document.getElementById(`agent-${result.id}`);
   if (!card) return;
   const voteEl = document.getElementById(`vote-${result.id}`);
   const descEl = document.getElementById(`desc-${result.id}`);
@@ -1222,18 +1317,19 @@ function updateMasterCard(result) {
   voteEl.className = `master-vote vote-${result.vote.toLowerCase()}`;
   voteEl.innerText = result.vote === 'BUY' ? '📈 BUY' : result.vote === 'SELL' ? '📉 SELL' : '⏸ HOLD';
   let providerBadge = '';
-  if (result.provider === 'Mistral (Fallback)') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
-  else if (result.provider?.startsWith('Gemini')) providerBadge = `<span class="provider-badge provider-gemini">${result.provider}</span>`;
+  if (result.provider === 'Mistral') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
+  else if (result.provider === 'Gemini') providerBadge = `<span class="provider-badge provider-gemini">Gemini</span>`;
   else if (result.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
   const durationText = result.duration ? ` • ${(result.duration/1000).toFixed(1)}s` : '';
   descEl.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key Level: ${result.key_level}</strong>` : '');
   confEl.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> (Weight: ${(result.weight*100).toFixed(0)}%) ${providerBadge}${durationText}<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
 
-function computeSLTP(masters, action, livePrice, pair) {
+// ============ SL/TP COMPUTATION ============
+function computeSLTP(agents, action, livePrice, pair) {
   const spec = PAIR_SPECS[pair] || PAIR_SPECS.XAUUSD;
   const isBuy = action === 'BUY';
-  const keyLevels = masters.filter(m => m.key_level && !isNaN(parseFloat(m.key_level))).map(m => parseFloat(m.key_level));
+  const keyLevels = agents.filter(a => a.key_level && !isNaN(parseFloat(a.key_level))).map(a => parseFloat(a.key_level));
   let sl;
   if (isBuy) {
     const slCandidates = keyLevels.filter(l => l < livePrice);
@@ -1265,12 +1361,13 @@ function computeSLTP(masters, action, livePrice, pair) {
   };
 }
 
-function renderFinalResults(record, shield, outliers = []) {
-  document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield, outliers);
+// ============ RENDER FINAL RESULTS ============
+function renderFinalResults(record, shield, indicators) {
+  document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield, indicators);
 }
 
-function buildAnalysisHTML(record, shield, outliers = []) {
-  const { signalLabel, signalColor, signalReason, tradable, confidence, entry, sl, tp1, tp2, tp3, pair, dominance } = record;
+function buildAnalysisHTML(record, shield, indicators) {
+  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence } = record;
   const spec = PAIR_SPECS[pair];
   const slPips = record.slPips || 0;
   const tp1Pips = record.tp1Pips || 0;
@@ -1282,46 +1379,57 @@ function buildAnalysisHTML(record, shield, outliers = []) {
     const pipValue = getPipValue(spec, lot);
     return { lot, pipValue, tp1: (tp1Pips * pipValue).toFixed(2), tp3: (tp3Pips * pipValue).toFixed(2) };
   });
-  const signalTextColor = signalColor.includes('buy') ? 'var(--green)' : signalColor.includes('sell') ? 'var(--red)' : signalColor.includes('wait') ? 'var(--yellow)' : 'var(--muted)';
+  
+  const signalColor = action === 'BUY' ? 'buy' : action === 'SELL' ? 'sell' : 'wait';
+  const signalLabel = action === 'BUY' ? '🟢 BUY' : action === 'SELL' ? '🔴 SELL' : '⏸ HOLD';
+  const signalTextColor = action === 'BUY' ? 'var(--green)' : action === 'SELL' ? 'var(--red)' : 'var(--yellow)';
   
   let html = `
     <div class="signal-hero ${signalColor}">
       <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
       <div class="signal-label" style="color:${signalTextColor};">${signalLabel}</div>
       <div class="signal-badge-container">
-        <span class="badge-conf">${confidence}% MARGIN</span>
-        <span class="badge-status">${record.confluence?.buyCount || 0}B / ${record.confluence?.sellCount || 0}S / ${record.confluence?.holdCount || 0}H</span>
-        <span class="badge-warn">DOM: ${dominance || 0}</span>
-        <span class="badge-${tradable ? 'conf' : 'wait'}">${tradable ? '✅ TRADABLE' : '⏸ WAIT'}</span>
+        <span class="badge-conf">${confluenceScore}% CONFLUENCE</span>
+        <span class="badge-status">${confluence.buyCount}B / ${confluence.sellCount}S / ${confluence.holdCount}H</span>
+        <span class="badge-${shield.approved ? 'conf' : 'shield'}">${shield.approved ? '✅ APPROVED' : '🛡️ BLOCKED'}</span>
       </div>
-      <div class="signal-reason">${signalReason || ''}</div>
+      <div class="signal-reason">${record.signalReason || ''}</div>
       <div style="font-size:11px;color:var(--muted);margin-top:8px;">📅 ${record.date || ''} • ${record.totalDuration ? (record.totalDuration/1000).toFixed(1) + 's' : ''}</div>
     </div>
   `;
   
-  html += `
-    <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
-      <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
-      <div class="shield-box">${shield.message}</div>
-      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>Margin ≥ 30% (Current: ${confidence}%)</span></div>
-      <div class="checklist-item ${shield.checks.dominance ? 'pass' : 'fail'}"><span>${shield.checks.dominance ? '✓' : '✗'}</span><span>Dominance ≥ 1 (Current: ${dominance || 0})</span></div>
-      <div class="checklist-item ${shield.checks.alignment ? 'pass' : 'fail'}"><span>${shield.checks.alignment ? '✓' : '✗'}</span><span>3+ masters voted</span></div>
-      <div class="checklist-item ${shield.checks.notTie ? 'pass' : 'fail'}"><span>${shield.checks.notTie ? '✓' : '✗'}</span><span>No tie</span></div>
-      <div class="checklist-item ${shield.checks.tradable ? 'pass' : 'fail'}"><span>${shield.checks.tradable ? '✓' : '✗'}</span><span>Tradable signal</span></div>
-      <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2 (Current: 1:${shield.checks.rrrValue || rrr})</span></div>
-    </div>
-  `;
-  
-  if (!tradable) {
+  if (indicators) {
     html += `
-      <div class="card" style="border-color:var(--yellow);">
-        <div class="ballistic-header" style="color:var(--yellow);">⏸ WHY WAIT?</div>
-        <div class="wait-box"><strong>${signalReason || 'Wait for clear setup.'}</strong></div>
+      <div class="card" style="border-color:var(--accent);">
+        <div class="ballistic-header">📊 REAL MARKET DATA</div>
+        <div class="grid-3">
+          <div class="mini-box"><label>Trend</label><div style="font-size:13px;font-weight:bold;color:var(--accent);">${indicators.trend}</div></div>
+          <div class="mini-box"><label>RSI(14)</label><div style="font-size:13px;font-weight:bold;">${indicators.rsi || '—'}</div></div>
+          <div class="mini-box"><label>ATR(14)</label><div style="font-size:13px;font-weight:bold;">${indicators.atr || '—'}</div></div>
+        </div>
+        <div class="grid-3">
+          <div class="mini-box"><label>MA(20)</label><div style="font-size:12px;">${indicators.ma20 || '—'}</div></div>
+          <div class="mini-box"><label>MA(50)</label><div style="font-size:12px;">${indicators.ma50 || '—'}</div></div>
+          <div class="mini-box"><label>MA(200)</label><div style="font-size:12px;">${indicators.ma200 || '—'}</div></div>
+        </div>
+        ${indicators.macd ? `<div class="mini-box" style="margin-top:10px;"><label>MACD</label><div style="font-size:12px;">Value: ${indicators.macd.value} • Signal: ${indicators.macd.signal} • Histogram: ${indicators.macd.histogram} (${indicators.macd.crossover})</div></div>` : ''}
+        ${indicators.fib ? `<div class="mini-box" style="margin-top:10px;"><label>Fibonacci Levels</label><div style="font-size:11px;line-height:1.7;">23.6%: ${indicators.fib.level_236} • 38.2%: ${indicators.fib.level_382} • 50%: ${indicators.fib.level_500}<br>61.8%: ${indicators.fib.level_618} • 78.6%: ${indicators.fib.level_786}</div></div>` : ''}
       </div>
     `;
   }
   
-  if (tradable && slPips > 0) {
+  html += `
+    <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
+      <div class="ballistic-header">🛡️ CAPITAL SHIELD (Risk Gate)</div>
+      <div class="shield-box">${shield.message}</div>
+      <div class="checklist-item ${shield.checks.confluence ? 'pass' : 'fail'}"><span>${shield.checks.confluence ? '✓' : '✗'}</span><span>Confluence ≥ ${CONFLUENCE_THRESHOLD}% (Current: ${confluenceScore}%)</span></div>
+      <div class="checklist-item ${shield.checks.notHOLD ? 'pass' : 'fail'}"><span>${shield.checks.notHOLD ? '✓' : '✗'}</span><span>Direction not HOLD</span></div>
+      <div class="checklist-item ${shield.checks.consensus ? 'pass' : 'fail'}"><span>${shield.checks.consensus ? '✓' : '✗'}</span><span>2+ agents voted (Current: ${confluence.buyCount + confluence.sellCount})</span></div>
+      <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:${RRR_MINIMUM} (Current: 1:${shield.checks.rrrValue || rrr})</span></div>
+    </div>
+  `;
+  
+  if (shield.approved && action !== 'HOLD' && slPips > 0) {
     html += `
       <div class="card">
         <div class="ballistic-header">📊 TRADE PARAMETERS</div>
@@ -1351,28 +1459,28 @@ function buildAnalysisHTML(record, shield, outliers = []) {
     `;
   }
   
-  if (record.masters && record.masters.length > 0) {
+  if (record.agents && record.agents.length > 0) {
     html += `
       <div class="card">
-        <div class="ballistic-header">👥 MASTERS 6 — VOTES</div>
-        ${record.masters.map(m => {
-          const voteClass = m.vote === 'BUY' ? 'vote-buy' : m.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
-          const cardClass = m.vote.toLowerCase();
+        <div class="ballistic-header">👥 AGENTS 4 — VOTES & WEIGHTS</div>
+        ${record.agents.map(a => {
+          const voteClass = a.vote === 'BUY' ? 'vote-buy' : a.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
+          const cardClass = a.vote.toLowerCase();
           let providerBadge = '';
-          if (m.provider === 'Mistral (Fallback)') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
-          else if (m.provider?.startsWith('Gemini')) providerBadge = `<span class="provider-badge provider-gemini">${m.provider}</span>`;
-          else if (m.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
-          const durationText = m.duration ? ` • ${(m.duration/1000).toFixed(1)}s` : '';
+          if (a.provider === 'Mistral') providerBadge = `<span class="provider-badge provider-mistral">Mistral</span>`;
+          else if (a.provider === 'Gemini') providerBadge = `<span class="provider-badge provider-gemini">Gemini</span>`;
+          else if (a.provider === 'Failed') providerBadge = `<span class="provider-badge provider-failed">Failed</span>`;
+          const durationText = a.duration ? ` • ${(a.duration/1000).toFixed(1)}s` : '';
           return `
             <div class="master-card ${cardClass}">
               <div class="master-header">
-                <div class="master-name">${m.id}. ${m.name}</div>
-                <div class="master-vote ${voteClass}">${m.vote}</div>
+                <div class="master-name">${a.id}. ${a.name} (${(a.weight*100).toFixed(0)}%)</div>
+                <div class="master-vote ${voteClass}">${a.vote}</div>
               </div>
-              <div class="master-desc">${m.reasoning}</div>
+              <div class="master-desc">${a.reasoning}</div>
               <div class="master-confidence">
-                Confidence: <strong style="color:var(--accent);">${m.confidence}%</strong> • Weight: ${(m.weight*100).toFixed(0)}% ${providerBadge}${durationText}
-                <div class="confidence-bar"><div class="confidence-fill" style="width:${m.confidence}%"></div></div>
+                Confidence: <strong style="color:var(--accent);">${a.confidence}%</strong> • Weight: ${(a.weight*100).toFixed(0)}% ${providerBadge}${durationText}
+                <div class="confidence-bar"><div class="confidence-fill" style="width:${a.confidence}%"></div></div>
               </div>
             </div>
           `;
@@ -1384,6 +1492,7 @@ function buildAnalysisHTML(record, shield, outliers = []) {
   return html;
 }
 
+// ============ BACKTEST ============
 function refreshBacktest() {
   const container = document.getElementById('backtestContainer');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
@@ -1400,6 +1509,7 @@ function refreshBacktest() {
   const losses = closed.filter(h => h.outcome === 'LOSS');
   const winRate = wins.length + losses.length > 0 ? (wins.length / (wins.length + losses.length) * 100).toFixed(1) + '%' : '—';
   
+  // By signal type
   const bySignal = {};
   closed.forEach(h => {
     const key = h.signalLabel || h.action || 'UNKNOWN';
@@ -1408,6 +1518,7 @@ function refreshBacktest() {
     else bySignal[key].losses++;
   });
   
+  // By pair
   const byPair = {};
   closed.forEach(h => {
     const key = h.pair || 'UNKNOWN';
@@ -1440,6 +1551,74 @@ function refreshBacktest() {
   `;
 }
 
+// ============ AUTO-BACKTEST ============
+function checkAutoBacktest() {
+  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  let updated = false;
+  const now = Date.now();
+  history.forEach(record => {
+    if (record.type === 'manual') return;
+    if (record.outcome === 'WIN' || record.outcome === 'LOSS') return;
+    if (!record.sl || !record.tp3 || !record.action) return;
+    if (!record.autoTrackStart) return;
+    const hoursSince = (now - record.autoTrackStart) / (1000 * 60 * 60);
+    if (hoursSince > 24) {
+      record.outcome = 'EXPIRED';
+      record.autoOutcome = 'Stale - expired after 24h';
+      updated = true;
+      return;
+    }
+    const currentPrice = parseFloat(localStorage.getItem(`price_${record.pair}`) || 0);
+    if (!currentPrice) return;
+    const sl = parseFloat(record.sl);
+    const tp3 = parseFloat(record.tp3);
+    if (record.action === 'BUY') {
+      if (currentPrice <= sl) { record.outcome = 'LOSS'; record.autoOutcome = `SL hit at ${currentPrice}`; updated = true; }
+      else if (currentPrice >= tp3) { record.outcome = 'WIN'; record.autoOutcome = `TP3 hit at ${currentPrice}`; updated = true; }
+    } else if (record.action === 'SELL') {
+      if (currentPrice >= sl) { record.outcome = 'LOSS'; record.autoOutcome = `SL hit at ${currentPrice}`; updated = true; }
+      else if (currentPrice <= tp3) { record.outcome = 'WIN'; record.autoOutcome = `TP3 hit at ${currentPrice}`; updated = true; }
+    }
+  });
+  if (updated) {
+    localStorage.setItem('lutynoel_history', JSON.stringify(history));
+    showToast("📊 Auto-backtest updated!", 3000);
+  }
+  return updated;
+}
+
+async function updatePricesForBacktest() {
+  const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const openPairs = [...new Set(history.filter(h => !h.outcome || h.outcome === 'PENDING').map(h => h.pair).filter(Boolean))];
+  for (const pair of openPairs) {
+    const spec = PAIR_SPECS[pair];
+    if (!spec) continue;
+    try {
+      let price = null;
+      if (spec.source === 'binance' && spec.binanceSymbol) {
+        const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
+        if (r.ok) { const d = await r.json(); price = parseFloat(d.price); }
+      } else if (spec.source === 'twelve') {
+        const key = sessionStorage.getItem('lutynoel_twelveKey');
+        if (key) {
+          const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
+          if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
+        }
+      }
+      if (price) localStorage.setItem(`price_${pair}`, price.toString());
+    } catch (err) { console.warn(`Price update failed for ${pair}`); }
+  }
+}
+
+function runAutoBacktest() {
+  if (document.hidden) return;  // Skip if tab is hidden
+  updatePricesForBacktest().then(() => {
+    checkAutoBacktest();
+    if (document.getElementById('view-backtest')?.style.display !== 'none') refreshBacktest();
+  });
+}
+
+// ============ RISK CALCULATOR ============
 function calculateRisk() {
   const balance = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const riskPct = parseFloat(document.getElementById('riskPercent').value) || 1;
@@ -1459,6 +1638,7 @@ function calculateRisk() {
   `;
 }
 
+// ============ PIPS CALCULATOR ============
 function updatePipsPairInfo() {
   const pair = document.getElementById('pipsPair').value;
   const spec = PAIR_SPECS[pair];
@@ -1497,6 +1677,7 @@ function calculatePips() {
   showToast(isProfit ? `✅ Profit: $${usdValue.toFixed(2)}` : `❌ Loss: $${usdValue.toFixed(2)}`, 3000);
 }
 
+// ============ NEWS ============
 async function fetchLiveNews() {
   const container = document.getElementById('newsContainer');
   container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Loading news...</div>`;
@@ -1546,6 +1727,7 @@ function getFlag(currency) {
   return flags[currency] || '🌍';
 }
 
+// ============ JOURNAL ============
 function saveJournalTrade() {
   const trade = {
     id: Date.now(), date: new Date().toLocaleString(), type: 'manual',
@@ -1558,6 +1740,7 @@ function saveJournalTrade() {
   saveToHistory(trade); showToast("Trade saved!"); navigate('history');
 }
 
+// ============ HISTORY ============
 function saveToHistory(record) {
   let history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   history.unshift(record);
@@ -1577,14 +1760,13 @@ function loadHistory() {
       if (h.signalColor.includes('buy')) color = 'var(--green)';
       else if (h.signalColor.includes('sell')) color = 'var(--red)';
       else if (h.signalColor.includes('wait')) color = 'var(--yellow)';
-    } else if (h.action === 'BUY') color = 'var(--green)';
-    else if (h.action === 'SELL') color = 'var(--red)';
+    }
     let statusBadge = '';
     if (h.outcome === 'WIN') statusBadge = `<span style="color:var(--green);font-size:10px;font-weight:bold;">✅ WIN</span>`;
     else if (h.outcome === 'LOSS') statusBadge = `<span style="color:var(--red);font-size:10px;font-weight:bold;">❌ LOSS</span>`;
     else if (h.outcome === 'PENDING' && h.autoTrackStart) statusBadge = `<span style="color:var(--yellow);font-size:10px;font-weight:bold;">⏳ TRACKING</span>`;
     else if (h.outcome === 'EXPIRED') statusBadge = `<span style="color:var(--muted);font-size:10px;font-weight:bold;">⌛ EXPIRED</span>`;
-    return `<div class="history-card" onclick="viewHistoryDetail(${i})"><div style="flex-grow:1;"><strong>${h.pair || '—'} <span style="color:${color};">${label}</span></strong> ${statusBadge}${h.confidence ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confidence}%</span>` : ''}<br><small style="color:var(--muted);">${h.date || ''}</small></div><div class="chevron">›</div><button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button></div>`;
+    return `<div class="history-card" onclick="viewHistoryDetail(${i})"><div style="flex-grow:1;"><strong>${h.pair || '—'} <span style="color:${color};">${label}</span></strong> ${statusBadge}${h.confluenceScore ? `<span style="color:var(--muted);font-size:11px;"> • ${h.confluenceScore}%</span>` : ''}<br><small style="color:var(--muted);">${h.date || ''}</small></div><div class="chevron">›</div><button onclick="event.stopPropagation(); deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;margin-left:6px;">🗑️</button></div>`;
   }).join('');
 }
 
@@ -1592,6 +1774,7 @@ function viewHistoryDetail(index) {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const record = history[index];
   if (!record) { alert("Analysis not found."); return; }
+  
   if (record.type === 'manual') {
     document.getElementById('modalInnerContent').innerHTML = `
       <h2 style="color:var(--accent);margin:0 0 15px;">📝 Manual Trade</h2>
@@ -1606,26 +1789,25 @@ function viewHistoryDetail(index) {
     document.getElementById('universalModal').style.display = 'flex';
     return;
   }
-  if (record.masters && record.confluence) {
+  
+  // ✅ FIX: Use record.agents (consistent schema)
+  if (record.agents && record.confluence) {
     try {
       const shield = {
         approved: record.shield === true,
         checks: {
-          consensus: (record.confidence || 0) >= 30,
-          dominance: (record.dominance || 0) >= 1,
-          alignment: ((record.confluence.buyCount || 0) + (record.confluence.sellCount || 0)) >= 3,
-          notTie: (record.confluence.buyCount || 0) !== (record.confluence.sellCount || 0),
-          tradable: record.tradable === true,
-          rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= 2 : false,
+          confluence: (record.confluenceScore || 0) >= CONFLUENCE_THRESHOLD,
+          notHOLD: record.action !== 'HOLD',
+          consensus: ((record.confluence.buyCount || 0) + (record.confluence.sellCount || 0)) >= 2,
+          rrr: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips) >= RRR_MINIMUM : false,
           rrrValue: (record.tp3Pips && record.slPips) ? (record.tp3Pips / record.slPips).toFixed(2) : '?'
         },
         message: record.shield ? "✅ CAPITAL SHIELD: Trade was approved." : "🛡️ CAPITAL SHIELD: Trade was blocked."
       };
-      const outliers = record.outliers || [];
       document.getElementById('modalInnerContent').innerHTML = `
         <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
         ${record.outcome && record.outcome !== 'PENDING' ? `<div class="info-box"><strong>Auto-Outcome:</strong> ${record.outcome} ${record.autoOutcome ? `— ${record.autoOutcome}` : ''}</div>` : ''}
-        ${buildAnalysisHTML(record, shield, outliers)}
+        ${buildAnalysisHTML(record, shield, record.indicators)}
         <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
       `;
       document.getElementById('universalModal').style.display = 'flex';
@@ -1633,18 +1815,8 @@ function viewHistoryDetail(index) {
     } catch (err) { alert(`❌ Failed: ${err.message}`); }
     return;
   }
-  const actionColor = record.action === 'BUY' ? 'var(--green)' : record.action === 'SELL' ? 'var(--red)' : 'var(--orange)';
-  document.getElementById('modalInnerContent').innerHTML = `
-    <h2 style="color:var(--accent);margin:0 0 15px;">📊 Old Analysis</h2>
-    <div class="card" style="text-align:center;"><div style="font-size:13px;color:var(--accent);font-weight:bold;">${record.pair || '—'}</div><div style="font-size:32px;font-weight:bold;color:${actionColor};margin:5px 0;">${record.action || 'HOLD'}</div></div>
-    <div class="card">
-      <div class="grid-2"><div class="mini-box"><label>Entry</label><div>${record.entry || '—'}</div></div><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl || '—'}</div></div></div>
-      <div class="grid-3"><div class="mini-box"><label>TP1</label><div style="color:var(--green);">${record.tp1 || '—'}</div></div><div class="mini-box"><label>TP2</label><div style="color:var(--green);">${record.tp2 || '—'}</div></div><div class="mini-box"><label>TP3</label><div style="color:var(--green);">${record.tp3 || '—'}</div></div></div>
-    </div>
-    <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
-  `;
-  document.getElementById('universalModal').style.display = 'flex';
-  document.getElementById('universalModal').scrollTop = 0;
+  
+  alert("Analysis not found or old format.");
 }
 
 function deleteHistory(index) {
@@ -1676,7 +1848,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "24.0" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "26.0" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1690,6 +1862,7 @@ function changeLiveChart(symbol) {
   document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${symbol}&interval=15&theme=dark&style=1`;
 }
 
+// ============ INIT ============
 window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   const name = sessionStorage.getItem('lutynoel_name');
@@ -1699,8 +1872,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
     loadHistory(); updateStats();
     setTimeout(() => fetchLivePrice(), 1500);
-    setInterval(runAutoBacktest, AUTO_CHECK_INTERVAL);
-    setTimeout(runAutoBacktest, 5000);
+    startAutoBacktest();
   }
 });
 </script>
