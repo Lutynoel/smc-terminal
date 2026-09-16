@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v28.3 — Fundamentals Edition</title>
+<title>Lutynoel FX v28.2 — 15M Backup Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -128,13 +128,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .stat-box{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:8px;text-align:center;}
 .stat-value{font-size:22px;font-weight:bold;color:var(--accent);}
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;}
-.news-item{background:#08080a;border:1px solid var(--border);padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:12px;line-height:1.6;}
-.news-item .news-source{color:var(--accent);font-weight:bold;font-size:11px;}
-.news-item .news-title{color:var(--text);margin-top:4px;}
-.calendar-event{background:#08080a;border:1px solid var(--border);padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
-.calendar-event .impact-high{border-left:4px solid var(--red);}
-.calendar-event .impact-medium{border-left:4px solid var(--orange);}
-.calendar-event .impact-low{border-left:4px solid var(--blue);}
 </style>
 </head>
 <body>
@@ -150,8 +143,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v28.3</div>
-    <div class="auth-subtitle">Fundamentals Edition</div>
+    <div class="auth-title">Lutynoel FX v28.2</div>
+    <div class="auth-subtitle">15M Backup Source Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
@@ -207,13 +200,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v28.3</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v28.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">FUND</span></div>
-    <div class="menu-item" onclick="navigate('news')">📰 Live News</div>
-    <div class="menu-item" onclick="navigate('calendar')">📅 Economic Calendar</div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">15M</span></div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -227,13 +218,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v28.3 FUNDAMENTALS</span>
+          <span class="badge-shield">v28.2 15M BACKUP</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">AI + OHLC + News</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">AI + OHLC Data</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Real-time news. Economic calendar. AI grounding.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">15M backup sources. Keys persistent. Modal fixed.</p>
       </div>
 
       <div class="grid-3">
@@ -245,17 +236,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
         <button class="primary-btn" onclick="navigate('analyst')">🎯 Start AI Analysis</button>
-        <button class="secondary-btn" onclick="navigate('news')">📰 View Live News</button>
-        <button class="secondary-btn" onclick="navigate('calendar')">📅 Economic Calendar</button>
+        <button class="secondary-btn" onclick="navigate('backtest')">📊 Auto-Backtest</button>
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>v28.3 Features:</strong><br>
-        • <strong>Fundamental Analysis</strong> — News + Economic Events<br>
-        • <strong>Google Search Grounding</strong> — Gemini searches real-time news<br>
-        • <strong>Economic Calendar</strong> — NFP, CPI, FOMC alerts<br>
-        • <strong>15M Backup</strong> — TwelveData → Alpha Vantage<br>
+        ⚙️ <strong>v28.2 Features:</strong><br>
+        • <strong>15M Backup</strong> — TwelveData → Alpha Vantage → Yahoo<br>
         • <strong>Persistent Keys</strong> — Login mara moja<br>
+        • <strong>OHLC Data</strong> — Multi-timeframe (4H + 1H + 15M)<br>
         • <strong>4 AI Agents</strong> — Weighted confluence
       </div>
     </div>
@@ -306,46 +294,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div id="resultsContainer" style="display:none;"></div>
-    </div>
-
-    <div id="view-news" class="view-section" style="display:none;">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">📰 Live News</h3>
-          <button onclick="fetchNews()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
-        </div>
-        <label>Filter by Pair</label>
-        <select id="newsFilter" onchange="fetchNews()">
-          <option value="forex">All Forex</option>
-          <option value="XAUUSD">Gold (XAUUSD)</option>
-          <option value="EURUSD">EUR/USD</option>
-          <option value="GBPUSD">GBP/USD</option>
-          <option value="USDJPY">USD/JPY</option>
-          <option value="BTCUSD">Bitcoin</option>
-        </select>
-        <div id="newsContainer">
-          <div style="text-align:center;padding:30px;color:var(--muted);">
-            <div class="spinner-white"></div> Loading news...
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="view-calendar" class="view-section" style="display:none;">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">📅 Economic Calendar</h3>
-          <button onclick="fetchCalendar()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
-        </div>
-        <div class="info-box" style="margin-bottom:12px;">
-          📊 High-impact events (NFP, CPI, FOMC) zinazoathiri soko.
-        </div>
-        <div id="calendarContainer">
-          <div style="text-align:center;padding:30px;color:var(--muted);">
-            <div class="spinner-white"></div> Loading calendar...
-          </div>
-        </div>
-      </div>
     </div>
 
     <div id="view-backtest" class="view-section" style="display:none;">
@@ -496,9 +444,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v28.3 (Fundamentals)<br>
-          <strong>News Source:</strong> Google Search Grounding<br>
-          <strong>Calendar Source:</strong> ForexFactory (via API)<br>
+          <strong>Version:</strong> v28.2 (15M Backup)<br>
+          <strong>15M Sources:</strong> TwelveData → Alpha Vantage → Yahoo<br>
           <strong>Primary AI:</strong> Gemini 3.8 Flash<br>
           <strong>Fallback:</strong> Gemini 3.6 → 3.5 → Mistral
         </div>
@@ -515,10 +462,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <input type="text" id="settingsAlphaKey" placeholder="Alpha Vantage key">
         <button class="secondary-btn" onclick="saveSettingsAlphaKey()">💾 Save Alpha Vantage Key</button>
         
-        <label>Economic Calendar API Key (Optional)</label>
-        <input type="text" id="settingsCalendarKey" placeholder="Calendar API key (Apify, etc.)">
-        <button class="secondary-btn" onclick="saveSettingsCalendarKey()">💾 Save Calendar Key</button>
-        
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         
         <button class="secondary-btn" onclick="testApiKeys()">🧪 Test API Keys</button>
@@ -531,8 +474,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v28.3 — FUNDAMENTALS EDITION
-   Google Search Grounding + Economic Calendar API
+   LUTYNOEL FX v28.2 — 15M BACKUP SOURCE EDITION
+   TwelveData → Alpha Vantage → Yahoo for 15M
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -542,8 +485,6 @@ const MISTRAL_MODEL = 'mistral-large-latest';
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
-const FINNHUB_API = 'https://finnhub.io/api/v1';
-const FOREXFACTORY_CALENDAR_API = 'https://nfs.faireconomy.media/ff_calendar_thisweek.json';
 
 const AGENT_TIMEOUT = 120000;
 const API_TIMEOUT = 60000;
@@ -557,9 +498,7 @@ const STORAGE_KEYS = {
   GEMINI: 'lutynoel_saved_geminiKey',
   MISTRAL: 'lutynoel_saved_mistralKey',
   TWELVE: 'lutynoel_saved_twelveKey',
-  ALPHA: 'lutynoel_saved_alphaKey',
-  FINNHUB: 'lutynoel_saved_finnhubKey',
-  CALENDAR: 'lutynoel_saved_calendarKey'
+  ALPHA: 'lutynoel_saved_alphaKey'
 };
 
 const PAIR_SPECS = {
@@ -575,18 +514,16 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
-// ==================== AGENTS 4 — FUNDAMENTALS INCLUDED ====================
 const AGENTS_4 = [
-  { id: 1, name: "Price Action Master", weight: 0.25, focus: "Candlesticks",
+  { id: 1, name: "Price Action Master", weight: 0.30, focus: "Candlesticks",
     lens: "Candlestick patterns ONLY. Analyze OHLC data for: engulfing, rejection wicks, pin bars, doji, hammer, shooting star. Compare last 5-10 candles." },
-  { id: 2, name: "Supply & Demand Master", weight: 0.20, focus: "Order Blocks",
+  { id: 2, name: "Supply & Demand Master", weight: 0.25, focus: "Order Blocks",
     lens: "Order Blocks & Liquidity ONLY. Identify institutional order blocks, imbalance zones, liquidity sweeps from OHLC." },
-  { id: 3, name: "Market Structure Master", weight: 0.20, focus: "Structure",
+  { id: 3, name: "Market Structure Master", weight: 0.25, focus: "Structure",
     lens: "Market Structure ONLY. From OHLC: higher highs, higher lows, lower highs, lower lows, CHoCH, BOS." },
-  { id: 4, name: "Fundamental & Momentum Master", weight: 0.35, focus: "Fundamentals + Momentum",
-    lens: "Fundamental Analysis & Momentum. Use the provided NEWS HEADLINES and ECONOMIC CALENDAR EVENTS to assess fundamental bias. Also use technical indicators (RSI, MACD, MA, ATR, Stochastic, Bollinger Bands) from the provided OHLC numbers. Combine fundamental sentiment with momentum for your vote." }
+  { id: 4, name: "Fundamental & Momentum Master", weight: 0.20, focus: "Momentum",
+    lens: "Momentum & Indicators ONLY. Use RSI, MACD, MA, ATR, Stochastic, Bollinger Bands." }
 ];
-// =========================================================================
 
 // ============ UTILITIES ============
 function showToast(msg, duration = 3500) {
@@ -597,7 +534,9 @@ function showToast(msg, duration = 3500) {
 }
 
 function getPipValue(spec, lot) {
-  return lot * spec.pipValue.standard;
+  if (lot >= 1.0) return spec.pipValue.standard;
+  if (lot >= 0.10) return spec.pipValue.mini;
+  return spec.pipValue.micro;
 }
 
 function safeJsonParse(text) {
@@ -648,7 +587,7 @@ async function withTimeout(promise, timeoutMs, errorMessage) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v28.3", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v28.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -679,14 +618,12 @@ function closeUniversalModal() {
 }
 
 // ============ PERSISTENT KEYS ============
-function saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey, finnhubKey, calendarKey) {
+function saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
   localStorage.setItem(STORAGE_KEYS.GEMINI, geminiKey);
   if (mistralKey) localStorage.setItem(STORAGE_KEYS.MISTRAL, mistralKey);
   if (twelveKey) localStorage.setItem(STORAGE_KEYS.TWELVE, twelveKey);
   if (alphaKey) localStorage.setItem(STORAGE_KEYS.ALPHA, alphaKey);
-  if (finnhubKey) localStorage.setItem(STORAGE_KEYS.FINNHUB, finnhubKey);
-  if (calendarKey) localStorage.setItem(STORAGE_KEYS.CALENDAR, calendarKey);
 }
 
 function loadKeys() {
@@ -695,9 +632,7 @@ function loadKeys() {
     geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI),
     mistralKey: localStorage.getItem(STORAGE_KEYS.MISTRAL),
     twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE),
-    alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA),
-    finnhubKey: localStorage.getItem(STORAGE_KEYS.FINNHUB),
-    calendarKey: localStorage.getItem(STORAGE_KEYS.CALENDAR)
+    alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA)
   };
 }
 
@@ -705,8 +640,6 @@ function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getMistralKey() { return localStorage.getItem(STORAGE_KEYS.MISTRAL); }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
 function getAlphaKey() { return localStorage.getItem(STORAGE_KEYS.ALPHA); }
-function getFinnhubKey() { return localStorage.getItem(STORAGE_KEYS.FINNHUB); }
-function getCalendarKey() { return localStorage.getItem(STORAGE_KEYS.CALENDAR); }
 
 function clearAllKeys() {
   if (!confirm("Clear all saved keys? You'll need to login again.")) return;
@@ -721,13 +654,11 @@ function handleLogin() {
   const mistralKey = document.getElementById('authMistralKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
   const alphaKey = document.getElementById('authAlphaKey').value.trim();
-  const finnhubKey = document.getElementById('authFinnhubKey')?.value.trim() || '';
-  const calendarKey = document.getElementById('authCalendarKey')?.value.trim() || '';
 
   if (!name) { alert("Enter your name."); return; }
   if (!geminiKey && !mistralKey) { alert("Enter at least one AI API key."); return; }
 
-  saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey, finnhubKey, calendarKey);
+  saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey);
   enterApp(name, geminiKey, twelveKey, alphaKey);
 }
 
@@ -759,8 +690,6 @@ function showLoginForm() {
   if (keys.geminiKey) document.getElementById('authGeminiKey').value = keys.geminiKey;
   if (keys.twelveKey) document.getElementById('authTwelveKey').value = keys.twelveKey;
   if (keys.alphaKey) document.getElementById('authAlphaKey').value = keys.alphaKey;
-  if (keys.finnhubKey) document.getElementById('authFinnhubKey').value = keys.finnhubKey;
-  if (keys.calendarKey) document.getElementById('authCalendarKey').value = keys.calendarKey;
 }
 
 function saveSettingsGeminiKey() {
@@ -782,13 +711,6 @@ function saveSettingsAlphaKey() {
   if (key) localStorage.setItem(STORAGE_KEYS.ALPHA, key);
   else localStorage.removeItem(STORAGE_KEYS.ALPHA);
   showToast("✅ Alpha Vantage key saved!");
-}
-
-function saveSettingsCalendarKey() {
-  const key = document.getElementById('settingsCalendarKey').value.trim();
-  if (key) localStorage.setItem(STORAGE_KEYS.CALENDAR, key);
-  else localStorage.removeItem(STORAGE_KEYS.CALENDAR);
-  showToast("✅ Calendar key saved!");
 }
 
 function startAutoBacktest() {
@@ -858,8 +780,6 @@ function navigate(view) {
   if (view === 'overview') updateStats();
   if (view === 'pips') updatePipsPairInfo();
   if (view === 'backtest') refreshBacktest();
-  if (view === 'news') fetchNews();
-  if (view === 'calendar') fetchCalendar();
   window.scrollTo(0, 0);
 }
 
@@ -884,7 +804,7 @@ function setPriceStatus(type, text, time = '') {
 }
 
 function clearMarketData() {
-  window.marketData = { h4: null, h1: null, m15: null, indicators: null, news: null, calendar: null };
+  window.marketData = { h4: null, h1: null, m15: null, indicators: null };
   ['data4H','data1H','data15M','dataIndicators'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
@@ -935,13 +855,14 @@ async function fetchLivePrice() {
   }
 }
 
-// ============ FETCH OHLC ============
+// ============ FETCH OHLC — MULTI-SOURCE FOR 15M ============
 async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   const spec = PAIR_SPECS[pair];
   if (!spec) return null;
   
   for (let attempt = 0; attempt < retries; attempt++) {
     try {
+      // === Crypto: Binance ===
       if (spec.source === 'binance' && spec.binanceSymbol) {
         const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
         const res = await fetchWithTimeout(url, {}, 10000);
@@ -953,9 +874,11 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
         }));
       }
       
+      // === Forex: TwelveData (primary) ===
       if (spec.source === 'twelve') {
         const key = getTwelveKey();
         if (key) {
+          // FIX: Tumia '15min' kwa TwelveData
           const intervalMap = { '4h': '4h', '1h': '1h', '15m': '15min' };
           const interval = intervalMap[timeframe] || timeframe;
           
@@ -970,14 +893,17 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
                 low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0)
               }));
             }
+            console.warn(`TwelveData ${timeframe} failed:`, data.message || 'no values');
           }
         }
       }
       
+      // === 15M BACKUP: Alpha Vantage (kama TwelveData inafeli) ===
       if (timeframe === '15m' && spec.alphaSymbol) {
         const alphaKey = getAlphaKey();
         if (alphaKey) {
           try {
+            // Alpha Vantage inatumia FX_INTRADAY kwa 15min
             const url = `${ALPHAVANTAGE_API}?function=FX_INTRADAY&from_symbol=${spec.alphaSymbol.substring(0,3)}&to_symbol=${spec.alphaSymbol.substring(3,6)}&interval=15min&outputsize=compact&apikey=${alphaKey}`;
             const res = await fetchWithTimeout(url, {}, 20000);
             if (res.ok) {
@@ -1147,166 +1073,6 @@ function calculateIndicators(ohlcData) {
   };
 }
 
-// ==================== FETCH NEWS (Google Search Grounding) ====================
-async function fetchNewsFromGemini(pair) {
-  const geminiKey = getGeminiKey();
-  if (!geminiKey) return null;
-  
-  const pairNames = {
-    'XAUUSD': 'Gold (XAUUSD)',
-    'EURUSD': 'EUR/USD',
-    'GBPUSD': 'GBP/USD',
-    'USDJPY': 'USD/JPY',
-    'BTCUSD': 'Bitcoin',
-    'NAS100': 'NASDAQ',
-    'AUDUSD': 'AUD/USD',
-    'USDCAD': 'USD/CAD',
-    'ETHUSD': 'Ethereum',
-    'SOLUSD': 'Solana'
-  };
-  
-  const query = `Latest fundamental news for ${pairNames[pair] || pair} today. 
-Focus on: central bank decisions, inflation data (CPI, PPI), employment data (NFP, unemployment), 
-GDP, geopolitical events, and any market-moving news. 
-Provide the top 5 most relevant headlines with sources.`;
-  
-  try {
-    const endpoint = `${GEMINI_BASE_URL}/models/gemini-3.8-flash:generateContent?key=${geminiKey}`;
-    const response = await fetchWithTimeout(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: query }] }],
-        tools: [{ google_search: {} }],
-        generationConfig: { temperature: 0.2 }
-      })
-    }, 45000);
-    
-    const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
-    
-    let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    const groundingMetadata = data.candidates?.[0]?.groundingMetadata;
-    
-    let sources = [];
-    if (groundingMetadata?.groundingChunks) {
-      sources = groundingMetadata.groundingChunks.map(chunk => ({
-        title: chunk.web?.title || 'Unknown',
-        url: chunk.web?.uri || '#'
-      }));
-    }
-    
-    return { text, sources };
-  } catch (err) {
-    console.warn('News fetch failed:', err.message);
-    return null;
-  }
-}
-
-// ==================== FETCH ECONOMIC CALENDAR ====================
-async function fetchEconomicCalendar() {
-  try {
-    const res = await fetchWithTimeout(FOREXFACTORY_CALENDAR_API, {}, 20000);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error('Invalid calendar data');
-    
-    return data.filter(e => e.impact === 'High').map(e => ({
-      title: e.title || e.event || 'Unknown',
-      currency: e.country || e.currency || '—',
-      date: e.date || e.datetime || '',
-      impact: e.impact || 'High',
-      forecast: e.forecast || '—',
-      previous: e.previous || '—',
-      actual: e.actual || '—'
-    }));
-  } catch (err) {
-    console.warn('Calendar fetch failed:', err.message);
-    return null;
-  }
-}
-
-// ==================== RENDER NEWS PAGE ====================
-async function fetchNews() {
-  const container = document.getElementById('newsContainer');
-  const filter = document.getElementById('newsFilter')?.value || 'forex';
-  
-  container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Loading news...</div>';
-  
-  const news = await fetchNewsFromGemini(filter === 'forex' ? 'XAUUSD' : filter);
-  
-  if (!news) {
-    container.innerHTML = `
-      <div class="wait-box">
-        ⚠️ News fetch failed. <br><br>
-        <strong>Possible reasons:</strong><br>
-        • Your Gemini API key doesn't support Search Grounding<br>
-        • You're on the free tier (grounding requires paid tier)<br>
-        • Network issue<br><br>
-        <strong>Solution:</strong> Check your Gemini API key or add an Economic Calendar API key in Settings.
-      </div>
-    `;
-    return;
-  }
-  
-  let html = '';
-  
-  if (news.text) {
-    html += `<div class="news-item" style="background:rgba(251,191,36,.05);border-color:var(--accent);">`;
-    html += `<div style="color:var(--accent);font-weight:bold;margin-bottom:8px;">📰 FUNDAMENTAL SUMMARY</div>`;
-    html += `<div style="font-size:12px;line-height:1.7;">${news.text.replace(/\n/g, '<br>')}</div>`;
-    html += `</div>`;
-  }
-  
-  if (news.sources && news.sources.length > 0) {
-    html += `<div class="ballistic-header" style="margin-top:15px;">🔗 SOURCES</div>`;
-    news.sources.forEach(s => {
-      html += `<div class="news-item"><span class="news-source">${s.title}</span> <a href="${s.url}" target="_blank" style="color:var(--accent);font-size:11px;">→ Open</a></div>`;
-    });
-  }
-  
-  container.innerHTML = html || '<div class="info-box">No news available.</div>';
-}
-
-// ==================== RENDER CALENDAR PAGE ====================
-async function fetchCalendar() {
-  const container = document.getElementById('calendarContainer');
-  container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);"><div class="spinner-white"></div> Loading calendar...</div>';
-  
-  const events = await fetchEconomicCalendar();
-  
-  if (!events || events.length === 0) {
-    container.innerHTML = `
-      <div class="wait-box">
-        ⚠️ Calendar fetch failed or no high-impact events this week.<br><br>
-        <strong>Alternative:</strong> Add an Economic Calendar API key in Settings (Apify, Trading Economics, etc.)
-      </div>
-    `;
-    return;
-  }
-  
-  let html = `<div class="info-box">📊 <strong>${events.length} high-impact events</strong> this week</div>`;
-  
-  events.forEach(e => {
-    const impactClass = e.impact === 'High' ? 'impact-high' : e.impact === 'Medium' ? 'impact-medium' : 'impact-low';
-    const dateStr = e.date ? new Date(e.date).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
-    html += `
-      <div class="calendar-event ${impactClass}">
-        <div style="flex-grow:1;">
-          <div style="font-weight:bold;">${e.currency} — ${e.title}</div>
-          <div style="color:var(--muted);font-size:11px;">📅 ${dateStr}</div>
-        </div>
-        <div style="text-align:right;font-size:11px;">
-          <div style="color:var(--muted);">Forecast: ${e.forecast}</div>
-          <div style="color:var(--muted);">Previous: ${e.previous}</div>
-        </div>
-      </div>
-    `;
-  });
-  
-  container.innerHTML = html;
-}
-
 // ============ FETCH ALL MARKET DATA ============
 async function fetchAllMarketData() {
   const pair = document.getElementById('selectedPair').value;
@@ -1333,13 +1099,13 @@ async function fetchAllMarketData() {
     
     await new Promise(r => setTimeout(r, 1000));
     
-    // 15M
+    // 15M (muhimu — multi-source)
     document.getElementById('data15M').querySelector('span:last-child').innerText = '⏳';
     const m15Data = await fetchOHLC(pair, '15m', 100, 3);
     document.getElementById('data15M').className = `data-status-item ${m15Data ? 'ok' : 'fail'}`;
     document.getElementById('data15M').querySelector('span:last-child').innerText = m15Data ? `${m15Data.length} bars ✓` : 'FAILED';
     
-    window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, indicators: null, news: null, calendar: null };
+    window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, indicators: null };
     
     let indicators = null;
     if (h1Data && h1Data.length >= 30) {
@@ -1350,21 +1116,12 @@ async function fetchAllMarketData() {
     document.getElementById('dataIndicators').className = `data-status-item ${indicators ? 'ok' : 'fail'}`;
     document.getElementById('dataIndicators').querySelector('span:last-child').innerText = indicators ? 'READY ✓' : 'FAILED';
     
-    // ✅ FETCH NEWS + CALENDAR (Fundamentals)
-    showToast('📰 Fetching fundamentals...', 2000);
-    const [news, calendar] = await Promise.all([
-      fetchNewsFromGemini(pair),
-      fetchEconomicCalendar()
-    ]);
-    window.marketData.news = news;
-    window.marketData.calendar = calendar;
-    
     renderChartPreview(pair, h4Data, h1Data, m15Data, indicators);
     
+    // ✅ ZUIA analysis kama 15M haipo (muhimu kwa short-term)
     if (h1Data && h1Data.length > 0 && m15Data && m15Data.length > 0) {
       document.getElementById('runBtn').disabled = false;
-      const fundStatus = (news || calendar) ? '✓' : '⚠️ (no fundamentals)';
-      showToast(`✅ Data loaded: 4H + 1H + 15M + Fundamentals ${fundStatus}`);
+      showToast(`✅ All data loaded (4H + 1H + 15M)`);
     } else if (h1Data && h1Data.length > 0) {
       document.getElementById('runBtn').disabled = true;
       showToast(`⚠️ 15M failed — short-term needs 15M. Add Alpha Vantage key in Settings.`, 6000);
@@ -1409,8 +1166,8 @@ function renderChartPreview(pair, h4Data, h1Data, m15Data, indicators) {
   container.innerHTML = html || '<div style="text-align:center;color:var(--muted);">No data</div>';
 }
 
-// ============ BUILD PROMPT (With Fundamentals) ============
-function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar) {
+// ============ BUILD PROMPT ============
+function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators) {
   let prompt = `You are the "${agent.name}" in an institutional trading confluence system.
 
 YOUR LENS: ${agent.lens}
@@ -1469,28 +1226,12 @@ You are analyzing NUMBERS from real market data (NOT chart images).
     prompt += `\n`;
   }
   
-  // ==================== FUNDAMENTALS DATA ====================
-  if (news && news.text) {
-    prompt += `FUNDAMENTAL NEWS (from Google Search):\n`;
-    prompt += `${news.text.substring(0, 2000)}\n\n`;
-  }
-  
-  if (calendar && calendar.length > 0) {
-    prompt += `ECONOMIC CALENDAR — HIGH IMPACT EVENTS THIS WEEK:\n`;
-    calendar.slice(0, 8).forEach(e => {
-      prompt += `- ${e.currency} | ${e.title} | Forecast: ${e.forecast} | Previous: ${e.previous}\n`;
-    });
-    prompt += `\n`;
-  }
-  // ==========================================================
-  
   prompt += `RULES:
-1. Analyze DATA provided (numbers + news), NOT chart images.
+1. Analyze DATA provided (numbers), NOT chart images.
 2. Analyze ONLY through YOUR assigned lens.
-3. If you are the Fundamental Master, prioritize news and calendar events.
-4. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep.
-5. Give confidence score 0-100 based on data strength.
-6. If data is unclear, vote HOLD with low confidence.
+3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep.
+4. Give confidence score 0-100 based on data strength.
+5. If data is unclear, vote HOLD with low confidence.
 
 Respond ONLY in valid JSON:
 {
@@ -1504,29 +1245,21 @@ Respond ONLY in valid JSON:
 }
 
 // ============ CALL GEMINI ============
-async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar, apiKey) {
-  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar);
+async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, apiKey) {
+  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators);
 
   let lastError = null;
   for (const model of GEMINI_MODELS) {
     try {
       return await withRetry(async () => {
         const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
-        
-        const requestBody = {
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
-        };
-        
-        // Enable Google Search grounding for fundamental agent
-        if (agent.id === 4) {
-          requestBody.tools = [{ google_search: {} }];
-        }
-        
         const response = await fetchWithTimeout(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(requestBody)
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
+          })
         }, API_TIMEOUT);
 
         const data = await response.json();
@@ -1557,8 +1290,8 @@ async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indic
 }
 
 // ============ CALL MISTRAL ============
-async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar, apiKey) {
-  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar);
+async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, apiKey) {
+  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators);
 
   return await withRetry(async () => {
     const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
@@ -1592,17 +1325,17 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indi
   }, 2, 2000);
 }
 
-async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar) {
+async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators) {
   const geminiKey = getGeminiKey();
   const mistralKey = getMistralKey();
 
   const agentCall = async () => {
     if (geminiKey) {
-      try { return await callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar, geminiKey); }
+      try { return await callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, geminiKey); }
       catch (err) { console.warn(`[${agent.name}] Gemini failed: ${err.message}`); }
     }
     if (mistralKey) {
-      try { return await callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, news, calendar, mistralKey); }
+      try { return await callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, mistralKey); }
       catch (err) { console.warn(`[${agent.name}] Mistral failed: ${err.message}`); }
     }
     throw new Error("All providers failed");
@@ -1696,7 +1429,7 @@ async function runAnalysis() {
 
   const pair = document.getElementById('selectedPair').value;
   const livePrice = parseFloat(document.getElementById('livePrice').value);
-  const { h4, h1, m15, indicators, news, calendar } = window.marketData;
+  const { h4, h1, m15, indicators } = window.marketData;
 
   if (!livePrice) { alert("Enter live price."); return; }
 
@@ -1717,7 +1450,7 @@ async function runAnalysis() {
     const agent = AGENTS_4[i];
     const agentStart = Date.now();
     try {
-      const result = await callAgent(agent, pair, livePrice, h4, h1, m15, indicators, news, calendar);
+      const result = await callAgent(agent, pair, livePrice, h4, h1, m15, indicators);
       result.duration = Date.now() - agentStart;
       updateAgentCard(result);
       agentResults.push(result);
@@ -1759,8 +1492,6 @@ async function runAnalysis() {
       agents: agentResults,
       confluence,
       indicators: indicators,
-      news: news,
-      calendar: calendar,
       totalDuration,
       currentPriceAtAnalysis: livePrice,
       autoTrackStart: Date.now(),
@@ -1788,7 +1519,7 @@ function renderLoadingState(pair, livePrice, agents) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ AI AGENTS ANALYZING ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Data + Fundamentals • No Images</div>
+      <div style="font-size:12px;color:var(--muted);">Data-Driven Analysis • No Images</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 AGENTS 4 — LIVE VOTING</div>
@@ -1921,31 +1652,6 @@ function buildAnalysisHTML(record, shield, indicators) {
     `;
   }
   
-  // ==================== SHOW FUNDAMENTALS IN RESULTS ====================
-  if (record.news && record.news.text) {
-    html += `
-      <div class="card" style="border-color:var(--blue);">
-        <div class="ballistic-header">📰 FUNDAMENTAL NEWS</div>
-        <div style="font-size:12px;line-height:1.7;background:#08080a;padding:12px;border-radius:8px;">${record.news.text.replace(/\n/g, '<br>')}</div>
-      </div>
-    `;
-  }
-  
-  if (record.calendar && record.calendar.length > 0) {
-    html += `
-      <div class="card" style="border-color:var(--purple);">
-        <div class="ballistic-header">📅 HIGH-IMPACT EVENTS</div>
-        ${record.calendar.slice(0, 5).map(e => `
-          <div class="lot-row">
-            <div><strong>${e.currency}</strong> — ${e.title}</div>
-            <span style="color:var(--muted);font-size:11px;">F: ${e.forecast} | P: ${e.previous}</span>
-          </div>
-        `).join('')}
-      </div>
-    `;
-  }
-  // ==================================================================
-  
   html += `
     <div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
       <div class="ballistic-header">🛡️ CAPITAL SHIELD (Risk Gate)</div>
@@ -1976,7 +1682,7 @@ function buildAnalysisHTML(record, shield, indicators) {
         </div>
       </div>
       <div class="card">
-        <div class="ballistic-header">💵 PROFIT PROJECTIONS (Lot Size × Pips)</div>
+        <div class="ballistic-header">💵 PROFIT PROJECTIONS</div>
         ${projections.map(p => `
           <div class="lot-row">
             <div><strong>Lot ${p.lot}</strong><br><small style="color:var(--muted);font-size:10px;">$${p.pipValue.toFixed(3)}/pip</small></div>
@@ -2327,7 +2033,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.3" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.2" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2365,4 +2071,4 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>
+</html> )
