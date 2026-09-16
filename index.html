@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v31.2 — Institutional Pro</title>
+<title>Lutynoel FX v31.3 — Institutional Pro</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -144,7 +144,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v31.2</div>
+    <div class="auth-title">Lutynoel FX v31.3</div>
     <div class="auth-subtitle">Institutional Pro Edition</div>
 
     <div class="disclaimer-box">
@@ -161,11 +161,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
 
-      <label>Gemini API Key (Required)</label>
-      <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
+      <label>Mistral API Key (Required - Main AI)</label>
+      <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
 
-      <label>Mistral API Key (Fallback)</label>
-      <input type="password" id="authMistralKey" placeholder="Mistral key (optional)" autocomplete="off">
+      <label>Gemini API Key (Fallback AI)</label>
+      <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
 
       <label>TwelveData API Key (Required for Forex)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
@@ -198,7 +198,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v31.2</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v31.3</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -216,7 +216,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">INSTITUTIONAL PRO TRADING</div>
-          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v31.2 PRO</span>
+          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v31.3 PRO</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
@@ -238,10 +238,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v31.2 FEATURES:</div>
+        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v31.3 FEATURES:</div>
         <div style="font-size:11px;line-height:1.9;">
-          ✅ <strong>DXY Correlation</strong> — Trade WITH dollar<br>
-          ✅ <strong>US10Y Bond Yields</strong> — Risk sentiment<br>
+          ✅ <strong>Mistral Main AI</strong> — Gemini imekuwa Fallback<br>
+          ✅ <strong>DXY & US10Y Fixed</strong> — CORS Proxy imewekwa<br>
           ✅ <strong>Session Levels</strong> — PDH, PDL, PWH, PWL<br>
           ✅ <strong>Wyckoff Phase</strong> — Accumulation/Distribution<br>
           ✅ <strong>Asian Range</strong> — London breakout<br>
@@ -444,9 +444,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v31.2 (Institutional Pro)<br>
-          <strong>Primary AI:</strong> Gemini 3.6 Flash<br>
-          <strong>Fallback AI:</strong> Mistral Large<br>
+          <strong>Version:</strong> v31.3 (Institutional Pro)<br>
+          <strong>Primary AI:</strong> Mistral (Small/Large/Mixtral)<br>
+          <strong>Fallback AI:</strong> Gemini 3.6 Flash<br>
           <strong>Features:</strong> DXY + US10Y + Wyckoff + Auto-Sizing
         </div>
 
@@ -462,12 +462,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🔑 API KEYS</div>
+        <label>Update Mistral Key</label>
+        <input type="password" id="settingsMistralKey" placeholder="Mistral key">
+        <button class="secondary-btn" onclick="saveSettingsMistralKey()">💾 Save Mistral</button>
+        
         <label>Update Gemini Key</label>
         <input type="password" id="settingsGeminiKey" placeholder="Gemini key">
         <button class="secondary-btn" onclick="saveSettingsGeminiKey()">💾 Save Gemini</button>
+        
         <label>Update TwelveData Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="TwelveData key">
         <button class="secondary-btn" onclick="saveSettingsTwelveKey()">💾 Save TwelveData</button>
+        
         <label>Update Alpha Vantage Key</label>
         <input type="text" id="settingsAlphaKey" placeholder="Alpha Vantage key">
         <button class="secondary-btn" onclick="saveSettingsAlphaKey()">💾 Save Alpha Vantage</button>
@@ -483,19 +489,20 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v31.2 — INSTITUTIONAL PRO
-   Gemini 3.6 Flash ONLY + Mistral fallback
+   LUTYNOEL FX v31.3 — INSTITUTIONAL PRO
+   Mistral Main AI + Gemini Fallback + CORS Proxy for DXY/US10Y
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-// ✅ FIX: 2.0 imeondolewa, 3.6 pekee. Mistral ipo kama fallback.
-const GEMINI_MODELS = ['gemini-3.6-flash'];
+const GEMINI_MODELS = ['gemini-3.6-flash']; // Gemini pekee kama fallback
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
-const MISTRAL_MODEL = 'mistral-large-latest';
+// Mistral fallback models (Small -> Large -> Mixtral)
+const MISTRAL_MODELS = ['mistral-small-latest', 'mistral-large-latest', 'open-mixtral-8x7b'];
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
 const YAHOO_API = 'https://query1.finance.yahoo.com/v8/finance/chart';
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 const FOREXFACTORY_CALENDAR = 'https://nfs.faireconomy.media/ff_calendar_thisweek.json';
 
 const AGENT_TIMEOUT = 120000;
@@ -592,7 +599,7 @@ async function withTimeout(promise, timeoutMs, errorMessage) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v31.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v31.3", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -632,10 +639,10 @@ function computeAutoLotSize(slPips, pipValueStandard) {
 }
 
 // ============ PERSISTENT KEYS ============
-function saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey) {
+function saveKeys(name, mistralKey, geminiKey, twelveKey, alphaKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
-  localStorage.setItem(STORAGE_KEYS.GEMINI, geminiKey);
   if (mistralKey) localStorage.setItem(STORAGE_KEYS.MISTRAL, mistralKey);
+  localStorage.setItem(STORAGE_KEYS.GEMINI, geminiKey || '');
   if (twelveKey) localStorage.setItem(STORAGE_KEYS.TWELVE, twelveKey);
   if (alphaKey) localStorage.setItem(STORAGE_KEYS.ALPHA, alphaKey);
 }
@@ -643,15 +650,15 @@ function saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey) {
 function loadKeys() {
   return {
     name: localStorage.getItem(STORAGE_KEYS.NAME),
-    geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI),
     mistralKey: localStorage.getItem(STORAGE_KEYS.MISTRAL),
+    geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI),
     twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE),
     alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA)
   };
 }
 
-function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getMistralKey() { return localStorage.getItem(STORAGE_KEYS.MISTRAL); }
+function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
 function getAlphaKey() { return localStorage.getItem(STORAGE_KEYS.ALPHA); }
 
@@ -663,26 +670,27 @@ function clearAllKeys() {
 
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
-  const geminiKey = document.getElementById('authGeminiKey').value.trim();
   const mistralKey = document.getElementById('authMistralKey').value.trim();
+  const geminiKey = document.getElementById('authGeminiKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
   const alphaKey = document.getElementById('authAlphaKey').value.trim();
   if (!name) { alert("Enter your name."); return; }
-  if (!geminiKey && !mistralKey) { alert("Enter at least one AI API key."); return; }
-  saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey);
-  enterApp(name, geminiKey, twelveKey, alphaKey);
+  if (!mistralKey && !geminiKey) { alert("Enter at least one AI API key."); return; }
+  saveKeys(name, mistralKey, geminiKey, twelveKey, alphaKey);
+  enterApp(name, mistralKey, geminiKey, twelveKey, alphaKey);
 }
 
 function continueWithSavedKeys() {
   const keys = loadKeys();
-  if (!keys.name || !keys.geminiKey) { showLoginForm(); return; }
-  enterApp(keys.name, keys.geminiKey, keys.twelveKey, keys.alphaKey);
+  if (!keys.name || (!keys.mistralKey && !keys.geminiKey)) { showLoginForm(); return; }
+  enterApp(keys.name, keys.mistralKey, keys.geminiKey, keys.twelveKey, keys.alphaKey);
 }
 
-function enterApp(name, geminiKey, twelveKey, alphaKey) {
+function enterApp(name, mistralKey, geminiKey, twelveKey, alphaKey) {
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
+  document.getElementById('settingsMistralKey').value = mistralKey || '';
   document.getElementById('settingsGeminiKey').value = geminiKey || '';
   document.getElementById('settingsTwelveKey').value = twelveKey || '';
   document.getElementById('settingsAlphaKey').value = alphaKey || '';
@@ -699,15 +707,22 @@ function showLoginForm() {
   document.getElementById('loginFormSection').style.display = 'block';
   const keys = loadKeys();
   if (keys.name) document.getElementById('loginName').value = keys.name;
+  if (keys.mistralKey) document.getElementById('authMistralKey').value = keys.mistralKey;
   if (keys.geminiKey) document.getElementById('authGeminiKey').value = keys.geminiKey;
   if (keys.twelveKey) document.getElementById('authTwelveKey').value = keys.twelveKey;
   if (keys.alphaKey) document.getElementById('authAlphaKey').value = keys.alphaKey;
 }
 
+function saveSettingsMistralKey() {
+  const key = document.getElementById('settingsMistralKey').value.trim();
+  if (key) localStorage.setItem(STORAGE_KEYS.MISTRAL, key);
+  else localStorage.removeItem(STORAGE_KEYS.MISTRAL);
+  showToast("✅ Mistral key saved!");
+}
 function saveSettingsGeminiKey() {
   const key = document.getElementById('settingsGeminiKey').value.trim();
-  if (!key) return;
-  localStorage.setItem(STORAGE_KEYS.GEMINI, key);
+  if (key) localStorage.setItem(STORAGE_KEYS.GEMINI, key);
+  else localStorage.removeItem(STORAGE_KEYS.GEMINI);
   showToast("✅ Gemini key saved!");
 }
 function saveSettingsTwelveKey() {
@@ -734,59 +749,47 @@ function logout() {
   document.getElementById('appInterface').style.display = 'none';
   document.getElementById('authScreen').style.display = 'flex';
   const keys = loadKeys();
-  if (keys.name && keys.geminiKey) {
+  if (keys.name && (keys.mistralKey || keys.geminiKey)) {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${keys.name}</strong>!`;
   } else showLoginForm();
 }
 
-// ================= TEST API KEYS (FIXED: Uses gemini-3.6-flash) =================
+// ================= TEST API KEYS =================
 async function testApiKeys() {
-  const geminiKey = getGeminiKey();
   const mistralKey = getMistralKey();
-  const twelveKey = getTwelveKey();
+  const geminiKey = getGeminiKey();
   let results = [];
-  
-  if (geminiKey) {
-    try {
-      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/gemini-3.6-flash:generateContent?key=${geminiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
-      }, 15000);
-      const d = await r.json();
-      if (d.error) {
-        results.push(`❌ Gemini 3.6-flash: ${d.error.message}`);
-      } else {
-        results.push(`✅ Gemini 3.6-flash: OK`);
-      }
-    } catch (e) { results.push(`❌ Gemini 3.6-flash: ${e.message}`); }
-  }
   
   if (mistralKey) {
     try {
       const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
-        body: JSON.stringify({ model: MISTRAL_MODEL, messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
+        body: JSON.stringify({ model: MISTRAL_MODELS[0], messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
       }, 15000);
       const d = await r.json();
-      if (d.error) results.push(`❌ Mistral: ${d.error.message}`);
-      else results.push(`✅ Mistral: OK`);
+      if (d.error) results.push(`❌ Mistral (${MISTRAL_MODELS[0]}): ${d.error.message}`);
+      else results.push(`✅ Mistral (${MISTRAL_MODELS[0]}): OK`);
     } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
   }
   
-  if (twelveKey) {
+  if (geminiKey) {
     try {
-      const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=EUR/USD&apikey=${twelveKey}`, {}, 15000);
+      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_MODELS[0]}:generateContent?key=${geminiKey}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
+      }, 15000);
       const d = await r.json();
-      results.push(d.status === 'error' ? `❌ TwelveData: ${d.message}` : `✅ TwelveData: OK`);
-    } catch (e) { results.push(`❌ TwelveData: ${e.message}`); }
+      if (d.error) results.push(`❌ Gemini (${GEMINI_MODELS[0]}): ${d.error.message}`);
+      else results.push(`✅ Gemini (${GEMINI_MODELS[0]}): OK`);
+    } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
   }
   
   if (results.length === 0) results.push("No keys to test.");
   alert(results.join('\n\n'));
 }
-// ===============================================================================
+// =================================================
 
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -923,9 +926,11 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   return null;
 }
 
+// ================= FETCH DXY & US10Y (WITH CORS PROXY) =================
 async function fetchDXYData() {
   try {
-    const url = `${YAHOO_API}/DX-Y.NYB?interval=1h&range=5d`;
+    const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?interval=1h&range=5d';
+    const url = CORS_PROXY + encodeURIComponent(yahooUrl);
     const res = await fetchWithTimeout(url, {}, 15000);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
@@ -947,7 +952,8 @@ async function fetchDXYData() {
 
 async function fetchUS10YData() {
   try {
-    const url = `${YAHOO_API}/%5ETNX?interval=1h&range=5d`;
+    const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1h&range=5d';
+    const url = CORS_PROXY + encodeURIComponent(yahooUrl);
     const res = await fetchWithTimeout(url, {}, 15000);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
@@ -966,6 +972,7 @@ async function fetchUS10YData() {
     return null;
   }
 }
+// ========================================================================
 
 function analyzeDXY(dxyData, pairSpec) {
   if (!dxyData || dxyData.length < 20) return null;
@@ -1546,6 +1553,44 @@ Respond ONLY in valid JSON:
   return prompt;
 }
 
+// ================= CALL MISTRAL (MAIN AI) =================
+async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, apiKey) {
+  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents);
+  let lastError = null;
+  
+  for (const model of MISTRAL_MODELS) {
+    try {
+      return await withRetry(async () => {
+        const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+          body: JSON.stringify({ model: model, messages: [{ role: 'user', content: prompt }], temperature: 0.3, max_tokens: 1000 })
+        }, API_TIMEOUT);
+        const data = await response.json();
+        if (data.error) throw new Error(`Mistral (${model}): ${data.error.message}`);
+        if (!data.choices || !data.choices[0]) throw new Error(`Mistral (${model}): No response`);
+        let text = data.choices[0].message.content.trim();
+        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+        const result = safeJsonParse(text);
+        if (!result) throw new Error(`Mistral (${model}): Invalid JSON`);
+        return {
+          ...agent,
+          vote: (result.vote || 'HOLD').toUpperCase(),
+          confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+          reasoning: result.reasoning || 'No analysis.',
+          key_level: result.key_level || null,
+          provider: 'Mistral'
+        };
+      }, 2, 2000);
+    } catch (e) {
+      lastError = e;
+      console.warn(`[${agent.name}] Mistral ${model} failed: ${e.message}`);
+      continue;
+    }
+  }
+  throw new Error(lastError?.message || 'All Mistral models failed');
+}
+// ==========================================================
+
 async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, apiKey) {
   const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents);
   let lastError = null;
@@ -1585,47 +1630,26 @@ async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indic
   throw new Error(lastError?.message || 'All Gemini models failed');
 }
 
-async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, apiKey) {
-  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents);
-  return await withRetry(async () => {
-    const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify({ model: MISTRAL_MODEL, messages: [{ role: 'user', content: prompt }], temperature: 0.3, max_tokens: 1000 })
-    }, API_TIMEOUT);
-    const data = await response.json();
-    if (data.error) throw new Error(`Mistral: ${data.error.message}`);
-    if (!data.choices || !data.choices[0]) throw new Error("Mistral: No response");
-    let text = data.choices[0].message.content.trim();
-    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-    const result = safeJsonParse(text);
-    if (!result) throw new Error("Mistral: Invalid JSON");
-    return {
-      ...agent,
-      vote: (result.vote || 'HOLD').toUpperCase(),
-      confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-      reasoning: result.reasoning || 'No analysis.',
-      key_level: result.key_level || null,
-      provider: 'Mistral'
-    };
-  }, 2, 2000);
-}
-
-// ================= CALL AGENT (BETTER ERROR LOGGING) =================
+// ================= CALL AGENT (MISTRAL FIRST) =================
 async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents) {
-  const geminiKey = getGeminiKey(), mistralKey = getMistralKey();
+  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
   const agentCall = async () => {
-    let gErr = null, mErr = null;
-    if (geminiKey) {
-      try { return await callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, geminiKey); }
-      catch (e) { gErr = e.message; }
-    }
+    let mErr = null, gErr = null;
+    
     if (mistralKey) {
       try { return await callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, mistralKey); }
       catch (e) { mErr = e.message; }
     }
+    
+    if (geminiKey) {
+      try { return await callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, geminiKey); }
+      catch (e) { gErr = e.message; }
+    }
+    
     let msg = "All providers failed. ";
-    if (gErr) msg += `Gemini → ${gErr}. `;
-    if (mErr) msg += `Mistral → ${mErr}`;
+    if (mErr) msg += `Mistral → ${mErr}. `;
+    if (gErr) msg += `Gemini → ${gErr}`;
+    if (!geminiKey && mErr) msg += " (Gemini key not set)";
     if (!mistralKey && gErr) msg += " (Mistral key not set)";
     throw new Error(msg);
   };
@@ -1677,8 +1701,8 @@ function capitalShield(confluence, entry, sl, tp) {
 }
 
 async function runAnalysis() {
-  const geminiKey = getGeminiKey(), mistralKey = getMistralKey();
-  if (!geminiKey && !mistralKey) { alert("No API key."); logout(); return; }
+  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
+  if (!mistralKey && !geminiKey) { alert("No AI API key."); logout(); return; }
   if (!window.marketData || !window.marketData.h1) { alert("Fetch data first."); return; }
 
   const pair = document.getElementById('selectedPair').value;
@@ -2126,11 +2150,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "31.2", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "31.3", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v31.2-${Date.now()}.json`;
+  a.download = `lutynoel-v31.3-${Date.now()}.json`;
   a.click();
 }
 
@@ -2143,7 +2167,7 @@ window.addEventListener('DOMContentLoaded', () => {
   clearMarketData();
   document.getElementById('universalModal').addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
   const keys = loadKeys();
-  if (keys.name && keys.geminiKey) {
+  if (keys.name && (keys.mistralKey || keys.geminiKey)) {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${keys.name}</strong>!`;
