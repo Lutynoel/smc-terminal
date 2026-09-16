@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v28.2 — 15M Backup Edition</title>
+<title>Lutynoel FX v28.4 — S/R & Fallback Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -128,6 +128,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .stat-box{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:8px;text-align:center;}
 .stat-value{font-size:22px;font-weight:bold;color:var(--accent);}
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;}
+.news-item{background:#08080a;border:1px solid var(--border);padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:12px;line-height:1.6;}
+.news-item .news-source{color:var(--accent);font-weight:bold;font-size:11px;}
+.news-item .news-title{color:var(--text);margin-top:4px;}
+.calendar-event{background:#08080a;border:1px solid var(--border);padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.calendar-event .impact-high{border-left:4px solid var(--red);}
+.calendar-event .impact-medium{border-left:4px solid var(--orange);}
+.calendar-event .impact-low{border-left:4px solid var(--blue);}
 </style>
 </head>
 <body>
@@ -143,8 +150,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v28.2</div>
-    <div class="auth-subtitle">15M Backup Source Edition</div>
+    <div class="auth-title">Lutynoel FX v28.4</div>
+    <div class="auth-subtitle">S/R & Fallback Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
@@ -200,11 +207,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v28.2</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v28.4</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">15M</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">S/R</span></div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -218,13 +225,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v28.2 15M BACKUP</span>
+          <span class="badge-shield">v28.4 S/R</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">AI + OHLC Data</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">AI + OHLC + S/R</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">15M backup sources. Keys persistent. Modal fixed.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Support & Resistance. Gemini + Mistral fallback.</p>
       </div>
 
       <div class="grid-3">
@@ -240,10 +247,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>v28.2 Features:</strong><br>
-        • <strong>15M Backup</strong> — TwelveData → Alpha Vantage → Yahoo<br>
+        ⚙️ <strong>v28.4 Features:</strong><br>
+        • <strong>Support & Resistance</strong> — Pivot Points (R1, S1, R2, S2)<br>
+        • <strong>Mistral Fallback</strong> — Gemini ikigoma, Mistral inatumika<br>
+        • <strong>15M Backup</strong> — TwelveData → Alpha Vantage<br>
         • <strong>Persistent Keys</strong> — Login mara moja<br>
-        • <strong>OHLC Data</strong> — Multi-timeframe (4H + 1H + 15M)<br>
         • <strong>4 AI Agents</strong> — Weighted confluence
       </div>
     </div>
@@ -444,10 +452,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v28.2 (15M Backup)<br>
-          <strong>15M Sources:</strong> TwelveData → Alpha Vantage → Yahoo<br>
-          <strong>Primary AI:</strong> Gemini 3.8 Flash<br>
-          <strong>Fallback:</strong> Gemini 3.6 → 3.5 → Mistral
+          <strong>Version:</strong> v28.4 (S/R & Fallback)<br>
+          <strong>Primary AI:</strong> Gemini 3.6 Flash<br>
+          <strong>Fallback:</strong> Gemini 2.0 → 1.5 → Mistral<br>
+          <strong>Data:</strong> TwelveData + Alpha Vantage
         </div>
         
         <label>Update Gemini Key</label>
@@ -474,12 +482,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v28.2 — 15M BACKUP SOURCE EDITION
-   TwelveData → Alpha Vantage → Yahoo for 15M
+   LUTYNOEL FX v28.4 — S/R & FALLBACK EDITION
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash'];
+// Model 3.6 Flash kama ulivyoomba, na backup zake
+const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const MISTRAL_MODEL = 'mistral-large-latest';
 const BINANCE_API = 'https://api.binance.com/api/v3';
@@ -514,16 +522,18 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
+// ==================== AGENTS 4 — S/R INCLUDED ====================
 const AGENTS_4 = [
-  { id: 1, name: "Price Action Master", weight: 0.30, focus: "Candlesticks",
-    lens: "Candlestick patterns ONLY. Analyze OHLC data for: engulfing, rejection wicks, pin bars, doji, hammer, shooting star. Compare last 5-10 candles." },
-  { id: 2, name: "Supply & Demand Master", weight: 0.25, focus: "Order Blocks",
+  { id: 1, name: "Price Action & S/R Master", weight: 0.25, focus: "Candlesticks + S/R",
+    lens: "Candlestick patterns AND Support/Resistance. Analyze OHLC data for: engulfing, rejection wicks, pin bars, doji, hammer, shooting star. ALSO analyze how price reacts to the provided Pivot Points (R1, S1, R2, S2, R3, S3)." },
+  { id: 2, name: "Supply & Demand Master", weight: 0.20, focus: "Order Blocks",
     lens: "Order Blocks & Liquidity ONLY. Identify institutional order blocks, imbalance zones, liquidity sweeps from OHLC." },
-  { id: 3, name: "Market Structure Master", weight: 0.25, focus: "Structure",
+  { id: 3, name: "Market Structure Master", weight: 0.20, focus: "Structure",
     lens: "Market Structure ONLY. From OHLC: higher highs, higher lows, lower highs, lower lows, CHoCH, BOS." },
-  { id: 4, name: "Fundamental & Momentum Master", weight: 0.20, focus: "Momentum",
-    lens: "Momentum & Indicators ONLY. Use RSI, MACD, MA, ATR, Stochastic, Bollinger Bands." }
+  { id: 4, name: "Momentum & Technical Master", weight: 0.35, focus: "Momentum & Indicators",
+    lens: "Technical Indicators & Momentum ONLY. Use RSI, MACD, MA, ATR, Stochastic, Bollinger Bands from the provided OHLC numbers. Also use Pivot Points for S/R context." }
 ];
+// =========================================================================
 
 // ============ UTILITIES ============
 function showToast(msg, duration = 3500) {
@@ -534,9 +544,7 @@ function showToast(msg, duration = 3500) {
 }
 
 function getPipValue(spec, lot) {
-  if (lot >= 1.0) return spec.pipValue.standard;
-  if (lot >= 0.10) return spec.pipValue.mini;
-  return spec.pipValue.micro;
+  return lot * spec.pipValue.standard;
 }
 
 function safeJsonParse(text) {
@@ -587,7 +595,7 @@ async function withTimeout(promise, timeoutMs, errorMessage) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v28.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v28.4", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -742,7 +750,7 @@ async function testApiKeys() {
   let results = [];
   if (geminiKey) {
     try {
-      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/gemini-3.8-flash:generateContent?key=${geminiKey}`, {
+      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/gemini-3.6-flash:generateContent?key=${geminiKey}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
       }, 15000);
@@ -855,14 +863,13 @@ async function fetchLivePrice() {
   }
 }
 
-// ============ FETCH OHLC — MULTI-SOURCE FOR 15M ============
+// ============ FETCH OHLC ============
 async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   const spec = PAIR_SPECS[pair];
   if (!spec) return null;
   
   for (let attempt = 0; attempt < retries; attempt++) {
     try {
-      // === Crypto: Binance ===
       if (spec.source === 'binance' && spec.binanceSymbol) {
         const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
         const res = await fetchWithTimeout(url, {}, 10000);
@@ -874,11 +881,9 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
         }));
       }
       
-      // === Forex: TwelveData (primary) ===
       if (spec.source === 'twelve') {
         const key = getTwelveKey();
         if (key) {
-          // FIX: Tumia '15min' kwa TwelveData
           const intervalMap = { '4h': '4h', '1h': '1h', '15m': '15min' };
           const interval = intervalMap[timeframe] || timeframe;
           
@@ -893,17 +898,14 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
                 low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0)
               }));
             }
-            console.warn(`TwelveData ${timeframe} failed:`, data.message || 'no values');
           }
         }
       }
       
-      // === 15M BACKUP: Alpha Vantage (kama TwelveData inafeli) ===
       if (timeframe === '15m' && spec.alphaSymbol) {
         const alphaKey = getAlphaKey();
         if (alphaKey) {
           try {
-            // Alpha Vantage inatumia FX_INTRADAY kwa 15min
             const url = `${ALPHAVANTAGE_API}?function=FX_INTRADAY&from_symbol=${spec.alphaSymbol.substring(0,3)}&to_symbol=${spec.alphaSymbol.substring(3,6)}&interval=15min&outputsize=compact&apikey=${alphaKey}`;
             const res = await fetchWithTimeout(url, {}, 20000);
             if (res.ok) {
@@ -940,7 +942,7 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   return null;
 }
 
-// ============ INDICATORS ============
+// ============ INDICATORS (WITH S/R) ============
 function calculateRSI(closes, period = 14) {
   if (closes.length < period + 1) return null;
   let gains = 0, losses = 0;
@@ -1048,6 +1050,23 @@ function calculateIndicators(ohlcData) {
     level_786: (recentHigh - fibRange * 0.786).toFixed(4)
   };
   
+  // === SUPPORT & RESISTANCE (Pivot Points) ===
+  const lastCandle = ohlcData[ohlcData.length - 1];
+  const pivot = (lastCandle.high + lastCandle.low + lastCandle.close) / 3;
+  const r1 = (2 * pivot) - lastCandle.low;
+  const s1 = (2 * pivot) - lastCandle.high;
+  const r2 = pivot + (lastCandle.high - lastCandle.low);
+  const s2 = pivot - (lastCandle.high - lastCandle.low);
+  const r3 = lastCandle.high + 2 * (pivot - lastCandle.low);
+  const s3 = lastCandle.low - 2 * (lastCandle.high - pivot);
+  
+  const supportResistance = {
+    pivot: pivot.toFixed(4),
+    r1: r1.toFixed(4), s1: s1.toFixed(4),
+    r2: r2.toFixed(4), s2: s2.toFixed(4),
+    r3: r3.toFixed(4), s3: s3.toFixed(4)
+  };
+  
   return {
     rsi: rsi ? rsi.toFixed(1) : null,
     rsi_signal: rsi ? (rsi > 70 ? 'OVERBOUGHT' : rsi < 30 ? 'OVERSOLD' : 'NEUTRAL') : null,
@@ -1069,7 +1088,8 @@ function calculateIndicators(ohlcData) {
     recentLow: recentLow.toFixed(4),
     currentPrice: currentPrice.toFixed(4),
     trend: trend,
-    fib: fib
+    fib: fib,
+    supportResistance: supportResistance
   };
 }
 
@@ -1083,7 +1103,6 @@ async function fetchAllMarketData() {
   clearMarketData();
   
   try {
-    // 4H
     document.getElementById('data4H').querySelector('span:last-child').innerText = '⏳';
     const h4Data = await fetchOHLC(pair, '4h', 100);
     document.getElementById('data4H').className = `data-status-item ${h4Data ? 'ok' : 'fail'}`;
@@ -1091,7 +1110,6 @@ async function fetchAllMarketData() {
     
     await new Promise(r => setTimeout(r, 1000));
     
-    // 1H
     document.getElementById('data1H').querySelector('span:last-child').innerText = '⏳';
     const h1Data = await fetchOHLC(pair, '1h', 100);
     document.getElementById('data1H').className = `data-status-item ${h1Data ? 'ok' : 'fail'}`;
@@ -1099,7 +1117,6 @@ async function fetchAllMarketData() {
     
     await new Promise(r => setTimeout(r, 1000));
     
-    // 15M (muhimu — multi-source)
     document.getElementById('data15M').querySelector('span:last-child').innerText = '⏳';
     const m15Data = await fetchOHLC(pair, '15m', 100, 3);
     document.getElementById('data15M').className = `data-status-item ${m15Data ? 'ok' : 'fail'}`;
@@ -1118,7 +1135,6 @@ async function fetchAllMarketData() {
     
     renderChartPreview(pair, h4Data, h1Data, m15Data, indicators);
     
-    // ✅ ZUIA analysis kama 15M haipo (muhimu kwa short-term)
     if (h1Data && h1Data.length > 0 && m15Data && m15Data.length > 0) {
       document.getElementById('runBtn').disabled = false;
       showToast(`✅ All data loaded (4H + 1H + 15M)`);
@@ -1153,6 +1169,15 @@ function renderChartPreview(pair, h4Data, h1Data, m15Data, indicators) {
     html += `<div style="margin-top:8px;color:var(--accent);">Trend: <strong>${indicators.trend}</strong></div>`;
     html += `<div style="color:var(--accent);">Recent High: ${indicators.recentHigh} | Low: ${indicators.recentLow}</div>`;
     html += `<div style="color:var(--accent);">Fib: 23.6%=${indicators.fib.level_236}, 38.2%=${indicators.fib.level_382}, 50%=${indicators.fib.level_500}, 61.8%=${indicators.fib.level_618}</div>`;
+    
+    // S/R Preview
+    if (indicators.supportResistance) {
+      const sr = indicators.supportResistance;
+      html += `<div style="margin-top:8px;color:var(--purple);font-weight:bold;">📐 SUPPORT & RESISTANCE</div>`;
+      html += `<div style="color:var(--red);">R3: ${sr.r3} | R2: ${sr.r2} | R1: ${sr.r1}</div>`;
+      html += `<div style="color:var(--yellow);">Pivot: ${sr.pivot}</div>`;
+      html += `<div style="color:var(--green);">S1: ${sr.s1} | S2: ${sr.s2} | S3: ${sr.s3}</div>`;
+    }
   }
   
   if (h1Data && h1Data.length > 0) {
@@ -1223,13 +1248,23 @@ You are analyzing NUMBERS from real market data (NOT chart images).
     if (indicators.fib) {
       prompt += `- Fibonacci: 23.6%=${indicators.fib.level_236}, 38.2%=${indicators.fib.level_382}, 50%=${indicators.fib.level_500}, 61.8%=${indicators.fib.level_618}\n`;
     }
+    
+    // Support & Resistance in Prompt
+    if (indicators.supportResistance) {
+      const sr = indicators.supportResistance;
+      prompt += `- Support & Resistance (Pivot Points):\n`;
+      prompt += `  * Pivot: ${sr.pivot}\n`;
+      prompt += `  * Resistance: R1=${sr.r1}, R2=${sr.r2}, R3=${sr.r3}\n`;
+      prompt += `  * Support: S1=${sr.s1}, S2=${sr.s2}, S3=${sr.s3}\n`;
+    }
+    
     prompt += `\n`;
   }
   
   prompt += `RULES:
 1. Analyze DATA provided (numbers), NOT chart images.
 2. Analyze ONLY through YOUR assigned lens.
-3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep.
+3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep, Support/Resistance.
 4. Give confidence score 0-100 based on data strength.
 5. If data is unclear, vote HOLD with low confidence.
 
@@ -1253,18 +1288,30 @@ async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indic
     try {
       return await withRetry(async () => {
         const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
+        
+        const requestBody = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
+        };
+        
+        // NOTE: Google Search Grounding imeondolewa ili kuzuia 400 Bad Request kwa Free Tier users.
+        // Kama una Paid Tier, unaweza kuirudisha hapa.
+        
         const response = await fetchWithTimeout(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
-          })
+          body: JSON.stringify(requestBody)
         }, API_TIMEOUT);
 
         const data = await response.json();
-        if (data.error) throw new Error(`Gemini ${model}: ${data.error.message}`);
-        if (!data.candidates || !data.candidates[0]) throw new Error(`Gemini ${model}: No response`);
+        if (data.error) {
+          console.error(`Gemini API Error (${model}):`, data.error);
+          throw new Error(`Gemini ${model}: ${data.error.message}`);
+        }
+        if (!data.candidates || !data.candidates[0]) {
+          console.error(`Gemini No Candidates (${model}):`, data);
+          throw new Error(`Gemini ${model}: No response`);
+        }
 
         let text = data.candidates[0].content.parts[0].text.trim();
         text = text.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -1286,7 +1333,7 @@ async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indic
       continue;
     }
   }
-  throw new Error(`All Gemini models failed`);
+  throw new Error(`All Gemini models failed. Last error: ${lastError?.message}`);
 }
 
 // ============ CALL MISTRAL ============
@@ -1330,15 +1377,30 @@ async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indica
   const mistralKey = getMistralKey();
 
   const agentCall = async () => {
+    let geminiError = null;
+    let mistralError = null;
+
     if (geminiKey) {
       try { return await callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, geminiKey); }
-      catch (err) { console.warn(`[${agent.name}] Gemini failed: ${err.message}`); }
+      catch (err) { 
+        geminiError = err.message;
+        console.warn(`[${agent.name}] Gemini failed: ${err.message}`); 
+      }
     }
+    
     if (mistralKey) {
       try { return await callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, mistralKey); }
-      catch (err) { console.warn(`[${agent.name}] Mistral failed: ${err.message}`); }
+      catch (err) { 
+        mistralError = err.message;
+        console.warn(`[${agent.name}] Mistral failed: ${err.message}`); 
+      }
     }
-    throw new Error("All providers failed");
+    
+    // Kama zote zimeshindwa, toa error ya kina
+    let errorMsg = "All providers failed. ";
+    if (geminiError) errorMsg += `Gemini: ${geminiError}. `;
+    if (mistralError) errorMsg += `Mistral: ${mistralError}. `;
+    throw new Error(errorMsg);
   };
 
   return withTimeout(agentCall(), AGENT_TIMEOUT, `${agent.name}: Timeout`);
@@ -1519,7 +1581,7 @@ function renderLoadingState(pair, livePrice, agents) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--accent);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">⏳ AI AGENTS ANALYZING ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Data-Driven Analysis • No Images</div>
+      <div style="font-size:12px;color:var(--muted);">Data-Driven Analysis • S/R Included</div>
     </div>
     <div class="card">
       <div class="ballistic-header">👥 AGENTS 4 — LIVE VOTING</div>
@@ -1650,6 +1712,30 @@ function buildAnalysisHTML(record, shield, indicators) {
         ${indicators.fib ? `<div class="mini-box" style="margin-top:10px;"><label>Fibonacci Levels</label><div style="font-size:11px;line-height:1.7;">23.6%: ${indicators.fib.level_236} • 38.2%: ${indicators.fib.level_382} • 50%: ${indicators.fib.level_500}<br>61.8%: ${indicators.fib.level_618}</div></div>` : ''}
       </div>
     `;
+    
+    // SUPPORT & RESISTANCE CARD
+    if (indicators.supportResistance) {
+      const sr = indicators.supportResistance;
+      html += `
+        <div class="card" style="border-color:var(--purple);">
+          <div class="ballistic-header">📐 SUPPORT & RESISTANCE (Pivot Points)</div>
+          <div class="grid-3">
+            <div class="mini-box" style="border-color:var(--red);"><label style="color:var(--red);">R3</label><div style="font-size:13px;font-weight:bold;color:var(--red);">${sr.r3}</div></div>
+            <div class="mini-box" style="border-color:var(--red);"><label style="color:var(--red);">R2</label><div style="font-size:13px;font-weight:bold;color:var(--red);">${sr.r2}</div></div>
+            <div class="mini-box" style="border-color:var(--red);"><label style="color:var(--red);">R1</label><div style="font-size:13px;font-weight:bold;color:var(--red);">${sr.r1}</div></div>
+          </div>
+          <div class="mini-box" style="text-align:center;border-color:var(--yellow);margin-bottom:10px;">
+            <label style="color:var(--yellow);">PIVOT</label>
+            <div style="font-size:18px;font-weight:bold;color:var(--yellow);">${sr.pivot}</div>
+          </div>
+          <div class="grid-3">
+            <div class="mini-box" style="border-color:var(--green);"><label style="color:var(--green);">S1</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${sr.s1}</div></div>
+            <div class="mini-box" style="border-color:var(--green);"><label style="color:var(--green);">S2</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${sr.s2}</div></div>
+            <div class="mini-box" style="border-color:var(--green);"><label style="color:var(--green);">S3</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${sr.s3}</div></div>
+          </div>
+        </div>
+      `;
+    }
   }
   
   html += `
@@ -1682,7 +1768,7 @@ function buildAnalysisHTML(record, shield, indicators) {
         </div>
       </div>
       <div class="card">
-        <div class="ballistic-header">💵 PROFIT PROJECTIONS</div>
+        <div class="ballistic-header">💵 PROFIT PROJECTIONS (Lot Size × Pips)</div>
         ${projections.map(p => `
           <div class="lot-row">
             <div><strong>Lot ${p.lot}</strong><br><small style="color:var(--muted);font-size:10px;">$${p.pipValue.toFixed(3)}/pip</small></div>
@@ -2033,7 +2119,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.2" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.4" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2071,4 +2157,4 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html> )
+</html>
