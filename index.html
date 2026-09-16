@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v31.1 — Institutional Pro</title>
+<title>Lutynoel FX v31.2 — Institutional Pro</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -144,7 +144,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v31.1</div>
+    <div class="auth-title">Lutynoel FX v31.2</div>
     <div class="auth-subtitle">Institutional Pro Edition</div>
 
     <div class="disclaimer-box">
@@ -198,7 +198,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v31.1</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v31.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -216,7 +216,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">INSTITUTIONAL PRO TRADING</div>
-          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v31.1 PRO</span>
+          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v31.2 PRO</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
@@ -238,7 +238,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v31.1 FEATURES:</div>
+        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v31.2 FEATURES:</div>
         <div style="font-size:11px;line-height:1.9;">
           ✅ <strong>DXY Correlation</strong> — Trade WITH dollar<br>
           ✅ <strong>US10Y Bond Yields</strong> — Risk sentiment<br>
@@ -444,9 +444,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v31.1 (Institutional Pro)<br>
+          <strong>Version:</strong> v31.2 (Institutional Pro)<br>
           <strong>Primary AI:</strong> Gemini 3.6 Flash<br>
-          <strong>Backup AI:</strong> Gemini 2.0 Flash → Mistral<br>
+          <strong>Fallback AI:</strong> Mistral Large<br>
           <strong>Features:</strong> DXY + US10Y + Wyckoff + Auto-Sizing
         </div>
 
@@ -483,13 +483,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v31.1 — INSTITUTIONAL PRO
-   Gemini 3.6 Flash + Gemini 2.0 Flash backup + Mistral fallback
+   LUTYNOEL FX v31.2 — INSTITUTIONAL PRO
+   Gemini 3.6 Flash ONLY + Mistral fallback
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-// ✅ FIX: 1.5-flash imeondolewa. 3.6-flash ni primary, 2.0-flash ni backup
-const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-2.0-flash'];
+// ✅ FIX: 2.0 imeondolewa, 3.6 pekee. Mistral ipo kama fallback.
+const GEMINI_MODELS = ['gemini-3.6-flash'];
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const MISTRAL_MODEL = 'mistral-large-latest';
 const BINANCE_API = 'https://api.binance.com/api/v3';
@@ -500,7 +500,7 @@ const FOREXFACTORY_CALENDAR = 'https://nfs.faireconomy.media/ff_calendar_thiswee
 
 const AGENT_TIMEOUT = 120000;
 const API_TIMEOUT = 60000;
-const RETRY_ATTEMPTS = 3;
+const RETRY_ATTEMPTS = 2;
 const AUTO_CHECK_INTERVAL = 300000;
 const CONFLUENCE_THRESHOLD = 65;
 
@@ -592,7 +592,7 @@ async function withTimeout(promise, timeoutMs, errorMessage) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v31.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v31.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -2126,11 +2126,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "31.1", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "31.2", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v31.1-${Date.now()}.json`;
+  a.download = `lutynoel-v31.2-${Date.now()}.json`;
   a.click();
 }
 
