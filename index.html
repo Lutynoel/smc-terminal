@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v31.3 — Institutional Pro</title>
+<title>Lutynoel FX v31.4 — Mistral Only</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -56,7 +56,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .data-status-item{background:#08080a;border:1px solid var(--border);padding:8px 12px;border-radius:6px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:6px}
 .data-status-item.ok{border-color:var(--green)}
 .data-status-item.fail{border-color:var(--red)}
-.data-status-item.warn{border-color:var(--yellow)}
 .master-card{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:10px}
 .master-card.buy{border-left:4px solid var(--green)}
 .master-card.sell{border-left:4px solid var(--red)}
@@ -73,18 +72,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .master-confidence{font-size:11px;color:var(--muted);margin-top:6px}
 .provider-badge{display:inline-block;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-left:4px}
 .provider-mistral{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue)}
-.provider-gemini{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
 .provider-failed{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 .confidence-bar{width:100%;height:4px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
 .confidence-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));transition:width .5s}
 .signal-badge-container{display:flex;justify-content:center;gap:6px;margin:10px 0;flex-wrap:wrap}
-.badge-pass,.badge-conf,.badge-status,.badge-warn,.badge-shield,.badge-wait{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold}
-.badge-pass{background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent)}
+.badge-conf,.badge-status,.badge-shield{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold}
 .badge-conf{background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green)}
 .badge-status{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
-.badge-warn{background:rgba(249,115,22,.15);color:var(--orange);border:1px solid var(--orange)}
 .badge-shield{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
-.badge-wait{background:rgba(250,204,21,.15);color:var(--yellow);border:1px solid var(--yellow)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .mini-box{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px}
@@ -101,15 +96,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .modal.active{display:flex}
 .modal-content{max-width:92%;width:100%;max-width:600px;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;position:relative;margin:20px 0;animation:modalSlideIn 0.3s ease}
 @keyframes modalSlideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-.modal-close-top{position:absolute;top:10px;right:10px;background:#ef4444;color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;flex-shrink:0}
-.modal-close-top:hover{background:#dc2626}
+.modal-close-top{position:absolute;top:10px;right:10px;background:#ef4444;color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10}
 .modal-close-bottom{width:100%;padding:14px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:bold;font-size:15px;margin-top:15px;cursor:pointer}
 .nav-btn{background:none;border:none;color:#fff;font-size:20px;padding:4px}
 .disclaimer-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .info-box{background:rgba(59,130,246,.1);border:1px solid var(--blue);color:#93c5fd;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .success-box{background:rgba(16,185,129,.1);border:1px solid var(--green);color:#6ee7b7;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .shield-box{background:rgba(168,85,247,.1);border:1px solid var(--purple);color:#d8b4fe;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-bottom:12px}
-.wait-box{background:rgba(250,204,21,.1);border:1px solid var(--yellow);color:#fef08a;padding:12px;border-radius:8px;font-size:13px;line-height:1.6;margin-bottom:12px;text-align:center}
 .toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:380px;margin:0 auto;background:var(--accent);color:#000;padding:12px 20px;border-radius:8px;z-index:9999;font-weight:bold;font-size:13px;box-shadow:0 5px 15px rgba(0,0,0,.5);animation:slideUp .3s}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
@@ -120,7 +113,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .signal-hero.sell{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.05));border:2px solid var(--red)}
 .signal-hero.wait{background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05));border:2px solid var(--yellow)}
 .signal-label{font-size:28px;font-weight:900;letter-spacing:1px;margin:5px 0}
-.signal-reason{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
 .calc-result-box{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:18px;margin-top:15px;}
 .calc-big-value{font-size:32px;font-weight:900;color:var(--accent);text-align:center;margin:8px 0;}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
@@ -136,19 +128,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <body>
 
 <div id="universalModal" class="modal">
-  <div class="modal-content" id="modalBody">
-    <div id="modalInnerContent"></div>
-  </div>
+  <div class="modal-content"><div id="modalInnerContent"></div></div>
 </div>
 
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v31.3</div>
-    <div class="auth-subtitle">Institutional Pro Edition</div>
+    <div class="auth-title">Lutynoel FX v31.4</div>
+    <div class="auth-subtitle">Mistral Only Edition</div>
 
     <div class="disclaimer-box">
-      ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
+      ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
     </div>
 
     <div id="returningUserSection" style="display:none;">
@@ -161,11 +151,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
 
-      <label>Mistral API Key (Required - Main AI)</label>
+      <label>Mistral API Key (Required)</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
-
-      <label>Gemini API Key (Fallback AI)</label>
-      <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
 
       <label>TwelveData API Key (Required for Forex)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
@@ -175,7 +162,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="info-box">
         🔒 Keys zinahifadhiwa kwenye <strong>localStorage</strong>.<br>
-        ✅ Utaingia <strong>mara moja tu</strong>.
+        ✅ Utaingia <strong>mara moja tu</strong>.<br>
+        🤖 AI: <strong>Mistral Small → Medium → Large</strong>
       </div>
 
       <button class="primary-btn" onclick="handleLogin()">Login</button>
@@ -198,11 +186,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v31.3</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v31.4</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">v31</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence</div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -215,12 +203,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="view-overview" class="view-section">
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">INSTITUTIONAL PRO TRADING</div>
-          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v31.3 PRO</span>
+          <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">MISTRAL ONLY EDITION</div>
+          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v31.4</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
-          <span style="font-size:12px;color:var(--muted);font-weight:600;">Think Like Smart Money</span>
+          <span style="font-size:12px;color:var(--muted);font-weight:600;">Institutional Pro</span>
         </h2>
         <p style="color:var(--muted);font-size:11px;margin:0;">DXY + US10Y + Wyckoff + Auto-Sizing</p>
       </div>
@@ -233,21 +221,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Institutional Analysis</button>
+        <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Analysis</button>
         <button class="secondary-btn" onclick="navigate('backtest')">📊 Auto-Backtest</button>
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v31.3 FEATURES:</div>
+        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 v31.4 FEATURES:</div>
         <div style="font-size:11px;line-height:1.9;">
-          ✅ <strong>Mistral Main AI</strong> — Gemini imekuwa Fallback<br>
-          ✅ <strong>DXY & US10Y Fixed</strong> — CORS Proxy imewekwa<br>
-          ✅ <strong>Session Levels</strong> — PDH, PDL, PWH, PWL<br>
+          ✅ <strong>Mistral ONLY</strong> — Small → Medium → Large<br>
+          ✅ <strong>DXY + US10Y</strong> — CORS Proxy imewekwa<br>
           ✅ <strong>Wyckoff Phase</strong> — Accumulation/Distribution<br>
-          ✅ <strong>Asian Range</strong> — London breakout<br>
-          ✅ <strong>Kill Zones</strong> — London/NY sessions<br>
+          ✅ <strong>Session Levels</strong> — PDH, PDL, PWH, PWL<br>
           ✅ <strong>Auto Position Size</strong> — Lot size calculator<br>
-          ✅ <strong>New Pairs</strong> — US30, SPX500, XAGUSD, WTI<br>
           ✅ <strong>A+ Grading</strong> — Score 0-100
         </div>
       </div>
@@ -300,7 +285,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
 
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
-        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 START INSTITUTIONAL ANALYSIS</button>
+        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 START ANALYSIS</button>
       </div>
 
       <div id="resultsContainer" style="display:none;"></div>
@@ -333,8 +318,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
               <option value="USDJPY">USDJPY</option>
               <option value="XAGUSD">XAGUSD</option>
               <option value="WTI">WTI</option>
-              <option value="US30">US30</option>
-              <option value="SPX500">SPX500</option>
             </select>
           </div>
         </div>
@@ -383,13 +366,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <select id="liveChartSelect" onchange="changeLiveChart(this.value)">
           <option value="OANDA:XAUUSD">XAUUSD</option>
           <option value="BINANCE:BTCUSDT">BTCUSD</option>
-          <option value="CAPITALCOM:US100">NAS100</option>
-          <option value="TVC:DXY">DXY (Dollar Index)</option>
-          <option value="TVC:US10Y">US10Y (Bond Yields)</option>
-          <option value="TVC:US30">US30 (Dow)</option>
-          <option value="SP:SPX">SPX500 (S&P 500)</option>
-          <option value="TVC:SILVER">XAGUSD (Silver)</option>
-          <option value="TVC:USOIL">WTI (Crude Oil)</option>
+          <option value="TVC:DXY">DXY</option>
+          <option value="TVC:US10Y">US10Y</option>
+          <option value="TVC:US30">US30</option>
+          <option value="SP:SPX">SPX500</option>
+          <option value="TVC:SILVER">XAGUSD</option>
+          <option value="TVC:USOIL">WTI</option>
         </select>
         <div style="height:480px;width:100%;margin-top:10px;">
           <iframe id="tvIframe" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=15&theme=dark&style=1" style="width:100%;height:100%;border:0;border-radius:8px;"></iframe>
@@ -409,8 +391,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="USDJPY">USDJPY</option>
           <option value="XAGUSD">XAGUSD</option>
           <option value="WTI">WTI</option>
-          <option value="US30">US30</option>
-          <option value="SPX500">SPX500</option>
         </select>
         <div class="grid-2">
           <div><label>Entry</label><input type="number" step="any" id="pipsEntry" value="2650.00"></div>
@@ -444,19 +424,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v31.3 (Institutional Pro)<br>
-          <strong>Primary AI:</strong> Mistral (Small/Large/Mixtral)<br>
-          <strong>Fallback AI:</strong> Gemini 3.6 Flash<br>
+          <strong>Version:</strong> v31.4 (Mistral Only)<br>
+          <strong>AI Models:</strong> mistral-small-latest → mistral-medium-latest → mistral-large-latest<br>
           <strong>Features:</strong> DXY + US10Y + Wyckoff + Auto-Sizing
         </div>
 
         <div class="ballistic-header">💰 RISK MANAGEMENT</div>
         <label>Account Balance (USD)</label>
-        <input type="number" id="settingsBalance" placeholder="e.g. 1000" value="1000">
-        
+        <input type="number" id="settingsBalance" value="1000">
         <label>Risk Per Trade (%)</label>
-        <input type="number" step="0.1" id="settingsRiskPct" placeholder="e.g. 1.0" value="1.0">
-        
+        <input type="number" step="0.1" id="settingsRiskPct" value="1.0">
         <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save Risk Settings</button>
         
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
@@ -465,21 +442,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <label>Update Mistral Key</label>
         <input type="password" id="settingsMistralKey" placeholder="Mistral key">
         <button class="secondary-btn" onclick="saveSettingsMistralKey()">💾 Save Mistral</button>
-        
-        <label>Update Gemini Key</label>
-        <input type="password" id="settingsGeminiKey" placeholder="Gemini key">
-        <button class="secondary-btn" onclick="saveSettingsGeminiKey()">💾 Save Gemini</button>
-        
         <label>Update TwelveData Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="TwelveData key">
         <button class="secondary-btn" onclick="saveSettingsTwelveKey()">💾 Save TwelveData</button>
-        
         <label>Update Alpha Vantage Key</label>
         <input type="text" id="settingsAlphaKey" placeholder="Alpha Vantage key">
         <button class="secondary-btn" onclick="saveSettingsAlphaKey()">💾 Save Alpha Vantage</button>
         
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
-        <button class="secondary-btn" onclick="testApiKeys()">🧪 Test API Keys</button>
+        <button class="secondary-btn" onclick="testMistralKey()">🧪 Test Mistral Key</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
         <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All Keys</button>
       </div>
@@ -489,31 +460,27 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v31.3 — INSTITUTIONAL PRO
-   Mistral Main AI + Gemini Fallback + CORS Proxy for DXY/US10Y
+   LUTYNOEL FX v31.4 — MISTRAL ONLY EDITION
+   Models: mistral-small-latest → mistral-medium-latest → mistral-large-latest
    ===================================================== */
 
-const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-const GEMINI_MODELS = ['gemini-3.6-flash']; // Gemini pekee kama fallback
+// ✅ MISTRAL MODELS ONLY — no open-mixtral-8x7b
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
-// Mistral fallback models (Small -> Large -> Mixtral)
-const MISTRAL_MODELS = ['mistral-small-latest', 'mistral-large-latest', 'open-mixtral-8x7b'];
+const MISTRAL_MODELS = ['mistral-small-latest', 'mistral-medium-latest', 'mistral-large-latest'];
+
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
-const YAHOO_API = 'https://query1.finance.yahoo.com/v8/finance/chart';
 const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 const FOREXFACTORY_CALENDAR = 'https://nfs.faireconomy.media/ff_calendar_thisweek.json';
 
 const AGENT_TIMEOUT = 120000;
-const API_TIMEOUT = 60000;
-const RETRY_ATTEMPTS = 2;
+const API_TIMEOUT = 90000;
 const AUTO_CHECK_INTERVAL = 300000;
 const CONFLUENCE_THRESHOLD = 65;
 
 const STORAGE_KEYS = {
   NAME: 'lutynoel_saved_name',
-  GEMINI: 'lutynoel_saved_geminiKey',
   MISTRAL: 'lutynoel_saved_mistralKey',
   TWELVE: 'lutynoel_saved_twelveKey',
   ALPHA: 'lutynoel_saved_alphaKey',
@@ -522,20 +489,20 @@ const STORAGE_KEYS = {
 };
 
 const PAIR_SPECS = {
-  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', alphaSymbol: 'XAUUSD', dxyCorrelation: 'INVERSE', slDefault: 40, pipValue: { standard: 10.00 } },
-  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', alphaSymbol: 'EURUSD', dxyCorrelation: 'INVERSE', slDefault: 30, pipValue: { standard: 10.00 } },
-  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', alphaSymbol: 'GBPUSD', dxyCorrelation: 'INVERSE', slDefault: 35, pipValue: { standard: 10.00 } },
-  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', alphaSymbol: 'USDJPY', dxyCorrelation: 'DIRECT', slDefault: 30, pipValue: { standard: 9.10 } },
-  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', alphaSymbol: 'AUDUSD', dxyCorrelation: 'INVERSE', slDefault: 30, pipValue: { standard: 10.00 } },
-  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', alphaSymbol: 'USDCAD', dxyCorrelation: 'DIRECT', slDefault: 30, pipValue: { standard: 7.40 } },
-  BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', dxyCorrelation: 'INVERSE', slDefault: 800, pipValue: { standard: 1.00 } },
-  ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', dxyCorrelation: 'INVERSE', slDefault: 50, pipValue: { standard: 1.00 } },
-  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', alphaSymbol: 'NDX', dxyCorrelation: 'INVERSE', slDefault: 80, pipValue: { standard: 1.00 } },
-  SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', dxyCorrelation: 'INVERSE', slDefault: 3, pipValue: { standard: 1.00 } },
-  US30: { pipSize: 1, defaultPrice: 42000, decimals: 2, source: 'twelve', twelveSymbol: 'DJI', alphaSymbol: null, dxyCorrelation: 'INVERSE', slDefault: 150, pipValue: { standard: 1.00 } },
-  SPX500: { pipSize: 0.1, defaultPrice: 5800, decimals: 2, source: 'twelve', twelveSymbol: 'SPX', alphaSymbol: null, dxyCorrelation: 'INVERSE', slDefault: 25, pipValue: { standard: 10.00 } },
-  XAGUSD: { pipSize: 0.001, defaultPrice: 30, decimals: 3, source: 'twelve', twelveSymbol: 'XAG/USD', alphaSymbol: 'XAGUSD', dxyCorrelation: 'INVERSE', slDefault: 40, pipValue: { standard: 5.00 } },
-  WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', alphaSymbol: null, dxyCorrelation: 'INVERSE', slDefault: 60, pipValue: { standard: 10.00 } }
+  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', alphaSymbol: 'XAUUSD', dxyCorrelation: 'INVERSE', pipValue: 10.00 },
+  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', alphaSymbol: 'EURUSD', dxyCorrelation: 'INVERSE', pipValue: 10.00 },
+  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', alphaSymbol: 'GBPUSD', dxyCorrelation: 'INVERSE', pipValue: 10.00 },
+  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', alphaSymbol: 'USDJPY', dxyCorrelation: 'DIRECT', pipValue: 9.10 },
+  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', alphaSymbol: 'AUDUSD', dxyCorrelation: 'INVERSE', pipValue: 10.00 },
+  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', alphaSymbol: 'USDCAD', dxyCorrelation: 'DIRECT', pipValue: 7.40 },
+  BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', dxyCorrelation: 'INVERSE', pipValue: 1.00 },
+  ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', dxyCorrelation: 'INVERSE', pipValue: 1.00 },
+  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', alphaSymbol: 'NDX', dxyCorrelation: 'INVERSE', pipValue: 1.00 },
+  SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', dxyCorrelation: 'INVERSE', pipValue: 1.00 },
+  US30: { pipSize: 1, defaultPrice: 42000, decimals: 2, source: 'twelve', twelveSymbol: 'DJI', alphaSymbol: null, dxyCorrelation: 'INVERSE', pipValue: 1.00 },
+  SPX500: { pipSize: 0.1, defaultPrice: 5800, decimals: 2, source: 'twelve', twelveSymbol: 'SPX', alphaSymbol: null, dxyCorrelation: 'INVERSE', pipValue: 10.00 },
+  XAGUSD: { pipSize: 0.001, defaultPrice: 30, decimals: 3, source: 'twelve', twelveSymbol: 'XAG/USD', alphaSymbol: 'XAGUSD', dxyCorrelation: 'INVERSE', pipValue: 5.00 },
+  WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', alphaSymbol: null, dxyCorrelation: 'INVERSE', pipValue: 10.00 }
 };
 
 const AGENTS_4 = [
@@ -557,7 +524,7 @@ function showToast(msg, duration = 3500) {
   setTimeout(() => t.remove(), duration);
 }
 
-function getPipValue(spec, lot) { return lot * spec.pipValue.standard; }
+function getPipValue(spec, lot) { return lot * spec.pipValue; }
 
 function safeJsonParse(text) {
   if (!text) return null;
@@ -584,22 +551,13 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   }
 }
 
-async function withRetry(fn, attempts = RETRY_ATTEMPTS, delayMs = 1500) {
-  let lastError = null;
-  for (let i = 0; i < attempts; i++) {
-    try { return await fn(); }
-    catch (err) { lastError = err; if (i < attempts - 1) await new Promise(r => setTimeout(r, delayMs * (i + 1))); }
-  }
-  throw lastError;
-}
-
 async function withTimeout(promise, timeoutMs, errorMessage) {
   return Promise.race([promise, new Promise((_, reject) => setTimeout(() => reject(new Error(errorMessage || `Timeout`)), timeoutMs))]);
 }
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v31.3", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v31.4", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -625,7 +583,6 @@ function saveRiskSettings() {
   localStorage.setItem(STORAGE_KEYS.RISK_PCT, risk.toString());
   showToast(`✅ Balance: $${bal} | Risk: ${risk}%`);
 }
-
 function getBalance() { return parseFloat(localStorage.getItem(STORAGE_KEYS.BALANCE)) || 1000; }
 function getRiskPct() { return parseFloat(localStorage.getItem(STORAGE_KEYS.RISK_PCT)) || 1.0; }
 
@@ -639,26 +596,21 @@ function computeAutoLotSize(slPips, pipValueStandard) {
 }
 
 // ============ PERSISTENT KEYS ============
-function saveKeys(name, mistralKey, geminiKey, twelveKey, alphaKey) {
+function saveKeys(name, mistralKey, twelveKey, alphaKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
-  if (mistralKey) localStorage.setItem(STORAGE_KEYS.MISTRAL, mistralKey);
-  localStorage.setItem(STORAGE_KEYS.GEMINI, geminiKey || '');
+  localStorage.setItem(STORAGE_KEYS.MISTRAL, mistralKey);
   if (twelveKey) localStorage.setItem(STORAGE_KEYS.TWELVE, twelveKey);
   if (alphaKey) localStorage.setItem(STORAGE_KEYS.ALPHA, alphaKey);
 }
-
 function loadKeys() {
   return {
     name: localStorage.getItem(STORAGE_KEYS.NAME),
     mistralKey: localStorage.getItem(STORAGE_KEYS.MISTRAL),
-    geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI),
     twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE),
     alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA)
   };
 }
-
 function getMistralKey() { return localStorage.getItem(STORAGE_KEYS.MISTRAL); }
-function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
 function getAlphaKey() { return localStorage.getItem(STORAGE_KEYS.ALPHA); }
 
@@ -671,33 +623,31 @@ function clearAllKeys() {
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const mistralKey = document.getElementById('authMistralKey').value.trim();
-  const geminiKey = document.getElementById('authGeminiKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
   const alphaKey = document.getElementById('authAlphaKey').value.trim();
   if (!name) { alert("Enter your name."); return; }
-  if (!mistralKey && !geminiKey) { alert("Enter at least one AI API key."); return; }
-  saveKeys(name, mistralKey, geminiKey, twelveKey, alphaKey);
-  enterApp(name, mistralKey, geminiKey, twelveKey, alphaKey);
+  if (!mistralKey) { alert("Enter Mistral API key."); return; }
+  saveKeys(name, mistralKey, twelveKey, alphaKey);
+  enterApp(name, mistralKey, twelveKey, alphaKey);
 }
 
 function continueWithSavedKeys() {
   const keys = loadKeys();
-  if (!keys.name || (!keys.mistralKey && !keys.geminiKey)) { showLoginForm(); return; }
-  enterApp(keys.name, keys.mistralKey, keys.geminiKey, keys.twelveKey, keys.alphaKey);
+  if (!keys.name || !keys.mistralKey) { showLoginForm(); return; }
+  enterApp(keys.name, keys.mistralKey, keys.twelveKey, keys.alphaKey);
 }
 
-function enterApp(name, mistralKey, geminiKey, twelveKey, alphaKey) {
+function enterApp(name, mistralKey, twelveKey, alphaKey) {
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
   document.getElementById('settingsMistralKey').value = mistralKey || '';
-  document.getElementById('settingsGeminiKey').value = geminiKey || '';
   document.getElementById('settingsTwelveKey').value = twelveKey || '';
   document.getElementById('settingsAlphaKey').value = alphaKey || '';
   document.getElementById('settingsBalance').value = getBalance();
   document.getElementById('settingsRiskPct').value = getRiskPct();
   loadHistory(); updateStats();
-  showToast(`Welcome ${name}! 🏦`);
+  showToast(`Welcome ${name}! 🤖`);
   setTimeout(() => fetchLivePrice(), 1000);
   startAutoBacktest();
 }
@@ -708,7 +658,6 @@ function showLoginForm() {
   const keys = loadKeys();
   if (keys.name) document.getElementById('loginName').value = keys.name;
   if (keys.mistralKey) document.getElementById('authMistralKey').value = keys.mistralKey;
-  if (keys.geminiKey) document.getElementById('authGeminiKey').value = keys.geminiKey;
   if (keys.twelveKey) document.getElementById('authTwelveKey').value = keys.twelveKey;
   if (keys.alphaKey) document.getElementById('authAlphaKey').value = keys.alphaKey;
 }
@@ -718,12 +667,6 @@ function saveSettingsMistralKey() {
   if (key) localStorage.setItem(STORAGE_KEYS.MISTRAL, key);
   else localStorage.removeItem(STORAGE_KEYS.MISTRAL);
   showToast("✅ Mistral key saved!");
-}
-function saveSettingsGeminiKey() {
-  const key = document.getElementById('settingsGeminiKey').value.trim();
-  if (key) localStorage.setItem(STORAGE_KEYS.GEMINI, key);
-  else localStorage.removeItem(STORAGE_KEYS.GEMINI);
-  showToast("✅ Gemini key saved!");
 }
 function saveSettingsTwelveKey() {
   const key = document.getElementById('settingsTwelveKey').value.trim();
@@ -749,44 +692,45 @@ function logout() {
   document.getElementById('appInterface').style.display = 'none';
   document.getElementById('authScreen').style.display = 'flex';
   const keys = loadKeys();
-  if (keys.name && (keys.mistralKey || keys.geminiKey)) {
+  if (keys.name && keys.mistralKey) {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${keys.name}</strong>!`;
   } else showLoginForm();
 }
 
-// ================= TEST API KEYS =================
-async function testApiKeys() {
-  const mistralKey = getMistralKey();
-  const geminiKey = getGeminiKey();
+// ================= TEST MISTRAL =================
+async function testMistralKey() {
+  const key = getMistralKey();
+  if (!key) { alert("Hakuna Mistral key. Weka kwanza."); return; }
+  showToast("🧪 Testing Mistral...", 2000);
   let results = [];
   
-  if (mistralKey) {
+  for (const model of MISTRAL_MODELS) {
     try {
       const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
-        body: JSON.stringify({ model: MISTRAL_MODELS[0], messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
-      }, 15000);
-      const d = await r.json();
-      if (d.error) results.push(`❌ Mistral (${MISTRAL_MODELS[0]}): ${d.error.message}`);
-      else results.push(`✅ Mistral (${MISTRAL_MODELS[0]}): OK`);
-    } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+        body: JSON.stringify({ model: model, messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
+      }, 20000);
+      const txt = await r.text();
+      let d;
+      try { d = JSON.parse(txt); } catch(e) { d = null; }
+      
+      if (!d) {
+        results.push(`❌ ${model} (HTTP ${r.status}): Non-JSON: ${txt.substring(0, 100)}`);
+      } else if (d.error) {
+        const msg = typeof d.error === 'string' ? d.error : (d.error.message || JSON.stringify(d.error));
+        results.push(`❌ ${model}: ${msg}`);
+      } else if (d.choices && d.choices[0]) {
+        results.push(`✅ ${model}: OK`);
+      } else {
+        results.push(`⚠️ ${model}: Response: ${txt.substring(0, 100)}`);
+      }
+    } catch (e) {
+      results.push(`❌ ${model}: ${e.message}`);
+    }
   }
-  
-  if (geminiKey) {
-    try {
-      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_MODELS[0]}:generateContent?key=${geminiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
-      }, 15000);
-      const d = await r.json();
-      if (d.error) results.push(`❌ Gemini (${GEMINI_MODELS[0]}): ${d.error.message}`);
-      else results.push(`✅ Gemini (${GEMINI_MODELS[0]}): OK`);
-    } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
-  }
-  
-  if (results.length === 0) results.push("No keys to test.");
   alert(results.join('\n\n'));
 }
 // =================================================
@@ -845,23 +789,22 @@ async function fetchLivePrice() {
   const refreshBtn = document.getElementById('refreshBtn');
   refreshBtn.disabled = true;
   refreshBtn.innerHTML = '<span class="spinner-white"></span>';
-  setPriceStatus('loading', '⏳ Loading price...');
+  setPriceStatus('loading', '⏳ Loading...');
   try {
     let price = null;
-    if (spec.source === 'binance' && spec.binanceSymbol) {
+    if (spec.source === 'binance') {
       const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 10000);
       if (r.ok) { const d = await r.json(); price = parseFloat(d.price); }
     } else {
       const key = getTwelveKey();
-      if (key && spec.twelveSymbol) {
+      if (key) {
         const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 10000);
         if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
       }
     }
     if (price > 0) {
       document.getElementById('livePrice').value = price.toFixed(spec.decimals);
-      const time = new Date().toLocaleTimeString();
-      setPriceStatus('live', `🟢 Live price`, time);
+      setPriceStatus('live', `🟢 Live price`, new Date().toLocaleTimeString());
       localStorage.setItem(`price_${pair}`, price.toString());
       showToast(`✅ ${price.toFixed(spec.decimals)}`, 2000);
     } else throw new Error("Not found");
@@ -879,19 +822,18 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   if (!spec) return null;
   for (let attempt = 0; attempt < retries; attempt++) {
     try {
-      if (spec.source === 'binance' && spec.binanceSymbol) {
+      if (spec.source === 'binance') {
         const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
         const res = await fetchWithTimeout(url, {}, 10000);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         return data.map(d => ({ time: parseInt(d[0]), open: parseFloat(d[1]), high: parseFloat(d[2]), low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5]) }));
       }
-      if (spec.source === 'twelve' && spec.twelveSymbol) {
+      if (spec.source === 'twelve') {
         const key = getTwelveKey();
         if (key) {
           const intervalMap = { '4h': '4h', '1h': '1h', '15m': '15min' };
-          const interval = intervalMap[timeframe] || timeframe;
-          const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${interval}&outputsize=${limit}&apikey=${key}`;
+          const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${intervalMap[timeframe]}&outputsize=${limit}&apikey=${key}`;
           const res = await fetchWithTimeout(url, {}, 20000);
           if (res.ok) {
             const data = await res.json();
@@ -926,7 +868,7 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   return null;
 }
 
-// ================= FETCH DXY & US10Y (WITH CORS PROXY) =================
+// ================= DXY & US10Y (CORS PROXY) =================
 async function fetchDXYData() {
   try {
     const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?interval=1h&range=5d';
@@ -935,19 +877,16 @@ async function fetchDXYData() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const result = data?.chart?.result?.[0];
-    if (!result || !result.timestamp) throw new Error("No DXY data");
-    const quotes = result.indicators.quote[0];
-    const dxy = [];
+    if (!result || !result.timestamp) throw new Error("No data");
+    const q = result.indicators.quote[0];
+    const arr = [];
     for (let i = 0; i < result.timestamp.length; i++) {
-      if (quotes.open[i] && quotes.high[i] && quotes.low[i] && quotes.close[i]) {
-        dxy.push({ time: result.timestamp[i] * 1000, open: quotes.open[i], high: quotes.high[i], low: quotes.low[i], close: quotes.close[i], volume: quotes.volume[i] || 0 });
+      if (q.open[i] && q.high[i] && q.low[i] && q.close[i]) {
+        arr.push({ time: result.timestamp[i] * 1000, open: q.open[i], high: q.high[i], low: q.low[i], close: q.close[i], volume: q.volume[i] || 0 });
       }
     }
-    return dxy;
-  } catch (err) {
-    console.warn('DXY fetch failed:', err.message);
-    return null;
-  }
+    return arr;
+  } catch (err) { console.warn('DXY:', err.message); return null; }
 }
 
 async function fetchUS10YData() {
@@ -958,43 +897,36 @@ async function fetchUS10YData() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const result = data?.chart?.result?.[0];
-    if (!result || !result.timestamp) throw new Error("No US10Y data");
-    const quotes = result.indicators.quote[0];
-    const yields = [];
+    if (!result || !result.timestamp) throw new Error("No data");
+    const q = result.indicators.quote[0];
+    const arr = [];
     for (let i = 0; i < result.timestamp.length; i++) {
-      if (quotes.close[i]) {
-        yields.push({ time: result.timestamp[i] * 1000, close: quotes.close[i] });
-      }
+      if (q.close[i]) arr.push({ time: result.timestamp[i] * 1000, close: q.close[i] });
     }
-    return yields;
-  } catch (err) {
-    console.warn('US10Y fetch failed:', err.message);
-    return null;
-  }
+    return arr;
+  } catch (err) { console.warn('US10Y:', err.message); return null; }
 }
-// ========================================================================
 
-function analyzeDXY(dxyData, pairSpec) {
+function analyzeDXY(dxyData, spec) {
   if (!dxyData || dxyData.length < 20) return null;
   const closes = dxyData.map(d => d.close);
-  const ma20 = calculateSMA(closes, 20);
-  const ma50 = calculateSMA(closes, 50);
-  const currentPrice = closes[closes.length - 1];
+  const ma20 = calculateSMA(closes, 20), ma50 = calculateSMA(closes, 50);
+  const current = closes[closes.length - 1];
   let direction = 'NEUTRAL';
-  if (ma20 && ma50 && currentPrice > ma20 && ma20 > ma50) direction = 'BULLISH';
-  else if (ma20 && ma50 && currentPrice < ma20 && ma20 < ma50) direction = 'BEARISH';
-  else if (ma20) direction = currentPrice > ma20 ? 'MILD_BULLISH' : 'MILD_BEARISH';
+  if (ma20 && ma50 && current > ma20 && ma20 > ma50) direction = 'BULLISH';
+  else if (ma20 && ma50 && current < ma20 && ma20 < ma50) direction = 'BEARISH';
+  else if (ma20) direction = current > ma20 ? 'MILD_BULLISH' : 'MILD_BEARISH';
   let alignment = 'NEUTRAL', expectation = '';
-  if (pairSpec && pairSpec.dxyCorrelation) {
-    if (pairSpec.dxyCorrelation === 'INVERSE') {
-      if (direction === 'BULLISH' || direction === 'MILD_BULLISH') { alignment = 'FAVORS_SELL'; expectation = 'DXY UP → Bearish for this pair'; }
-      else if (direction === 'BEARISH' || direction === 'MILD_BEARISH') { alignment = 'FAVORS_BUY'; expectation = 'DXY DOWN → Bullish for this pair'; }
-    } else if (pairSpec.dxyCorrelation === 'DIRECT') {
-      if (direction === 'BULLISH' || direction === 'MILD_BULLISH') { alignment = 'FAVORS_BUY'; expectation = 'DXY UP → Bullish for this pair'; }
-      else if (direction === 'BEARISH' || direction === 'MILD_BEARISH') { alignment = 'FAVORS_SELL'; expectation = 'DXY DOWN → Bearish for this pair'; }
+  if (spec && spec.dxyCorrelation) {
+    if (spec.dxyCorrelation === 'INVERSE') {
+      if (direction.includes('BULL')) { alignment = 'FAVORS_SELL'; expectation = 'DXY UP → Bearish for this pair'; }
+      else if (direction.includes('BEAR')) { alignment = 'FAVORS_BUY'; expectation = 'DXY DOWN → Bullish for this pair'; }
+    } else {
+      if (direction.includes('BULL')) { alignment = 'FAVORS_BUY'; expectation = 'DXY UP → Bullish for this pair'; }
+      else if (direction.includes('BEAR')) { alignment = 'FAVORS_SELL'; expectation = 'DXY DOWN → Bearish for this pair'; }
     }
   }
-  return { price: currentPrice.toFixed(3), direction, correlation: pairSpec?.dxyCorrelation || 'N/A', alignment, expectation };
+  return { price: current.toFixed(3), direction, correlation: spec?.dxyCorrelation || 'N/A', alignment, expectation };
 }
 
 function analyzeUS10Y(yieldsData) {
@@ -1008,7 +940,7 @@ function analyzeUS10Y(yieldsData) {
   let direction = 'NEUTRAL', bias = 'NEUTRAL';
   if (current > prev5 && current > prev20) { direction = 'RISING'; bias = 'USD_BULLISH'; }
   else if (current < prev5 && current < prev20) { direction = 'FALLING'; bias = 'USD_BEARISH'; }
-  let interpretation = direction === 'RISING' ? 'Yields rising — Bearish for Gold, Bullish for USD' : direction === 'FALLING' ? 'Yields falling — Bullish for Gold, Bearish for USD' : 'Yields stable — No strong bias';
+  const interpretation = direction === 'RISING' ? 'Yields rising — Bearish for Gold' : direction === 'FALLING' ? 'Yields falling — Bullish for Gold' : 'Yields stable';
   return { current: current.toFixed(3) + '%', direction, change5: change5.toFixed(2) + '%', change20: change20.toFixed(2) + '%', bias, interpretation };
 }
 
@@ -1035,12 +967,11 @@ function calculateAsianRange(h1Data) {
   if (asianCandles.length < 4) return null;
   const asianHigh = Math.max(...asianCandles.map(d => d.high));
   const asianLow = Math.min(...asianCandles.map(d => d.low));
-  const asianRange = asianHigh - asianLow;
   const currentPrice = h1Data[h1Data.length - 1].close;
   let breakout = 'INSIDE_RANGE';
   if (currentPrice > asianHigh) breakout = 'BULLISH_BREAKOUT';
   else if (currentPrice < asianLow) breakout = 'BEARISH_BREAKOUT';
-  return { high: asianHigh.toFixed(4), low: asianLow.toFixed(4), range: asianRange.toFixed(4), breakout, bias: breakout === 'BULLISH_BREAKOUT' ? 'BUY' : breakout === 'BEARISH_BREAKOUT' ? 'SELL' : 'WAIT' };
+  return { high: asianHigh.toFixed(4), low: asianLow.toFixed(4), breakout, bias: breakout === 'BULLISH_BREAKOUT' ? 'BUY' : breakout === 'BEARISH_BREAKOUT' ? 'SELL' : 'WAIT' };
 }
 
 function detectWyckoffPhase(h4Data) {
@@ -1059,22 +990,12 @@ function detectWyckoffPhase(h4Data) {
   const avgLast = last10.reduce((a,b) => a+b, 0) / 10;
   const avgFirst = first10.reduce((a,b) => a+b, 0) / 10;
   let phase = 'UNKNOWN', description = '';
-  if (position < 0.3 && Math.abs(avgLast - avgFirst) / avgFirst < 0.005) { phase = 'ACCUMULATION'; description = 'Smart Money accumulating at lows (bullish bias)'; }
-  else if (position > 0.7 && Math.abs(avgLast - avgFirst) / avgFirst < 0.005) { phase = 'DISTRIBUTION'; description = 'Smart Money distributing at highs (bearish bias)'; }
-  else if (position > 0.5 && avgLast > avgFirst) { phase = 'MARKUP'; description = 'Uptrend - Trend continuation likely'; }
-  else if (position < 0.5 && avgLast < avgFirst) { phase = 'MARKDOWN'; description = 'Downtrend - Trend continuation likely'; }
-  else { phase = 'REACCUMULATION'; description = 'Consolidation in uptrend'; }
+  if (position < 0.3 && Math.abs(avgLast - avgFirst) / avgFirst < 0.005) { phase = 'ACCUMULATION'; description = 'Smart Money accumulating at lows'; }
+  else if (position > 0.7 && Math.abs(avgLast - avgFirst) / avgFirst < 0.005) { phase = 'DISTRIBUTION'; description = 'Smart Money distributing at highs'; }
+  else if (position > 0.5 && avgLast > avgFirst) { phase = 'MARKUP'; description = 'Uptrend - Trend continuation'; }
+  else if (position < 0.5 && avgLast < avgFirst) { phase = 'MARKDOWN'; description = 'Downtrend - Trend continuation'; }
+  else { phase = 'REACCUMULATION'; description = 'Consolidation'; }
   return { phase, description, position: (position * 100).toFixed(1) + '%', bias: phase === 'ACCUMULATION' || phase === 'MARKUP' ? 'BUY' : phase === 'DISTRIBUTION' || phase === 'MARKDOWN' ? 'SELL' : 'WAIT' };
-}
-
-async function fetchEconomicEvents() {
-  try {
-    const res = await fetchWithTimeout(FOREXFACTORY_CALENDAR, {}, 15000);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error('Invalid');
-    return data.filter(e => e.impact === 'High').slice(0, 10).map(e => ({ title: e.title || '', currency: e.country || '', date: e.date || '', impact: e.impact || 'High', forecast: e.forecast || '', previous: e.previous || '' }));
-  } catch (err) { return null; }
 }
 
 // ============ BASIC INDICATORS ============
@@ -1092,8 +1013,7 @@ function calculateRSI(closes, period = 14) {
 
 function calculateSMA(values, period) {
   if (values.length < period) return null;
-  const slice = values.slice(-period);
-  return slice.reduce((a, b) => a + b, 0) / period;
+  return values.slice(-period).reduce((a, b) => a + b, 0) / period;
 }
 
 function calculateEMA(values, period) {
@@ -1108,8 +1028,8 @@ function calculateMACD(closes) {
   if (closes.length < 26) return null;
   const ema12 = calculateEMA(closes, 12), ema26 = calculateEMA(closes, 26);
   if (!ema12 || !ema26) return null;
-  const macd = ema12 - ema26, signal = macd * 0.2;
-  return { macd, signal, histogram: macd - signal };
+  const macd = ema12 - ema26;
+  return { histogram: macd - macd * 0.2 };
 }
 
 function calculateATR(highs, lows, closes, period = 14) {
@@ -1129,17 +1049,8 @@ function calculateStochastic(highs, lows, closes, period = 14) {
   return ((closes[closes.length - 1] - ll) / (hh - ll)) * 100;
 }
 
-function calculateBollinger(closes, period = 20, mult = 2) {
-  if (closes.length < period) return null;
-  const slice = closes.slice(-period);
-  const sma = slice.reduce((a, b) => a + b, 0) / period;
-  const variance = slice.reduce((s, v) => s + Math.pow(v - sma, 2), 0) / period;
-  const sd = Math.sqrt(variance);
-  return { upper: (sma + mult * sd).toFixed(4), middle: sma.toFixed(4), lower: (sma - mult * sd).toFixed(4) };
-}
-
 function detectMarketRegime(ohlcData) {
-  if (!ohlcData || ohlcData.length < 50) return { regime: 'UNKNOWN', confidence: 0, adx: '0' };
+  if (!ohlcData || ohlcData.length < 50) return { regime: 'UNKNOWN', adx: '0' };
   const closes = ohlcData.map(d => d.close);
   const highs = ohlcData.map(d => d.high);
   const lows = ohlcData.map(d => d.low);
@@ -1155,11 +1066,10 @@ function detectMarketRegime(ohlcData) {
   const plusDI = tr > 0 ? (plusDM / tr) * 100 : 0;
   const minusDI = tr > 0 ? (minusDM / tr) * 100 : 0;
   const adxValue = (plusDI + minusDI) > 0 ? Math.abs(plusDI - minusDI) / (plusDI + minusDI) * 100 : 0;
-  let regime = 'RANGING', confidence = 0;
-  if (adxValue > 25) { regime = ma50 && currentPrice > ma50 ? 'STRONG_UPTREND' : 'STRONG_DOWNTREND'; confidence = Math.min(95, adxValue * 1.5); }
-  else if (adxValue > 20) { regime = ma50 && currentPrice > ma50 ? 'WEAK_UPTREND' : 'WEAK_DOWNTREND'; confidence = adxValue * 1.2; }
-  else { regime = 'RANGING'; confidence = Math.max(0, 100 - adxValue); }
-  return { regime, adx: adxValue.toFixed(1), confidence: Math.round(confidence) };
+  let regime = 'RANGING';
+  if (adxValue > 25) regime = ma50 && currentPrice > ma50 ? 'STRONG_UPTREND' : 'STRONG_DOWNTREND';
+  else if (adxValue > 20) regime = ma50 && currentPrice > ma50 ? 'WEAK_UPTREND' : 'WEAK_DOWNTREND';
+  return { regime, adx: adxValue.toFixed(1) };
 }
 
 function getPremiumDiscountZone(ohlcData) {
@@ -1181,22 +1091,20 @@ function getPremiumDiscountZone(ohlcData) {
 
 function getKillZoneInfo() {
   const now = new Date();
-  const utcHour = now.getUTCHours();
-  const utcMinute = now.getUTCMinutes();
-  const totalMinutes = utcHour * 60 + utcMinute;
+  const totalMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
   const zones = [
-    { name: 'ASIAN_KZ', start: 0, end: 180, quality: 'LOW', desc: 'Asian range - Low volatility' },
-    { name: 'LONDON_OPEN', start: 420, end: 600, quality: 'HIGH', desc: 'London Open - Best trend' },
-    { name: 'LONDON_NY_OVERLAP', start: 720, end: 900, quality: 'VERY_HIGH', desc: 'BEST for A+ setups' },
-    { name: 'NY_AFTERNOON', start: 900, end: 1020, quality: 'MEDIUM', desc: 'NY PM - Consolidation' },
-    { name: 'DEAD_ZONE', start: 1260, end: 1440, quality: 'VERY_LOW', desc: 'Dead zone' }
+    { name: 'ASIAN_KZ', start: 0, end: 180, quality: 'LOW' },
+    { name: 'LONDON_OPEN', start: 420, end: 600, quality: 'HIGH' },
+    { name: 'LONDON_NY_OVERLAP', start: 720, end: 900, quality: 'VERY_HIGH' },
+    { name: 'NY_AFTERNOON', start: 900, end: 1020, quality: 'MEDIUM' },
+    { name: 'DEAD_ZONE', start: 1260, end: 1440, quality: 'VERY_LOW' }
   ];
   for (const z of zones) {
     if (totalMinutes >= z.start && totalMinutes < z.end) {
-      return { active: true, session: z.name, quality: z.quality, description: z.desc, utcTime: `${String(utcHour).padStart(2, '0')}:${String(utcMinute).padStart(2, '0')} UTC`, recommendation: z.quality === 'VERY_HIGH' || z.quality === 'HIGH' ? '✅ Trade' : '⚠️ Caution' };
+      return { session: z.name, quality: z.quality, utcTime: `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')} UTC`, recommendation: z.quality === 'VERY_HIGH' || z.quality === 'HIGH' ? '✅ Trade' : '⚠️ Caution' };
     }
   }
-  return { active: false, session: 'OFF_HOURS', quality: 'LOW', description: 'Off hours', utcTime: `${String(utcHour).padStart(2, '0')}:${String(utcMinute).padStart(2, '0')} UTC`, recommendation: '⏳ Wait' };
+  return { session: 'OFF_HOURS', quality: 'LOW', utcTime: `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')} UTC`, recommendation: '⏳ Wait' };
 }
 
 function detectDivergence(ohlcData) {
@@ -1233,13 +1141,13 @@ function detectLiquiditySweep(ohlcData) {
   const last = ohlcData[ohlcData.length - 1];
   const recentHigh = Math.max(...highs.slice(-20, -1));
   const recentLow = Math.min(...lows.slice(-20, -1));
-  if (last.low < recentLow && last.close > recentLow) return { type: 'BULLISH_SWEEP', sweptLevel: recentLow.toFixed(4), bias: 'BUY', strength: 'HIGH' };
-  if (last.high > recentHigh && last.close < recentHigh) return { type: 'BEARISH_SWEEP', sweptLevel: recentHigh.toFixed(4), bias: 'SELL', strength: 'HIGH' };
+  if (last.low < recentLow && last.close > recentLow) return { type: 'BULLISH_SWEEP', sweptLevel: recentLow.toFixed(4), bias: 'BUY' };
+  if (last.high > recentHigh && last.close < recentHigh) return { type: 'BEARISH_SWEEP', sweptLevel: recentHigh.toFixed(4), bias: 'SELL' };
   return null;
 }
 
 function getHTFBias(h4Data, h1Data) {
-  if (!h4Data || h4Data.length < 50) return { bias: 'NEUTRAL', h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
+  if (!h4Data || h4Data.length < 50) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
   const h4Closes = h4Data.map(d => d.close);
   const h1Closes = h1Data ? h1Data.map(d => d.close) : [];
   const h4MA20 = calculateSMA(h4Closes, 20), h4MA50 = calculateSMA(h4Closes, 50);
@@ -1254,17 +1162,18 @@ function getHTFBias(h4Data, h1Data) {
     if (h1MA20 && h1MA50 && h1Price > h1MA20 && h1MA20 > h1MA50) h1Trend = 'BULLISH';
     else if (h1MA20 && h1MA50 && h1Price < h1MA20 && h1MA20 < h1MA50) h1Trend = 'BEARISH';
   }
-  return { h4: h4Trend, h1: h1Trend, bias: h4Trend, aligned: h4Trend === h1Trend && h4Trend !== 'NEUTRAL' };
+  return { h4: h4Trend, h1: h1Trend, aligned: h4Trend === h1Trend && h4Trend !== 'NEUTRAL' };
 }
 
 function calculateSupportResistance(ohlcData) {
   if (!ohlcData || ohlcData.length < 20) return null;
   const last = ohlcData[ohlcData.length - 1];
   const pivot = (last.high + last.low + last.close) / 3;
-  const r1 = (2 * pivot) - last.low, s1 = (2 * pivot) - last.high;
-  const r2 = pivot + (last.high - last.low), s2 = pivot - (last.high - last.low);
-  const r3 = last.high + 2 * (pivot - last.low), s3 = last.low - 2 * (last.high - pivot);
-  return { pivot: pivot.toFixed(4), r1: r1.toFixed(4), s1: s1.toFixed(4), r2: r2.toFixed(4), s2: s2.toFixed(4), r3: r3.toFixed(4), s3: s3.toFixed(4) };
+  return {
+    pivot: pivot.toFixed(4),
+    r1: ((2 * pivot) - last.low).toFixed(4), s1: ((2 * pivot) - last.high).toFixed(4),
+    r2: (pivot + (last.high - last.low)).toFixed(4), s2: (pivot - (last.high - last.low)).toFixed(4)
+  };
 }
 
 function calculateATRBasedSLTP(ohlcData, action, livePrice, spec) {
@@ -1276,7 +1185,6 @@ function calculateATRBasedSLTP(ohlcData, action, livePrice, spec) {
   const slDist = atr * 1.5;
   const tp1Dist = slDist * 1.5, tp2Dist = slDist * 2.5, tp3Dist = slDist * 4.0;
   return {
-    entry: livePrice,
     sl: (isBuy ? livePrice - slDist : livePrice + slDist).toFixed(spec.decimals),
     tp1: (isBuy ? livePrice + tp1Dist : livePrice - tp1Dist).toFixed(spec.decimals),
     tp2: (isBuy ? livePrice + tp2Dist : livePrice - tp2Dist).toFixed(spec.decimals),
@@ -1284,8 +1192,7 @@ function calculateATRBasedSLTP(ohlcData, action, livePrice, spec) {
     slPips: Math.round(Math.abs(slDist / spec.pipSize)),
     tp1Pips: Math.round(Math.abs(tp1Dist / spec.pipSize)),
     tp2Pips: Math.round(Math.abs(tp2Dist / spec.pipSize)),
-    tp3Pips: Math.round(Math.abs(tp3Dist / spec.pipSize)),
-    atr: atr.toFixed(4)
+    tp3Pips: Math.round(Math.abs(tp3Dist / spec.pipSize))
   };
 }
 
@@ -1299,24 +1206,19 @@ function calculateIndicators(ohlcData) {
   const atr = calculateATR(highs, lows, closes, 14);
   const ma20 = calculateSMA(closes, 20);
   const ma50 = calculateSMA(closes, 50);
-  const ma200 = closes.length >= 200 ? calculateSMA(closes, 200) : null;
   const stoch = calculateStochastic(highs, lows, closes, 14);
-  const bb = calculateBollinger(closes, 20, 2);
   const currentPrice = closes[closes.length - 1];
   let trend = 'RANGING';
   if (ma20 && ma50 && currentPrice > ma20 && ma20 > ma50) trend = 'UPTREND';
   else if (ma20 && ma50 && currentPrice < ma20 && ma20 < ma50) trend = 'DOWNTREND';
   return {
     rsi: rsi ? rsi.toFixed(1) : null,
-    rsi_signal: rsi ? (rsi > 70 ? 'OVERBOUGHT' : rsi < 30 ? 'OVERSOLD' : 'NEUTRAL') : null,
-    macd: macd ? { value: macd.macd.toFixed(4), histogram: macd.histogram.toFixed(4), crossover: macd.histogram > 0 ? 'BULLISH' : 'BEARISH' } : null,
+    macd: macd ? { histogram: macd.histogram.toFixed(4), crossover: macd.histogram > 0 ? 'BULLISH' : 'BEARISH' } : null,
     atr: atr ? atr.toFixed(4) : null,
-    volatilityPct: atr ? (atr / currentPrice * 100).toFixed(2) : null,
     ma20: ma20 ? ma20.toFixed(4) : null,
     ma50: ma50 ? ma50.toFixed(4) : null,
-    ma200: ma200 ? ma200.toFixed(4) : null,
     stoch: stoch ? stoch.toFixed(1) : null,
-    bb: bb, trend: trend, currentPrice: currentPrice.toFixed(4),
+    trend, currentPrice: currentPrice.toFixed(4),
     regime: detectMarketRegime(ohlcData),
     zone: getPremiumDiscountZone(ohlcData),
     killZone: getKillZoneInfo(),
@@ -1335,14 +1237,13 @@ function calculateInstitutionalAlignment(confluence, dxyAnalysis, us10yAnalysis,
   if (dxyAnalysis && dxyAnalysis.alignment !== 'NEUTRAL') {
     if ((dxyAnalysis.alignment === 'FAVORS_BUY' && confluence.action === 'BUY') || (dxyAnalysis.alignment === 'FAVORS_SELL' && confluence.action === 'SELL')) {
       score += 25; checks.push('✅ DXY aligns');
-    } else { checks.push('❌ DXY disagrees'); }
+    } else checks.push('❌ DXY disagrees');
   } else { score += 8; checks.push('⚠️ DXY neutral'); }
   
   maxScore += 20;
   if (us10yAnalysis && us10yAnalysis.direction !== 'NEUTRAL') {
     const usdBull = us10yAnalysis.bias === 'USD_BULLISH';
-    const usdBear = us10yAnalysis.bias === 'USD_BEARISH';
-    if ((usdBull && confluence.action === 'SELL') || (usdBear && confluence.action === 'BUY')) {
+    if ((usdBull && confluence.action === 'SELL') || (!usdBull && confluence.action === 'BUY')) {
       score += 20; checks.push(`✅ US10Y ${us10yAnalysis.direction} aligns`);
     } else { checks.push(`⚠️ US10Y ${us10yAnalysis.direction}`); score += 5; }
   } else { score += 8; checks.push('⚠️ US10Y neutral'); }
@@ -1351,7 +1252,7 @@ function calculateInstitutionalAlignment(confluence, dxyAnalysis, us10yAnalysis,
   if (htfBias && htfBias.aligned) {
     if ((htfBias.h4 === 'BULLISH' && confluence.action === 'BUY') || (htfBias.h4 === 'BEARISH' && confluence.action === 'SELL')) {
       score += 20; checks.push('✅ HTF aligned');
-    } else { checks.push('❌ Fighting HTF'); }
+    } else checks.push('❌ Fighting HTF');
   } else { checks.push('⚠️ HTF mixed'); score += 5; }
   
   maxScore += 10;
@@ -1365,7 +1266,7 @@ function calculateInstitutionalAlignment(confluence, dxyAnalysis, us10yAnalysis,
   if (wyckoff) {
     if ((wyckoff.bias === 'BUY' && confluence.action === 'BUY') || (wyckoff.bias === 'SELL' && confluence.action === 'SELL')) {
       score += 10; checks.push(`✅ Wyckoff ${wyckoff.phase}`);
-    } else { checks.push(`❌ Wyckoff ${wyckoff.phase}`); }
+    } else checks.push(`❌ Wyckoff ${wyckoff.phase}`);
   }
   
   maxScore += 5;
@@ -1424,7 +1325,7 @@ async function fetchAllMarketData() {
     document.getElementById('dataUS10Y').className = `data-status-item ${us10yData ? 'ok' : 'fail'}`;
     document.getElementById('dataUS10Y').querySelector('span:last-child').innerText = us10yData ? `${us10yData.length} ✓` : 'FAIL';
     
-    window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, dxy: dxyData, us10y: us10yData, indicators: null, news: null };
+    window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, dxy: dxyData, us10y: us10yData, indicators: null };
     
     if (h1Data && h1Data.length >= 30) {
       const ind = calculateIndicators(h1Data);
@@ -1432,15 +1333,12 @@ async function fetchAllMarketData() {
       window.marketData.indicators = ind;
     }
     
-    fetchEconomicEvents().then(events => { window.marketData.news = events; });
-    renderChartPreview(pair, h4Data, h1Data, m15Data, window.marketData.indicators, dxyData, us10yData);
+    renderChartPreview(pair, h4Data, h1Data, indicators, dxyData, us10yData);
     
     if (h1Data && m15Data) {
       document.getElementById('runBtn').disabled = false;
       showToast(`✅ All data loaded`);
-    } else {
-      showToast(`⚠️ Some data failed`, 5000);
-    }
+    } else showToast(`⚠️ Some data failed`, 5000);
   } catch (err) {
     showToast(`❌ ${err.message}`, 4000);
   } finally {
@@ -1449,7 +1347,7 @@ async function fetchAllMarketData() {
   }
 }
 
-function renderChartPreview(pair, h4Data, h1Data, m15Data, indicators, dxyData, us10yData) {
+function renderChartPreview(pair, h4Data, h1Data, indicators, dxyData, us10yData) {
   const container = document.getElementById('chartPreview');
   const spec = PAIR_SPECS[pair];
   let html = '';
@@ -1461,50 +1359,30 @@ function renderChartPreview(pair, h4Data, h1Data, m15Data, indicators, dxyData, 
     if (indicators.zone) html += `<div>Zone: <strong>${indicators.zone.zone}</strong> (${indicators.zone.position})</div>`;
     if (indicators.wyckoff) html += `<div style="color:var(--pink);">Wyckoff: <strong>${indicators.wyckoff.phase}</strong></div>`;
   }
-  
   if (dxyData && dxyData.length > 0) {
     const dxy = analyzeDXY(dxyData, spec);
-    if (dxy) {
-      html += `<div style="margin-top:8px;color:var(--purple);font-weight:bold;">💵 DXY: ${dxy.price} — ${dxy.direction}</div>`;
-      html += `<div style="color:var(--purple);">Alignment: <strong>${dxy.alignment}</strong></div>`;
-    }
+    if (dxy) html += `<div style="margin-top:8px;color:var(--purple);font-weight:bold;">💵 DXY: ${dxy.price} — ${dxy.direction}</div>`;
   }
-  
   if (us10yData && us10yData.length > 0) {
-    const us10y = analyzeUS10Y(us10yData);
-    if (us10y) html += `<div style="margin-top:6px;color:var(--cyan);font-weight:bold;">📈 US10Y: ${us10y.current} — ${us10y.direction}</div>`;
+    const u = analyzeUS10Y(us10yData);
+    if (u) html += `<div style="margin-top:6px;color:var(--cyan);font-weight:bold;">📈 US10Y: ${u.current} — ${u.direction}</div>`;
   }
-  
-  if (h1Data && h1Data.length > 0) {
-    html += `<div style="margin-top:8px;color:var(--accent);">📈 Last 3 candles:</div>`;
-    h1Data.slice(-3).forEach(c => {
-      const bull = c.close >= c.open;
-      html += `<div class="${bull ? 'bullish' : 'bearish'}">C:${c.close.toFixed(4)} ${bull ? '▲' : '▼'}</div>`;
-    });
-  }
-  
   container.innerHTML = html || 'No data';
 }
 
-function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents) {
+function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias) {
   let prompt = `You are the "${agent.name}" in an INSTITUTIONAL trading system. You think like SMART MONEY.
 
 YOUR LENS: ${agent.lens}
-YOUR FOCUS: ${agent.focus}
 YOUR WEIGHT: ${(agent.weight * 100).toFixed(0)}%
 
 Analyze ${pair} at current price ${livePrice}.
 `;
+  if (htfBias) prompt += `\nHTF BIAS:\n- 4H: ${htfBias.h4}\n- 1H: ${htfBias.h1}\n- Aligned: ${htfBias.aligned ? 'YES' : 'NO'}\n`;
+  if (dxyAnalysis) prompt += `\n💵 DXY:\n- Price: ${dxyAnalysis.price}\n- Direction: ${dxyAnalysis.direction}\n- Alignment: ${dxyAnalysis.alignment}\n- Expectation: ${dxyAnalysis.expectation}\n`;
+  if (us10yAnalysis) prompt += `\n📈 US10Y:\n- Yield: ${us10yAnalysis.current}\n- Direction: ${us10yAnalysis.direction}\n- Interpretation: ${us10yAnalysis.interpretation}\n`;
+  if (sessionLevels) prompt += `\nSESSION LEVELS:\n- PDH: ${sessionLevels.pdh}\n- PDL: ${sessionLevels.pdl}\n- PWH: ${sessionLevels.pwh}\n- PWL: ${sessionLevels.pwl}\n- Bias: ${sessionLevels.liquidityBias}\n`;
   
-  if (htfBias) prompt += `\nHIGHER TIMEFRAME BIAS:\n- 4H: ${htfBias.h4}\n- 1H: ${htfBias.h1}\n- Aligned: ${htfBias.aligned ? 'YES' : 'NO'}\n`;
-  if (dxyAnalysis) prompt += `\n💵 DXY:\n- Price: ${dxyAnalysis.price}\n- Direction: ${dxyAnalysis.direction}\n- Correlation: ${dxyAnalysis.correlation}\n- Alignment: ${dxyAnalysis.alignment}\n- Expectation: ${dxyAnalysis.expectation}\n`;
-  if (us10yAnalysis) prompt += `\n📈 US10Y:\n- Yield: ${us10yAnalysis.current}\n- Direction: ${us10yAnalysis.direction}\n- Bias: ${us10yAnalysis.bias}\n- Interpretation: ${us10yAnalysis.interpretation}\n`;
-  if (sessionLevels) prompt += `\n📊 SESSION LEVELS:\n- PDH: ${sessionLevels.pdh}\n- PDL: ${sessionLevels.pdl}\n- PWH: ${sessionLevels.pwh}\n- PWL: ${sessionLevels.pwl}\n- Bias: ${sessionLevels.liquidityBias}\n`;
-  
-  if (h4Data) {
-    prompt += `\n4-HOUR CANDLES (last 15):\n`;
-    h4Data.slice(-15).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(4)} H:${c.high.toFixed(4)} L:${c.low.toFixed(4)} C:${c.close.toFixed(4)}\n`);
-  }
   if (h1Data) {
     prompt += `\n1-HOUR CANDLES (last 20):\n`;
     h1Data.slice(-20).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(4)} H:${c.high.toFixed(4)} L:${c.low.toFixed(4)} C:${c.close.toFixed(4)}\n`);
@@ -1516,32 +1394,25 @@ Analyze ${pair} at current price ${livePrice}.
   
   if (indicators) {
     prompt += `\nINDICATORS:\n`;
-    prompt += `- RSI(14): ${indicators.rsi} (${indicators.rsi_signal})\n`;
-    if (indicators.macd) prompt += `- MACD Histogram: ${indicators.macd.histogram} (${indicators.macd.crossover})\n`;
+    prompt += `- RSI(14): ${indicators.rsi}\n`;
+    if (indicators.macd) prompt += `- MACD: ${indicators.macd.histogram} (${indicators.macd.crossover})\n`;
     prompt += `- Trend: ${indicators.trend}\n`;
     if (indicators.regime) prompt += `- Regime: ${indicators.regime.regime} (ADX: ${indicators.regime.adx})\n`;
     if (indicators.zone) prompt += `- Zone: ${indicators.zone.zone} (${indicators.zone.position}) — ${indicators.zone.bias}\n`;
-    if (indicators.killZone) prompt += `- Kill Zone: ${indicators.killZone.session}\n`;
     if (indicators.divergence?.detected) prompt += `- ⚠️ ${indicators.divergence.rsi} (${indicators.divergence.strength}%)\n`;
-    if (indicators.sweep) prompt += `- 💧 SWEEP: ${indicators.sweep.type} at ${indicators.sweep.sweptLevel}\n`;
-    if (indicators.wyckoff) prompt += `- Wyckoff: ${indicators.wyckoff.phase} — ${indicators.wyckoff.description}\n`;
-    if (indicators.asianRange) prompt += `- Asian Range: H=${indicators.asianRange.high}, L=${indicators.asianRange.low} — ${indicators.asianRange.breakout}\n`;
+    if (indicators.sweep) prompt += `- 💧 SWEEP: ${indicators.sweep.type}\n`;
+    if (indicators.wyckoff) prompt += `- Wyckoff: ${indicators.wyckoff.phase}\n`;
+    if (indicators.asianRange) prompt += `- Asian Range: ${indicators.asianRange.breakout}\n`;
     if (indicators.supportResistance) {
       const sr = indicators.supportResistance;
       prompt += `- S/R: R1=${sr.r1}, Pivot=${sr.pivot}, S1=${sr.s1}\n`;
     }
   }
   
-  if (economicEvents && economicEvents.length > 0) {
-    prompt += `\nECONOMIC EVENTS:\n`;
-    economicEvents.slice(0, 5).forEach(e => prompt += `- ${e.currency}: ${e.title}\n`);
-  }
-  
-  prompt += `\nINSTITUTIONAL RULES:
+  prompt += `\nRULES:
 1. TRADE WITH INSTITUTIONS — align with DXY, US10Y, HTF, Sessions.
 2. If DXY or US10Y DISAGREE, REDUCE confidence heavily.
-3. Consider Smart Money: Order Blocks, FVG, Liquidity Sweeps, Wyckoff.
-4. Confidence 0-100. If unclear, vote HOLD.
+3. Confidence 0-100. If unclear, vote HOLD.
 
 Respond ONLY in valid JSON:
 {
@@ -1553,34 +1424,63 @@ Respond ONLY in valid JSON:
   return prompt;
 }
 
-// ================= CALL MISTRAL (MAIN AI) =================
-async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, apiKey) {
-  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents);
+// ================= CALL MISTRAL ONLY =================
+async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, apiKey) {
+  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias);
   let lastError = null;
   
   for (const model of MISTRAL_MODELS) {
     try {
-      return await withRetry(async () => {
-        const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-          body: JSON.stringify({ model: model, messages: [{ role: 'user', content: prompt }], temperature: 0.3, max_tokens: 1000 })
-        }, API_TIMEOUT);
-        const data = await response.json();
-        if (data.error) throw new Error(`Mistral (${model}): ${data.error.message}`);
-        if (!data.choices || !data.choices[0]) throw new Error(`Mistral (${model}): No response`);
-        let text = data.choices[0].message.content.trim();
-        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-        const result = safeJsonParse(text);
-        if (!result) throw new Error(`Mistral (${model}): Invalid JSON`);
-        return {
-          ...agent,
-          vote: (result.vote || 'HOLD').toUpperCase(),
-          confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-          reasoning: result.reasoning || 'No analysis.',
-          key_level: result.key_level || null,
-          provider: 'Mistral'
-        };
-      }, 2, 2000);
+      console.log(`[Mistral] Trying model: ${model}`);
+      const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({ 
+          model: model, 
+          messages: [{ role: 'user', content: prompt }], 
+          temperature: 0.3, 
+          max_tokens: 1000 
+        })
+      }, API_TIMEOUT);
+      
+      const rawText = await response.text();
+      console.log(`[Mistral ${model}] Status: ${response.status}, Length: ${rawText.length}`);
+      console.log(`[Mistral ${model}] Preview:`, rawText.substring(0, 200));
+      
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (jsonErr) {
+        throw new Error(`${model}: HTTP ${response.status} — ${rawText.substring(0, 100)}`);
+      }
+      
+      if (data.error) {
+        const errMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
+        throw new Error(`${model}: ${errMsg}`);
+      }
+      if (data.message && !data.choices) {
+        throw new Error(`${model}: ${data.message}`);
+      }
+      if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+        throw new Error(`${model}: Unexpected: ${rawText.substring(0, 100)}`);
+      }
+      
+      let text = data.choices[0].message.content.trim();
+      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      const result = safeJsonParse(text);
+      if (!result) throw new Error(`${model}: Invalid JSON from AI`);
+      
+      return {
+        ...agent,
+        vote: (result.vote || 'HOLD').toUpperCase(),
+        confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+        reasoning: result.reasoning || 'No analysis.',
+        key_level: result.key_level || null,
+        provider: 'Mistral'
+      };
     } catch (e) {
       lastError = e;
       console.warn(`[${agent.name}] Mistral ${model} failed: ${e.message}`);
@@ -1589,73 +1489,17 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indi
   }
   throw new Error(lastError?.message || 'All Mistral models failed');
 }
-// ==========================================================
 
-async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, apiKey) {
-  const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents);
-  let lastError = null;
-  for (const model of GEMINI_MODELS) {
-    try {
-      return await withRetry(async () => {
-        const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
-        const response = await fetchWithTimeout(endpoint, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { temperature: 0.3, responseMimeType: "application/json" }
-          })
-        }, API_TIMEOUT);
-        const data = await response.json();
-        if (data.error) throw new Error(`${model}: ${data.error.message}`);
-        if (!data.candidates || !data.candidates[0]) throw new Error(`${model}: No response`);
-        let text = data.candidates[0].content.parts[0].text.trim();
-        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-        const result = safeJsonParse(text);
-        if (!result) throw new Error(`${model}: Invalid JSON`);
-        return {
-          ...agent,
-          vote: (result.vote || 'HOLD').toUpperCase(),
-          confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-          reasoning: result.reasoning || 'No analysis.',
-          key_level: result.key_level || null,
-          provider: `Gemini`
-        };
-      }, RETRY_ATTEMPTS, 1500);
-    } catch (e) { 
-      lastError = e; 
-      console.warn(`[${agent.name}] ${model} failed: ${e.message}`);
-      continue; 
-    }
-  }
-  throw new Error(lastError?.message || 'All Gemini models failed');
+async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias) {
+  const mistralKey = getMistralKey();
+  if (!mistralKey) throw new Error("Hakuna Mistral API key");
+  return withTimeout(
+    callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, mistralKey),
+    AGENT_TIMEOUT,
+    `${agent.name}: Timeout`
+  );
 }
-
-// ================= CALL AGENT (MISTRAL FIRST) =================
-async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents) {
-  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
-  const agentCall = async () => {
-    let mErr = null, gErr = null;
-    
-    if (mistralKey) {
-      try { return await callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, mistralKey); }
-      catch (e) { mErr = e.message; }
-    }
-    
-    if (geminiKey) {
-      try { return await callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, economicEvents, geminiKey); }
-      catch (e) { gErr = e.message; }
-    }
-    
-    let msg = "All providers failed. ";
-    if (mErr) msg += `Mistral → ${mErr}. `;
-    if (gErr) msg += `Gemini → ${gErr}`;
-    if (!geminiKey && mErr) msg += " (Gemini key not set)";
-    if (!mistralKey && gErr) msg += " (Mistral key not set)";
-    throw new Error(msg);
-  };
-  return withTimeout(agentCall(), AGENT_TIMEOUT, `${agent.name}: Timeout`);
-}
-// =====================================================================
+// ===========================================================
 
 function computeConfluence(agentResults) {
   let buy = 0, sell = 0, hold = 0;
@@ -1673,7 +1517,6 @@ function computeConfluence(agentResults) {
   else { action = 'HOLD'; score = holdN; }
   return {
     action, confluenceScore: Math.round(score),
-    buyScore: Math.round(buyN), sellScore: Math.round(sellN), holdScore: Math.round(holdN),
     buyCount: agentResults.filter(r => r.vote === 'BUY').length,
     sellCount: agentResults.filter(r => r.vote === 'SELL').length,
     holdCount: agentResults.filter(r => r.vote === 'HOLD').length
@@ -1701,13 +1544,13 @@ function capitalShield(confluence, entry, sl, tp) {
 }
 
 async function runAnalysis() {
-  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
-  if (!mistralKey && !geminiKey) { alert("No AI API key."); logout(); return; }
+  const mistralKey = getMistralKey();
+  if (!mistralKey) { alert("No Mistral key."); logout(); return; }
   if (!window.marketData || !window.marketData.h1) { alert("Fetch data first."); return; }
 
   const pair = document.getElementById('selectedPair').value;
   const livePrice = parseFloat(document.getElementById('livePrice').value);
-  const { h4, h1, m15, indicators, dxy, us10y, news } = window.marketData;
+  const { h4, h1, m15, indicators, dxy, us10y } = window.marketData;
   const spec = PAIR_SPECS[pair];
   const dxyAnalysis = dxy ? analyzeDXY(dxy, spec) : null;
   const us10yAnalysis = us10y ? analyzeUS10Y(us10y) : null;
@@ -1730,7 +1573,7 @@ async function runAnalysis() {
     const agent = AGENTS_4[i];
     const aStart = Date.now();
     try {
-      const result = await callAgent(agent, pair, livePrice, h4, h1, m15, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, news);
+      const result = await callAgent(agent, pair, livePrice, h4, h1, m15, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias);
       result.duration = Date.now() - aStart;
       updateAgentCard(result);
       agentResults.push(result);
@@ -1739,7 +1582,7 @@ async function runAnalysis() {
       updateAgentCard(failed);
       agentResults.push(failed);
     }
-    if (i < AGENTS_4.length - 1) await new Promise(r => setTimeout(r, 1000));
+    if (i < AGENTS_4.length - 1) await new Promise(r => setTimeout(r, 1500));
   }
 
   try {
@@ -1766,7 +1609,7 @@ async function runAnalysis() {
       shield: shield.approved,
       agents: agentResults, confluence, indicators,
       dxyAnalysis, us10yAnalysis, sessionLevels, htfBias,
-      institutionalScore, news,
+      institutionalScore,
       totalDuration: Date.now() - startTime,
       autoTrackStart: Date.now(), outcome: 'PENDING'
     };
@@ -1779,7 +1622,7 @@ async function runAnalysis() {
     container.innerHTML = `<div class="card" style="border-color:var(--red);"><h3>❌ Error</h3><p>${err.message}</p></div>`;
   } finally {
     runBtn.disabled = false;
-    runBtn.innerHTML = '🚀 START INSTITUTIONAL ANALYSIS';
+    runBtn.innerHTML = '🚀 START ANALYSIS';
   }
 }
 
@@ -1787,8 +1630,8 @@ function renderLoadingState(pair, agents) {
   const container = document.getElementById('resultsContainer');
   container.innerHTML = `
     <div class="card" style="border-color:var(--pink);text-align:center;">
-      <div class="ballistic-header" style="justify-content:center;">🏦 INSTITUTIONAL ANALYSIS — ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">DXY + US10Y + Wyckoff + HTF</div>
+      <div class="ballistic-header" style="justify-content:center;">🏦 MISTRAL ANALYSIS — ${pair}</div>
+      <div style="font-size:12px;color:var(--muted);">Small → Medium → Large</div>
     </div>
     <div class="card"><div class="ballistic-header">👥 AGENTS 4</div><div id="agentsLiveContainer"></div></div>
   `;
@@ -1808,7 +1651,7 @@ function updateAgentCard(result) {
   card.classList.add(result.vote.toLowerCase());
   v.className = `master-vote vote-${result.vote.toLowerCase()}`;
   v.innerText = result.vote === 'BUY' ? '📈 BUY' : result.vote === 'SELL' ? '📉 SELL' : '⏸ HOLD';
-  let p = result.provider === 'Mistral' ? '<span class="provider-badge provider-mistral">Mistral</span>' : result.provider === 'Gemini' ? '<span class="provider-badge provider-gemini">Gemini</span>' : '<span class="provider-badge provider-failed">Failed</span>';
+  let p = result.provider === 'Mistral' ? '<span class="provider-badge provider-mistral">Mistral</span>' : '<span class="provider-badge provider-failed">Failed</span>';
   d.innerHTML = result.reasoning + (result.key_level ? `<br><strong style="color:var(--accent);">Key: ${result.key_level}</strong>` : '');
   c.innerHTML = `Confidence: <strong style="color:var(--accent);">${result.confidence}%</strong> ${p} • ${(result.duration/1000).toFixed(1)}s<div class="confidence-bar"><div class="confidence-fill" style="width:${result.confidence}%"></div></div>`;
 }
@@ -1864,7 +1707,7 @@ function buildAnalysisHTML(record, shield) {
       <div class="ballistic-header">💵 DXY CORRELATION</div>
       <div class="grid-2">
         <div class="mini-box"><label>DXY Price</label><div style="font-size:16px;font-weight:bold;color:${dColor};">${d.price}</div><div style="font-size:11px;color:var(--muted);">${d.direction}</div></div>
-        <div class="mini-box" style="border-color:${aColor};"><label>Alignment</label><div style="font-size:14px;font-weight:bold;color:${aColor};">${d.alignment}</div><div style="font-size:10px;color:var(--muted);">${d.correlation}</div></div>
+        <div class="mini-box" style="border-color:${aColor};"><label>Alignment</label><div style="font-size:14px;font-weight:bold;color:${aColor};">${d.alignment}</div></div>
       </div>
       <div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center;">${d.expectation}</div>
     </div>`;
@@ -1920,7 +1763,7 @@ function buildAnalysisHTML(record, shield) {
     }
     if (ar) {
       const aColor = ar.bias === 'BUY' ? 'var(--green)' : ar.bias === 'SELL' ? 'var(--red)' : 'var(--yellow)';
-      html += `<div class="mini-box" style="border-color:${aColor};margin-bottom:8px;"><label style="color:${aColor};">Asian Range</label><div style="font-size:12px;">H: ${ar.high} | L: ${ar.low}</div><div style="font-size:12px;font-weight:bold;color:${aColor};">${ar.breakout.replace(/_/g, ' ')}</div></div>`;
+      html += `<div class="mini-box" style="border-color:${aColor};margin-bottom:8px;"><label style="color:${aColor};">Asian Range</label><div style="font-size:12px;font-weight:bold;color:${aColor};">${ar.breakout.replace(/_/g, ' ')}</div></div>`;
     }
     if (kz) html += `<div class="mini-box"><label>Kill Zone</label><div style="font-size:12px;">${kz.session} — ${kz.recommendation}</div></div>`;
     html += `</div>`;
@@ -1936,10 +1779,9 @@ function buildAnalysisHTML(record, shield) {
   </div>`;
   
   if (shield.approved && action !== 'HOLD' && slPips > 0) {
-    const autoLot = computeAutoLotSize(slPips, spec.pipValue.standard);
-    
+    const autoLot = computeAutoLotSize(slPips, spec.pipValue);
     html += `<div class="card">
-      <div class="ballistic-header">📊 TRADE PARAMETERS (ATR-Based)</div>
+      <div class="ballistic-header">📊 TRADE PARAMETERS</div>
       <div class="grid-2">
         <div class="mini-box"><label>Entry</label><div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div></div>
         <div class="mini-box"><label style="color:var(--red);">SL</label><div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div><div style="font-size:11px;">${slPips} pips</div></div>
@@ -1950,12 +1792,11 @@ function buildAnalysisHTML(record, shield) {
         <div class="mini-box"><label style="color:var(--green);">TP3</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${tp3}</div><div style="font-size:11px;">${tp3Pips}p</div></div>
       </div>
       <div class="mini-box" style="margin-top:10px;text-align:center;"><label style="color:var(--accent);">RRR</label><div style="font-size:20px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div></div>
-      
       ${autoLot ? `
         <div class="auto-lot-box">
           <div style="font-size:11px;color:var(--pink);letter-spacing:2px;">💰 AUTO POSITION SIZE</div>
           <div class="auto-lot-value">${autoLot.lotSize}</div>
-          <div style="font-size:13px;color:var(--text);">LOTS</div>
+          <div style="font-size:13px;">LOTS</div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;">Balance: $${autoLot.balance} | Risk: ${autoLot.riskPct}% ($${autoLot.riskAmount})</div>
         </div>
       ` : ''}
@@ -1967,13 +1808,12 @@ function buildAnalysisHTML(record, shield) {
   }
   
   if (record.agents) {
-    html += `<div class="card"><div class="ballistic-header">👥 AGENTS 4</div>${record.agents.map(a => {
+    html += `<div class="card"><div class="ballistic-header">👥 AGENTS 4 — MISTRAL</div>${record.agents.map(a => {
       const vc = a.vote === 'BUY' ? 'vote-buy' : a.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
-      let pb = a.provider === 'Mistral' ? '<span class="provider-badge provider-mistral">Mistral</span>' : a.provider === 'Gemini' ? '<span class="provider-badge provider-gemini">Gemini</span>' : '<span class="provider-badge provider-failed">Failed</span>';
       return `<div class="master-card ${a.vote.toLowerCase()}">
         <div class="master-header"><div class="master-name">${a.id}. ${a.name}</div><div class="master-vote ${vc}">${a.vote}</div></div>
         <div class="master-desc">${a.reasoning}</div>
-        <div class="master-confidence">Confidence: <strong style="color:var(--accent);">${a.confidence}%</strong> ${pb} • ${(a.duration/1000).toFixed(1)}s<div class="confidence-bar"><div class="confidence-fill" style="width:${a.confidence}%"></div></div></div>
+        <div class="master-confidence">Confidence: <strong style="color:var(--accent);">${a.confidence}%</strong> • ${(a.duration/1000).toFixed(1)}s<div class="confidence-bar"><div class="confidence-fill" style="width:${a.confidence}%"></div></div></div>
       </div>`;
     }).join('')}</div>`;
   }
@@ -2023,10 +1863,10 @@ async function updatePricesForBacktest() {
     if (!spec) continue;
     try {
       let price = null;
-      if (spec.source === 'binance' && spec.binanceSymbol) {
+      if (spec.source === 'binance') {
         const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
         if (r.ok) price = parseFloat((await r.json()).price);
-      } else if (spec.twelveSymbol) {
+      } else {
         const key = getTwelveKey();
         if (key) {
           const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
@@ -2050,7 +1890,7 @@ function calculateRisk() {
   const pair = document.getElementById('riskPair').value;
   const spec = PAIR_SPECS[pair];
   const riskAmt = b * (r / 100);
-  const lot = riskAmt / (sl * spec.pipValue.standard);
+  const lot = riskAmt / (sl * spec.pipValue);
   document.getElementById('riskResultBox').style.display = 'block';
   document.getElementById('riskResultText').innerHTML = `Balance: $${b.toFixed(2)}<br>Risk: $${riskAmt.toFixed(2)}<br><br><strong style="color:var(--accent);font-size:15px;">LOT: ${lot.toFixed(3)}</strong>`;
 }
@@ -2150,11 +1990,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "31.3", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "31.4", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v31.3-${Date.now()}.json`;
+  a.download = `lutynoel-v31.4-${Date.now()}.json`;
   a.click();
 }
 
@@ -2167,7 +2007,7 @@ window.addEventListener('DOMContentLoaded', () => {
   clearMarketData();
   document.getElementById('universalModal').addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
   const keys = loadKeys();
-  if (keys.name && (keys.mistralKey || keys.geminiKey)) {
+  if (keys.name && keys.mistralKey) {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${keys.name}</strong>!`;
