@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v28.0 — Persistent Keys Edition</title>
+<title>Lutynoel FX v28.1 — Modal Fix Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -96,9 +96,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .history-card:hover{border-color:var(--accent);background:#141418}
 .history-card .chevron{color:var(--accent);font-size:22px;font-weight:bold;flex-shrink:0}
 .forex-hero{background:linear-gradient(135deg,rgba(18,18,21,.95),rgba(30,27,75,.9));border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:15px}
-.modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
-.modal-content{max-width:92%;width:100%;max-width:600px;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;position:relative;margin:20px 0}
-.modal-close{position:absolute;top:10px;right:20px;color:#fff;font-size:30px;font-weight:bold;cursor:pointer;line-height:1}
+/* MODAL - FIXED */
+.modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal.active{display:flex}
+.modal-content{max-width:92%;width:100%;max-width:600px;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;position:relative;margin:20px 0;animation:modalSlideIn 0.3s ease}
+@keyframes modalSlideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.modal-close-top{position:absolute;top:10px;right:10px;background:#ef4444;color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;flex-shrink:0}
+.modal-close-top:hover{background:#dc2626}
+.modal-close-bottom{width:100%;padding:14px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:bold;font-size:15px;margin-top:15px;cursor:pointer}
 .nav-btn{background:none;border:none;color:#fff;font-size:20px;padding:4px}
 .disclaimer-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .info-box{background:rgba(59,130,246,.1);border:1px solid var(--blue);color:#93c5fd;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
@@ -126,9 +131,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 </head>
 <body>
 
-<div id="universalModal" class="modal" onclick="closeUniversalModal()">
-  <div id="modalBody" onclick="event.stopPropagation()" class="modal-content">
-    <span class="modal-close" onclick="closeUniversalModal()">&times;</span>
+<!-- MODAL - FIXED -->
+<div id="universalModal" class="modal">
+  <div class="modal-content" id="modalBody">
     <div id="modalInnerContent"></div>
   </div>
 </div>
@@ -136,8 +141,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v28.0</div>
-    <div class="auth-subtitle">Persistent Keys Edition</div>
+    <div class="auth-title">Lutynoel FX v28.1</div>
+    <div class="auth-subtitle">Persistent Keys + Modal Fix</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
@@ -163,8 +168,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
 
       <div class="info-box">
-        🔒 Keys zinahifadhiwa kwenye <strong>localStorage</strong> (browser yako).<br>
-        ✅ Utaingia <strong>mara moja tu</strong> — hakuna kurudia.<br>
+        🔒 Keys zinahifadhiwa kwenye <strong>localStorage</strong>.<br>
+        ✅ Utaingia <strong>mara moja tu</strong>.<br>
         🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Get Gemini key →</a><br>
         🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Get TwelveData key →</a>
       </div>
@@ -189,7 +194,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v28.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v28.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -207,13 +212,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v28.0 PERSISTENT</span>
+          <span class="badge-shield">v28.1 MODAL FIX</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
           <span style="font-size:12px;color:var(--muted);font-weight:600;">AI + OHLC Data</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Keys zinahifadhiwa. Hakuna kurudia login. Data-driven analysis.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Keys persistent. Modal fixed. Data-driven analysis.</p>
       </div>
 
       <div class="grid-3">
@@ -229,18 +234,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>v28.0 Features:</strong><br>
-        • <strong>Persistent Keys</strong> — Login mara moja tu<br>
-        • <strong>OHLC Data</strong> — Multi-timeframe (4H + 1H + 15M)<br>
-        • <strong>4 AI Agents</strong> — Weighted confluence<br>
-        • <strong>Capital Shield</strong> — RRR ≥ 1:2 na Confluence ≥ 60%<br>
-        • <strong>Auto-Backtest</strong> — Inafuatilia signals
+        ⚙️ <strong>v28.1 Features:</strong><br>
+        • <strong>Persistent Keys</strong> — Login mara moja<br>
+        • <strong>Modal Fix</strong> — Funga kwa ✕ au ESC au Background<br>
+        • <strong>OHLC Data</strong> — Multi-timeframe<br>
+        • <strong>4 AI Agents</strong> — Weighted confluence
       </div>
     </div>
 
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 AI Confluence Analysis (OHLC Data)</h3>
+        <h3 style="margin:5px 0 15px;">🎯 AI Confluence Analysis</h3>
 
         <label>1. Choose Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
@@ -421,6 +425,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <h3 style="margin:0;">📁 History</h3>
           <button onclick="clearHistory()" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">Clear All</button>
         </div>
+        <div class="info-box" style="margin-bottom:12px;">
+          👆 <strong>Tap any analysis</strong> to view full details
+        </div>
         <div id="historyList">
           <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">No history yet.</div>
         </div>
@@ -431,11 +438,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v28.0 (Persistent Keys)<br>
+          <strong>Version:</strong> v28.1 (Modal Fix)<br>
           <strong>Primary AI:</strong> Gemini 3.8 Flash<br>
           <strong>Fallback:</strong> Gemini 3.6 → 3.5 → Mistral<br>
-          <strong>Data:</strong> TwelveData (forex) + Binance (crypto)<br>
-          <strong>Keys Storage:</strong> localStorage (persistent)
+          <strong>Data:</strong> TwelveData + Binance<br>
+          <strong>Keys Storage:</strong> localStorage
         </div>
         
         <label>Update Gemini Key</label>
@@ -450,7 +457,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         
         <button class="secondary-btn" onclick="testApiKeys()">🧪 Test API Keys</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
-        <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All Keys (Logout Completely)</button>
+        <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All Keys</button>
       </div>
     </div>
   </div>
@@ -458,11 +465,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v28.0 — PERSISTENT KEYS EDITION
-   All v25-v27 bugs fixed. Keys saved. Auto-login.
+   LUTYNOEL FX v28.1 — MODAL FIX EDITION
+   All bugs fixed including history modal close
    ===================================================== */
 
-// ============ CONFIG ============
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash'];
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
@@ -477,7 +483,6 @@ const AUTO_CHECK_INTERVAL = 300000;
 const CONFLUENCE_THRESHOLD = 60;
 const RRR_MINIMUM = 2.0;
 
-// localStorage keys
 const STORAGE_KEYS = {
   NAME: 'lutynoel_saved_name',
   GEMINI: 'lutynoel_saved_geminiKey',
@@ -485,7 +490,6 @@ const STORAGE_KEYS = {
   TWELVE: 'lutynoel_saved_twelveKey'
 };
 
-// ============ PAIR SPECS ============
 const PAIR_SPECS = {
   XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', binanceSymbol: null, slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
   BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
@@ -499,16 +503,15 @@ const PAIR_SPECS = {
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
-// ============ 4 AGENTS ============
 const AGENTS_4 = [
   { id: 1, name: "Price Action Master", weight: 0.30, focus: "Candlesticks",
-    lens: "Candlestick patterns ONLY. Analyze the OHLC data for: engulfing patterns, rejection wicks (long wicks vs body), pin bars, doji, hammer, shooting star. Compare last 5-10 candles." },
+    lens: "Candlestick patterns ONLY. Analyze the OHLC data for: engulfing patterns, rejection wicks, pin bars, doji, hammer, shooting star. Compare last 5-10 candles." },
   { id: 2, name: "Supply & Demand Master", weight: 0.25, focus: "Order Blocks",
-    lens: "Order Blocks & Liquidity ONLY. Identify institutional order blocks from OHLC: consolidation zones (multiple candles with same high/low), imbalance zones, liquidity sweeps (long wicks beyond recent highs/lows)." },
+    lens: "Order Blocks & Liquidity ONLY. Identify institutional order blocks from OHLC: consolidation zones, imbalance zones, liquidity sweeps." },
   { id: 3, name: "Market Structure Master", weight: 0.25, focus: "Structure",
-    lens: "Market Structure ONLY. From OHLC data, identify: higher highs, higher lows (uptrend), lower highs, lower lows (downtrend), or ranging. Determine CHoCH (Change of Character) or BOS (Break of Structure)." },
+    lens: "Market Structure ONLY. From OHLC data, identify: higher highs, higher lows, lower highs, lower lows, CHoCH, BOS." },
   { id: 4, name: "Fundamental & Momentum Master", weight: 0.20, focus: "Momentum",
-    lens: "Momentum & Indicators ONLY. Use provided: RSI (overbought >70, oversold <30), MACD (crossover, histogram), MA (price vs MA20/50/200), ATR (volatility), Stochastic, Bollinger Bands." }
+    lens: "Momentum & Indicators ONLY. Use RSI, MACD, MA, ATR, Stochastic, Bollinger Bands." }
 ];
 
 // ============ UTILITIES ============
@@ -573,12 +576,34 @@ async function withTimeout(promise, timeoutMs, errorMessage) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v28.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v28.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
   const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
   document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
+}
+
+// ============ MODAL FUNCTIONS (FIXED) ============
+function openUniversalModal() {
+  const modal = document.getElementById('universalModal');
+  if (modal) {
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    modal.scrollTop = 0;
+  }
+}
+
+function closeUniversalModal() {
+  const modal = document.getElementById('universalModal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+    const content = document.getElementById('modalInnerContent');
+    if (content) content.innerHTML = '';
+  }
+  document.body.style.overflow = '';
 }
 
 // ============ PERSISTENT KEYS ============
@@ -601,24 +626,14 @@ function loadKeys() {
 function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getMistralKey() { return localStorage.getItem(STORAGE_KEYS.MISTRAL); }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
-function getUserName() { return localStorage.getItem(STORAGE_KEYS.NAME); }
 
 function clearAllKeys() {
   if (!confirm("Clear all saved keys? You'll need to login again.")) return;
-  localStorage.removeItem(STORAGE_KEYS.NAME);
-  localStorage.removeItem(STORAGE_KEYS.GEMINI);
-  localStorage.removeItem(STORAGE_KEYS.MISTRAL);
-  localStorage.removeItem(STORAGE_KEYS.TWELVE);
+  Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
   location.reload();
 }
 
-function clearAllData() {
-  if (!confirm("Clear ALL data (keys + history)? This cannot be undone.")) return;
-  localStorage.clear();
-  location.reload();
-}
-
-// ============ LOGIN HANDLING ============
+// ============ LOGIN ============
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const geminiKey = document.getElementById('authGeminiKey').value.trim();
@@ -626,36 +641,28 @@ function handleLogin() {
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
 
   if (!name) { alert("Enter your name."); return; }
-  if (!geminiKey && !mistralKey) { alert("Enter at least one AI API key (Gemini recommended)."); return; }
+  if (!geminiKey && !mistralKey) { alert("Enter at least one AI API key."); return; }
   if (geminiKey && geminiKey.length < 20) { alert("Gemini key seems too short."); return; }
-  if (twelveKey && twelveKey.length < 10) { alert("TwelveData key seems too short."); return; }
 
   saveKeys(name, geminiKey, mistralKey, twelveKey);
-
-  document.getElementById('authScreen').style.display = 'none';
-  document.getElementById('appInterface').style.display = 'block';
-  document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
-  document.getElementById('settingsGeminiKey').value = geminiKey;
-  document.getElementById('settingsTwelveKey').value = twelveKey || '';
-  
-  loadHistory(); updateStats();
-  showToast(`Welcome back, ${name}! 🚀`);
-  setTimeout(() => fetchLivePrice(), 1000);
-  startAutoBacktest();
+  enterApp(name, geminiKey, twelveKey);
 }
 
 function continueWithSavedKeys() {
   const keys = loadKeys();
   if (!keys.name || !keys.geminiKey) { showLoginForm(); return; }
-  
+  enterApp(keys.name, keys.geminiKey, keys.twelveKey);
+}
+
+function enterApp(name, geminiKey, twelveKey) {
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
-  document.getElementById('displayUserName').innerText = keys.name.toUpperCase().substring(0, 12);
-  document.getElementById('settingsGeminiKey').value = keys.geminiKey;
-  document.getElementById('settingsTwelveKey').value = keys.twelveKey || '';
+  document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
+  document.getElementById('settingsGeminiKey').value = geminiKey || '';
+  document.getElementById('settingsTwelveKey').value = twelveKey || '';
   
   loadHistory(); updateStats();
-  showToast(`Welcome back, ${keys.name}! 🚀`);
+  showToast(`Welcome ${name}! 🚀`);
   setTimeout(() => fetchLivePrice(), 1000);
   startAutoBacktest();
 }
@@ -663,7 +670,6 @@ function continueWithSavedKeys() {
 function showLoginForm() {
   document.getElementById('returningUserSection').style.display = 'none';
   document.getElementById('loginFormSection').style.display = 'block';
-  // Pre-fill name if exists
   const keys = loadKeys();
   if (keys.name) document.getElementById('loginName').value = keys.name;
   if (keys.geminiKey) document.getElementById('authGeminiKey').value = keys.geminiKey;
@@ -692,11 +698,9 @@ function startAutoBacktest() {
 
 function logout() {
   if (window.__autoBacktestInterval) clearInterval(window.__autoBacktestInterval);
-  // Keep keys, just return to login (with pre-filled data)
   document.getElementById('appInterface').style.display = 'none';
   document.getElementById('authScreen').style.display = 'flex';
   
-  // Check if keys exist
   const keys = loadKeys();
   if (keys.name && keys.geminiKey) {
     document.getElementById('returningUserSection').style.display = 'block';
@@ -1077,7 +1081,7 @@ YOUR WEIGHT: ${(agent.weight * 100).toFixed(0)}% of final decision.
 
 Analyze ${pair} at current price ${livePrice}.
 
-You are analyzing NUMBERS from real market data (NOT chart images). Be precise.
+You are analyzing NUMBERS from real market data (NOT chart images).
 
 `;
   
@@ -1128,10 +1132,10 @@ You are analyzing NUMBERS from real market data (NOT chart images). Be precise.
   }
   
   prompt += `RULES:
-1. Analyze the DATA provided (numbers), NOT chart images.
+1. Analyze DATA provided (numbers), NOT chart images.
 2. Analyze ONLY through YOUR assigned lens.
 3. Use standard trading terms: FVG, PDL, PDH, CHoCH, MSS, BOS, Order Block, Liquidity Sweep.
-4. Give a confidence score 0-100 based on data strength.
+4. Give confidence score 0-100 based on data strength.
 5. If data is unclear, vote HOLD with low confidence.
 
 Respond ONLY in valid JSON:
@@ -1245,7 +1249,7 @@ async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indica
   return withTimeout(agentCall(), AGENT_TIMEOUT, `${agent.name}: Timeout`);
 }
 
-// ============ CONFLUENCE ENGINE ============
+// ============ CONFLUENCE ============
 function computeConfluence(agentResults) {
   let buyScore = 0, sellScore = 0, holdScore = 0;
   
@@ -1287,7 +1291,6 @@ function computeConfluence(agentResults) {
   };
 }
 
-// ============ CAPITAL SHIELD ============
 function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
   const checks = {
     confluence: confluence.confluenceScore >= CONFLUENCE_THRESHOLD,
@@ -1322,7 +1325,7 @@ function capitalShield(confluence, entryPrice, slPrice, tpPrice) {
 async function runAnalysis() {
   const geminiKey = getGeminiKey();
   const mistralKey = getMistralKey();
-  if (!geminiKey && !mistralKey) { alert("No API key. Login again."); logout(); return; }
+  if (!geminiKey && !mistralKey) { alert("No API key."); logout(); return; }
 
   if (!window.marketData || !window.marketData.h1 || window.marketData.h1.length === 0) {
     alert("Fetch market data first.");
@@ -1739,7 +1742,7 @@ function runAutoBacktest() {
   });
 }
 
-// ============ RISK CALCULATOR ============
+// ============ RISK ============
 function calculateRisk() {
   const balance = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const riskPct = parseFloat(document.getElementById('riskPercent').value) || 1;
@@ -1759,7 +1762,7 @@ function calculateRisk() {
   `;
 }
 
-// ============ PIPS CALCULATOR ============
+// ============ PIPS ============
 function updatePipsPairInfo() {
   const pair = document.getElementById('pipsPair').value;
   const spec = PAIR_SPECS[pair];
@@ -1846,18 +1849,29 @@ function viewHistoryDetail(index) {
   const record = history[index];
   if (!record) { alert("Analysis not found."); return; }
   
+  const modalContent = document.getElementById('modalInnerContent');
+  let html = '';
+  
+  // Header with close button
+  html += `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+      <h2 style="color:var(--accent);margin:0;font-size:18px;">📊 Analysis Detail</h2>
+      <button onclick="closeUniversalModal()" class="modal-close-top">✕</button>
+    </div>
+  `;
+  
   if (record.type === 'manual') {
-    document.getElementById('modalInnerContent').innerHTML = `
-      <h2 style="color:var(--accent);margin:0 0 15px;">📝 Manual Trade</h2>
+    html += `
       <div class="card">
         <div class="grid-2"><div class="mini-box"><label>Pair</label><div>${record.pair}</div></div><div class="mini-box"><label>Action</label><div>${record.action}</div></div></div>
         <div class="grid-2"><div class="mini-box"><label>Entry</label><div>${record.entry}</div></div><div class="mini-box"><label>Lot</label><div>${record.lot}</div></div></div>
         <div class="grid-2"><div class="mini-box"><label>SL</label><div style="color:var(--red);">${record.sl}</div></div><div class="mini-box"><label>TP</label><div style="color:var(--green);">${record.tp}</div></div></div>
         <div class="mini-box" style="margin-top:10px;"><label>Outcome</label><div>${record.outcome}</div></div>
       </div>
-      <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:10px;">Close</button>
+      <button class="modal-close-bottom" onclick="closeUniversalModal()">Funga</button>
     `;
-    document.getElementById('universalModal').style.display = 'flex';
+    modalContent.innerHTML = html;
+    openUniversalModal();
     return;
   }
   
@@ -1874,19 +1888,27 @@ function viewHistoryDetail(index) {
         },
         message: record.shield ? "✅ CAPITAL SHIELD: Trade was approved." : "🛡️ CAPITAL SHIELD: Trade was blocked."
       };
-      document.getElementById('modalInnerContent').innerHTML = `
-        <h2 style="color:var(--accent);margin:0 0 15px;font-size:18px;">📊 Analysis Detail</h2>
-        ${record.outcome && record.outcome !== 'PENDING' ? `<div class="info-box"><strong>Auto-Outcome:</strong> ${record.outcome} ${record.autoOutcome ? `— ${record.autoOutcome}` : ''}</div>` : ''}
-        ${buildAnalysisHTML(record, shield, record.indicators)}
-        <button class="primary-btn" onclick="closeUniversalModal()" style="margin-top:15px;">Close</button>
-      `;
-      document.getElementById('universalModal').style.display = 'flex';
-      document.getElementById('universalModal').scrollTop = 0;
-    } catch (err) { alert(`❌ Failed: ${err.message}`); }
+      
+      if (record.outcome && record.outcome !== 'PENDING') {
+        html += `<div class="info-box"><strong>Auto-Outcome:</strong> ${record.outcome} ${record.autoOutcome ? `— ${record.autoOutcome}` : ''}</div>`;
+      }
+      
+      html += buildAnalysisHTML(record, shield, record.indicators);
+      html += `<button class="modal-close-bottom" onclick="closeUniversalModal()">Funga</button>`;
+      
+      modalContent.innerHTML = html;
+      openUniversalModal();
+    } catch (err) {
+      alert(`❌ Failed: ${err.message}`);
+    }
     return;
   }
   
-  alert("Analysis not found or old format.");
+  // Old format
+  html += `<div class="info-box">Analysis format is old. Cannot display details.</div>`;
+  html += `<button class="modal-close-bottom" onclick="closeUniversalModal()">Funga</button>`;
+  modalContent.innerHTML = html;
+  openUniversalModal();
 }
 
 function deleteHistory(index) {
@@ -1918,7 +1940,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.0" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.1" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1937,9 +1959,22 @@ window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   clearMarketData();
   
+  // ESC key to close modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeUniversalModal();
+    }
+  });
+  
+  // Click outside modal to close
+  document.getElementById('universalModal').addEventListener('click', (e) => {
+    if (e.target.id === 'universalModal') {
+      closeUniversalModal();
+    }
+  });
+  
   const keys = loadKeys();
   if (keys.name && keys.geminiKey) {
-    // Show "Continue with saved keys"
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${keys.name}</strong>!`;
