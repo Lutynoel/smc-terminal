@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v32.0 — Mistral CORS Edition</title>
+<title>Lutynoel FX v32.1 — Multi-Source Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -56,6 +56,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .data-status-item{background:#08080a;border:1px solid var(--border);padding:8px 12px;border-radius:6px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:6px}
 .data-status-item.ok{border-color:var(--green)}
 .data-status-item.fail{border-color:var(--red)}
+.data-status-item.warn{border-color:var(--yellow)}
 .master-card{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:10px}
 .master-card.buy{border-left:4px solid var(--green)}
 .master-card.sell{border-left:4px solid var(--red)}
@@ -135,15 +136,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v32.0</div>
-    <div class="auth-subtitle">Mistral CORS Edition</div>
+    <div class="auth-title">Lutynoel FX v32.1</div>
+    <div class="auth-subtitle">Multi-Source Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
     </div>
 
     <div class="warning-box">
-      🔐 <strong>TAHADHARI:</strong> App hii inatumia CORS proxy kufanya Mistral ifanye kazi. API key yako inapita kwa proxy server. Tumia key tofauti na uifute mara kwa mara.
+      🔐 <strong>TAHADHARI:</strong> App inatumia CORS Proxy kufanya Mistral ifanye kazi. API key yako inapita kwa proxy. Tumia key tofauti na uifute mara kwa mara.
     </div>
 
     <div id="returningUserSection" style="display:none;">
@@ -167,8 +168,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="info-box">
         🔒 Keys zinahifadhiwa kwenye <strong>localStorage</strong>.<br>
-        🤖 AI: <strong>Mistral (kupitia CORS Proxy)</strong><br>
-        ⚠️ Key yako inapita kwa proxy — tumia key tofauti.
+        🤖 AI: <strong>Mistral (CORS Proxy)</strong><br>
+        📊 Data: <strong>Yahoo → Stooq → Proxies</strong>
       </div>
 
       <button class="primary-btn" onclick="handleLogin()">Login</button>
@@ -191,7 +192,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v32.0</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v32.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -208,14 +209,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="view-overview" class="view-section">
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">MISTRAL CORS EDITION</div>
-          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v32.0</span>
+          <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">MULTI-SOURCE EDITION</div>
+          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v32.1</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
           <span style="font-size:12px;color:var(--muted);font-weight:600;">Institutional Pro</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">DXY + US10Y + Wyckoff + Mistral</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">Yahoo → Stooq → Proxy Fallback</p>
       </div>
 
       <div class="grid-3">
@@ -231,12 +232,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 v32.0 FEATURES:</div>
+        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 v32.1 FEATURES:</div>
         <div style="font-size:11px;line-height:1.9;">
+          ✅ <strong>Multi-Source DXY/US10Y</strong> — Yahoo → Stooq<br>
+          ✅ <strong>4 Fallback Proxies</strong> — Moja ikigoma, nyingine<br>
           ✅ <strong>Mistral (CORS Proxy)</strong> — Inafanya kazi browser<br>
-          ✅ <strong>DXY + US10Y</strong> — CORS Proxy imewekwa<br>
           ✅ <strong>Wyckoff Phase</strong> — Accumulation/Distribution<br>
-          ✅ <strong>Session Levels</strong> — PDH, PDL, PWH, PWL<br>
           ✅ <strong>Auto Position Size</strong> — Lot size calculator<br>
           ✅ <strong>A+ Grading</strong> — Score 0-100
         </div>
@@ -429,9 +430,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v32.0 (Mistral CORS)<br>
-          <strong>AI:</strong> Mistral kupitia CORS Proxy<br>
-          <strong>Models:</strong> mistral-small-latest → medium → large
+          <strong>Version:</strong> v32.1 (Multi-Source)<br>
+          <strong>AI:</strong> Mistral (CORS Proxy)<br>
+          <strong>DXY/US10Y:</strong> Yahoo → Stooq → Proxies
         </div>
 
         <div class="ballistic-header">💰 RISK MANAGEMENT</div>
@@ -456,6 +457,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <button class="secondary-btn" onclick="testMistralKey()">🧪 Test Mistral Key</button>
+        <button class="secondary-btn" onclick="testDXYUS10Y()">📊 Test DXY & US10Y</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
         <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All Keys</button>
       </div>
@@ -465,20 +467,23 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v32.0 — MISTRAL CORS EDITION
-   Mistral inatumika kupitia CORS Proxy
+   LUTYNOEL FX v32.1 — MULTI-SOURCE EDITION
    ===================================================== */
 
-// ============ CORS PROXY CONFIG ============
-// Tunatumia corsproxy.io ambayo inaruhusu POST requests
-const MISTRAL_PROXY_URL = 'https://corsproxy.io/?url=';
 const MISTRAL_REAL_URL = 'https://api.mistral.ai/v1/chat/completions';
+const MISTRAL_PROXY_URL = 'https://corsproxy.io/?url=';
 const MISTRAL_MODELS = ['mistral-small-latest', 'mistral-medium-latest', 'mistral-large-latest'];
+
+const CORS_PROXIES = [
+  { name: 'codetabs', build: (url) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url) },
+  { name: 'allorigins', build: (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url) },
+  { name: 'corsproxy', build: (url) => 'https://corsproxy.io/?url=' + encodeURIComponent(url) },
+  { name: 'direct', build: (url) => url }
+];
 
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
-const YAHOO_PROXY = 'https://api.allorigins.win/raw?url=';
 
 const AGENT_TIMEOUT = 120000;
 const API_TIMEOUT = 90000;
@@ -522,7 +527,6 @@ const AGENTS_4 = [
     lens: "DXY, US10Y Bond Yields, Market Regime, RSI Divergence, Kill Zones. ALIGN trades with DXY direction." }
 ];
 
-// ============ UTILITIES ============
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
   t.className = 'toast'; t.innerText = msg;
@@ -559,7 +563,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v32.0", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v32.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -577,7 +581,6 @@ function closeUniversalModal() {
   document.body.style.overflow = '';
 }
 
-// ============ RISK SETTINGS ============
 function saveRiskSettings() {
   const bal = parseFloat(document.getElementById('settingsBalance').value) || 1000;
   const risk = parseFloat(document.getElementById('settingsRiskPct').value) || 1.0;
@@ -597,7 +600,6 @@ function computeAutoLotSize(slPips, pipValueStandard) {
   return { balance, riskPct, riskAmount: riskAmount.toFixed(2), lotSize: lotSize.toFixed(3) };
 }
 
-// ============ PERSISTENT KEYS ============
 function saveKeys(name, mistralKey, twelveKey, alphaKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
   localStorage.setItem(STORAGE_KEYS.MISTRAL, mistralKey);
@@ -701,24 +703,18 @@ function logout() {
   } else showLoginForm();
 }
 
-// ================= TEST MISTRAL (CORS PROXY) =================
 async function testMistralKey() {
   const key = getMistralKey();
   if (!key) { alert("Hakuna Mistral key."); return; }
-  showToast("🧪 Testing Mistral (CORS Proxy)...", 2000);
+  showToast("🧪 Testing Mistral...", 2000);
   let results = [];
   
   for (const model of MISTRAL_MODELS) {
     try {
-      const realUrl = MISTRAL_REAL_URL;
-      const proxyUrl = MISTRAL_PROXY_URL + encodeURIComponent(realUrl);
-      
+      const proxyUrl = MISTRAL_PROXY_URL + encodeURIComponent(MISTRAL_REAL_URL);
       const r = await fetchWithTimeout(proxyUrl, {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${key}`
-        },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
         body: JSON.stringify({ model, messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
       }, 20000);
       
@@ -726,9 +722,8 @@ async function testMistralKey() {
       let d;
       try { d = JSON.parse(txt); } catch(e) { d = null; }
       
-      if (!d) {
-        results.push(`❌ ${model} (HTTP ${r.status}): ${txt.substring(0, 100)}`);
-      } else if (d.error) {
+      if (!d) results.push(`❌ ${model} (HTTP ${r.status}): ${txt.substring(0, 100)}`);
+      else if (d.error) {
         const msg = typeof d.error === 'string' ? d.error : (d.error.message || JSON.stringify(d.error));
         results.push(`❌ ${model}: ${msg}`);
       } else if (d.choices && d.choices[0]) {
@@ -744,7 +739,31 @@ async function testMistralKey() {
   }
   alert(results.join('\n\n'));
 }
-// =================================================
+
+async function testDXYUS10Y() {
+  showToast("📊 Testing DXY & US10Y...", 3000);
+  let results = [];
+  
+  results.push("=== DXY TEST ===");
+  try {
+    const dxy = await fetchDXYData();
+    if (dxy && dxy.length > 0) {
+      const last = dxy[dxy.length - 1];
+      results.push(`✅ DXY: ${dxy.length} candles, last close: ${last.close.toFixed(3)}`);
+    } else results.push(`❌ DXY failed`);
+  } catch(e) { results.push(`❌ DXY error: ${e.message}`); }
+  
+  results.push("\n=== US10Y TEST ===");
+  try {
+    const us10y = await fetchUS10YData();
+    if (us10y && us10y.length > 0) {
+      const last = us10y[us10y.length - 1];
+      results.push(`✅ US10Y: ${us10y.length} points, last: ${last.close.toFixed(3)}%`);
+    } else results.push(`❌ US10Y failed`);
+  } catch(e) { results.push(`❌ US10Y error: ${e.message}`); }
+  
+  alert(results.join('\n'));
+}
 
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -879,41 +898,98 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   return null;
 }
 
-// ================= DXY & US10Y (CORS PROXY) =================
+async function fetchWithFallback(yahooUrl, timeout = 12000) {
+  for (const proxy of CORS_PROXIES) {
+    try {
+      const url = proxy.build(yahooUrl);
+      console.log(`[Fetch] Trying ${proxy.name}...`);
+      const res = await fetchWithTimeout(url, {}, timeout);
+      if (!res.ok) { console.warn(`[Fetch] ${proxy.name} HTTP ${res.status}`); continue; }
+      const txt = await res.text();
+      if (!txt || txt.length < 50) { console.warn(`[Fetch] ${proxy.name} empty`); continue; }
+      const data = JSON.parse(txt);
+      if (data && data.chart && data.chart.result) {
+        console.log(`[Fetch] ✅ ${proxy.name} OK`);
+        return data;
+      }
+      console.warn(`[Fetch] ${proxy.name} — invalid format`);
+    } catch (e) {
+      console.warn(`[Fetch] ${proxy.name} failed: ${e.message}`);
+    }
+  }
+  throw new Error('All proxies failed');
+}
+
 async function fetchDXYData() {
   try {
     const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?interval=1h&range=5d';
-    const url = YAHOO_PROXY + encodeURIComponent(yahooUrl);
-    const res = await fetchWithTimeout(url, {}, 15000);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const result = data?.chart?.result?.[0];
-    if (!result || !result.timestamp) throw new Error("No data");
-    const q = result.indicators.quote[0];
-    const arr = [];
-    for (let i = 0; i < result.timestamp.length; i++) {
-      if (q.open[i] && q.close[i]) arr.push({ time: result.timestamp[i] * 1000, open: q.open[i], high: q.high[i], low: q.low[i], close: q.close[i], volume: q.volume[i] || 0 });
+    const data = await fetchWithFallback(yahooUrl);
+    const result = data.chart.result[0];
+    if (result && result.timestamp) {
+      const q = result.indicators.quote[0];
+      const arr = [];
+      for (let i = 0; i < result.timestamp.length; i++) {
+        if (q.open[i] && q.close[i]) arr.push({
+          time: result.timestamp[i] * 1000,
+          open: q.open[i], high: q.high[i], low: q.low[i], close: q.close[i],
+          volume: q.volume[i] || 0
+        });
+      }
+      if (arr.length > 20) { console.log(`[DXY] Yahoo OK: ${arr.length} candles`); return arr; }
     }
-    return arr;
-  } catch (err) { console.warn('DXY:', err.message); return null; }
+  } catch (e) { console.warn('[DXY] Yahoo failed:', e.message); }
+  
+  try {
+    const stooqUrl = 'https://stooq.com/q/d/l/?s=dx.f&i=d';
+    const res = await fetchWithTimeout(stooqUrl, {}, 12000);
+    if (res.ok) {
+      const txt = await res.text();
+      const lines = txt.trim().split('\n').slice(1);
+      const arr = lines.map(line => {
+        const parts = line.split(',');
+        if (parts.length < 5) return null;
+        return { time: new Date(parts[0]).getTime(), open: parseFloat(parts[1]), high: parseFloat(parts[2]), low: parseFloat(parts[3]), close: parseFloat(parts[4]), volume: 0 };
+      }).filter(Boolean);
+      if (arr.length > 20) { console.log(`[DXY] Stooq OK: ${arr.length} candles`); return arr; }
+    }
+  } catch (e) { console.warn('[DXY] Stooq failed:', e.message); }
+  
+  console.warn('[DXY] All sources failed');
+  return null;
 }
 
 async function fetchUS10YData() {
   try {
     const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1h&range=5d';
-    const url = YAHOO_PROXY + encodeURIComponent(yahooUrl);
-    const res = await fetchWithTimeout(url, {}, 15000);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const result = data?.chart?.result?.[0];
-    if (!result || !result.timestamp) throw new Error("No data");
-    const q = result.indicators.quote[0];
-    const arr = [];
-    for (let i = 0; i < result.timestamp.length; i++) {
-      if (q.close[i]) arr.push({ time: result.timestamp[i] * 1000, close: q.close[i] });
+    const data = await fetchWithFallback(yahooUrl);
+    const result = data.chart.result[0];
+    if (result && result.timestamp) {
+      const q = result.indicators.quote[0];
+      const arr = [];
+      for (let i = 0; i < result.timestamp.length; i++) {
+        if (q.close[i]) arr.push({ time: result.timestamp[i] * 1000, close: q.close[i] });
+      }
+      if (arr.length > 20) { console.log(`[US10Y] Yahoo OK: ${arr.length} points`); return arr; }
     }
-    return arr;
-  } catch (err) { console.warn('US10Y:', err.message); return null; }
+  } catch (e) { console.warn('[US10Y] Yahoo failed:', e.message); }
+  
+  try {
+    const stooqUrl = 'https://stooq.com/q/d/l/?s=10usy.b&i=d';
+    const res = await fetchWithTimeout(stooqUrl, {}, 12000);
+    if (res.ok) {
+      const txt = await res.text();
+      const lines = txt.trim().split('\n').slice(1);
+      const arr = lines.map(line => {
+        const parts = line.split(',');
+        if (parts.length < 5) return null;
+        return { time: new Date(parts[0]).getTime(), open: parseFloat(parts[1]), high: parseFloat(parts[2]), low: parseFloat(parts[3]), close: parseFloat(parts[4]), volume: 0 };
+      }).filter(Boolean);
+      if (arr.length > 20) { console.log(`[US10Y] Stooq OK: ${arr.length} points`); return arr; }
+    }
+  } catch (e) { console.warn('[US10Y] Stooq failed:', e.message); }
+  
+  console.warn('[US10Y] All sources failed');
+  return null;
 }
 
 function analyzeDXY(dxyData, spec) {
@@ -962,8 +1038,6 @@ function calculateSessionLevels(h4Data, h1Data) {
   let liquidityBias = 'RANGING';
   if (currentPrice > pdh) liquidityBias = 'ABOVE_PDH_BULLISH';
   else if (currentPrice < pdl) liquidityBias = 'BELOW_PDL_BEARISH';
-  else if (currentPrice > pwh) liquidityBias = 'ABOVE_PWH_BULLISH';
-  else if (currentPrice < pwl) liquidityBias = 'BELOW_PWL_BEARISH';
   return { pdh: pdh.toFixed(4), pdl: pdl.toFixed(4), pwh: pwh.toFixed(4), pwl: pwl.toFixed(4), liquidityBias };
 }
 
@@ -986,7 +1060,6 @@ function detectWyckoffPhase(h4Data) {
   return { phase, description, position: (position * 100).toFixed(1) + '%', bias: phase === 'ACCUMULATION' || phase === 'MARKUP' ? 'BUY' : 'SELL' };
 }
 
-// ============ BASIC INDICATORS ============
 function calculateRSI(closes, period = 14) {
   if (closes.length < period + 1) return null;
   let gains = 0, losses = 0;
@@ -1100,14 +1173,16 @@ async function fetchAllMarketData() {
     document.getElementById('data15M').querySelector('span:last-child').innerText = m15Data ? `${m15Data.length} ✓` : 'FAIL';
     
     document.getElementById('dataDXY').querySelector('span:last-child').innerText = '⏳';
-    const dxyData = await fetchDXYData();
-    document.getElementById('dataDXY').className = `data-status-item ${dxyData ? 'ok' : 'fail'}`;
-    document.getElementById('dataDXY').querySelector('span:last-child').innerText = dxyData ? `${dxyData.length} ✓` : 'FAIL';
+    let dxyData = null;
+    try { dxyData = await fetchDXYData(); } catch(e) { console.warn('DXY fetch failed:', e); }
+    document.getElementById('dataDXY').className = `data-status-item ${dxyData ? 'ok' : 'warn'}`;
+    document.getElementById('dataDXY').querySelector('span:last-child').innerText = dxyData ? `${dxyData.length} ✓` : 'SKIP';
     
     document.getElementById('dataUS10Y').querySelector('span:last-child').innerText = '⏳';
-    const us10yData = await fetchUS10YData();
-    document.getElementById('dataUS10Y').className = `data-status-item ${us10yData ? 'ok' : 'fail'}`;
-    document.getElementById('dataUS10Y').querySelector('span:last-child').innerText = us10yData ? `${us10yData.length} ✓` : 'FAIL';
+    let us10yData = null;
+    try { us10yData = await fetchUS10YData(); } catch(e) { console.warn('US10Y fetch failed:', e); }
+    document.getElementById('dataUS10Y').className = `data-status-item ${us10yData ? 'ok' : 'warn'}`;
+    document.getElementById('dataUS10Y').querySelector('span:last-child').innerText = us10yData ? `${us10yData.length} ✓` : 'SKIP';
     
     window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, dxy: dxyData, us10y: us10yData, indicators: null };
     
@@ -1115,12 +1190,17 @@ async function fetchAllMarketData() {
       window.marketData.indicators = calculateIndicators(h1Data);
     }
     
-    renderChartPreview(pair, indicators, dxyData, us10yData);
+    renderChartPreview(pair, window.marketData.indicators, dxyData, us10yData);
     
-    if (h1Data && m15Data) {
+    if (h1Data && h1Data.length > 30 && m15Data && m15Data.length > 30) {
       document.getElementById('runBtn').disabled = false;
-      showToast(`✅ Data loaded`);
-    } else showToast(`⚠️ Some data failed`, 5000);
+      const dxyStatus = dxyData ? '✅ DXY' : '⚠️ DXY missing';
+      const us10yStatus = us10yData ? '✅ US10Y' : '⚠️ US10Y missing';
+      showToast(`✅ Data ready — ${dxyStatus}, ${us10yStatus}`, 4000);
+    } else {
+      document.getElementById('runBtn').disabled = true;
+      showToast(`❌ Essential data (1H au 15M) imefeli`, 5000);
+    }
   } catch (err) {
     showToast(`❌ ${err.message}`, 4000);
   } finally {
@@ -1141,11 +1221,15 @@ function renderChartPreview(pair, indicators, dxyData, us10yData) {
   }
   if (dxyData) {
     const dxy = analyzeDXY(dxyData, spec);
-    if (dxy) html += `<div style="margin-top:8px;color:var(--purple);">💵 DXY: ${dxy.price} — ${dxy.direction}</div>`;
+    if (dxy) html += `<div style="margin-top:8px;color:var(--purple);">💵 DXY: ${dxy.price} — ${dxy.direction} (${dxy.alignment})</div>`;
+  } else {
+    html += `<div style="margin-top:8px;color:var(--yellow);">⚠️ DXY: haipo (analysis itaendelea bila yake)</div>`;
   }
   if (us10yData) {
     const u = analyzeUS10Y(us10yData);
     if (u) html += `<div style="margin-top:6px;color:var(--cyan);">📈 US10Y: ${u.current} — ${u.direction}</div>`;
+  } else {
+    html += `<div style="margin-top:6px;color:var(--yellow);">⚠️ US10Y: haipo (analysis itaendelea bila yake)</div>`;
   }
   container.innerHTML = html || 'No data';
 }
@@ -1160,8 +1244,10 @@ Analyze ${pair} at price ${livePrice}.
 `;
   if (htfBias) prompt += `\nHTF BIAS: 4H=${htfBias.h4}, 1H=${htfBias.h1}, Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
   if (dxyAnalysis) prompt += `\nDXY: ${dxyAnalysis.price} (${dxyAnalysis.direction}) — Alignment: ${dxyAnalysis.alignment}\n`;
+  else prompt += `\nDXY: Data haipo — tumia technicals pekee.\n`;
   if (us10yAnalysis) prompt += `\nUS10Y: ${us10yAnalysis.current} (${us10yAnalysis.direction})\n`;
-  if (sessionLevels) prompt += `\nSessions: PDH=${sessionLevels.pdh}, PDL=${sessionLevels.pdl}, Bias=${sessionLevels.liquidityBias}\n`;
+  else prompt += `\nUS10Y: Data haipo — tumia technicals pekee.\n`;
+  if (sessionLevels) prompt += `\nSessions: PDH=${sessionLevels.pdh}, PDL=${sessionLevels.pdl}\n`;
   
   if (h1Data) {
     prompt += `\n1H CANDLES (last 15):\n`;
@@ -1189,18 +1275,14 @@ Analyze ${pair} at price ${livePrice}.
   return prompt;
 }
 
-// ================= CALL MISTRAL THROUGH CORS PROXY =================
 async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, apiKey) {
   const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias);
   let lastError = null;
   
   for (const model of MISTRAL_MODELS) {
     try {
-      // Use CORS Proxy to bypass browser restriction
-      const realUrl = MISTRAL_REAL_URL;
-      const proxyUrl = MISTRAL_PROXY_URL + encodeURIComponent(realUrl);
-      
-      console.log(`[Mistral Proxy] Trying: ${model}`);
+      const proxyUrl = MISTRAL_PROXY_URL + encodeURIComponent(MISTRAL_REAL_URL);
+      console.log(`[Mistral] Trying: ${model}`);
       
       const response = await fetchWithTimeout(proxyUrl, {
         method: 'POST',
@@ -1220,11 +1302,8 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indi
       console.log(`[Mistral ${model}] Status: ${response.status}, Length: ${rawText.length}`);
       
       let data;
-      try {
-        data = JSON.parse(rawText);
-      } catch (jsonErr) {
-        throw new Error(`${model}: HTTP ${response.status} — ${rawText.substring(0, 100)}`);
-      }
+      try { data = JSON.parse(rawText); }
+      catch (e) { throw new Error(`${model}: HTTP ${response.status}`); }
       
       if (data.error) {
         const errMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
@@ -1237,7 +1316,7 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indi
       let text = data.choices[0].message.content.trim();
       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
       const result = safeJsonParse(text);
-      if (!result) throw new Error(`${model}: Invalid JSON from AI`);
+      if (!result) throw new Error(`${model}: Invalid JSON`);
       
       return {
         ...agent,
@@ -1261,7 +1340,6 @@ async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, indica
   if (!mistralKey) throw new Error("No Mistral key");
   return callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, dxyAnalysis, us10yAnalysis, sessionLevels, htfBias, mistralKey);
 }
-// =======================================================================
 
 function computeConfluence(agentResults) {
   let buy = 0, sell = 0, hold = 0;
@@ -1410,7 +1488,6 @@ function renderLoadingState(pair, agents) {
   container.innerHTML = `
     <div class="card" style="border-color:var(--pink);text-align:center;">
       <div class="ballistic-header" style="justify-content:center;">🏦 MISTRAL ANALYSIS — ${pair}</div>
-      <div style="font-size:12px;color:var(--muted);">Through CORS Proxy</div>
     </div>
     <div class="card"><div class="ballistic-header">👥 AGENTS 4</div><div id="agentsLiveContainer"></div></div>
   `;
@@ -1475,6 +1552,11 @@ function buildAnalysisHTML(record, shield) {
         <div class="mini-box" style="border-color:${aColor};"><label>Alignment</label><div style="font-size:14px;font-weight:bold;color:${aColor};">${d.alignment}</div></div>
       </div>
     </div>`;
+  } else {
+    html += `<div class="card" style="border-color:var(--yellow);">
+      <div class="ballistic-header">💵 DXY — HAIKUNA DATA</div>
+      <div style="font-size:11px;color:var(--muted);">Analysis inaendelea bila DXY. Tumia technicals pekee.</div>
+    </div>`;
   }
   
   if (record.us10yAnalysis) {
@@ -1493,10 +1575,6 @@ function buildAnalysisHTML(record, shield) {
       <div class="grid-2">
         <div class="mini-box"><label style="color:var(--red);">PDH</label><div>${s.pdh}</div></div>
         <div class="mini-box"><label style="color:var(--green);">PDL</label><div>${s.pdl}</div></div>
-      </div>
-      <div class="grid-2">
-        <div class="mini-box"><label style="color:var(--red);">PWH</label><div>${s.pwh}</div></div>
-        <div class="mini-box"><label style="color:var(--green);">PWL</label><div>${s.pwl}</div></div>
       </div>
     </div>`;
   }
@@ -1734,11 +1812,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "32.0", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "32.1", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v32.0-${Date.now()}.json`;
+  a.download = `lutynoel-v32.1-${Date.now()}.json`;
   a.click();
 }
 
