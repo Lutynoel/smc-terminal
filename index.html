@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v28.1 — Modal Fix Edition</title>
+<title>Lutynoel FX v28.2 — 15M Backup Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,9 +53,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .chart-preview .bullish{color:var(--green)}
 .chart-preview .bearish{color:var(--red)}
 .data-status{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.data-status-item{background:#08080a;border:1px solid var(--border);padding:8px 12px;border-radius:6px;font-size:11px;display:flex;justify-content:space-between;align-items:center}
+.data-status-item{background:#08080a;border:1px solid var(--border);padding:8px 12px;border-radius:6px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:6px}
 .data-status-item.ok{border-color:var(--green)}
 .data-status-item.fail{border-color:var(--red)}
+.data-status-item.warn{border-color:var(--yellow)}
+.data-status-item .src-badge{font-size:9px;padding:2px 5px;border-radius:3px;background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue);white-space:nowrap}
 .master-card{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:10px}
 .master-card.buy{border-left:4px solid var(--green)}
 .master-card.sell{border-left:4px solid var(--red)}
@@ -96,7 +98,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .history-card:hover{border-color:var(--accent);background:#141418}
 .history-card .chevron{color:var(--accent);font-size:22px;font-weight:bold;flex-shrink:0}
 .forex-hero{background:linear-gradient(135deg,rgba(18,18,21,.95),rgba(30,27,75,.9));border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:15px}
-/* MODAL - FIXED */
 .modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .modal.active{display:flex}
 .modal-content{max-width:92%;width:100%;max-width:600px;border-radius:10px;border:1px solid var(--accent);background:var(--card);padding:20px;position:relative;margin:20px 0;animation:modalSlideIn 0.3s ease}
@@ -131,18 +132,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 </head>
 <body>
 
-<!-- MODAL - FIXED -->
+<!-- MODAL -->
 <div id="universalModal" class="modal">
   <div class="modal-content" id="modalBody">
     <div id="modalInnerContent"></div>
   </div>
 </div>
 
+<!-- AUTH -->
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v28.1</div>
-    <div class="auth-subtitle">Persistent Keys + Modal Fix</div>
+    <div class="auth-title">Lutynoel FX v28.2</div>
+    <div class="auth-subtitle">15M Backup Source Edition</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. AI can make mistakes. No profit guarantee. Trade at your own risk.
@@ -164,14 +166,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Mistral API Key (Optional)</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key (optional)" autocomplete="off">
 
-      <label>TwelveData API Key (For Forex)</label>
+      <label>TwelveData API Key (Required for Forex)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
+
+      <label>Alpha Vantage Key (Optional — 15M Backup)</label>
+      <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key (free)" autocomplete="off">
 
       <div class="info-box">
         🔒 Keys zinahifadhiwa kwenye <strong>localStorage</strong>.<br>
         ✅ Utaingia <strong>mara moja tu</strong>.<br>
-        🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Get Gemini key →</a><br>
-        🆓 <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">Get TwelveData key →</a>
+        🆓 <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent);">Gemini →</a> | 
+        <a href="https://twelvedata.com/pricing" target="_blank" style="color:var(--accent);">TwelveData →</a> | 
+        <a href="https://www.alphavantage.co/support/#api-key" target="_blank" style="color:var(--accent);">Alpha Vantage →</a>
       </div>
 
       <button class="primary-btn" onclick="handleLogin()">Login</button>
@@ -194,11 +200,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v28.1</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v28.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">v28</span></div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 AI Confluence <span class="badge-new">15M</span></div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -212,13 +218,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <div style="font-size:10px;color:var(--accent);font-weight:bold;letter-spacing:2px;">XAUUSD • BTCUSD • NAS100 • FOREX</div>
-          <span class="badge-shield">v28.1 MODAL FIX</span>
+          <span class="badge-shield">v28.2 15M BACKUP</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
           <span style="font-size:12px;color:var(--muted);font-weight:600;">AI + OHLC Data</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Keys persistent. Modal fixed. Data-driven analysis.</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">15M backup sources. Keys persistent. Modal fixed.</p>
       </div>
 
       <div class="grid-3">
@@ -234,10 +240,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="info-box">
-        ⚙️ <strong>v28.1 Features:</strong><br>
+        ⚙️ <strong>v28.2 Features:</strong><br>
+        • <strong>15M Backup</strong> — TwelveData → Alpha Vantage → Yahoo<br>
         • <strong>Persistent Keys</strong> — Login mara moja<br>
-        • <strong>Modal Fix</strong> — Funga kwa ✕ au ESC au Background<br>
-        • <strong>OHLC Data</strong> — Multi-timeframe<br>
+        • <strong>OHLC Data</strong> — Multi-timeframe (4H + 1H + 15M)<br>
         • <strong>4 AI Agents</strong> — Weighted confluence
       </div>
     </div>
@@ -438,11 +444,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v28.1 (Modal Fix)<br>
+          <strong>Version:</strong> v28.2 (15M Backup)<br>
+          <strong>15M Sources:</strong> TwelveData → Alpha Vantage → Yahoo<br>
           <strong>Primary AI:</strong> Gemini 3.8 Flash<br>
-          <strong>Fallback:</strong> Gemini 3.6 → 3.5 → Mistral<br>
-          <strong>Data:</strong> TwelveData + Binance<br>
-          <strong>Keys Storage:</strong> localStorage
+          <strong>Fallback:</strong> Gemini 3.6 → 3.5 → Mistral
         </div>
         
         <label>Update Gemini Key</label>
@@ -452,6 +457,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <label>Update TwelveData Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="TwelveData key">
         <button class="secondary-btn" onclick="saveSettingsTwelveKey()">💾 Save TwelveData Key</button>
+        
+        <label>Update Alpha Vantage Key</label>
+        <input type="text" id="settingsAlphaKey" placeholder="Alpha Vantage key">
+        <button class="secondary-btn" onclick="saveSettingsAlphaKey()">💾 Save Alpha Vantage Key</button>
         
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         
@@ -465,8 +474,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v28.1 — MODAL FIX EDITION
-   All bugs fixed including history modal close
+   LUTYNOEL FX v28.2 — 15M BACKUP SOURCE EDITION
+   TwelveData → Alpha Vantage → Yahoo for 15M
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -475,6 +484,7 @@ const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const MISTRAL_MODEL = 'mistral-large-latest';
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
+const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
 
 const AGENT_TIMEOUT = 120000;
 const API_TIMEOUT = 60000;
@@ -487,29 +497,30 @@ const STORAGE_KEYS = {
   NAME: 'lutynoel_saved_name',
   GEMINI: 'lutynoel_saved_geminiKey',
   MISTRAL: 'lutynoel_saved_mistralKey',
-  TWELVE: 'lutynoel_saved_twelveKey'
+  TWELVE: 'lutynoel_saved_twelveKey',
+  ALPHA: 'lutynoel_saved_alphaKey'
 };
 
 const PAIR_SPECS = {
-  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', binanceSymbol: null, slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', alphaSymbol: 'XAUUSD', binanceSymbol: null, slDefault: 40, slMin: 25, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 300, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
   BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', slDefault: 800, slMin: 500, slMax: 1500, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 1000, tp3Max: 5000, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
-  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
-  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
-  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
-  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.091, mini: 0.91, standard: 9.10 } },
-  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
-  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.074, mini: 0.74, standard: 7.40 } },
+  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', alphaSymbol: 'NDX', slDefault: 80, slMin: 50, slMax: 150, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
+  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', alphaSymbol: 'EURUSD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', alphaSymbol: 'GBPUSD', slDefault: 35, slMin: 20, slMax: 60, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', alphaSymbol: 'USDJPY', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.091, mini: 0.91, standard: 9.10 } },
+  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', alphaSymbol: 'AUDUSD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.10, mini: 1.00, standard: 10.00 } },
+  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', alphaSymbol: 'USDCAD', slDefault: 30, slMin: 20, slMax: 50, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 50, tp3Max: 200, pipValue: { micro: 0.074, mini: 0.74, standard: 7.40 } },
   ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', slDefault: 50, slMin: 30, slMax: 100, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 100, tp3Max: 500, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } },
   SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', slDefault: 3, slMin: 2, slMax: 6, tp1Multiplier: 2, tp2Multiplier: 4, tp3Multiplier: 6, tp3Min: 10, tp3Max: 50, pipValue: { micro: 0.01, mini: 0.10, standard: 1.00 } }
 };
 
 const AGENTS_4 = [
   { id: 1, name: "Price Action Master", weight: 0.30, focus: "Candlesticks",
-    lens: "Candlestick patterns ONLY. Analyze the OHLC data for: engulfing patterns, rejection wicks, pin bars, doji, hammer, shooting star. Compare last 5-10 candles." },
+    lens: "Candlestick patterns ONLY. Analyze OHLC data for: engulfing, rejection wicks, pin bars, doji, hammer, shooting star. Compare last 5-10 candles." },
   { id: 2, name: "Supply & Demand Master", weight: 0.25, focus: "Order Blocks",
-    lens: "Order Blocks & Liquidity ONLY. Identify institutional order blocks from OHLC: consolidation zones, imbalance zones, liquidity sweeps." },
+    lens: "Order Blocks & Liquidity ONLY. Identify institutional order blocks, imbalance zones, liquidity sweeps from OHLC." },
   { id: 3, name: "Market Structure Master", weight: 0.25, focus: "Structure",
-    lens: "Market Structure ONLY. From OHLC data, identify: higher highs, higher lows, lower highs, lower lows, CHoCH, BOS." },
+    lens: "Market Structure ONLY. From OHLC: higher highs, higher lows, lower highs, lower lows, CHoCH, BOS." },
   { id: 4, name: "Fundamental & Momentum Master", weight: 0.20, focus: "Momentum",
     lens: "Momentum & Indicators ONLY. Use RSI, MACD, MA, ATR, Stochastic, Bollinger Bands." }
 ];
@@ -576,7 +587,7 @@ async function withTimeout(promise, timeoutMs, errorMessage) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v28.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v28.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -584,7 +595,7 @@ function setupPWA() {
   document.getElementById('dynamicManifest').href = URL.createObjectURL(blob);
 }
 
-// ============ MODAL FUNCTIONS (FIXED) ============
+// ============ MODAL ============
 function openUniversalModal() {
   const modal = document.getElementById('universalModal');
   if (modal) {
@@ -607,11 +618,12 @@ function closeUniversalModal() {
 }
 
 // ============ PERSISTENT KEYS ============
-function saveKeys(name, geminiKey, mistralKey, twelveKey) {
+function saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
   localStorage.setItem(STORAGE_KEYS.GEMINI, geminiKey);
   if (mistralKey) localStorage.setItem(STORAGE_KEYS.MISTRAL, mistralKey);
   if (twelveKey) localStorage.setItem(STORAGE_KEYS.TWELVE, twelveKey);
+  if (alphaKey) localStorage.setItem(STORAGE_KEYS.ALPHA, alphaKey);
 }
 
 function loadKeys() {
@@ -619,13 +631,15 @@ function loadKeys() {
     name: localStorage.getItem(STORAGE_KEYS.NAME),
     geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI),
     mistralKey: localStorage.getItem(STORAGE_KEYS.MISTRAL),
-    twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE)
+    twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE),
+    alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA)
   };
 }
 
 function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getMistralKey() { return localStorage.getItem(STORAGE_KEYS.MISTRAL); }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
+function getAlphaKey() { return localStorage.getItem(STORAGE_KEYS.ALPHA); }
 
 function clearAllKeys() {
   if (!confirm("Clear all saved keys? You'll need to login again.")) return;
@@ -639,27 +653,28 @@ function handleLogin() {
   const geminiKey = document.getElementById('authGeminiKey').value.trim();
   const mistralKey = document.getElementById('authMistralKey').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
+  const alphaKey = document.getElementById('authAlphaKey').value.trim();
 
   if (!name) { alert("Enter your name."); return; }
   if (!geminiKey && !mistralKey) { alert("Enter at least one AI API key."); return; }
-  if (geminiKey && geminiKey.length < 20) { alert("Gemini key seems too short."); return; }
 
-  saveKeys(name, geminiKey, mistralKey, twelveKey);
-  enterApp(name, geminiKey, twelveKey);
+  saveKeys(name, geminiKey, mistralKey, twelveKey, alphaKey);
+  enterApp(name, geminiKey, twelveKey, alphaKey);
 }
 
 function continueWithSavedKeys() {
   const keys = loadKeys();
   if (!keys.name || !keys.geminiKey) { showLoginForm(); return; }
-  enterApp(keys.name, keys.geminiKey, keys.twelveKey);
+  enterApp(keys.name, keys.geminiKey, keys.twelveKey, keys.alphaKey);
 }
 
-function enterApp(name, geminiKey, twelveKey) {
+function enterApp(name, geminiKey, twelveKey, alphaKey) {
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('appInterface').style.display = 'block';
   document.getElementById('displayUserName').innerText = name.toUpperCase().substring(0, 12);
   document.getElementById('settingsGeminiKey').value = geminiKey || '';
   document.getElementById('settingsTwelveKey').value = twelveKey || '';
+  document.getElementById('settingsAlphaKey').value = alphaKey || '';
   
   loadHistory(); updateStats();
   showToast(`Welcome ${name}! 🚀`);
@@ -674,6 +689,7 @@ function showLoginForm() {
   if (keys.name) document.getElementById('loginName').value = keys.name;
   if (keys.geminiKey) document.getElementById('authGeminiKey').value = keys.geminiKey;
   if (keys.twelveKey) document.getElementById('authTwelveKey').value = keys.twelveKey;
+  if (keys.alphaKey) document.getElementById('authAlphaKey').value = keys.alphaKey;
 }
 
 function saveSettingsGeminiKey() {
@@ -688,6 +704,13 @@ function saveSettingsTwelveKey() {
   if (key) localStorage.setItem(STORAGE_KEYS.TWELVE, key);
   else localStorage.removeItem(STORAGE_KEYS.TWELVE);
   showToast("✅ TwelveData key saved!");
+}
+
+function saveSettingsAlphaKey() {
+  const key = document.getElementById('settingsAlphaKey').value.trim();
+  if (key) localStorage.setItem(STORAGE_KEYS.ALPHA, key);
+  else localStorage.removeItem(STORAGE_KEYS.ALPHA);
+  showToast("✅ Alpha Vantage key saved!");
 }
 
 function startAutoBacktest() {
@@ -714,6 +737,7 @@ function logout() {
 async function testApiKeys() {
   const geminiKey = getGeminiKey();
   const twelveKey = getTwelveKey();
+  const alphaKey = getAlphaKey();
   showToast("🧪 Testing...", 2000);
   let results = [];
   if (geminiKey) {
@@ -730,8 +754,15 @@ async function testApiKeys() {
     try {
       const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=EUR/USD&apikey=${twelveKey}`, {}, 15000);
       const d = await r.json();
-      results.push(d.status === 'error' ? `❌ TwelveData: ${d.message}` : `✅ TwelveData: OK (EUR/USD = ${d.price})`);
+      results.push(d.status === 'error' ? `❌ TwelveData: ${d.message}` : `✅ TwelveData: OK`);
     } catch (e) { results.push(`❌ TwelveData: ${e.message}`); }
+  }
+  if (alphaKey) {
+    try {
+      const r = await fetchWithTimeout(`${ALPHAVANTAGE_API}?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=USD&apikey=${alphaKey}`, {}, 15000);
+      const d = await r.json();
+      results.push(d['Error Message'] ? `❌ Alpha Vantage: ${d['Error Message']}` : `✅ Alpha Vantage: OK`);
+    } catch (e) { results.push(`❌ Alpha Vantage: ${e.message}`); }
   }
   alert(results.join('\n\n'));
 }
@@ -824,37 +855,89 @@ async function fetchLivePrice() {
   }
 }
 
-// ============ FETCH OHLC ============
-async function fetchOHLC(pair, timeframe, limit = 100) {
+// ============ FETCH OHLC — MULTI-SOURCE FOR 15M ============
+async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   const spec = PAIR_SPECS[pair];
   if (!spec) return null;
-  try {
-    if (spec.source === 'binance' && spec.binanceSymbol) {
-      const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
-      const res = await fetchWithTimeout(url, {}, 10000);
-      if (!res.ok) return null;
-      const data = await res.json();
-      return data.map(d => ({
-        time: parseInt(d[0]), open: parseFloat(d[1]), high: parseFloat(d[2]),
-        low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5])
-      }));
+  
+  for (let attempt = 0; attempt < retries; attempt++) {
+    try {
+      // === Crypto: Binance ===
+      if (spec.source === 'binance' && spec.binanceSymbol) {
+        const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
+        const res = await fetchWithTimeout(url, {}, 10000);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        return data.map(d => ({
+          time: parseInt(d[0]), open: parseFloat(d[1]), high: parseFloat(d[2]),
+          low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5])
+        }));
+      }
+      
+      // === Forex: TwelveData (primary) ===
+      if (spec.source === 'twelve') {
+        const key = getTwelveKey();
+        if (key) {
+          // FIX: Tumia '15min' kwa TwelveData
+          const intervalMap = { '4h': '4h', '1h': '1h', '15m': '15min' };
+          const interval = intervalMap[timeframe] || timeframe;
+          
+          const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${interval}&outputsize=${limit}&apikey=${key}`;
+          const res = await fetchWithTimeout(url, {}, 20000);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.status !== 'error' && data.values && data.values.length > 0) {
+              return data.values.reverse().map(d => ({
+                time: new Date(d.datetime).getTime(),
+                open: parseFloat(d.open), high: parseFloat(d.high),
+                low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0)
+              }));
+            }
+            console.warn(`TwelveData ${timeframe} failed:`, data.message || 'no values');
+          }
+        }
+      }
+      
+      // === 15M BACKUP: Alpha Vantage (kama TwelveData inafeli) ===
+      if (timeframe === '15m' && spec.alphaSymbol) {
+        const alphaKey = getAlphaKey();
+        if (alphaKey) {
+          try {
+            // Alpha Vantage inatumia FX_INTRADAY kwa 15min
+            const url = `${ALPHAVANTAGE_API}?function=FX_INTRADAY&from_symbol=${spec.alphaSymbol.substring(0,3)}&to_symbol=${spec.alphaSymbol.substring(3,6)}&interval=15min&outputsize=compact&apikey=${alphaKey}`;
+            const res = await fetchWithTimeout(url, {}, 20000);
+            if (res.ok) {
+              const data = await res.json();
+              const key = Object.keys(data).find(k => k.includes('Time Series'));
+              if (key && data[key]) {
+                const series = data[key];
+                return Object.entries(series).slice(0, limit).reverse().map(([datetime, values]) => ({
+                  time: new Date(datetime).getTime(),
+                  open: parseFloat(values['1. open']),
+                  high: parseFloat(values['2. high']),
+                  low: parseFloat(values['3. low']),
+                  close: parseFloat(values['4. close']),
+                  volume: 0
+                }));
+              }
+            }
+          } catch (alphaErr) {
+            console.warn(`Alpha Vantage 15M failed:`, alphaErr.message);
+          }
+        }
+      }
+      
+      throw new Error(`All sources failed for ${timeframe}`);
+    } catch (err) {
+      console.warn(`OHLC ${timeframe} attempt ${attempt + 1}/${retries} failed:`, err.message);
+      if (attempt < retries - 1) {
+        await new Promise(r => setTimeout(r, 3000 * (attempt + 1)));
+      } else {
+        return null;
+      }
     }
-    if (spec.source === 'twelve') {
-      const key = getTwelveKey();
-      if (!key) return null;
-      const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${timeframe}&outputsize=${limit}&apikey=${key}`;
-      const res = await fetchWithTimeout(url, {}, 15000);
-      if (!res.ok) return null;
-      const data = await res.json();
-      if (data.status === 'error' || !data.values) return null;
-      return data.values.reverse().map(d => ({
-        time: new Date(d.datetime).getTime(),
-        open: parseFloat(d.open), high: parseFloat(d.high),
-        low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0)
-      }));
-    }
-    return null;
-  } catch (err) { console.warn(`OHLC ${timeframe} fetch failed:`, err.message); return null; }
+  }
+  return null;
 }
 
 // ============ INDICATORS ============
@@ -1000,22 +1083,29 @@ async function fetchAllMarketData() {
   clearMarketData();
   
   try {
-    const [h4Data, h1Data, m15Data] = await Promise.all([
-      fetchOHLC(pair, '4h', 100),
-      fetchOHLC(pair, '1h', 100),
-      fetchOHLC(pair, '15m', 100)
-    ]);
-    
-    window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, indicators: null };
-    
+    // 4H
+    document.getElementById('data4H').querySelector('span:last-child').innerText = '⏳';
+    const h4Data = await fetchOHLC(pair, '4h', 100);
     document.getElementById('data4H').className = `data-status-item ${h4Data ? 'ok' : 'fail'}`;
     document.getElementById('data4H').querySelector('span:last-child').innerText = h4Data ? `${h4Data.length} bars ✓` : 'FAILED';
     
+    await new Promise(r => setTimeout(r, 1000));
+    
+    // 1H
+    document.getElementById('data1H').querySelector('span:last-child').innerText = '⏳';
+    const h1Data = await fetchOHLC(pair, '1h', 100);
     document.getElementById('data1H').className = `data-status-item ${h1Data ? 'ok' : 'fail'}`;
     document.getElementById('data1H').querySelector('span:last-child').innerText = h1Data ? `${h1Data.length} bars ✓` : 'FAILED';
     
+    await new Promise(r => setTimeout(r, 1000));
+    
+    // 15M (muhimu — multi-source)
+    document.getElementById('data15M').querySelector('span:last-child').innerText = '⏳';
+    const m15Data = await fetchOHLC(pair, '15m', 100, 3);
     document.getElementById('data15M').className = `data-status-item ${m15Data ? 'ok' : 'fail'}`;
     document.getElementById('data15M').querySelector('span:last-child').innerText = m15Data ? `${m15Data.length} bars ✓` : 'FAILED';
+    
+    window.marketData = { h4: h4Data, h1: h1Data, m15: m15Data, indicators: null };
     
     let indicators = null;
     if (h1Data && h1Data.length >= 30) {
@@ -1028,11 +1118,16 @@ async function fetchAllMarketData() {
     
     renderChartPreview(pair, h4Data, h1Data, m15Data, indicators);
     
-    if (h1Data && h1Data.length > 0) {
+    // ✅ ZUIA analysis kama 15M haipo (muhimu kwa short-term)
+    if (h1Data && h1Data.length > 0 && m15Data && m15Data.length > 0) {
       document.getElementById('runBtn').disabled = false;
-      showToast(`✅ Market data loaded (${h1Data.length} bars)`);
+      showToast(`✅ All data loaded (4H + 1H + 15M)`);
+    } else if (h1Data && h1Data.length > 0) {
+      document.getElementById('runBtn').disabled = true;
+      showToast(`⚠️ 15M failed — short-term needs 15M. Add Alpha Vantage key in Settings.`, 6000);
     } else {
-      showToast("⚠️ Failed to fetch market data", 4000);
+      document.getElementById('runBtn').disabled = true;
+      showToast(`❌ Failed to load essential data`, 5000);
     }
     
   } catch (err) {
@@ -1852,7 +1947,6 @@ function viewHistoryDetail(index) {
   const modalContent = document.getElementById('modalInnerContent');
   let html = '';
   
-  // Header with close button
   html += `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid var(--border);">
       <h2 style="color:var(--accent);margin:0;font-size:18px;">📊 Analysis Detail</h2>
@@ -1904,7 +1998,6 @@ function viewHistoryDetail(index) {
     return;
   }
   
-  // Old format
   html += `<div class="info-box">Analysis format is old. Cannot display details.</div>`;
   html += `<button class="modal-close-bottom" onclick="closeUniversalModal()">Funga</button>`;
   modalContent.innerHTML = html;
@@ -1940,7 +2033,7 @@ function updateStats() {
 }
 
 function exportData() {
-  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.1" };
+  const data = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), exportedAt: new Date().toISOString(), version: "28.2" };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1959,18 +2052,12 @@ window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   clearMarketData();
   
-  // ESC key to close modal
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeUniversalModal();
-    }
+    if (e.key === 'Escape') closeUniversalModal();
   });
   
-  // Click outside modal to close
   document.getElementById('universalModal').addEventListener('click', (e) => {
-    if (e.target.id === 'universalModal') {
-      closeUniversalModal();
-    }
+    if (e.target.id === 'universalModal') closeUniversalModal();
   });
   
   const keys = loadKeys();
