@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel FX v33.2 — Masters + S/R</title>
+<title>Lutynoel FX v33.3 — Mistral 7B Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -136,8 +136,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel FX v33.2</div>
-    <div class="auth-subtitle">Masters + Support & Resistance</div>
+    <div class="auth-title">Lutynoel FX v33.3</div>
+    <div class="auth-subtitle">Masters + S/R + Mistral 7B</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
@@ -166,7 +166,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
 
       <div class="info-box">
-        🤖 Main: <strong>Gemini 3.6 Flash</strong> → Backup: <strong>Mistral</strong><br>
+        🤖 Main: <strong>Gemini 3.6 / 2.0 / 1.5</strong><br>
+        🔷 Backup: <strong>Mistral 7B (open-mistral-7b)</strong><br>
         🎯 4 Masters + Support/Resistance (R3-S3)
       </div>
 
@@ -190,7 +191,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v33.2</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v33.3</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -207,14 +208,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="view-overview" class="view-section">
       <div class="forex-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">MASTERS + S/R EDITION</div>
-          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v33.2</span>
+          <div style="font-size:10px;color:var(--pink);font-weight:bold;letter-spacing:2px;">MISTRAL 7B EDITION</div>
+          <span class="badge-shield" style="background:rgba(236,72,153,.2);color:var(--pink);border-color:var(--pink);">v33.3</span>
         </div>
         <h2 style="margin:0 0 5px;font-size:19px;">
           <span style="color:var(--accent);font-weight:900;">Lutynoel FX</span> 
           <span style="font-size:12px;color:var(--muted);font-weight:600;">Institutional Pro</span>
         </h2>
-        <p style="color:var(--muted);font-size:11px;margin:0;">4 Masters + Order Type + S/R + Trade Management</p>
+        <p style="color:var(--muted);font-size:11px;margin:0;">4 Masters + S/R + Order Type + Trade Management</p>
       </div>
 
       <div class="grid-3">
@@ -230,13 +231,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 v33.2 FEATURES:</div>
+        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 v33.3 FEATURES:</div>
         <div style="font-size:11px;line-height:1.9;">
+          ✅ <strong>Mistral 7B (open-mistral-7b)</strong> — Backup<br>
+          ✅ <strong>Gemini 3.6 → 2.0 → 1.5</strong> — Main AI<br>
           ✅ <strong>4 SenseiX Masters</strong> — PA, S&D, Structure, Fundamental<br>
           ✅ <strong>Support & Resistance</strong> — R3, R2, R1, Pivot, S1, S2, S3<br>
-          ✅ <strong>Gemini 3.6 Flash</strong> — Main AI<br>
-          ✅ <strong>Mistral Direct</strong> — Backup bila proxy<br>
-          ✅ <strong>Order Type</strong> — BUY_LIMIT / SELL_LIMIT / MARKET<br>
+          ✅ <strong>Order Type</strong> — BUY_LIMIT / SELL_LIMIT<br>
           ✅ <strong>Trade Management</strong> — Scale-Out 50% + Breakeven<br>
           ✅ <strong>Wyckoff, Premium/Discount, Sweeps</strong>
         </div>
@@ -426,10 +427,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v33.2 (Masters + S/R)<br>
-          <strong>Main AI:</strong> Gemini 3.6 Flash<br>
-          <strong>Backup AI:</strong> Mistral Direct<br>
-          <strong>Masters:</strong> 4 (PA, S&D, Structure, Fundamental)
+          <strong>Version:</strong> v33.3 (Mistral 7B)<br>
+          <strong>Main AI:</strong> Gemini 3.6 → 2.0 → 1.5<br>
+          <strong>Backup AI:</strong> Mistral open-mistral-7b<br>
+          <strong>Masters:</strong> 4 + Support/Resistance
         </div>
 
         <div class="ballistic-header">💰 RISK MANAGEMENT</div>
@@ -466,14 +467,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* =====================================================
-   LUTYNOEL FX v33.2 — MASTERS + SUPPORT & RESISTANCE
-   Gemini 3.6 Flash + Mistral Direct. No DXY/US10Y.
+   LUTYNOEL FX v33.3 — MASTERS + S/R + MISTRAL 7B
+   Main: Gemini 3.6 → 2.0 → 1.5
+   Backup: Mistral open-mistral-7b
+   No DXY/US10Y.
    ===================================================== */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-const GEMINI_MODELS = ['gemini-3.6-flash'];
+const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-2.0-flash-exp', 'gemini-1.5-flash-latest'];
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
-const MISTRAL_MODELS = ['mistral-small-latest', 'mistral-medium-latest', 'mistral-large-latest'];
+const MISTRAL_MODELS = ['open-mistral-7b'];
 
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
@@ -513,13 +516,13 @@ const PAIR_SPECS = {
 
 const AGENTS_4 = [
   { id: 1, name: "Price Action Master", weight: 0.25, focus: "Candlesticks & Momentum",
-    lens: "You are the PRICE ACTION MASTER. Analyze candlestick patterns: engulfing, pin bars, rejection wicks, doji, hammer, shooting star. Analyze momentum from recent candles. Look for exhaustion or continuation signals. Cross-check with the provided Support & Resistance levels — is price reacting at R1/R2/S1/S2?" },
+    lens: "You are the PRICE ACTION MASTER. Analyze candlestick patterns: engulfing, pin bars, rejection wicks, doji, hammer, shooting star. Analyze momentum from recent candles. Look for exhaustion or continuation signals. Cross-check with the provided Support & Resistance levels." },
   { id: 2, name: "Supply & Demand Master", weight: 0.25, focus: "Order Blocks & Liquidity",
-    lens: "You are the SUPPLY & DEMAND MASTER. Identify: Order Blocks, Fair Value Gaps (FVG), Liquidity Sweeps (SSL/BSL), unmitigated demand/supply zones, institutional accumulation/distribution. Use Support & Resistance (R3-R2-R1-Pivot-S1-S2-S3) as confluence for zone strength." },
+    lens: "You are the SUPPLY & DEMAND MASTER. Identify: Order Blocks, Fair Value Gaps (FVG), Liquidity Sweeps (SSL/BSL), unmitigated demand/supply zones, institutional accumulation/distribution. Use Support & Resistance (R3-R2-R1-Pivot-S1-S2-S3) for zone strength confluence." },
   { id: 3, name: "Market Structure Master", weight: 0.20, focus: "SMC Structure",
-    lens: "You are the MARKET STRUCTURE MASTER. Analyze: Higher Highs, Higher Lows, Lower Highs, Lower Lows, CHoCH, BOS. Confirm multi-timeframe alignment (H4, H1, M15). Use Pivot Point (PP) as the equilibrium to determine trend bias." },
+    lens: "You are the MARKET STRUCTURE MASTER. Analyze: Higher Highs, Higher Lows, Lower Highs, Lower Lows, CHoCH, BOS. Confirm multi-timeframe alignment (H4, H1, M15). Use Pivot Point (PP) as equilibrium to determine trend bias." },
   { id: 4, name: "Fundamental Analyst Master", weight: 0.30, focus: "Macro + S/R",
-    lens: "You are the FUNDAMENTAL ANALYST MASTER. Analyze market sentiment, safe-haven flows, institutional positioning, volatility conditions. Combine fundamental bias with the provided Support & Resistance levels (R3-S3). Identify whether price is near major resistance (bearish bias) or major support (bullish bias)." }
+    lens: "You are the FUNDAMENTAL ANALYST MASTER. Analyze market sentiment, safe-haven flows, institutional positioning, volatility conditions. Combine fundamental bias with provided Support & Resistance (R3-S3). Identify whether price is near major resistance (bearish bias) or major support (bullish bias)." }
 ];
 
 function showToast(msg, duration = 3500) {
@@ -558,7 +561,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel FX v33.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel FX v33.3", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -716,25 +719,47 @@ async function testApiKeys() {
   let results = [];
   
   if (geminiKey) {
-    try {
-      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_MODELS[0]}:generateContent?key=${geminiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
-      }, 20000);
-      const d = await r.json();
-      results.push(d.error ? `❌ Gemini: ${d.error.message}` : `✅ Gemini: OK`);
-    } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
+    for (const model of GEMINI_MODELS) {
+      try {
+        const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${model}:generateContent?key=${geminiKey}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: 'Say OK' }] }] })
+        }, 20000);
+        const d = await r.json();
+        if (d.error) {
+          results.push(`❌ Gemini ${model}: ${d.error.message.substring(0, 60)}`);
+        } else {
+          results.push(`✅ Gemini ${model}: OK`);
+          break;
+        }
+      } catch (e) { results.push(`❌ Gemini ${model}: ${e.message.substring(0, 60)}`); }
+    }
   }
   
   if (mistralKey) {
-    try {
-      const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
-        body: JSON.stringify({ model: 'mistral-small-latest', messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
-      }, 20000);
-      const d = await r.json();
-      results.push(d.error ? `❌ Mistral: ${d.error.message}` : `✅ Mistral: OK`);
-    } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
+    for (const model of MISTRAL_MODELS) {
+      try {
+        const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
+          body: JSON.stringify({ model: model, messages: [{ role: 'user', content: 'Say OK' }], max_tokens: 10 })
+        }, 20000);
+        const txt = await r.text();
+        let d;
+        try { d = JSON.parse(txt); } catch(e) { d = null; }
+        if (!d) {
+          results.push(`❌ Mistral ${model}: HTTP ${r.status} — ${txt.substring(0, 60)}`);
+        } else if (d.error) {
+          const msg = typeof d.error === 'string' ? d.error : (d.error.message || JSON.stringify(d.error));
+          results.push(`❌ Mistral ${model}: ${msg.substring(0, 60)}`);
+        } else if (d.choices && d.choices[0]) {
+          results.push(`✅ Mistral ${model}: OK`);
+        } else if (d.message) {
+          results.push(`❌ Mistral ${model}: ${d.message.substring(0, 60)}`);
+        } else {
+          results.push(`⚠️ Mistral ${model}: ${txt.substring(0, 60)}`);
+        }
+      } catch (e) { results.push(`❌ Mistral ${model}: ${e.message.substring(0, 60)}`); }
+    }
   }
   
   if (results.length === 0) results.push("No keys to test.");
@@ -874,7 +899,6 @@ async function fetchOHLC(pair, timeframe, limit = 100, retries = 3) {
   return null;
 }
 
-// ============ INDICATORS ============
 function calculateRSI(closes, period = 14) {
   if (closes.length < period + 1) return null;
   let gains = 0, losses = 0;
@@ -913,17 +937,10 @@ function calculateATR(highs, lows, closes, period = 14) {
   return trs.slice(-period).reduce((a, b) => a + b, 0) / period;
 }
 
-// ============ SUPPORT & RESISTANCE (KAMILI) ============
 function calculateSupportResistance(ohlcData) {
   if (!ohlcData || ohlcData.length < 5) return null;
-  
-  // Tumia candle ya jana (previous complete candle) kwa pivot calculation
   const prev = ohlcData[ohlcData.length - 2];
-  const prevHigh = prev.high;
-  const prevLow = prev.low;
-  const prevClose = prev.close;
-  
-  // Classic Pivot Points
+  const prevHigh = prev.high, prevLow = prev.low, prevClose = prev.close;
   const pivot = (prevHigh + prevLow + prevClose) / 3;
   const r1 = (2 * pivot) - prevLow;
   const s1 = (2 * pivot) - prevHigh;
@@ -931,13 +948,9 @@ function calculateSupportResistance(ohlcData) {
   const s2 = pivot - (prevHigh - prevLow);
   const r3 = prevHigh + 2 * (pivot - prevLow);
   const s3 = prevLow - 2 * (prevHigh - pivot);
-  
-  // Ziada: Recent Swing High/Low (kwa 50 candles)
   const recentHigh = Math.max(...ohlcData.slice(-50).map(d => d.high));
   const recentLow = Math.min(...ohlcData.slice(-50).map(d => d.low));
   const currentPrice = ohlcData[ohlcData.length - 1].close;
-  
-  // Tambua kama bei iko karibu na level yoyote (within 0.3%)
   const threshold = currentPrice * 0.003;
   const nearLevels = [];
   const levels = [
@@ -945,12 +958,7 @@ function calculateSupportResistance(ohlcData) {
     { name: 'Pivot', value: pivot },
     { name: 'S1', value: s1 }, { name: 'S2', value: s2 }, { name: 'S3', value: s3 }
   ];
-  levels.forEach(l => {
-    if (Math.abs(currentPrice - l.value) < threshold) {
-      nearLevels.push(l.name);
-    }
-  });
-  
+  levels.forEach(l => { if (Math.abs(currentPrice - l.value) < threshold) nearLevels.push(l.name); });
   let position = 'MID_RANGE';
   if (currentPrice > r3) position = 'ABOVE_R3';
   else if (currentPrice > r2) position = 'ABOVE_R2';
@@ -960,24 +968,19 @@ function calculateSupportResistance(ohlcData) {
   else if (currentPrice > s2) position = 'BELOW_S1';
   else if (currentPrice > s3) position = 'BELOW_S2';
   else position = 'BELOW_S3';
-  
   let bias = 'NEUTRAL';
   if (currentPrice > pivot) bias = 'BULLISH_ZONE';
   else if (currentPrice < pivot) bias = 'BEARISH_ZONE';
-  
   return {
     pivot: pivot.toFixed(4),
     r1: r1.toFixed(4), r2: r2.toFixed(4), r3: r3.toFixed(4),
     s1: s1.toFixed(4), s2: s2.toFixed(4), s3: s3.toFixed(4),
-    recentHigh: recentHigh.toFixed(4),
-    recentLow: recentLow.toFixed(4),
+    recentHigh: recentHigh.toFixed(4), recentLow: recentLow.toFixed(4),
     currentPrice: currentPrice.toFixed(4),
-    position,
-    bias,
+    position, bias,
     nearLevels: nearLevels.length > 0 ? nearLevels.join(', ') : 'None'
   };
 }
-// =======================================================
 
 function getPremiumDiscountZone(ohlcData) {
   if (!ohlcData || ohlcData.length < 50) return null;
@@ -1271,23 +1274,16 @@ Analyze ${pair} at current price ${livePrice}.
     if (indicators.sweep) prompt += `, Sweep=${indicators.sweep.type}`;
     prompt += `\n`;
     
-    // ============ SUPPORT & RESISTANCE ============
     if (indicators.supportResistance) {
       const sr = indicators.supportResistance;
       prompt += `\n📐 SUPPORT & RESISTANCE (Pivot Points):\n`;
-      prompt += `- R3 (Strong Resistance): ${sr.r3}\n`;
-      prompt += `- R2 (Resistance): ${sr.r2}\n`;
-      prompt += `- R1 (Weak Resistance): ${sr.r1}\n`;
-      prompt += `- PIVOT (Equilibrium): ${sr.pivot}\n`;
-      prompt += `- S1 (Weak Support): ${sr.s1}\n`;
-      prompt += `- S2 (Support): ${sr.s2}\n`;
-      prompt += `- S3 (Strong Support): ${sr.s3}\n`;
+      prompt += `- R3: ${sr.r3}\n- R2: ${sr.r2}\n- R1: ${sr.r1}\n`;
+      prompt += `- PIVOT: ${sr.pivot}\n`;
+      prompt += `- S1: ${sr.s1}\n- S2: ${sr.s2}\n- S3: ${sr.s3}\n`;
       prompt += `- Current Position: ${sr.position}\n`;
       prompt += `- Zone Bias: ${sr.bias}\n`;
       prompt += `- Near Levels: ${sr.nearLevels}\n`;
-      prompt += `- Recent Swing High: ${sr.recentHigh}\n`;
-      prompt += `- Recent Swing Low: ${sr.recentLow}\n`;
-      prompt += `\nGUIDANCE: If price is at R1/R2/R3, expect resistance and possible reversal/bounce DOWN (bearish bias). If at S1/S2/S3, expect support and possible reversal/bounce UP (bullish bias). Pivot is equilibrium — above = bullish, below = bearish.\n`;
+      prompt += `\nGUIDANCE: At R1/R2/R3 = expect resistance (bearish bias). At S1/S2/S3 = expect support (bullish bias). Pivot = equilibrium.\n`;
     }
   }
   
@@ -1302,70 +1298,101 @@ Analyze ${pair} at current price ${livePrice}.
   return prompt;
 }
 
-// ============ GEMINI (MAIN) ============
 async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, sessionLevels, htfBias, apiKey) {
   const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, sessionLevels, htfBias);
   let lastError = null;
   
   for (const model of GEMINI_MODELS) {
-    try {
-      const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetchWithTimeout(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.3, responseMimeType: 'application/json' }
-        })
-      }, API_TIMEOUT);
-      
-      const data = await response.json();
-      if (data.error) throw new Error(`${model}: ${data.error.message}`);
-      if (!data.candidates || !data.candidates[0]) throw new Error(`${model}: No response`);
-      
-      let text = data.candidates[0].content.parts[0].text.trim();
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const result = safeJsonParse(text);
-      if (!result) throw new Error(`${model}: Invalid JSON`);
-      
-      return {
-        ...agent,
-        vote: (result.vote || 'HOLD').toUpperCase(),
-        confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
-        reasoning: result.reasoning || 'No analysis.',
-        key_level: result.key_level || null,
-        order_type: result.order_type || 'MARKET',
-        provider: 'Gemini'
-      };
-    } catch (e) {
-      lastError = e;
-      continue;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        if (attempt > 0) await new Promise(r => setTimeout(r, 4000));
+        
+        const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
+        const response = await fetchWithTimeout(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.3, responseMimeType: 'application/json' }
+          })
+        }, API_TIMEOUT);
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          const errMsg = data.error.message || '';
+          if (errMsg.includes('high demand') || errMsg.includes('overloaded') || response.status === 503) {
+            lastError = new Error(`${model}: High demand`);
+            continue;
+          }
+          throw new Error(`${model}: ${errMsg}`);
+        }
+        
+        if (!data.candidates || !data.candidates[0]) throw new Error(`${model}: No response`);
+        
+        let text = data.candidates[0].content.parts[0].text.trim();
+        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+        const result = safeJsonParse(text);
+        if (!result) throw new Error(`${model}: Invalid JSON`);
+        
+        return {
+          ...agent,
+          vote: (result.vote || 'HOLD').toUpperCase(),
+          confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
+          reasoning: result.reasoning || 'No analysis.',
+          key_level: result.key_level || null,
+          order_type: result.order_type || 'MARKET',
+          provider: 'Gemini'
+        };
+      } catch (e) {
+        lastError = e;
+      }
     }
   }
   throw new Error(lastError?.message || 'Gemini failed');
 }
 
-// ============ MISTRAL (BACKUP) ============
 async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, sessionLevels, htfBias, apiKey) {
   const prompt = buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, indicators, sessionLevels, htfBias);
   let lastError = null;
   
   for (const model of MISTRAL_MODELS) {
     try {
+      console.log(`[Mistral] Calling ${model}...`);
       const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-        body: JSON.stringify({ model: model, messages: [{ role: 'user', content: prompt }], temperature: 0.3, max_tokens: 1000 })
+        body: JSON.stringify({ 
+          model: model, 
+          messages: [{ role: 'user', content: prompt }], 
+          temperature: 0.3, 
+          max_tokens: 2000 
+        })
       }, API_TIMEOUT);
       
-      const data = await response.json();
-      if (data.error) throw new Error(`${model}: ${data.error.message}`);
-      if (!data.choices || !data.choices[0] || !data.choices[0].message) throw new Error(`${model}: No response`);
+      const rawText = await response.text();
+      console.log(`[Mistral ${model}] HTTP ${response.status}, Length: ${rawText.length}`);
+      
+      let data;
+      try { data = JSON.parse(rawText); } catch (e) {
+        throw new Error(`${model}: HTTP ${response.status} — ${rawText.substring(0, 100)}`);
+      }
+      
+      if (data.error) {
+        const errMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
+        throw new Error(`${model}: ${errMsg}`);
+      }
+      if (data.message && !data.choices) throw new Error(`${model}: ${data.message}`);
+      if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+        throw new Error(`${model}: Unexpected — ${rawText.substring(0, 100)}`);
+      }
       
       let text = data.choices[0].message.content.trim();
       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
       const result = safeJsonParse(text);
-      if (!result) throw new Error(`${model}: Invalid JSON`);
+      if (!result) throw new Error(`${model}: Invalid JSON from AI`);
+      
+      console.log(`[Mistral] ✅ Success with ${model}`);
       
       return {
         ...agent,
@@ -1378,7 +1405,7 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, indi
       };
     } catch (e) {
       lastError = e;
-      continue;
+      console.warn(`[${agent.name}] Mistral ${model} failed: ${e.message}`);
     }
   }
   throw new Error(lastError?.message || 'Mistral failed');
@@ -1610,7 +1637,6 @@ function buildAnalysisHTML(record, shield) {
     </div>
   </div>`;
   
-  // ORDER TYPE
   if (action !== 'HOLD' && orderType && orderType !== 'N/A') {
     html += `<div class="order-type-box">
       <div style="font-size:11px;color:var(--blue);font-weight:bold;letter-spacing:2px;">⚡ ORDER TYPE</div>
@@ -1619,7 +1645,6 @@ function buildAnalysisHTML(record, shield) {
     </div>`;
   }
   
-  // SUPPORT & RESISTANCE (NEW)
   if (record.indicators?.supportResistance) {
     const sr = record.indicators.supportResistance;
     html += `<div class="card" style="border-color:var(--cyan);">
@@ -1641,7 +1666,6 @@ function buildAnalysisHTML(record, shield) {
     </div>`;
   }
   
-  // HTF BIAS
   if (record.htfBias) {
     const h = record.htfBias;
     html += `<div class="card">
@@ -1654,7 +1678,6 @@ function buildAnalysisHTML(record, shield) {
     </div>`;
   }
   
-  // INSTITUTIONAL INSIGHTS
   const w = record.indicators?.wyckoff;
   const zone = record.indicators?.zone;
   const sweep = record.indicators?.sweep;
@@ -1675,7 +1698,6 @@ function buildAnalysisHTML(record, shield) {
     html += `</div>`;
   }
   
-  // CAPITAL SHIELD
   html += `<div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
     <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
     <div class="shield-box">${shield.message}</div>
@@ -1685,7 +1707,6 @@ function buildAnalysisHTML(record, shield) {
     <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2</span></div>
   </div>`;
   
-  // TRADE PARAMETERS
   if (shield.approved && action !== 'HOLD' && slPips > 0) {
     const autoLot = computeAutoLotSize(slPips, spec.pipValue);
     
@@ -1725,7 +1746,6 @@ function buildAnalysisHTML(record, shield) {
     </div>`;
   }
   
-  // MASTERS CONSULTATION
   if (record.agents) {
     html += `<div class="card"><div class="ballistic-header">👥 SPECIALIST CONSULTATION</div>${record.agents.map(a => {
       const vc = a.vote === 'BUY' ? 'vote-buy' : a.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
@@ -1912,11 +1932,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "33.2", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "33.3", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v33.2-${Date.now()}.json`;
+  a.download = `lutynoel-v33.3-${Date.now()}.json`;
   a.click();
 }
 
