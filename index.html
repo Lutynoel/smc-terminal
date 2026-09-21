@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v34.1</title>
+<title>Lutynoel.fx v34.2</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -103,7 +103,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .signal-hero.buy{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:2px solid var(--green)}
 .signal-hero.sell{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.05));border:2px solid var(--red)}
 .signal-hero.wait{background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05));border:2px solid var(--yellow)}
-.signal-label{font-size:28px;font-weight:900;letter-spacing:1px;margin:5px 0}
+.signal-label{font-size:22px;font-weight:900;letter-spacing:1px;margin:5px 0}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .stat-box{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:8px;text-align:center}
 .stat-value{font-size:22px;font-weight:bold;color:var(--accent)}
@@ -143,7 +143,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">📈</div>
-    <div class="auth-title">Lutynoel.fx v34.1</div>
+    <div class="auth-title">Lutynoel.fx v34.2</div>
     <div class="auth-subtitle">AI Institutional Trading</div>
 
     <div class="disclaimer-box">
@@ -170,7 +170,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="info-box">
         🤖 Main: <strong>Gemini 3.6 / 2.0 / 1.5</strong><br>
         🔷 Backup: <strong>Mistral 7B</strong><br>
-        🎯 4 Masters + S/R + Order Type
+        🎯 4 Masters + S/R + Signal Strength
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -192,7 +192,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">📈</div> v34.1</div>
+      <div class="logo-area"><div class="logo-icon">📈</div> v34.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -207,8 +207,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="main-content">
     <div id="view-overview" class="view-section">
-      
-      <!-- AI HERO BANNER - SVG ROBOT -->
       <div class="hero-banner">
         <div class="glow1"></div>
         <div class="glow2"></div>
@@ -253,8 +251,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
             <div class="hero-badges">
               <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">4 MASTERS</span>
               <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">S/R</span>
-              <span style="background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue);">ORDER TYPE</span>
-              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">AI v34</span>
+              <span style="background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue);">STRENGTH</span>
+              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">AI v34.2</span>
             </div>
           </div>
         </div>
@@ -273,14 +271,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 LUTYNOEL.FX v34.1 FEATURES:</div>
+        <div style="color:var(--pink);font-weight:bold;font-size:13px;margin-bottom:8px;">🤖 LUTYNOEL.FX v34.2 FEATURES:</div>
         <div style="font-size:11px;line-height:1.9;">
+          ✅ <strong>Signal Strength</strong> — STRONG BUY, WEAK BUY, STRONG SELL, WEAK SELL<br>
           ✅ <strong>4 Masters</strong> — PA, S&D, Structure, Fundamental<br>
           ✅ <strong>Support & Resistance</strong> — R3, R2, R1, Pivot, S1, S2, S3<br>
           ✅ <strong>HOLD Explanation</strong> — Sababu kamili kutoka Masters<br>
-          ✅ <strong>Order Type</strong> — BUY_LIMIT / SELL_LIMIT<br>
-          ✅ <strong>Trade Management</strong> — Scale-Out 50% + Breakeven<br>
-          ✅ <strong>Gemini 3.6 → 2.0 → 1.5</strong> + <strong>Mistral 7B</strong>
+          ✅ <strong>Auto-Backtest</strong> — Kila dakika 1 + Win Rate kwa Signal Type<br>
+          ✅ <strong>Profit Projections</strong> — Formula: Pips × (Lot × Pip Value)
         </div>
       </div>
     </div>
@@ -459,10 +457,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v34.1 (Lutynoel.fx)<br>
+          <strong>Version:</strong> v34.2<br>
           <strong>Main AI:</strong> Gemini 3.6 → 2.0 → 1.5<br>
           <strong>Backup AI:</strong> Mistral open-mistral-7b<br>
-          <strong>Masters:</strong> 4 + Support/Resistance
+          <strong>Backtest Check:</strong> Kila dakika 1
         </div>
         <div class="ballistic-header">💰 RISK MANAGEMENT</div>
         <label>Account Balance (USD)</label>
@@ -502,7 +500,7 @@ const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
 const API_TIMEOUT = 90000;
-const AUTO_CHECK_INTERVAL = 300000;
+const AUTO_CHECK_INTERVAL = 60000; // ✅ 1 minute
 const CONFLUENCE_THRESHOLD = 65;
 
 const STORAGE_KEYS = {
@@ -552,6 +550,22 @@ function showToast(msg, duration = 3500) {
 
 function getPipValue(spec, lot) { return lot * spec.pipValue; }
 
+// ✅ SIGNAL STRENGTH CATEGORIZATION
+function getSignalStrength(action, confluenceScore) {
+  if (action === 'HOLD' || !action) return { label: '⏸ HOLD', color: 'var(--yellow)', strength: 'NEUTRAL', emoji: '⏸' };
+  if (action === 'BUY') {
+    if (confluenceScore >= 80) return { label: '🔥 STRONG BUY', color: 'var(--green)', strength: 'STRONG', emoji: '🔥' };
+    if (confluenceScore >= 65) return { label: '🟢 WEAK BUY', color: 'var(--green)', strength: 'WEAK', emoji: '🟢' };
+    return { label: '⚪ WEAK BUY', color: 'var(--muted)', strength: 'VERY_WEAK', emoji: '⚪' };
+  }
+  if (action === 'SELL') {
+    if (confluenceScore >= 80) return { label: '🔥 STRONG SELL', color: 'var(--red)', strength: 'STRONG', emoji: '🔥' };
+    if (confluenceScore >= 65) return { label: '🔴 WEAK SELL', color: 'var(--red)', strength: 'WEAK', emoji: '🔴' };
+    return { label: '⚪ WEAK SELL', color: 'var(--muted)', strength: 'VERY_WEAK', emoji: '⚪' };
+  }
+  return { label: '⏸ HOLD', color: 'var(--yellow)', strength: 'NEUTRAL', emoji: '⏸' };
+}
+
 function safeJsonParse(text) {
   if (!text) return null;
   try { return JSON.parse(text); }
@@ -573,7 +587,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel.fx v34.1", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel.fx v34.2", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#fbbf24",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>📈</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -1006,9 +1020,7 @@ function getKillZoneInfo() {
     { name: 'DEAD_ZONE', start: 1260, end: 1440, quality: 'VERY_LOW' }
   ];
   for (const z of zones) {
-    if (totalMinutes >= z.start && totalMinutes < z.end) {
-      return { session: z.name, quality: z.quality };
-    }
+    if (totalMinutes >= z.start && totalMinutes < z.end) return { session: z.name, quality: z.quality };
   }
   return { session: 'OFF_HOURS', quality: 'LOW' };
 }
@@ -1435,10 +1447,13 @@ async function runAnalysis() {
       else orderType = determineOrderType(confluence.action, livePrice, sltp.entry);
     }
 
+    const strengthInfo = getSignalStrength(confluence.action, confluence.confluenceScore);
+
     const record = {
       id: Date.now(), date: new Date().toLocaleString(), pair,
       action: confluence.action,
-      signalLabel: confluence.action === 'BUY' ? '🟢 BUY' : confluence.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD',
+      signalLabel: strengthInfo.label,
+      signalStrength: strengthInfo.strength,
       signalColor: confluence.action === 'BUY' ? 'buy' : confluence.action === 'SELL' ? 'sell' : 'wait',
       confluenceScore: confluence.confluenceScore,
       entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
@@ -1451,7 +1466,7 @@ async function runAnalysis() {
 
     saveToHistory(record);
     renderFinalResults(record, shield);
-    showToast(shield.approved ? `✅ ${confluence.confluenceScore}% — ${orderType}` : `⏸ HOLD ${confluence.confluenceScore}%`, 4500);
+    showToast(shield.approved ? `${strengthInfo.label} — ${confluence.confluenceScore}%` : `${strengthInfo.label} ${confluence.confluenceScore}%`, 4500);
     localStorage.setItem(`price_${pair}`, livePrice.toString());
   } catch (err) {
     container.innerHTML = `<div class="card" style="border-color:var(--red);"><h3>❌ Error</h3><p>${err.message}</p></div>`;
@@ -1505,14 +1520,23 @@ function buildAnalysisHTML(record, shield) {
   const tp1Pips = record.tp1Pips || 0, tp2Pips = record.tp2Pips || 0, tp3Pips = record.tp3Pips || 0;
   const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '—';
   const lots = [0.01, 0.02, 0.05, 0.10, 0.50, 1.00];
+
+  // ✅ PROFIT PROJECTIONS — Lot × Standard Pip Value
   const projections = lots.map(lot => {
-    const pv = getPipValue(spec, lot);
-    return { lot, pv, tp1: (tp1Pips * pv).toFixed(2), tp3: (tp3Pips * pv).toFixed(2) };
+    const pvPerPip = lot * spec.pipValue;
+    return {
+      lot,
+      pvPerPip,
+      tp1: (tp1Pips * pvPerPip).toFixed(2),
+      tp2: (tp2Pips * pvPerPip).toFixed(2),
+      tp3: (tp3Pips * pvPerPip).toFixed(2)
+    };
   });
 
+  const strength = getSignalStrength(action, confluenceScore);
   const signalColor = action === 'BUY' ? 'buy' : action === 'SELL' ? 'sell' : 'wait';
-  const signalLabel = action === 'BUY' ? '🟢 BUY' : action === 'SELL' ? '🔴 SELL' : '⏸ HOLD';
-  const signalTextColor = action === 'BUY' ? 'var(--green)' : action === 'SELL' ? 'var(--red)' : 'var(--yellow)';
+  const signalLabel = strength.label;
+  const signalTextColor = strength.color;
 
   let html = `<div class="signal-hero ${signalColor}">
     <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
@@ -1528,29 +1552,29 @@ function buildAnalysisHTML(record, shield) {
   if (action === 'HOLD') {
     let reasonSummary = '';
     if (confluence.buyCount > 0 && confluence.sellCount > 0 && confluence.holdCount > 0) {
-      reasonSummary = `Kuna mchanganyiko wa maoni: <strong>${confluence.buyCount} BUY</strong>, <strong>${confluence.sellCount} SELL</strong>, <strong>${confluence.holdCount} HOLD</strong>. Soko <strong>halijafafanuka (mixed signals)</strong>. Masters hawaoni muafaka wa wazi.`;
+      reasonSummary = `Kuna mchanganyiko wa maoni: <strong>${confluence.buyCount} BUY</strong>, <strong>${confluence.sellCount} SELL</strong>, <strong>${confluence.holdCount} HOLD</strong>. Soko <strong>halijafafanuka</strong>. Masters hawaoni muafaka wa wazi.`;
     } else if (confluence.holdCount >= 3) {
-      reasonSummary = `Masters <strong>${confluence.holdCount} kati ya 4</strong> wameshauri HOLD. Mazingira ya soko hayafai kwa entry kwa sasa.`;
+      reasonSummary = `Masters <strong>${confluence.holdCount} kati ya 4</strong> wameshauri HOLD. Mazingira hayafai kwa entry kwa sasa.`;
     } else if (confluenceScore < CONFLUENCE_THRESHOLD) {
-      reasonSummary = `Confluence ni <strong>${confluenceScore}%</strong> tu (inahitajika <strong>≥ ${CONFLUENCE_THRESHOLD}%</strong>). Masters hawana uhakika wa kutosha kuingia trade.`;
+      reasonSummary = `Confluence ni <strong>${confluenceScore}%</strong> tu (inahitajika <strong>≥ ${CONFLUENCE_THRESHOLD}%</strong>). Masters hawana uhakika wa kutosha.`;
     } else {
-      reasonSummary = `Masters wameshauri HOLD kutokana na mazingira ya soko kwa sasa. Subiri mabadiliko kabla ya kuingia.`;
+      reasonSummary = `Masters wameshauri HOLD kutokana na mazingira ya soko kwa sasa.`;
     }
     html += `<div class="card" style="border-color:var(--orange);background:linear-gradient(135deg,rgba(249,115,22,.08),transparent);">
-      <div class="ballistic-header" style="color:var(--orange);">⏸ SABABU YA HOLD — LUTYNOEL.FX MASTERS</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Maelezo kamili kutoka kwa Masters wote kuhusu kwa nini HOLD:</div>
+      <div class="ballistic-header" style="color:var(--orange);">⏸ SABABU YA HOLD — MASTERS</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Maelezo kamili kutoka kwa Masters wote:</div>
       ${record.agents.map(a => `
         <div style="background:#08080a;padding:12px;border-radius:8px;margin-bottom:8px;border-left:3px solid ${a.vote === 'BUY' ? 'var(--green)' : a.vote === 'SELL' ? 'var(--red)' : 'var(--orange)'};">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
             <strong style="font-size:12px;color:var(--accent);">${a.name}</strong>
             <span style="font-size:10px;font-weight:bold;padding:2px 8px;border-radius:10px;background:${a.vote === 'BUY' ? 'rgba(16,185,129,.15)' : a.vote === 'SELL' ? 'rgba(239,68,68,.15)' : 'rgba(249,115,22,.15)'};color:${a.vote === 'BUY' ? 'var(--green)' : a.vote === 'SELL' ? 'var(--red)' : 'var(--orange)'};">${a.vote} • ${a.confidence}%</span>
           </div>
-          <div style="font-size:12px;line-height:1.7;color:var(--text);">${a.reasoning}</div>
+          <div style="font-size:12px;line-height:1.7;">${a.reasoning}</div>
         </div>
       `).join('')}
       <div style="margin-top:12px;padding:14px;background:#08080a;border-radius:8px;border-left:3px solid var(--yellow);">
         <div style="font-size:11px;color:var(--yellow);font-weight:bold;margin-bottom:8px;">💡 USHAURI WA MWISHO</div>
-        <div style="font-size:12px;line-height:1.7;color:var(--text);">${reasonSummary}</div>
+        <div style="font-size:12px;line-height:1.7;">${reasonSummary}</div>
       </div>
     </div>`;
   }
@@ -1653,9 +1677,37 @@ function buildAnalysisHTML(record, shield) {
       <div class="manage-row"><div class="num">3</div><div><strong>Runner:</strong> Acha 50% iliyobaki iende TP2 (${tp2}) na TP3 (${tp3}).</div></div>
     </div>`;
 
+    // ✅ FIXED PROFIT PROJECTIONS
     html += `<div class="card">
       <div class="ballistic-header">💵 PROFIT PROJECTIONS</div>
-      ${projections.map(p => `<div class="lot-row"><div><strong>Lot ${p.lot}</strong><br><small style="color:var(--muted);">$${p.pv.toFixed(3)}/pip</small></div><span><span style="color:var(--orange);">TP1: $${p.tp1}</span><span style="color:var(--green);margin-left:8px;">TP3: $${p.tp3}</span></span></div>`).join('')}
+      <div style="background:rgba(59,130,246,.08);border:1px solid var(--blue);border-radius:8px;padding:10px;margin-bottom:12px;font-size:11px;text-align:center;">
+        <strong style="color:var(--blue);">📐 Formula:</strong> <span style="color:var(--accent);">Pips × (Lot × $${spec.pipValue}/pip)</span>
+      </div>
+      ${projections.map(p => `
+        <div style="background:#08080a;border:1px solid var(--border);padding:10px 14px;border-radius:8px;margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <strong style="color:var(--accent);font-size:14px;">Lot ${p.lot}</strong>
+            <span style="font-size:11px;color:var(--muted);">$${p.pvPerPip.toFixed(3)}/pip</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:11px;">
+            <div style="background:rgba(249,115,22,.1);border-radius:6px;padding:6px;text-align:center;">
+              <div style="color:var(--orange);">TP1</div>
+              <div style="font-weight:bold;color:var(--orange);font-size:13px;">$${p.tp1}</div>
+              <div style="color:var(--muted);font-size:9px;">${tp1Pips}p</div>
+            </div>
+            <div style="background:rgba(6,182,212,.1);border-radius:6px;padding:6px;text-align:center;">
+              <div style="color:var(--cyan);">TP2</div>
+              <div style="font-weight:bold;color:var(--cyan);font-size:13px;">$${p.tp2}</div>
+              <div style="color:var(--muted);font-size:9px;">${tp2Pips}p</div>
+            </div>
+            <div style="background:rgba(16,185,129,.1);border-radius:6px;padding:6px;text-align:center;">
+              <div style="color:var(--green);">TP3</div>
+              <div style="font-weight:bold;color:var(--green);font-size:13px;">$${p.tp3}</div>
+              <div style="color:var(--muted);font-size:9px;">${tp3Pips}p</div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
     </div>`;
   }
 
@@ -1677,38 +1729,123 @@ function buildAnalysisHTML(record, shield) {
   return html;
 }
 
+// ✅ REFRESH BACKTEST — Detailed Dashboard
 function refreshBacktest() {
+  const container = document.getElementById('backtestContainer');
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  const closed = history.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
-  const wins = closed.filter(h => h.outcome === 'WIN').length;
-  const wr = closed.length > 0 ? ((wins / closed.length) * 100).toFixed(1) + '%' : '—';
-  document.getElementById('backtestContainer').innerHTML = `
-    <div class="success-box">Closed: ${closed.length}</div>
+  const withSLTP = history.filter(h => h.autoTrackStart && h.action !== 'HOLD');
+  const closed = withSLTP.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
+  const pending = withSLTP.filter(h => h.outcome === 'PENDING');
+  const expired = withSLTP.filter(h => h.outcome === 'EXPIRED');
+
+  if (withSLTP.length === 0) {
+    container.innerHTML = `<div class="info-box">📊 Bado hakuna analysis za kutrack. Fanya analysis (BUY/SELL) na app itaanza kufuatilia kiotomatiki kila dakika 1.</div>`;
+    return;
+  }
+
+  const wins = closed.filter(h => h.outcome === 'WIN');
+  const losses = closed.filter(h => h.outcome === 'LOSS');
+  const winRate = closed.length > 0 ? ((wins.length / closed.length) * 100).toFixed(1) : '—';
+
+  const byStrength = {
+    STRONG_BUY: { wins: 0, losses: 0, total: 0 },
+    WEAK_BUY: { wins: 0, losses: 0, total: 0 },
+    VERY_WEAK_BUY: { wins: 0, losses: 0, total: 0 },
+    STRONG_SELL: { wins: 0, losses: 0, total: 0 },
+    WEAK_SELL: { wins: 0, losses: 0, total: 0 },
+    VERY_WEAK_SELL: { wins: 0, losses: 0, total: 0 }
+  };
+
+  closed.forEach(h => {
+    const s = getSignalStrength(h.action, h.confluenceScore || 0);
+    const key = `${s.strength}_${h.action}`;
+    if (byStrength[key]) {
+      byStrength[key].total++;
+      if (h.outcome === 'WIN') byStrength[key].wins++;
+      else byStrength[key].losses++;
+    }
+  });
+
+  const byPair = {};
+  closed.forEach(h => {
+    if (!byPair[h.pair]) byPair[h.pair] = { wins: 0, losses: 0 };
+    if (h.outcome === 'WIN') byPair[h.pair].wins++;
+    else byPair[h.pair].losses++;
+  });
+
+  let html = `
+    <div class="success-box">✅ <strong>Auto-Backtest Live</strong> — Inacheck kila dakika 1</div>
+
     <div class="stats-grid">
-      <div class="stat-box"><div class="stat-value">${wr}</div><div class="stat-label">Win Rate</div></div>
-      <div class="stat-box"><div class="stat-value">${wins}</div><div class="stat-label">Wins</div></div>
-    </div>`;
+      <div class="stat-box"><div class="stat-value" style="color:${parseFloat(winRate) >= 50 ? 'var(--green)' : 'var(--red)'};">${winRate}${closed.length > 0 ? '%' : ''}</div><div class="stat-label">Win Rate</div></div>
+      <div class="stat-box"><div class="stat-value">${closed.length}</div><div class="stat-label">Closed</div></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="mini-box" style="text-align:center;"><label style="color:var(--green);">Wins ✅</label><div style="font-size:20px;font-weight:bold;color:var(--green);">${wins.length}</div></div>
+      <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">Losses ❌</label><div style="font-size:20px;font-weight:bold;color:var(--red);">${losses.length}</div></div>
+      <div class="mini-box" style="text-align:center;"><label style="color:var(--yellow);">Pending ⏳</label><div style="font-size:20px;font-weight:bold;color:var(--yellow);">${pending.length}</div></div>
+    </div>
+
+    <div style="margin-top:15px;">
+      <div class="ballistic-header">📊 PERFORMANCE BY SIGNAL TYPE</div>
+      ${Object.entries(byStrength).map(([key, val]) => {
+        const [strength, action] = key.split('_');
+        const color = action === 'BUY' ? 'var(--green)' : 'var(--red)';
+        let emoji = '⚪';
+        if (strength === 'STRONG') emoji = '🔥';
+        else if (strength === 'WEAK') emoji = action === 'BUY' ? '🟢' : '🔴';
+        const label = `${emoji} ${strength.replace('_', ' ')} ${action}`;
+        const wr = val.total > 0 ? ((val.wins / val.total) * 100).toFixed(0) + '%' : '—';
+        return `<div class="lot-row" style="border-left:3px solid ${color};">
+          <div><strong style="color:${color};font-size:12px;">${label}</strong><br><small style="color:var(--muted);">${val.wins}W / ${val.losses}L (${val.total} total)</small></div>
+          <span style="color:${parseFloat(wr) >= 50 ? 'var(--green)' : wr === '—' ? 'var(--muted)' : 'var(--red)'};font-weight:bold;font-size:14px;">${wr}</span>
+        </div>`;
+      }).join('')}
+    </div>
+
+    ${Object.keys(byPair).length > 0 ? `
+      <div style="margin-top:15px;">
+        <div class="ballistic-header">📈 PERFORMANCE BY PAIR</div>
+        ${Object.entries(byPair).map(([pair, val]) => {
+          const total = val.wins + val.losses;
+          const wr = total > 0 ? ((val.wins / total) * 100).toFixed(0) + '%' : '—';
+          return `<div class="lot-row">
+            <div><strong>${pair}</strong><br><small style="color:var(--muted);">${val.wins}W / ${val.losses}L</small></div>
+            <span style="color:${parseFloat(wr) >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    ` : ''}
+
+    ${expired.length > 0 ? `<div class="info-box" style="margin-top:10px;">⌛ ${expired.length} trades zime-expire (zilikaa zaidi ya 24h bila SL au TP3)</div>` : ''}
+  `;
+
+  container.innerHTML = html;
 }
 
+// ✅ UPDATED checkAutoBacktest — Returns true if updated
 function checkAutoBacktest() {
   const history = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   const now = Date.now();
   let updated = false;
   history.forEach(r => {
     if (r.outcome !== 'PENDING' || !r.autoTrackStart) return;
+    if (r.action === 'HOLD' || !r.sl || !r.tp3) { r.outcome = 'SKIPPED'; updated = true; return; }
     if ((now - r.autoTrackStart) / 3600000 > 24) { r.outcome = 'EXPIRED'; updated = true; return; }
     const cp = parseFloat(localStorage.getItem(`price_${r.pair}`) || 0);
     if (!cp) return;
     const sl = parseFloat(r.sl), tp = parseFloat(r.tp3);
     if (r.action === 'BUY') {
-      if (cp <= sl) { r.outcome = 'LOSS'; updated = true; }
-      else if (cp >= tp) { r.outcome = 'WIN'; updated = true; }
+      if (cp <= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL hit at ${cp}`; updated = true; }
+      else if (cp >= tp) { r.outcome = 'WIN'; r.autoOutcome = `TP3 hit at ${cp}`; updated = true; }
     } else if (r.action === 'SELL') {
-      if (cp >= sl) { r.outcome = 'LOSS'; updated = true; }
-      else if (cp <= tp) { r.outcome = 'WIN'; updated = true; }
+      if (cp >= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL hit at ${cp}`; updated = true; }
+      else if (cp <= tp) { r.outcome = 'WIN'; r.autoOutcome = `TP3 hit at ${cp}`; updated = true; }
     }
   });
   if (updated) localStorage.setItem('lutynoel_history', JSON.stringify(history));
+  return updated;
 }
 
 async function updatePricesForBacktest() {
@@ -1734,9 +1871,16 @@ async function updatePricesForBacktest() {
   }
 }
 
-function runAutoBacktest() {
+async function runAutoBacktest() {
   if (document.hidden) return;
-  updatePricesForBacktest().then(() => { checkAutoBacktest(); if (document.getElementById('view-backtest')?.style.display !== 'none') refreshBacktest(); });
+  console.log('[AutoBacktest] Checking...');
+  await updatePricesForBacktest();
+  const updated = checkAutoBacktest();
+  if (updated) {
+    console.log('[AutoBacktest] Trades updated!');
+    updateStats();
+  }
+  if (document.getElementById('view-backtest')?.style.display !== 'none') refreshBacktest();
 }
 
 function calculateRisk() {
@@ -1794,9 +1938,19 @@ function loadHistory() {
   const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   if (h.length === 0) { c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">No history</div>'; return; }
   c.innerHTML = h.map((r, i) => {
-    const lbl = r.signalLabel || (r.action === 'BUY' ? '🟢 BUY' : r.action === 'SELL' ? '🔴 SELL' : '⏸ HOLD');
-    let sb = r.outcome === 'WIN' ? '✅' : r.outcome === 'LOSS' ? '❌' : r.outcome === 'PENDING' ? '⏳' : '⌛';
-    return `<div class="history-card" onclick="viewHistoryDetail(${i})"><div style="flex-grow:1;"><strong>${r.pair} ${lbl}</strong> ${sb}<br><small style="color:var(--muted);">${r.date}</small></div><div class="chevron">›</div><button onclick="event.stopPropagation();deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">🗑️</button></div>`;
+    const strength = getSignalStrength(r.action, r.confluenceScore || 0);
+    const lbl = strength.label;
+    const lblColor = strength.color;
+    let sb = r.outcome === 'WIN' ? '✅' : r.outcome === 'LOSS' ? '❌' : r.outcome === 'PENDING' ? '⏳' : r.outcome === 'SKIPPED' ? '⏭' : '⌛';
+    return `<div class="history-card" onclick="viewHistoryDetail(${i})">
+      <div style="flex-grow:1;">
+        <strong>${r.pair} <span style="color:${lblColor};">${lbl}</span></strong> ${sb}
+        ${r.confluenceScore ? `<span style="color:var(--muted);font-size:11px;"> • ${r.confluenceScore}%</span>` : ''}
+        <br><small style="color:var(--muted);">${r.date}</small>
+      </div>
+      <div class="chevron">›</div>
+      <button onclick="event.stopPropagation();deleteHistory(${i})" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:11px;">🗑️</button>
+    </div>`;
   }).join('');
 }
 
@@ -1845,11 +1999,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "34.1", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "34.2", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v34.1-${Date.now()}.json`;
+  a.download = `lutynoel-v34.2-${Date.now()}.json`;
   a.click();
 }
 
