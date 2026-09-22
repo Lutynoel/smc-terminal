@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v38.1 Pro</title>
-<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lutynoel">
+<meta name="theme-color" content="#09090b">
+<link rel="manifest" id="dynamicManifest">
+<link rel="apple-touch-icon" id="appleIcon">
+<title>Lutynoel.fx v38.2</title>
 <style>
 :root{--bg:#09090b;--card:#121215;--border:#222228;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15;--cyan:#06b6d4;--pink:#ec4899}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -14,7 +19,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .auth-box{background:var(--card);border:1px solid var(--border);padding:25px;border-radius:14px;width:100%;max-width:460px}
 .auth-title{text-align:center;font-size:22px;font-weight:bold;margin-bottom:5px}
 .auth-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:20px}
-#appInterface{display:none;padding-bottom:40px}
+#appInterface{display:none;padding-bottom:80px}
 header{display:flex;justify-content:space-between;align-items:center;background:var(--card);padding:12px 18px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
 .logo-area{display:flex;align-items:center;gap:10px;font-weight:bold;font-size:16px;color:var(--accent)}
 .logo-icon{background:var(--accent);color:#000;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:bold;font-size:16px}
@@ -85,7 +90,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .sr-s{background:rgba(16,185,129,.18);color:#6ee7b7;border-left:4px solid var(--green)}
 .sr-current{background:rgba(59,130,246,.2);color:#93c5fd;border-left:4px solid var(--blue);font-size:14px}
 .sr-weekly{background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.05));border-left:4px solid var(--purple);color:#d8b4fe}
-.sr-broken{opacity:.4;text-decoration:line-through}
 .history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer}
 .modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .modal.active{display:flex}
@@ -114,6 +118,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .strategy-card.neutral{border-left-color:var(--muted)}
 .metric-row{display:flex;justify-content:space-between;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}
 .metric-row:last-child{border-bottom:0}
+.gap-bar{width:100%;height:20px;background:#1a1a1d;border-radius:10px;overflow:hidden;position:relative;margin:8px 0}
+.gap-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow));transition:width .3s}
+.gap-target{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--accent);left:55%}
+.target-card{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(251,191,36,.02));border:2px solid var(--accent);border-radius:10px;padding:14px;margin-bottom:12px}
+.target-card.buy{border-color:var(--green);background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(16,185,129,.02))}
+.target-card.sell{border-color:var(--red);background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(239,68,68,.02))}
+.target-price{font-size:24px;font-weight:900;text-align:center;margin:6px 0}
+.pill{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold;display:inline-block}
+.pill-yes{background:rgba(16,185,129,.2);color:var(--green);border:1px solid var(--green)}
+.pill-no{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
+.pill-wait{background:rgba(251,191,36,.2);color:var(--accent);border:1px solid var(--accent)}
 </style>
 </head>
 <body>
@@ -123,10 +138,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">⚡</div>
-    <div class="auth-title">Lutynoel.fx v38.1 Pro</div>
-    <div class="auth-subtitle">Performance + Accuracy Fix</div>
+    <div class="auth-title">Lutynoel.fx v38.2</div>
+    <div class="auth-subtitle">HOLD Intelligence + Notifications</div>
     <div class="info-box">
-      ⚡ <strong>Fixed:</strong> O(n²) → O(n) indicators • Proper Wilder's ADX • Real FOMC dates • Volume by-hour • Multi-day S/R • DST-aware sessions • Magnitude-based conflict
+      ⚡ <strong>NEW:</strong> HOLD explanation ya kina + price targets + notifications + installable PWA
     </div>
     <div id="returningUserSection" style="display:none;">
       <div class="success-box" id="welcomeBackMsg"></div>
@@ -158,11 +173,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">⚡</div> v38.1</div>
+      <div class="logo-area"><div class="logo-icon">⚡</div> v38.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">🎯 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">📊 Signal Analysis</div>
+    <div class="menu-item" onclick="navigate('watchlist')">👁️ Watchlist</div>
     <div class="menu-item" onclick="navigate('risk')">🛡️ Trade Limits</div>
     <div class="menu-item" onclick="navigate('journal')">📓 Trade Log</div>
     <div class="menu-item" onclick="navigate('statistics')">📈 Statistics</div>
@@ -179,43 +195,31 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <div class="hero-banner-inner">
           <div style="width:60px;height:60px;flex-shrink:0;background:rgba(251,191,36,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;">⚡</div>
           <div style="flex:1;">
-            <div class="hero-title">PRO ENGINE v38.1</div>
-            <div class="hero-sub">Optimized • Wilder's-correct • Multi-day S/R</div>
+            <div class="hero-title">HOLD INTELLIGENCE</div>
+            <div class="hero-sub">v38.2 • Notifications • Installable</div>
             <div class="hero-badges">
-              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">O(n)</span>
-              <span style="background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue);">TREND</span>
-              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">REVERSAL</span>
-              <span style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);">BREAKOUT</span>
+              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">PWA</span>
+              <span style="background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue);">NOTIFY</span>
+              <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">TARGETS</span>
             </div>
           </div>
         </div>
       </div>
+
+      <div id="installBannerContainer"></div>
+      <div id="notifBannerContainer"></div>
       <div id="dailySummaryContainer"></div>
+
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">🎯 Quick Actions</h3>
         <button class="primary-btn" onclick="navigate('analyst')">📊 Analyze Trade</button>
-        <button class="secondary-btn" onclick="navigate('calculator')">🧮 Lot Size</button>
+        <button class="secondary-btn" onclick="navigate('watchlist')">👁️ Watchlist</button>
         <button class="secondary-btn" onclick="navigate('statistics')">📈 Statistics</button>
       </div>
+
       <div class="card">
         <div class="ballistic-header">🛡️ TRADE LIMITS</div>
         <div id="overviewRulesContainer"></div>
-      </div>
-      <div class="card">
-        <div class="ballistic-header">🔧 v38.1 FIXES</div>
-        <div style="font-size:11px;line-height:1.9;color:var(--muted);">
-          <strong style="color:var(--green);">✅ Fixed:</strong><br>
-          • O(n²)→O(n) for MACD/RSI/ATR/ADX (10x faster)<br>
-          • ADX proper Wilder's 2-stage smoothing<br>
-          • Volume compared to same-hour historical<br>
-          • Real FOMC/CPI dates (najua 2026 schedule)<br>
-          • Multi-day S/R (Daily + Weekly + Monthly)<br>
-          • Sessions with DST adjustment<br>
-          • Conflict by magnitude (sio count)<br>
-          • Data gap/stale validation<br>
-          • Volume Profile range distribution<br>
-          • S/R breakout needs candle close + volume
-        </div>
       </div>
     </div>
 
@@ -252,6 +256,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>⚡ Generate Signal</button>
       </div>
       <div id="resultsContainer" style="display:none;"></div>
+    </div>
+
+    <div id="view-watchlist" class="view-section" style="display:none;">
+      <div class="card">
+        <h3 style="margin:5px 0 15px;">👁️ Watchlist</h3>
+        <div class="info-box">
+          Pairs unazofuatilia. App ina-check kila dakika 5 na kukutumia notification kama signal inabadilika.
+        </div>
+        <div id="watchlistContainer"></div>
+        <button class="secondary-btn" onclick="addToWatchlist()">➕ Add Pair</button>
+        <button class="primary-btn" onclick="refreshWatchlist()">🔄 Refresh All</button>
+      </div>
     </div>
 
     <div id="view-risk" class="view-section" style="display:none;">
@@ -310,6 +326,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card"><h3 style="margin:5px 0 15px;">📈 Statistics</h3><div id="realStatsContainer"></div></div>
       <div class="card"><div class="ballistic-header">📊 By Pair</div><div id="byPairContainer"></div></div>
       <div class="card"><div class="ballistic-header">🏆 By Tier</div><div id="byTierContainer"></div></div>
+      <div class="card"><div class="ballistic-header">📉 By Signal Type</div><div id="bySignalContainer"></div></div>
     </div>
 
     <div id="view-correlation" class="view-section" style="display:none;">
@@ -372,9 +389,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v38.1 Pro<br>
-          <strong>Engine:</strong> Multi-Strategy + Regime<br>
-          <strong>Performance:</strong> O(n) indicators
+          <strong>Version:</strong> v38.2 HOLD Intelligence<br>
+          <strong>Engine:</strong> Multi-Strategy + Regime + Targets
         </div>
         <label>Balance ($)</label><input type="number" id="settingsBalance" value="1000">
         <label>Risk Per Trade (%)</label><input type="number" step="0.1" id="settingsRiskPct" value="1.0">
@@ -382,6 +398,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <label>TwelveData Key</label><input type="password" id="settingsTwelveKey" placeholder="TwelveData key">
         <button class="secondary-btn" onclick="saveSettingsTwelveKey()">💾 Save Key</button>
+        <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+        <div class="ballistic-header">🔔 NOTIFICATIONS</div>
+        <button class="secondary-btn" onclick="requestNotificationPermission()">Enable Notifications</button>
+        <button class="secondary-btn" onclick="testNotification()">🧪 Test Notification</button>
+        <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+        <div class="ballistic-header">📱 INSTALL APP</div>
+        <button class="secondary-btn" id="installBtn" onclick="installPWA()" style="display:none;">📲 Install App</button>
+        <div class="info-box">Kama install button haipo, fungua kwenye Chrome/Safari → Menu → "Add to Home Screen"</div>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <button class="secondary-btn" onclick="exportData()">📥 Export</button>
         <button class="danger-btn" onclick="clearAllData()">🗑️ Clear All</button>
@@ -392,7 +416,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* ============================================================
-   LUTYNOEL.FX v38.1 PRO — OPTIMIZED ENGINE
+   LUTYNOEL.FX v38.2 — HOLD INTELLIGENCE
    ============================================================ */
 
 const BINANCE_API = 'https://api.binance.com/api/v3';
@@ -400,14 +424,18 @@ const TWELVEDATA_API = 'https://api.twelvedata.com';
 const API_TIMEOUT = 20000;
 const AUTO_CHECK_INTERVAL = 60000;
 const BACKTEST_PRICE_INTERVAL = 180000;
+const WATCHLIST_INTERVAL = 300000; // 5 min
 const MAX_TRADE_HOURS = 48;
-const CACHE_TTL = 30 * 60 * 1000; // 30 min cache
+const CACHE_TTL = 30 * 60 * 1000;
 
 const STORAGE_KEYS = {
-  NAME: 'qfx381_name', TWELVE: 'qfx381_twelve',
-  BALANCE: 'qfx381_balance', RISK_PCT: 'qfx381_riskPct',
-  HISTORY: 'qfx381_history', RULES: 'qfx381_rules',
-  CORR_CACHE: 'qfx381_corr_cache'
+  NAME: 'qfx382_name', TWELVE: 'qfx382_twelve',
+  BALANCE: 'qfx382_balance', RISK_PCT: 'qfx382_riskPct',
+  HISTORY: 'qfx382_history', RULES: 'qfx382_rules',
+  CORR_CACHE: 'qfx382_corr_cache',
+  WATCHLIST: 'qfx382_watchlist',
+  SIGNALS_CACHE: 'qfx382_signals',
+  NOTIF_ENABLED: 'qfx382_notif_enabled'
 };
 
 const PAIR_SPECS = {
@@ -421,13 +449,7 @@ const PAIR_SPECS = {
   ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', pipValue: 1.00 }
 };
 
-// ✅ FOMC 2026 actual dates (Fed published)
-const FOMC_DATES_2026 = [
-  '2026-01-28', '2026-03-18', '2026-04-29', '2026-06-17',
-  '2026-07-29', '2026-09-16', '2026-11-04', '2026-12-16'
-];
-// CPI typically: 2nd or 3rd Tuesday-Wednesday of month
-// NFP: 1st Friday of month
+const FOMC_DATES_2026 = ['2026-01-28', '2026-03-18', '2026-04-29', '2026-06-17', '2026-07-29', '2026-09-16', '2026-11-04', '2026-12-16'];
 
 const DEFAULT_RULES = {
   maxTradesPerDay: 3, maxConcurrentTrades: 2, maxDailyLossPct: 3,
@@ -458,15 +480,122 @@ function todayStr() { const d = new Date(); return `${d.getFullYear()}-${d.getMo
 function dateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
 /* ============================================================
+   NOTIFICATIONS
+   ============================================================ */
+async function requestNotificationPermission() {
+  if (!('Notification' in window)) {
+    showToast('❌ Browser yako haiunga mkono notifications', 4000);
+    return false;
+  }
+  try {
+    const perm = await Notification.requestPermission();
+    if (perm === 'granted') {
+      localStorage.setItem(STORAGE_KEYS.NOTIF_ENABLED, 'true');
+      showToast('✅ Notifications zimewashwa', 3000);
+      new Notification('Lutynoel.fx', { body: 'Notifications zinafanya kazi! Utapata alerts signals zinapobadilika.', icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%23fbbf24"/><text y=".9em" font-size="80" x="10">⚡</text></svg>' });
+      renderNotifBanner();
+      return true;
+    } else {
+      showToast('❌ Notifications zimekataliwa', 3000);
+      return false;
+    }
+  } catch (e) {
+    showToast('❌ Error: ' + e.message, 3000);
+    return false;
+  }
+}
+
+function sendNotification(title, body, tag = 'lutynoel') {
+  if (localStorage.getItem(STORAGE_KEYS.NOTIF_ENABLED) !== 'true') return;
+  if (!('Notification' in window)) return;
+  if (Notification.permission !== 'granted') return;
+  try {
+    const n = new Notification(title, {
+      body,
+      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%23fbbf24"/><text y=".9em" font-size="80" x="10">⚡</text></svg>',
+      tag: tag + Date.now(),
+      vibrate: [200, 100, 200],
+      requireInteraction: true
+    });
+    n.onclick = () => { window.focus(); n.close(); };
+  } catch (e) { console.warn('Notif fail', e); }
+}
+
+function testNotification() {
+  sendNotification('🔔 Test Notification', 'Hii ni test. Ukipata hii, notifications zinafanya kazi!');
+  if (localStorage.getItem(STORAGE_KEYS.NOTIF_ENABLED) !== 'true') {
+    showToast('⚠️ Kwanza washa notifications kwenye settings', 4000);
+  }
+}
+
+function renderNotifBanner() {
+  const c = document.getElementById('notifBannerContainer');
+  if (!c) return;
+  const enabled = localStorage.getItem(STORAGE_KEYS.NOTIF_ENABLED) === 'true' && 'Notification' in window && Notification.permission === 'granted';
+  if (enabled) { c.innerHTML = ''; return; }
+  c.innerHTML = `<div class="card" style="border-color:var(--accent);">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:bold;color:var(--accent);">🔔 Washa Notifications</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px;">Upate alerts signals zinapobadilika</div>
+      </div>
+      <button onclick="requestNotificationPermission()" style="background:var(--accent);color:#000;border:none;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:12px;">Enable</button>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PWA INSTALL
+   ============================================================ */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'block';
+  renderInstallBanner();
+});
+
+function renderInstallBanner() {
+  const c = document.getElementById('installBannerContainer');
+  if (!c) return;
+  if (!deferredPrompt || window.matchMedia('(display-mode: standalone)').matches) { c.innerHTML = ''; return; }
+  c.innerHTML = `<div class="card" style="border-color:var(--green);">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:bold;color:var(--green);">📲 Install App</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px;">Tumia bila browser (Opera, Chrome, n.k.)</div>
+      </div>
+      <button onclick="installPWA()" style="background:var(--green);color:#fff;border:none;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:12px;">Install</button>
+    </div>
+  </div>`;
+}
+
+async function installPWA() {
+  if (!deferredPrompt) {
+    showToast('📱 Fungua browser menu → "Add to Home Screen"', 5000);
+    return;
+  }
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') showToast('✅ App imeinstalliwa!', 3000);
+  deferredPrompt = null;
+  renderInstallBanner();
+}
+
+window.addEventListener('appinstalled', () => {
+  showToast('✅ App imeinstalliwa kwenye device yako', 3000);
+  deferredPrompt = null;
+});
+
+/* ============================================================
    AUTH
    ============================================================ */
 function saveKeys(name, twelveKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
   if (twelveKey) localStorage.setItem(STORAGE_KEYS.TWELVE, twelveKey);
 }
-function loadKeys() {
-  return { name: localStorage.getItem(STORAGE_KEYS.NAME), twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE) };
-}
+function loadKeys() { return { name: localStorage.getItem(STORAGE_KEYS.NAME), twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE) }; }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
 function getBalance() { return parseFloat(localStorage.getItem(STORAGE_KEYS.BALANCE)) || 1000; }
 function getRiskPct() { return parseFloat(localStorage.getItem(STORAGE_KEYS.RISK_PCT)) || 1.0; }
@@ -489,9 +618,12 @@ function enterApp(name) {
   document.getElementById('settingsRiskPct').value = getRiskPct();
   loadRulesIntoEditor();
   renderDailySummary(); renderRulesOverview(); renderRiskCheck();
+  renderNotifBanner(); renderInstallBanner();
+  renderWatchlist();
   showToast(`Karibu ${name}! ⚡`);
   setTimeout(() => fetchLivePrice(), 800);
   startAutoBacktest();
+  startWatchlistMonitor();
 }
 function showLoginForm() {
   document.getElementById('returningUserSection').style.display = 'none';
@@ -503,6 +635,7 @@ function showLoginForm() {
 function logout() {
   if (window.__uiInterval) clearInterval(window.__uiInterval);
   if (window.__priceInterval) clearInterval(window.__priceInterval);
+  if (window.__watchInterval) clearInterval(window.__watchInterval);
   document.getElementById('appInterface').style.display = 'none';
   document.getElementById('authScreen').style.display = 'flex';
   const k = loadKeys();
@@ -542,9 +675,10 @@ function navigate(view) {
     if (item.getAttribute('onclick')?.includes(view)) item.classList.add('active');
   });
   document.getElementById('appSidebar').classList.remove('open');
-  if (view === 'overview') { renderDailySummary(); renderRulesOverview(); }
+  if (view === 'overview') { renderDailySummary(); renderRulesOverview(); renderNotifBanner(); renderInstallBanner(); }
   if (view === 'statistics') renderRealStats();
   if (view === 'risk') renderRiskCheck();
+  if (view === 'watchlist') renderWatchlist();
   window.scrollTo(0, 0);
 }
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
@@ -552,8 +686,7 @@ function goBack() { navigate('overview'); }
 function changeLiveChart(s) { document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${s}&interval=15&theme=dark&style=1`; }
 
 /* ============================================================
-   ⚡ OPTIMIZED INDICATOR CACHE — O(n)
-   Computes ALL indicators in ONE pass. No O(n²).
+   INDICATORS — O(n) cached
    ============================================================ */
 function computeIndicatorCache(ohlc) {
   const n = ohlc.length;
@@ -563,7 +696,6 @@ function computeIndicatorCache(ohlc) {
   const lows = ohlc.map(d => d.low);
   const volumes = ohlc.map(d => d.volume || 0);
 
-  // --- EMA 12 / 26 (incremental) ---
   const ema12 = new Array(n).fill(null);
   const ema26 = new Array(n).fill(null);
   if (n >= 12) {
@@ -578,8 +710,6 @@ function computeIndicatorCache(ohlc) {
     const k = 2 / 27;
     for (let i = 26; i < n; i++) { e = closes[i] * k + e * (1 - k); ema26[i] = e; }
   }
-
-  // --- MACD line + signal (incremental) ---
   const macdLine = new Array(n).fill(null);
   for (let i = 26; i < n; i++) macdLine[i] = ema12[i] - ema26[i];
   const signalLine = new Array(n).fill(null);
@@ -597,7 +727,6 @@ function computeIndicatorCache(ohlc) {
     }
   }
 
-  // --- RSI (Wilder's, incremental) ---
   const rsi = new Array(n).fill(null);
   if (n > 14) {
     let g = 0, l = 0;
@@ -616,7 +745,6 @@ function computeIndicatorCache(ohlc) {
     }
   }
 
-  // --- ATR (Wilder's, incremental) ---
   const tr = new Array(n).fill(0);
   for (let i = 1; i < n; i++) {
     tr[i] = Math.max(highs[i] - lows[i], Math.abs(highs[i] - closes[i - 1]), Math.abs(lows[i] - closes[i - 1]));
@@ -628,7 +756,6 @@ function computeIndicatorCache(ohlc) {
     for (let i = 15; i < n; i++) { a = (a * 13 + tr[i]) / 14; atr[i] = a; }
   }
 
-  // --- ✅ ADX (proper Wilder's 2-stage) ---
   const plusDM = new Array(n).fill(0);
   const minusDM = new Array(n).fill(0);
   for (let i = 1; i < n; i++) {
@@ -665,18 +792,6 @@ function computeIndicatorCache(ohlc) {
     for (let i = 28; i < n; i++) { a = (a * 13 + dx[i]) / 14; adx[i] = a; }
   }
 
-  // --- ✅ ATR Percentile — O(n) with cached ATR array ---
-  const atrPercentile = new Array(n).fill(null);
-  const validAtrs = [];
-  for (let i = 14; i < n; i++) {
-    if (atr[i] !== null) {
-      validAtrs.push(atr[i]);
-      const below = validAtrs.filter(v => v <= atr[i]).length;
-      atrPercentile[i] = (below / validAtrs.length) * 100;
-    }
-  }
-  // Hii bado ni O(n²) kwa filter — badala yake, tumia sorted array with binary insert
-  // Kwa urahisi, tumia last 100 values tu:
   const atrPctFast = new Array(n).fill(null);
   for (let i = 14; i < n; i++) {
     if (atr[i] === null) continue;
@@ -686,14 +801,12 @@ function computeIndicatorCache(ohlc) {
     atrPctFast[i] = (below / window.length) * 100;
   }
 
-  // --- ROC (10-period momentum) ---
   const roc = new Array(n).fill(null);
   for (let i = 10; i < n; i++) {
     const past = closes[i - 10];
     if (past > 0) roc[i] = ((closes[i] - past) / past) * 100;
   }
 
-  // --- SMA 20/50 (rolling sum — O(n)) ---
   const sma20 = new Array(n).fill(null);
   const sma50 = new Array(n).fill(null);
   if (n >= 20) {
@@ -707,12 +820,7 @@ function computeIndicatorCache(ohlc) {
     for (let i = 50; i < n; i++) { sum += closes[i] - closes[i - 50]; sma50[i] = sum / 50; }
   }
 
-  return {
-    n, closes, highs, lows, volumes, ohlc,
-    ema12, ema26, macdLine, signalLine, histogram,
-    rsi, atr, adx, plusDI, minusDI, atrPercentile: atrPctFast,
-    roc, sma20, sma50
-  };
+  return { n, closes, highs, lows, volumes, ohlc, ema12, ema26, macdLine, signalLine, histogram, rsi, atr, adx, plusDI, minusDI, atrPercentile: atrPctFast, roc, sma20, sma50 };
 }
 
 function lastValid(arr) {
@@ -720,10 +828,8 @@ function lastValid(arr) {
   return null;
 }
 
-function valAt(arr, idx) { return arr[idx]; }
-
 /* ============================================================
-   ✅ CANDLE PATTERNS
+   CANDLE PATTERNS
    ============================================================ */
 function detectCandlePatterns(ohlc, atr) {
   if (!ohlc || ohlc.length < 3) return [];
@@ -735,39 +841,18 @@ function detectCandlePatterns(ohlc, atr) {
   const upperWick = last.high - Math.max(last.close, last.open);
   const lowerWick = Math.min(last.close, last.open) - last.low;
   if (rangeLast === 0) return [];
-
   const patterns = [];
   const atrVal = atr || rangeLast;
-
-  // Bullish Engulfing — needs decent size
-  if (prev.close < prev.open && last.close > last.open &&
-      last.close > prev.open && last.open < prev.close &&
-      bodyLast > bodyPrev * 1.3 && bodyLast > atrVal * 0.5) {
-    patterns.push({ name: 'Bullish Engulfing', bias: 'BUY', strength: 22 });
-  }
-  // Bearish Engulfing
-  if (prev.close > prev.open && last.close < last.open &&
-      last.close < prev.open && last.open > prev.close &&
-      bodyLast > bodyPrev * 1.3 && bodyLast > atrVal * 0.5) {
-    patterns.push({ name: 'Bearish Engulfing', bias: 'SELL', strength: 22 });
-  }
-  // Hammer (bullish pin) — needs context-aware strength
-  if (lowerWick > bodyLast * 2 && upperWick < bodyLast * 0.4 && rangeLast > atrVal * 0.8) {
-    patterns.push({ name: 'Hammer', bias: 'BUY', strength: 18 });
-  }
-  // Shooting Star
-  if (upperWick > bodyLast * 2 && lowerWick < bodyLast * 0.4 && rangeLast > atrVal * 0.8) {
-    patterns.push({ name: 'Shooting Star', bias: 'SELL', strength: 18 });
-  }
-  // Inside Bar
-  if (last.high < prev.high && last.low > prev.low) {
-    patterns.push({ name: 'Inside Bar', bias: 'NEUTRAL', strength: 5 });
-  }
+  if (prev.close < prev.open && last.close > last.open && last.close > prev.open && last.open < prev.close && bodyLast > bodyPrev * 1.3 && bodyLast > atrVal * 0.5) patterns.push({ name: 'Bullish Engulfing', bias: 'BUY', strength: 22 });
+  if (prev.close > prev.open && last.close < last.open && last.close < prev.open && last.open > prev.close && bodyLast > bodyPrev * 1.3 && bodyLast > atrVal * 0.5) patterns.push({ name: 'Bearish Engulfing', bias: 'SELL', strength: 22 });
+  if (lowerWick > bodyLast * 2 && upperWick < bodyLast * 0.4 && rangeLast > atrVal * 0.8) patterns.push({ name: 'Hammer', bias: 'BUY', strength: 18 });
+  if (upperWick > bodyLast * 2 && lowerWick < bodyLast * 0.4 && rangeLast > atrVal * 0.8) patterns.push({ name: 'Shooting Star', bias: 'SELL', strength: 18 });
+  if (last.high < prev.high && last.low > prev.low) patterns.push({ name: 'Inside Bar', bias: 'NEUTRAL', strength: 5 });
   return patterns;
 }
 
 /* ============================================================
-   ✅ VOLUME — by-hour normalized (past 5 days)
+   VOLUME BY HOUR
    ============================================================ */
 function analyzeVolumeByHour(ohlc) {
   const n = ohlc.length;
@@ -775,365 +860,189 @@ function analyzeVolumeByHour(ohlc) {
   const last = ohlc[n - 1];
   const lastDate = new Date(last.time);
   const lastHour = lastDate.getUTCHours();
-
-  // Same-hour candles from past days
   const sameHour = [];
   for (let i = n - 2; i >= 0 && sameHour.length < 5; i--) {
     const d = new Date(ohlc[i].time);
-    if (d.getUTCHours() === lastHour && d.getUTCDate() !== lastDate.getUTCDate()) {
-      sameHour.push(ohlc[i]);
-    }
+    if (d.getUTCHours() === lastHour && d.getUTCDate() !== lastDate.getUTCDate()) sameHour.push(ohlc[i]);
   }
-
-  let avgVol;
-  let basis;
-  if (sameHour.length >= 3) {
-    avgVol = sameHour.reduce((a, c) => a + (c.volume || 0), 0) / sameHour.length;
-    basis = `${sameHour.length}d same-hour`;
-  } else {
-    // Fallback: last 20 candles
-    const last20 = ohlc.slice(-21, -1);
-    avgVol = last20.reduce((a, c) => a + (c.volume || 0), 0) / last20.length;
-    basis = '20-candle avg';
-  }
-
+  let avgVol, basis;
+  if (sameHour.length >= 3) { avgVol = sameHour.reduce((a, c) => a + (c.volume || 0), 0) / sameHour.length; basis = `${sameHour.length}d same-hour`; }
+  else { const last20 = ohlc.slice(-21, -1); avgVol = last20.reduce((a, c) => a + (c.volume || 0), 0) / last20.length; basis = '20-candle avg'; }
   const vol = last.volume || 0;
   const ratio = avgVol > 0 ? vol / avgVol : 1;
   const direction = last.close > last.open ? 'BULL' : last.close < last.open ? 'BEAR' : 'FLAT';
-
   let strength = 'NORMAL';
   if (ratio > 1.6) strength = 'SURGE';
   else if (ratio > 1.25) strength = 'HIGH';
   else if (ratio < 0.7) strength = 'LOW';
-
   return { ratio, strength, direction, avgVol, currentVol: vol, basis };
 }
 
 /* ============================================================
-   ✅ REGIME — using cached ADX + ATR percentile
+   REGIME
    ============================================================ */
 function detectRegimeFromCache(cache) {
   const adxVal = lastValid(cache.adx);
   const atrPct = lastValid(cache.atrPercentile);
   const pdi = lastValid(cache.plusDI);
   const mdi = lastValid(cache.minusDI);
-
   if (adxVal === null) return { regime: 'UNKNOWN', adx: null, atrPercentile: null };
-
   let regime = 'RANGING';
   if (adxVal > 25 && atrPct > 40) regime = 'TRENDING';
   else if (adxVal > 25 && atrPct <= 40) regime = 'TRENDING_LOW_VOL';
   else if (adxVal < 20 && atrPct > 60) regime = 'VOLATILE_CHOP';
   else if (adxVal < 20 && atrPct < 30) regime = 'DEAD';
   else regime = 'RANGING';
-
-  return {
-    regime, adx: adxVal, plusDI: pdi, minusDI: mdi,
-    atrPercentile: atrPct,
-    trendUp: pdi > mdi,
-    strength: adxVal
-  };
+  return { regime, adx: adxVal, plusDI: pdi, minusDI: mdi, atrPercentile: atrPct, trendUp: pdi > mdi, strength: adxVal };
 }
 
 /* ============================================================
-   ✅ S/R — Multi-day (Daily + Weekly + Monthly)
+   MULTI-DAY S/R
    ============================================================ */
 function aggregateCandles(ohlc, periodFn) {
   const groups = {};
   ohlc.forEach(c => {
     const key = periodFn(new Date(c.time));
     if (!groups[key]) groups[key] = { high: c.high, low: c.low, close: c.close, time: c.time };
-    else {
-      groups[key].high = Math.max(groups[key].high, c.high);
-      groups[key].low = Math.min(groups[key].low, c.low);
-      groups[key].close = c.close;
-    }
+    else { groups[key].high = Math.max(groups[key].high, c.high); groups[key].low = Math.min(groups[key].low, c.low); groups[key].close = c.close; }
   });
   return Object.values(groups).sort((a, b) => a.time - b.time);
 }
-
 function computePivotsFrom(prev) {
   const pivot = (prev.high + prev.low + prev.close) / 3;
-  return {
-    pivot, r1: 2 * pivot - prev.low, s1: 2 * pivot - prev.high,
-    r2: pivot + (prev.high - prev.low), s2: pivot - (prev.high - prev.low),
-    r3: prev.high + 2 * (pivot - prev.low), s3: prev.low - 2 * (prev.high - pivot)
-  };
+  return { pivot, r1: 2 * pivot - prev.low, s1: 2 * pivot - prev.high, r2: pivot + (prev.high - prev.low), s2: pivot - (prev.high - prev.low), r3: prev.high + 2 * (pivot - prev.low), s3: prev.low - 2 * (prev.high - pivot) };
 }
-
 function computeMultiDaySR(ohlc1h) {
   if (!ohlc1h || ohlc1h.length < 50) return null;
-
   const dayKey = d => `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
-  const weekKey = d => {
-    const onejan = new Date(d.getUTCFullYear(), 0, 1);
-    const week = Math.ceil(((d - onejan) / 86400000 + onejan.getDay() + 1) / 7);
-    return `${d.getUTCFullYear()}-W${week}`;
-  };
+  const weekKey = d => { const o = new Date(d.getUTCFullYear(), 0, 1); const w = Math.ceil(((d - o) / 86400000 + o.getDay() + 1) / 7); return `${d.getUTCFullYear()}-W${w}`; };
   const monthKey = d => `${d.getUTCFullYear()}-${d.getUTCMonth()}`;
-
   const daily = aggregateCandles(ohlc1h, dayKey);
   const weekly = aggregateCandles(ohlc1h, weekKey);
   const monthly = aggregateCandles(ohlc1h, monthKey);
-
   const result = {};
-
-  if (daily.length >= 2) {
-    const p = computePivotsFrom(daily[daily.length - 2]);
-    result.daily = p;
-  }
-  if (weekly.length >= 2) {
-    const p = computePivotsFrom(weekly[weekly.length - 2]);
-    result.weekly = p;
-  }
-  if (monthly.length >= 2) {
-    const p = computePivotsFrom(monthly[monthly.length - 2]);
-    result.monthly = p;
-  }
-
+  if (daily.length >= 2) result.daily = computePivotsFrom(daily[daily.length - 2]);
+  if (weekly.length >= 2) result.weekly = computePivotsFrom(weekly[weekly.length - 2]);
+  if (monthly.length >= 2) result.monthly = computePivotsFrom(monthly[monthly.length - 2]);
   return result;
 }
-
 function analyzeSR(ohlc, srData) {
   if (!srData) return null;
   const cp = ohlc[ohlc.length - 1].close;
   const threshold = cp * 0.004;
-
   const levels = [];
   if (srData.daily) {
     const p = srData.daily;
-    levels.push(
-      { n: 'D-R3', v: p.r3, tf: 'D', type: 'R' },
-      { n: 'D-R2', v: p.r2, tf: 'D', type: 'R' },
-      { n: 'D-R1', v: p.r1, tf: 'D', type: 'R' },
-      { n: 'D-Pivot', v: p.pivot, tf: 'D', type: 'P' },
-      { n: 'D-S1', v: p.s1, tf: 'D', type: 'S' },
-      { n: 'D-S2', v: p.s2, tf: 'D', type: 'S' },
-      { n: 'D-S3', v: p.s3, tf: 'D', type: 'S' }
-    );
+    levels.push({ n: 'D-R3', v: p.r3, tf: 'D', type: 'R' }, { n: 'D-R2', v: p.r2, tf: 'D', type: 'R' }, { n: 'D-R1', v: p.r1, tf: 'D', type: 'R' }, { n: 'D-Pivot', v: p.pivot, tf: 'D', type: 'P' }, { n: 'D-S1', v: p.s1, tf: 'D', type: 'S' }, { n: 'D-S2', v: p.s2, tf: 'D', type: 'S' }, { n: 'D-S3', v: p.s3, tf: 'D', type: 'S' });
   }
   if (srData.weekly) {
     const p = srData.weekly;
-    levels.push(
-      { n: 'W-R1', v: p.r1, tf: 'W', type: 'R' },
-      { n: 'W-Pivot', v: p.pivot, tf: 'W', type: 'P' },
-      { n: 'W-S1', v: p.s1, tf: 'W', type: 'S' }
-    );
+    levels.push({ n: 'W-R1', v: p.r1, tf: 'W', type: 'R' }, { n: 'W-Pivot', v: p.pivot, tf: 'W', type: 'P' }, { n: 'W-S1', v: p.s1, tf: 'W', type: 'S' });
   }
   if (srData.monthly) {
     const p = srData.monthly;
-    levels.push(
-      { n: 'M-R1', v: p.r1, tf: 'M', type: 'R' },
-      { n: 'M-Pivot', v: p.pivot, tf: 'M', type: 'P' },
-      { n: 'M-S1', v: p.s1, tf: 'M', type: 'S' }
-    );
+    levels.push({ n: 'M-R1', v: p.r1, tf: 'M', type: 'R' }, { n: 'M-Pivot', v: p.pivot, tf: 'M', type: 'P' }, { n: 'M-S1', v: p.s1, tf: 'M', type: 'S' });
   }
-
-  // Filter to nearest levels
-  const sorted = levels.sort((a, b) => Math.abs(cp - a.v) - Math.abs(cp - b.v));
+  const sorted = [...levels].sort((a, b) => Math.abs(cp - a.v) - Math.abs(cp - b.v));
   const nearLevels = sorted.filter(l => Math.abs(cp - l.v) < threshold).map(l => l.n);
-
-  // Confluence: multiple levels within small range = strong level
   const confluence = [];
-  for (let i = 0; i < levels.length; i++) {
-    for (let j = i + 1; j < levels.length; j++) {
-      if (Math.abs(levels[i].v - levels[j].v) < cp * 0.0015) {
-        confluence.push(`${levels[i].n} ≈ ${levels[j].n}`);
-      }
-    }
-  }
-
-  // Broken levels
+  for (let i = 0; i < levels.length; i++) for (let j = i + 1; j < levels.length; j++) if (Math.abs(levels[i].v - levels[j].v) < cp * 0.0015) confluence.push(`${levels[i].n} ≈ ${levels[j].n}`);
   const broken = [];
   levels.forEach(l => {
     if (l.type === 'R' && cp > l.v && Math.abs(cp - l.v) > cp * 0.0005) broken.push(l.n);
     if (l.type === 'S' && cp < l.v && Math.abs(cp - l.v) > cp * 0.0005) broken.push(l.n);
   });
-
-  return {
-    allLevels: levels, nearLevels, confluence, broken, currentPrice: cp,
-    daily: srData.daily, weekly: srData.weekly, monthly: srData.monthly
-  };
+  return { allLevels: levels, nearLevels, confluence, broken, currentPrice: cp, daily: srData.daily, weekly: srData.weekly, monthly: srData.monthly };
 }
 
 /* ============================================================
-   ✅ SESSION — DST-aware
+   SESSION + NEWS
    ============================================================ */
-function isUS_DST(date) {
-  const year = date.getUTCFullYear();
-  // 2nd Sunday March to 1st Sunday November
-  const march = new Date(Date.UTC(year, 2, 1));
-  const dstStart = new Date(Date.UTC(year, 2, 8 + (7 - march.getUTCDay()) % 7));
-  const nov = new Date(Date.UTC(year, 10, 1));
-  const dstEnd = new Date(Date.UTC(year, 10, 1 + (7 - nov.getUTCDay()) % 7));
-  return date >= dstStart && date < dstEnd;
-}
-function isEU_DST(date) {
-  const year = date.getUTCFullYear();
-  // Last Sunday March to last Sunday October
-  const march = new Date(Date.UTC(year, 2, 31));
-  const dstStart = new Date(Date.UTC(year, 2, 31 - ((march.getUTCDay() + 6) % 7)));
-  const oct = new Date(Date.UTC(year, 9, 31));
-  const dstEnd = new Date(Date.UTC(year, 9, 31 - ((oct.getUTCDay() + 6) % 7)));
-  return date >= dstStart && date < dstEnd;
-}
-
+function isUS_DST(date) { const y = date.getUTCFullYear(); const mar = new Date(Date.UTC(y, 2, 1)); const s = new Date(Date.UTC(y, 2, 8 + (7 - mar.getUTCDay()) % 7)); const nov = new Date(Date.UTC(y, 10, 1)); const e = new Date(Date.UTC(y, 10, 1 + (7 - nov.getUTCDay()) % 7)); return date >= s && date < e; }
+function isEU_DST(date) { const y = date.getUTCFullYear(); const mar = new Date(Date.UTC(y, 2, 31)); const s = new Date(Date.UTC(y, 2, 31 - ((mar.getUTCDay() + 6) % 7))); const oct = new Date(Date.UTC(y, 9, 31)); const e = new Date(Date.UTC(y, 9, 31 - ((oct.getUTCDay() + 6) % 7))); return date >= s && date < e; }
 function getSession() {
   const now = new Date();
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
-  const usDST = isUS_DST(now);
-  const euDST = isEU_DST(now);
-
-  // London: 8:00-16:30 UTC normally, 7:00-15:30 UTC during BST
-  const londonStart = euDST ? 7 * 60 : 8 * 60;
-  const londonEnd = euDST ? 15 * 60 + 30 : 16 * 60 + 30;
-  // NY: 13:30-20:00 UTC normally, 12:30-19:00 UTC during EDT
-  const nyStart = usDST ? 12 * 60 + 30 : 13 * 60 + 30;
-  const nyEnd = usDST ? 19 * 60 : 20 * 60;
-
-  if (m >= londonStart && m < londonEnd && m >= nyStart && m < nyEnd) {
-    return { name: 'LONDON_NY_OVERLAP', quality: 'VERY_HIGH', score: 12 };
-  }
-  if (m >= londonStart && m < londonEnd) {
-    return { name: 'LONDON', quality: 'HIGH', score: 8 };
-  }
-  if (m >= nyStart && m < nyEnd) {
-    return { name: 'NEW_YORK', quality: 'HIGH', score: 7 };
-  }
+  const euDST = isEU_DST(now), usDST = isUS_DST(now);
+  const lS = euDST ? 7 * 60 : 8 * 60, lE = euDST ? 15 * 60 + 30 : 16 * 60 + 30;
+  const nS = usDST ? 12 * 60 + 30 : 13 * 60 + 30, nE = usDST ? 19 * 60 : 20 * 60;
+  if (m >= lS && m < lE && m >= nS && m < nE) return { name: 'LONDON_NY_OVERLAP', quality: 'VERY_HIGH', score: 12 };
+  if (m >= lS && m < lE) return { name: 'LONDON', quality: 'HIGH', score: 8 };
+  if (m >= nS && m < nE) return { name: 'NEW_YORK', quality: 'HIGH', score: 7 };
   if (m >= 0 && m < 180) return { name: 'ASIAN', quality: 'LOW', score: -5 };
   return { name: 'OFF_HOURS', quality: 'LOW', score: -8 };
 }
-
-/* ============================================================
-   ✅ NEWS — Real FOMC dates
-   ============================================================ */
 function checkNewsWindow() {
   const now = new Date();
-  const todayStr = dateStr(now);
+  const ts = dateStr(now);
   const day = now.getUTCDay();
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
   const dom = now.getUTCDate();
   const events = [];
-
-  // ✅ FOMC — actual dates
-  if (FOMC_DATES_2026.includes(todayStr) && m >= 18 * 60 && m <= 20 * 60) {
-    events.push('FOMC');
-  }
-  // ✅ NFP — First Friday, 13:30-14:30 UTC
-  const firstFriday = getFirstFriday(now);
-  if (day === 5 && dom === firstFriday && m >= 13 * 60 + 15 && m <= 14 * 60 + 15) {
-    events.push('NFP');
-  }
-  // ✅ CPI — typically 2nd/3rd Wed 13:30 UTC, but approximate within window
-  if (day === 3 && dom >= 10 && dom <= 20 && m >= 13 * 60 + 15 && m <= 14 * 60 + 15) {
-    events.push('CPI (approx)');
-  }
-  // ✅ ECB — 1st/3rd Thursday
-  if (day === 4 && (dom <= 7 || (dom >= 14 && dom <= 21)) && m >= 11 * 60 + 45 && m <= 13 * 60) {
-    events.push('ECB');
-  }
-
+  if (FOMC_DATES_2026.includes(ts) && m >= 18 * 60 && m <= 20 * 60) events.push('FOMC');
+  const ff = getFirstFriday(now);
+  if (day === 5 && dom === ff && m >= 13 * 60 + 15 && m <= 14 * 60 + 15) events.push('NFP');
+  if (day === 3 && dom >= 10 && dom <= 20 && m >= 13 * 60 + 15 && m <= 14 * 60 + 15) events.push('CPI');
+  if (day === 4 && (dom <= 7 || (dom >= 14 && dom <= 21)) && m >= 11 * 60 + 45 && m <= 13 * 60) events.push('ECB');
   return { blocked: events.length > 0, events };
 }
-
 function getFirstFriday(date) {
   const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1));
   while (d.getUTCDay() !== 5) d.setUTCDate(d.getUTCDate() + 1);
   return d.getUTCDate();
 }
 
-/* ============================================================
-   ✅ HTF BIAS — using cached SMAs
-   ============================================================ */
 function getHTFBiasFromCache(h4Cache, h1Cache) {
   if (!h4Cache || !h1Cache) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
-  const h4sma20 = lastValid(h4Cache.sma20);
-  const h4sma50 = lastValid(h4Cache.sma50);
+  const h4sma20 = lastValid(h4Cache.sma20), h4sma50 = lastValid(h4Cache.sma50);
   const h4p = h4Cache.closes[h4Cache.closes.length - 1];
-  const h1sma20 = lastValid(h1Cache.sma20);
-  const h1sma50 = lastValid(h1Cache.sma50);
+  const h1sma20 = lastValid(h1Cache.sma20), h1sma50 = lastValid(h1Cache.sma50);
   const h1p = h1Cache.closes[h1Cache.closes.length - 1];
-
   let h4t = 'NEUTRAL';
   if (h4sma20 && h4sma50 && h4p > h4sma20 && h4sma20 > h4sma50) h4t = 'BULLISH';
   else if (h4sma20 && h4sma50 && h4p < h4sma20 && h4sma20 < h4sma50) h4t = 'BEARISH';
-
   let h1t = 'NEUTRAL';
   if (h1sma20 && h1sma50 && h1p > h1sma20 && h1sma20 > h1sma50) h1t = 'BULLISH';
   else if (h1sma20 && h1sma50 && h1p < h1sma20 && h1sma20 < h1sma50) h1t = 'BEARISH';
-
   return { h4: h4t, h1: h1t, aligned: h4t === h1t && h4t !== 'NEUTRAL' };
 }
 
-/* ============================================================
-   ✅ SWEEP — confirmation-based
-   ============================================================ */
 function detectSweep(ohlc) {
   if (!ohlc || ohlc.length < 25) return null;
-  const highs = ohlc.map(d => d.high);
-  const lows = ohlc.map(d => d.low);
-  const last = ohlc[ohlc.length - 1], prev = ohlc[ohlc.length - 2];
-  const rH = Math.max(...highs.slice(-20, -2));
-  const rL = Math.min(...lows.slice(-20, -2));
-
-  // Bullish sweep: prev closes BELOW rL, last sweeps low, closes back above with bullish body
-  const bullish = last.low < rL && last.close > rL &&
-                  last.close > last.open &&
-                  (last.close - last.low) > (last.high - last.close) * 1.5;
-  // Bearish sweep
-  const bearish = last.high > rH && last.close < rH &&
-                  last.close < last.open &&
-                  (last.high - last.close) > (last.close - last.low) * 1.5;
-
+  const highs = ohlc.map(d => d.high), lows = ohlc.map(d => d.low);
+  const last = ohlc[ohlc.length - 1];
+  const rH = Math.max(...highs.slice(-20, -2)), rL = Math.min(...lows.slice(-20, -2));
+  const bullish = last.low < rL && last.close > rL && last.close > last.open && (last.close - last.low) > (last.high - last.close) * 1.5;
+  const bearish = last.high > rH && last.close < rH && last.close < last.open && (last.high - last.close) > (last.close - last.low) * 1.5;
   if (bullish) return { type: 'BULLISH_SWEEP', bias: 'BUY', level: rL, strength: 18 };
   if (bearish) return { type: 'BEARISH_SWEEP', bias: 'SELL', level: rH, strength: 18 };
   return null;
 }
 
-/* ============================================================
-   ✅ DIVERGENCE — uses cached RSI (no recalc)
-   ============================================================ */
 function detectDivergenceFromCache(cache) {
   const { closes, rsi, n } = cache;
   if (n < 30) return null;
-  const lookback = 30;
-  const startIdx = Math.max(0, n - lookback);
+  const startIdx = Math.max(0, n - 30);
   const closesSeg = closes.slice(startIdx);
-  const rsiSeg = rsi.slice(startIdx).filter(v => v !== null);
-  if (rsiSeg.length < 15) return null;
-
-  const lows = [], highs = [];
   const rsiAligned = rsi.slice(startIdx);
+  if (rsiAligned.filter(v => v !== null).length < 15) return null;
+  const lows = [], highs = [];
   for (let i = 2; i < closesSeg.length - 2; i++) {
-    if (rsiAligned[i] === null) continue;
-    if (closesSeg[i] < closesSeg[i - 1] && closesSeg[i] < closesSeg[i + 1] &&
-        rsiAligned[i] !== null && rsiAligned[i - 1] !== null && rsiAligned[i + 1] !== null) {
-      lows.push({ price: closesSeg[i], rsi: rsiAligned[i], idx: i });
-    }
-    if (closesSeg[i] > closesSeg[i - 1] && closesSeg[i] > closesSeg[i + 1] &&
-        rsiAligned[i] !== null && rsiAligned[i - 1] !== null && rsiAligned[i + 1] !== null) {
-      highs.push({ price: closesSeg[i], rsi: rsiAligned[i], idx: i });
-    }
+    if (rsiAligned[i] === null || rsiAligned[i-1] === null || rsiAligned[i+1] === null) continue;
+    if (closesSeg[i] < closesSeg[i-1] && closesSeg[i] < closesSeg[i+1]) lows.push({ price: closesSeg[i], rsi: rsiAligned[i] });
+    if (closesSeg[i] > closesSeg[i-1] && closesSeg[i] > closesSeg[i+1]) highs.push({ price: closesSeg[i], rsi: rsiAligned[i] });
   }
-
   if (lows.length >= 2) {
-    const l = lows[lows.length - 1], p = lows[lows.length - 2];
-    if (l.price < p.price && l.rsi > p.rsi + 3) {
-      return { type: 'BULLISH_DIVERGENCE', bias: 'BUY', strength: 15 };
-    }
+    const l = lows[lows.length-1], p = lows[lows.length-2];
+    if (l.price < p.price && l.rsi > p.rsi + 3) return { type: 'BULLISH_DIVERGENCE', bias: 'BUY', strength: 15 };
   }
   if (highs.length >= 2) {
-    const l = highs[highs.length - 1], p = highs[highs.length - 2];
-    if (l.price > p.price && l.rsi < p.rsi - 3) {
-      return { type: 'BEARISH_DIVERGENCE', bias: 'SELL', strength: 15 };
-    }
+    const l = highs[highs.length-1], p = highs[highs.length-2];
+    if (l.price > p.price && l.rsi < p.rsi - 3) return { type: 'BEARISH_DIVERGENCE', bias: 'SELL', strength: 15 };
   }
   return null;
 }
 
-/* ============================================================
-   ✅ VOLUME PROFILE — range distribution (better than v38)
-   ============================================================ */
 function calculateVolumeProfile(ohlc, bins = 25) {
   if (!ohlc || ohlc.length < 20) return null;
   const prices = ohlc.flatMap(c => [c.high, c.low, c.close]);
@@ -1142,7 +1051,6 @@ function calculateVolumeProfile(ohlc, bins = 25) {
   if (range === 0) return null;
   const binSize = range / bins;
   const profile = new Array(bins).fill(0);
-
   ohlc.forEach(c => {
     const vol = c.volume || 1;
     const loBin = Math.max(0, Math.floor((c.low - min) / binSize));
@@ -1151,7 +1059,6 @@ function calculateVolumeProfile(ohlc, bins = 25) {
     const volPerBin = vol / span;
     for (let b = loBin; b <= hiBin; b++) profile[b] += volPerBin;
   });
-
   const pocBin = profile.indexOf(Math.max(...profile));
   const poc = min + (pocBin + 0.5) * binSize;
   const totalVol = profile.reduce((a, b) => a + b, 0);
@@ -1163,172 +1070,116 @@ function calculateVolumeProfile(ohlc, bins = 25) {
   return { poc, vaHigh, vaLow };
 }
 
-/* ============================================================
-   ✅ DATA VALIDATION
-   ============================================================ */
 function validateOhlc(ohlc, pair) {
   if (!ohlc || ohlc.length < 20) return { valid: false, reason: 'insufficient data' };
-  // Check stale (last candle older than 2x timeframe)
   const last = ohlc[ohlc.length - 1];
-  const now = Date.now();
-  const age = now - last.time;
-  if (age > 4 * 3600000) return { valid: false, reason: 'stale data (>4h)' };
-  // Check for gaps >5 bars
+  const age = Date.now() - last.time;
+  if (age > 4 * 3600000) return { valid: false, reason: 'stale data' };
   let gaps = 0;
-  for (let i = 1; i < ohlc.length; i++) {
-    const diff = ohlc[i].time - ohlc[i - 1].time;
-    if (diff > 5 * 3600000) gaps++;
-  }
+  for (let i = 1; i < ohlc.length; i++) if (ohlc[i].time - ohlc[i-1].time > 5 * 3600000) gaps++;
   if (gaps > ohlc.length * 0.1) return { valid: false, reason: 'too many gaps' };
   return { valid: true };
 }
 
 /* ============================================================
-   ✅ PRO SIGNAL ENGINE — v38.1
+   PRO SIGNAL ENGINE
    ============================================================ */
 function computeProSignal(cache1h, srData, htfBias, session, regime, volume, patterns, sweep, divergence, currentPrice) {
   const strategies = [];
   let extraScore = 0;
   const extraChecks = [];
 
-  // ---------- STRATEGY 1: TREND ----------
-  const trendChecks = [];
-  let trendScore = 0;
-
-  if (htfBias.aligned && htfBias.h4 === 'BULLISH') {
-    trendScore += 25; trendChecks.push({ name: '4H + 1H Bullish', pts: 25, pass: true });
-  } else if (htfBias.aligned && htfBias.h4 === 'BEARISH') {
-    trendScore -= 25; trendChecks.push({ name: '4H + 1H Bearish', pts: -25, pass: true });
-  } else if (htfBias.h4 === 'BEARISH' && htfBias.h1 === 'BULLISH') {
-    trendScore -= 12; trendChecks.push({ name: '4H Bearish (1H conflict)', pts: -12, pass: true });
-  } else if (htfBias.h4 === 'BULLISH' && htfBias.h1 === 'BEARISH') {
-    trendScore += 12; trendChecks.push({ name: '4H Bullish (1H conflict)', pts: 12, pass: true });
-  } else {
-    trendChecks.push({ name: 'HTF Not Aligned', pts: 0, pass: false });
-  }
+  // TREND
+  const trendChecks = []; let trendScore = 0;
+  if (htfBias.aligned && htfBias.h4 === 'BULLISH') { trendScore += 25; trendChecks.push({ name: '4H + 1H Bullish', pts: 25, pass: true }); }
+  else if (htfBias.aligned && htfBias.h4 === 'BEARISH') { trendScore -= 25; trendChecks.push({ name: '4H + 1H Bearish', pts: -25, pass: true }); }
+  else if (htfBias.h4 === 'BEARISH' && htfBias.h1 === 'BULLISH') { trendScore -= 12; trendChecks.push({ name: '4H Bearish (1H conflict)', pts: -12, pass: true }); }
+  else if (htfBias.h4 === 'BULLISH' && htfBias.h1 === 'BEARISH') { trendScore += 12; trendChecks.push({ name: '4H Bullish (1H conflict)', pts: 12, pass: true }); }
+  else trendChecks.push({ name: 'HTF Not Aligned', pts: 0, pass: false });
 
   const macdHist = lastValid(cache1h.histogram);
   const prevHist = cache1h.histogram[cache1h.n - 2];
   if (macdHist !== null) {
-    if (prevHist !== null && prevHist <= 0 && macdHist > 0) {
-      trendScore += 15; trendChecks.push({ name: 'MACD Bullish Cross ⚡', pts: 15, pass: true });
-    } else if (prevHist !== null && prevHist >= 0 && macdHist < 0) {
-      trendScore -= 15; trendChecks.push({ name: 'MACD Bearish Cross ⚡', pts: -15, pass: true });
-    } else if (macdHist > 0) {
-      trendScore += 6; trendChecks.push({ name: 'MACD Bullish', pts: 6, pass: true });
-    } else {
-      trendScore -= 6; trendChecks.push({ name: 'MACD Bearish', pts: -6, pass: true });
-    }
+    if (prevHist !== null && prevHist <= 0 && macdHist > 0) { trendScore += 15; trendChecks.push({ name: 'MACD Bullish Cross ⚡', pts: 15, pass: true }); }
+    else if (prevHist !== null && prevHist >= 0 && macdHist < 0) { trendScore -= 15; trendChecks.push({ name: 'MACD Bearish Cross ⚡', pts: -15, pass: true }); }
+    else if (macdHist > 0) { trendScore += 6; trendChecks.push({ name: 'MACD Bullish', pts: 6, pass: true }); }
+    else { trendScore -= 6; trendChecks.push({ name: 'MACD Bearish', pts: -6, pass: true }); }
   }
-
   if (regime.adx !== null && regime.adx > 25) {
     if (regime.trendUp) { trendScore += 10; trendChecks.push({ name: `ADX Bull (${regime.adx.toFixed(1)})`, pts: 10, pass: true }); }
     else { trendScore -= 10; trendChecks.push({ name: `ADX Bear (${regime.adx.toFixed(1)})`, pts: -10, pass: true }); }
   }
-
   strategies.push({ name: 'TREND', score: trendScore, checks: trendChecks, active: regime.regime.includes('TRENDING') });
 
-  // ---------- STRATEGY 2: REVERSAL ----------
-  const revChecks = [];
-  let revScore = 0;
+  // REVERSAL
+  const revChecks = []; let revScore = 0;
   const rsiVal = lastValid(cache1h.rsi);
-
   if (rsiVal !== null) {
     if (rsiVal < 25) { revScore += 20; revChecks.push({ name: `RSI Extreme OS (${rsiVal.toFixed(1)})`, pts: 20, pass: true }); }
     else if (rsiVal < 30 && htfBias.h4 !== 'BEARISH') { revScore += 15; revChecks.push({ name: `RSI OS (${rsiVal.toFixed(1)})`, pts: 15, pass: true }); }
     else if (rsiVal > 75) { revScore -= 20; revChecks.push({ name: `RSI Extreme OB (${rsiVal.toFixed(1)})`, pts: -20, pass: true }); }
     else if (rsiVal > 70 && htfBias.h4 !== 'BULLISH') { revScore -= 15; revChecks.push({ name: `RSI OB (${rsiVal.toFixed(1)})`, pts: -15, pass: true }); }
   }
-
-  if (sweep) {
-    const s = sweep.bias === 'BUY' ? sweep.strength : -sweep.strength;
-    revScore += s;
-    revChecks.push({ name: `${sweep.type} @ ${sweep.level.toFixed(4)}`, pts: s, pass: true });
-  }
-
-  if (divergence) {
-    const s = divergence.bias === 'BUY' ? divergence.strength : -divergence.strength;
-    revScore += s;
-    revChecks.push({ name: divergence.type, pts: s, pass: true });
-  }
-
+  if (sweep) { const s = sweep.bias === 'BUY' ? sweep.strength : -sweep.strength; revScore += s; revChecks.push({ name: `${sweep.type}`, pts: s, pass: true }); }
+  if (divergence) { const s = divergence.bias === 'BUY' ? divergence.strength : -divergence.strength; revScore += s; revChecks.push({ name: divergence.type, pts: s, pass: true }); }
   if (srData) {
     const nearS = srData.nearLevels.some(n => n.includes('S') && !n.includes('R'));
     const nearR = srData.nearLevels.some(n => n.includes('R'));
     if (nearS) { revScore += 20; revChecks.push({ name: 'At Support', pts: 20, pass: true }); }
     else if (nearR) { revScore -= 20; revChecks.push({ name: 'At Resistance', pts: -20, pass: true }); }
   }
-
   strategies.push({ name: 'REVERSAL', score: revScore, checks: revChecks, active: regime.regime === 'RANGING' || regime.regime === 'DEAD' });
 
-  // ---------- STRATEGY 3: BREAKOUT ----------
-  const breakChecks = [];
-  let breakScore = 0;
-
+  // BREAKOUT
+  const breakChecks = []; let breakScore = 0;
   if (srData && srData.broken.length > 0) {
     const brokeR = srData.broken.filter(n => n.includes('R'));
     const brokeS = srData.broken.filter(n => n.includes('S'));
     if (brokeR.length > 0) { breakScore += 20; breakChecks.push({ name: `Broke ${brokeR.join(', ')}`, pts: 20, pass: true }); }
-    if (brokeS.length > 0) { breakScore -= 20; breakChecks.push({ name: `Broke below ${brokeS.join(', ')}`, pts: -20, pass: true }); }
+    if (brokeS.length > 0) { breakScore -= 20; breakChecks.push({ name: `Broke ${brokeS.join(', ')}`, pts: -20, pass: true }); }
   }
-
   if (volume && volume.strength === 'SURGE') {
     if (volume.direction === 'BULL') { breakScore += 18; breakChecks.push({ name: 'Volume Surge Bull', pts: 18, pass: true }); }
     else if (volume.direction === 'BEAR') { breakScore -= 18; breakChecks.push({ name: 'Volume Surge Bear', pts: -18, pass: true }); }
   }
-
   const rocVal = lastValid(cache1h.roc);
   if (rocVal !== null) {
     if (rocVal > 0.5) { breakScore += 10; breakChecks.push({ name: `ROC +${rocVal.toFixed(2)}%`, pts: 10, pass: true }); }
     else if (rocVal < -0.5) { breakScore -= 10; breakChecks.push({ name: `ROC ${rocVal.toFixed(2)}%`, pts: -10, pass: true }); }
   }
-
   strategies.push({ name: 'BREAKOUT', score: breakScore, checks: breakChecks, active: regime.regime === 'TRENDING' || regime.regime === 'VOLATILE_CHOP' });
 
-  // ---------- CANDLE PATTERNS + SESSION ----------
+  // PATTERNS + SESSION
   if (patterns && patterns.length > 0) {
     patterns.forEach(p => {
       if (p.bias === 'BUY') { extraScore += p.strength; extraChecks.push({ name: `Pattern: ${p.name}`, pts: p.strength, pass: true }); }
       else if (p.bias === 'SELL') { extraScore -= p.strength; extraChecks.push({ name: `Pattern: ${p.name}`, pts: -p.strength, pass: true }); }
-      else { extraChecks.push({ name: `Pattern: ${p.name}`, pts: 0, pass: false }); }
+      else extraChecks.push({ name: `Pattern: ${p.name}`, pts: 0, pass: false });
     });
   }
-
   extraScore += session.score;
   extraChecks.push({ name: `Session: ${session.name}`, pts: session.score, pass: true });
 
-  // ---------- COMBINE ----------
+  // COMBINE
   const activeStrategies = strategies.filter(s => s.active);
   let totalScore = 0;
   const checks = [];
-
   if (activeStrategies.length === 0) {
-    // Fallback: use all strategies weighted
-    strategies.forEach(s => {
-      totalScore += s.score * 0.5;
-      s.checks.forEach(c => checks.push(c));
-    });
+    strategies.forEach(s => { totalScore += s.score * 0.5; s.checks.forEach(c => checks.push(c)); });
   } else {
-    activeStrategies.forEach(s => {
-      totalScore += s.score;
-      s.checks.forEach(c => checks.push(c));
-    });
-    // If multiple active, average
+    activeStrategies.forEach(s => { totalScore += s.score; s.checks.forEach(c => checks.push(c)); });
     if (activeStrategies.length > 1) totalScore = totalScore / activeStrategies.length;
   }
   totalScore += extraScore;
   extraChecks.forEach(c => checks.push(c));
 
-  // ---------- CONFLICT by MAGNITUDE ----------
   const posSum = strategies.filter(s => s.active && s.score > 0).reduce((a, s) => a + s.score, 0);
   const negSum = Math.abs(strategies.filter(s => s.active && s.score < 0).reduce((a, s) => a + s.score, 0));
   const hasConflict = posSum > 0 && negSum > 0 && Math.abs(posSum - negSum) < 20;
 
-  // ---------- DECISION ----------
   const absScore = Math.abs(Math.round(totalScore));
   const rules = getRules();
   let action = 'HOLD', confidence = 0, tier = 'C';
-
   if (absScore >= 55 && !hasConflict) {
     action = totalScore > 0 ? 'BUY' : 'SELL';
     const excess = absScore - 55;
@@ -1336,19 +1187,158 @@ function computeProSignal(cache1h, srData, htfBias, session, regime, volume, pat
     if (absScore >= 85 && confidence >= 80) tier = 'A+';
     else if (absScore >= 70 && confidence >= 70) tier = 'A';
     else if (absScore >= 55) tier = 'B';
-  } else if (hasConflict) {
-    action = 'HOLD'; confidence = 30; tier = 'C';
-  } else {
-    action = 'HOLD';
-    confidence = Math.max(25, 75 - absScore);
-    tier = 'C';
+  } else if (hasConflict) { action = 'HOLD'; confidence = 30; tier = 'C'; }
+  else { action = 'HOLD'; confidence = Math.max(25, 75 - absScore); tier = 'C'; }
+
+  return { action, score: Math.round(totalScore), confidence, tier, checks, strategies, hasConflict, regime, conflictMag: hasConflict ? `+${posSum.toFixed(0)} vs -${negSum.toFixed(0)}` : null, activeStrategies: activeStrategies.map(s => s.name) };
+}
+
+/* ============================================================
+   ✅ HOLD ANALYSIS — Kwa nini HOLD + Price targets
+   ============================================================ */
+function analyzeHoldReason(signal, cache1h, srData, regime, currentPrice, spec) {
+  const absScore = Math.abs(signal.score);
+  const gap = 55 - absScore;
+  const reasons = [];
+
+  // 1. Primary reason
+  if (signal.hasConflict) {
+    reasons.push({ icon: '⚔️', title: 'Strategy Conflict', detail: `Strategies zinapingana kwa magnitude ndogo (${signal.conflictMag}). Hakuna mwelekeo wazi.` });
+  } else if (absScore < 55) {
+    reasons.push({ icon: '📉', title: 'Score chini ya threshold', detail: `Score ni ${signal.score > 0 ? '+' : ''}${signal.score}, inahitajika ${signal.score > 0 ? '+' : '-'}55. Gap: ${gap} points.` });
   }
 
-  return {
-    action, score: Math.round(totalScore), confidence, tier, checks,
-    strategies, hasConflict, regime,
-    conflictMag: hasConflict ? `+${posSum.toFixed(0)} vs -${negSum.toFixed(0)}` : null
-  };
+  // 2. Which strategies inactive
+  const inactive = signal.strategies.filter(s => !s.active);
+  if (inactive.length > 0 && !signal.hasConflict) {
+    reasons.push({ icon: '💤', title: `Strategies ${inactive.length} ziko inactive`, detail: `${inactive.map(s => s.name).join(', ')} haziendani na regime ya sasa (${regime.regime}).` });
+  }
+
+  // 3. Specific missing points
+  const missingPositive = [];
+  const missingNegative = [];
+  signal.strategies.forEach(strat => {
+    if (!strat.active) return;
+    strat.checks.forEach(c => {
+      if (!c.pass && c.pts === 0) {
+        if (strat.name === 'BREAKOUT') missingPositive.push(`S/R breakout`);
+        if (strat.name === 'TREND') missingPositive.push(`MACD cross`);
+      }
+    });
+  });
+
+  // 4. Calculate target prices to flip to BUY
+  const buyTargets = calculateFlipTargets('BUY', signal, cache1h, srData, currentPrice, spec);
+  const sellTargets = calculateFlipTargets('SELL', signal, cache1h, srData, currentPrice, spec);
+
+  return { gap, reasons, buyTargets, sellTargets, absScore, required: 55 };
+}
+
+function calculateFlipTargets(direction, signal, cache1h, srData, currentPrice, spec) {
+  const targets = [];
+  const isBuy = direction === 'BUY';
+  const needed = 55 - Math.abs(signal.score);
+  if (needed <= 0) return targets;
+
+  // For BUY targets (positive points needed)
+  if (isBuy) {
+    // 1. S/R breakout targets
+    if (srData?.allLevels) {
+      const breakoutLevels = srData.allLevels.filter(l => l.type === 'R' && l.v > currentPrice);
+      breakoutLevels.sort((a, b) => a.v - b.v);
+      if (breakoutLevels.length > 0) {
+        const nearest = breakoutLevels[0];
+        targets.push({
+          type: 'BREAKOUT_ABOVE',
+          label: `Break above ${nearest.n}`,
+          price: nearest.v,
+          points: 20,
+          detail: `Kama bei inafunga juu ya ${nearest.n} (${nearest.v.toFixed(spec.decimals)}), Breakout inapata +20 points`,
+          distance: ((nearest.v - currentPrice) / currentPrice * 100).toFixed(2) + '%'
+        });
+      }
+    }
+
+    // 2. RSI threshold
+    const rsiVal = lastValid(cache1h.rsi);
+    const atr = lastValid(cache1h.atr);
+    if (rsiVal !== null && atr) {
+      // Approximate: RSI moves ~1 point per ATR/5 price move
+      const rsiNeeded = rsiVal < 30 ? 30 : rsiVal < 40 ? 40 : 50;
+      // Estimate price for RSI to rise (approximate)
+      const atrPct = atr / currentPrice * 100;
+      const priceMove = Math.abs(rsiNeeded - rsiVal) * atrPct * 0.3;
+      if (rsiVal >= 30 && rsiVal < 50) {
+        const estPrice = currentPrice * (1 - priceMove / 100); // RSI rises as price falls (oversold)
+        targets.push({
+          type: 'RSI_OVERSOLD',
+          label: `RSI iwe < 30 (sasa ${rsiVal.toFixed(1)})`,
+          price: estPrice,
+          points: 15,
+          detail: `Kama RSI inashuka chini ya 30, Reversal inapata +15 points`,
+          distance: ((estPrice - currentPrice) / currentPrice * 100).toFixed(2) + '%',
+          approximate: true
+        });
+      }
+    }
+
+    // 3. HTF alignment (time-based)
+    targets.push({
+      type: 'TIME_BASED',
+      label: '4H & 1H trend ialign Bullish',
+      price: null,
+      points: 25,
+      detail: `Subiri 4H na 1H zote ziwe bullish (inachukua masaa 4-12)`,
+      approximate: true
+    });
+  } else {
+    // SELL targets
+    if (srData?.allLevels) {
+      const breakLevels = srData.allLevels.filter(l => l.type === 'S' && l.v < currentPrice);
+      breakLevels.sort((a, b) => b.v - a.v);
+      if (breakLevels.length > 0) {
+        const nearest = breakLevels[0];
+        targets.push({
+          type: 'BREAKDOWN_BELOW',
+          label: `Break below ${nearest.n}`,
+          price: nearest.v,
+          points: -20,
+          detail: `Kama bei inafunga chini ya ${nearest.n} (${nearest.v.toFixed(spec.decimals)}), Breakout inapata -20 points`,
+          distance: ((nearest.v - currentPrice) / currentPrice * 100).toFixed(2) + '%'
+        });
+      }
+    }
+
+    const rsiVal = lastValid(cache1h.rsi);
+    const atr = lastValid(cache1h.atr);
+    if (rsiVal !== null && atr) {
+      const atrPct = atr / currentPrice * 100;
+      const priceMove = Math.abs(70 - rsiVal) * atrPct * 0.3;
+      if (rsiVal > 50 && rsiVal < 70) {
+        const estPrice = currentPrice * (1 + priceMove / 100);
+        targets.push({
+          type: 'RSI_OVERBOUGHT',
+          label: `RSI iwe > 70 (sasa ${rsiVal.toFixed(1)})`,
+          price: estPrice,
+          points: -15,
+          detail: `Kama RSI inapanda juu ya 70, Reversal inapata -15 points`,
+          distance: ((estPrice - currentPrice) / currentPrice * 100).toFixed(2) + '%',
+          approximate: true
+        });
+      }
+    }
+
+    targets.push({
+      type: 'TIME_BASED',
+      label: '4H & 1H trend ialign Bearish',
+      price: null,
+      points: -25,
+      detail: `Subiri 4H na 1H zote ziwe bearish (inachukua masaa 4-12)`,
+      approximate: true
+    });
+  }
+
+  return targets;
 }
 
 /* ============================================================
@@ -1359,13 +1349,11 @@ function checkDiscipline(signal) {
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   const today = todayStr();
   const now = Date.now();
-
   const todaysTrades = history.filter(h => h.day === today && h.action !== 'HOLD' && h.action !== 'SKIPPED');
   const openTrades = history.filter(h => h.outcome === 'PENDING' && h.action !== 'HOLD');
   const todaysClosed = todaysTrades.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
   const todayPnL = todaysClosed.reduce((s, t) => s + (t.outcome === 'WIN' ? (t.tp3Pips || 0) : -(t.slPips || 0)), 0);
   const dailyLossPct = todayPnL < 0 ? (Math.abs(todayPnL) * 10 / getBalance()) * 100 : 0;
-
   const lastClosed = history.find(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
   let cd = 0, cdR = '';
   if (lastClosed && lastClosed.closeTime) {
@@ -1373,7 +1361,6 @@ function checkDiscipline(signal) {
     if (lastClosed.outcome === 'LOSS' && el < rules.cooldownAfterLossMin) { cd = Math.ceil(rules.cooldownAfterLossMin - el); cdR = 'After loss'; }
     else if (lastClosed.outcome === 'WIN' && el < rules.cooldownAfterWinMin) { cd = Math.ceil(rules.cooldownAfterWinMin - el); cdR = 'After win'; }
   }
-
   const news = checkNewsWindow();
   const session = getSession();
   const results = { checks: [], allowed: true, blockReasons: [], warnings: [] };
@@ -1451,7 +1438,6 @@ function renderDailySummary() {
   const d = checkDiscipline(null);
   const sc = d.allowed ? 'var(--green)' : 'var(--red)';
   const st = d.allowed ? '✅ CLEAR' : '🚫 LOCKED';
-
   c.innerHTML = `
     <div class="card" style="border-color:${sc};">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -1615,18 +1601,15 @@ async function fetchAllMarketData() {
     setDataStatus('data4H', 'loading');
     const h4 = await fetchOHLC(pair, '4h', 200);
     setDataStatus('data4H', h4 ? 'ok' : 'fail', h4 ? `${h4.length} ✓` : 'FAIL');
-
     await new Promise(r => setTimeout(r, 700));
     setDataStatus('data1H', 'loading');
     const h1 = await fetchOHLC(pair, '1h', 300);
     setDataStatus('data1H', h1 ? 'ok' : 'fail', h1 ? `${h1.length} ✓` : 'FAIL');
-
     await new Promise(r => setTimeout(r, 700));
     setDataStatus('data15M', 'loading');
     const m15 = await fetchOHLC(pair, '15m', 200);
     setDataStatus('data15M', m15 ? 'ok' : 'fail', m15 ? `${m15.length} ✓` : 'FAIL');
 
-    // Validate
     const v1h = h1 ? validateOhlc(h1, pair) : { valid: false, reason: 'no data' };
     if (!v1h.valid) {
       setDataStatus('dataIndicators', 'fail', v1h.reason);
@@ -1634,65 +1617,33 @@ async function fetchAllMarketData() {
       return;
     }
 
-    // ✅ Compute cache ONCE
     const cache1h = computeIndicatorCache(h1);
     const cache4h = h4 ? computeIndicatorCache(h4) : null;
-    const tCache = performance.now();
-
-    // Multi-day S/R
     const srData = computeMultiDaySR(h1);
     const sr = analyzeSR(h1, srData);
-
-    // Volume by hour
     const volume = analyzeVolumeByHour(h1);
-
-    // Patterns
     const atrVal = lastValid(cache1h.atr);
     const patterns = detectCandlePatterns(h1, atrVal);
-
-    // Sweep + Divergence
     const sweep = detectSweep(h1);
     const divergence = detectDivergenceFromCache(cache1h);
-
-    // Regime
     const regime = detectRegimeFromCache(cache1h);
-
-    // Volume Profile
     const vp = calculateVolumeProfile(h1, 25);
-
     const t1 = performance.now();
 
     window.marketData = {
-      h4, h1, m15, sr, srData, volume, patterns, sweep, divergence, regime, vp,
-      cache1h, cache4h,
+      h4, h1, m15, sr, srData, volume, patterns, sweep, divergence, regime, vp, cache1h, cache4h,
       indicators: {
         rsi: lastValid(cache1h.rsi)?.toFixed(1),
-        macd: {
-          macd: lastValid(cache1h.macdLine),
-          signal: lastValid(cache1h.signalLine),
-          histogram: lastValid(cache1h.histogram),
-          crossover: (() => {
-            const h = lastValid(cache1h.histogram);
-            const ph = cache1h.histogram[cache1h.n - 2];
-            if (h === null || ph === null) return 'NEUTRAL';
-            if (ph <= 0 && h > 0) return 'BULLISH_CROSS';
-            if (ph >= 0 && h < 0) return 'BEARISH_CROSS';
-            return h > 0 ? 'BULLISH' : 'BEARISH';
-          })()
+        macd: { macd: lastValid(cache1h.macdLine), signal: lastValid(cache1h.signalLine), histogram: lastValid(cache1h.histogram),
+          crossover: (() => { const h = lastValid(cache1h.histogram); const ph = cache1h.histogram[cache1h.n - 2]; if (h === null || ph === null) return 'NEUTRAL'; if (ph <= 0 && h > 0) return 'BULLISH_CROSS'; if (ph >= 0 && h < 0) return 'BEARISH_CROSS'; return h > 0 ? 'BULLISH' : 'BEARISH'; })()
         },
-        atr: atrVal,
-        roc: lastValid(cache1h.roc),
-        adx: regime.adx,
+        atr: atrVal, roc: lastValid(cache1h.roc), adx: regime.adx,
         currentPrice: cache1h.closes[cache1h.n - 1],
-        supportResistance: sr,
-        volumeProfile: vp,
-        volume, patterns, sweep, divergence, regime
+        supportResistance: sr, volumeProfile: vp, volume, patterns, sweep, divergence, regime
       }
     };
-
-    console.log(`[v38.1 PERF] Cache computed in ${(tCache - t0).toFixed(0)}ms, total ${(t1 - t0).toFixed(0)}ms for ${h1.length} candles`);
-
-    setDataStatus('dataIndicators', 'ok', `READY ✓ (${(t1 - t0).toFixed(0)}ms)`);
+    console.log(`[v38.2 PERF] ${(t1 - t0).toFixed(0)}ms for ${h1.length} candles`);
+    setDataStatus('dataIndicators', 'ok', `READY ✓`);
     document.getElementById('runBtn').disabled = false;
     showToast(`✅ Data ready (${(t1 - t0).toFixed(0)}ms)`, 2500);
   } catch (err) {
@@ -1718,11 +1669,10 @@ function onPairChange(pair) {
    ============================================================ */
 function runAnalysis() {
   if (!window.marketData || !window.marketData.indicators) { alert("Fetch data first."); return; }
-
   const pair = document.getElementById('selectedPair').value;
   const price = parseFloat(document.getElementById('livePrice').value);
   const md = window.marketData;
-  const { cache1h, cache4h, sr, volume, patterns, sweep, divergence, regime, indicators } = md;
+  const { cache1h, cache4h, sr, volume, patterns, sweep, divergence, regime, srData } = md;
   const spec = PAIR_SPECS[pair];
 
   const htfBias = getHTFBiasFromCache(cache4h, cache1h);
@@ -1731,49 +1681,44 @@ function runAnalysis() {
   const discipline = checkDiscipline(signal);
 
   let sltp = null;
-  if (signal.action !== 'HOLD') {
-    sltp = calculateSLTP(cache1h, signal.action, price, spec, regime);
-  }
+  if (signal.action !== 'HOLD') sltp = calculateSLTP(cache1h, signal.action, price, spec, regime);
 
   const record = {
-    id: Date.now(),
-    date: new Date().toLocaleString(),
-    day: todayStr(),
+    id: Date.now(), date: new Date().toLocaleString(), day: todayStr(),
     pair, action: signal.action, score: signal.score,
     confidence: signal.confidence, tier: signal.tier,
     entry: price,
     sl: sltp?.sl, tp1: sltp?.tp1, tp2: sltp?.tp2, tp3: sltp?.tp3,
     slPips: sltp?.slPips, tp1Pips: sltp?.tp1Pips, tp2Pips: sltp?.tp2Pips, tp3Pips: sltp?.tp3Pips,
-    atr: sltp?.atr,
-    checks: signal.checks,
-    strategies: signal.strategies,
-    conflictMag: signal.conflictMag,
-    hasConflict: signal.hasConflict,
-    indicators: {
-      rsi: indicators.rsi, macd: indicators.macd,
-      adx: regime.adx, regime: regime.regime,
-      supportResistance: sr, volumeProfile: md.vp, volume
-    },
-    htfBias, session,
-    disciplineResult: discipline,
+    atr: sltp?.atr, checks: signal.checks, strategies: signal.strategies,
+    conflictMag: signal.conflictMag, hasConflict: signal.hasConflict,
+    indicators: { rsi: md.indicators.rsi, macd: md.indicators.macd, adx: regime.adx, regime: regime.regime, supportResistance: sr, volumeProfile: md.vp, volume },
+    htfBias, session, disciplineResult: discipline,
     autoTrackStart: Date.now(),
     outcome: signal.action === 'HOLD' ? 'SKIPPED' : 'PENDING'
   };
 
   if (signal.action === 'HOLD') {
+    // ✅ Compute HOLD analysis
+    const holdAnalysis = analyzeHoldReason(signal, cache1h, sr, regime, price, spec);
+    record.holdAnalysis = holdAnalysis;
     saveToHistory(record);
-    renderResults(record);
+    renderResults(record, md);
     showToast(`⏸ HOLD (score ${signal.score})`, 3500);
+    // Save signal to cache for notifications
+    saveSignalToCache(pair, signal, price);
     return;
   }
 
   if (!discipline.allowed) {
     record.disciplineBlocked = true;
-    renderResults(record);
+    renderResults(record, md);
     showToast(`🚫 ${discipline.blockReasons[0]}`, 5000);
+    saveSignalToCache(pair, signal, price);
     return;
   }
 
+  saveSignalToCache(pair, signal, price);
   showPreTradeConfirmation(record);
 }
 
@@ -1820,8 +1765,7 @@ function showPreTradeConfirmation(record) {
       <div class="checklist-modal-item" onclick="toggleChecklist(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Nimekubali hasara hii</label></div>
     </div>
     <button class="primary-btn" id="confirmTradeBtn" onclick="confirmTrade()" disabled>✅ Confirm</button>
-    <button class="secondary-btn" onclick="skipTrade()">⏭️ Skip</button>
-  `;
+    <button class="secondary-btn" onclick="skipTrade()">⏭️ Skip</button>`;
   document.getElementById('modalInnerContent').innerHTML = html;
   openUniversalModal();
   window.__pendingRecord = record;
@@ -1847,9 +1791,9 @@ function confirmTrade() {
 function skipTrade() { showToast('⏭️ Skipped', 2000); closeUniversalModal(); window.__pendingRecord = null; }
 
 /* ============================================================
-   RENDER RESULTS
+   RENDER RESULTS + HOLD ANALYSIS
    ============================================================ */
-function renderResults(record) {
+function renderResults(record, md = null) {
   const c = document.getElementById('resultsContainer');
   c.style.display = 'block';
   const s = record;
@@ -1871,6 +1815,87 @@ function renderResults(record) {
 
   if (locked) html += `<div class="danger-box"><strong>🚫 BLOCKED</strong><br><br>${s.disciplineResult.blockReasons.map(r => '• ' + r).join('<br>')}</div>`;
 
+  // ✅ HOLD ANALYSIS CARD (only if HOLD)
+  if (s.action === 'HOLD' && s.holdAnalysis) {
+    const h = s.holdAnalysis;
+    html += `<div class="card" style="border-color:var(--accent);background:linear-gradient(135deg,rgba(251,191,36,.05),transparent);">
+      <div class="ballistic-header" style="color:var(--accent);">🚫 KWA NINI HOLD</div>`;
+
+    // Score gap visual
+    html += `<div class="mini-box" style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+        <span>Score ya sasa</span>
+        <strong style="color:var(--accent);">${s.score > 0 ? '+' : ''}${s.score}</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+        <span>Inahitajika</span>
+        <strong style="color:var(--yellow);">±55</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px;">
+        <span>Gap</span>
+        <strong style="color:var(--red);">${h.gap} points</strong>
+      </div>
+      <div class="gap-bar">
+        <div class="gap-fill" style="width:${Math.min(100, h.absScore / 55 * 100)}%"></div>
+        <div class="gap-target"></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;">Lengo ni ±55 points</div>
+    </div>`;
+
+    // Reasons
+    html += `<div style="margin-bottom:12px;">`;
+    h.reasons.forEach(r => {
+      html += `<div style="display:flex;gap:10px;padding:10px;background:#08080a;border-radius:8px;margin-bottom:8px;border-left:3px solid var(--accent);">
+        <div style="font-size:20px;">${r.icon}</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:bold;color:var(--accent);margin-bottom:3px;">${r.title}</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5;">${r.detail}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+
+    // Buy targets
+    if (h.buyTargets && h.buyTargets.length > 0) {
+      html += `<div class="target-card buy">
+        <div style="font-size:12px;color:var(--green);font-weight:bold;letter-spacing:1px;text-align:center;">📈 ILI IWE BUY — FIKIA HAYA</div>`;
+      h.buyTargets.forEach(t => {
+        html += `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:12px;font-weight:bold;color:var(--green);">${t.label}</div>
+            <span class="pill pill-yes">${t.points > 0 ? '+' : ''}${t.points} pts</span>
+          </div>
+          ${t.price ? `<div class="target-price" style="color:var(--green);">${t.price.toFixed(PAIR_SPECS[s.pair].decimals)}</div>` : `<div style="text-align:center;font-size:11px;color:var(--muted);margin:6px 0;">⏱️ Time-based</div>`}
+          ${t.distance ? `<div style="text-align:center;font-size:11px;color:var(--muted);">${t.distance} kutoka bei ya sasa</div>` : ''}
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4;">${t.detail}</div>
+          ${t.approximate ? `<div style="font-size:10px;color:var(--yellow);margin-top:4px;">⚠️ Approximate</div>` : ''}
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // Sell targets
+    if (h.sellTargets && h.sellTargets.length > 0) {
+      html += `<div class="target-card sell">
+        <div style="font-size:12px;color:var(--red);font-weight:bold;letter-spacing:1px;text-align:center;">📉 ILI IWE SELL — FIKIA HAYA</div>`;
+      h.sellTargets.forEach(t => {
+        html += `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:12px;font-weight:bold;color:var(--red);">${t.label}</div>
+            <span class="pill pill-no">${t.points} pts</span>
+          </div>
+          ${t.price ? `<div class="target-price" style="color:var(--red);">${t.price.toFixed(PAIR_SPECS[s.pair].decimals)}</div>` : `<div style="text-align:center;font-size:11px;color:var(--muted);margin:6px 0;">⏱️ Time-based</div>`}
+          ${t.distance ? `<div style="text-align:center;font-size:11px;color:var(--muted);">${t.distance} kutoka bei ya sasa</div>` : ''}
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4;">${t.detail}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    html += `</div>`;
+  }
+
+  // Regime
   if (s.indicators?.regime) {
     const r = s.indicators.regime;
     const rc = r === 'TRENDING' ? 'regime-trend' : r === 'RANGING' ? 'regime-range' : r === 'VOLATILE_CHOP' ? 'regime-volatile' : 'regime-dead';
@@ -1883,8 +1908,9 @@ function renderResults(record) {
     </div>`;
   }
 
+  // Strategies
   if (s.strategies && s.strategies.length > 0) {
-    html += `<div class="card"><div class="ballistic-header">⚡ Strategies</div>`;
+    html += `<div class="card"><div class="ballistic-header">⚡ Strategy Breakdown</div>`;
     s.strategies.forEach(strat => {
       const cls = strat.score > 5 ? 'bull' : strat.score < -5 ? 'bear' : 'neutral';
       const statusText = strat.active ? (strat.score > 0 ? 'BULLISH' : strat.score < 0 ? 'BEARISH' : 'NEUTRAL') : 'INACTIVE';
@@ -1903,9 +1929,7 @@ function renderResults(record) {
     html += `</div>`;
   }
 
-  if (s.hasConflict) {
-    html += `<div class="warn-box">⚠️ <strong>STRATEGY CONFLICT</strong> (${s.conflictMag})<br>Strategies zinapingana kwa magnitude ndogo. HOLD ni sahihi.</div>`;
-  }
+  if (s.hasConflict) html += `<div class="warn-box">⚠️ <strong>STRATEGY CONFLICT</strong> (${s.conflictMag})<br>Strategies zinapingana kwa magnitude ndogo. HOLD ni sahihi.</div>`;
 
   if (s.disciplineResult) {
     html += `<div class="card" style="border-color:${s.disciplineResult.allowed ? 'var(--green)' : 'var(--red)'};">
@@ -1936,28 +1960,9 @@ function renderResults(record) {
       html += `<div class="sr-level sr-weekly"><span>W-Pivot</span><span>${sr.weekly.pivot.toFixed(4)}</span></div>`;
       html += `<div class="sr-level sr-weekly"><span>W-S1</span><span>${sr.weekly.s1.toFixed(4)}</span></div>`;
     }
-    if (sr.monthly) {
-      html += `<div style="font-size:10px;color:var(--pink);margin:8px 0 4px 0;">MONTHLY</div>`;
-      html += `<div class="sr-level sr-weekly"><span>M-R1</span><span>${sr.monthly.r1.toFixed(4)}</span></div>`;
-      html += `<div class="sr-level sr-weekly"><span>M-Pivot</span><span>${sr.monthly.pivot.toFixed(4)}</span></div>`;
-      html += `<div class="sr-level sr-weekly"><span>M-S1</span><span>${sr.monthly.s1.toFixed(4)}</span></div>`;
-    }
     html += `<div class="sr-level sr-current"><span>💰 PRICE</span><span>${sr.currentPrice.toFixed(4)}</span></div>`;
     if (sr.confluence.length > 0) html += `<div style="margin-top:8px;padding:8px;background:rgba(251,191,36,.1);border-radius:6px;font-size:11px;color:var(--accent);">💎 Confluence: ${sr.confluence.join(', ')}</div>`;
-    if (sr.broken.length > 0) html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,.1);border-radius:6px;font-size:11px;color:var(--red);">⚡ Broken: ${sr.broken.join(', ')}</div>`;
     html += `</div>`;
-  }
-
-  if (s.indicators?.volume) {
-    const v = s.indicators.volume;
-    const vc = v.direction === 'BULL' ? 'var(--green)' : v.direction === 'BEAR' ? 'var(--red)' : 'var(--muted)';
-    html += `<div class="card" style="border-color:var(--orange);">
-      <div class="ballistic-header">📊 Volume</div>
-      <div class="metric-row"><span>Direction</span><strong style="color:${vc};">${v.direction}</strong></div>
-      <div class="metric-row"><span>Strength</span><strong style="color:${v.strength === 'SURGE' ? 'var(--green)' : v.strength === 'HIGH' ? 'var(--cyan)' : 'var(--muted)'};">${v.strength}</strong></div>
-      <div class="metric-row"><span>Ratio</span><strong>${v.ratio.toFixed(2)}x</strong></div>
-      <div class="metric-row"><span>Basis</span><span style="color:var(--muted);">${v.basis}</span></div>
-    </div>`;
   }
 
   if (s.action !== 'HOLD' && s.sl && s.tp3) {
@@ -1974,13 +1979,11 @@ function renderResults(record) {
         <div class="mini-box"><label style="color:var(--green);">TP3</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${s.tp3}</div><div style="font-size:11px;">${s.tp3Pips}p</div></div>
       </div>
       <div class="mini-box" style="margin-top:10px;text-align:center;">
-        <label>R:R (TP3)</label>
+        <label>R:R</label>
         <div style="font-size:22px;font-weight:bold;color:var(--accent);">1 : ${(s.tp3Pips / s.slPips).toFixed(2)}</div>
       </div>
     </div>`;
-
-    const balance = getBalance(), riskPct = getRiskPct();
-    const riskAmt = balance * riskPct / 100;
+    const riskAmt = getBalance() * getRiskPct() / 100;
     const lotSize = riskAmt / (s.slPips * spec.pipValue);
     html += `<div class="card" style="border-color:var(--pink);">
       <div class="ballistic-header">💰 Position Size</div>
@@ -1994,6 +1997,125 @@ function renderResults(record) {
 
   c.innerHTML = html;
   c.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ============================================================
+   WATCHLIST + NOTIFICATIONS
+   ============================================================ */
+function getWatchlist() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.WATCHLIST) || '[]'); }
+  catch { return []; }
+}
+function saveWatchlist(w) { localStorage.setItem(STORAGE_KEYS.WATCHLIST, JSON.stringify(w)); }
+function getSignalCache() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.SIGNALS_CACHE) || '{}'); }
+  catch { return {}; }
+}
+function saveSignalToCache(pair, signal, price) {
+  const cache = getSignalCache();
+  const prev = cache[pair];
+  cache[pair] = { action: signal.action, score: signal.score, tier: signal.tier, confidence: signal.confidence, price, ts: Date.now() };
+  localStorage.setItem(STORAGE_KEYS.SIGNALS_CACHE, JSON.stringify(cache));
+  // ✅ Notify if action changed
+  if (prev && prev.action !== signal.action && signal.action !== 'HOLD') {
+    sendNotification(
+      `⚡ ${pair} ${signal.action}`,
+      `Score: ${signal.score} | Tier: ${signal.tier} | Conf: ${signal.confidence}% | Price: ${price}`,
+      'signal_' + pair
+    );
+  }
+}
+
+function renderWatchlist() {
+  const c = document.getElementById('watchlistContainer');
+  if (!c) return;
+  const w = getWatchlist();
+  const cache = getSignalCache();
+  if (w.length === 0) {
+    c.innerHTML = `<div class="info-box">Hakuna pairs kwenye watchlist. Bonyeza "Add Pair" kuongeza.</div>`;
+    return;
+  }
+  let html = '';
+  w.forEach(pair => {
+    const spec = PAIR_SPECS[pair];
+    const cached = cache[pair];
+    const age = cached ? Math.round((Date.now() - cached.ts) / 60000) : null;
+    const actionColor = cached ? (cached.action === 'BUY' ? 'var(--green)' : cached.action === 'SELL' ? 'var(--red)' : 'var(--yellow)') : 'var(--muted)';
+    html += `<div class="mini-box" style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong>${pair}</strong>
+          ${cached ? `<div style="font-size:11px;color:var(--muted);margin-top:2px;">Score: ${cached.score > 0 ? '+' : ''}${cached.score} | ${age}min ago</div>` : '<div style="font-size:11px;color:var(--muted);">Not analyzed yet</div>'}
+        </div>
+        <div style="text-align:right;">
+          ${cached ? `<div style="font-size:14px;font-weight:bold;color:${actionColor};">${cached.action}</div>` : ''}
+          <button onclick="removeFromWatchlist('${pair}')" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:6px;font-size:10px;margin-top:4px;">Remove</button>
+        </div>
+      </div>
+    </div>`;
+  });
+  c.innerHTML = html;
+}
+
+function addToWatchlist() {
+  const w = getWatchlist();
+  const available = Object.keys(PAIR_SPECS).filter(p => !w.includes(p));
+  if (available.length === 0) { showToast('All pairs already in watchlist'); return; }
+  const pick = prompt(`Chagua pair:\n${available.map((p, i) => `${i + 1}. ${p}`).join('\n')}\n\nIngiza namba:`);
+  const idx = parseInt(pick) - 1;
+  if (isNaN(idx) || idx < 0 || idx >= available.length) return;
+  w.push(available[idx]);
+  saveWatchlist(w);
+  renderWatchlist();
+  showToast(`✅ ${available[idx]} added`);
+}
+
+function removeFromWatchlist(pair) {
+  const w = getWatchlist().filter(p => p !== pair);
+  saveWatchlist(w);
+  renderWatchlist();
+  showToast(`✅ ${pair} removed`);
+}
+
+async function refreshWatchlist() {
+  const w = getWatchlist();
+  if (w.length === 0) { showToast('Watchlist ni tupu'); return; }
+  showToast(`🔄 Analyzing ${w.length} pairs...`, 5000);
+  for (const pair of w) {
+    try {
+      const h1 = await fetchOHLC(pair, '1h', 300);
+      const h4 = await fetchOHLC(pair, '4h', 200);
+      if (!h1 || h1.length < 50) continue;
+      const cache1h = computeIndicatorCache(h1);
+      const cache4h = h4 ? computeIndicatorCache(h4) : null;
+      const srData = computeMultiDaySR(h1);
+      const sr = analyzeSR(h1, srData);
+      const volume = analyzeVolumeByHour(h1);
+      const atrVal = lastValid(cache1h.atr);
+      const patterns = detectCandlePatterns(h1, atrVal);
+      const sweep = detectSweep(h1);
+      const divergence = detectDivergenceFromCache(cache1h);
+      const regime = detectRegimeFromCache(cache1h);
+      const htfBias = getHTFBiasFromCache(cache4h, cache1h);
+      const session = getSession();
+      const price = cache1h.closes[cache1h.n - 1];
+      const signal = computeProSignal(cache1h, sr, htfBias, session, regime, volume, patterns, sweep, divergence, price);
+      saveSignalToCache(pair, signal, price);
+      await new Promise(r => setTimeout(r, 700));
+    } catch (e) { console.warn('Watchlist fail', pair, e); }
+  }
+  renderWatchlist();
+  showToast('✅ Watchlist updated');
+}
+
+function startWatchlistMonitor() {
+  if (window.__watchInterval) clearInterval(window.__watchInterval);
+  window.__watchInterval = setInterval(async () => {
+    const w = getWatchlist();
+    if (w.length === 0) return;
+    console.log('[Watchlist] Checking', w.length, 'pairs');
+    await refreshWatchlist();
+  }, WATCHLIST_INTERVAL);
 }
 
 /* ============================================================
@@ -2011,11 +2133,7 @@ function startAutoBacktest() {
     const u = checkAutoBacktest();
     if (u) { renderDailySummary(); renderRealStats(); }
   }, BACKTEST_PRICE_INTERVAL);
-  setTimeout(async () => {
-    await updatePricesForBacktest();
-    checkAutoBacktest();
-    renderDailySummary();
-  }, 3000);
+  setTimeout(async () => { await updatePricesForBacktest(); checkAutoBacktest(); renderDailySummary(); }, 3000);
 }
 
 async function updatePricesForBacktest() {
@@ -2034,10 +2152,7 @@ async function updatePricesForBacktest() {
         const key = getTwelveKey();
         if (key) {
           const r = await fetchWithTimeout(`${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=1min&outputsize=10&apikey=${key}`, {}, 10000);
-          if (r.ok) {
-            const d = await r.json();
-            if (d.status !== 'error' && d.values) ohlc = d.values.reverse().map(v => ({ high: parseFloat(v.high), low: parseFloat(v.low), close: parseFloat(v.close) }));
-          }
+          if (r.ok) { const d = await r.json(); if (d.status !== 'error' && d.values) ohlc = d.values.reverse().map(v => ({ high: parseFloat(v.high), low: parseFloat(v.low), close: parseFloat(v.close) })); }
         }
       }
       if (ohlc && ohlc.length) {
@@ -2058,7 +2173,7 @@ function checkAutoBacktest() {
     if (r.outcome !== 'PENDING' || !r.autoTrackStart) return;
     if (r.action === 'HOLD' || !r.sl || !r.tp3) { r.outcome = 'SKIPPED'; u = true; return; }
     const h = (now - r.autoTrackStart) / 3600000;
-    if (h > MAX_TRADE_HOURS) { r.outcome = 'EXPIRED'; r.autoOutcome = `Expired ${h.toFixed(1)}h`; r.closeTime = now; u = true; return; }
+    if (h > MAX_TRADE_HOURS) { r.outcome = 'EXPIRED'; r.autoOutcome = `Expired`; r.closeTime = now; u = true; return; }
     const cp = parseFloat(localStorage.getItem(`qfx_price_${r.pair}`) || 0);
     const hi = parseFloat(localStorage.getItem(`qfx_high_${r.pair}`) || cp);
     const lo = parseFloat(localStorage.getItem(`qfx_low_${r.pair}`) || cp);
@@ -2067,13 +2182,13 @@ function checkAutoBacktest() {
     if (r.action === 'BUY') {
       if (!r.hitTP1 && hi >= tp1) { r.hitTP1 = true; u = true; }
       if (!r.hitTP2 && hi >= tp2) { r.hitTP2 = true; u = true; }
-      if (lo <= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL @ ${sl}`; r.closeTime = now; u = true; }
-      else if (hi >= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3 @ ${tp3}`; r.closeTime = now; u = true; }
+      if (lo <= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL`; r.closeTime = now; u = true; sendNotification(`❌ ${r.pair} LOSS`, `SL hit @ ${sl}`, 'outcome_' + r.id); }
+      else if (hi >= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3`; r.closeTime = now; u = true; sendNotification(`✅ ${r.pair} WIN`, `TP3 hit @ ${tp3}`, 'outcome_' + r.id); }
     } else if (r.action === 'SELL') {
       if (!r.hitTP1 && lo <= tp1) { r.hitTP1 = true; u = true; }
       if (!r.hitTP2 && lo <= tp2) { r.hitTP2 = true; u = true; }
-      if (hi >= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL @ ${sl}`; r.closeTime = now; u = true; }
-      else if (lo <= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3 @ ${tp3}`; r.closeTime = now; u = true; }
+      if (hi >= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL`; r.closeTime = now; u = true; sendNotification(`❌ ${r.pair} LOSS`, `SL hit @ ${sl}`, 'outcome_' + r.id); }
+      else if (lo <= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3`; r.closeTime = now; u = true; sendNotification(`✅ ${r.pair} WIN`, `TP3 hit @ ${tp3}`, 'outcome_' + r.id); }
     }
   });
   if (u) localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(history));
@@ -2130,9 +2245,10 @@ function renderRealStats() {
       <div class="mini-box"><label>Max DD</label><div style="font-size:20px;font-weight:bold;color:var(--red);">${s.maxDD.toFixed(0)}p</div></div>
     </div>`;
 
+  // ✅ By signal type
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   const closed = history.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
-  const byPair = {}, byTier = {};
+  const byPair = {}, byTier = {}, bySignal = {};
   closed.forEach(h => {
     if (!byPair[h.pair]) byPair[h.pair] = { wins: 0, losses: 0, pips: 0 };
     if (h.outcome === 'WIN') { byPair[h.pair].wins++; byPair[h.pair].pips += (h.tp3Pips || 0); }
@@ -2141,30 +2257,40 @@ function renderRealStats() {
     if (!byTier[t]) byTier[t] = { wins: 0, losses: 0, pips: 0 };
     if (h.outcome === 'WIN') { byTier[t].wins++; byTier[t].pips += (h.tp3Pips || 0); }
     else { byTier[t].losses++; byTier[t].pips -= (h.slPips || 0); }
+    // Signal type = combination of score range + action
+    const scoreAbs = Math.abs(h.score || 0);
+    const sig = scoreAbs >= 85 ? `A+ ${h.action}` : scoreAbs >= 70 ? `A ${h.action}` : scoreAbs >= 55 ? `B ${h.action}` : `C ${h.action}`;
+    if (!bySignal[sig]) bySignal[sig] = { wins: 0, losses: 0, pips: 0 };
+    if (h.outcome === 'WIN') { bySignal[sig].wins++; bySignal[sig].pips += (h.tp3Pips || 0); }
+    else { bySignal[sig].losses++; bySignal[sig].pips -= (h.slPips || 0); }
   });
+
   const pc = document.getElementById('byPairContainer');
   pc.innerHTML = Object.keys(byPair).length === 0 ? '<div class="info-box">Hakuna.</div>' :
     Object.entries(byPair).map(([p, d]) => {
       const t = d.wins + d.losses, wr = (d.wins / t * 100).toFixed(0);
-      return `<div class="mini-box" style="margin-bottom:8px;">
-        <div style="display:flex;justify-content:space-between;"><strong>${p}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div>
-      </div>`;
+      return `<div class="mini-box" style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;"><strong>${p}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div><div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div></div>`;
     }).join('');
+
   const tc = document.getElementById('byTierContainer');
   tc.innerHTML = Object.keys(byTier).length === 0 ? '<div class="info-box">Hakuna.</div>' :
     Object.entries(byTier).sort().map(([t, d]) => {
       const tot = d.wins + d.losses, wr = (d.wins / tot * 100).toFixed(0);
       const emoji = t === 'A+' ? '🏆' : t === 'A' ? '⭐' : t === 'B' ? '✓' : '⚠️';
-      return `<div class="mini-box" style="margin-bottom:8px;">
-        <div style="display:flex;justify-content:space-between;"><strong>${emoji} ${t}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div>
-      </div>`;
+      return `<div class="mini-box" style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;"><strong>${emoji} ${t}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div><div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div></div>`;
+    }).join('');
+
+  const sc = document.getElementById('bySignalContainer');
+  sc.innerHTML = Object.keys(bySignal).length === 0 ? '<div class="info-box">Hakuna.</div>' :
+    Object.entries(bySignal).sort().map(([sig, d]) => {
+      const tot = d.wins + d.losses, wr = (d.wins / tot * 100).toFixed(0);
+      const color = sig.includes('BUY') ? 'var(--green)' : 'var(--red)';
+      return `<div class="mini-box" style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;"><strong style="color:${color};">${sig}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div><div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div></div>`;
     }).join('');
 }
 
 /* ============================================================
-   CORRELATION (with cache)
+   CORRELATION
    ============================================================ */
 function computeCorr(r1, r2) {
   const n = Math.min(r1.length, r2.length);
@@ -2179,7 +2305,6 @@ function computeCorr(r1, r2) {
 
 async function computeCorrelationMatrix() {
   const c = document.getElementById('corrContainer');
-  // Check cache
   try {
     const cache = JSON.parse(localStorage.getItem(STORAGE_KEYS.CORR_CACHE) || '{}');
     if (cache.ts && (Date.now() - cache.ts) < CACHE_TTL && cache.html) {
@@ -2187,7 +2312,6 @@ async function computeCorrelationMatrix() {
       return;
     }
   } catch {}
-
   c.innerHTML = '<div style="text-align:center;padding:20px;"><span class="spinner"></span> Fetching...</div>';
   const pairs = ['XAUUSD', 'EURUSD', 'GBPUSD', 'USDJPY', 'XAGUSD', 'BTCUSD'];
   const returns = {};
@@ -2250,7 +2374,6 @@ function saveJournalTrade() {
   document.getElementById('jEntry').value = ''; document.getElementById('jSL').value = ''; document.getElementById('jTP').value = ''; document.getElementById('jNotes').value = '';
   renderDailySummary();
 }
-
 function calculateRisk() {
   const b = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const r = parseFloat(document.getElementById('riskPercent').value) || 1;
@@ -2259,17 +2382,11 @@ function calculateRisk() {
   const riskAmt = b * (r / 100);
   const lot = riskAmt / (sl * spec.pipValue);
   document.getElementById('riskResultBox').style.display = 'block';
-  document.getElementById('riskResultBox').innerHTML = `
-    <div style="font-size:12px;">Balance: $${b.toFixed(2)}</div>
-    <div style="font-size:12px;">Risk: $${riskAmt.toFixed(2)}</div>
-    <div style="margin-top:10px;font-size:22px;font-weight:bold;color:var(--accent);text-align:center;">LOT: ${lot.toFixed(3)}</div>`;
+  document.getElementById('riskResultBox').innerHTML = `<div style="font-size:12px;">Balance: $${b.toFixed(2)}</div><div style="font-size:12px;">Risk: $${riskAmt.toFixed(2)}</div><div style="margin-top:10px;font-size:22px;font-weight:bold;color:var(--accent);text-align:center;">LOT: ${lot.toFixed(3)}</div>`;
 }
 function updatePipsInfo() {
   const spec = PAIR_SPECS[document.getElementById('pipsPair').value];
-  if (spec) {
-    document.getElementById('pipsEntry').value = spec.defaultPrice;
-    document.getElementById('pipsExit').value = (spec.defaultPrice + spec.pipSize * 100).toFixed(spec.decimals);
-  }
+  if (spec) { document.getElementById('pipsEntry').value = spec.defaultPrice; document.getElementById('pipsExit').value = (spec.defaultPrice + spec.pipSize * 100).toFixed(spec.decimals); }
 }
 function calculatePips() {
   const spec = PAIR_SPECS[document.getElementById('pipsPair').value];
@@ -2281,43 +2398,69 @@ function calculatePips() {
   const usd = Math.abs(diff) * lot * spec.pipValue;
   const isP = diff > 0;
   document.getElementById('pipsResultBox').style.display = 'block';
-  document.getElementById('pipsResultBox').innerHTML = `
-    <div style="background:#08080a;border:2px solid var(--accent);border-radius:12px;padding:18px;">
-      <div style="font-size:28px;font-weight:900;color:${isP ? 'var(--green)' : 'var(--red)'};text-align:center;">${isP ? '+' : '-'}${Math.abs(diff).toFixed(1)} PIPS</div>
-      <div style="text-align:center;font-size:20px;font-weight:bold;color:${isP ? 'var(--green)' : 'var(--red)'};">${isP ? '+' : '-'}$${usd.toFixed(2)}</div>
-    </div>`;
+  document.getElementById('pipsResultBox').innerHTML = `<div style="background:#08080a;border:2px solid var(--accent);border-radius:12px;padding:18px;"><div style="font-size:28px;font-weight:900;color:${isP ? 'var(--green)' : 'var(--red)'};text-align:center;">${isP ? '+' : '-'}${Math.abs(diff).toFixed(1)} PIPS</div><div style="text-align:center;font-size:20px;font-weight:bold;color:${isP ? 'var(--green)' : 'var(--red)'};">${isP ? '+' : '-'}$${usd.toFixed(2)}</div></div>`;
 }
 
 /* ============================================================
-   MODAL + EXPORT
+   MODAL + EXPORT + PWA
    ============================================================ */
-function openUniversalModal() {
-  const m = document.getElementById('universalModal');
-  m.classList.add('active'); m.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeUniversalModal() {
-  const m = document.getElementById('universalModal');
-  m.classList.remove('active'); m.style.display = 'none';
-  document.getElementById('modalInnerContent').innerHTML = '';
-  document.body.style.overflow = '';
-}
+function openUniversalModal() { const m = document.getElementById('universalModal'); m.classList.add('active'); m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+function closeUniversalModal() { const m = document.getElementById('universalModal'); m.classList.remove('active'); m.style.display = 'none'; document.getElementById('modalInnerContent').innerHTML = ''; document.body.style.overflow = ''; }
 function exportData() {
-  const d = {
-    history: JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]'),
-    rules: getRules(), version: '38.1', exportedAt: new Date().toISOString()
-  };
+  const d = { history: JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]'), rules: getRules(), version: '38.2', exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v381-${Date.now()}.json`;
-  a.click();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `lutynoel-v382-${Date.now()}.json`; a.click();
+}
+
+function setupPWA() {
+  const iconSvg = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><text y='.9em' font-size='80' x='10'>⚡</text></svg>";
+  const manifest = {
+    name: 'Lutynoel.fx v38.2', short_name: 'Lutynoel',
+    description: 'HOLD Intelligence + Multi-Strategy Trading',
+    start_url: './', display: 'standalone', orientation: 'portrait',
+    background_color: '#09090b', theme_color: '#fbbf24',
+    scope: './',
+    icons: [
+      { src: iconSvg, sizes: '192x192', type: 'image/svg+xml', purpose: 'any' },
+      { src: iconSvg, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.getElementById('dynamicManifest');
+  if (link) link.href = url;
+  const apple = document.getElementById('appleIcon');
+  if (apple) apple.href = iconSvg;
+
+  // Register minimal service worker for offline caching
+  if ('serviceWorker' in navigator) {
+    const swCode = `
+      const CACHE = 'lutynoel-v382';
+      self.addEventListener('install', e => { self.skipWaiting(); });
+      self.addEventListener('activate', e => { e.waitUntil(clients.claim()); });
+      self.addEventListener('fetch', e => {
+        if (e.request.method !== 'GET') return;
+        if (e.request.url.includes('api.') || e.request.url.includes('tradingview') || e.request.url.includes('generativelanguage')) return;
+        e.respondWith(
+          caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+            const clone = res.clone();
+            caches.open(CACHE).then(c => c.put(e.request, clone));
+            return res;
+          }).catch(() => caches.match(e.request)))
+        );
+      });
+    `;
+    const swBlob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swUrl, { scope: './' }).catch(e => console.warn('SW reg fail', e));
+  }
 }
 
 /* ============================================================
    INIT
    ============================================================ */
 window.addEventListener('DOMContentLoaded', () => {
+  setupPWA();
   clearMarketData();
   const modal = document.getElementById('universalModal');
   if (modal) modal.addEventListener('click', e => { if (e.target.id === 'universalModal') closeUniversalModal(); });
@@ -2326,12 +2469,9 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome, <strong>${k.name}</strong>!`;
-    setTimeout(async () => {
-      await updatePricesForBacktest();
-      checkAutoBacktest();
-      startAutoBacktest();
-    }, 2000);
+    setTimeout(async () => { await updatePricesForBacktest(); checkAutoBacktest(); startAutoBacktest(); startWatchlistMonitor(); }, 2000);
   } else showLoginForm();
+  renderInstallBanner();
 });
 </script>
 </body>
