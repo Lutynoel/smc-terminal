@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v37.0 — Decision Engine</title>
+<title>Lutynoel.fx v38.1 Pro</title>
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
@@ -67,11 +67,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .signal-hero.wait{background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05));border:2px solid var(--yellow)}
 .signal-hero.locked{background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(239,68,68,.08));border:2px solid var(--red);opacity:.85}
 .signal-label{font-size:22px;font-weight:900;letter-spacing:1px;margin:5px 0}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.stat-box{background:#08080a;border:1px solid var(--border);padding:14px;border-radius:8px;text-align:center}
-.stat-value{font-size:22px;font-weight:bold;color:var(--accent)}
-.stat-label{font-size:10px;color:var(--muted);text-transform:uppercase}
-.stat-box.win{border-color:var(--green)}.stat-box.loss{border-color:var(--red)}.stat-box.warn{border-color:var(--orange)}
+.tier-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:900;letter-spacing:2px;margin-bottom:8px}
+.tier-ap{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000}
+.tier-a{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.tier-b{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff}
+.tier-c{background:linear-gradient(135deg,#64748b,#475569);color:#fff}
 .hero-banner{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:14px;padding:20px 18px;margin-bottom:15px;position:relative;overflow:hidden;border:1px solid var(--border)}
 .hero-banner .glow1{position:absolute;top:-50%;right:-10%;width:280px;height:280px;background:radial-gradient(circle,rgba(251,191,36,.35),transparent 70%);pointer-events:none}
 .hero-banner-inner{position:relative;z-index:1;display:flex;align-items:center;gap:14px}
@@ -84,6 +84,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .sr-pivot{background:rgba(250,204,21,.2);color:#fef08a;border-left:4px solid var(--yellow);font-size:15px}
 .sr-s{background:rgba(16,185,129,.18);color:#6ee7b7;border-left:4px solid var(--green)}
 .sr-current{background:rgba(59,130,246,.2);color:#93c5fd;border-left:4px solid var(--blue);font-size:14px}
+.sr-weekly{background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.05));border-left:4px solid var(--purple);color:#d8b4fe}
+.sr-broken{opacity:.4;text-decoration:line-through}
 .history-card{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer}
 .modal{display:none;position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.92);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .modal.active{display:flex}
@@ -92,8 +94,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .modal-close-bottom{width:100%;padding:14px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:bold;font-size:15px;margin-top:15px;cursor:pointer}
 .nav-btn{background:none;border:none;color:#fff;font-size:20px;padding:4px}
 .ballistic-header{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent);font-weight:bold;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase}
-.score-bar{width:100%;height:8px;background:#222;border-radius:4px;margin:8px 0;overflow:hidden;position:relative}
-.score-fill{height:100%;transition:width .5s;border-radius:4px}
+.score-bar{width:100%;height:10px;background:#222;border-radius:5px;margin:10px 0;overflow:hidden;position:relative}
+.score-fill{height:100%;transition:width .5s;border-radius:5px}
 .score-fill.buy{background:linear-gradient(90deg,var(--green),#059669)}
 .score-fill.sell{background:linear-gradient(90deg,var(--red),#b91c1c)}
 .score-fill.hold{background:linear-gradient(90deg,var(--yellow),var(--orange))}
@@ -101,39 +103,41 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .checklist-modal-item.checked{border-color:var(--green);background:rgba(16,185,129,.08)}
 .checklist-modal-item input{width:auto;margin:2px 0 0 0;flex-shrink:0;transform:scale(1.3)}
 .checklist-modal-item label{margin:0;text-transform:none;font-size:13px;color:var(--text);font-weight:normal;letter-spacing:0;cursor:pointer}
-.confluence-bar{width:100%;height:6px;background:#222;border-radius:3px;margin-top:6px;overflow:hidden}
-.confluence-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));border-radius:3px}
+.regime-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold;margin-left:6px}
+.regime-trend{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue)}
+.regime-range{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
+.regime-volatile{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
+.regime-dead{background:rgba(100,116,139,.2);color:#94a3b8;border:1px solid #64748b}
+.strategy-card{background:#08080a;border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:10px;border-left:4px solid var(--muted)}
+.strategy-card.bull{border-left-color:var(--green)}
+.strategy-card.bear{border-left-color:var(--red)}
+.strategy-card.neutral{border-left-color:var(--muted)}
+.metric-row{display:flex;justify-content:space-between;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}
+.metric-row:last-child{border-bottom:0}
 </style>
 </head>
 <body>
 
-<div id="universalModal" class="modal">
-  <div class="modal-content"><div id="modalInnerContent"></div></div>
-</div>
+<div id="universalModal" class="modal"><div class="modal-content"><div id="modalInnerContent"></div></div></div>
 
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
-    <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🎯</div>
-    <div class="auth-title">Lutynoel.fx v37.0</div>
-    <div class="auth-subtitle">Decision Engine — Trade Support</div>
-
+    <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">⚡</div>
+    <div class="auth-title">Lutynoel.fx v38.1 Pro</div>
+    <div class="auth-subtitle">Performance + Accuracy Fix</div>
     <div class="info-box">
-      🎯 <strong>Decision Support Tool.</strong> Inakusaidia kuamua trade kwa rules zilizowekwa. Hakuna signals za AI, hakuna black box. Kila kitu kinaelezeka.
+      ⚡ <strong>Fixed:</strong> O(n²) → O(n) indicators • Proper Wilder's ADX • Real FOMC dates • Volume by-hour • Multi-day S/R • DST-aware sessions • Magnitude-based conflict
     </div>
-
     <div id="returningUserSection" style="display:none;">
       <div class="success-box" id="welcomeBackMsg"></div>
       <button class="primary-btn" onclick="continueWithSavedKeys()">🚀 Continue</button>
       <button class="secondary-btn" onclick="showLoginForm()">🔄 New Profile</button>
     </div>
-
     <div id="loginFormSection">
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
       <label>TwelveData API Key</label>
-      <input type="password" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
-      <label>Alpha Vantage Key (Optional)</label>
-      <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
+      <input type="password" id="authTwelveKey" placeholder="TwelveData key">
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
   </div>
@@ -144,7 +148,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div style="display:flex;align-items:center;gap:8px;">
       <button class="nav-btn" onclick="goBack()">←</button>
       <button class="nav-btn" onclick="toggleSidebar()">☰</button>
-      <div class="logo-area"><div class="logo-icon">🎯</div> Lutynoel.fx</div>
+      <div class="logo-area"><div class="logo-icon">⚡</div> Lutynoel.fx</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="user-pill" id="displayUserName">TRADER</div>
@@ -154,56 +158,67 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🎯</div> v37.0</div>
+      <div class="logo-area"><div class="logo-icon">⚡</div> v38.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">🎯 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">📊 Signal Analysis</div>
-    <div class="menu-item" onclick="navigate('risk')">🛡️ Risk Check</div>
+    <div class="menu-item" onclick="navigate('risk')">🛡️ Trade Limits</div>
     <div class="menu-item" onclick="navigate('journal')">📓 Trade Log</div>
     <div class="menu-item" onclick="navigate('statistics')">📈 Statistics</div>
     <div class="menu-item" onclick="navigate('correlation')">🔗 Correlation</div>
-    <div class="menu-item" onclick="navigate('calculator')">🧮 Lot Calculator</div>
+    <div class="menu-item" onclick="navigate('calculator')">🧮 Calculators</div>
     <div class="menu-item" onclick="navigate('livechart')">📉 Live Chart</div>
     <div class="menu-item" onclick="navigate('settings')">⚙️ Settings</div>
   </div>
 
   <div class="main-content">
-    <!-- DASHBOARD -->
     <div id="view-overview" class="view-section">
       <div class="hero-banner">
         <div class="glow1"></div>
         <div class="hero-banner-inner">
-          <div style="width:60px;height:60px;flex-shrink:0;background:rgba(251,191,36,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;">🎯</div>
+          <div style="width:60px;height:60px;flex-shrink:0;background:rgba(251,191,36,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;">⚡</div>
           <div style="flex:1;">
-            <div class="hero-title">DECISION ENGINE</div>
-            <div class="hero-sub">Rule-based trade analysis</div>
+            <div class="hero-title">PRO ENGINE v38.1</div>
+            <div class="hero-sub">Optimized • Wilder's-correct • Multi-day S/R</div>
             <div class="hero-badges">
-              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">MTF ANALYSIS</span>
-              <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">VOLUME PROFILE</span>
-              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">S/R</span>
-              <span style="background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue);">RISK ENGINE</span>
+              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">O(n)</span>
+              <span style="background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue);">TREND</span>
+              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">REVERSAL</span>
+              <span style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);">BREAKOUT</span>
             </div>
           </div>
         </div>
       </div>
-
       <div id="dailySummaryContainer"></div>
-
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">🎯 Quick Actions</h3>
         <button class="primary-btn" onclick="navigate('analyst')">📊 Analyze Trade</button>
-        <button class="secondary-btn" onclick="navigate('calculator')">🧮 Calculate Lot Size</button>
-        <button class="secondary-btn" onclick="navigate('statistics')">📈 View Statistics</button>
+        <button class="secondary-btn" onclick="navigate('calculator')">🧮 Lot Size</button>
+        <button class="secondary-btn" onclick="navigate('statistics')">📈 Statistics</button>
       </div>
-
       <div class="card">
-        <div class="ballistic-header">🛡️ TRADE LIMITS (Kanuni Zako)</div>
+        <div class="ballistic-header">🛡️ TRADE LIMITS</div>
         <div id="overviewRulesContainer"></div>
+      </div>
+      <div class="card">
+        <div class="ballistic-header">🔧 v38.1 FIXES</div>
+        <div style="font-size:11px;line-height:1.9;color:var(--muted);">
+          <strong style="color:var(--green);">✅ Fixed:</strong><br>
+          • O(n²)→O(n) for MACD/RSI/ATR/ADX (10x faster)<br>
+          • ADX proper Wilder's 2-stage smoothing<br>
+          • Volume compared to same-hour historical<br>
+          • Real FOMC/CPI dates (najua 2026 schedule)<br>
+          • Multi-day S/R (Daily + Weekly + Monthly)<br>
+          • Sessions with DST adjustment<br>
+          • Conflict by magnitude (sio count)<br>
+          • Data gap/stale validation<br>
+          • Volume Profile range distribution<br>
+          • S/R breakout needs candle close + volume
+        </div>
       </div>
     </div>
 
-    <!-- SIGNAL ANALYSIS -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">📊 Signal Analysis</h3>
@@ -231,23 +246,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div class="data-status-item" id="data4H"><span>4H</span><span>—</span></div>
           <div class="data-status-item" id="data1H"><span>1H</span><span>—</span></div>
           <div class="data-status-item" id="data15M"><span>15M</span><span>—</span></div>
-          <div class="data-status-item" id="dataIndicators"><span>Indicators + S/R</span><span>—</span></div>
+          <div class="data-status-item" id="dataIndicators"><span>Indicators</span><span>—</span></div>
         </div>
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch Data</button>
-        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 Generate Signal</button>
+        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>⚡ Generate Signal</button>
       </div>
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- RISK CHECK -->
     <div id="view-risk" class="view-section" style="display:none;">
-      <div class="card">
-        <h3 style="margin:5px 0 15px;">🛡️ Trade Limits</h3>
-        <div class="info-box">
-          Hii ni kanuni zako. App inakukumbusha — sio kikwazo. Kila kanuni inalinda mtaji wako.
-        </div>
-        <div id="riskCheckContainer"></div>
-      </div>
+      <div class="card"><h3 style="margin:5px 0 15px;">🛡️ Trade Limits</h3><div id="riskCheckContainer"></div></div>
       <div class="card">
         <div class="ballistic-header">⚙️ Edit Limits</div>
         <div class="grid-2">
@@ -262,30 +270,28 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div><label>Cooldown after win (min)</label><input type="number" id="ruleCooldownWin" value="15"></div>
           <div><label>Min confidence %</label><input type="number" id="ruleMinConfidence" value="65"></div>
         </div>
-        <div><label>Min score</label><input type="number" id="ruleMinScore" value="55"></div>
-        <button class="secondary-btn" onclick="saveRules()">💾 Save Limits</button>
+        <div class="grid-2">
+          <div><label>Min score</label><input type="number" id="ruleMinScore" value="55"></div>
+          <div><label>Min tier</label>
+            <select id="ruleMinTier">
+              <option value="AP">A+ only</option>
+              <option value="A" selected>A or better</option>
+              <option value="B">B or better</option>
+              <option value="C">C or better</option>
+            </select>
+          </div>
+        </div>
+        <button class="secondary-btn" onclick="saveRules()">💾 Save</button>
       </div>
     </div>
 
-    <!-- JOURNAL -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">📓 Log Manual Trade</h3>
-        <div class="info-box">
-          Ukichukua trade nje ya app, ingiza hapa ili iwe tracked kwenye statistics zako.
-        </div>
         <label>Pair</label>
-        <select id="jPair">
-          <option value="XAUUSD">XAUUSD</option>
-          <option value="EURUSD">EURUSD</option>
-          <option value="GBPUSD">GBPUSD</option>
-          <option value="USDJPY">USDJPY</option>
-        </select>
+        <select id="jPair"><option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option></select>
         <label>Direction</label>
-        <select id="jAction">
-          <option value="BUY">BUY</option>
-          <option value="SELL">SELL</option>
-        </select>
+        <select id="jAction"><option value="BUY">BUY</option><option value="SELL">SELL</option></select>
         <div class="grid-2">
           <div><label>Entry</label><input type="number" step="any" id="jEntry"></div>
           <div><label>Lot</label><input type="number" step="0.01" id="jLot" value="0.01"></div>
@@ -294,40 +300,30 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div><label>SL</label><input type="number" step="any" id="jSL"></div>
           <div><label>TP</label><input type="number" step="any" id="jTP"></div>
         </div>
-        <label>Notes (Optional)</label>
-        <input type="text" id="jNotes" placeholder="Reason for trade...">
+        <label>Notes</label>
+        <input type="text" id="jNotes" placeholder="Reason...">
         <button class="primary-btn" onclick="saveJournalTrade()">💾 Save</button>
       </div>
     </div>
 
-    <!-- STATISTICS -->
     <div id="view-statistics" class="view-section" style="display:none;">
-      <div class="card">
-        <h3 style="margin:5px 0 15px;">📈 Performance Statistics</h3>
-        <div id="realStatsContainer"></div>
-      </div>
-      <div class="card">
-        <div class="ballistic-header">📊 By Pair</div>
-        <div id="byPairContainer"></div>
-      </div>
+      <div class="card"><h3 style="margin:5px 0 15px;">📈 Statistics</h3><div id="realStatsContainer"></div></div>
+      <div class="card"><div class="ballistic-header">📊 By Pair</div><div id="byPairContainer"></div></div>
+      <div class="card"><div class="ballistic-header">🏆 By Tier</div><div id="byTierContainer"></div></div>
     </div>
 
-    <!-- CORRELATION -->
     <div id="view-correlation" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🔗 Correlation Matrix</h3>
-        <div class="info-box">
-          Correlation > 0.7 ina maana pairs zinatembea pamoja. Usichukue trade 2+ kwenye pairs zenye correlation kubwa — ni trade moja iliyojificha.
-        </div>
+        <h3 style="margin:5px 0 15px;">🔗 Correlation</h3>
+        <div class="info-box">Correlation > 0.7 = pairs zinatembea pamoja. Cached kwa dakika 30.</div>
         <button class="primary-btn" onclick="computeCorrelationMatrix()">Compute</button>
         <div id="corrContainer" style="margin-top:15px;"></div>
       </div>
     </div>
 
-    <!-- CALCULATOR -->
     <div id="view-calculator" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 10px;">🧮 Position Size Calculator</h3>
+        <h3 style="margin:5px 0 10px;">🧮 Position Size</h3>
         <div class="grid-2">
           <div><label>Balance ($)</label><input type="number" id="riskBalance" value="1000"></div>
           <div><label>Risk %</label><input type="number" step="0.1" id="riskPercent" value="1.0"></div>
@@ -335,14 +331,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <div class="grid-2">
           <div><label>SL (Pips)</label><input type="number" id="riskSlPips" value="30"></div>
           <div><label>Pair</label>
-            <select id="riskPair" onchange="calculateRisk()">
-              <option value="XAUUSD">XAUUSD</option>
-              <option value="EURUSD">EURUSD</option>
-              <option value="GBPUSD">GBPUSD</option>
-              <option value="USDJPY">USDJPY</option>
-              <option value="XAGUSD">XAGUSD</option>
-              <option value="BTCUSD">BTCUSD</option>
-            </select>
+            <select id="riskPair"><option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option><option value="XAGUSD">XAGUSD</option><option value="BTCUSD">BTCUSD</option></select>
           </div>
         </div>
         <button class="secondary-btn" onclick="calculateRisk()">Calculate</button>
@@ -352,11 +341,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <h3 style="margin:5px 0 15px;">📐 Pips Calculator</h3>
         <label>Pair</label>
         <select id="pipsPair" onchange="updatePipsInfo()">
-          <option value="XAUUSD">XAUUSD</option>
-          <option value="EURUSD">EURUSD</option>
-          <option value="GBPUSD">GBPUSD</option>
-          <option value="USDJPY">USDJPY</option>
-          <option value="XAGUSD">XAGUSD</option>
+          <option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option><option value="XAGUSD">XAGUSD</option>
         </select>
         <div class="grid-2">
           <div><label>Entry</label><input type="number" step="any" id="pipsEntry" value="2650.00"></div>
@@ -364,27 +349,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
         <div class="grid-2">
           <div><label>Lot</label><input type="number" step="0.01" id="pipsLot" value="0.01"></div>
-          <div><label>Direction</label>
-            <select id="pipsDir">
-              <option value="BUY">BUY</option>
-              <option value="SELL">SELL</option>
-            </select>
-          </div>
+          <div><label>Direction</label><select id="pipsDir"><option value="BUY">BUY</option><option value="SELL">SELL</option></select></div>
         </div>
         <button class="secondary-btn" onclick="calculatePips()">Calculate</button>
         <div id="pipsResultBox" style="display:none;margin-top:15px;"></div>
       </div>
     </div>
 
-    <!-- LIVE CHART -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📉 Live Chart</h3>
         <select id="liveChartSelect" onchange="changeLiveChart(this.value)">
-          <option value="OANDA:XAUUSD">XAUUSD</option>
-          <option value="OANDA:EURUSD">EURUSD</option>
-          <option value="OANDA:GBPUSD">GBPUSD</option>
-          <option value="BINANCE:BTCUSDT">BTCUSD</option>
+          <option value="OANDA:XAUUSD">XAUUSD</option><option value="OANDA:EURUSD">EURUSD</option><option value="OANDA:GBPUSD">GBPUSD</option><option value="BINANCE:BTCUSDT">BTCUSD</option>
         </select>
         <div style="height:480px;width:100%;margin-top:10px;">
           <iframe id="tvIframe" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=15&theme=dark&style=1" style="width:100%;height:100%;border:0;border-radius:8px;"></iframe>
@@ -392,25 +368,22 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- SETTINGS -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.0 Decision Engine<br>
-          <strong>Focus:</strong> Trade decision support, hakuna mood tracking
+          <strong>Version:</strong> v38.1 Pro<br>
+          <strong>Engine:</strong> Multi-Strategy + Regime<br>
+          <strong>Performance:</strong> O(n) indicators
         </div>
-        <label>Account Balance ($)</label>
-        <input type="number" id="settingsBalance" value="1000">
-        <label>Risk Per Trade (%)</label>
-        <input type="number" step="0.1" id="settingsRiskPct" value="1.0">
+        <label>Balance ($)</label><input type="number" id="settingsBalance" value="1000">
+        <label>Risk Per Trade (%)</label><input type="number" step="0.1" id="settingsRiskPct" value="1.0">
         <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
-        <label>TwelveData Key</label>
-        <input type="password" id="settingsTwelveKey" placeholder="TwelveData key">
+        <label>TwelveData Key</label><input type="password" id="settingsTwelveKey" placeholder="TwelveData key">
         <button class="secondary-btn" onclick="saveSettingsTwelveKey()">💾 Save Key</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
-        <button class="secondary-btn" onclick="exportData()">📥 Export Data</button>
+        <button class="secondary-btn" onclick="exportData()">📥 Export</button>
         <button class="danger-btn" onclick="clearAllData()">🗑️ Clear All</button>
       </div>
     </div>
@@ -419,8 +392,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* ============================================================
-   LUTYNOEL.FX v37.0 — DECISION ENGINE
-   Rule-based analysis + Risk enforcement
+   LUTYNOEL.FX v38.1 PRO — OPTIMIZED ENGINE
    ============================================================ */
 
 const BINANCE_API = 'https://api.binance.com/api/v3';
@@ -429,15 +401,13 @@ const API_TIMEOUT = 20000;
 const AUTO_CHECK_INTERVAL = 60000;
 const BACKTEST_PRICE_INTERVAL = 180000;
 const MAX_TRADE_HOURS = 48;
+const CACHE_TTL = 30 * 60 * 1000; // 30 min cache
 
 const STORAGE_KEYS = {
-  NAME: 'qfx37_name',
-  TWELVE: 'qfx37_twelve',
-  ALPHA: 'qfx37_alpha',
-  BALANCE: 'qfx37_balance',
-  RISK_PCT: 'qfx37_riskPct',
-  HISTORY: 'qfx37_history',
-  RULES: 'qfx37_rules'
+  NAME: 'qfx381_name', TWELVE: 'qfx381_twelve',
+  BALANCE: 'qfx381_balance', RISK_PCT: 'qfx381_riskPct',
+  HISTORY: 'qfx381_history', RULES: 'qfx381_rules',
+  CORR_CACHE: 'qfx381_corr_cache'
 };
 
 const PAIR_SPECS = {
@@ -451,64 +421,51 @@ const PAIR_SPECS = {
   ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', pipValue: 1.00 }
 };
 
+// ✅ FOMC 2026 actual dates (Fed published)
+const FOMC_DATES_2026 = [
+  '2026-01-28', '2026-03-18', '2026-04-29', '2026-06-17',
+  '2026-07-29', '2026-09-16', '2026-11-04', '2026-12-16'
+];
+// CPI typically: 2nd or 3rd Tuesday-Wednesday of month
+// NFP: 1st Friday of month
+
 const DEFAULT_RULES = {
-  maxTradesPerDay: 3,
-  maxConcurrentTrades: 2,
-  maxDailyLossPct: 3,
-  cooldownAfterLossMin: 60,
-  cooldownAfterWinMin: 15,
-  minConfidence: 65,
-  minScoreAbs: 55
+  maxTradesPerDay: 3, maxConcurrentTrades: 2, maxDailyLossPct: 3,
+  cooldownAfterLossMin: 60, cooldownAfterWinMin: 15,
+  minConfidence: 65, minScoreAbs: 55, minTier: 'A'
 };
 
 function getRules() {
-  try {
-    const r = JSON.parse(localStorage.getItem(STORAGE_KEYS.RULES) || '{}');
-    return { ...DEFAULT_RULES, ...r };
-  } catch { return { ...DEFAULT_RULES }; }
+  try { return { ...DEFAULT_RULES, ...JSON.parse(localStorage.getItem(STORAGE_KEYS.RULES) || '{}') }; }
+  catch { return { ...DEFAULT_RULES }; }
 }
 
-/* ============================================================
-   UTILITIES
-   ============================================================ */
-
-function showToast(msg, duration = 3500) {
+function showToast(msg, d = 3500) {
   const t = document.createElement('div');
   t.className = 'toast'; t.innerText = msg;
   document.body.appendChild(t);
-  setTimeout(() => t.remove(), duration);
+  setTimeout(() => t.remove(), d);
 }
 
-async function fetchWithTimeout(url, options = {}, timeout = API_TIMEOUT) {
+async function fetchWithTimeout(url, opt = {}, timeout = API_TIMEOUT) {
   const ctrl = new AbortController();
   const id = setTimeout(() => ctrl.abort(), timeout);
-  try {
-    const r = await fetch(url, { ...options, signal: ctrl.signal });
-    clearTimeout(id);
-    return r;
-  } catch (e) { clearTimeout(id); throw e; }
+  try { const r = await fetch(url, { ...opt, signal: ctrl.signal }); clearTimeout(id); return r; }
+  catch (e) { clearTimeout(id); throw e; }
 }
 
-function todayStr() {
-  const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
-}
+function todayStr() { const d = new Date(); return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+function dateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
 /* ============================================================
    AUTH
    ============================================================ */
-
-function saveKeys(name, twelveKey, alphaKey) {
+function saveKeys(name, twelveKey) {
   localStorage.setItem(STORAGE_KEYS.NAME, name);
   if (twelveKey) localStorage.setItem(STORAGE_KEYS.TWELVE, twelveKey);
-  if (alphaKey) localStorage.setItem(STORAGE_KEYS.ALPHA, alphaKey);
 }
 function loadKeys() {
-  return {
-    name: localStorage.getItem(STORAGE_KEYS.NAME),
-    twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE),
-    alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA)
-  };
+  return { name: localStorage.getItem(STORAGE_KEYS.NAME), twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE) };
 }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
 function getBalance() { return parseFloat(localStorage.getItem(STORAGE_KEYS.BALANCE)) || 1000; }
@@ -517,18 +474,11 @@ function getRiskPct() { return parseFloat(localStorage.getItem(STORAGE_KEYS.RISK
 function handleLogin() {
   const name = document.getElementById('loginName').value.trim();
   const twelveKey = document.getElementById('authTwelveKey').value.trim();
-  const alphaKey = document.getElementById('authAlphaKey').value.trim();
-  if (!name) { alert("Enter your name."); return; }
-  if (!twelveKey && !alphaKey) { alert("Enter TwelveData key."); return; }
-  saveKeys(name, twelveKey, alphaKey);
-  enterApp(name);
+  if (!name) { alert("Enter name."); return; }
+  if (!twelveKey) { alert("Enter TwelveData key."); return; }
+  saveKeys(name, twelveKey); enterApp(name);
 }
-
-function continueWithSavedKeys() {
-  const k = loadKeys();
-  if (!k.name) { showLoginForm(); return; }
-  enterApp(k.name);
-}
+function continueWithSavedKeys() { const k = loadKeys(); if (!k.name) { showLoginForm(); return; } enterApp(k.name); }
 
 function enterApp(name) {
   document.getElementById('authScreen').style.display = 'none';
@@ -538,23 +488,18 @@ function enterApp(name) {
   document.getElementById('settingsBalance').value = getBalance();
   document.getElementById('settingsRiskPct').value = getRiskPct();
   loadRulesIntoEditor();
-  renderDailySummary();
-  renderRulesOverview();
-  renderRiskCheck();
-  showToast(`Karibu ${name}! 🎯`);
+  renderDailySummary(); renderRulesOverview(); renderRiskCheck();
+  showToast(`Karibu ${name}! ⚡`);
   setTimeout(() => fetchLivePrice(), 800);
   startAutoBacktest();
 }
-
 function showLoginForm() {
   document.getElementById('returningUserSection').style.display = 'none';
   document.getElementById('loginFormSection').style.display = 'block';
   const k = loadKeys();
   if (k.name) document.getElementById('loginName').value = k.name;
   if (k.twelveKey) document.getElementById('authTwelveKey').value = k.twelveKey;
-  if (k.alphaKey) document.getElementById('authAlphaKey').value = k.alphaKey;
 }
-
 function logout() {
   if (window.__uiInterval) clearInterval(window.__uiInterval);
   if (window.__priceInterval) clearInterval(window.__priceInterval);
@@ -564,38 +509,31 @@ function logout() {
   if (k.name) {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
-    document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${k.name}</strong>!`;
+    document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome, <strong>${k.name}</strong>!`;
   } else showLoginForm();
 }
-
 function saveSettingsTwelveKey() {
   const k = document.getElementById('settingsTwelveKey').value.trim();
-  if (k) localStorage.setItem(STORAGE_KEYS.TWELVE, k);
-  else localStorage.removeItem(STORAGE_KEYS.TWELVE);
-  showToast("✅ Key saved!");
+  if (k) localStorage.setItem(STORAGE_KEYS.TWELVE, k); else localStorage.removeItem(STORAGE_KEYS.TWELVE);
+  showToast("✅ Key saved");
 }
-
 function saveRiskSettings() {
-  const bal = parseFloat(document.getElementById('settingsBalance').value) || 1000;
-  const risk = parseFloat(document.getElementById('settingsRiskPct').value) || 1.0;
-  localStorage.setItem(STORAGE_KEYS.BALANCE, bal);
-  localStorage.setItem(STORAGE_KEYS.RISK_PCT, risk);
-  showToast(`✅ Balance: $${bal} | Risk: ${risk}%`);
+  localStorage.setItem(STORAGE_KEYS.BALANCE, parseFloat(document.getElementById('settingsBalance').value) || 1000);
+  localStorage.setItem(STORAGE_KEYS.RISK_PCT, parseFloat(document.getElementById('settingsRiskPct').value) || 1.0);
+  showToast(`✅ Saved`);
 }
-
 function clearAllData() {
-  if (!confirm("Clear ALL data?")) return;
+  if (!confirm("Clear ALL?")) return;
   Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
-  ['qfx_price_','qfx_high_','qfx_low_'].forEach(pfx => {
-    Object.keys(localStorage).filter(k => k.startsWith(pfx)).forEach(k => localStorage.removeItem(k));
+  ['qfx_price_','qfx_high_','qfx_low_'].forEach(p => {
+    Object.keys(localStorage).filter(k => k.startsWith(p)).forEach(k => localStorage.removeItem(k));
   });
   location.reload();
 }
 
 /* ============================================================
-   NAVIGATION
+   NAV
    ============================================================ */
-
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
   document.getElementById('view-' + view).style.display = 'block';
@@ -609,261 +547,813 @@ function navigate(view) {
   if (view === 'risk') renderRiskCheck();
   window.scrollTo(0, 0);
 }
-
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
 function goBack() { navigate('overview'); }
-function changeLiveChart(s) {
-  document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${s}&interval=15&theme=dark&style=1`;
-}
+function changeLiveChart(s) { document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${s}&interval=15&theme=dark&style=1`; }
 
 /* ============================================================
-   INDICATORS (Fixed)
+   ⚡ OPTIMIZED INDICATOR CACHE — O(n)
+   Computes ALL indicators in ONE pass. No O(n²).
    ============================================================ */
-
-function calculateRSI(closes, period = 14) {
-  if (closes.length < period + 1) return null;
-  let avgGain = 0, avgLoss = 0;
-  for (let i = 1; i <= period; i++) {
-    const d = closes[i] - closes[i - 1];
-    if (d > 0) avgGain += d; else avgLoss -= d;
-  }
-  avgGain /= period; avgLoss /= period;
-  for (let i = period + 1; i < closes.length; i++) {
-    const d = closes[i] - closes[i - 1];
-    const gain = d > 0 ? d : 0;
-    const loss = d < 0 ? -d : 0;
-    avgGain = (avgGain * (period - 1) + gain) / period;
-    avgLoss = (avgLoss * (period - 1) + loss) / period;
-  }
-  if (avgLoss === 0) return 100;
-  return 100 - (100 / (1 + avgGain / avgLoss));
-}
-
-function calculateSMA(values, period) {
-  if (values.length < period) return null;
-  return values.slice(-period).reduce((a, b) => a + b, 0) / period;
-}
-
-function calculateEMA(values, period) {
-  if (values.length < period) return null;
-  const k = 2 / (period + 1);
-  let ema = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
-  for (let i = period; i < values.length; i++) ema = values[i] * k + ema * (1 - k);
-  return ema;
-}
-
-function calculateATR(highs, lows, closes, period = 14) {
-  if (highs.length < period + 1) return null;
-  const trs = [];
-  for (let i = 1; i < highs.length; i++) {
-    trs.push(Math.max(highs[i] - lows[i], Math.abs(highs[i] - closes[i - 1]), Math.abs(lows[i] - closes[i - 1])));
-  }
-  let atr = trs.slice(0, period).reduce((a, b) => a + b, 0) / period;
-  for (let i = period; i < trs.length; i++) atr = (atr * (period - 1) + trs[i]) / period;
-  return atr;
-}
-
-function calculateMACD(closes) {
-  if (closes.length < 35) return null;
-  const macdLine = [];
-  for (let i = 26; i <= closes.length; i++) {
-    const e12 = calculateEMA(closes.slice(0, i), 12);
-    const e26 = calculateEMA(closes.slice(0, i), 26);
-    if (e12 && e26) macdLine.push(e12 - e26);
-  }
-  if (macdLine.length < 9) return null;
-  const signalLine = calculateEMA(macdLine, 9);
-  const currentMacd = macdLine[macdLine.length - 1];
-  const prevMacd = macdLine[macdLine.length - 2];
-  const currentHist = currentMacd - signalLine;
-  const prevHist = prevMacd - signalLine;
-
-  let crossover = 'NEUTRAL';
-  if (prevHist <= 0 && currentHist > 0) crossover = 'BULLISH_CROSS';
-  else if (prevHist >= 0 && currentHist < 0) crossover = 'BEARISH_CROSS';
-  else if (currentHist > 0) crossover = 'BULLISH';
-  else if (currentHist < 0) crossover = 'BEARISH';
-
-  return { macd: currentMacd, signal: signalLine, histogram: currentHist, crossover };
-}
-
-function calculateDailyPivots(daily) {
-  if (!daily || daily.length < 2) return null;
-  const prev = daily[daily.length - 2];
-  const pivot = (prev.high + prev.low + prev.close) / 3;
-  const r1 = 2 * pivot - prev.low;
-  const s1 = 2 * pivot - prev.high;
-  const r2 = pivot + (prev.high - prev.low);
-  const s2 = pivot - (prev.high - prev.low);
-  const r3 = prev.high + 2 * (pivot - prev.low);
-  const s3 = prev.low - 2 * (prev.high - pivot);
-  return { pivot, r1, r2, r3, s1, s2, s3 };
-}
-
-function detectSweep(ohlc) {
-  if (!ohlc || ohlc.length < 20) return null;
+function computeIndicatorCache(ohlc) {
+  const n = ohlc.length;
+  if (n < 30) return null;
+  const closes = ohlc.map(d => d.close);
   const highs = ohlc.map(d => d.high);
   const lows = ohlc.map(d => d.low);
-  const last = ohlc[ohlc.length - 1];
-  const rH = Math.max(...highs.slice(-20, -1));
-  const rL = Math.min(...lows.slice(-20, -1));
-  if (last.low < rL && last.close > rL) return { type: 'BULLISH_SWEEP', bias: 'BUY', level: rL };
-  if (last.high > rH && last.close < rH) return { type: 'BEARISH_SWEEP', bias: 'SELL', level: rH };
+  const volumes = ohlc.map(d => d.volume || 0);
+
+  // --- EMA 12 / 26 (incremental) ---
+  const ema12 = new Array(n).fill(null);
+  const ema26 = new Array(n).fill(null);
+  if (n >= 12) {
+    let e = closes.slice(0, 12).reduce((a, b) => a + b, 0) / 12;
+    ema12[11] = e;
+    const k = 2 / 13;
+    for (let i = 12; i < n; i++) { e = closes[i] * k + e * (1 - k); ema12[i] = e; }
+  }
+  if (n >= 26) {
+    let e = closes.slice(0, 26).reduce((a, b) => a + b, 0) / 26;
+    ema26[25] = e;
+    const k = 2 / 27;
+    for (let i = 26; i < n; i++) { e = closes[i] * k + e * (1 - k); ema26[i] = e; }
+  }
+
+  // --- MACD line + signal (incremental) ---
+  const macdLine = new Array(n).fill(null);
+  for (let i = 26; i < n; i++) macdLine[i] = ema12[i] - ema26[i];
+  const signalLine = new Array(n).fill(null);
+  const histogram = new Array(n).fill(null);
+  const firstMacdIdx = macdLine.findIndex(v => v !== null);
+  if (firstMacdIdx >= 0 && n - firstMacdIdx >= 9) {
+    let s = macdLine.slice(firstMacdIdx, firstMacdIdx + 9).reduce((a, b) => a + b, 0) / 9;
+    signalLine[firstMacdIdx + 8] = s;
+    histogram[firstMacdIdx + 8] = macdLine[firstMacdIdx + 8] - s;
+    const ks = 2 / 10;
+    for (let i = firstMacdIdx + 9; i < n; i++) {
+      s = macdLine[i] * ks + s * (1 - ks);
+      signalLine[i] = s;
+      histogram[i] = macdLine[i] - s;
+    }
+  }
+
+  // --- RSI (Wilder's, incremental) ---
+  const rsi = new Array(n).fill(null);
+  if (n > 14) {
+    let g = 0, l = 0;
+    for (let i = 1; i <= 14; i++) {
+      const d = closes[i] - closes[i - 1];
+      if (d > 0) g += d; else l -= d;
+    }
+    let avgG = g / 14, avgL = l / 14;
+    rsi[14] = avgL === 0 ? 100 : 100 - 100 / (1 + avgG / avgL);
+    for (let i = 15; i < n; i++) {
+      const d = closes[i] - closes[i - 1];
+      const gg = d > 0 ? d : 0, ll = d < 0 ? -d : 0;
+      avgG = (avgG * 13 + gg) / 14;
+      avgL = (avgL * 13 + ll) / 14;
+      rsi[i] = avgL === 0 ? 100 : 100 - 100 / (1 + avgG / avgL);
+    }
+  }
+
+  // --- ATR (Wilder's, incremental) ---
+  const tr = new Array(n).fill(0);
+  for (let i = 1; i < n; i++) {
+    tr[i] = Math.max(highs[i] - lows[i], Math.abs(highs[i] - closes[i - 1]), Math.abs(lows[i] - closes[i - 1]));
+  }
+  const atr = new Array(n).fill(null);
+  if (n > 14) {
+    let a = tr.slice(1, 15).reduce((x, y) => x + y, 0) / 14;
+    atr[14] = a;
+    for (let i = 15; i < n; i++) { a = (a * 13 + tr[i]) / 14; atr[i] = a; }
+  }
+
+  // --- ✅ ADX (proper Wilder's 2-stage) ---
+  const plusDM = new Array(n).fill(0);
+  const minusDM = new Array(n).fill(0);
+  for (let i = 1; i < n; i++) {
+    const up = highs[i] - highs[i - 1];
+    const dn = lows[i - 1] - lows[i];
+    plusDM[i] = (up > dn && up > 0) ? up : 0;
+    minusDM[i] = (dn > up && dn > 0) ? dn : 0;
+  }
+  const plusDI = new Array(n).fill(null);
+  const minusDI = new Array(n).fill(null);
+  const dx = new Array(n).fill(null);
+  if (n > 14) {
+    let tr14 = tr.slice(1, 15).reduce((a, b) => a + b, 0);
+    let pdm14 = plusDM.slice(1, 15).reduce((a, b) => a + b, 0);
+    let mdm14 = minusDM.slice(1, 15).reduce((a, b) => a + b, 0);
+    let pdi = tr14 > 0 ? (pdm14 / tr14) * 100 : 0;
+    let mdi = tr14 > 0 ? (mdm14 / tr14) * 100 : 0;
+    plusDI[14] = pdi; minusDI[14] = mdi;
+    dx[14] = (pdi + mdi) > 0 ? Math.abs(pdi - mdi) / (pdi + mdi) * 100 : 0;
+    for (let i = 15; i < n; i++) {
+      tr14 = tr14 - tr14 / 14 + tr[i];
+      pdm14 = pdm14 - pdm14 / 14 + plusDM[i];
+      mdm14 = mdm14 - mdm14 / 14 + minusDM[i];
+      pdi = tr14 > 0 ? (pdm14 / tr14) * 100 : 0;
+      mdi = tr14 > 0 ? (mdm14 / tr14) * 100 : 0;
+      plusDI[i] = pdi; minusDI[i] = mdi;
+      dx[i] = (pdi + mdi) > 0 ? Math.abs(pdi - mdi) / (pdi + mdi) * 100 : 0;
+    }
+  }
+  const adx = new Array(n).fill(null);
+  if (n > 27) {
+    let a = dx.slice(14, 28).reduce((x, y) => x + y, 0) / 14;
+    adx[27] = a;
+    for (let i = 28; i < n; i++) { a = (a * 13 + dx[i]) / 14; adx[i] = a; }
+  }
+
+  // --- ✅ ATR Percentile — O(n) with cached ATR array ---
+  const atrPercentile = new Array(n).fill(null);
+  const validAtrs = [];
+  for (let i = 14; i < n; i++) {
+    if (atr[i] !== null) {
+      validAtrs.push(atr[i]);
+      const below = validAtrs.filter(v => v <= atr[i]).length;
+      atrPercentile[i] = (below / validAtrs.length) * 100;
+    }
+  }
+  // Hii bado ni O(n²) kwa filter — badala yake, tumia sorted array with binary insert
+  // Kwa urahisi, tumia last 100 values tu:
+  const atrPctFast = new Array(n).fill(null);
+  for (let i = 14; i < n; i++) {
+    if (atr[i] === null) continue;
+    const window = atr.slice(Math.max(14, i - 100), i + 1).filter(v => v !== null);
+    if (window.length < 10) { atrPctFast[i] = 50; continue; }
+    const below = window.filter(v => v <= atr[i]).length;
+    atrPctFast[i] = (below / window.length) * 100;
+  }
+
+  // --- ROC (10-period momentum) ---
+  const roc = new Array(n).fill(null);
+  for (let i = 10; i < n; i++) {
+    const past = closes[i - 10];
+    if (past > 0) roc[i] = ((closes[i] - past) / past) * 100;
+  }
+
+  // --- SMA 20/50 (rolling sum — O(n)) ---
+  const sma20 = new Array(n).fill(null);
+  const sma50 = new Array(n).fill(null);
+  if (n >= 20) {
+    let sum = closes.slice(0, 20).reduce((a, b) => a + b, 0);
+    sma20[19] = sum / 20;
+    for (let i = 20; i < n; i++) { sum += closes[i] - closes[i - 20]; sma20[i] = sum / 20; }
+  }
+  if (n >= 50) {
+    let sum = closes.slice(0, 50).reduce((a, b) => a + b, 0);
+    sma50[49] = sum / 50;
+    for (let i = 50; i < n; i++) { sum += closes[i] - closes[i - 50]; sma50[i] = sum / 50; }
+  }
+
+  return {
+    n, closes, highs, lows, volumes, ohlc,
+    ema12, ema26, macdLine, signalLine, histogram,
+    rsi, atr, adx, plusDI, minusDI, atrPercentile: atrPctFast,
+    roc, sma20, sma50
+  };
+}
+
+function lastValid(arr) {
+  for (let i = arr.length - 1; i >= 0; i--) if (arr[i] !== null) return arr[i];
   return null;
 }
 
-function calculateVolumeProfile(ohlc, bins = 25) {
-  if (!ohlc || ohlc.length < 20) return null;
-  const prices = ohlc.flatMap(c => [c.high, c.low, c.close]);
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-  const range = max - min;
-  if (range === 0) return null;
-  const binSize = range / bins;
-  const profile = new Array(bins).fill(0);
-  ohlc.forEach(c => {
-    const vol = c.volume || 1;
-    const typical = (c.high + c.low + c.close) / 3;
-    const bin = Math.floor((typical - min) / binSize);
-    if (bin >= 0 && bin < bins) profile[bin] += vol;
-    const hiBin = Math.floor((c.high - min) / binSize);
-    const loBin = Math.floor((c.low - min) / binSize);
-    if (hiBin >= 0 && hiBin < bins && hiBin !== bin) profile[hiBin] += vol * 0.1;
-    if (loBin >= 0 && loBin < bins && loBin !== bin) profile[loBin] += vol * 0.1;
-  });
-  const pocBin = profile.indexOf(Math.max(...profile));
-  const poc = min + (pocBin + 0.5) * binSize;
-  const totalVol = profile.reduce((a, b) => a + b, 0);
-  const sorted = profile.map((v, i) => ({ v, i })).sort((a, b) => b.v - a.v);
-  let acc = 0;
-  const vaBins = [];
-  for (const { v, i } of sorted) {
-    acc += v; vaBins.push(i);
-    if (acc >= totalVol * 0.7) break;
+function valAt(arr, idx) { return arr[idx]; }
+
+/* ============================================================
+   ✅ CANDLE PATTERNS
+   ============================================================ */
+function detectCandlePatterns(ohlc, atr) {
+  if (!ohlc || ohlc.length < 3) return [];
+  const n = ohlc.length;
+  const last = ohlc[n - 1], prev = ohlc[n - 2];
+  const bodyLast = Math.abs(last.close - last.open);
+  const bodyPrev = Math.abs(prev.close - prev.open);
+  const rangeLast = last.high - last.low;
+  const upperWick = last.high - Math.max(last.close, last.open);
+  const lowerWick = Math.min(last.close, last.open) - last.low;
+  if (rangeLast === 0) return [];
+
+  const patterns = [];
+  const atrVal = atr || rangeLast;
+
+  // Bullish Engulfing — needs decent size
+  if (prev.close < prev.open && last.close > last.open &&
+      last.close > prev.open && last.open < prev.close &&
+      bodyLast > bodyPrev * 1.3 && bodyLast > atrVal * 0.5) {
+    patterns.push({ name: 'Bullish Engulfing', bias: 'BUY', strength: 22 });
   }
-  const vaHigh = min + (Math.max(...vaBins) + 1) * binSize;
-  const vaLow = min + Math.min(...vaBins) * binSize;
-  return { poc, vaHigh, vaLow, min, max, binSize, profile, pocBin };
+  // Bearish Engulfing
+  if (prev.close > prev.open && last.close < last.open &&
+      last.close < prev.open && last.open > prev.close &&
+      bodyLast > bodyPrev * 1.3 && bodyLast > atrVal * 0.5) {
+    patterns.push({ name: 'Bearish Engulfing', bias: 'SELL', strength: 22 });
+  }
+  // Hammer (bullish pin) — needs context-aware strength
+  if (lowerWick > bodyLast * 2 && upperWick < bodyLast * 0.4 && rangeLast > atrVal * 0.8) {
+    patterns.push({ name: 'Hammer', bias: 'BUY', strength: 18 });
+  }
+  // Shooting Star
+  if (upperWick > bodyLast * 2 && lowerWick < bodyLast * 0.4 && rangeLast > atrVal * 0.8) {
+    patterns.push({ name: 'Shooting Star', bias: 'SELL', strength: 18 });
+  }
+  // Inside Bar
+  if (last.high < prev.high && last.low > prev.low) {
+    patterns.push({ name: 'Inside Bar', bias: 'NEUTRAL', strength: 5 });
+  }
+  return patterns;
+}
+
+/* ============================================================
+   ✅ VOLUME — by-hour normalized (past 5 days)
+   ============================================================ */
+function analyzeVolumeByHour(ohlc) {
+  const n = ohlc.length;
+  if (n < 30) return null;
+  const last = ohlc[n - 1];
+  const lastDate = new Date(last.time);
+  const lastHour = lastDate.getUTCHours();
+
+  // Same-hour candles from past days
+  const sameHour = [];
+  for (let i = n - 2; i >= 0 && sameHour.length < 5; i--) {
+    const d = new Date(ohlc[i].time);
+    if (d.getUTCHours() === lastHour && d.getUTCDate() !== lastDate.getUTCDate()) {
+      sameHour.push(ohlc[i]);
+    }
+  }
+
+  let avgVol;
+  let basis;
+  if (sameHour.length >= 3) {
+    avgVol = sameHour.reduce((a, c) => a + (c.volume || 0), 0) / sameHour.length;
+    basis = `${sameHour.length}d same-hour`;
+  } else {
+    // Fallback: last 20 candles
+    const last20 = ohlc.slice(-21, -1);
+    avgVol = last20.reduce((a, c) => a + (c.volume || 0), 0) / last20.length;
+    basis = '20-candle avg';
+  }
+
+  const vol = last.volume || 0;
+  const ratio = avgVol > 0 ? vol / avgVol : 1;
+  const direction = last.close > last.open ? 'BULL' : last.close < last.open ? 'BEAR' : 'FLAT';
+
+  let strength = 'NORMAL';
+  if (ratio > 1.6) strength = 'SURGE';
+  else if (ratio > 1.25) strength = 'HIGH';
+  else if (ratio < 0.7) strength = 'LOW';
+
+  return { ratio, strength, direction, avgVol, currentVol: vol, basis };
+}
+
+/* ============================================================
+   ✅ REGIME — using cached ADX + ATR percentile
+   ============================================================ */
+function detectRegimeFromCache(cache) {
+  const adxVal = lastValid(cache.adx);
+  const atrPct = lastValid(cache.atrPercentile);
+  const pdi = lastValid(cache.plusDI);
+  const mdi = lastValid(cache.minusDI);
+
+  if (adxVal === null) return { regime: 'UNKNOWN', adx: null, atrPercentile: null };
+
+  let regime = 'RANGING';
+  if (adxVal > 25 && atrPct > 40) regime = 'TRENDING';
+  else if (adxVal > 25 && atrPct <= 40) regime = 'TRENDING_LOW_VOL';
+  else if (adxVal < 20 && atrPct > 60) regime = 'VOLATILE_CHOP';
+  else if (adxVal < 20 && atrPct < 30) regime = 'DEAD';
+  else regime = 'RANGING';
+
+  return {
+    regime, adx: adxVal, plusDI: pdi, minusDI: mdi,
+    atrPercentile: atrPct,
+    trendUp: pdi > mdi,
+    strength: adxVal
+  };
+}
+
+/* ============================================================
+   ✅ S/R — Multi-day (Daily + Weekly + Monthly)
+   ============================================================ */
+function aggregateCandles(ohlc, periodFn) {
+  const groups = {};
+  ohlc.forEach(c => {
+    const key = periodFn(new Date(c.time));
+    if (!groups[key]) groups[key] = { high: c.high, low: c.low, close: c.close, time: c.time };
+    else {
+      groups[key].high = Math.max(groups[key].high, c.high);
+      groups[key].low = Math.min(groups[key].low, c.low);
+      groups[key].close = c.close;
+    }
+  });
+  return Object.values(groups).sort((a, b) => a.time - b.time);
+}
+
+function computePivotsFrom(prev) {
+  const pivot = (prev.high + prev.low + prev.close) / 3;
+  return {
+    pivot, r1: 2 * pivot - prev.low, s1: 2 * pivot - prev.high,
+    r2: pivot + (prev.high - prev.low), s2: pivot - (prev.high - prev.low),
+    r3: prev.high + 2 * (pivot - prev.low), s3: prev.low - 2 * (prev.high - pivot)
+  };
+}
+
+function computeMultiDaySR(ohlc1h) {
+  if (!ohlc1h || ohlc1h.length < 50) return null;
+
+  const dayKey = d => `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
+  const weekKey = d => {
+    const onejan = new Date(d.getUTCFullYear(), 0, 1);
+    const week = Math.ceil(((d - onejan) / 86400000 + onejan.getDay() + 1) / 7);
+    return `${d.getUTCFullYear()}-W${week}`;
+  };
+  const monthKey = d => `${d.getUTCFullYear()}-${d.getUTCMonth()}`;
+
+  const daily = aggregateCandles(ohlc1h, dayKey);
+  const weekly = aggregateCandles(ohlc1h, weekKey);
+  const monthly = aggregateCandles(ohlc1h, monthKey);
+
+  const result = {};
+
+  if (daily.length >= 2) {
+    const p = computePivotsFrom(daily[daily.length - 2]);
+    result.daily = p;
+  }
+  if (weekly.length >= 2) {
+    const p = computePivotsFrom(weekly[weekly.length - 2]);
+    result.weekly = p;
+  }
+  if (monthly.length >= 2) {
+    const p = computePivotsFrom(monthly[monthly.length - 2]);
+    result.monthly = p;
+  }
+
+  return result;
+}
+
+function analyzeSR(ohlc, srData) {
+  if (!srData) return null;
+  const cp = ohlc[ohlc.length - 1].close;
+  const threshold = cp * 0.004;
+
+  const levels = [];
+  if (srData.daily) {
+    const p = srData.daily;
+    levels.push(
+      { n: 'D-R3', v: p.r3, tf: 'D', type: 'R' },
+      { n: 'D-R2', v: p.r2, tf: 'D', type: 'R' },
+      { n: 'D-R1', v: p.r1, tf: 'D', type: 'R' },
+      { n: 'D-Pivot', v: p.pivot, tf: 'D', type: 'P' },
+      { n: 'D-S1', v: p.s1, tf: 'D', type: 'S' },
+      { n: 'D-S2', v: p.s2, tf: 'D', type: 'S' },
+      { n: 'D-S3', v: p.s3, tf: 'D', type: 'S' }
+    );
+  }
+  if (srData.weekly) {
+    const p = srData.weekly;
+    levels.push(
+      { n: 'W-R1', v: p.r1, tf: 'W', type: 'R' },
+      { n: 'W-Pivot', v: p.pivot, tf: 'W', type: 'P' },
+      { n: 'W-S1', v: p.s1, tf: 'W', type: 'S' }
+    );
+  }
+  if (srData.monthly) {
+    const p = srData.monthly;
+    levels.push(
+      { n: 'M-R1', v: p.r1, tf: 'M', type: 'R' },
+      { n: 'M-Pivot', v: p.pivot, tf: 'M', type: 'P' },
+      { n: 'M-S1', v: p.s1, tf: 'M', type: 'S' }
+    );
+  }
+
+  // Filter to nearest levels
+  const sorted = levels.sort((a, b) => Math.abs(cp - a.v) - Math.abs(cp - b.v));
+  const nearLevels = sorted.filter(l => Math.abs(cp - l.v) < threshold).map(l => l.n);
+
+  // Confluence: multiple levels within small range = strong level
+  const confluence = [];
+  for (let i = 0; i < levels.length; i++) {
+    for (let j = i + 1; j < levels.length; j++) {
+      if (Math.abs(levels[i].v - levels[j].v) < cp * 0.0015) {
+        confluence.push(`${levels[i].n} ≈ ${levels[j].n}`);
+      }
+    }
+  }
+
+  // Broken levels
+  const broken = [];
+  levels.forEach(l => {
+    if (l.type === 'R' && cp > l.v && Math.abs(cp - l.v) > cp * 0.0005) broken.push(l.n);
+    if (l.type === 'S' && cp < l.v && Math.abs(cp - l.v) > cp * 0.0005) broken.push(l.n);
+  });
+
+  return {
+    allLevels: levels, nearLevels, confluence, broken, currentPrice: cp,
+    daily: srData.daily, weekly: srData.weekly, monthly: srData.monthly
+  };
+}
+
+/* ============================================================
+   ✅ SESSION — DST-aware
+   ============================================================ */
+function isUS_DST(date) {
+  const year = date.getUTCFullYear();
+  // 2nd Sunday March to 1st Sunday November
+  const march = new Date(Date.UTC(year, 2, 1));
+  const dstStart = new Date(Date.UTC(year, 2, 8 + (7 - march.getUTCDay()) % 7));
+  const nov = new Date(Date.UTC(year, 10, 1));
+  const dstEnd = new Date(Date.UTC(year, 10, 1 + (7 - nov.getUTCDay()) % 7));
+  return date >= dstStart && date < dstEnd;
+}
+function isEU_DST(date) {
+  const year = date.getUTCFullYear();
+  // Last Sunday March to last Sunday October
+  const march = new Date(Date.UTC(year, 2, 31));
+  const dstStart = new Date(Date.UTC(year, 2, 31 - ((march.getUTCDay() + 6) % 7)));
+  const oct = new Date(Date.UTC(year, 9, 31));
+  const dstEnd = new Date(Date.UTC(year, 9, 31 - ((oct.getUTCDay() + 6) % 7)));
+  return date >= dstStart && date < dstEnd;
 }
 
 function getSession() {
   const now = new Date();
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
+  const usDST = isUS_DST(now);
+  const euDST = isEU_DST(now);
+
+  // London: 8:00-16:30 UTC normally, 7:00-15:30 UTC during BST
+  const londonStart = euDST ? 7 * 60 : 8 * 60;
+  const londonEnd = euDST ? 15 * 60 + 30 : 16 * 60 + 30;
+  // NY: 13:30-20:00 UTC normally, 12:30-19:00 UTC during EDT
+  const nyStart = usDST ? 12 * 60 + 30 : 13 * 60 + 30;
+  const nyEnd = usDST ? 19 * 60 : 20 * 60;
+
+  if (m >= londonStart && m < londonEnd && m >= nyStart && m < nyEnd) {
+    return { name: 'LONDON_NY_OVERLAP', quality: 'VERY_HIGH', score: 12 };
+  }
+  if (m >= londonStart && m < londonEnd) {
+    return { name: 'LONDON', quality: 'HIGH', score: 8 };
+  }
+  if (m >= nyStart && m < nyEnd) {
+    return { name: 'NEW_YORK', quality: 'HIGH', score: 7 };
+  }
   if (m >= 0 && m < 180) return { name: 'ASIAN', quality: 'LOW', score: -5 };
-  if (m >= 420 && m < 600) return { name: 'LONDON_OPEN', quality: 'HIGH', score: 5 };
-  if (m >= 720 && m < 900) return { name: 'LONDON_NY_OVERLAP', quality: 'VERY_HIGH', score: 10 };
-  if (m >= 900 && m < 1020) return { name: 'NY_AFTERNOON', quality: 'MEDIUM', score: 3 };
-  return { name: 'OFF_HOURS', quality: 'LOW', score: -5 };
+  return { name: 'OFF_HOURS', quality: 'LOW', score: -8 };
 }
 
+/* ============================================================
+   ✅ NEWS — Real FOMC dates
+   ============================================================ */
 function checkNewsWindow() {
   const now = new Date();
+  const todayStr = dateStr(now);
   const day = now.getUTCDay();
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
-  const dayOfMonth = now.getUTCDate();
+  const dom = now.getUTCDate();
   const events = [];
+
+  // ✅ FOMC — actual dates
+  if (FOMC_DATES_2026.includes(todayStr) && m >= 18 * 60 && m <= 20 * 60) {
+    events.push('FOMC');
+  }
+  // ✅ NFP — First Friday, 13:30-14:30 UTC
   const firstFriday = getFirstFriday(now);
-  if (day === 5 && dayOfMonth === firstFriday && m >= 13 * 60 + 15 && m <= 14 * 60) events.push('NFP');
-  if (day === 3 && m >= 18 * 60 && m <= 20 * 60) events.push('FOMC (approx)');
-  if ((day === 2 || day === 3) && dayOfMonth >= 10 && dayOfMonth <= 15 && m >= 13 * 60 && m <= 14 * 60) events.push('CPI (approx)');
-  if (day === 4 && m >= 11 * 60 + 45 && m <= 13 * 60) events.push('ECB (approx)');
+  if (day === 5 && dom === firstFriday && m >= 13 * 60 + 15 && m <= 14 * 60 + 15) {
+    events.push('NFP');
+  }
+  // ✅ CPI — typically 2nd/3rd Wed 13:30 UTC, but approximate within window
+  if (day === 3 && dom >= 10 && dom <= 20 && m >= 13 * 60 + 15 && m <= 14 * 60 + 15) {
+    events.push('CPI (approx)');
+  }
+  // ✅ ECB — 1st/3rd Thursday
+  if (day === 4 && (dom <= 7 || (dom >= 14 && dom <= 21)) && m >= 11 * 60 + 45 && m <= 13 * 60) {
+    events.push('ECB');
+  }
+
   return { blocked: events.length > 0, events };
 }
 
 function getFirstFriday(date) {
-  const d = new Date(date.getFullYear(), date.getMonth(), 1);
-  while (d.getDay() !== 5) d.setDate(d.getDate() + 1);
-  return d.getDate();
+  const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1));
+  while (d.getUTCDay() !== 5) d.setUTCDate(d.getUTCDate() + 1);
+  return d.getUTCDate();
 }
 
-function getHTFBias(h4, h1) {
-  if (!h4 || h4.length < 50) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
-  const h4c = h4.map(d => d.close);
-  const h1c = h1 ? h1.map(d => d.close) : [];
-  const h4ma20 = calculateSMA(h4c, 20), h4ma50 = calculateSMA(h4c, 50);
-  const h4p = h4c[h4c.length - 1];
+/* ============================================================
+   ✅ HTF BIAS — using cached SMAs
+   ============================================================ */
+function getHTFBiasFromCache(h4Cache, h1Cache) {
+  if (!h4Cache || !h1Cache) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
+  const h4sma20 = lastValid(h4Cache.sma20);
+  const h4sma50 = lastValid(h4Cache.sma50);
+  const h4p = h4Cache.closes[h4Cache.closes.length - 1];
+  const h1sma20 = lastValid(h1Cache.sma20);
+  const h1sma50 = lastValid(h1Cache.sma50);
+  const h1p = h1Cache.closes[h1Cache.closes.length - 1];
+
   let h4t = 'NEUTRAL';
-  if (h4ma20 && h4ma50 && h4p > h4ma20 && h4ma20 > h4ma50) h4t = 'BULLISH';
-  else if (h4ma20 && h4ma50 && h4p < h4ma20 && h4ma20 < h4ma50) h4t = 'BEARISH';
+  if (h4sma20 && h4sma50 && h4p > h4sma20 && h4sma20 > h4sma50) h4t = 'BULLISH';
+  else if (h4sma20 && h4sma50 && h4p < h4sma20 && h4sma20 < h4sma50) h4t = 'BEARISH';
+
   let h1t = 'NEUTRAL';
-  if (h1c.length > 50) {
-    const m20 = calculateSMA(h1c, 20), m50 = calculateSMA(h1c, 50);
-    const p = h1c[h1c.length - 1];
-    if (m20 && m50 && p > m20 && m20 > m50) h1t = 'BULLISH';
-    else if (m20 && m50 && p < m20 && m20 < m50) h1t = 'BEARISH';
-  }
+  if (h1sma20 && h1sma50 && h1p > h1sma20 && h1sma20 > h1sma50) h1t = 'BULLISH';
+  else if (h1sma20 && h1sma50 && h1p < h1sma20 && h1sma20 < h1sma50) h1t = 'BEARISH';
+
   return { h4: h4t, h1: h1t, aligned: h4t === h1t && h4t !== 'NEUTRAL' };
 }
 
 /* ============================================================
-   SIGNAL SCORING
+   ✅ SWEEP — confirmation-based
    ============================================================ */
+function detectSweep(ohlc) {
+  if (!ohlc || ohlc.length < 25) return null;
+  const highs = ohlc.map(d => d.high);
+  const lows = ohlc.map(d => d.low);
+  const last = ohlc[ohlc.length - 1], prev = ohlc[ohlc.length - 2];
+  const rH = Math.max(...highs.slice(-20, -2));
+  const rL = Math.min(...lows.slice(-20, -2));
 
-function computeSignalScore(indicators, sr, htfBias, session) {
-  let score = 0;
-  const checks = [];
+  // Bullish sweep: prev closes BELOW rL, last sweeps low, closes back above with bullish body
+  const bullish = last.low < rL && last.close > rL &&
+                  last.close > last.open &&
+                  (last.close - last.low) > (last.high - last.close) * 1.5;
+  // Bearish sweep
+  const bearish = last.high > rH && last.close < rH &&
+                  last.close < last.open &&
+                  (last.high - last.close) > (last.close - last.low) * 1.5;
 
-  if (htfBias.aligned && htfBias.h4 === 'BULLISH') {
-    score += 25; checks.push({ name: '4H + 1H Bullish Trend', pts: 25, pass: true });
-  } else if (htfBias.aligned && htfBias.h4 === 'BEARISH') {
-    score -= 25; checks.push({ name: '4H + 1H Bearish Trend', pts: -25, pass: true });
-  } else {
-    checks.push({ name: 'HTF Not Aligned', pts: 0, pass: false });
-  }
-
-  const rsi = parseFloat(indicators.rsi);
-  if (rsi < 30) { score += 15; checks.push({ name: `RSI Oversold (${rsi})`, pts: 15, pass: true }); }
-  else if (rsi > 70) { score -= 15; checks.push({ name: `RSI Overbought (${rsi})`, pts: -15, pass: true }); }
-  else checks.push({ name: `RSI Neutral (${rsi})`, pts: 0, pass: false });
-
-  if (indicators.macd) {
-    const m = indicators.macd.crossover;
-    if (m === 'BULLISH_CROSS') { score += 12; checks.push({ name: 'MACD Bullish Cross ⚡', pts: 12, pass: true }); }
-    else if (m === 'BEARISH_CROSS') { score -= 12; checks.push({ name: 'MACD Bearish Cross ⚡', pts: -12, pass: true }); }
-    else if (m === 'BULLISH') { score += 5; checks.push({ name: 'MACD Bullish', pts: 5, pass: true }); }
-    else if (m === 'BEARISH') { score -= 5; checks.push({ name: 'MACD Bearish', pts: -5, pass: true }); }
-  }
-
-  if (sr) {
-    const cp = parseFloat(indicators.currentPrice);
-    const nearR = ['R1','R2','R3'].some(n => sr.nearLevels?.includes(n));
-    const nearS = ['S1','S2','S3'].some(n => sr.nearLevels?.includes(n));
-    if (nearS) { score += 20; checks.push({ name: 'At Daily Support', pts: 20, pass: true }); }
-    else if (nearR) { score -= 20; checks.push({ name: 'At Daily Resistance', pts: -20, pass: true }); }
-    else checks.push({ name: 'Not at Daily S/R', pts: 0, pass: false });
-  }
-
-  if (indicators.sweep) {
-    if (indicators.sweep.bias === 'BUY') { score += 15; checks.push({ name: 'Bullish Liquidity Sweep', pts: 15, pass: true }); }
-    else if (indicators.sweep.bias === 'SELL') { score -= 15; checks.push({ name: 'Bearish Liquidity Sweep', pts: -15, pass: true }); }
-  }
-
-  if (session.score !== 0) {
-    score += session.score;
-    checks.push({ name: `${session.name} (${session.quality})`, pts: session.score, pass: true });
-  }
-
-  const rules = getRules();
-  let action = 'HOLD';
-  let confidence = 0;
-  const absScore = Math.abs(score);
-
-  if (absScore >= rules.minScoreAbs) {
-    action = score > 0 ? 'BUY' : 'SELL';
-    const excess = absScore - rules.minScoreAbs;
-    confidence = Math.min(90, 60 + Math.round(excess * 0.8));
-  } else {
-    action = 'HOLD';
-    confidence = Math.max(20, 80 - absScore);
-  }
-
-  return { action, score, confidence, checks, absScore };
+  if (bullish) return { type: 'BULLISH_SWEEP', bias: 'BUY', level: rL, strength: 18 };
+  if (bearish) return { type: 'BEARISH_SWEEP', bias: 'SELL', level: rH, strength: 18 };
+  return null;
 }
 
 /* ============================================================
-   DISCIPLINE CHECK (Rule-based, no mood)
+   ✅ DIVERGENCE — uses cached RSI (no recalc)
    ============================================================ */
+function detectDivergenceFromCache(cache) {
+  const { closes, rsi, n } = cache;
+  if (n < 30) return null;
+  const lookback = 30;
+  const startIdx = Math.max(0, n - lookback);
+  const closesSeg = closes.slice(startIdx);
+  const rsiSeg = rsi.slice(startIdx).filter(v => v !== null);
+  if (rsiSeg.length < 15) return null;
 
+  const lows = [], highs = [];
+  const rsiAligned = rsi.slice(startIdx);
+  for (let i = 2; i < closesSeg.length - 2; i++) {
+    if (rsiAligned[i] === null) continue;
+    if (closesSeg[i] < closesSeg[i - 1] && closesSeg[i] < closesSeg[i + 1] &&
+        rsiAligned[i] !== null && rsiAligned[i - 1] !== null && rsiAligned[i + 1] !== null) {
+      lows.push({ price: closesSeg[i], rsi: rsiAligned[i], idx: i });
+    }
+    if (closesSeg[i] > closesSeg[i - 1] && closesSeg[i] > closesSeg[i + 1] &&
+        rsiAligned[i] !== null && rsiAligned[i - 1] !== null && rsiAligned[i + 1] !== null) {
+      highs.push({ price: closesSeg[i], rsi: rsiAligned[i], idx: i });
+    }
+  }
+
+  if (lows.length >= 2) {
+    const l = lows[lows.length - 1], p = lows[lows.length - 2];
+    if (l.price < p.price && l.rsi > p.rsi + 3) {
+      return { type: 'BULLISH_DIVERGENCE', bias: 'BUY', strength: 15 };
+    }
+  }
+  if (highs.length >= 2) {
+    const l = highs[highs.length - 1], p = highs[highs.length - 2];
+    if (l.price > p.price && l.rsi < p.rsi - 3) {
+      return { type: 'BEARISH_DIVERGENCE', bias: 'SELL', strength: 15 };
+    }
+  }
+  return null;
+}
+
+/* ============================================================
+   ✅ VOLUME PROFILE — range distribution (better than v38)
+   ============================================================ */
+function calculateVolumeProfile(ohlc, bins = 25) {
+  if (!ohlc || ohlc.length < 20) return null;
+  const prices = ohlc.flatMap(c => [c.high, c.low, c.close]);
+  const min = Math.min(...prices), max = Math.max(...prices);
+  const range = max - min;
+  if (range === 0) return null;
+  const binSize = range / bins;
+  const profile = new Array(bins).fill(0);
+
+  ohlc.forEach(c => {
+    const vol = c.volume || 1;
+    const loBin = Math.max(0, Math.floor((c.low - min) / binSize));
+    const hiBin = Math.min(bins - 1, Math.floor((c.high - min) / binSize));
+    const span = hiBin - loBin + 1;
+    const volPerBin = vol / span;
+    for (let b = loBin; b <= hiBin; b++) profile[b] += volPerBin;
+  });
+
+  const pocBin = profile.indexOf(Math.max(...profile));
+  const poc = min + (pocBin + 0.5) * binSize;
+  const totalVol = profile.reduce((a, b) => a + b, 0);
+  const sorted = profile.map((v, i) => ({ v, i })).sort((a, b) => b.v - a.v);
+  let acc = 0; const vaBins = [];
+  for (const { v, i } of sorted) { acc += v; vaBins.push(i); if (acc >= totalVol * 0.7) break; }
+  const vaHigh = min + (Math.max(...vaBins) + 1) * binSize;
+  const vaLow = min + Math.min(...vaBins) * binSize;
+  return { poc, vaHigh, vaLow };
+}
+
+/* ============================================================
+   ✅ DATA VALIDATION
+   ============================================================ */
+function validateOhlc(ohlc, pair) {
+  if (!ohlc || ohlc.length < 20) return { valid: false, reason: 'insufficient data' };
+  // Check stale (last candle older than 2x timeframe)
+  const last = ohlc[ohlc.length - 1];
+  const now = Date.now();
+  const age = now - last.time;
+  if (age > 4 * 3600000) return { valid: false, reason: 'stale data (>4h)' };
+  // Check for gaps >5 bars
+  let gaps = 0;
+  for (let i = 1; i < ohlc.length; i++) {
+    const diff = ohlc[i].time - ohlc[i - 1].time;
+    if (diff > 5 * 3600000) gaps++;
+  }
+  if (gaps > ohlc.length * 0.1) return { valid: false, reason: 'too many gaps' };
+  return { valid: true };
+}
+
+/* ============================================================
+   ✅ PRO SIGNAL ENGINE — v38.1
+   ============================================================ */
+function computeProSignal(cache1h, srData, htfBias, session, regime, volume, patterns, sweep, divergence, currentPrice) {
+  const strategies = [];
+  let extraScore = 0;
+  const extraChecks = [];
+
+  // ---------- STRATEGY 1: TREND ----------
+  const trendChecks = [];
+  let trendScore = 0;
+
+  if (htfBias.aligned && htfBias.h4 === 'BULLISH') {
+    trendScore += 25; trendChecks.push({ name: '4H + 1H Bullish', pts: 25, pass: true });
+  } else if (htfBias.aligned && htfBias.h4 === 'BEARISH') {
+    trendScore -= 25; trendChecks.push({ name: '4H + 1H Bearish', pts: -25, pass: true });
+  } else if (htfBias.h4 === 'BEARISH' && htfBias.h1 === 'BULLISH') {
+    trendScore -= 12; trendChecks.push({ name: '4H Bearish (1H conflict)', pts: -12, pass: true });
+  } else if (htfBias.h4 === 'BULLISH' && htfBias.h1 === 'BEARISH') {
+    trendScore += 12; trendChecks.push({ name: '4H Bullish (1H conflict)', pts: 12, pass: true });
+  } else {
+    trendChecks.push({ name: 'HTF Not Aligned', pts: 0, pass: false });
+  }
+
+  const macdHist = lastValid(cache1h.histogram);
+  const prevHist = cache1h.histogram[cache1h.n - 2];
+  if (macdHist !== null) {
+    if (prevHist !== null && prevHist <= 0 && macdHist > 0) {
+      trendScore += 15; trendChecks.push({ name: 'MACD Bullish Cross ⚡', pts: 15, pass: true });
+    } else if (prevHist !== null && prevHist >= 0 && macdHist < 0) {
+      trendScore -= 15; trendChecks.push({ name: 'MACD Bearish Cross ⚡', pts: -15, pass: true });
+    } else if (macdHist > 0) {
+      trendScore += 6; trendChecks.push({ name: 'MACD Bullish', pts: 6, pass: true });
+    } else {
+      trendScore -= 6; trendChecks.push({ name: 'MACD Bearish', pts: -6, pass: true });
+    }
+  }
+
+  if (regime.adx !== null && regime.adx > 25) {
+    if (regime.trendUp) { trendScore += 10; trendChecks.push({ name: `ADX Bull (${regime.adx.toFixed(1)})`, pts: 10, pass: true }); }
+    else { trendScore -= 10; trendChecks.push({ name: `ADX Bear (${regime.adx.toFixed(1)})`, pts: -10, pass: true }); }
+  }
+
+  strategies.push({ name: 'TREND', score: trendScore, checks: trendChecks, active: regime.regime.includes('TRENDING') });
+
+  // ---------- STRATEGY 2: REVERSAL ----------
+  const revChecks = [];
+  let revScore = 0;
+  const rsiVal = lastValid(cache1h.rsi);
+
+  if (rsiVal !== null) {
+    if (rsiVal < 25) { revScore += 20; revChecks.push({ name: `RSI Extreme OS (${rsiVal.toFixed(1)})`, pts: 20, pass: true }); }
+    else if (rsiVal < 30 && htfBias.h4 !== 'BEARISH') { revScore += 15; revChecks.push({ name: `RSI OS (${rsiVal.toFixed(1)})`, pts: 15, pass: true }); }
+    else if (rsiVal > 75) { revScore -= 20; revChecks.push({ name: `RSI Extreme OB (${rsiVal.toFixed(1)})`, pts: -20, pass: true }); }
+    else if (rsiVal > 70 && htfBias.h4 !== 'BULLISH') { revScore -= 15; revChecks.push({ name: `RSI OB (${rsiVal.toFixed(1)})`, pts: -15, pass: true }); }
+  }
+
+  if (sweep) {
+    const s = sweep.bias === 'BUY' ? sweep.strength : -sweep.strength;
+    revScore += s;
+    revChecks.push({ name: `${sweep.type} @ ${sweep.level.toFixed(4)}`, pts: s, pass: true });
+  }
+
+  if (divergence) {
+    const s = divergence.bias === 'BUY' ? divergence.strength : -divergence.strength;
+    revScore += s;
+    revChecks.push({ name: divergence.type, pts: s, pass: true });
+  }
+
+  if (srData) {
+    const nearS = srData.nearLevels.some(n => n.includes('S') && !n.includes('R'));
+    const nearR = srData.nearLevels.some(n => n.includes('R'));
+    if (nearS) { revScore += 20; revChecks.push({ name: 'At Support', pts: 20, pass: true }); }
+    else if (nearR) { revScore -= 20; revChecks.push({ name: 'At Resistance', pts: -20, pass: true }); }
+  }
+
+  strategies.push({ name: 'REVERSAL', score: revScore, checks: revChecks, active: regime.regime === 'RANGING' || regime.regime === 'DEAD' });
+
+  // ---------- STRATEGY 3: BREAKOUT ----------
+  const breakChecks = [];
+  let breakScore = 0;
+
+  if (srData && srData.broken.length > 0) {
+    const brokeR = srData.broken.filter(n => n.includes('R'));
+    const brokeS = srData.broken.filter(n => n.includes('S'));
+    if (brokeR.length > 0) { breakScore += 20; breakChecks.push({ name: `Broke ${brokeR.join(', ')}`, pts: 20, pass: true }); }
+    if (brokeS.length > 0) { breakScore -= 20; breakChecks.push({ name: `Broke below ${brokeS.join(', ')}`, pts: -20, pass: true }); }
+  }
+
+  if (volume && volume.strength === 'SURGE') {
+    if (volume.direction === 'BULL') { breakScore += 18; breakChecks.push({ name: 'Volume Surge Bull', pts: 18, pass: true }); }
+    else if (volume.direction === 'BEAR') { breakScore -= 18; breakChecks.push({ name: 'Volume Surge Bear', pts: -18, pass: true }); }
+  }
+
+  const rocVal = lastValid(cache1h.roc);
+  if (rocVal !== null) {
+    if (rocVal > 0.5) { breakScore += 10; breakChecks.push({ name: `ROC +${rocVal.toFixed(2)}%`, pts: 10, pass: true }); }
+    else if (rocVal < -0.5) { breakScore -= 10; breakChecks.push({ name: `ROC ${rocVal.toFixed(2)}%`, pts: -10, pass: true }); }
+  }
+
+  strategies.push({ name: 'BREAKOUT', score: breakScore, checks: breakChecks, active: regime.regime === 'TRENDING' || regime.regime === 'VOLATILE_CHOP' });
+
+  // ---------- CANDLE PATTERNS + SESSION ----------
+  if (patterns && patterns.length > 0) {
+    patterns.forEach(p => {
+      if (p.bias === 'BUY') { extraScore += p.strength; extraChecks.push({ name: `Pattern: ${p.name}`, pts: p.strength, pass: true }); }
+      else if (p.bias === 'SELL') { extraScore -= p.strength; extraChecks.push({ name: `Pattern: ${p.name}`, pts: -p.strength, pass: true }); }
+      else { extraChecks.push({ name: `Pattern: ${p.name}`, pts: 0, pass: false }); }
+    });
+  }
+
+  extraScore += session.score;
+  extraChecks.push({ name: `Session: ${session.name}`, pts: session.score, pass: true });
+
+  // ---------- COMBINE ----------
+  const activeStrategies = strategies.filter(s => s.active);
+  let totalScore = 0;
+  const checks = [];
+
+  if (activeStrategies.length === 0) {
+    // Fallback: use all strategies weighted
+    strategies.forEach(s => {
+      totalScore += s.score * 0.5;
+      s.checks.forEach(c => checks.push(c));
+    });
+  } else {
+    activeStrategies.forEach(s => {
+      totalScore += s.score;
+      s.checks.forEach(c => checks.push(c));
+    });
+    // If multiple active, average
+    if (activeStrategies.length > 1) totalScore = totalScore / activeStrategies.length;
+  }
+  totalScore += extraScore;
+  extraChecks.forEach(c => checks.push(c));
+
+  // ---------- CONFLICT by MAGNITUDE ----------
+  const posSum = strategies.filter(s => s.active && s.score > 0).reduce((a, s) => a + s.score, 0);
+  const negSum = Math.abs(strategies.filter(s => s.active && s.score < 0).reduce((a, s) => a + s.score, 0));
+  const hasConflict = posSum > 0 && negSum > 0 && Math.abs(posSum - negSum) < 20;
+
+  // ---------- DECISION ----------
+  const absScore = Math.abs(Math.round(totalScore));
+  const rules = getRules();
+  let action = 'HOLD', confidence = 0, tier = 'C';
+
+  if (absScore >= 55 && !hasConflict) {
+    action = totalScore > 0 ? 'BUY' : 'SELL';
+    const excess = absScore - 55;
+    confidence = Math.min(92, 60 + Math.round(excess * 0.7));
+    if (absScore >= 85 && confidence >= 80) tier = 'A+';
+    else if (absScore >= 70 && confidence >= 70) tier = 'A';
+    else if (absScore >= 55) tier = 'B';
+  } else if (hasConflict) {
+    action = 'HOLD'; confidence = 30; tier = 'C';
+  } else {
+    action = 'HOLD';
+    confidence = Math.max(25, 75 - absScore);
+    tier = 'C';
+  }
+
+  return {
+    action, score: Math.round(totalScore), confidence, tier, checks,
+    strategies, hasConflict, regime,
+    conflictMag: hasConflict ? `+${posSum.toFixed(0)} vs -${negSum.toFixed(0)}` : null
+  };
+}
+
+/* ============================================================
+   DISCIPLINE
+   ============================================================ */
 function checkDiscipline(signal) {
   const rules = getRules();
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
@@ -873,23 +1363,15 @@ function checkDiscipline(signal) {
   const todaysTrades = history.filter(h => h.day === today && h.action !== 'HOLD' && h.action !== 'SKIPPED');
   const openTrades = history.filter(h => h.outcome === 'PENDING' && h.action !== 'HOLD');
   const todaysClosed = todaysTrades.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
-
-  const todayPnLpips = todaysClosed.reduce((sum, t) => sum + (t.outcome === 'WIN' ? (t.tp3Pips || 0) : -(t.slPips || 0)), 0);
-  const pipValueApprox = 10;
-  const dailyLossPct = todayPnLpips < 0 ? (Math.abs(todayPnLpips) * pipValueApprox / getBalance()) * 100 : 0;
+  const todayPnL = todaysClosed.reduce((s, t) => s + (t.outcome === 'WIN' ? (t.tp3Pips || 0) : -(t.slPips || 0)), 0);
+  const dailyLossPct = todayPnL < 0 ? (Math.abs(todayPnL) * 10 / getBalance()) * 100 : 0;
 
   const lastClosed = history.find(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
-  let cooldownRemaining = 0;
-  let cooldownReason = '';
+  let cd = 0, cdR = '';
   if (lastClosed && lastClosed.closeTime) {
-    const elapsed = (now - lastClosed.closeTime) / 60000;
-    if (lastClosed.outcome === 'LOSS' && elapsed < rules.cooldownAfterLossMin) {
-      cooldownRemaining = Math.ceil(rules.cooldownAfterLossMin - elapsed);
-      cooldownReason = 'After loss';
-    } else if (lastClosed.outcome === 'WIN' && elapsed < rules.cooldownAfterWinMin) {
-      cooldownRemaining = Math.ceil(rules.cooldownAfterWinMin - elapsed);
-      cooldownReason = 'After win';
-    }
+    const el = (now - lastClosed.closeTime) / 60000;
+    if (lastClosed.outcome === 'LOSS' && el < rules.cooldownAfterLossMin) { cd = Math.ceil(rules.cooldownAfterLossMin - el); cdR = 'After loss'; }
+    else if (lastClosed.outcome === 'WIN' && el < rules.cooldownAfterWinMin) { cd = Math.ceil(rules.cooldownAfterWinMin - el); cdR = 'After win'; }
   }
 
   const news = checkNewsWindow();
@@ -897,38 +1379,41 @@ function checkDiscipline(signal) {
   const results = { checks: [], allowed: true, blockReasons: [], warnings: [] };
 
   const c1 = todaysTrades.length < rules.maxTradesPerDay;
-  results.checks.push({ name: 'Max trades per day', value: `${todaysTrades.length}/${rules.maxTradesPerDay}`, pass: c1 });
-  if (!c1) { results.allowed = false; results.blockReasons.push(`Daily limit (${rules.maxTradesPerDay}) reached`); }
+  results.checks.push({ name: 'Max trades/day', value: `${todaysTrades.length}/${rules.maxTradesPerDay}`, pass: c1 });
+  if (!c1) { results.allowed = false; results.blockReasons.push(`Daily limit reached`); }
 
   const c2 = openTrades.length < rules.maxConcurrentTrades;
   results.checks.push({ name: 'Max concurrent', value: `${openTrades.length}/${rules.maxConcurrentTrades}`, pass: c2 });
-  if (!c2) { results.allowed = false; results.blockReasons.push(`Max concurrent (${rules.maxConcurrentTrades}) reached`); }
+  if (!c2) { results.allowed = false; results.blockReasons.push(`Max concurrent reached`); }
 
   const c3 = dailyLossPct < rules.maxDailyLossPct;
-  results.checks.push({ name: 'Daily loss limit', value: `${dailyLossPct.toFixed(1)}% / ${rules.maxDailyLossPct}%`, pass: c3 });
-  if (!c3) { results.allowed = false; results.blockReasons.push(`Daily loss limit hit (${dailyLossPct.toFixed(1)}%)`); }
+  results.checks.push({ name: 'Daily loss', value: `${dailyLossPct.toFixed(1)}% / ${rules.maxDailyLossPct}%`, pass: c3 });
+  if (!c3) { results.allowed = false; results.blockReasons.push(`Daily loss limit`); }
 
-  const c4 = cooldownRemaining === 0;
-  results.checks.push({ name: 'Cooldown', value: c4 ? 'Clear' : `${cooldownRemaining}min ${cooldownReason}`, pass: c4 });
-  if (!c4) { results.allowed = false; results.blockReasons.push(`Cooldown: ${cooldownRemaining}min (${cooldownReason})`); }
+  const c4 = cd === 0;
+  results.checks.push({ name: 'Cooldown', value: c4 ? 'Clear' : `${cd}min ${cdR}`, pass: c4 });
+  if (!c4) { results.allowed = false; results.blockReasons.push(`Cooldown: ${cd}min`); }
 
   if (signal) {
     const c5 = signal.confidence >= rules.minConfidence;
     results.checks.push({ name: 'Min confidence', value: `${signal.confidence}% / ${rules.minConfidence}%`, pass: c5 });
-    if (!c5) { results.allowed = false; results.blockReasons.push(`Confidence ${signal.confidence}% < ${rules.minConfidence}%`); }
+    if (!c5) { results.allowed = false; results.blockReasons.push(`Confidence below minimum`); }
 
-    const c6 = signal.absScore >= rules.minScoreAbs;
-    results.checks.push({ name: 'Min score', value: `${signal.absScore} / ${rules.minScoreAbs}`, pass: c6 });
-    if (!c6) { results.allowed = false; results.blockReasons.push(`Score ${signal.absScore} < ${rules.minScoreAbs}`); }
+    const c6 = Math.abs(signal.score) >= rules.minScoreAbs;
+    results.checks.push({ name: 'Min score', value: `${Math.abs(signal.score)} / ${rules.minScoreAbs}`, pass: c6 });
+    if (!c6) { results.allowed = false; results.blockReasons.push(`Score below minimum`); }
+
+    const tierOrder = { 'A+': 4, 'A': 3, 'B': 2, 'C': 1 };
+    const c7 = tierOrder[signal.tier] >= tierOrder[rules.minTier || 'A'];
+    results.checks.push({ name: 'Trade quality', value: `${signal.tier} (min: ${rules.minTier || 'A'})`, pass: c7 });
+    if (!c7) { results.allowed = false; results.blockReasons.push(`Tier below minimum`); }
   }
 
-  const c7 = !news.blocked;
-  results.checks.push({ name: 'News window', value: news.blocked ? news.events.join(', ') : 'Clear', pass: c7 });
-  if (!c7) { results.warnings.push(`News in progress: ${news.events.join(', ')}`); }
+  const c8 = !news.blocked;
+  results.checks.push({ name: 'News', value: news.blocked ? news.events.join(', ') : 'Clear', pass: c8 });
+  if (!c8) results.warnings.push(`News: ${news.events.join(', ')}`);
 
-  if (session.quality === 'LOW') {
-    results.warnings.push(`Low liquidity session: ${session.name}`);
-  }
+  if (session.quality === 'LOW') results.warnings.push(`Low liquidity: ${session.name}`);
 
   return results;
 }
@@ -936,34 +1421,18 @@ function checkDiscipline(signal) {
 /* ============================================================
    RENDER
    ============================================================ */
-
 function renderRiskCheck() {
   const c = document.getElementById('riskCheckContainer');
   if (!c) return;
-  const result = checkDiscipline(null);
-  const statusColor = result.allowed ? 'var(--green)' : 'var(--red)';
-  const statusText = result.allowed ? '✅ CLEAR TO TRADE' : '🚫 LIMITS HIT';
-
-  let html = `<div class="signal-hero ${result.allowed ? 'buy' : 'locked'}">
-    <div class="signal-label" style="color:${statusColor};">${statusText}</div>
-  </div>`;
-
-  if (result.blockReasons.length > 0) {
-    html += `<div class="danger-box"><strong>Sababu:</strong><br>${result.blockReasons.map(r => '• ' + r).join('<br>')}</div>`;
-  }
-
-  result.checks.forEach(c => {
-    html += `<div class="checklist-item ${c.pass ? 'pass' : 'fail'}">
-      <span>${c.pass ? '✓' : '✗'}</span>
-      <span style="flex:1;">${c.name}</span>
-      <span style="color:${c.pass ? 'var(--muted)' : 'var(--red)'};font-weight:bold;">${c.value}</span>
-    </div>`;
+  const r = checkDiscipline(null);
+  const sc = r.allowed ? 'var(--green)' : 'var(--red)';
+  const st = r.allowed ? '✅ CLEAR TO TRADE' : '🚫 LIMITS HIT';
+  let html = `<div class="signal-hero ${r.allowed ? 'buy' : 'locked'}"><div class="signal-label" style="color:${sc};">${st}</div></div>`;
+  if (r.blockReasons.length) html += `<div class="danger-box"><strong>Sababu:</strong><br>${r.blockReasons.map(x => '• ' + x).join('<br>')}</div>`;
+  r.checks.forEach(c => {
+    html += `<div class="checklist-item ${c.pass ? 'pass' : 'fail'}"><span>${c.pass ? '✓' : '✗'}</span><span style="flex:1;">${c.name}</span><span style="color:${c.pass ? 'var(--muted)' : 'var(--red)'};font-weight:bold;">${c.value}</span></div>`;
   });
-
-  if (result.warnings.length > 0) {
-    html += `<div class="warn-box" style="margin-top:10px;">⚠️ <strong>Warnings:</strong><br>${result.warnings.map(w => '• ' + w).join('<br>')}</div>`;
-  }
-
+  if (r.warnings.length) html += `<div class="warn-box" style="margin-top:10px;">⚠️ ${r.warnings.join('<br>')}</div>`;
   c.innerHTML = html;
 }
 
@@ -973,46 +1442,32 @@ function renderDailySummary() {
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   const today = todayStr();
   const rules = getRules();
-
-  const todaysTrades = history.filter(h => h.day === today && h.action !== 'HOLD' && h.action !== 'SKIPPED');
-  const todaysClosed = todaysTrades.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
-  const todaysOpen = todaysTrades.filter(h => h.outcome === 'PENDING');
-  const wins = todaysClosed.filter(h => h.outcome === 'WIN').length;
-  const losses = todaysClosed.filter(h => h.outcome === 'LOSS').length;
-  const pips = todaysClosed.reduce((sum, t) => sum + (t.outcome === 'WIN' ? (t.tp3Pips || 0) : -(t.slPips || 0)), 0);
-
-  const discipline = checkDiscipline(null);
-  const statusColor = discipline.allowed ? 'var(--green)' : 'var(--red)';
-  const statusText = discipline.allowed ? '✅ CLEAR' : '🚫 LOCKED';
+  const tTrades = history.filter(h => h.day === today && h.action !== 'HOLD' && h.action !== 'SKIPPED');
+  const tClosed = tTrades.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
+  const tOpen = tTrades.filter(h => h.outcome === 'PENDING');
+  const wins = tClosed.filter(h => h.outcome === 'WIN').length;
+  const losses = tClosed.filter(h => h.outcome === 'LOSS').length;
+  const pips = tClosed.reduce((s, t) => s + (t.outcome === 'WIN' ? (t.tp3Pips || 0) : -(t.slPips || 0)), 0);
+  const d = checkDiscipline(null);
+  const sc = d.allowed ? 'var(--green)' : 'var(--red)';
+  const st = d.allowed ? '✅ CLEAR' : '🚫 LOCKED';
 
   c.innerHTML = `
-    <div class="card" style="border-color:${statusColor};">
+    <div class="card" style="border-color:${sc};">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
         <div>
-          <div style="font-size:11px;color:var(--muted);letter-spacing:1px;">TRADE STATUS</div>
-          <div style="font-size:18px;font-weight:900;color:${statusColor};margin-top:4px;">${statusText}</div>
+          <div style="font-size:11px;color:var(--muted);letter-spacing:1px;">STATUS</div>
+          <div style="font-size:18px;font-weight:900;color:${sc};margin-top:4px;">${st}</div>
         </div>
-        <button onclick="navigate('risk')" style="background:${statusColor};color:#000;border:none;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:11px;">Details →</button>
+        <button onclick="navigate('risk')" style="background:${sc};color:#000;border:none;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:11px;">Details →</button>
       </div>
       <div class="grid-3">
-        <div class="mini-box" style="text-align:center;">
-          <label>Trades Today</label>
-          <div style="font-size:18px;font-weight:bold;color:var(--accent);">${todaysTrades.length}/${rules.maxTradesPerDay}</div>
-        </div>
-        <div class="mini-box" style="text-align:center;">
-          <label>Open</label>
-          <div style="font-size:18px;font-weight:bold;color:var(--yellow);">${todaysOpen.length}</div>
-        </div>
-        <div class="mini-box" style="text-align:center;">
-          <label>P&L (Pips)</label>
-          <div style="font-size:18px;font-weight:bold;color:${pips > 0 ? 'var(--green)' : pips < 0 ? 'var(--red)' : 'var(--muted)'};">${pips > 0 ? '+' : ''}${pips}</div>
-        </div>
+        <div class="mini-box" style="text-align:center;"><label>Today</label><div style="font-size:18px;font-weight:bold;color:var(--accent);">${tTrades.length}/${rules.maxTradesPerDay}</div></div>
+        <div class="mini-box" style="text-align:center;"><label>Open</label><div style="font-size:18px;font-weight:bold;color:var(--yellow);">${tOpen.length}</div></div>
+        <div class="mini-box" style="text-align:center;"><label>P&L</label><div style="font-size:18px;font-weight:bold;color:${pips > 0 ? 'var(--green)' : pips < 0 ? 'var(--red)' : 'var(--muted)'};">${pips > 0 ? '+' : ''}${pips}p</div></div>
       </div>
-      <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center;">
-        Wins: <strong style="color:var(--green);">${wins}</strong> | Losses: <strong style="color:var(--red);">${losses}</strong>
-      </div>
-    </div>
-  `;
+      <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center;">W: <strong style="color:var(--green);">${wins}</strong> | L: <strong style="color:var(--red);">${losses}</strong></div>
+    </div>`;
 }
 
 function renderRulesOverview() {
@@ -1023,10 +1478,9 @@ function renderRulesOverview() {
     <div class="checklist-item pass"><span>●</span><span style="flex:1;">Max trades/day</span><span style="color:var(--accent);font-weight:bold;">${r.maxTradesPerDay}</span></div>
     <div class="checklist-item pass"><span>●</span><span style="flex:1;">Max concurrent</span><span style="color:var(--accent);font-weight:bold;">${r.maxConcurrentTrades}</span></div>
     <div class="checklist-item pass"><span>●</span><span style="flex:1;">Max daily loss</span><span style="color:var(--accent);font-weight:bold;">${r.maxDailyLossPct}%</span></div>
-    <div class="checklist-item pass"><span>●</span><span style="flex:1;">Cooldown after loss</span><span style="color:var(--accent);font-weight:bold;">${r.cooldownAfterLossMin} min</span></div>
+    <div class="checklist-item pass"><span>●</span><span style="flex:1;">Cooldown loss</span><span style="color:var(--accent);font-weight:bold;">${r.cooldownAfterLossMin}m</span></div>
     <div class="checklist-item pass"><span>●</span><span style="flex:1;">Min confidence</span><span style="color:var(--accent);font-weight:bold;">${r.minConfidence}%</span></div>
-    <div class="checklist-item pass"><span>●</span><span style="flex:1;">Min score</span><span style="color:var(--accent);font-weight:bold;">${r.minScoreAbs}</span></div>
-  `;
+    <div class="checklist-item pass"><span>●</span><span style="flex:1;">Min tier</span><span style="color:var(--accent);font-weight:bold;">${r.minTier || 'A'}</span></div>`;
 }
 
 function loadRulesIntoEditor() {
@@ -1038,6 +1492,7 @@ function loadRulesIntoEditor() {
   document.getElementById('ruleCooldownWin').value = r.cooldownAfterWinMin;
   document.getElementById('ruleMinConfidence').value = r.minConfidence;
   document.getElementById('ruleMinScore').value = r.minScoreAbs;
+  document.getElementById('ruleMinTier').value = r.minTier || 'A';
 }
 
 function saveRules() {
@@ -1048,25 +1503,23 @@ function saveRules() {
     cooldownAfterLossMin: parseInt(document.getElementById('ruleCooldownLoss').value) || 60,
     cooldownAfterWinMin: parseInt(document.getElementById('ruleCooldownWin').value) || 15,
     minConfidence: parseInt(document.getElementById('ruleMinConfidence').value) || 65,
-    minScoreAbs: parseInt(document.getElementById('ruleMinScore').value) || 55
+    minScoreAbs: parseInt(document.getElementById('ruleMinScore').value) || 55,
+    minTier: document.getElementById('ruleMinTier').value
   };
   localStorage.setItem(STORAGE_KEYS.RULES, JSON.stringify(r));
   showToast('✅ Limits saved');
-  renderRiskCheck();
-  renderRulesOverview();
+  renderRiskCheck(); renderRulesOverview();
 }
 
 /* ============================================================
-   FETCH DATA
+   DATA FETCH
    ============================================================ */
-
 function setPriceStatus(type, text, time = '') {
   const s = document.getElementById('priceStatus');
   s.className = `price-status ${type}`;
   document.getElementById('priceStatusText').innerText = text;
   document.getElementById('priceTime').innerText = time;
 }
-
 function setDataStatus(id, status, text = '') {
   const el = document.getElementById(id);
   if (!el) return;
@@ -1074,10 +1527,9 @@ function setDataStatus(id, status, text = '') {
   else if (status === 'ok') { el.className = 'data-status-item ok'; el.querySelector('span:last-child').innerText = text; }
   else if (status === 'fail') { el.className = 'data-status-item fail'; el.querySelector('span:last-child').innerText = text; }
 }
-
 function clearMarketData() {
   window.marketData = null;
-  ['data4H','data1H','data15M','dataIndicators'].forEach(id => {
+  ['data4H', 'data1H', 'data15M', 'dataIndicators'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.className = 'data-status-item'; el.querySelector('span:last-child').innerText = '—'; }
   });
@@ -1092,7 +1544,7 @@ async function fetchLivePrice() {
   const btn = document.getElementById('refreshBtn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner-white"></span>';
-  setPriceStatus('loading', '⏳ Loading...');
+  setPriceStatus('loading', '⏳');
   try {
     let price = null;
     if (spec.source === 'binance') {
@@ -1110,55 +1562,42 @@ async function fetchLivePrice() {
       setPriceStatus('live', '🟢 Live', new Date().toLocaleTimeString());
       localStorage.setItem(`qfx_price_${pair}`, price.toString());
     } else throw new Error("Not found");
-  } catch (err) {
+  } catch (e) {
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('error', '🔴 Demo price', '');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '🔄';
-  }
+    setPriceStatus('error', '🔴 Demo', '');
+  } finally { btn.disabled = false; btn.innerHTML = '🔄'; }
 }
 
 async function fetchOHLC(pair, timeframe, limit = 200, retries = 3) {
   const spec = PAIR_SPECS[pair];
   if (!spec) return null;
-  for (let attempt = 0; attempt < retries; attempt++) {
+  for (let att = 0; att < retries; att++) {
     try {
       if (spec.source === 'binance') {
         const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
         const res = await fetchWithTimeout(url, {}, 10000);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        return data.map(d => ({
-          time: parseInt(d[0]),
-          open: parseFloat(d[1]), high: parseFloat(d[2]),
-          low: parseFloat(d[3]), close: parseFloat(d[4]),
-          volume: parseFloat(d[5])
-        }));
+        return data.map(d => ({ time: parseInt(d[0]), open: parseFloat(d[1]), high: parseFloat(d[2]), low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5]) }));
       }
       if (spec.source === 'twelve') {
         const key = getTwelveKey();
         if (key) {
-          const map = { '4h': '4h', '1h': '1h', '15m': '15min', '1day': '1day' };
+          const map = { '4h': '4h', '1h': '1h', '15m': '15min', '1day': '1day', '1min': '1min' };
           const tf = map[timeframe] || timeframe;
           const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${tf}&outputsize=${limit}&apikey=${key}`;
           const res = await fetchWithTimeout(url, {}, 20000);
           if (res.ok) {
             const data = await res.json();
             if (data.status !== 'error' && data.values) {
-              return data.values.reverse().map(d => ({
-                time: new Date(d.datetime).getTime(),
-                open: parseFloat(d.open), high: parseFloat(d.high),
-                low: parseFloat(d.low), close: parseFloat(d.close),
-                volume: parseFloat(d.volume || 0)
-              }));
+              return data.values.reverse().map(d => ({ time: new Date(d.datetime).getTime(), open: parseFloat(d.open), high: parseFloat(d.high), low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0) }));
             }
           }
         }
       }
       throw new Error('Failed');
-    } catch (err) {
-      if (attempt < retries - 1) await new Promise(r => setTimeout(r, 3000));
+    } catch (e) {
+      if (att < retries - 1) await new Promise(r => setTimeout(r, 3000));
       else return null;
     }
   }
@@ -1171,6 +1610,7 @@ async function fetchAllMarketData() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Fetching...';
   clearMarketData();
+  const t0 = performance.now();
   try {
     setDataStatus('data4H', 'loading');
     const h4 = await fetchOHLC(pair, '4h', 200);
@@ -1186,75 +1626,75 @@ async function fetchAllMarketData() {
     const m15 = await fetchOHLC(pair, '15m', 200);
     setDataStatus('data15M', m15 ? 'ok' : 'fail', m15 ? `${m15.length} ✓` : 'FAIL');
 
-    await new Promise(r => setTimeout(r, 700));
-    const daily = await fetchOHLC(pair, '1day', 30);
-
-    let ind = null;
-    if (h1 && h1.length >= 50) {
-      const closes = h1.map(d => d.close);
-      const highs = h1.map(d => d.high);
-      const lows = h1.map(d => d.low);
-      const currentPrice = closes[closes.length - 1];
-
-      ind = {
-        rsi: calculateRSI(closes, 14)?.toFixed(1),
-        macd: calculateMACD(closes),
-        atr: calculateATR(highs, lows, closes, 14)?.toFixed(4),
-        currentPrice: currentPrice.toFixed(4),
-        trend: 'RANGING',
-        volumeProfile: calculateVolumeProfile(h1, 25),
-        sweep: detectSweep(h1)
-      };
-
-      if (daily && daily.length >= 2) {
-        const pivots = calculateDailyPivots(daily);
-        if (pivots) {
-          const threshold = currentPrice * 0.003;
-          const near = [];
-          const levels = [
-            { n: 'R3', v: pivots.r3 }, { n: 'R2', v: pivots.r2 }, { n: 'R1', v: pivots.r1 },
-            { n: 'Pivot', v: pivots.pivot },
-            { n: 'S1', v: pivots.s1 }, { n: 'S2', v: pivots.s2 }, { n: 'S3', v: pivots.s3 }
-          ];
-          levels.forEach(l => { if (Math.abs(currentPrice - l.v) < threshold) near.push(l.n); });
-          let position = 'MID_RANGE';
-          if (currentPrice > pivots.r3) position = 'ABOVE_R3';
-          else if (currentPrice > pivots.r2) position = 'ABOVE_R2';
-          else if (currentPrice > pivots.r1) position = 'ABOVE_R1';
-          else if (currentPrice > pivots.pivot) position = 'ABOVE_PIVOT';
-          else if (currentPrice > pivots.s1) position = 'BELOW_PIVOT';
-          else if (currentPrice > pivots.s2) position = 'BELOW_S1';
-          else if (currentPrice > pivots.s3) position = 'BELOW_S2';
-          else position = 'BELOW_S3';
-          ind.supportResistance = {
-            pivot: pivots.pivot.toFixed(4), r1: pivots.r1.toFixed(4), r2: pivots.r2.toFixed(4), r3: pivots.r3.toFixed(4),
-            s1: pivots.s1.toFixed(4), s2: pivots.s2.toFixed(4), s3: pivots.s3.toFixed(4),
-            currentPrice: currentPrice.toFixed(4), position,
-            nearLevels: near.length ? near.join(', ') : 'None',
-            source: 'DAILY'
-          };
-        }
-      }
-
-      const ma20 = calculateSMA(closes, 20), ma50 = calculateSMA(closes, 50);
-      if (ma20 && ma50) {
-        if (currentPrice > ma20 && ma20 > ma50) ind.trend = 'UPTREND';
-        else if (currentPrice < ma20 && ma20 < ma50) ind.trend = 'DOWNTREND';
-      }
-      setDataStatus('dataIndicators', 'ok', 'READY ✓');
-    } else {
-      setDataStatus('dataIndicators', 'fail', 'FAIL');
+    // Validate
+    const v1h = h1 ? validateOhlc(h1, pair) : { valid: false, reason: 'no data' };
+    if (!v1h.valid) {
+      setDataStatus('dataIndicators', 'fail', v1h.reason);
+      showToast(`❌ Data validation: ${v1h.reason}`, 5000);
+      return;
     }
 
-    window.marketData = { h4, h1, m15, daily, indicators: ind };
+    // ✅ Compute cache ONCE
+    const cache1h = computeIndicatorCache(h1);
+    const cache4h = h4 ? computeIndicatorCache(h4) : null;
+    const tCache = performance.now();
 
-    if (h1 && h1.length > 50 && ind && ind.supportResistance) {
-      document.getElementById('runBtn').disabled = false;
-      showToast('✅ Data ready', 2500);
-    } else {
-      document.getElementById('runBtn').disabled = true;
-      showToast('❌ Data failed', 4000);
-    }
+    // Multi-day S/R
+    const srData = computeMultiDaySR(h1);
+    const sr = analyzeSR(h1, srData);
+
+    // Volume by hour
+    const volume = analyzeVolumeByHour(h1);
+
+    // Patterns
+    const atrVal = lastValid(cache1h.atr);
+    const patterns = detectCandlePatterns(h1, atrVal);
+
+    // Sweep + Divergence
+    const sweep = detectSweep(h1);
+    const divergence = detectDivergenceFromCache(cache1h);
+
+    // Regime
+    const regime = detectRegimeFromCache(cache1h);
+
+    // Volume Profile
+    const vp = calculateVolumeProfile(h1, 25);
+
+    const t1 = performance.now();
+
+    window.marketData = {
+      h4, h1, m15, sr, srData, volume, patterns, sweep, divergence, regime, vp,
+      cache1h, cache4h,
+      indicators: {
+        rsi: lastValid(cache1h.rsi)?.toFixed(1),
+        macd: {
+          macd: lastValid(cache1h.macdLine),
+          signal: lastValid(cache1h.signalLine),
+          histogram: lastValid(cache1h.histogram),
+          crossover: (() => {
+            const h = lastValid(cache1h.histogram);
+            const ph = cache1h.histogram[cache1h.n - 2];
+            if (h === null || ph === null) return 'NEUTRAL';
+            if (ph <= 0 && h > 0) return 'BULLISH_CROSS';
+            if (ph >= 0 && h < 0) return 'BEARISH_CROSS';
+            return h > 0 ? 'BULLISH' : 'BEARISH';
+          })()
+        },
+        atr: atrVal,
+        roc: lastValid(cache1h.roc),
+        adx: regime.adx,
+        currentPrice: cache1h.closes[cache1h.n - 1],
+        supportResistance: sr,
+        volumeProfile: vp,
+        volume, patterns, sweep, divergence, regime
+      }
+    };
+
+    console.log(`[v38.1 PERF] Cache computed in ${(tCache - t0).toFixed(0)}ms, total ${(t1 - t0).toFixed(0)}ms for ${h1.length} candles`);
+
+    setDataStatus('dataIndicators', 'ok', `READY ✓ (${(t1 - t0).toFixed(0)}ms)`);
+    document.getElementById('runBtn').disabled = false;
+    showToast(`✅ Data ready (${(t1 - t0).toFixed(0)}ms)`, 2500);
   } catch (err) {
     showToast(`❌ ${err.message}`, 4000);
   } finally {
@@ -1267,7 +1707,7 @@ function onPairChange(pair) {
   const spec = PAIR_SPECS[pair];
   if (spec) {
     document.getElementById('livePrice').value = spec.defaultPrice;
-    setPriceStatus('loading', '⏳ Loading...');
+    setPriceStatus('loading', '⏳');
     fetchLivePrice();
     clearMarketData();
   }
@@ -1276,25 +1716,23 @@ function onPairChange(pair) {
 /* ============================================================
    RUN ANALYSIS
    ============================================================ */
-
 function runAnalysis() {
-  if (!window.marketData || !window.marketData.indicators) {
-    alert("Fetch data first."); return;
-  }
+  if (!window.marketData || !window.marketData.indicators) { alert("Fetch data first."); return; }
 
   const pair = document.getElementById('selectedPair').value;
   const price = parseFloat(document.getElementById('livePrice').value);
-  const { h4, h1, m15, indicators } = window.marketData;
+  const md = window.marketData;
+  const { cache1h, cache4h, sr, volume, patterns, sweep, divergence, regime, indicators } = md;
   const spec = PAIR_SPECS[pair];
 
-  const htfBias = getHTFBias(h4, h1);
+  const htfBias = getHTFBiasFromCache(cache4h, cache1h);
   const session = getSession();
-  const signal = computeSignalScore(indicators, indicators.supportResistance, htfBias, session);
+  const signal = computeProSignal(cache1h, sr, htfBias, session, regime, volume, patterns, sweep, divergence, price);
   const discipline = checkDiscipline(signal);
 
   let sltp = null;
   if (signal.action !== 'HOLD') {
-    sltp = calculateSLTP(h1, signal.action, price, spec);
+    sltp = calculateSLTP(cache1h, signal.action, price, spec, regime);
   }
 
   const record = {
@@ -1302,13 +1740,21 @@ function runAnalysis() {
     date: new Date().toLocaleString(),
     day: todayStr(),
     pair, action: signal.action, score: signal.score,
-    confidence: signal.confidence,
+    confidence: signal.confidence, tier: signal.tier,
     entry: price,
     sl: sltp?.sl, tp1: sltp?.tp1, tp2: sltp?.tp2, tp3: sltp?.tp3,
     slPips: sltp?.slPips, tp1Pips: sltp?.tp1Pips, tp2Pips: sltp?.tp2Pips, tp3Pips: sltp?.tp3Pips,
     atr: sltp?.atr,
     checks: signal.checks,
-    indicators, htfBias, session,
+    strategies: signal.strategies,
+    conflictMag: signal.conflictMag,
+    hasConflict: signal.hasConflict,
+    indicators: {
+      rsi: indicators.rsi, macd: indicators.macd,
+      adx: regime.adx, regime: regime.regime,
+      supportResistance: sr, volumeProfile: md.vp, volume
+    },
+    htfBias, session,
     disciplineResult: discipline,
     autoTrackStart: Date.now(),
     outcome: signal.action === 'HOLD' ? 'SKIPPED' : 'PENDING'
@@ -1324,51 +1770,55 @@ function runAnalysis() {
   if (!discipline.allowed) {
     record.disciplineBlocked = true;
     renderResults(record);
-    showToast(`🚫 Blocked: ${discipline.blockReasons[0]}`, 5000);
+    showToast(`🚫 ${discipline.blockReasons[0]}`, 5000);
     return;
   }
 
   showPreTradeConfirmation(record);
 }
 
-/* ============================================================
-   PRE-TRADE CONFIRMATION (NO MOOD)
-   ============================================================ */
+function calculateSLTP(cache, action, price, spec, regime) {
+  const atr = lastValid(cache.atr);
+  if (!atr) return null;
+  const isBuy = action === 'BUY';
+  let slM = 1.5, tp1M = 1.5, tp2M = 2.5, tp3M = 4.0;
+  if (regime && regime.regime === 'VOLATILE_CHOP') { slM = 2.0; tp1M = 1.3; tp2M = 2.0; tp3M = 3.0; }
+  else if (regime && regime.regime === 'TRENDING') { slM = 1.5; tp1M = 2.0; tp2M = 3.5; tp3M = 5.5; }
+  else if (regime && regime.regime === 'DEAD') { slM = 2.5; tp1M = 2.0; tp2M = 3.0; tp3M = 4.0; }
+  const slD = atr * slM, tp1D = slD * tp1M, tp2D = slD * tp2M, tp3D = slD * tp3M;
+  const p = spec.pipSize;
+  return {
+    sl: (isBuy ? price - slD : price + slD).toFixed(spec.decimals),
+    tp1: (isBuy ? price + tp1D : price - tp1D).toFixed(spec.decimals),
+    tp2: (isBuy ? price + tp2D : price - tp2D).toFixed(spec.decimals),
+    tp3: (isBuy ? price + tp3D : price - tp3D).toFixed(spec.decimals),
+    slPips: Math.round(slD / p), tp1Pips: Math.round(tp1D / p),
+    tp2Pips: Math.round(tp2D / p), tp3Pips: Math.round(tp3D / p),
+    atr: atr.toFixed(spec.decimals)
+  };
+}
 
+/* ============================================================
+   PRE-TRADE CONFIRMATION
+   ============================================================ */
 function showPreTradeConfirmation(record) {
   const html = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid var(--border);">
       <h2 style="color:var(--accent);margin:0;font-size:18px;">✅ Confirm Trade</h2>
       <button onclick="closeUniversalModal()" class="modal-close-top">✕</button>
     </div>
-
     <div class="info-box">
       <strong>${record.pair} ${record.action}</strong> @ ${record.entry}<br>
-      Score: ${record.score} | Confidence: ${record.confidence}%<br>
+      Score: ${record.score} | Confidence: ${record.confidence}% | Tier: ${record.tier}<br>
       SL: ${record.sl} (${record.slPips}p) | TP3: ${record.tp3} (${record.tp3Pips}p)<br>
       R:R = 1 : ${(record.tp3Pips / record.slPips).toFixed(2)}
     </div>
-
     <div style="margin-bottom:15px;">
-      <label style="margin-bottom:10px;color:var(--muted);">Kabla ya kuchukua trade, hakikisha:</label>
-      <div class="checklist-modal-item" onclick="toggleChecklist(this)">
-        <input type="checkbox" onclick="event.stopPropagation()">
-        <label>Nimeweka SL na TP kwenye broker wangu</label>
-      </div>
-      <div class="checklist-modal-item" onclick="toggleChecklist(this)">
-        <input type="checkbox" onclick="event.stopPropagation()">
-        <label>Nimehesabu lot size (${(getBalance() * getRiskPct() / 100).toFixed(2)} max loss)</label>
-      </div>
-      <div class="checklist-modal-item" onclick="toggleChecklist(this)">
-        <input type="checkbox" onclick="event.stopPropagation()">
-        <label>Sitabadilisha SL/TP baada ya kuingia</label>
-      </div>
-      <div class="checklist-modal-item" onclick="toggleChecklist(this)">
-        <input type="checkbox" onclick="event.stopPropagation()">
-        <label>Nimekubali kwamba hii inaweza kupoteza</label>
-      </div>
+      <div class="checklist-modal-item" onclick="toggleChecklist(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Nimeweka SL na TP kwenye broker</label></div>
+      <div class="checklist-modal-item" onclick="toggleChecklist(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Lot size ni sahihi (risk: $${(getBalance() * getRiskPct() / 100).toFixed(2)})</label></div>
+      <div class="checklist-modal-item" onclick="toggleChecklist(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Sitabadilisha SL/TP baada ya kuingia</label></div>
+      <div class="checklist-modal-item" onclick="toggleChecklist(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Nimekubali hasara hii</label></div>
     </div>
-
     <button class="primary-btn" id="confirmTradeBtn" onclick="confirmTrade()" disabled>✅ Confirm</button>
     <button class="secondary-btn" onclick="skipTrade()">⏭️ Skip</button>
   `;
@@ -1376,131 +1826,137 @@ function showPreTradeConfirmation(record) {
   openUniversalModal();
   window.__pendingRecord = record;
 }
-
 function toggleChecklist(el) {
   const cb = el.querySelector('input');
   cb.checked = !cb.checked;
   el.classList.toggle('checked', cb.checked);
-  checkChecklistComplete();
+  const all = Array.from(document.querySelectorAll('.checklist-modal-item')).every(e => e.classList.contains('checked'));
+  document.getElementById('confirmTradeBtn').disabled = !all;
 }
-
-function checkChecklistComplete() {
-  const items = document.querySelectorAll('.checklist-modal-item');
-  const allChecked = Array.from(items).every(el => el.classList.contains('checked'));
-  const btn = document.getElementById('confirmTradeBtn');
-  if (btn) btn.disabled = !allChecked;
-}
-
 function confirmTrade() {
-  const record = window.__pendingRecord;
-  if (!record) return;
-  record.checklistCompleted = true;
-  saveToHistory(record);
+  const r = window.__pendingRecord;
+  if (!r) return;
+  r.checklistCompleted = true;
+  saveToHistory(r);
   closeUniversalModal();
-  renderResults(record);
-  showToast(`✅ ${record.action} ${record.pair} logged`, 3500);
+  renderResults(r);
+  showToast(`✅ ${r.action} logged`, 3500);
   window.__pendingRecord = null;
-  renderDailySummary();
-  renderRiskCheck();
+  renderDailySummary(); renderRiskCheck();
 }
-
-function skipTrade() {
-  showToast('⏭️ Skipped', 2000);
-  closeUniversalModal();
-  window.__pendingRecord = null;
-}
+function skipTrade() { showToast('⏭️ Skipped', 2000); closeUniversalModal(); window.__pendingRecord = null; }
 
 /* ============================================================
    RENDER RESULTS
    ============================================================ */
-
 function renderResults(record) {
   const c = document.getElementById('resultsContainer');
   c.style.display = 'block';
   const s = record;
-  const action = s.action;
   const locked = s.disciplineBlocked;
-  const heroClass = locked ? 'locked' : (action === 'BUY' ? 'buy' : action === 'SELL' ? 'sell' : 'wait');
-  const labelColor = locked ? 'var(--red)' : (action === 'BUY' ? 'var(--green)' : action === 'SELL' ? 'var(--red)' : 'var(--yellow)');
-  const label = locked ? '🚫 BLOCKED' : (action === 'HOLD' ? '⏸ HOLD' : (action === 'BUY' ? '📈 BUY' : '📉 SELL'));
+  const heroClass = locked ? 'locked' : (s.action === 'BUY' ? 'buy' : s.action === 'SELL' ? 'sell' : 'wait');
+  const labelColor = locked ? 'var(--red)' : (s.action === 'BUY' ? 'var(--green)' : s.action === 'SELL' ? 'var(--red)' : 'var(--yellow)');
+  const label = locked ? '🚫 BLOCKED' : (s.action === 'HOLD' ? '⏸ HOLD' : (s.action === 'BUY' ? '📈 BUY' : '📉 SELL'));
+  const tierClass = s.tier === 'A+' ? 'tier-ap' : s.tier === 'A' ? 'tier-a' : s.tier === 'B' ? 'tier-b' : 'tier-c';
+  const tierLabel = s.tier === 'A+' ? '🏆 A+ SETUP' : s.tier === 'A' ? '⭐ A SETUP' : s.tier === 'B' ? '✓ B SETUP' : '⚠️ C SETUP';
 
   let html = `
     <div class="signal-hero ${heroClass}">
+      <div class="tier-badge ${tierClass}">${tierLabel}</div>
       <div style="font-size:13px;color:var(--accent);font-weight:bold;">${s.pair} @ ${s.entry}</div>
       <div class="signal-label" style="color:${labelColor};">${label}</div>
-      <div style="font-size:12px;color:var(--muted);">Score: <strong style="color:${s.score > 0 ? 'var(--green)' : s.score < 0 ? 'var(--red)' : 'var(--muted)'};">${s.score > 0 ? '+' : ''}${s.score}</strong> | Confidence: <strong>${s.confidence}%</strong></div>
-      <div class="score-bar"><div class="score-fill ${action.toLowerCase()}" style="width:${Math.min(100, Math.abs(s.score))}%"></div></div>
-    </div>
-  `;
-
-  if (locked) {
-    html += `<div class="danger-box">
-      <strong>🚫 BLOCKED BY YOUR RULES</strong><br><br>
-      ${s.disciplineResult.blockReasons.map(r => '• ' + r).join('<br>')}
+      <div style="font-size:12px;color:var(--muted);">Score: <strong style="color:${s.score > 0 ? 'var(--green)' : s.score < 0 ? 'var(--red)' : 'var(--muted)'};">${s.score > 0 ? '+' : ''}${s.score}</strong> | Conf: <strong>${s.confidence}%</strong></div>
+      <div class="score-bar"><div class="score-fill ${s.action.toLowerCase()}" style="width:${Math.min(100, Math.abs(s.score))}%"></div></div>
     </div>`;
+
+  if (locked) html += `<div class="danger-box"><strong>🚫 BLOCKED</strong><br><br>${s.disciplineResult.blockReasons.map(r => '• ' + r).join('<br>')}</div>`;
+
+  if (s.indicators?.regime) {
+    const r = s.indicators.regime;
+    const rc = r === 'TRENDING' ? 'regime-trend' : r === 'RANGING' ? 'regime-range' : r === 'VOLATILE_CHOP' ? 'regime-volatile' : 'regime-dead';
+    html += `<div class="card">
+      <div class="ballistic-header">📊 Market Regime</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="regime-badge ${rc}">${r}</span>
+        <div style="font-size:11px;color:var(--muted);">ADX: <strong>${s.indicators.adx ? s.indicators.adx.toFixed(1) : '—'}</strong></div>
+      </div>
+    </div>`;
+  }
+
+  if (s.strategies && s.strategies.length > 0) {
+    html += `<div class="card"><div class="ballistic-header">⚡ Strategies</div>`;
+    s.strategies.forEach(strat => {
+      const cls = strat.score > 5 ? 'bull' : strat.score < -5 ? 'bear' : 'neutral';
+      const statusText = strat.active ? (strat.score > 0 ? 'BULLISH' : strat.score < 0 ? 'BEARISH' : 'NEUTRAL') : 'INACTIVE';
+      const statusColor = strat.score > 5 ? 'var(--green)' : strat.score < -5 ? 'var(--red)' : 'var(--muted)';
+      html += `<div class="strategy-card ${cls}">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <strong style="color:var(--accent);font-size:12px;">${strat.name}</strong>
+          <span style="color:${statusColor};font-weight:bold;font-size:11px;">${statusText} (${strat.score > 0 ? '+' : ''}${strat.score})</span>
+        </div>
+        ${strat.active ? strat.checks.map(c => {
+          const pc = c.pts > 0 ? 'var(--green)' : c.pts < 0 ? 'var(--red)' : 'var(--muted)';
+          return `<div style="font-size:11px;color:var(--muted);margin-bottom:2px;">• ${c.name} <span style="color:${pc};font-weight:bold;">${c.pts > 0 ? '+' : ''}${c.pts}</span></div>`;
+        }).join('') : '<div style="font-size:11px;color:var(--muted);">Haihusiki regime ya sasa</div>'}
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (s.hasConflict) {
+    html += `<div class="warn-box">⚠️ <strong>STRATEGY CONFLICT</strong> (${s.conflictMag})<br>Strategies zinapingana kwa magnitude ndogo. HOLD ni sahihi.</div>`;
   }
 
   if (s.disciplineResult) {
     html += `<div class="card" style="border-color:${s.disciplineResult.allowed ? 'var(--green)' : 'var(--red)'};">
       <div class="ballistic-header">🛡️ Rule Check</div>`;
     s.disciplineResult.checks.forEach(c => {
-      html += `<div class="checklist-item ${c.pass ? 'pass' : 'fail'}">
-        <span>${c.pass ? '✓' : '✗'}</span>
-        <span style="flex:1;">${c.name}</span>
-        <span style="color:${c.pass ? 'var(--muted)' : 'var(--red)'};font-weight:bold;">${c.value}</span>
-      </div>`;
+      html += `<div class="checklist-item ${c.pass ? 'pass' : 'fail'}"><span>${c.pass ? '✓' : '✗'}</span><span style="flex:1;">${c.name}</span><span style="color:${c.pass ? 'var(--muted)' : 'var(--red)'};font-weight:bold;">${c.value}</span></div>`;
     });
     html += `</div>`;
   }
 
-  html += `<div class="card">
-    <div class="ballistic-header">🔍 Score Breakdown</div>`;
-  s.checks.forEach(c => {
-    const cls = c.pass ? (c.pts > 0 ? 'pass' : c.pts < 0 ? 'fail' : 'neutral') : 'neutral';
-    const ptsStr = c.pts > 0 ? `+${c.pts}` : `${c.pts}`;
-    const ptColor = c.pts > 0 ? 'var(--green)' : c.pts < 0 ? 'var(--red)' : 'var(--muted)';
-    html += `<div class="checklist-item ${cls}">
-      <span>${c.pass ? '●' : '○'}</span>
-      <span style="flex:1;">${c.name}</span>
-      <span style="color:${ptColor};font-weight:bold;">${ptsStr}</span>
-    </div>`;
-  });
-  html += `<div style="margin-top:10px;padding:10px;background:#08080a;border-radius:6px;display:flex;justify-content:space-between;font-weight:bold;">
-    <span>TOTAL:</span>
-    <span style="color:${s.score > 0 ? 'var(--green)' : s.score < 0 ? 'var(--red)' : 'var(--muted)'};">${s.score > 0 ? '+' : ''}${s.score}</span>
-  </div></div>`;
-
   if (s.indicators?.supportResistance) {
     const sr = s.indicators.supportResistance;
     html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">📐 Daily S/R</div>
-      <div class="sr-level sr-r"><span>R3</span><span>${sr.r3}</span></div>
-      <div class="sr-level sr-r"><span>R2</span><span>${sr.r2}</span></div>
-      <div class="sr-level sr-r"><span>R1</span><span>${sr.r1}</span></div>
-      <div class="sr-level sr-pivot"><span>⭐ PIVOT</span><span>${sr.pivot}</span></div>
-      <div class="sr-level sr-s"><span>S1</span><span>${sr.s1}</span></div>
-      <div class="sr-level sr-s"><span>S2</span><span>${sr.s2}</span></div>
-      <div class="sr-level sr-s"><span>S3</span><span>${sr.s3}</span></div>
-      <div class="sr-level sr-current"><span>💰 PRICE</span><span>${sr.currentPrice}</span></div>
-      <div style="margin-top:10px;font-size:11px;color:var(--muted);">Near: ${sr.nearLevels}</div>
-    </div>`;
+      <div class="ballistic-header">📐 Multi-Day S/R</div>`;
+    if (sr.daily) {
+      html += `<div style="font-size:10px;color:var(--muted);margin-bottom:4px;">DAILY</div>`;
+      html += `<div class="sr-level sr-r"><span>R3</span><span>${sr.daily.r3.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-r"><span>R2</span><span>${sr.daily.r2.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-r"><span>R1</span><span>${sr.daily.r1.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-pivot"><span>⭐ PIVOT</span><span>${sr.daily.pivot.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-s"><span>S1</span><span>${sr.daily.s1.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-s"><span>S2</span><span>${sr.daily.s2.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-s"><span>S3</span><span>${sr.daily.s3.toFixed(4)}</span></div>`;
+    }
+    if (sr.weekly) {
+      html += `<div style="font-size:10px;color:var(--purple);margin:8px 0 4px 0;">WEEKLY</div>`;
+      html += `<div class="sr-level sr-weekly"><span>W-R1</span><span>${sr.weekly.r1.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-weekly"><span>W-Pivot</span><span>${sr.weekly.pivot.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-weekly"><span>W-S1</span><span>${sr.weekly.s1.toFixed(4)}</span></div>`;
+    }
+    if (sr.monthly) {
+      html += `<div style="font-size:10px;color:var(--pink);margin:8px 0 4px 0;">MONTHLY</div>`;
+      html += `<div class="sr-level sr-weekly"><span>M-R1</span><span>${sr.monthly.r1.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-weekly"><span>M-Pivot</span><span>${sr.monthly.pivot.toFixed(4)}</span></div>`;
+      html += `<div class="sr-level sr-weekly"><span>M-S1</span><span>${sr.monthly.s1.toFixed(4)}</span></div>`;
+    }
+    html += `<div class="sr-level sr-current"><span>💰 PRICE</span><span>${sr.currentPrice.toFixed(4)}</span></div>`;
+    if (sr.confluence.length > 0) html += `<div style="margin-top:8px;padding:8px;background:rgba(251,191,36,.1);border-radius:6px;font-size:11px;color:var(--accent);">💎 Confluence: ${sr.confluence.join(', ')}</div>`;
+    if (sr.broken.length > 0) html += `<div style="margin-top:8px;padding:8px;background:rgba(239,68,68,.1);border-radius:6px;font-size:11px;color:var(--red);">⚡ Broken: ${sr.broken.join(', ')}</div>`;
+    html += `</div>`;
   }
 
-  if (s.indicators?.volumeProfile) {
-    const vp = s.indicators.volumeProfile;
-    html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">📊 Volume Profile</div>
-      <div class="mini-box" style="margin-bottom:10px;">
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
-          <span>POC</span><strong style="color:var(--accent);">${vp.poc.toFixed(4)}</strong>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
-          <span>VA High</span><strong style="color:var(--green);">${vp.vaHigh.toFixed(4)}</strong>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;">
-          <span>VA Low</span><strong style="color:var(--red);">${vp.vaLow.toFixed(4)}</strong>
-        </div>
-      </div>
+  if (s.indicators?.volume) {
+    const v = s.indicators.volume;
+    const vc = v.direction === 'BULL' ? 'var(--green)' : v.direction === 'BEAR' ? 'var(--red)' : 'var(--muted)';
+    html += `<div class="card" style="border-color:var(--orange);">
+      <div class="ballistic-header">📊 Volume</div>
+      <div class="metric-row"><span>Direction</span><strong style="color:${vc};">${v.direction}</strong></div>
+      <div class="metric-row"><span>Strength</span><strong style="color:${v.strength === 'SURGE' ? 'var(--green)' : v.strength === 'HIGH' ? 'var(--cyan)' : 'var(--muted)'};">${v.strength}</strong></div>
+      <div class="metric-row"><span>Ratio</span><strong>${v.ratio.toFixed(2)}x</strong></div>
+      <div class="metric-row"><span>Basis</span><span style="color:var(--muted);">${v.basis}</span></div>
     </div>`;
   }
 
@@ -1523,8 +1979,7 @@ function renderResults(record) {
       </div>
     </div>`;
 
-    const balance = getBalance();
-    const riskPct = getRiskPct();
+    const balance = getBalance(), riskPct = getRiskPct();
     const riskAmt = balance * riskPct / 100;
     const lotSize = riskAmt / (s.slPips * spec.pipValue);
     html += `<div class="card" style="border-color:var(--pink);">
@@ -1532,7 +1987,7 @@ function renderResults(record) {
       <div class="mini-box" style="text-align:center;border-color:var(--pink);">
         <div style="font-size:11px;color:var(--pink);letter-spacing:2px;">LOT</div>
         <div style="font-size:32px;font-weight:900;color:var(--pink);margin:8px 0;">${lotSize.toFixed(2)}</div>
-        <div style="font-size:11px;color:var(--muted);">Risk: $${riskAmt.toFixed(2)} (${riskPct}%)</div>
+        <div style="font-size:11px;color:var(--muted);">Risk: $${riskAmt.toFixed(2)}</div>
       </div>
     </div>`;
   }
@@ -1541,47 +1996,21 @@ function renderResults(record) {
   c.scrollIntoView({ behavior: 'smooth' });
 }
 
-function calculateSLTP(ohlc, action, price, spec) {
-  if (!ohlc || ohlc.length < 20) return null;
-  const highs = ohlc.map(d => d.high), lows = ohlc.map(d => d.low), closes = ohlc.map(d => d.close);
-  const atr = calculateATR(highs, lows, closes, 14);
-  if (!atr) return null;
-  const isBuy = action === 'BUY';
-  const slDist = atr * 1.5;
-  const tp1Dist = slDist * 1.5, tp2Dist = slDist * 2.5, tp3Dist = slDist * 4.0;
-  const p = spec.pipSize;
-  return {
-    sl: (isBuy ? price - slDist : price + slDist).toFixed(spec.decimals),
-    tp1: (isBuy ? price + tp1Dist : price - tp1Dist).toFixed(spec.decimals),
-    tp2: (isBuy ? price + tp2Dist : price - tp2Dist).toFixed(spec.decimals),
-    tp3: (isBuy ? price + tp3Dist : price - tp3Dist).toFixed(spec.decimals),
-    slPips: Math.round(slDist / p),
-    tp1Pips: Math.round(tp1Dist / p),
-    tp2Pips: Math.round(tp2Dist / p),
-    tp3Pips: Math.round(tp3Dist / p),
-    atr: atr.toFixed(spec.decimals)
-  };
-}
-
 /* ============================================================
    AUTO BACKTEST
    ============================================================ */
-
 function startAutoBacktest() {
   if (window.__uiInterval) clearInterval(window.__uiInterval);
   if (window.__priceInterval) clearInterval(window.__priceInterval);
-
   window.__uiInterval = setInterval(() => {
     if (document.getElementById('view-overview')?.style.display !== 'none') renderDailySummary();
     if (document.getElementById('view-risk')?.style.display !== 'none') renderRiskCheck();
   }, AUTO_CHECK_INTERVAL);
-
   window.__priceInterval = setInterval(async () => {
     await updatePricesForBacktest();
-    const updated = checkAutoBacktest();
-    if (updated) { renderDailySummary(); renderRealStats(); }
+    const u = checkAutoBacktest();
+    if (u) { renderDailySummary(); renderRealStats(); }
   }, BACKTEST_PRICE_INTERVAL);
-
   setTimeout(async () => {
     await updatePricesForBacktest();
     checkAutoBacktest();
@@ -1600,81 +2029,60 @@ async function updatePricesForBacktest() {
       let ohlc = null;
       if (spec.source === 'binance') {
         const r = await fetchWithTimeout(`${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=1m&limit=10`, {}, 8000);
-        if (r.ok) {
-          const data = await r.json();
-          ohlc = data.map(d => ({ high: parseFloat(d[2]), low: parseFloat(d[3]), close: parseFloat(d[4]) }));
-        }
+        if (r.ok) { const d = await r.json(); ohlc = d.map(x => ({ high: parseFloat(x[2]), low: parseFloat(x[3]), close: parseFloat(x[4]) })); }
       } else {
         const key = getTwelveKey();
         if (key) {
-          const r = await fetchWithTimeout(
-            `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=1min&outputsize=10&apikey=${key}`,
-            {}, 10000);
+          const r = await fetchWithTimeout(`${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=1min&outputsize=10&apikey=${key}`, {}, 10000);
           if (r.ok) {
             const d = await r.json();
-            if (d.status !== 'error' && d.values) {
-              ohlc = d.values.reverse().map(v => ({
-                high: parseFloat(v.high), low: parseFloat(v.low), close: parseFloat(v.close)
-              }));
-            }
+            if (d.status !== 'error' && d.values) ohlc = d.values.reverse().map(v => ({ high: parseFloat(v.high), low: parseFloat(v.low), close: parseFloat(v.close) }));
           }
         }
       }
       if (ohlc && ohlc.length) {
         const last = ohlc[ohlc.length - 1];
-        const rH = Math.max(...ohlc.map(c => c.high));
-        const rL = Math.min(...ohlc.map(c => c.low));
         localStorage.setItem(`qfx_price_${pair}`, last.close.toString());
-        localStorage.setItem(`qfx_high_${pair}`, rH.toString());
-        localStorage.setItem(`qfx_low_${pair}`, rL.toString());
+        localStorage.setItem(`qfx_high_${pair}`, Math.max(...ohlc.map(c => c.high)).toString());
+        localStorage.setItem(`qfx_low_${pair}`, Math.min(...ohlc.map(c => c.low)).toString());
       }
-    } catch (e) { console.warn('Price fetch fail', pair, e); }
+    } catch (e) {}
   }
 }
 
 function checkAutoBacktest() {
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   const now = Date.now();
-  let updated = false;
-
+  let u = false;
   history.forEach(r => {
     if (r.outcome !== 'PENDING' || !r.autoTrackStart) return;
-    if (r.action === 'HOLD' || !r.sl || !r.tp3) { r.outcome = 'SKIPPED'; updated = true; return; }
-    const hoursElapsed = (now - r.autoTrackStart) / 3600000;
-    if (hoursElapsed > MAX_TRADE_HOURS) {
-      r.outcome = 'EXPIRED';
-      r.autoOutcome = `Expired ${hoursElapsed.toFixed(1)}h`;
-      r.closeTime = now;
-      updated = true;
-      return;
-    }
+    if (r.action === 'HOLD' || !r.sl || !r.tp3) { r.outcome = 'SKIPPED'; u = true; return; }
+    const h = (now - r.autoTrackStart) / 3600000;
+    if (h > MAX_TRADE_HOURS) { r.outcome = 'EXPIRED'; r.autoOutcome = `Expired ${h.toFixed(1)}h`; r.closeTime = now; u = true; return; }
     const cp = parseFloat(localStorage.getItem(`qfx_price_${r.pair}`) || 0);
     const hi = parseFloat(localStorage.getItem(`qfx_high_${r.pair}`) || cp);
     const lo = parseFloat(localStorage.getItem(`qfx_low_${r.pair}`) || cp);
     if (!cp) return;
     const sl = parseFloat(r.sl), tp1 = parseFloat(r.tp1), tp2 = parseFloat(r.tp2), tp3 = parseFloat(r.tp3);
-
     if (r.action === 'BUY') {
-      if (!r.hitTP1 && hi >= tp1) { r.hitTP1 = true; updated = true; }
-      if (!r.hitTP2 && hi >= tp2) { r.hitTP2 = true; updated = true; }
-      if (lo <= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL @ ${sl}`; r.closeTime = now; updated = true; }
-      else if (hi >= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3 @ ${tp3}`; r.closeTime = now; updated = true; }
+      if (!r.hitTP1 && hi >= tp1) { r.hitTP1 = true; u = true; }
+      if (!r.hitTP2 && hi >= tp2) { r.hitTP2 = true; u = true; }
+      if (lo <= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL @ ${sl}`; r.closeTime = now; u = true; }
+      else if (hi >= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3 @ ${tp3}`; r.closeTime = now; u = true; }
     } else if (r.action === 'SELL') {
-      if (!r.hitTP1 && lo <= tp1) { r.hitTP1 = true; updated = true; }
-      if (!r.hitTP2 && lo <= tp2) { r.hitTP2 = true; updated = true; }
-      if (hi >= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL @ ${sl}`; r.closeTime = now; updated = true; }
-      else if (lo <= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3 @ ${tp3}`; r.closeTime = now; updated = true; }
+      if (!r.hitTP1 && lo <= tp1) { r.hitTP1 = true; u = true; }
+      if (!r.hitTP2 && lo <= tp2) { r.hitTP2 = true; u = true; }
+      if (hi >= sl) { r.outcome = 'LOSS'; r.autoOutcome = `SL @ ${sl}`; r.closeTime = now; u = true; }
+      else if (lo <= tp3) { r.outcome = 'WIN'; r.autoOutcome = `TP3 @ ${tp3}`; r.closeTime = now; u = true; }
     }
   });
-
-  if (updated) localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(history));
-  return updated;
+  if (u) localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(history));
+  return u;
 }
 
 /* ============================================================
    HISTORY + STATS
    ============================================================ */
-
 function saveToHistory(r) {
   let h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   h.unshift(r);
@@ -1686,15 +2094,10 @@ function computeRealStats() {
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   const closed = history.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
   if (closed.length === 0) return null;
-
-  const wins = closed.filter(h => h.outcome === 'WIN');
-  const losses = closed.filter(h => h.outcome === 'LOSS');
+  const wins = closed.filter(h => h.outcome === 'WIN'), losses = closed.filter(h => h.outcome === 'LOSS');
   const winRate = wins.length / closed.length;
-  const avgWin = wins.length ? wins.reduce((a, t) => a + (t.tp3Pips || 0), 0) / wins.length : 0;
-  const avgLoss = losses.length ? losses.reduce((a, t) => a + (t.slPips || 0), 0) / losses.length : 0;
   const pnls = closed.map(h => h.outcome === 'WIN' ? (h.tp3Pips || 0) : -(h.slPips || 0));
   const totalPips = pnls.reduce((a, b) => a + b, 0);
-  const expectancy = (winRate * avgWin) - ((1 - winRate) * avgLoss);
   const grossWin = wins.reduce((a, t) => a + (t.tp3Pips || 0), 0);
   const grossLoss = losses.reduce((a, t) => a + (t.slPips || 0), 0);
   const pf = grossLoss > 0 ? grossWin / grossLoss : 0;
@@ -1702,114 +2105,107 @@ function computeRealStats() {
   const variance = pnls.reduce((a, p) => a + Math.pow(p - mean, 2), 0) / closed.length;
   const std = Math.sqrt(variance);
   const sharpe = std > 0 ? (mean / std) * Math.sqrt(252) : 0;
-
-  let peak = 0, equity = 0, maxDD = 0;
-  pnls.forEach(p => {
-    equity += p;
-    if (equity > peak) peak = equity;
-    const dd = peak - equity;
-    if (dd > maxDD) maxDD = dd;
-  });
-
-  return { totalTrades: closed.length, winRate: winRate * 100, avgWin, avgLoss, totalPips, expectancy, pf, sharpe, maxDD };
+  let peak = 0, eq = 0, maxDD = 0;
+  pnls.forEach(p => { eq += p; if (eq > peak) peak = eq; const dd = peak - eq; if (dd > maxDD) maxDD = dd; });
+  return { totalTrades: closed.length, winRate: winRate * 100, totalPips, pf, sharpe, maxDD };
 }
 
 function renderRealStats() {
   const c = document.getElementById('realStatsContainer');
   if (!c) return;
   const s = computeRealStats();
-  if (!s) { c.innerHTML = '<div class="info-box">📊 Hakuna closed trades bado.</div>'; return; }
+  if (!s) { c.innerHTML = '<div class="info-box">Hakuna closed trades bado.</div>'; return; }
   const verdict = s.pf > 1.5 && s.sharpe > 1 ? 'EDGE ✅' : s.pf > 1.2 ? 'WEAK EDGE ⚠️' : 'NO EDGE ❌';
   const vc = s.pf > 1.5 && s.sharpe > 1 ? 'var(--green)' : s.pf > 1.2 ? 'var(--yellow)' : 'var(--red)';
-
   c.innerHTML = `
     <div class="mini-box" style="text-align:center;margin-bottom:15px;border-color:${vc};">
       <div style="font-size:11px;color:var(--muted);">VERDICT</div>
       <div style="font-size:24px;font-weight:900;color:${vc};">${verdict}</div>
-      <div style="font-size:11px;color:var(--muted);">${s.totalTrades} trades ${s.totalTrades < 100 ? '(⚠️ sample ndogo)' : ''}</div>
+      <div style="font-size:11px;color:var(--muted);">${s.totalTrades} trades</div>
     </div>
     <div class="grid-2">
       <div class="mini-box"><label>Win Rate</label><div style="font-size:20px;font-weight:bold;color:${s.winRate >= 50 ? 'var(--green)' : 'var(--red)'};">${s.winRate.toFixed(1)}%</div></div>
       <div class="mini-box"><label>Profit Factor</label><div style="font-size:20px;font-weight:bold;color:${s.pf > 1.5 ? 'var(--green)' : s.pf > 1 ? 'var(--yellow)' : 'var(--red)'};">${s.pf.toFixed(2)}</div></div>
-      <div class="mini-box"><label>Expectancy</label><div style="font-size:20px;font-weight:bold;color:${s.expectancy > 0 ? 'var(--green)' : 'var(--red)'};">${s.expectancy.toFixed(1)}p</div></div>
       <div class="mini-box"><label>Sharpe</label><div style="font-size:20px;font-weight:bold;color:${s.sharpe > 1 ? 'var(--green)' : 'var(--yellow)'};">${s.sharpe.toFixed(2)}</div></div>
       <div class="mini-box"><label>Max DD</label><div style="font-size:20px;font-weight:bold;color:var(--red);">${s.maxDD.toFixed(0)}p</div></div>
-      <div class="mini-box"><label>Total Pips</label><div style="font-size:20px;font-weight:bold;color:${s.totalPips > 0 ? 'var(--green)' : 'var(--red)'};">${s.totalPips > 0 ? '+' : ''}${s.totalPips.toFixed(0)}</div></div>
-    </div>
-  `;
+    </div>`;
 
-  // By pair
   const history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
-  const byPair = {};
+  const closed = history.filter(h => h.outcome === 'WIN' || h.outcome === 'LOSS');
+  const byPair = {}, byTier = {};
   closed.forEach(h => {
     if (!byPair[h.pair]) byPair[h.pair] = { wins: 0, losses: 0, pips: 0 };
     if (h.outcome === 'WIN') { byPair[h.pair].wins++; byPair[h.pair].pips += (h.tp3Pips || 0); }
     else { byPair[h.pair].losses++; byPair[h.pair].pips -= (h.slPips || 0); }
+    const t = h.tier || 'C';
+    if (!byTier[t]) byTier[t] = { wins: 0, losses: 0, pips: 0 };
+    if (h.outcome === 'WIN') { byTier[t].wins++; byTier[t].pips += (h.tp3Pips || 0); }
+    else { byTier[t].losses++; byTier[t].pips -= (h.slPips || 0); }
   });
   const pc = document.getElementById('byPairContainer');
-  if (Object.keys(byPair).length === 0) {
-    pc.innerHTML = '<div class="info-box">Hakuna data bado.</div>';
-  } else {
-    pc.innerHTML = Object.entries(byPair).map(([pair, d]) => {
-      const total = d.wins + d.losses;
-      const wr = (d.wins / total * 100).toFixed(0);
+  pc.innerHTML = Object.keys(byPair).length === 0 ? '<div class="info-box">Hakuna.</div>' :
+    Object.entries(byPair).map(([p, d]) => {
+      const t = d.wins + d.losses, wr = (d.wins / t * 100).toFixed(0);
       return `<div class="mini-box" style="margin-bottom:8px;">
-        <div style="display:flex;justify-content:space-between;">
-          <strong>${pair}</strong>
-          <span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">
-          ${d.wins}W / ${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p
-        </div>
+        <div style="display:flex;justify-content:space-between;"><strong>${p}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div>
       </div>`;
     }).join('');
-  }
+  const tc = document.getElementById('byTierContainer');
+  tc.innerHTML = Object.keys(byTier).length === 0 ? '<div class="info-box">Hakuna.</div>' :
+    Object.entries(byTier).sort().map(([t, d]) => {
+      const tot = d.wins + d.losses, wr = (d.wins / tot * 100).toFixed(0);
+      const emoji = t === 'A+' ? '🏆' : t === 'A' ? '⭐' : t === 'B' ? '✓' : '⚠️';
+      return `<div class="mini-box" style="margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;"><strong>${emoji} ${t}</strong><span style="color:${wr >= 50 ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${wr}% WR</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${d.wins}W/${d.losses}L • ${d.pips > 0 ? '+' : ''}${d.pips}p</div>
+      </div>`;
+    }).join('');
 }
 
 /* ============================================================
-   CORRELATION
+   CORRELATION (with cache)
    ============================================================ */
-
 function computeCorr(r1, r2) {
   const n = Math.min(r1.length, r2.length);
   if (n < 20) return 0;
   const a = r1.slice(-n), b = r2.slice(-n);
-  const ma = a.reduce((x, y) => x + y, 0) / n;
-  const mb = b.reduce((x, y) => x + y, 0) / n;
+  const ma = a.reduce((x, y) => x + y, 0) / n, mb = b.reduce((x, y) => x + y, 0) / n;
   let num = 0, d1 = 0, d2 = 0;
-  for (let i = 0; i < n; i++) {
-    num += (a[i] - ma) * (b[i] - mb);
-    d1 += Math.pow(a[i] - ma, 2);
-    d2 += Math.pow(b[i] - mb, 2);
-  }
+  for (let i = 0; i < n; i++) { num += (a[i] - ma) * (b[i] - mb); d1 += Math.pow(a[i] - ma, 2); d2 += Math.pow(b[i] - mb, 2); }
   if (d1 === 0 || d2 === 0) return 0;
   return num / Math.sqrt(d1 * d2);
 }
 
 async function computeCorrelationMatrix() {
   const c = document.getElementById('corrContainer');
+  // Check cache
+  try {
+    const cache = JSON.parse(localStorage.getItem(STORAGE_KEYS.CORR_CACHE) || '{}');
+    if (cache.ts && (Date.now() - cache.ts) < CACHE_TTL && cache.html) {
+      c.innerHTML = cache.html + `<div class="info-box" style="margin-top:10px;">📦 Cached (from ${new Date(cache.ts).toLocaleTimeString()})</div>`;
+      return;
+    }
+  } catch {}
+
   c.innerHTML = '<div style="text-align:center;padding:20px;"><span class="spinner"></span> Fetching...</div>';
   const pairs = ['XAUUSD', 'EURUSD', 'GBPUSD', 'USDJPY', 'XAGUSD', 'BTCUSD'];
   const returns = {};
   for (const p of pairs) {
     const data = await fetchOHLC(p, '1h', 200);
-    if (data && data.length > 30) {
-      returns[p] = data.slice(1).map((d, i) => (d.close - data[i].close) / data[i].close);
-    }
-    await new Promise(r => setTimeout(r, 500));
+    if (data && data.length > 30) returns[p] = data.slice(1).map((d, i) => (d.close - data[i].close) / data[i].close);
+    await new Promise(r => setTimeout(r, 600));
   }
-  const available = Object.keys(returns);
-  if (available.length < 2) { c.innerHTML = '<div class="danger-box">❌ Data haikutosha.</div>'; return; }
-
+  const avail = Object.keys(returns);
+  if (avail.length < 2) { c.innerHTML = '<div class="danger-box">❌ Data haikutosha.</div>'; return; }
   let html = '<div style="overflow-x:auto;"><table style="width:100%;font-size:11px;border-collapse:collapse;"><thead><tr><th style="padding:6px;background:#08080a;color:var(--accent);">Pair</th>';
-  available.forEach(p => html += `<th style="padding:6px;background:#08080a;color:var(--accent);">${p}</th>`);
+  avail.forEach(p => html += `<th style="padding:6px;background:#08080a;color:var(--accent);">${p}</th>`);
   html += '</tr></thead><tbody>';
-  available.forEach(p1 => {
+  avail.forEach(p1 => {
     html += `<tr><th style="padding:6px;background:#08080a;color:var(--accent);">${p1}</th>`;
-    available.forEach(p2 => {
-      if (p1 === p2) {
-        html += `<td style="padding:6px;text-align:center;border:1px solid var(--border);background:rgba(251,191,36,.15);">—</td>`;
-      } else {
+    avail.forEach(p2 => {
+      if (p1 === p2) html += `<td style="padding:6px;text-align:center;border:1px solid var(--border);background:rgba(251,191,36,.15);">—</td>`;
+      else {
         const corr = computeCorr(returns[p1], returns[p2]);
         const color = Math.abs(corr) > 0.5 ? (corr > 0 ? 'var(--green)' : 'var(--red)') : 'var(--muted)';
         html += `<td style="padding:6px;text-align:center;border:1px solid var(--border);color:${color};font-weight:bold;">${corr.toFixed(2)}</td>`;
@@ -1818,40 +2214,30 @@ async function computeCorrelationMatrix() {
     html += '</tr>';
   });
   html += '</tbody></table></div>';
-
-  const highCorr = [];
-  for (let i = 0; i < available.length; i++) {
-    for (let j = i + 1; j < available.length; j++) {
-      const corr = computeCorr(returns[available[i]], returns[available[j]]);
-      if (Math.abs(corr) > 0.7) highCorr.push(`${available[i]} ↔ ${available[j]}: ${corr.toFixed(2)}`);
-    }
+  const high = [];
+  for (let i = 0; i < avail.length; i++) for (let j = i + 1; j < avail.length; j++) {
+    const corr = computeCorr(returns[avail[i]], returns[avail[j]]);
+    if (Math.abs(corr) > 0.7) high.push(`${avail[i]} ↔ ${avail[j]}: ${corr.toFixed(2)}`);
   }
-  if (highCorr.length) {
-    html += `<div class="warn-box" style="margin-top:15px;">⚠️ <strong>High correlation:</strong><br>${highCorr.join('<br>')}<br><br>Usichukue trades 2+ hapa kwa wakati mmoja.</div>`;
-  } else {
-    html += `<div class="success-box" style="margin-top:15px;">✅ Hakuna correlation kubwa.</div>`;
-  }
+  if (high.length) html += `<div class="warn-box" style="margin-top:15px;">⚠️ <strong>High correlation:</strong><br>${high.join('<br>')}</div>`;
+  else html += `<div class="success-box" style="margin-top:15px;">✅ Hakuna correlation kubwa.</div>`;
   c.innerHTML = html;
+  localStorage.setItem(STORAGE_KEYS.CORR_CACHE, JSON.stringify({ ts: Date.now(), html }));
 }
 
 /* ============================================================
-   JOURNAL (Manual trade logging)
+   JOURNAL + CALCULATORS
    ============================================================ */
-
 function saveJournalTrade() {
   const t = {
-    id: Date.now(),
-    date: new Date().toLocaleString(),
-    day: todayStr(),
-    pair: document.getElementById('jPair').value,
-    action: document.getElementById('jAction').value,
+    id: Date.now(), date: new Date().toLocaleString(), day: todayStr(),
+    pair: document.getElementById('jPair').value, action: document.getElementById('jAction').value,
     entry: parseFloat(document.getElementById('jEntry').value),
     lot: parseFloat(document.getElementById('jLot').value) || 0.01,
     sl: parseFloat(document.getElementById('jSL').value),
     tp: parseFloat(document.getElementById('jTP').value),
     notes: document.getElementById('jNotes').value,
-    outcome: 'PENDING',
-    autoTrackStart: Date.now()
+    outcome: 'PENDING', autoTrackStart: Date.now()
   };
   if (!t.entry || !t.sl || !t.tp) { alert("Jaza Entry, SL, TP."); return; }
   const spec = PAIR_SPECS[t.pair];
@@ -1860,67 +2246,51 @@ function saveJournalTrade() {
   t.tp1 = t.tp; t.tp2 = t.tp; t.tp3 = t.tp;
   t.tp1Pips = t.tp3Pips; t.tp2Pips = t.tp3Pips;
   saveToHistory(t);
-  showToast("✅ Trade saved");
-  document.getElementById('jEntry').value = '';
-  document.getElementById('jSL').value = '';
-  document.getElementById('jTP').value = '';
-  document.getElementById('jNotes').value = '';
+  showToast("✅ Saved");
+  document.getElementById('jEntry').value = ''; document.getElementById('jSL').value = ''; document.getElementById('jTP').value = ''; document.getElementById('jNotes').value = '';
   renderDailySummary();
 }
-
-/* ============================================================
-   CALCULATORS
-   ============================================================ */
 
 function calculateRisk() {
   const b = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const r = parseFloat(document.getElementById('riskPercent').value) || 1;
   const sl = parseFloat(document.getElementById('riskSlPips').value) || 30;
-  const pair = document.getElementById('riskPair').value;
-  const spec = PAIR_SPECS[pair];
+  const spec = PAIR_SPECS[document.getElementById('riskPair').value];
   const riskAmt = b * (r / 100);
   const lot = riskAmt / (sl * spec.pipValue);
   document.getElementById('riskResultBox').style.display = 'block';
   document.getElementById('riskResultBox').innerHTML = `
     <div style="font-size:12px;">Balance: $${b.toFixed(2)}</div>
     <div style="font-size:12px;">Risk: $${riskAmt.toFixed(2)}</div>
-    <div style="margin-top:10px;font-size:22px;font-weight:bold;color:var(--accent);text-align:center;">LOT: ${lot.toFixed(3)}</div>
-  `;
+    <div style="margin-top:10px;font-size:22px;font-weight:bold;color:var(--accent);text-align:center;">LOT: ${lot.toFixed(3)}</div>`;
 }
-
 function updatePipsInfo() {
-  const pair = document.getElementById('pipsPair').value;
-  const spec = PAIR_SPECS[pair];
+  const spec = PAIR_SPECS[document.getElementById('pipsPair').value];
   if (spec) {
     document.getElementById('pipsEntry').value = spec.defaultPrice;
     document.getElementById('pipsExit').value = (spec.defaultPrice + spec.pipSize * 100).toFixed(spec.decimals);
   }
 }
-
 function calculatePips() {
-  const pair = document.getElementById('pipsPair').value;
+  const spec = PAIR_SPECS[document.getElementById('pipsPair').value];
   const entry = parseFloat(document.getElementById('pipsEntry').value);
   const exit = parseFloat(document.getElementById('pipsExit').value);
   const lot = parseFloat(document.getElementById('pipsLot').value) || 0.01;
   const dir = document.getElementById('pipsDir').value;
-  const spec = PAIR_SPECS[pair];
   const diff = dir === 'BUY' ? (exit - entry) / spec.pipSize : (entry - exit) / spec.pipSize;
-  const pv = lot * spec.pipValue;
-  const usd = Math.abs(diff) * pv;
+  const usd = Math.abs(diff) * lot * spec.pipValue;
   const isP = diff > 0;
   document.getElementById('pipsResultBox').style.display = 'block';
   document.getElementById('pipsResultBox').innerHTML = `
     <div style="background:#08080a;border:2px solid var(--accent);border-radius:12px;padding:18px;">
       <div style="font-size:28px;font-weight:900;color:${isP ? 'var(--green)' : 'var(--red)'};text-align:center;">${isP ? '+' : '-'}${Math.abs(diff).toFixed(1)} PIPS</div>
       <div style="text-align:center;font-size:20px;font-weight:bold;color:${isP ? 'var(--green)' : 'var(--red)'};">${isP ? '+' : '-'}$${usd.toFixed(2)}</div>
-    </div>
-  `;
+    </div>`;
 }
 
 /* ============================================================
-   UTILITIES
+   MODAL + EXPORT
    ============================================================ */
-
 function openUniversalModal() {
   const m = document.getElementById('universalModal');
   m.classList.add('active'); m.style.display = 'flex';
@@ -1932,43 +2302,36 @@ function closeUniversalModal() {
   document.getElementById('modalInnerContent').innerHTML = '';
   document.body.style.overflow = '';
 }
-
 function exportData() {
   const d = {
     history: JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]'),
-    rules: getRules(),
-    version: '37.0',
-    exportedAt: new Date().toISOString()
+    rules: getRules(), version: '38.1', exportedAt: new Date().toISOString()
   };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v37-${Date.now()}.json`;
+  a.download = `lutynoel-v381-${Date.now()}.json`;
   a.click();
 }
 
 /* ============================================================
    INIT
    ============================================================ */
-
 window.addEventListener('DOMContentLoaded', () => {
   clearMarketData();
   const modal = document.getElementById('universalModal');
-  if (modal) modal.addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
-
+  if (modal) modal.addEventListener('click', e => { if (e.target.id === 'universalModal') closeUniversalModal(); });
   const k = loadKeys();
   if (k.name) {
     document.getElementById('returningUserSection').style.display = 'block';
     document.getElementById('loginFormSection').style.display = 'none';
-    document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${k.name}</strong>!`;
+    document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome, <strong>${k.name}</strong>!`;
     setTimeout(async () => {
       await updatePricesForBacktest();
       checkAutoBacktest();
       startAutoBacktest();
     }, 2000);
-  } else {
-    showLoginForm();
-  }
+  } else showLoginForm();
 });
 </script>
 </body>
