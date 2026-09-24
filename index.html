@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v35.5 — Institutional Flow</title>
+<title>Lutynoel.fx v35.8 — Voice Edition</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -67,6 +67,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .provider-badge{display:inline-block;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-left:4px}
 .provider-gemini{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
 .provider-mistral{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue)}
+.provider-pixtral{background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink)}
 .provider-failed{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 .confidence-bar{width:100%;height:4px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
 .confidence-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--green))}
@@ -140,10 +141,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .inst-bias-score{font-size:38px;font-weight:900;letter-spacing:1px;margin:5px 0}
 .inst-bias-bar{height:8px;background:#222;border-radius:4px;overflow:hidden;margin-top:10px;position:relative}
 .inst-bias-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green));transition:width .6s}
-.vp-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:11px}
-.vp-bar{flex:1;height:14px;background:#1a1a1f;border-radius:3px;overflow:hidden;position:relative}
-.vp-bar-fill{height:100%;background:linear-gradient(90deg,var(--inst),var(--pink))}
-.vp-label{font-weight:bold;width:50px;text-align:right;font-family:monospace}
 .inst-zone{background:#08080a;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .inst-zone.bull{border-left:4px solid var(--green)}
 .inst-zone.bear{border-left:4px solid var(--red)}
@@ -161,6 +158,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .chart-legend span{display:flex;align-items:center;gap:4px}
 .chart-legend i{display:inline-block;width:12px;height:8px;border-radius:2px}
 .dist-badge{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10px;font-weight:bold}
+.exec-panel{border-radius:12px;padding:16px;margin-bottom:15px;text-align:center}
+.exec-action{background:#000;color:#fff;border-radius:8px;padding:10px;margin-top:10px;text-align:center;font-weight:bold;font-size:13px}
+.voice-indicator{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold;background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink);margin-left:6px}
 </style>
 </head>
 <body>
@@ -172,8 +172,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v35.5</div>
-    <div class="auth-subtitle">Realistic Entry • Live Price Chart</div>
+    <div class="auth-title">Lutynoel.fx v35.8</div>
+    <div class="auth-subtitle">Voice Edition • Mistral Pixtral Vision</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
@@ -188,20 +188,21 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="loginFormSection">
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
-      <label>Mistral API Key (MAIN — Recommended)</label>
+      <label>Mistral API Key (MAIN + Pixtral Vision)</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
-      <label>Gemini API Key (Backup — Optional)</label>
+      <label>Gemini API Key (Backup + Vision fallback)</label>
       <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
       <label>TwelveData API Key (Required)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <label>Alpha Vantage Key (Optional)</label>
       <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v35.5 FIXED:</strong><br>
-        📏 Entry inarudi karibu na bei ya sasa (max 1.5%)<br>
-        💹 Kama hakuna zone karibu → MARKET entry<br>
-        📊 Chart inaonyesha LIVE PRICE line<br>
-        🎯 Entry Distance % inaonyeshwa
+        🎙️ <strong>v35.8 Voice Edition:</strong><br>
+        🔊 AI inazungumza Kiswahili (sio beeps)<br>
+        👁️ Mistral Pixtral + Gemini Vision<br>
+        🚀 MARKET entry (ingia sasa)<br>
+        📸 Screenshot analysis<br>
+        🎯 300 pips/siku target
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -223,11 +224,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v35.5</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v35.8</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
-    <div class="menu-item" onclick="navigate('analyst')">🎯 Institutional Analysis</div>
+    <div class="menu-item" onclick="navigate('analyst')">🎯 Analysis</div>
     <div class="menu-item" onclick="navigate('orderflow')">🌊 Order Flow Map</div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Auto-Backtest</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
@@ -271,12 +272,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           </div>
           <div style="flex:1;">
             <div class="hero-title">LUTYNOEL.FX</div>
-            <div class="hero-sub">Institutional Order Flow • v35.5</div>
+            <div class="hero-sub">Voice Edition • v35.8</div>
             <div class="hero-badges">
-              <span style="background:rgba(139,92,246,.15);color:var(--inst);border:1px solid var(--inst);">ORDER FLOW</span>
-              <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">REALISTIC ENTRY</span>
-              <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">LIVE CHART</span>
-              <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">v35.5</span>
+              <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">🎙️ VOICE</span>
+              <span style="background:rgba(139,92,246,.15);color:var(--inst);border:1px solid var(--inst);">PIXTRAL VISION</span>
+              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">MARKET ENTRY</span>
+              <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">300 PIPS/DAY</span>
             </div>
           </div>
         </div>
@@ -290,25 +291,39 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Institutional Analysis</button>
-        <button class="secondary-btn" onclick="navigate('orderflow')">🌊 Order Flow Map</button>
+        <button class="primary-btn" onclick="navigate('analyst')">🎯 Start Analysis</button>
+        <button class="secondary-btn" onclick="navigate('analyst')">📸 Upload Screenshot</button>
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v35.5 — WHAT'S NEW</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🎙️ v35.8 — VOICE + VISION</div>
         <div style="font-size:11px;line-height:1.9;">
-          ✅ <strong>Realistic Entry</strong> — Max 1.5% kutoka bei ya sasa<br>
-          ✅ <strong>Closest Zone</strong> — Inachagua OB/FVG karibu, sio ya mbali<br>
-          ✅ <strong>Market Fallback</strong> — Kama hakuna zone → entry @ current price<br>
-          ✅ <strong>Live Price Line</strong> — Chart inaonyesha bei ya sasa<br>
-          ✅ <strong>Entry Distance %</strong> — Unajua entry iko mbali kiasi gani
+          🔊 <strong>Voice Alerts</strong> — AI inazungumza Kiswahili<br>
+          👁️ <strong>Mistral Pixtral</strong> — vision kwenye Mistral<br>
+          👁️ <strong>Gemini Vision</strong> — fallback<br>
+          🚀 <strong>MARKET Entry</strong> — Ingia sasa<br>
+          🎯 <strong>300 Pips Target</strong> — Adaptive TP<br>
+          📸 <strong>Screenshot Upload</strong> — AI inaona chart
         </div>
       </div>
     </div>
 
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Institutional Analysis</h3>
+        <h3 style="margin:5px 0 15px;">📸 Upload Screenshot (Mistral Pixtral + Gemini Vision)</h3>
+        <div class="info-box">
+          📷 Piga screenshot ya chart yako, upload hapa. AI (Mistral Pixtral au Gemini Vision) anaiona na kutoa signal papo hapo.
+        </div>
+        <label>Chart Screenshot (PNG/JPG, max 5MB)</label>
+        <input type="file" id="screenshotInput" accept="image/*" style="padding:10px;">
+        <div id="screenshotPreview" style="display:none;margin-bottom:10px;">
+          <img id="screenshotImg" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+        </div>
+        <button class="primary-btn" id="analyzeScreenshotBtn" onclick="analyzeScreenshot()" disabled>🔍 ANALYZE SCREENSHOT</button>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:5px 0 15px;">🎯 Live Data Analysis</h3>
         <label>1. Choose Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
           <option value="XAUUSD">XAUUSD (Gold)</option>
@@ -340,14 +355,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div class="data-status-item" id="data4H"><span>4H Data</span><span>—</span></div>
           <div class="data-status-item" id="data1H"><span>1H Data</span><span>—</span></div>
           <div class="data-status-item" id="data15M"><span>15M Data</span><span>—</span></div>
-          <div class="data-status-item" id="dataIndicators"><span>Institutional Metrics</span><span>—</span></div>
+          <div class="data-status-item" id="dataIndicators"><span>Metrics</span><span>—</span></div>
         </div>
         <label>4. Institutional Snapshot</label>
         <div class="chart-preview" id="chartPreview">
           <div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div>
         </div>
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
-        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN INSTITUTIONAL ANALYSIS</button>
+        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN ANALYSIS</button>
       </div>
       <div id="resultsContainer" style="display:none;"></div>
     </div>
@@ -368,7 +383,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="US30">US30</option>
         </select>
         <div id="orderFlowContainer">
-          <div class="info-box">Click "Refresh" kupata institutional order flow map.</div>
+          <div class="info-box">Click "Refresh".</div>
         </div>
       </div>
     </div>
@@ -501,12 +516,33 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v35.5 — Realistic Entry<br>
-          <strong>Main AI:</strong> Mistral Small → 8x7B → 7B<br>
-          <strong>Backup AI:</strong> Gemini<br>
-          <strong>Entry Logic:</strong> Closest OB/FVG (max 1.5%) → Market fallback<br>
-          <strong>Timeframes:</strong> 4H + 1H + 15M
+          <strong>Version:</strong> v35.8 — Voice Edition<br>
+          <strong>Voice:</strong> Kiswahili TTS (Web Speech API)<br>
+          <strong>Vision:</strong> Mistral Pixtral + Gemini<br>
+          <strong>Entry:</strong> MARKET (ingia sasa)<br>
+          <strong>Target:</strong> 300 pips/siku
         </div>
+        <div class="ballistic-header">🔊 SAUTI</div>
+        <label>Voice Alerts (Kiswahili)</label>
+        <select id="settingsVoiceEnabled" onchange="saveVoiceSetting()">
+          <option value="true">✅ Iwezekane (AI inazungumza)</option>
+          <option value="false">❌ Zima</option>
+        </select>
+        <button class="secondary-btn" onclick="testVoice()">🔊 Test Voice</button>
+        <button class="secondary-btn" onclick="testStrongVoice()">🔥 Test Strong Signal</button>
+        <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+        <div class="ballistic-header">🎯 TRADING STYLE</div>
+        <label>Entry Mode</label>
+        <select id="settingsEntryMode" onchange="saveEntryMode()">
+          <option value="MARKET">🚀 MARKET — Ingia sasa (day trading)</option>
+          <option value="LIMIT">⏳ LIMIT — Subiri bei irudi (swing)</option>
+        </select>
+        <label>Daily Pips Target</label>
+        <input type="number" id="settingsDailyTarget" value="300">
+        <label>Trades Per Day</label>
+        <input type="number" id="settingsTradesPerDay" value="3">
+        <button class="secondary-btn" onclick="saveTradingStyle()">💾 Save Trading Style</button>
+        <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <div class="ballistic-header">💰 RISK MANAGEMENT</div>
         <label>Account Balance (USD)</label>
         <input type="number" id="settingsBalance" value="1000">
@@ -515,16 +551,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save Risk Settings</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <div class="ballistic-header">🔑 API KEYS</div>
-        <label>Update Mistral Key (MAIN)</label>
+        <label>Mistral Key (MAIN + Pixtral Vision)</label>
         <input type="password" id="settingsMistralKey" placeholder="Mistral key">
         <button class="secondary-btn" onclick="saveSettingsMistralKey()">💾 Save Mistral</button>
-        <label>Update Gemini Key (Backup)</label>
+        <label>Gemini Key (Backup + Vision)</label>
         <input type="password" id="settingsGeminiKey" placeholder="Gemini key">
         <button class="secondary-btn" onclick="saveSettingsGeminiKey()">💾 Save Gemini</button>
-        <label>Update TwelveData Key</label>
+        <label>TwelveData Key</label>
         <input type="text" id="settingsTwelveKey" placeholder="TwelveData key">
         <button class="secondary-btn" onclick="saveSettingsTwelveKey()">💾 Save TwelveData</button>
-        <label>Update Alpha Vantage Key</label>
+        <label>Alpha Vantage Key</label>
         <input type="text" id="settingsAlphaKey" placeholder="Alpha Vantage key">
         <button class="secondary-btn" onclick="saveSettingsAlphaKey()">💾 Save Alpha Vantage</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
@@ -539,17 +575,20 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODELS = ['gemini-2.0-flash-exp', 'gemini-1.5-flash-latest'];
+const GEMINI_VISION_MODEL = 'gemini-2.0-flash-exp';
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const MISTRAL_MODELS = ['mistral-small-latest', 'open-mixtral-8x7b', 'open-mistral-7b'];
+const MISTRAL_VISION_MODEL = 'pixtral-large-latest';
+const MISTRAL_VISION_FALLBACK = 'pixtral-12b-2409';
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
 const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
 const API_TIMEOUT = 90000;
 const AUTO_CHECK_INTERVAL = 60000;
-const CONFLUENCE_THRESHOLD = 60;
-const INSTITUTIONAL_THRESHOLD = 60;
+const PRICE_REFRESH_INTERVAL = 30000;
+const CONFLUENCE_THRESHOLD = 55;
+const INSTITUTIONAL_THRESHOLD = 58;
 const MAJORITY_THRESHOLD = 40;
-const MAX_ENTRY_DISTANCE_PCT = 1.5; // ✅ v35.5: Max entry distance from current price
 
 const STORAGE_KEYS = {
   NAME: 'lutynoel_saved_name',
@@ -558,24 +597,28 @@ const STORAGE_KEYS = {
   TWELVE: 'lutynoel_saved_twelveKey',
   ALPHA: 'lutynoel_saved_alphaKey',
   BALANCE: 'lutynoel_balance',
-  RISK_PCT: 'lutynoel_riskPct'
+  RISK_PCT: 'lutynoel_riskPct',
+  ENTRY_MODE: 'lutynoel_entry_mode',
+  DAILY_TARGET: 'lutynoel_daily_target',
+  TRADES_PER_DAY: 'lutynoel_trades_per_day',
+  VOICE_ENABLED: 'lutynoel_voice_enabled'
 };
 
 const PAIR_SPECS = {
-  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', alphaSymbol: 'XAUUSD', pipValue: 10.00 },
-  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', alphaSymbol: 'EURUSD', pipValue: 10.00 },
-  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', alphaSymbol: 'GBPUSD', pipValue: 10.00 },
-  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', alphaSymbol: 'USDJPY', pipValue: 9.10 },
-  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', alphaSymbol: 'AUDUSD', pipValue: 10.00 },
-  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', alphaSymbol: 'USDCAD', pipValue: 7.40 },
-  BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', pipValue: 1.00 },
-  ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', pipValue: 1.00 },
-  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', alphaSymbol: 'NDX', pipValue: 1.00 },
-  SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', pipValue: 1.00 },
-  US30: { pipSize: 1, defaultPrice: 42000, decimals: 2, source: 'twelve', twelveSymbol: 'DJI', alphaSymbol: null, pipValue: 1.00 },
-  SPX500: { pipSize: 0.1, defaultPrice: 5800, decimals: 2, source: 'twelve', twelveSymbol: 'SPX', alphaSymbol: null, pipValue: 10.00 },
-  XAGUSD: { pipSize: 0.001, defaultPrice: 30, decimals: 3, source: 'twelve', twelveSymbol: 'XAG/USD', alphaSymbol: 'XAGUSD', pipValue: 5.00 },
-  WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', alphaSymbol: null, pipValue: 10.00 }
+  XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', alphaSymbol: 'XAUUSD', pipValue: 10.00, spoken: 'Gold' },
+  EURUSD: { pipSize: 0.0001, defaultPrice: 1.0850, decimals: 4, source: 'twelve', twelveSymbol: 'EUR/USD', alphaSymbol: 'EURUSD', pipValue: 10.00, spoken: 'Euro Dollar' },
+  GBPUSD: { pipSize: 0.0001, defaultPrice: 1.2750, decimals: 4, source: 'twelve', twelveSymbol: 'GBP/USD', alphaSymbol: 'GBPUSD', pipValue: 10.00, spoken: 'Pound Dollar' },
+  USDJPY: { pipSize: 0.01, defaultPrice: 155.00, decimals: 3, source: 'twelve', twelveSymbol: 'USD/JPY', alphaSymbol: 'USDJPY', pipValue: 9.10, spoken: 'Dollar Yen' },
+  AUDUSD: { pipSize: 0.0001, defaultPrice: 0.6500, decimals: 4, source: 'twelve', twelveSymbol: 'AUD/USD', alphaSymbol: 'AUDUSD', pipValue: 10.00, spoken: 'Aussie Dollar' },
+  USDCAD: { pipSize: 0.0001, defaultPrice: 1.3500, decimals: 4, source: 'twelve', twelveSymbol: 'USD/CAD', alphaSymbol: 'USDCAD', pipValue: 7.40, spoken: 'Dollar Loonie' },
+  BTCUSD: { pipSize: 1, defaultPrice: 95000, decimals: 2, source: 'binance', binanceSymbol: 'BTCUSDT', pipValue: 1.00, spoken: 'Bitcoin' },
+  ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', pipValue: 1.00, spoken: 'Ethereum' },
+  NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', alphaSymbol: 'NDX', pipValue: 1.00, spoken: 'Nasdaq' },
+  SOLUSD: { pipSize: 0.01, defaultPrice: 180, decimals: 2, source: 'binance', binanceSymbol: 'SOLUSDT', pipValue: 1.00, spoken: 'Solana' },
+  US30: { pipSize: 1, defaultPrice: 42000, decimals: 2, source: 'twelve', twelveSymbol: 'DJI', alphaSymbol: null, pipValue: 1.00, spoken: 'Dow Jones' },
+  SPX500: { pipSize: 0.1, defaultPrice: 5800, decimals: 2, source: 'twelve', twelveSymbol: 'SPX', alphaSymbol: null, pipValue: 10.00, spoken: 'S and P' },
+  XAGUSD: { pipSize: 0.001, defaultPrice: 30, decimals: 3, source: 'twelve', twelveSymbol: 'XAG/USD', alphaSymbol: 'XAGUSD', pipValue: 5.00, spoken: 'Silver' },
+  WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', alphaSymbol: null, pipValue: 10.00, spoken: 'Oil' }
 };
 
 const AGENTS_4 = [
@@ -601,20 +644,106 @@ function getPipValue(spec, lot) { return lot * spec.pipValue; }
 function getSignalStrength(action, confluenceScore, instBias) {
   const b = (instBias === undefined || instBias === null) ? 50 : instBias;
   if (action === 'HOLD' || !action) {
-    if (b >= 44 && b <= 56) return { label: '⏸ WAIT', color: 'var(--yellow)', strength: 'WAIT', emoji: '⏸', hint: 'Soko haliko clear — subiri muafaka' };
+    if (b >= 44 && b <= 56) return { label: '⏸ WAIT', color: 'var(--yellow)', strength: 'WAIT', emoji: '⏸', hint: 'Soko haliko clear' };
     return { label: '🚫 NO TRADE', color: 'var(--muted)', strength: 'NO_TRADE', emoji: '🚫', hint: 'Masters wote HOLD' };
   }
   if (action === 'BUY') {
-    if (confluenceScore >= 80 && b >= 70) return { label: '🔥 STRONG BUY', color: 'var(--green)', strength: 'STRONG', emoji: '🔥', hint: 'A+ setup — institutions bullish' };
-    if (confluenceScore >= 60) return { label: '🟢 WEAK BUY', color: 'var(--green)', strength: 'WEAK', emoji: '🟢', hint: 'Setup nzuri' };
-    return { label: '⚪ VERY WEAK BUY', color: 'var(--muted)', strength: 'VERY_WEAK', emoji: '⚪', hint: 'Epuka' };
+    if (confluenceScore >= 75 && b >= 68) return { label: '🔥 STRONG BUY', color: 'var(--green)', strength: 'STRONG', emoji: '🔥', hint: 'A+ setup — ingia sasa' };
+    if (confluenceScore >= 55) return { label: '🟢 BUY', color: 'var(--green)', strength: 'WEAK', emoji: '🟢', hint: 'Setup nzuri' };
+    return { label: '⚪ WEAK BUY', color: 'var(--muted)', strength: 'VERY_WEAK', emoji: '⚪', hint: 'Epuka' };
   }
   if (action === 'SELL') {
-    if (confluenceScore >= 80 && b <= 30) return { label: '🔥 STRONG SELL', color: 'var(--red)', strength: 'STRONG', emoji: '🔥', hint: 'A+ setup — institutions bearish' };
-    if (confluenceScore >= 60) return { label: '🔴 WEAK SELL', color: 'var(--red)', strength: 'WEAK', emoji: '🔴', hint: 'Setup nzuri' };
-    return { label: '⚪ VERY WEAK SELL', color: 'var(--muted)', strength: 'VERY_WEAK', emoji: '⚪', hint: 'Epuka' };
+    if (confluenceScore >= 75 && b <= 32) return { label: '🔥 STRONG SELL', color: 'var(--red)', strength: 'STRONG', emoji: '🔥', hint: 'A+ setup — ingia sasa' };
+    if (confluenceScore >= 55) return { label: '🔴 SELL', color: 'var(--red)', strength: 'WEAK', emoji: '🔴', hint: 'Setup nzuri' };
+    return { label: '⚪ WEAK SELL', color: 'var(--muted)', strength: 'VERY_WEAK', emoji: '⚪', hint: 'Epuka' };
   }
   return { label: '⏸ WAIT', color: 'var(--yellow)', strength: 'WAIT', emoji: '⏸', hint: 'Subiri' };
+}
+
+// ═══════════════════════════════════════════════════════════
+// 🔊 v35.8 — VOICE ALERTS (Kiswahili TTS)
+// ═══════════════════════════════════════════════════════════
+function isVoiceEnabled() {
+  return localStorage.getItem(STORAGE_KEYS.VOICE_ENABLED) !== 'false';
+}
+
+function saveVoiceSetting() {
+  const enabled = document.getElementById('settingsVoiceEnabled').value;
+  localStorage.setItem(STORAGE_KEYS.VOICE_ENABLED, enabled);
+  showToast(enabled === 'true' ? '✅ Voice imewashwa' : '❌ Voice imezimwa');
+}
+
+function speakText(text, options = {}) {
+  if (!isVoiceEnabled()) return;
+  try {
+    if (!('speechSynthesis' in window)) {
+      console.warn('Speech synthesis haitumiki kwenye browser hii');
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = options.lang || 'sw-KE';
+    utterance.rate = options.rate || 0.95;
+    utterance.pitch = options.pitch || 1.0;
+    utterance.volume = options.volume || 1.0;
+
+    const voices = window.speechSynthesis.getVoices();
+    let swVoice = voices.find(v => v.lang && v.lang.startsWith('sw'));
+    if (!swVoice) swVoice = voices.find(v => v.lang && v.lang.startsWith('en-GB'));
+    if (!swVoice) swVoice = voices.find(v => v.lang && v.lang.startsWith('en'));
+    
+    if (swVoice) {
+      utterance.voice = swVoice;
+      if (!swVoice.lang.startsWith('sw')) utterance.lang = 'sw-KE';
+    }
+
+    window.speechSynthesis.speak(utterance);
+  } catch (e) { console.warn('Voice failed:', e); }
+}
+
+function speakSignal(pair, action, confidence, livePrice) {
+  const spec = PAIR_SPECS[pair];
+  const pairSpoken = spec?.spoken || pair;
+  
+  let actionSw = '';
+  if (action === 'BUY') actionSw = 'Nunua';
+  else if (action === 'SELL') actionSw = 'Uza';
+  else actionSw = 'Subiri';
+
+  let confidenceLevel = '';
+  if (confidence >= 80) confidenceLevel = 'uhakika mkubwa sana';
+  else if (confidence >= 65) confidenceLevel = 'uhakika mkubwa';
+  else if (confidence >= 50) confidenceLevel = 'uhakika wa kati';
+  else confidenceLevel = 'uhakika mdogo';
+
+  const message = `${actionSw} ${pairSpoken}. ${actionSw} sasa. Bei ni ${livePrice.toFixed(2)}. ${confidenceLevel}, asilimia ${confidence}. Ingia sasa.`;
+  speakText(message);
+}
+
+function speakStrongSignal(pair, action, confidence, livePrice) {
+  const spec = PAIR_SPECS[pair];
+  const pairSpoken = spec?.spoken || pair;
+  const actionSw = action === 'BUY' ? 'Nunua' : action === 'SELL' ? 'Uza' : 'Subiri';
+  const message = `Tahadhari. ${actionSw} ${pairSpoken}. Signal kali. Bei ${livePrice.toFixed(2)}. Uhakika asilimia ${confidence}. Ingia sasa, haraka.`;
+  speakText(message, { rate: 1.0, pitch: 1.1 });
+}
+
+function speakBiasOverride(pair, action, confidence, livePrice) {
+  const spec = PAIR_SPECS[pair];
+  const pairSpoken = spec?.spoken || pair;
+  const actionSw = action === 'BUY' ? 'Nunua' : 'Uza';
+  const message = `Bias override. ${actionSw} ${pairSpoken} sasa. Bei ${livePrice.toFixed(2)}. Asilimia ${confidence}. Ingia.`;
+  speakText(message, { rate: 1.05, pitch: 1.05 });
+}
+
+function testVoice() {
+  const sample = 'Karibu Lutynoel FX. Mfumo uko tayari. Nunua dhahabu sasa, uhakika mkubwa asilimia themanini na tano.';
+  speakText(sample);
+}
+
+function testStrongVoice() {
+  const sample = 'Tahadhari. Uza dhahabu. Signal kali. Bei elfu nne mia mbili sitini na tatu. Uhakika asilimia themanini na tano. Ingia sasa, haraka.';
+  speakText(sample, { rate: 1.0, pitch: 1.1 });
 }
 
 function safeJsonParse(text) {
@@ -636,14 +765,13 @@ function safeJsonParse(text) {
     const confMatch = clean.match(/"confidence"\s*:\s*(\d+)/i);
     const reasonMatch = clean.match(/"reasoning"\s*:\s*"([^"]+)"/i);
     const keyMatch = clean.match(/"key_level"\s*:\s*"?([^",\s]+)"?/i);
-    const orderMatch = clean.match(/"order_type"\s*:\s*"([^"]+)"/i);
     if (voteMatch) {
       return {
         vote: voteMatch[1].toUpperCase().trim(),
         confidence: parseInt(confMatch?.[1]) || 55,
         reasoning: reasonMatch?.[1] || clean.substring(0, 250).replace(/\n/g, ' '),
         key_level: keyMatch?.[1] || null,
-        order_type: orderMatch?.[1] || 'MARKET'
+        order_type: 'MARKET'
       };
     }
   } catch (e3) {}
@@ -662,7 +790,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel.fx v35.5", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel.fx v35.8 Voice", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#8b5cf6",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%238b5cf6'/><text y='.9em' font-size='80' x='10'>🏦</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -687,6 +815,21 @@ function saveRiskSettings() {
   localStorage.setItem(STORAGE_KEYS.RISK_PCT, risk.toString());
   showToast(`✅ Balance: $${bal} | Risk: ${risk}%`);
 }
+function saveTradingStyle() {
+  const mode = document.getElementById('settingsEntryMode').value;
+  const target = parseInt(document.getElementById('settingsDailyTarget').value) || 300;
+  const trades = parseInt(document.getElementById('settingsTradesPerDay').value) || 3;
+  localStorage.setItem(STORAGE_KEYS.ENTRY_MODE, mode);
+  localStorage.setItem(STORAGE_KEYS.DAILY_TARGET, target.toString());
+  localStorage.setItem(STORAGE_KEYS.TRADES_PER_DAY, trades.toString());
+  showToast(`✅ ${mode} | ${target} pips | ${trades} trades/siku`);
+}
+function saveEntryMode() {
+  localStorage.setItem(STORAGE_KEYS.ENTRY_MODE, document.getElementById('settingsEntryMode').value);
+}
+function getEntryMode() { return localStorage.getItem(STORAGE_KEYS.ENTRY_MODE) || 'MARKET'; }
+function getDailyTarget() { return parseInt(localStorage.getItem(STORAGE_KEYS.DAILY_TARGET)) || 300; }
+function getTradesPerDay() { return parseInt(localStorage.getItem(STORAGE_KEYS.TRADES_PER_DAY)) || 3; }
 function getBalance() { return parseFloat(localStorage.getItem(STORAGE_KEYS.BALANCE)) || 1000; }
 function getRiskPct() { return parseFloat(localStorage.getItem(STORAGE_KEYS.RISK_PCT)) || 1.0; }
 
@@ -747,10 +890,19 @@ function enterApp(name, geminiKey, mistralKey, twelveKey, alphaKey) {
   document.getElementById('settingsAlphaKey').value = alphaKey || '';
   document.getElementById('settingsBalance').value = getBalance();
   document.getElementById('settingsRiskPct').value = getRiskPct();
+  document.getElementById('settingsEntryMode').value = getEntryMode();
+  document.getElementById('settingsDailyTarget').value = getDailyTarget();
+  document.getElementById('settingsTradesPerDay').value = getTradesPerDay();
+  document.getElementById('settingsVoiceEnabled').value = isVoiceEnabled() ? 'true' : 'false';
   loadHistory(); updateStats();
-  showToast(`Welcome ${name}! 🏦 v35.5`, 3000);
-  setTimeout(() => fetchLivePrice(), 1000);
+  setupScreenshotUpload();
   startAutoBacktest();
+  startAutoRefreshPrice();
+  showToast(`Welcome ${name}! 🎙️ v35.8 Voice`, 3000);
+  setTimeout(() => {
+    fetchLivePrice();
+    setTimeout(() => speakText('Mfumo uko tayari. Karibu Lutynoel FX.'), 2500);
+  }, 1000);
 }
 
 function showLoginForm() {
@@ -775,8 +927,40 @@ function startAutoBacktest() {
   setTimeout(runAutoBacktest, 5000);
 }
 
+function startAutoRefreshPrice() {
+  if (window.__priceRefreshInterval) clearInterval(window.__priceRefreshInterval);
+  window.__priceRefreshInterval = setInterval(async () => {
+    if (document.hidden) return;
+    const analystView = document.getElementById('view-analyst');
+    if (!analystView || analystView.style.display === 'none') return;
+    try {
+      const pair = document.getElementById('selectedPair').value;
+      const spec = PAIR_SPECS[pair];
+      if (!spec) return;
+      let price = null;
+      if (spec.source === 'binance') {
+        const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
+        if (r.ok) price = parseFloat((await r.json()).price);
+      } else {
+        const key = getTwelveKey();
+        if (key) {
+          const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
+          if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
+        }
+      }
+      if (price > 0) {
+        document.getElementById('livePrice').value = price.toFixed(spec.decimals);
+        localStorage.setItem(`price_${pair}`, price.toString());
+        setPriceStatus('live', `🟢 Live`, new Date().toLocaleTimeString());
+      }
+    } catch (e) {}
+  }, PRICE_REFRESH_INTERVAL);
+}
+
 function logout() {
   if (window.__autoBacktestInterval) clearInterval(window.__autoBacktestInterval);
+  if (window.__priceRefreshInterval) clearInterval(window.__priceRefreshInterval);
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
   document.getElementById('appInterface').style.display = 'none';
   document.getElementById('authScreen').style.display = 'flex';
   const keys = loadKeys();
@@ -994,10 +1178,7 @@ function calculateVolumeProfile(ohlcData, bins = 40) {
   const sorted = profile.map((v, i) => ({ v, p: minP + i * binSize + binSize/2 })).sort((a,b) => b.v - a.v);
   const hvn = sorted.slice(0, 3).map(x => x.p.toFixed(2));
   const lvn = sorted.slice(-3).map(x => x.p.toFixed(2));
-  const visualBins = profile.map((v, i) => ({ v, p: minP + i * binSize + binSize/2 }));
-  const maxV = Math.max(...profile, 1);
-  const visual = visualBins.map(x => ({ ...x, pct: (x.v / maxV) * 100 })).reverse();
-  return { poc: poc.toFixed(2), vah: vah.toFixed(2), val: val.toFixed(2), hvn, lvn, visual, maxVol: maxV };
+  return { poc: poc.toFixed(2), vah: vah.toFixed(2), val: val.toFixed(2), hvn, lvn };
 }
 
 function detectOrderBlocks(ohlcData, lookback = 60) {
@@ -1057,14 +1238,14 @@ function detectFVG(ohlcData, lookback = 60) {
 }
 
 function detectStructure(ohlcData) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return { trend: 'NEUTRAL', events: [] };
+  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return { trend: 'NEUTRAL' };
   const swings = [];
   for (let i = 2; i < ohlcData.length - 2; i++) {
     const h = ohlcData[i].high, l = ohlcData[i].low;
     if (h > ohlcData[i-1].high && h > ohlcData[i-2].high && h > ohlcData[i+1].high && h > ohlcData[i+2].high) swings.push({ type: 'H', price: h, idx: i });
     if (l < ohlcData[i-1].low && l < ohlcData[i-2].low && l < ohlcData[i+1].low && l < ohlcData[i+2].low) swings.push({ type: 'L', price: l, idx: i });
   }
-  if (swings.length < 4) return { trend: 'NEUTRAL', events: [] };
+  if (swings.length < 4) return { trend: 'NEUTRAL' };
   const recent = swings.slice(-6);
   const highs = recent.filter(s => s.type === 'H');
   const lows = recent.filter(s => s.type === 'L');
@@ -1078,9 +1259,7 @@ function detectStructure(ohlcData) {
     else if (lh && ll) trend = 'BEARISH';
     else trend = 'RANGING';
   }
-  const lastHigh = highs.length ? highs[highs.length-1] : null;
-  const lastLow = lows.length ? lows[lows.length-1] : null;
-  return { trend, recentSwingHigh: lastHigh?.price.toFixed(2), recentSwingLow: lastLow?.price.toFixed(2) };
+  return { trend };
 }
 
 function detectLiquiditySweep(ohlcData) {
@@ -1140,19 +1319,6 @@ function detectPowerOf3(h1Data) {
   else if (pos < 0.25 || pos > 0.75) { phase = 'MANIPULATION'; desc = 'Liquidity sweep likely'; }
   else { phase = 'ACCUMULATION'; desc = 'Range building'; }
   return { phase, desc, position: (pos*100).toFixed(1)+'%', bias: phase === 'DISTRIBUTION' ? (close > open ? 'BUY' : 'SELL') : 'WAIT' };
-}
-
-function calculateOTE(ohlcData, direction) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return null;
-  const recent = ohlcData.slice(-30);
-  const swingHigh = Math.max(...recent.map(d => d.high)), swingLow = Math.min(...recent.map(d => d.low));
-  const range = swingHigh - swingLow;
-  if (range === 0) return null;
-  if (direction === 'BUY') {
-    return { swingHigh: swingHigh.toFixed(2), swingLow: swingLow.toFixed(2), ote_62: (swingHigh - range * 0.62).toFixed(2), ote_705: (swingHigh - range * 0.705).toFixed(2), ote_79: (swingHigh - range * 0.79).toFixed(2) };
-  } else {
-    return { swingHigh: swingHigh.toFixed(2), swingLow: swingLow.toFixed(2), ote_62: (swingLow + range * 0.62).toFixed(2), ote_705: (swingLow + range * 0.705).toFixed(2), ote_79: (swingLow + range * 0.79).toFixed(2) };
-  }
 }
 
 function getPremiumDiscountZone(ohlcData) {
@@ -1224,36 +1390,35 @@ function calculateSupportResistance(ohlcData) {
 
 function computeInstitutionalBias(inst) {
   let score = 50;
-  const bull = [], bear = [], reasons = [];
-  if (inst.structure?.trend === 'BULLISH') { score += 12; bull.push('1H Bullish Structure'); }
-  if (inst.structure?.trend === 'BEARISH') { score -= 12; bear.push('1H Bearish Structure'); }
-  if (inst.htfStructure?.trend === 'BULLISH') { score += 10; bull.push('4H Bullish Structure'); }
-  if (inst.htfStructure?.trend === 'BEARISH') { score -= 10; bear.push('4H Bearish Structure'); }
-  if (inst.sweep?.bias === 'BUY') { score += 10; bull.push('Bullish Sweep'); }
-  if (inst.sweep?.bias === 'SELL') { score -= 10; bear.push('Bearish Sweep'); }
-  if (inst.displacement?.direction === 'BULLISH') { score += 8; bull.push('Bullish Displacement'); }
-  if (inst.displacement?.direction === 'BEARISH') { score -= 8; bear.push('Bearish Displacement'); }
-  if (inst.fvg?.nearestBull) { score += 5; bull.push('Unfilled Bullish FVG'); }
-  if (inst.fvg?.nearestBear) { score -= 5; bear.push('Unfilled Bearish FVG'); }
-  if (inst.orderBlocks?.nearestBull) { score += 7; bull.push('Bullish OB'); }
-  if (inst.orderBlocks?.nearestBear) { score -= 7; bear.push('Bearish OB'); }
-  if (inst.zone?.bias?.includes('BUY')) { score += 6; bull.push('Discount zone'); }
-  if (inst.zone?.bias?.includes('SELL')) { score -= 6; bear.push('Premium zone'); }
+  const bull = [], bear = [];
+  if (inst.structure?.trend === 'BULLISH') { score += 12; bull.push('1H Bullish'); }
+  if (inst.structure?.trend === 'BEARISH') { score -= 12; bear.push('1H Bearish'); }
+  if (inst.htfStructure?.trend === 'BULLISH') { score += 10; bull.push('4H Bullish'); }
+  if (inst.htfStructure?.trend === 'BEARISH') { score -= 10; bear.push('4H Bearish'); }
+  if (inst.sweep?.bias === 'BUY') { score += 10; bull.push('Bull Sweep'); }
+  if (inst.sweep?.bias === 'SELL') { score -= 10; bear.push('Bear Sweep'); }
+  if (inst.displacement?.direction === 'BULLISH') { score += 8; bull.push('Bull Displacement'); }
+  if (inst.displacement?.direction === 'BEARISH') { score -= 8; bear.push('Bear Displacement'); }
+  if (inst.fvg?.nearestBull) { score += 5; bull.push('Bull FVG'); }
+  if (inst.fvg?.nearestBear) { score -= 5; bear.push('Bear FVG'); }
+  if (inst.orderBlocks?.nearestBull) { score += 7; bull.push('Bull OB'); }
+  if (inst.orderBlocks?.nearestBear) { score -= 7; bear.push('Bear OB'); }
+  if (inst.zone?.bias?.includes('BUY')) { score += 6; bull.push('Discount'); }
+  if (inst.zone?.bias?.includes('SELL')) { score -= 6; bear.push('Premium'); }
   if (inst.volumeProfile && inst.currentPrice) {
     const cp = parseFloat(inst.currentPrice), poc = parseFloat(inst.volumeProfile.poc);
     if (cp > poc) { score += 3; bull.push('Above POC'); }
     else { score -= 3; bear.push('Below POC'); }
   }
-  if (inst.m15Bias === 'BUY') { score += 4; bull.push('15M Bullish Trigger'); }
-  if (inst.m15Bias === 'SELL') { score -= 4; bear.push('15M Bearish Trigger'); }
-  if (inst.killZone?.isActive) reasons.push('✓ Active Kill Zone');
+  if (inst.m15Bias === 'BUY') { score += 4; bull.push('15M Bull'); }
+  if (inst.m15Bias === 'SELL') { score -= 4; bear.push('15M Bear'); }
   score = Math.max(0, Math.min(100, score));
   let bias = 'NEUTRAL';
   if (score >= 68) bias = 'STRONG_BULLISH';
   else if (score >= 57) bias = 'BULLISH';
   else if (score <= 32) bias = 'STRONG_BEARISH';
   else if (score <= 43) bias = 'BEARISH';
-  return { score, bias, bull, bear, reasons };
+  return { score, bias, bull, bear };
 }
 
 function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
@@ -1261,9 +1426,7 @@ function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
   const closes = h1.map(d => d.close), highs = h1.map(d => d.high), lows = h1.map(d => d.low);
   const inst = {
     currentPrice: livePrice,
-    h1Raw: h1,
-    h4Raw: Array.isArray(h4) ? h4 : null,
-    m15Raw: Array.isArray(m15) ? m15 : null,
+    h1Raw: h1, h4Raw: Array.isArray(h4) ? h4 : null, m15Raw: Array.isArray(m15) ? m15 : null,
     volumeProfile: calculateVolumeProfile(h1, 40),
     orderBlocks: detectOrderBlocks(h1, 60),
     fvg: detectFVG(h1, 60),
@@ -1274,7 +1437,6 @@ function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
     m15Sweep: Array.isArray(m15) ? detectLiquiditySweep(m15) : null,
     m15Displacement: Array.isArray(m15) ? detectDisplacement(m15) : null,
     sweep: detectLiquiditySweep(h1),
-    sweepH4: Array.isArray(h4) ? detectLiquiditySweep(h4) : null,
     equalLevels: detectEqualLevels(h1),
     displacement: detectDisplacement(h1),
     powerOf3: detectPowerOf3(h1),
@@ -1320,137 +1482,302 @@ function getHTFBias(h4Data, h1Data) {
   return { h4: h4Trend, h1: h1Trend, aligned: h4Trend === h1Trend && h4Trend !== 'NEUTRAL' };
 }
 
-// ═══════════════════════════════════════════════════════════
-// ✅ v35.5 — CLOSEST ZONE FINDER
-// ═══════════════════════════════════════════════════════════
-function findClosestZone(zones, currentPrice, maxDistancePct = MAX_ENTRY_DISTANCE_PCT) {
-  if (!Array.isArray(zones) || zones.length === 0) return null;
-  const maxDist = currentPrice * (maxDistancePct / 100);
-  let closest = null, minDist = Infinity;
-  zones.forEach(z => {
-    const mid = z.high !== undefined ? (z.high + z.low) / 2 : (z.top + z.bottom) / 2;
-    const dist = Math.abs(mid - currentPrice);
-    if (dist < minDist && dist <= maxDist) { minDist = dist; closest = z; }
-  });
-  return closest;
-}
-
-// ═══════════════════════════════════════════════════════════
-// ✅ v35.5 — REALISTIC INSTITUTIONAL ENTRY
-// ═══════════════════════════════════════════════════════════
 function calculateInstitutionalEntry(action, livePrice, inst, spec) {
   if (!inst || !action || action === 'HOLD') return null;
 
   const isBuy = action === 'BUY';
-  let entry, entrySource, sl, quality = 'B', entryDistance = 0;
-  let usedZone = null;
+  const atr = inst.atr || (livePrice * 0.005);
+  const entry = livePrice;
 
-  // Pata CLOSEST zones kwa kila aina (max 1.5% kutoka bei)
-  const closestBullOB = findClosestZone(inst.orderBlocks?.bullish || [], livePrice);
-  const closestBearOB = findClosestZone(inst.orderBlocks?.bearish || [], livePrice);
-  const closestBullFVG15 = findClosestZone(inst.m15FVG?.bullish || [], livePrice);
-  const closestBearFVG15 = findClosestZone(inst.m15FVG?.bearish || [], livePrice);
-  const closestBullFVG1H = findClosestZone(inst.fvg?.bullish || [], livePrice);
-  const closestBearFVG1H = findClosestZone(inst.fvg?.bearish || [], livePrice);
+  const slDist = Math.max(atr * 1.2, livePrice * 0.003);
+  const sl = isBuy ? entry - slDist : entry + slDist;
 
-  if (isBuy) {
-    if (closestBullOB) {
-      const ob = closestBullOB;
-      entry = (ob.high + ob.low) / 2;
-      sl = ob.low - (ob.high - ob.low) * 0.3;
-      entryDistance = Math.abs(entry - livePrice);
-      entrySource = `🟢 Bullish OB (1H) — ${ob.low.toFixed(2)}–${ob.high.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
-      quality = entryDistance < livePrice * 0.005 ? 'A+' : 'A';
-      usedZone = { type: 'OB_1H_BULL', high: ob.high, low: ob.low };
-    } else if (closestBullFVG15) {
-      const fvg = closestBullFVG15;
-      entry = (fvg.top + fvg.bottom) / 2;
-      sl = fvg.bottom - (fvg.top - fvg.bottom) * 0.5;
-      entryDistance = Math.abs(entry - livePrice);
-      entrySource = `⚡ Bullish FVG (15M) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
-      quality = 'A';
-      usedZone = { type: 'FVG_15M_BULL', high: fvg.top, low: fvg.bottom };
-    } else if (closestBullFVG1H) {
-      const fvg = closestBullFVG1H;
-      entry = (fvg.top + fvg.bottom) / 2;
-      sl = fvg.bottom - (fvg.top - fvg.bottom) * 0.5;
-      entryDistance = Math.abs(entry - livePrice);
-      entrySource = `⚡ Bullish FVG (1H) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
-      quality = 'A';
-      usedZone = { type: 'FVG_1H_BULL', high: fvg.top, low: fvg.bottom };
-    } else {
-      // Fallback: MARKET entry @ current price (realistic!)
-      entry = livePrice;
-      const atr = inst.atr || (livePrice * 0.005);
-      sl = livePrice - atr * 1.5;
-      entryDistance = 0;
-      entrySource = `💹 MARKET — hakuna OB/FVG karibu na bei (within ${MAX_ENTRY_DISTANCE_PCT}%)`;
-      quality = 'C';
-    }
-  } else {
-    if (closestBearOB) {
-      const ob = closestBearOB;
-      entry = (ob.high + ob.low) / 2;
-      sl = ob.high + (ob.high - ob.low) * 0.3;
-      entryDistance = Math.abs(entry - livePrice);
-      entrySource = `🔴 Bearish OB (1H) — ${ob.low.toFixed(2)}–${ob.high.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
-      quality = entryDistance < livePrice * 0.005 ? 'A+' : 'A';
-      usedZone = { type: 'OB_1H_BEAR', high: ob.high, low: ob.low };
-    } else if (closestBearFVG15) {
-      const fvg = closestBearFVG15;
-      entry = (fvg.top + fvg.bottom) / 2;
-      sl = fvg.top + (fvg.top - fvg.bottom) * 0.5;
-      entryDistance = Math.abs(entry - livePrice);
-      entrySource = `⚡ Bearish FVG (15M) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
-      quality = 'A';
-      usedZone = { type: 'FVG_15M_BEAR', high: fvg.top, low: fvg.bottom };
-    } else if (closestBearFVG1H) {
-      const fvg = closestBearFVG1H;
-      entry = (fvg.top + fvg.bottom) / 2;
-      sl = fvg.top + (fvg.top - fvg.bottom) * 0.5;
-      entryDistance = Math.abs(entry - livePrice);
-      entrySource = `⚡ Bearish FVG (1H) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
-      quality = 'A';
-      usedZone = { type: 'FVG_1H_BEAR', high: fvg.top, low: fvg.bottom };
-    } else {
-      entry = livePrice;
-      const atr = inst.atr || (livePrice * 0.005);
-      sl = livePrice + atr * 1.5;
-      entryDistance = 0;
-      entrySource = `💹 MARKET — hakuna OB/FVG karibu na bei (within ${MAX_ENTRY_DISTANCE_PCT}%)`;
-      quality = 'C';
-    }
+  const dailyTarget = getDailyTarget();
+  const tradesPerDay = getTradesPerDay();
+  const targetPerTrade = dailyTarget / tradesPerDay;
+  const slPips = Math.round(slDist / spec.pipSize);
+
+  let tpMult1 = 2.0, tpMult2 = 3.5, tpMult3 = 5.0;
+  const tp3PipsTarget = slPips * tpMult3;
+  if (tp3PipsTarget < targetPerTrade && slPips > 0) {
+    const needed = targetPerTrade / slPips;
+    tpMult3 = Math.min(needed, 8.0);
+    tpMult2 = tpMult3 * 0.6;
+    tpMult1 = tpMult3 * 0.35;
   }
 
-  const slDist = Math.abs(entry - sl);
-  if (slDist === 0) return null;
+  const tp1 = isBuy ? entry + slDist * tpMult1 : entry - slDist * tpMult1;
+  const tp2 = isBuy ? entry + slDist * tpMult2 : entry - slDist * tpMult2;
+  const tp3 = isBuy ? entry + slDist * tpMult3 : entry - slDist * tpMult3;
 
-  const tp1 = isBuy ? entry + slDist * 1.5 : entry - slDist * 1.5;
-  const tp2 = isBuy ? entry + slDist * 2.5 : entry - slDist * 2.5;
-  const tp3 = isBuy ? entry + slDist * 4.0 : entry - slDist * 4.0;
+  let quality = 'B';
+  const hasOB = isBuy ? inst.orderBlocks?.nearestBull : inst.orderBlocks?.nearestBear;
+  const hasFVG = isBuy ? inst.fvg?.nearestBull : inst.fvg?.nearestBear;
+  const hasSweep = inst.sweep?.bias === action;
+  const hasDisplacement = inst.displacement?.detected && inst.displacement.direction === (isBuy ? 'BULLISH' : 'BEARISH');
+  const hasKillZone = inst.killZone?.isActive;
+  let confCount = 0;
+  if (hasOB) confCount++;
+  if (hasFVG) confCount++;
+  if (hasSweep) confCount++;
+  if (hasDisplacement) confCount++;
+  if (hasKillZone) confCount++;
 
-  const distPct = Math.abs(entry - livePrice) / livePrice * 100;
-  const orderType = distPct < 0.05 ? 'MARKET' : (isBuy ? 'BUY_LIMIT' : 'SELL_LIMIT');
+  if (confCount >= 4) quality = 'A+';
+  else if (confCount >= 3) quality = 'A';
+  else if (confCount >= 2) quality = 'B+';
+  else if (confCount >= 1) quality = 'B';
+  else quality = 'C';
+
+  const entrySource = `💹 MARKET @ ${entry.toFixed(spec.decimals)} • SL: ${slPips} pips • Confluences: ${confCount}/5`;
 
   return {
     entry: entry.toFixed(spec.decimals),
-    entrySource,
-    quality,
-    usedZone,
+    entrySource, quality,
     sl: sl.toFixed(spec.decimals),
     tp1: tp1.toFixed(spec.decimals),
     tp2: tp2.toFixed(spec.decimals),
     tp3: tp3.toFixed(spec.decimals),
-    slPips: Math.round(slDist / spec.pipSize),
-    tp1Pips: Math.round(Math.abs(tp1 - entry) / spec.pipSize),
+    slPips, tp1Pips: Math.round(Math.abs(tp1 - entry) / spec.pipSize),
     tp2Pips: Math.round(Math.abs(tp2 - entry) / spec.pipSize),
     tp3Pips: Math.round(Math.abs(tp3 - entry) / spec.pipSize),
-    orderType,
-    entryDistance,
-    entryDistancePct: distPct.toFixed(2)
+    orderType: 'MARKET',
+    entryDistance: 0, entryDistancePct: '0'
   };
 }
 
+// ═══════════════════════════════════════════════════════════
+// 📸 SCREENSHOT ANALYSIS (Mistral Pixtral + Gemini Vision)
+// ═══════════════════════════════════════════════════════════
+let uploadedScreenshot = null;
+
+function setupScreenshotUpload() {
+  const input = document.getElementById('screenshotInput');
+  if (!input) return;
+  input.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { alert('Screenshot ni kubwa sana (max 5MB).'); return; }
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      uploadedScreenshot = { base64: ev.target.result.split(',')[1], mimeType: file.type };
+      document.getElementById('screenshotImg').src = ev.target.result;
+      document.getElementById('screenshotPreview').style.display = 'block';
+      document.getElementById('analyzeScreenshotBtn').disabled = false;
+      showToast('📸 Screenshot ready! Click ANALYZE.');
+      speakText('Screenshot imepakiwa. Bonyeza analyze sasa.');
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function analyzeScreenshot() {
+  const mistralKey = getMistralKey();
+  const geminiKey = getGeminiKey();
+  if (!mistralKey && !geminiKey) { alert('Weka Mistral au Gemini key kwenye Settings.'); return; }
+  if (!uploadedScreenshot) { alert('Upload screenshot kwanza.'); return; }
+
+  const btn = document.getElementById('analyzeScreenshotBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Analyzing image...';
+
+  const pair = document.getElementById('selectedPair').value;
+  const livePrice = parseFloat(document.getElementById('livePrice').value);
+  const spec = PAIR_SPECS[pair];
+
+  const prompt = `You are an institutional trading analyst. Analyze this ${pair} chart screenshot at current price ${livePrice}.
+
+Examine IMAGE for:
+1. Chart timeframe (M15, H1, H4?)
+2. Candlestick patterns (engulfing, pin bars, hammers)
+3. Support/Resistance levels
+4. Trend direction (uptrend/downtrend/range)
+5. Order Blocks / FVG if visible
+6. Recent price action
+
+DECISION:
+- BUY if bullish structure + accumulation/demand
+- SELL if bearish structure + distribution/supply
+- HOLD if truly unclear
+
+Be DECISIVE — retail day trader needs actionable signal.
+
+Respond ONLY valid JSON:
+{
+  "vote": "BUY" | "SELL" | "HOLD",
+  "confidence": 0-100,
+  "reasoning": "Detailed analysis of what you see",
+  "chart_observations": "Timeframe, patterns, key levels",
+  "key_level": <price or null>
+}`;
+
+  let result = null;
+  let usedProvider = '';
+
+  // 1. Jaribu Mistral Pixtral Vision kwanza
+  if (mistralKey) {
+    for (const visionModel of [MISTRAL_VISION_MODEL, MISTRAL_VISION_FALLBACK]) {
+      try {
+        const dataUrl = `data:${uploadedScreenshot.mimeType};base64,${uploadedScreenshot.base64}`;
+        const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
+          body: JSON.stringify({
+            model: visionModel,
+            messages: [{
+              role: 'user',
+              content: [
+                { type: 'text', text: prompt },
+                { type: 'image_url', image_url: { url: dataUrl } }
+              ]
+            }],
+            temperature: 0.2,
+            max_tokens: 2000,
+            response_format: { type: 'json_object' }
+          })
+        }, 90000);
+
+        const rawText = await response.text();
+        let data;
+        try { data = JSON.parse(rawText); } catch (e) { continue; }
+        if (data.error) { console.warn(`${visionModel}:`, data.error); continue; }
+        if (!data.choices?.[0]?.message?.content) continue;
+
+        let text = data.choices[0].message.content.trim();
+        const parsed = safeJsonParse(text);
+        if (parsed) { result = parsed; usedProvider = `Mistral ${visionModel}`; break; }
+      } catch (e) { console.warn(`Mistral Vision ${visionModel}:`, e.message); }
+    }
+  }
+
+  // 2. Fallback: Gemini Vision
+  if (!result && geminiKey) {
+    try {
+      const response = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_VISION_MODEL}:generateContent?key=${geminiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [
+              { text: prompt },
+              { inline_data: { mime_type: uploadedScreenshot.mimeType, data: uploadedScreenshot.base64 } }
+            ]
+          }],
+          generationConfig: { temperature: 0.2, responseMimeType: 'application/json' }
+        })
+      }, 60000);
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error.message);
+      if (data.candidates?.[0]) {
+        let text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim();
+        const parsed = safeJsonParse(text);
+        if (parsed) { result = parsed; usedProvider = 'Gemini Vision'; }
+      }
+    } catch (e) { console.warn('Gemini Vision:', e.message); }
+  }
+
+  if (!result) {
+    alert('Screenshot analysis imeshindwa. Angalia API keys zako kwenye Settings.');
+    btn.disabled = false;
+    btn.innerHTML = '🔍 ANALYZE SCREENSHOT';
+    return;
+  }
+
+  const vote = (result.vote || 'HOLD').toUpperCase();
+  const confidence = Math.max(0, Math.min(100, parseInt(result.confidence) || 50));
+  const reasoning = result.reasoning || 'No analysis';
+  const observations = result.chart_observations || '';
+
+  showScreenshotResult(pair, livePrice, vote, confidence, reasoning, observations, usedProvider);
+
+  if (vote !== 'HOLD') {
+    if (confidence >= 75) speakStrongSignal(pair, vote, confidence, livePrice);
+    else speakSignal(pair, vote, confidence, livePrice);
+    if (navigator.vibrate) {
+      if (confidence >= 75) navigator.vibrate([300, 100, 300, 100, 300]);
+      else navigator.vibrate([200, 100, 200]);
+    }
+  } else {
+    speakText('Hakuna signal wazi. Subiri.', { rate: 0.95 });
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🔍 ANALYZE SCREENSHOT';
+}
+
+function showScreenshotResult(pair, livePrice, vote, confidence, reasoning, observations, usedProvider) {
+  const voteColor = vote === 'BUY' ? 'var(--green)' : vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
+  const voteIcon = vote === 'BUY' ? '📈' : vote === 'SELL' ? '📉' : '⏸';
+  const spec = PAIR_SPECS[pair];
+
+  let tradeSetup = '';
+  if (vote !== 'HOLD') {
+    const isBuy = vote === 'BUY';
+    const entry = livePrice;
+    const atr = entry * 0.005;
+    const slDist = Math.max(atr * 1.2, entry * 0.003);
+    const sl = isBuy ? entry - slDist : entry + slDist;
+
+    const dailyTarget = getDailyTarget();
+    const tradesPerDay = getTradesPerDay();
+    const targetPerTrade = dailyTarget / tradesPerDay;
+    const slPips = Math.round(slDist / spec.pipSize);
+
+    let tpMult3 = 5.0;
+    if (slPips * tpMult3 < targetPerTrade) tpMult3 = Math.min(targetPerTrade / slPips, 8.0);
+    const tpMult2 = tpMult3 * 0.6;
+    const tpMult1 = tpMult3 * 0.35;
+
+    const tp1 = isBuy ? entry + slDist * tpMult1 : entry - slDist * tpMult1;
+    const tp2 = isBuy ? entry + slDist * tpMult2 : entry - slDist * tpMult2;
+    const tp3 = isBuy ? entry + slDist * tpMult3 : entry - slDist * tpMult3;
+    const tp3Pips = Math.round(slDist * tpMult3 / spec.pipSize);
+
+    tradeSetup = `
+      <div style="margin-top:15px;background:#08080a;border-radius:8px;padding:14px;border-left:4px solid ${voteColor};">
+        <div style="color:var(--accent);font-weight:bold;font-size:12px;margin-bottom:10px;">📊 TRADE SETUP — MARKET ENTRY</div>
+        <div style="font-size:13px;line-height:2;">
+          <div>🚀 <strong>Entry:</strong> <span style="color:var(--accent);">${entry.toFixed(spec.decimals)}</span> (MARKET — ingia SASA)</div>
+          <div>🔴 <strong>SL:</strong> <span style="color:var(--red);">${sl.toFixed(spec.decimals)}</span> (${slPips} pips)</div>
+          <div>🟢 <strong>TP1:</strong> <span style="color:var(--green);">${tp1.toFixed(spec.decimals)}</span></div>
+          <div>🟢 <strong>TP2:</strong> <span style="color:var(--green);">${tp2.toFixed(spec.decimals)}</span></div>
+          <div>🎯 <strong>TP3:</strong> <span style="color:var(--green);">${tp3.toFixed(spec.decimals)}</span> (${tp3Pips} pips)</div>
+        </div>
+      </div>
+    `;
+  }
+
+  const html = `
+    <div style="border:3px solid ${voteColor};border-radius:12px;padding:16px;margin-bottom:15px;">
+      <div style="text-align:center;">
+        <div style="font-size:48px;">${voteIcon}</div>
+        <div style="font-size:24px;font-weight:900;color:${voteColor};margin:6px 0;letter-spacing:2px;">${vote}</div>
+        <div style="font-size:12px;color:var(--muted);">${confidence}% Confidence • ${pair}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px;">📸 ${usedProvider}</div>
+        <span class="voice-indicator">🔊 Voice</span>
+      </div>
+      <div style="margin-top:15px;background:rgba(0,0,0,.4);border-radius:8px;padding:12px;font-size:12px;line-height:1.7;">
+        <div style="color:var(--cyan);font-weight:bold;margin-bottom:6px;">🔍 AI ANALYSIS:</div>
+        ${reasoning}
+      </div>
+      ${observations ? `<div style="margin-top:10px;background:rgba(139,92,246,.1);border-radius:8px;padding:12px;font-size:11px;line-height:1.7;border-left:3px solid var(--inst);">
+        <div style="color:var(--inst);font-weight:bold;margin-bottom:6px;">👁 CHART OBSERVATIONS:</div>
+        ${observations}
+      </div>` : ''}
+      ${tradeSetup}
+    </div>
+  `;
+
+  document.getElementById('resultsContainer').style.display = 'block';
+  document.getElementById('resultsContainer').innerHTML = html;
+  document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+  showToast(`${voteIcon} ${vote} • ${confidence}%`, 5000);
+}
+
+// ═══════════════════════════════════════════════════════════
+// DATA & ANALYSIS
+// ═══════════════════════════════════════════════════════════
 async function fetchAllMarketData() {
   const pair = document.getElementById('selectedPair').value;
   const btn = document.getElementById('fetchDataBtn');
@@ -1486,10 +1813,11 @@ async function fetchAllMarketData() {
 
     if (h1Data && h1Data.length > 30 && m15Data && m15Data.length > 30) {
       document.getElementById('runBtn').disabled = false;
-      showToast(`🏦 4H + 1H + 15M data ready`, 3500);
+      showToast(`🏦 Data ready — 4H + 1H + 15M`, 3500);
+      speakText('Data iko tayari. Unaweza kufanya analysis.');
     } else {
       document.getElementById('runBtn').disabled = true;
-      showToast(`❌ Essential data imefeli`, 5000);
+      showToast(`❌ Data failed`, 5000);
     }
   } catch (err) { showToast(`❌ ${err.message}`, 4000); }
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
@@ -1498,74 +1826,64 @@ async function fetchAllMarketData() {
 function renderChartPreview(pair, h1Data, inst) {
   const c = document.getElementById('chartPreview');
   if (!inst) { c.innerHTML = 'No data'; return; }
-  let html = `<div style="color:var(--inst);font-weight:bold;margin-bottom:8px;">🏦 ${pair} — Institutional Snapshot</div>`;
+  let html = `<div style="color:var(--inst);font-weight:bold;margin-bottom:8px;">🏦 ${pair} — Snapshot</div>`;
   const b = inst.biasScore;
   const bColor = b.bias.includes('BULL') ? 'var(--green)' : b.bias.includes('BEAR') ? 'var(--red)' : 'var(--yellow)';
-  html += `<div style="font-size:14px;font-weight:bold;color:${bColor};">Institutional Bias: ${b.score}/100 — ${b.bias}</div>`;
-  if (inst.m15Bias) html += `<div style="color:var(--cyan);margin-top:4px;">⚡ 15M Trigger: ${inst.m15Bias}</div>`;
+  html += `<div style="font-size:14px;font-weight:bold;color:${bColor};">Bias: ${b.score}/100 — ${b.bias}</div>`;
+  if (inst.m15Bias) html += `<div style="color:var(--cyan);margin-top:4px;">⚡ 15M: ${inst.m15Bias}</div>`;
   if (inst.volumeProfile) html += `<div style="color:var(--pink);margin-top:6px;">📊 POC: ${inst.volumeProfile.poc}</div>`;
-  if (inst.structure) html += `<div>Structure 1H: <strong>${inst.structure.trend}</strong></div>`;
-  if (inst.htfStructure) html += `<div>Structure 4H: <strong>${inst.htfStructure.trend}</strong></div>`;
-  if (inst.ltfStructure) html += `<div>Structure 15M: <strong>${inst.ltfStructure.trend}</strong></div>`;
-  if (inst.sweep) html += `<div style="color:var(--cyan);">💧 Sweep: ${inst.sweep.type}</div>`;
+  if (inst.structure) html += `<div>1H: <strong>${inst.structure.trend}</strong></div>`;
+  if (inst.htfStructure) html += `<div>4H: <strong>${inst.htfStructure.trend}</strong></div>`;
+  if (inst.ltfStructure) html += `<div>15M: <strong>${inst.ltfStructure.trend}</strong></div>`;
   if (inst.killZone) html += `<div style="color:${inst.killZone.isActive ? 'var(--green)' : 'var(--muted)'};">⏰ ${inst.killZone.session}</div>`;
   c.innerHTML = html;
 }
 
 function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, inst, htfBias) {
-  let prompt = `${agent.lens}\n\nYOUR WEIGHT: ${(agent.weight * 100).toFixed(0)}% of final decision.\n\nAnalyze ${pair} at current price ${livePrice}.\n`;
-  if (htfBias) prompt += `\nHTF BIAS: 4H=${htfBias.h4}, 1H=${htfBias.h1}, Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
+  let prompt = `${agent.lens}\n\nYOUR WEIGHT: ${(agent.weight * 100).toFixed(0)}%\n\nAnalyze ${pair} at ${livePrice}.\n`;
+  if (htfBias) prompt += `\nHTF: 4H=${htfBias.h4}, 1H=${htfBias.h1}, Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
 
   if (Array.isArray(h4Data)) {
-    prompt += `\n════ 4-HOUR CANDLES (last 12) ════\n`;
+    prompt += `\n════ 4H CANDLES (last 12) ════\n`;
     h4Data.slice(-12).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
   }
   if (Array.isArray(h1Data)) {
-    prompt += `\n════ 1-HOUR CANDLES (last 20) ════\n`;
+    prompt += `\n════ 1H CANDLES (last 20) ════\n`;
     h1Data.slice(-20).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
   }
   if (Array.isArray(m15Data)) {
-    prompt += `\n════ 15-MIN CANDLES (last 24) ════\n`;
+    prompt += `\n════ 15M CANDLES (last 24) ════\n`;
     m15Data.slice(-24).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
   }
 
   if (inst) {
-    prompt += `\n════ INSTITUTIONAL METRICS ════\n`;
-    if (inst.biasScore) prompt += `★ INSTITUTIONAL BIAS: ${inst.biasScore.score}/100 — ${inst.biasScore.bias}\n`;
-    if (inst.volumeProfile) prompt += `\n📊 VOLUME PROFILE:\n- POC: ${inst.volumeProfile.poc}\n- VAH: ${inst.volumeProfile.vah}\n- VAL: ${inst.volumeProfile.val}\n`;
+    prompt += `\n════ METRICS ════\n`;
+    if (inst.biasScore) prompt += `★ BIAS: ${inst.biasScore.score}/100 — ${inst.biasScore.bias}\n`;
+    if (inst.volumeProfile) prompt += `📊 POC: ${inst.volumeProfile.poc} | VAH: ${inst.volumeProfile.vah} | VAL: ${inst.volumeProfile.val}\n`;
     if (inst.orderBlocks) {
-      prompt += `\n🏦 ORDER BLOCKS (1H):\n`;
-      if (inst.orderBlocks.nearestBull) prompt += `- Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(2)}-${inst.orderBlocks.nearestBull.high.toFixed(2)}\n`;
-      if (inst.orderBlocks.nearestBear) prompt += `- Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(2)}-${inst.orderBlocks.nearestBear.high.toFixed(2)}\n`;
+      if (inst.orderBlocks.nearestBull) prompt += `🏦 Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(2)}-${inst.orderBlocks.nearestBull.high.toFixed(2)}\n`;
+      if (inst.orderBlocks.nearestBear) prompt += `🏦 Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(2)}-${inst.orderBlocks.nearestBear.high.toFixed(2)}\n`;
     }
-    if (inst.structure) prompt += `\n🎯 STRUCTURE 1H: ${inst.structure.trend}\n`;
-    if (inst.htfStructure) prompt += `🎯 STRUCTURE 4H: ${inst.htfStructure.trend}\n`;
-    if (inst.ltfStructure) prompt += `🎯 STRUCTURE 15M: ${inst.ltfStructure.trend}\n`;
-    if (inst.sweep) prompt += `\n💧 SWEEP (1H): ${inst.sweep.type} → ${inst.sweep.bias}\n`;
-    if (inst.displacement?.detected) prompt += `💥 1H DISPLACEMENT: ${inst.displacement.direction}\n`;
-    if (inst.powerOf3) prompt += `\n🔄 PO3: ${inst.powerOf3.phase}\n`;
-    if (inst.zone) prompt += `📐 PREMIUM/DISCOUNT: ${inst.zone.zone} (${inst.zone.position})\n`;
-    if (inst.wyckoff) prompt += `🏦 WYCKOFF: ${inst.wyckoff.phase}\n`;
-    if (inst.killZone) prompt += `⏰ KILL ZONE: ${inst.killZone.session}\n`;
+    if (inst.structure) prompt += `🎯 1H: ${inst.structure.trend}\n`;
+    if (inst.htfStructure) prompt += `🎯 4H: ${inst.htfStructure.trend}\n`;
+    if (inst.ltfStructure) prompt += `🎯 15M: ${inst.ltfStructure.trend}\n`;
+    if (inst.sweep) prompt += `💧 Sweep: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
+    if (inst.displacement?.detected) prompt += `💥 Displacement: ${inst.displacement.direction}\n`;
+    if (inst.powerOf3) prompt += `🔄 Po3: ${inst.powerOf3.phase}\n`;
+    if (inst.zone) prompt += `📐 Zone: ${inst.zone.zone} (${inst.zone.position})\n`;
+    if (inst.wyckoff) prompt += `🏦 Wyckoff: ${inst.wyckoff.phase}\n`;
+    if (inst.killZone) prompt += `⏰ Session: ${inst.killZone.session}\n`;
     if (inst.rsi) prompt += `RSI: ${inst.rsi.toFixed(1)}\n`;
   }
 
   prompt += `\n════ RULES ════\n`;
-  prompt += `🚨 YOU MUST MAKE A DECISION. DO NOT DEFAULT TO HOLD.
-- HOLD only if Bias 45-55, 4H+1H RANGING, no displacement/sweep/OB/FVG.
-- Bias >= 65 → BUY. Bias <= 35 → SELL.
-- 4H aligned with 1H → follow direction.
-- 4H+1H bullish but 15M bearish → still BUY (60-70 confidence).
+  prompt += `🚨 RETAIL DAY TRADER needs DECISIVE signal.
+- HOLD only if Bias 45-55 AND 4H+1H RANGING.
+- Bias >= 60 → BUY. Bias <= 40 → SELL.
+- 4H+1H aligned → follow direction.
 
-════ JSON FORMAT ════
-Respond with ONLY this JSON:
-{
-  "vote": "BUY",
-  "confidence": 65,
-  "reasoning": "Your analysis",
-  "key_level": 4263.00,
-  "order_type": "BUY_LIMIT"
-}`;
+JSON ONLY:
+{"vote":"BUY","confidence":65,"reasoning":"...","key_level":4263.00,"order_type":"MARKET"}`;
   return prompt;
 }
 
@@ -1577,13 +1895,11 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, inst
       try {
         if (attempt > 0) await new Promise(r => setTimeout(r, 3000));
         const body = {
-          model: model,
-          messages: [
-            { role: 'system', content: 'You are an institutional trading AI. Respond with ONLY valid JSON.' },
+          model, messages: [
+            { role: 'system', content: 'Respond with ONLY valid JSON.' },
             { role: 'user', content: prompt }
           ],
-          temperature: 0.2,
-          max_tokens: 2000,
+          temperature: 0.2, max_tokens: 2000,
           response_format: { type: 'json_object' }
         };
         const response = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
@@ -1599,12 +1915,12 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, inst
         }
         if (data.error) throw new Error(`${model}: ${typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error))}`);
         if (!data.choices?.[0]?.message?.content) throw new Error(`${model}: No content`);
-        let text = data.choices[0].message.content.trim();
+        const text = data.choices[0].message.content.trim();
         const result = safeJsonParse(text);
         if (!result) throw new Error(`${model}: Invalid JSON`);
         const vote = (result.vote || 'HOLD').toUpperCase();
         if (!['BUY', 'SELL', 'HOLD'].includes(vote)) throw new Error(`${model}: Bad vote`);
-        return { ...agent, vote: vote, confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)), reasoning: result.reasoning || 'No analysis.', key_level: result.key_level || null, order_type: result.order_type || 'MARKET', provider: 'Mistral' };
+        return { ...agent, vote, confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)), reasoning: result.reasoning || 'No analysis.', key_level: result.key_level || null, order_type: 'MARKET', provider: 'Mistral' };
       } catch (e) { lastError = e; }
     }
   }
@@ -1621,14 +1937,14 @@ async function callGemini(agent, pair, livePrice, h4Data, h1Data, m15Data, inst,
         const endpoint = `${GEMINI_BASE_URL}/models/${model}:generateContent?key=${apiKey}`;
         const response = await fetchWithTimeout(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3, responseMimeType: 'application/json' } }) }, API_TIMEOUT);
         const data = await response.json();
-        if (data.error) { const e = data.error.message || ''; if (e.includes('high demand') || e.includes('overloaded') || response.status === 503) { lastError = new Error(`${model}: High demand`); continue; } throw new Error(`${model}: ${e}`); }
+        if (data.error) { const e = data.error.message || ''; if (e.includes('high demand') || response.status === 503) { lastError = new Error(`${model}: High demand`); continue; } throw new Error(`${model}: ${e}`); }
         if (!data.candidates?.[0]) throw new Error(`${model}: No response`);
-        let text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim();
+        const text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim();
         const result = safeJsonParse(text);
         if (!result) throw new Error(`${model}: Invalid JSON`);
         const vote = (result.vote || 'HOLD').toUpperCase();
         if (!['BUY', 'SELL', 'HOLD'].includes(vote)) throw new Error(`${model}: Bad vote`);
-        return { ...agent, vote: vote, confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)), reasoning: result.reasoning || 'No analysis.', key_level: result.key_level || null, order_type: result.order_type || 'MARKET', provider: 'Gemini' };
+        return { ...agent, vote, confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)), reasoning: result.reasoning || 'No analysis.', key_level: result.key_level || null, order_type: 'MARKET', provider: 'Gemini' };
       } catch (e) { lastError = e; }
     }
   }
@@ -1656,14 +1972,12 @@ async function callAgent(agent, pair, livePrice, h4Data, h1Data, m15Data, inst, 
 function computeConfluence(agentResults, inst) {
   let buy = 0, sell = 0, hold = 0;
   let buyCount = 0, sellCount = 0, holdCount = 0;
-
   agentResults.forEach(r => {
     const w = r.weight * (r.confidence / 100);
     if (r.vote === 'BUY') { buy += w; buyCount++; }
     else if (r.vote === 'SELL') { sell += w; sellCount++; }
     else { hold += w; holdCount++; }
   });
-
   const total = buy + sell + hold;
   const buyN = total > 0 ? (buy / total) * 100 : 0;
   const sellN = total > 0 ? (sell / total) * 100 : 0;
@@ -1673,28 +1987,26 @@ function computeConfluence(agentResults, inst) {
   if (actionableVotes === 0) {
     if (inst?.biasScore) {
       const b = inst.biasScore.score;
-      if (b >= 65) return { action: 'BUY', confluenceScore: Math.round(Math.min(75, 55 + (b - 65) * 0.8)), buyCount: 0, sellCount: 0, holdCount, isNoTrade: false, isFallback: true, fallbackReason: `Masters wote HOLD lakini Bias ni ${b}/100 — auto BUY` };
-      if (b <= 35) return { action: 'SELL', confluenceScore: Math.round(Math.min(75, 55 + (35 - b) * 0.8)), buyCount: 0, sellCount: 0, holdCount, isNoTrade: false, isFallback: true, fallbackReason: `Masters wote HOLD lakini Bias ni ${b}/100 — auto SELL` };
+      if (b >= 62) return { action: 'BUY', confluenceScore: Math.round(Math.min(75, 55 + (b - 62) * 0.8)), buyCount: 0, sellCount: 0, holdCount, isNoTrade: false, isFallback: true, fallbackReason: `All Masters HOLD lakini Bias ni ${b}/100 — auto BUY` };
+      if (b <= 38) return { action: 'SELL', confluenceScore: Math.round(Math.min(75, 55 + (38 - b) * 0.8)), buyCount: 0, sellCount: 0, holdCount, isNoTrade: false, isFallback: true, fallbackReason: `All Masters HOLD lakini Bias ni ${b}/100 — auto SELL` };
     }
     return { action: 'HOLD', confluenceScore: 0, buyCount: 0, sellCount: 0, holdCount, isNoTrade: true };
   }
 
   let action = 'HOLD', score = 0;
-
-  if (buyN > sellN && buyN > holdN && buyN >= 40) { action = 'BUY'; score = buyN; }
-  else if (sellN > buyN && sellN > holdN && sellN >= 40) { action = 'SELL'; score = sellN; }
-  else if (buyCount > sellCount && buyN >= 25) { action = 'BUY'; score = Math.max(buyN, 55); }
-  else if (sellCount > buyCount && sellN >= 25) { action = 'SELL'; score = Math.max(sellN, 55); }
+  if (buyN > sellN && buyN > holdN && buyN >= 35) { action = 'BUY'; score = buyN; }
+  else if (sellN > buyN && sellN > holdN && sellN >= 35) { action = 'SELL'; score = sellN; }
+  else if (buyCount > sellCount && buyN >= 20) { action = 'BUY'; score = Math.max(buyN, 55); }
+  else if (sellCount > buyCount && sellN >= 20) { action = 'SELL'; score = Math.max(sellN, 55); }
   else {
     if (inst?.biasScore) {
       const b = inst.biasScore.score;
-      if (b >= 60 && buyCount > 0) { action = 'BUY'; score = Math.max(buyN, 55); }
-      else if (b <= 40 && sellCount > 0) { action = 'SELL'; score = Math.max(sellN, 55); }
+      if (b >= 58 && buyCount > 0) { action = 'BUY'; score = Math.max(buyN, 55); }
+      else if (b <= 42 && sellCount > 0) { action = 'SELL'; score = Math.max(sellN, 55); }
       else { action = 'HOLD'; score = holdN; }
     } else { action = 'HOLD'; score = holdN; }
   }
-
-  return { action, confluenceScore: Math.round(Math.min(100, score)), buyCount, sellCount, holdCount, isNoTrade: false, isMixed: action === 'HOLD' && buyCount > 0 && sellCount > 0 };
+  return { action, confluenceScore: Math.round(Math.min(100, score)), buyCount, sellCount, holdCount, isNoTrade: false };
 }
 
 function capitalShield(confluence, entry, sl, tp, inst) {
@@ -1703,21 +2015,16 @@ function capitalShield(confluence, entry, sl, tp, inst) {
     notHOLD: confluence.action !== 'HOLD',
     consensus: (confluence.buyCount + confluence.sellCount) >= 1,
     rrr: false,
-    institutional: inst?.biasScore ? (inst.biasScore.score >= INSTITUTIONAL_THRESHOLD || inst.biasScore.score <= (100 - INSTITUTIONAL_THRESHOLD)) : false,
-    killZone: inst?.killZone?.isActive || false
+    institutional: inst?.biasScore ? (inst.biasScore.score >= INSTITUTIONAL_THRESHOLD || inst.biasScore.score <= (100 - INSTITUTIONAL_THRESHOLD)) : false
   };
   if (entry && sl && tp) {
     const risk = Math.abs(entry - sl), reward = Math.abs(tp - entry);
-    if (risk > 0) { const rrr = reward / risk; checks.rrr = rrr >= 2.0; checks.rrrValue = rrr.toFixed(2); }
+    if (risk > 0) { const rrr = reward / risk; checks.rrr = rrr >= 1.5; checks.rrrValue = rrr.toFixed(2); }
   }
-  const approved = checks.confluence && checks.notHOLD && checks.consensus && checks.rrr;
+  const approved = checks.confluence && checks.notHOLD && checks.consensus;
   let msg = approved ? `✅ APPROVED (${confluence.confluenceScore}%)` : `🛡️ BLOCKED`;
   if (confluence.isFallback) msg += ` — 🎯 BIAS OVERRIDE`;
   else if (confluence.isNoTrade) msg += ` — NO TRADE`;
-  else if (!checks.confluence) msg += ` — Low confluence`;
-  else if (!checks.notHOLD) msg += ` — HOLD`;
-  else if (!checks.consensus) msg += ` — No votes`;
-  else if (!checks.rrr) msg += ` — RRR < 1:2`;
   return { approved, checks, message: msg };
 }
 
@@ -1728,6 +2035,26 @@ async function runAnalysis() {
   if (!window.marketData || !window.marketData.h1) { alert("Fetch data first."); return; }
 
   const pair = document.getElementById('selectedPair').value;
+
+  try {
+    const spec = PAIR_SPECS[pair];
+    let freshPrice = null;
+    if (spec.source === 'binance') {
+      const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
+      if (r.ok) freshPrice = parseFloat((await r.json()).price);
+    } else {
+      const key = getTwelveKey();
+      if (key) {
+        const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
+        if (r.ok) { const d = await r.json(); if (d.status !== 'error') freshPrice = parseFloat(d.price); }
+      }
+    }
+    if (freshPrice > 0) {
+      document.getElementById('livePrice').value = freshPrice.toFixed(spec.decimals);
+      localStorage.setItem(`price_${pair}`, freshPrice.toString());
+    }
+  } catch (e) {}
+
   const livePrice = parseFloat(document.getElementById('livePrice').value);
   const { h4, h1, m15, indicators: inst } = window.marketData;
   const spec = PAIR_SPECS[pair];
@@ -1735,6 +2062,7 @@ async function runAnalysis() {
 
   const runBtn = document.getElementById('runBtn');
   runBtn.disabled = true; runBtn.innerHTML = '<span class="spinner"></span> Analyzing...';
+  speakText('Nasoma data. Subiri kidogo.');
 
   const container = document.getElementById('resultsContainer');
   container.style.display = 'block';
@@ -1761,22 +2089,18 @@ async function runAnalysis() {
 
   try {
     const confluence = computeConfluence(agentResults, inst);
-
-    let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0, entrySource: 'N/A', quality: '—', orderType: 'N/A', entryDistance: 0, entryDistancePct: '0', usedZone: null };
+    let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0, entrySource: 'N/A', quality: '—', orderType: 'MARKET' };
     if (confluence.action !== 'HOLD') {
       const instEntry = calculateInstitutionalEntry(confluence.action, livePrice, inst, spec);
       if (instEntry) sltp = { ...instEntry, entry: parseFloat(instEntry.entry), sl: parseFloat(instEntry.sl), tp1: parseFloat(instEntry.tp1), tp2: parseFloat(instEntry.tp2), tp3: parseFloat(instEntry.tp3) };
     }
-
     const shield = capitalShield(confluence, sltp.entry, sltp.sl, sltp.tp3, inst);
-    const orderType = sltp.orderType || 'N/A';
     const instBiasScore = inst?.biasScore?.score;
     const strengthInfo = getSignalStrength(confluence.action, confluence.confluenceScore, instBiasScore);
 
     const record = {
       id: Date.now(), date: new Date().toLocaleString(), pair,
-      livePrice: livePrice,
-      action: confluence.action,
+      livePrice, action: confluence.action,
       signalLabel: strengthInfo.label, signalStrength: strengthInfo.strength, signalHint: strengthInfo.hint,
       signalColor: confluence.action === 'BUY' ? 'buy' : confluence.action === 'SELL' ? 'sell' : (confluence.isNoTrade ? 'notrade' : 'wait'),
       confluenceScore: confluence.confluenceScore,
@@ -1789,37 +2113,11 @@ async function runAnalysis() {
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
       entrySource: sltp.entrySource || 'N/A',
       quality: sltp.quality || '—',
-      entryDistance: sltp.entryDistance || 0,
-      entryDistancePct: sltp.entryDistancePct || '0',
-      usedZone: sltp.usedZone || null,
-      orderType, shield: shield.approved,
+      orderType: 'MARKET',
+      shield: shield.approved,
       agents: agentResults, confluence,
-      indicators: {
-        volumeProfile: inst?.volumeProfile,
-        orderBlocks: inst?.orderBlocks,
-        fvg: inst?.fvg,
-        structure: inst?.structure,
-        htfStructure: inst?.htfStructure,
-        ltfStructure: inst?.ltfStructure,
-        m15FVG: inst?.m15FVG,
-        m15Sweep: inst?.m15Sweep,
-        m15Displacement: inst?.m15Displacement,
-        sweep: inst?.sweep,
-        equalLevels: inst?.equalLevels,
-        displacement: inst?.displacement,
-        powerOf3: inst?.powerOf3,
-        zone: inst?.zone,
-        wyckoff: inst?.wyckoff,
-        killZone: inst?.killZone,
-        supportResistance: inst?.supportResistance,
-        rsi: inst?.rsi, atr: inst?.atr, trend: inst?.trend,
-        m15Bias: inst?.m15Bias,
-        biasScore: inst?.biasScore,
-        currentPrice: inst?.currentPrice,
-        h1Raw: inst?.h1Raw, h4Raw: inst?.h4Raw, m15Raw: inst?.m15Raw
-      },
-      institutional: inst,
-      htfBias,
+      indicators: inst,
+      institutional: inst, htfBias,
       chartData: {
         m15: Array.isArray(m15) ? m15.slice(-60).map(c => ({ open: c.open, high: c.high, low: c.low, close: c.close })) : [],
         h1: Array.isArray(h1) ? h1.slice(-60).map(c => ({ open: c.open, high: c.high, low: c.low, close: c.close })) : [],
@@ -1831,12 +2129,30 @@ async function runAnalysis() {
     saveToHistory(record);
     renderFinalResults(record, shield);
     showToast(shield.approved ? `✅ ${strengthInfo.label}` : `${strengthInfo.label}`, 4500);
+
+    // 🔊 VOICE ALERT
+    if (confluence.action !== 'HOLD') {
+      const sig = strengthInfo.strength;
+      if (confluence.isFallback) {
+        speakBiasOverride(pair, confluence.action, confluence.confluenceScore, livePrice);
+      } else if (sig === 'STRONG') {
+        speakStrongSignal(pair, confluence.action, confluence.confluenceScore, livePrice);
+      } else {
+        speakSignal(pair, confluence.action, confluence.confluenceScore, livePrice);
+      }
+      if (navigator.vibrate) {
+        if (sig === 'STRONG') navigator.vibrate([300, 100, 300, 100, 300]);
+        else navigator.vibrate([200, 100, 200]);
+      }
+    } else {
+      speakText('Hakuna signal wazi. Subiri muafaka.');
+    }
     localStorage.setItem(`price_${pair}`, livePrice.toString());
   } catch (err) {
     console.error(err);
     container.innerHTML = `<div class="card" style="border-color:var(--red);"><h3>❌ Error</h3><p>${err.message}</p></div>`;
   } finally {
-    runBtn.disabled = false; runBtn.innerHTML = '🚀 RUN INSTITUTIONAL ANALYSIS';
+    runBtn.disabled = false; runBtn.innerHTML = '🚀 RUN ANALYSIS';
   }
 }
 
@@ -1847,7 +2163,7 @@ function renderLoadingState(pair, agents) {
       <div class="ballistic-header" style="justify-content:center;">🏦 LUTYNOEL.FX — ${pair}</div>
       <div style="font-size:12px;color:var(--muted);">Analyzing 4H + 1H + 15M...</div>
     </div>
-    <div class="card"><div class="ballistic-header">👥 INSTITUTIONAL MASTERS</div><div id="agentsLiveContainer"></div></div>
+    <div class="card"><div class="ballistic-header">👥 MASTERS</div><div id="agentsLiveContainer"></div></div>
   `;
   const m = document.getElementById('agentsLiveContainer');
   agents.forEach(a => {
@@ -1875,19 +2191,14 @@ function renderFinalResults(record, shield) {
   document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield);
 }
 
-// ═══════════════════════════════════════════════════════════
-// ✅ v35.5 — CHART WITH LIVE PRICE LINE
-// ═══════════════════════════════════════════════════════════
 function drawAnalysisChart(canvasId, record) {
   const canvas = document.getElementById(canvasId);
   if (!canvas || !record) return;
-
   const ohlc = record.chartData?.m15 || record.chartData?.h1 || [];
   if (ohlc.length < 5) {
-    if (canvas.parentElement) canvas.parentElement.innerHTML = '<div class="info-box">Hakuna data ya chart.</div>';
+    if (canvas.parentElement) canvas.parentElement.innerHTML = '<div class="info-box">No chart data.</div>';
     return;
   }
-
   const dpr = window.devicePixelRatio || 1;
   const cssW = canvas.parentElement.clientWidth - 16 || 340;
   const cssH = 440;
@@ -1904,25 +2215,15 @@ function drawAnalysisChart(canvasId, record) {
 
   let minP = Infinity, maxP = -Infinity;
   ohlc.forEach(c => { minP = Math.min(minP, c.low); maxP = Math.max(maxP, c.high); });
-
   const addLevel = v => { if (v && isFinite(v)) { minP = Math.min(minP, v); maxP = Math.max(maxP, v); } };
   addLevel(record.entry); addLevel(record.sl);
   addLevel(record.tp1); addLevel(record.tp2); addLevel(record.tp3);
   addLevel(record.livePrice);
 
-  const inst = record.indicators || record.institutional || {};
-  if (record.usedZone) { minP = Math.min(minP, record.usedZone.low); maxP = Math.max(maxP, record.usedZone.high); }
-  if (inst.volumeProfile) {
-    addLevel(parseFloat(inst.volumeProfile.poc));
-    addLevel(parseFloat(inst.volumeProfile.vah));
-    addLevel(parseFloat(inst.volumeProfile.val));
-  }
-
   const range = maxP - minP;
   if (range <= 0) return;
   minP -= range * 0.05; maxP += range * 0.05;
   const finalRange = maxP - minP;
-
   const priceToY = p => padT + (maxP - p) / finalRange * chartH;
   const idxToX = i => padL + (i / Math.max(1, ohlc.length - 1)) * chartW;
 
@@ -1941,57 +2242,23 @@ function drawAnalysisChart(canvasId, record) {
     ctx.fillText(price.toFixed(price > 100 ? 1 : 2), padL + chartW + 68, y + 3);
   }
 
-  // Used Zone (entry zone highlighting)
-  if (record.usedZone) {
-    const z = record.usedZone;
-    const y1 = priceToY(z.high), y2 = priceToY(z.low);
-    const isBull = z.type.includes('BULL');
-    ctx.fillStyle = isBull ? 'rgba(16,185,129,0.18)' : 'rgba(239,68,68,0.18)';
-    ctx.fillRect(padL, y1, chartW, Math.max(2, y2 - y1));
-    ctx.strokeStyle = isBull ? 'rgba(16,185,129,0.8)' : 'rgba(239,68,68,0.8)';
-    ctx.lineWidth = 1; ctx.setLineDash([4,3]);
-    ctx.strokeRect(padL, y1, chartW, Math.max(2, y2 - y1)); ctx.setLineDash([]);
-    ctx.fillStyle = isBull ? 'rgba(16,185,129,0.95)' : 'rgba(239,68,68,0.95)';
-    ctx.font = 'bold 9px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(z.type.replace(/_/g, ' '), padL + 4, y1 + 11);
-  }
-
-  // Candles
   const gap = chartW / ohlc.length;
   const candleW = Math.max(1.5, gap * 0.65);
   ohlc.forEach((c, i) => {
     const x = idxToX(i) + gap / 2;
     const isBull = c.close >= c.open;
     const color = isBull ? '#10b981' : '#ef4444';
-
     ctx.strokeStyle = color; ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(x, priceToY(c.high));
     ctx.lineTo(x, priceToY(c.low));
     ctx.stroke();
-
     const bodyTop = priceToY(Math.max(c.open, c.close));
     const bodyBot = priceToY(Math.min(c.open, c.close));
     ctx.fillStyle = color;
     ctx.fillRect(x - candleW/2, bodyTop, candleW, Math.max(1, bodyBot - bodyTop));
   });
 
-  // VP lines
-  if (inst.volumeProfile) {
-    const vp = inst.volumeProfile;
-    const drawVP = (price, color) => {
-      if (!price) return;
-      const y = priceToY(parseFloat(price));
-      if (y < padT - 2 || y > padT + chartH + 2) return;
-      ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.setLineDash([2,4]);
-      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
-      ctx.setLineDash([]);
-    };
-    drawVP(vp.poc, 'rgba(250,204,21,0.65)');
-  }
-
-  // Draw levels
   const drawLevel = (price, color, label, dashed) => {
     if (!price || !isFinite(price)) return;
     const y = priceToY(price);
@@ -2000,7 +2267,6 @@ function drawAnalysisChart(canvasId, record) {
     if (dashed) ctx.setLineDash([6,4]);
     ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
     ctx.setLineDash([]);
-
     ctx.fillStyle = color;
     ctx.fillRect(padL + chartW + 2, y - 7, 66, 14);
     ctx.fillStyle = '#000';
@@ -2015,30 +2281,16 @@ function drawAnalysisChart(canvasId, record) {
   if (record.tp3) drawLevel(record.tp3, '#22c55e', 'TP3', true);
   if (record.entry) drawLevel(record.entry, '#3b82f6', 'ENTRY', false);
 
-  // ✅ v35.5: LIVE PRICE line (yellow dashed)
   if (record.livePrice) {
     const y = priceToY(record.livePrice);
     if (y >= padT - 2 && y <= padT + chartH + 2) {
-      ctx.strokeStyle = '#fbbf24';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([8, 4]);
-      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
-      ctx.setLineDash([]);
-
       ctx.fillStyle = '#fbbf24';
-      ctx.fillRect(padL + chartW + 2, y - 8, 66, 16);
-      ctx.fillStyle = '#000';
-      ctx.font = 'bold 9px monospace';
-      ctx.textAlign = 'left';
-      ctx.fillText('LIVE', padL + chartW + 5, y + 3);
-
-      // Circle marker at end
-      ctx.fillStyle = '#fbbf24';
-      ctx.beginPath(); ctx.arc(padL + chartW, y, 4, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(padL + chartW, y, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#000'; ctx.lineWidth = 1; ctx.stroke();
     }
   }
 
-  // Kill zone
+  const inst = record.indicators || {};
   if (inst.killZone) {
     ctx.fillStyle = inst.killZone.isActive ? 'rgba(16,185,129,0.9)' : 'rgba(148,163,184,0.6)';
     ctx.font = 'bold 10px sans-serif';
@@ -2046,11 +2298,10 @@ function drawAnalysisChart(canvasId, record) {
     ctx.fillText('⏰ ' + inst.killZone.session, padL, padT + 12);
   }
 
-  // Bottom title
   ctx.fillStyle = '#fbbf24';
   ctx.font = 'bold 10px sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(record.pair + ' — M15 (' + ohlc.length + ' candles)', padL, cssH - 10);
+  ctx.fillText(record.pair + ' — M15', padL, cssH - 10);
   ctx.fillStyle = '#64748b';
   ctx.font = '9px sans-serif';
   ctx.textAlign = 'right';
@@ -2058,7 +2309,7 @@ function drawAnalysisChart(canvasId, record) {
 }
 
 function buildAnalysisHTML(record, shield) {
-  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence, orderType } = record;
+  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence } = record;
   const inst = record.indicators || record.institutional || {};
   const spec = PAIR_SPECS[pair];
   const slPips = record.slPips || 0;
@@ -2074,17 +2325,13 @@ function buildAnalysisHTML(record, shield) {
   const strength = getSignalStrength(action, confluenceScore, record.institutionalScore);
   const signalColor = record.signalColor || (action === 'BUY' ? 'buy' : action === 'SELL' ? 'sell' : 'wait');
   const signalTextColor = strength.color;
-
   const qualityBadge = record.quality || '—';
   const qualityColor = qualityBadge === 'A+' ? 'var(--green)' : qualityBadge === 'A' ? 'var(--cyan)' : qualityBadge === 'B+' ? 'var(--yellow)' : qualityBadge === 'B' ? 'var(--orange)' : 'var(--muted)';
-
-  const distPct = parseFloat(record.entryDistancePct) || 0;
-  const distColor = distPct < 0.3 ? 'var(--green)' : distPct < 0.8 ? 'var(--yellow)' : distPct < 1.5 ? 'var(--orange)' : 'var(--red)';
 
   let html = `<div class="signal-hero ${signalColor}">
     <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
     <div class="signal-label" style="color:${signalTextColor};">${strength.label}</div>
-    <div class="signal-hint">${strength.hint}</div>
+    <div class="signal-hint">${strength.hint} <span class="voice-indicator">🔊</span></div>
     <div class="signal-badge-container">
       <span class="badge-conf">${confluenceScore}% CONFLUENCE</span>
       <span class="badge-status">${confluence.buyCount}B / ${confluence.sellCount}S / ${confluence.holdCount}H</span>
@@ -2094,86 +2341,55 @@ function buildAnalysisHTML(record, shield) {
     </div>
   </div>`;
 
-  // Live vs Entry comparison (v35.5 NEW)
   if (action !== 'HOLD') {
-    html += `<div style="background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:10px;padding:14px;margin-bottom:12px;">
-      <div style="font-size:11px;color:var(--accent);font-weight:bold;letter-spacing:1px;margin-bottom:10px;">💹 LIVE vs ENTRY</div>
-      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center;">
-        <div>
-          <div style="font-size:10px;color:var(--muted);">LIVE PRICE</div>
-          <div style="font-size:18px;font-weight:900;color:var(--yellow);">${record.livePrice ? record.livePrice.toFixed(spec.decimals) : '—'}</div>
-        </div>
-        <div style="font-size:20px;color:var(--accent);">→</div>
-        <div>
-          <div style="font-size:10px;color:var(--muted);">ENTRY</div>
-          <div style="font-size:18px;font-weight:900;color:var(--accent);">${entry}</div>
-        </div>
+    html += `<div class="exec-panel" style="background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:3px solid var(--green);">
+      <div style="font-size:38px;">🚀</div>
+      <div style="font-size:18px;font-weight:900;color:var(--green);margin:6px 0;letter-spacing:1px;">INGIA SASA — MARKET</div>
+      <div style="background:#08080a;border-radius:8px;padding:12px;margin-top:10px;font-size:13px;line-height:1.8;text-align:left;">
+        <div>💹 Bei: <strong style="color:var(--accent);">${record.livePrice.toFixed(spec.decimals)}</strong></div>
+        <div>🎯 Action: <strong style="color:${signalTextColor};">${action} @ MARKET</strong></div>
+        <div>📊 Quality: <strong style="color:${qualityColor};">${qualityBadge}</strong></div>
       </div>
-      <div style="text-align:center;margin-top:10px;padding:6px;background:rgba(0,0,0,.3);border-radius:6px;">
-        <span class="dist-badge" style="background:${distColor}22;color:${distColor};border:1px solid ${distColor};">
-          📏 ${distPct.toFixed(2)}% ${record.orderType === 'MARKET' ? '(MARKET)' : 'away'} • ${record.orderType}
-        </span>
-      </div>
+      <div class="exec-action" style="background:${signalTextColor};color:#000;">${action} @ MARKET — SASA HIVI</div>
     </div>`;
   }
 
   if (record.isFallback && record.fallbackReason) {
     html += `<div class="fallback-box">
-      <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ INSTITUTIONAL BIAS OVERRIDE</div>
+      <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ BIAS OVERRIDE</div>
       <div style="font-size:12px;">${record.fallbackReason}</div>
     </div>`;
   }
 
-  if (action !== 'HOLD' && record.entrySource && record.entrySource !== 'N/A') {
+  if (action !== 'HOLD' && record.entrySource) {
     html += `<div class="entry-source-box">
-      <div style="color:var(--cyan);font-weight:bold;font-size:11px;letter-spacing:1px;margin-bottom:6px;">📍 ENTRY SOURCE</div>
+      <div style="color:var(--cyan);font-weight:bold;font-size:11px;letter-spacing:1px;margin-bottom:6px;">📍 ENTRY INFO</div>
       <div>${record.entrySource}</div>
-      <div style="margin-top:6px;font-size:11px;color:var(--muted);">Quality: <strong style="color:${qualityColor};">${qualityBadge}</strong> | Order: <strong style="color:var(--blue);">${orderType}</strong></div>
     </div>`;
   }
 
   const chartId = 'analysisChart_' + record.id;
   html += `<div class="card" style="border-color:var(--inst);">
     <div class="ballistic-header">📊 CHART VIEW</div>
-    <div class="chart-canvas-wrap">
-      <canvas id="${chartId}"></canvas>
-    </div>
+    <div class="chart-canvas-wrap"><canvas id="${chartId}"></canvas></div>
     <div class="chart-legend">
-      <span><i style="background:rgba(16,185,129,.5);border:1px solid #10b981;"></i>Entry Zone</span>
       <span><i style="background:#3b82f6;"></i>Entry</span>
-      <span><i style="background:#fbbf24;"></i>LIVE Price</span>
+      <span><i style="background:#fbbf24;"></i>Live</span>
       <span><i style="background:#ef4444;"></i>SL</span>
       <span><i style="background:#22c55e;"></i>TP</span>
     </div>
   </div>`;
-
   setTimeout(() => drawAnalysisChart(chartId, record), 100);
 
   if (inst?.biasScore) {
     const bs = inst.biasScore;
     const bColor = bs.bias.includes('BULL') ? 'var(--green)' : bs.bias.includes('BEAR') ? 'var(--red)' : 'var(--yellow)';
     html += `<div class="inst-bias-panel">
-      <div style="font-size:11px;color:var(--inst);font-weight:bold;letter-spacing:2px;">🧭 INSTITUTIONAL BIAS SCORE</div>
+      <div style="font-size:11px;color:var(--inst);font-weight:bold;letter-spacing:2px;">🧭 BIAS SCORE</div>
       <div class="inst-bias-score" style="color:${bColor};">${bs.score}<span style="font-size:20px;color:var(--muted);">/100</span></div>
       <div style="font-size:13px;font-weight:bold;color:${bColor};margin-bottom:8px;">${bs.bias.replace('_', ' ')}</div>
       <div class="inst-bias-bar"><div class="inst-bias-fill" style="width:${bs.score}%"></div></div>
-      ${bs.bull.length ? `<div style="font-size:10px;color:var(--green);margin-top:10px;text-align:left;">📈 ${bs.bull.slice(0,3).join(' • ')}</div>` : ''}
-      ${bs.bear.length ? `<div style="font-size:10px;color:var(--red);margin-top:4px;text-align:left;">📉 ${bs.bear.slice(0,3).join(' • ')}</div>` : ''}
     </div>`;
-  }
-
-  if (inst?.ltfStructure || inst?.m15Sweep || inst?.m15Displacement?.detected) {
-    html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">⚡ 15M ENTRY TIMING</div>`;
-    if (inst.ltfStructure) {
-      const stColor = inst.ltfStructure.trend === 'BULLISH' ? 'var(--green)' : inst.ltfStructure.trend === 'BEARISH' ? 'var(--red)' : 'var(--yellow)';
-      html += `<div class="inst-zone neutral"><div><strong>15M Structure</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.ltfStructure.trend}</span></div>`;
-    }
-    if (inst.m15Displacement?.detected) {
-      const dColor = inst.m15Displacement.direction === 'BULLISH' ? 'bull' : 'bear';
-      html += `<div class="inst-zone ${dColor}"><div><strong>💥 15M Displacement</strong></div><span class="zone-badge ${dColor}">${inst.m15Displacement.direction}</span></div>`;
-    }
-    html += `</div>`;
   }
 
   if (inst?.volumeProfile) {
@@ -2191,23 +2407,26 @@ function buildAnalysisHTML(record, shield) {
   if (inst?.orderBlocks || inst?.fvg) {
     html += `<div class="card" style="border-color:var(--pink);">
       <div class="ballistic-header">🏦 INSTITUTIONAL ZONES</div>`;
-    if (inst.orderBlocks?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bullish OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBull.low.toFixed(2)} – ${inst.orderBlocks.nearestBull.high.toFixed(2)}</small></div><span class="zone-badge bull">OB</span></div>`;
-    if (inst.orderBlocks?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bearish OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBear.low.toFixed(2)} – ${inst.orderBlocks.nearestBear.high.toFixed(2)}</small></div><span class="zone-badge bear">OB</span></div>`;
-    if (inst.fvg?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bullish FVG</strong><br><small style="color:var(--muted);">${inst.fvg.nearestBull.bottom.toFixed(2)} – ${inst.fvg.nearestBull.top.toFixed(2)}</small></div><span class="zone-badge bull">FVG</span></div>`;
-    if (inst.fvg?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bearish FVG</strong><br><small style="color:var(--muted);">${inst.fvg.nearestBear.bottom.toFixed(2)} – ${inst.fvg.nearestBear.top.toFixed(2)}</small></div><span class="zone-badge bear">FVG</span></div>`;
+    if (inst.orderBlocks?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bull OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBull.low.toFixed(2)} – ${inst.orderBlocks.nearestBull.high.toFixed(2)}</small></div><span class="zone-badge bull">OB</span></div>`;
+    if (inst.orderBlocks?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bear OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBear.low.toFixed(2)} – ${inst.orderBlocks.nearestBear.high.toFixed(2)}</small></div><span class="zone-badge bear">OB</span></div>`;
+    if (inst.fvg?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bull FVG</strong></div><span class="zone-badge bull">FVG</span></div>`;
+    if (inst.fvg?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bear FVG</strong></div><span class="zone-badge bear">FVG</span></div>`;
     html += `</div>`;
   }
 
   if (inst?.structure || inst?.sweep) {
-    html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">🎯 STRUCTURE & LIQUIDITY</div>`;
+    html += `<div class="card" style="border-color:var(--cyan);"><div class="ballistic-header">🎯 STRUCTURE</div>`;
     if (inst.structure) {
       const stColor = inst.structure.trend === 'BULLISH' ? 'var(--green)' : inst.structure.trend === 'BEARISH' ? 'var(--red)' : 'var(--yellow)';
-      html += `<div class="inst-zone neutral"><div><strong>1H Structure</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.structure.trend}</span></div>`;
+      html += `<div class="inst-zone neutral"><div><strong>1H</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.structure.trend}</span></div>`;
     }
     if (inst.htfStructure) {
       const stColor = inst.htfStructure.trend === 'BULLISH' ? 'var(--green)' : inst.htfStructure.trend === 'BEARISH' ? 'var(--red)' : 'var(--yellow)';
-      html += `<div class="inst-zone neutral"><div><strong>4H Structure</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.htfStructure.trend}</span></div>`;
+      html += `<div class="inst-zone neutral"><div><strong>4H</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.htfStructure.trend}</span></div>`;
+    }
+    if (inst.ltfStructure) {
+      const stColor = inst.ltfStructure.trend === 'BULLISH' ? 'var(--green)' : inst.ltfStructure.trend === 'BEARISH' ? 'var(--red)' : 'var(--yellow)';
+      html += `<div class="inst-zone neutral"><div><strong>15M</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.ltfStructure.trend}</span></div>`;
     }
     if (inst.sweep) {
       const sColor = inst.sweep.bias === 'BUY' ? 'bull' : 'bear';
@@ -2217,9 +2436,8 @@ function buildAnalysisHTML(record, shield) {
   }
 
   if (action === 'HOLD') {
-    let reasonSummary = confluence.isNoTrade ? `Masters wote <strong>${confluence.holdCount} kati ya 4</strong> walisema HOLD.` : `Masters wamegawanyika.`;
     html += `<div class="card" style="border-color:var(--orange);">
-      <div class="ballistic-header" style="color:var(--orange);">⏸ SABABU YA ${strength.label}</div>
+      <div class="ballistic-header" style="color:var(--orange);">⏸ SABABU YA HOLD</div>
       ${record.agents.map(a => `
         <div style="background:#08080a;padding:12px;border-radius:8px;margin-bottom:8px;border-left:3px solid ${a.vote === 'BUY' ? 'var(--green)' : a.vote === 'SELL' ? 'var(--red)' : 'var(--orange)'};">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -2229,25 +2447,13 @@ function buildAnalysisHTML(record, shield) {
           <div style="font-size:12px;line-height:1.7;">${a.reasoning}</div>
         </div>
       `).join('')}
-      <div style="margin-top:12px;padding:14px;background:#08080a;border-radius:8px;border-left:3px solid var(--yellow);">
-        <div style="font-size:11px;color:var(--yellow);font-weight:bold;margin-bottom:8px;">💡 USHAURI</div>
-        <div style="font-size:12px;line-height:1.7;">${reasonSummary}</div>
-      </div>
-    </div>`;
-  }
-
-  if (action !== 'HOLD' && orderType && orderType !== 'N/A') {
-    html += `<div class="order-type-box">
-      <div style="font-size:11px;color:var(--blue);font-weight:bold;letter-spacing:2px;">⚡ ORDER TYPE</div>
-      <div class="order-type-value">${orderType}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:5px;">${orderType === 'MARKET' ? 'Ingia sasa kwa bei ya sasa' : orderType === 'BUY_LIMIT' ? 'Subiri bei irudi kwenye entry' : 'Subiri bei ipande kwenye entry'}</div>
     </div>`;
   }
 
   if (inst?.supportResistance) {
     const sr = inst.supportResistance;
     html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">📐 SUPPORT & RESISTANCE</div>
+      <div class="ballistic-header">📐 S/R</div>
       <div class="sr-level sr-r3"><span>R3</span><span>${sr.r3}</span></div>
       <div class="sr-level sr-r2"><span>R2</span><span>${sr.r2}</span></div>
       <div class="sr-level sr-r1"><span>R1</span><span>${sr.r1}</span></div>
@@ -2259,40 +2465,26 @@ function buildAnalysisHTML(record, shield) {
     </div>`;
   }
 
-  if (record.htfBias) {
-    const h = record.htfBias;
-    html += `<div class="card"><div class="ballistic-header">📊 MTF CONFLUENCE</div>
-      <div class="grid-3">
-        <div class="mini-box" style="text-align:center;"><label>4H</label><div style="color:${h.h4 === 'BULLISH' ? 'var(--green)' : h.h4 === 'BEARISH' ? 'var(--red)' : 'var(--muted)'};font-weight:bold;">${h.h4}</div></div>
-        <div class="mini-box" style="text-align:center;"><label>1H</label><div style="color:${h.h1 === 'BULLISH' ? 'var(--green)' : h.h1 === 'BEARISH' ? 'var(--red)' : 'var(--muted)'};font-weight:bold;">${h.h1}</div></div>
-        <div class="mini-box" style="text-align:center;"><label>Aligned</label><div style="color:${h.aligned ? 'var(--green)' : 'var(--red)'};font-weight:bold;">${h.aligned ? '✓ YES' : '✗ NO'}</div></div>
-      </div>
-    </div>`;
-  }
-
   html += `<div class="card" style="border-color:${shield.approved ? 'var(--green)' : 'var(--purple)'};">
     <div class="ballistic-header">🛡️ CAPITAL SHIELD</div>
     <div class="shield-box">${shield.message}</div>
     <div class="checklist-item ${shield.checks.confluence ? 'pass' : 'fail'}"><span>${shield.checks.confluence ? '✓' : '✗'}</span><span>Confluence ≥ ${CONFLUENCE_THRESHOLD}%</span></div>
     <div class="checklist-item ${shield.checks.notHOLD ? 'pass' : 'fail'}"><span>${shield.checks.notHOLD ? '✓' : '✗'}</span><span>Not HOLD</span></div>
-    <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:2</span></div>
-    <div class="checklist-item ${shield.checks.institutional ? 'pass' : 'fail'}"><span>${shield.checks.institutional ? '✓' : '✗'}</span><span>Bias ≥ ${INSTITUTIONAL_THRESHOLD}</span></div>
-    <div class="checklist-item ${shield.checks.killZone ? 'pass' : 'fail'}"><span>${shield.checks.killZone ? '✓' : '✗'}</span><span>Active Kill Zone</span></div>
+    <div class="checklist-item ${shield.checks.rrr ? 'pass' : 'fail'}"><span>${shield.checks.rrr ? '✓' : '✗'}</span><span>RRR ≥ 1:1.5</span></div>
   </div>`;
 
   if (action !== 'HOLD' && slPips > 0) {
     const autoLot = computeAutoLotSize(slPips, spec.pipValue);
-    const ote = calculateOTE(inst.h1Raw || inst.h4Raw || [], action);
     html += `<div class="card">
       <div class="ballistic-header">📊 TRADING PARAMETERS</div>
       <div class="grid-2">
-        <div class="mini-box"><label>Entry</label><div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div></div>
+        <div class="mini-box"><label>Entry (MARKET)</label><div style="font-size:16px;font-weight:bold;color:var(--accent);">${entry}</div></div>
         <div class="mini-box"><label style="color:var(--red);">Stop Loss</label><div style="font-size:16px;font-weight:bold;color:var(--red);">${sl}</div><div style="font-size:11px;">${slPips}p</div></div>
       </div>
       <div class="grid-3">
         <div class="mini-box"><label style="color:var(--green);">TP1</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${tp1}</div><div style="font-size:11px;">${tp1Pips}p</div></div>
         <div class="mini-box"><label style="color:var(--green);">TP2</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${tp2}</div><div style="font-size:11px;">${tp2Pips}p</div></div>
-        <div class="mini-box"><label style="color:var(--green);">TP3</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${tp3}</div><div style="font-size:11px;">${tp3Pips}p</div></div>
+        <div class="mini-box"><label style="color:var(--green);">TP3 🎯</label><div style="font-size:13px;font-weight:bold;color:var(--green);">${tp3}</div><div style="font-size:11px;">${tp3Pips}p</div></div>
       </div>
       <div class="mini-box" style="margin-top:10px;text-align:center;"><label>RRR</label><div style="font-size:22px;font-weight:bold;color:var(--accent);">1 : ${rrr}</div></div>
       ${autoLot ? `<div class="auto-lot-box">
@@ -2303,20 +2495,11 @@ function buildAnalysisHTML(record, shield) {
       </div>` : ''}
     </div>`;
 
-    if (ote) {
-      html += `<div class="card" style="border-color:var(--inst);">
-        <div class="ballistic-header">📐 OTE (Optimal Trade Entry)</div>
-        <div class="lot-row"><span>62.0%</span><strong style="color:var(--inst);">${ote.ote_62}</strong></div>
-        <div class="lot-row" style="border-color:var(--yellow);"><span>70.5% ⭐</span><strong style="color:var(--yellow);">${ote.ote_705}</strong></div>
-        <div class="lot-row"><span>79.0%</span><strong style="color:var(--inst);">${ote.ote_79}</strong></div>
-      </div>`;
-    }
-
     html += `<div class="card" style="border-color:var(--cyan);">
       <div class="ballistic-header">📋 TRADE MANAGEMENT</div>
       <div class="manage-row"><div class="num">1</div><div><strong>Scale-Out:</strong> TP1 (${tp1}) — toa 50%.</div></div>
       <div class="manage-row"><div class="num">2</div><div><strong>Breakeven:</strong> SL → entry baada ya TP1.</div></div>
-      <div class="manage-row"><div class="num">3</div><div><strong>Runner:</strong> 50% iende TP2 (${tp2}) na TP3 (${tp3}).</div></div>
+      <div class="manage-row"><div class="num">3</div><div><strong>Runner:</strong> 50% iende TP3 (${tp3}) — ${tp3Pips}p 🎯</div></div>
     </div>`;
 
     html += `<div class="card">
@@ -2338,7 +2521,7 @@ function buildAnalysisHTML(record, shield) {
   }
 
   if (record.agents && action !== 'HOLD') {
-    html += `<div class="card"><div class="ballistic-header">👥 INSTITUTIONAL MASTERS</div>${record.agents.map(a => {
+    html += `<div class="card"><div class="ballistic-header">👥 MASTERS</div>${record.agents.map(a => {
       const vc = a.vote === 'BUY' ? 'vote-buy' : a.vote === 'SELL' ? 'vote-sell' : 'vote-hold';
       let pb = '';
       if (a.provider === 'Gemini') pb = '<span class="provider-badge provider-gemini">Gemini</span>';
@@ -2366,16 +2549,15 @@ async function refreshOrderFlow() {
     const livePrice = parseFloat(localStorage.getItem(`price_${pair}`)) || h1Data?.[h1Data.length-1]?.close || 0;
     if (!h1Data) { container.innerHTML = '<div class="disclaimer-box">Failed.</div>'; return; }
     const inst = calculateInstitutionalMetrics(h4Data, h1Data, m15Data, livePrice);
-    if (!inst) { container.innerHTML = '<div class="disclaimer-box">Not enough data.</div>'; return; }
+    if (!inst) { container.innerHTML = '<div class="disclaimer-box">No data.</div>'; return; }
     const b = inst.biasScore;
     const bColor = b.bias.includes('BULL') ? 'var(--green)' : b.bias.includes('BEAR') ? 'var(--red)' : 'var(--yellow)';
-    let html = `<div class="inst-bias-panel">
+    container.innerHTML = `<div class="inst-bias-panel">
       <div style="font-size:11px;color:var(--inst);font-weight:bold;letter-spacing:2px;">🧭 BIAS — ${pair}</div>
       <div class="inst-bias-score" style="color:${bColor};">${b.score}<span style="font-size:20px;color:var(--muted);">/100</span></div>
       <div style="font-size:13px;font-weight:bold;color:${bColor};">${b.bias.replace('_',' ')}</div>
       <div class="inst-bias-bar"><div class="inst-bias-fill" style="width:${b.score}%"></div></div>
     </div>`;
-    container.innerHTML = html;
   } catch (err) { container.innerHTML = `<div class="disclaimer-box">Error: ${err.message}</div>`; }
 }
 
@@ -2388,7 +2570,7 @@ function refreshBacktest() {
   if (withSLTP.length === 0) { container.innerHTML = `<div class="info-box">📊 Fanya analysis (BUY/SELL) na app itaanza kufuatilia.</div>`; return; }
   const wins = closed.filter(h => h.outcome === 'WIN'), losses = closed.filter(h => h.outcome === 'LOSS');
   const winRate = closed.length > 0 ? ((wins.length / closed.length) * 100).toFixed(1) : '—';
-  let html = `<div class="success-box">✅ <strong>Auto-Backtest Live</strong> — kila dakika 1</div>
+  container.innerHTML = `<div class="success-box">✅ <strong>Auto-Backtest Live</strong></div>
     <div class="stats-grid">
       <div class="stat-box"><div class="stat-value" style="color:${parseFloat(winRate) >= 50 ? 'var(--green)' : 'var(--red)'};">${winRate}${closed.length > 0 ? '%' : ''}</div><div class="stat-label">Win Rate</div></div>
       <div class="stat-box"><div class="stat-value">${closed.length}</div><div class="stat-label">Closed</div></div>
@@ -2398,7 +2580,6 @@ function refreshBacktest() {
       <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">Losses ❌</label><div style="font-size:20px;font-weight:bold;color:var(--red);">${losses.length}</div></div>
       <div class="mini-box" style="text-align:center;"><label style="color:var(--yellow);">Pending ⏳</label><div style="font-size:20px;font-weight:bold;color:var(--yellow);">${pending.length}</div></div>
     </div>`;
-  container.innerHTML = html;
 }
 
 function checkAutoBacktest() {
@@ -2515,7 +2696,6 @@ function loadHistory() {
       <div style="flex-grow:1;">
         <strong>${r.pair} <span style="color:${strength.color};">${strength.label}</span></strong> ${sb}
         ${r.quality && r.quality !== '—' ? `<span style="color:var(--cyan);font-size:11px;"> • 🎯 ${r.quality}</span>` : ''}
-        ${r.isFallback ? '<span style="color:var(--pink);font-size:11px;"> • OVERRIDE</span>' : ''}
         <br><small style="color:var(--muted);">${r.date}</small>
       </div>
       <div class="chevron">›</div>
@@ -2530,10 +2710,8 @@ function viewHistoryDetail(i) {
   if (!r) return;
   const c = document.getElementById('modalInnerContent');
   let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid var(--border);"><h2 style="color:var(--accent);margin:0;font-size:18px;">Detail</h2><button onclick="closeUniversalModal()" class="modal-close-top">✕</button></div>`;
-  if (r.type === 'manual') {
-    html += `<div class="card"><div class="grid-2"><div class="mini-box"><label>Pair</label>${r.pair}</div><div class="mini-box"><label>Action</label>${r.action}</div></div></div>`;
-  } else if (r.agents && r.confluence) {
-    const shield = { approved: r.shield === true, checks: { confluence: (r.confluenceScore || 0) >= CONFLUENCE_THRESHOLD, notHOLD: r.action !== 'HOLD', consensus: ((r.confluence.buyCount||0)+(r.confluence.sellCount||0)) >= 1, rrr: (r.tp3Pips && r.slPips) ? (r.tp3Pips/r.slPips) >= 2 : false, institutional: true, killZone: true }, message: r.shield ? '✅ Approved' : '🛡️ Blocked' };
+  if (r.agents && r.confluence) {
+    const shield = { approved: r.shield === true, checks: { confluence: (r.confluenceScore || 0) >= CONFLUENCE_THRESHOLD, notHOLD: r.action !== 'HOLD', consensus: ((r.confluence.buyCount||0)+(r.confluence.sellCount||0)) >= 1, rrr: true }, message: r.shield ? '✅ Approved' : '🛡️ Blocked' };
     html += buildAnalysisHTML(r, shield);
   }
   html += `<button class="modal-close-bottom" onclick="closeUniversalModal()">Funga</button>`;
@@ -2569,11 +2747,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "35.5", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "35.8", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v35.5-${Date.now()}.json`;
+  a.download = `lutynoel-v35.8-${Date.now()}.json`;
   a.click();
 }
 
@@ -2585,6 +2763,24 @@ window.addEventListener('DOMContentLoaded', () => {
   setupPWA();
   clearMarketData();
   document.getElementById('universalModal').addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
+  
+  // Warmup voice engine (user gesture required)
+  document.body.addEventListener('click', function warmupVoice() {
+    if ('speechSynthesis' in window) {
+      const u = new SpeechSynthesisUtterance('');
+      u.volume = 0;
+      window.speechSynthesis.speak(u);
+      // Force load voices
+      window.speechSynthesis.getVoices();
+    }
+    document.body.removeEventListener('click', warmupVoice);
+  }, { once: true });
+
+  // Load voices when available
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+  }
+
   const keys = loadKeys();
   if (keys.name && (keys.geminiKey || keys.mistralKey)) {
     document.getElementById('returningUserSection').style.display = 'block';
