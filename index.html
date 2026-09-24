@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v35.4 — Institutional Flow</title>
+<title>Lutynoel.fx v35.5 — Institutional Flow</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -160,6 +160,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .chart-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:10px;color:var(--muted)}
 .chart-legend span{display:flex;align-items:center;gap:4px}
 .chart-legend i{display:inline-block;width:12px;height:8px;border-radius:2px}
+.dist-badge{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10px;font-weight:bold}
 </style>
 </head>
 <body>
@@ -171,8 +172,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v35.4</div>
-    <div class="auth-subtitle">Mistral Main • Bug Fixed</div>
+    <div class="auth-title">Lutynoel.fx v35.5</div>
+    <div class="auth-subtitle">Realistic Entry • Live Price Chart</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
@@ -196,11 +197,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Alpha Vantage Key (Optional)</label>
       <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v35.4 FIXED:</strong><br>
-        🐛 `ohlcData.slice` error fixed<br>
-        ⚡ Mistral Small = Main AI<br>
-        🎯 Auto-Override HOLD by Bias<br>
-        📊 Chart + 15M Analysis
+        ✅ <strong>v35.5 FIXED:</strong><br>
+        📏 Entry inarudi karibu na bei ya sasa (max 1.5%)<br>
+        💹 Kama hakuna zone karibu → MARKET entry<br>
+        📊 Chart inaonyesha LIVE PRICE line<br>
+        🎯 Entry Distance % inaonyeshwa
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -222,7 +223,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v35.4</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v35.5</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -270,12 +271,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           </div>
           <div style="flex:1;">
             <div class="hero-title">LUTYNOEL.FX</div>
-            <div class="hero-sub">Institutional Order Flow • v35.4</div>
+            <div class="hero-sub">Institutional Order Flow • v35.5</div>
             <div class="hero-badges">
               <span style="background:rgba(139,92,246,.15);color:var(--inst);border:1px solid var(--inst);">ORDER FLOW</span>
-              <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">15M+1H+4H</span>
-              <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">CHART</span>
-              <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">v35.4</span>
+              <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">REALISTIC ENTRY</span>
+              <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">LIVE CHART</span>
+              <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">v35.5</span>
             </div>
           </div>
         </div>
@@ -294,13 +295,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v35.4 — WHAT'S NEW</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏦 v35.5 — WHAT'S NEW</div>
         <div style="font-size:11px;line-height:1.9;">
-          ✅ <strong>Bug Fixed</strong> — ohlcData.slice error imeondolewa<br>
-          ✅ <strong>Mistral MAIN</strong> — Gemini ni backup<br>
-          ✅ <strong>Auto-Override</strong> — HOLD inabadilishwa na Bias<br>
-          ✅ <strong>Chart + 15M</strong> — kama v35.2<br>
-          ✅ <strong>Robust JSON</strong> — 3-tier parser
+          ✅ <strong>Realistic Entry</strong> — Max 1.5% kutoka bei ya sasa<br>
+          ✅ <strong>Closest Zone</strong> — Inachagua OB/FVG karibu, sio ya mbali<br>
+          ✅ <strong>Market Fallback</strong> — Kama hakuna zone → entry @ current price<br>
+          ✅ <strong>Live Price Line</strong> — Chart inaonyesha bei ya sasa<br>
+          ✅ <strong>Entry Distance %</strong> — Unajua entry iko mbali kiasi gani
         </div>
       </div>
     </div>
@@ -500,10 +501,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v35.4 — Bug Fixed<br>
+          <strong>Version:</strong> v35.5 — Realistic Entry<br>
           <strong>Main AI:</strong> Mistral Small → 8x7B → 7B<br>
           <strong>Backup AI:</strong> Gemini<br>
-          <strong>Auto-Override:</strong> HOLD → Bias (≥65 au ≤35)<br>
+          <strong>Entry Logic:</strong> Closest OB/FVG (max 1.5%) → Market fallback<br>
           <strong>Timeframes:</strong> 4H + 1H + 15M
         </div>
         <div class="ballistic-header">💰 RISK MANAGEMENT</div>
@@ -548,6 +549,7 @@ const AUTO_CHECK_INTERVAL = 60000;
 const CONFLUENCE_THRESHOLD = 60;
 const INSTITUTIONAL_THRESHOLD = 60;
 const MAJORITY_THRESHOLD = 40;
+const MAX_ENTRY_DISTANCE_PCT = 1.5; // ✅ v35.5: Max entry distance from current price
 
 const STORAGE_KEYS = {
   NAME: 'lutynoel_saved_name',
@@ -660,7 +662,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
 
 function setupPWA() {
   const manifest = {
-    name: "Lutynoel.fx v35.4", short_name: "LutynoelFX", start_url: "./", display: "standalone",
+    name: "Lutynoel.fx v35.5", short_name: "LutynoelFX", start_url: "./", display: "standalone",
     background_color: "#09090b", theme_color: "#8b5cf6",
     icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%238b5cf6'/><text y='.9em' font-size='80' x='10'>🏦</text></svg>", sizes: "192x192 512x512", type: "image/svg+xml" }]
   };
@@ -746,7 +748,7 @@ function enterApp(name, geminiKey, mistralKey, twelveKey, alphaKey) {
   document.getElementById('settingsBalance').value = getBalance();
   document.getElementById('settingsRiskPct').value = getRiskPct();
   loadHistory(); updateStats();
-  showToast(`Welcome ${name}! 🏦 v35.4`, 3000);
+  showToast(`Welcome ${name}! 🏦 v35.5`, 3000);
   setTimeout(() => fetchLivePrice(), 1000);
   startAutoBacktest();
 }
@@ -990,12 +992,12 @@ function calculateVolumeProfile(ohlcData, bins = 40) {
   const vah = minP + upIdx * binSize + binSize / 2;
   const val = minP + downIdx * binSize + binSize / 2;
   const sorted = profile.map((v, i) => ({ v, p: minP + i * binSize + binSize/2 })).sort((a,b) => b.v - a.v);
-  const hvn = sorted.slice(0, 3).map(x => x.p.toFixed(4));
-  const lvn = sorted.slice(-3).map(x => x.p.toFixed(4));
+  const hvn = sorted.slice(0, 3).map(x => x.p.toFixed(2));
+  const lvn = sorted.slice(-3).map(x => x.p.toFixed(2));
   const visualBins = profile.map((v, i) => ({ v, p: minP + i * binSize + binSize/2 }));
   const maxV = Math.max(...profile, 1);
   const visual = visualBins.map(x => ({ ...x, pct: (x.v / maxV) * 100 })).reverse();
-  return { poc: poc.toFixed(4), vah: vah.toFixed(4), val: val.toFixed(4), hvn, lvn, visual, maxVol: maxV };
+  return { poc: poc.toFixed(2), vah: vah.toFixed(2), val: val.toFixed(2), hvn, lvn, visual, maxVol: maxV };
 }
 
 function detectOrderBlocks(ohlcData, lookback = 60) {
@@ -1024,7 +1026,7 @@ function detectOrderBlocks(ohlcData, lookback = 60) {
     }
   }
   return {
-    bullish: bullish.slice(-3), bearish: bearish.slice(-3),
+    bullish: bullish.slice(-5), bearish: bearish.slice(-5),
     nearestBull: bullish.length ? bullish[bullish.length-1] : null,
     nearestBear: bearish.length ? bearish[bearish.length-1] : null
   };
@@ -1048,7 +1050,7 @@ function detectFVG(ohlcData, lookback = 60) {
     }
   }
   return {
-    bullish: bullish.slice(-3), bearish: bearish.slice(-3),
+    bullish: bullish.slice(-5), bearish: bearish.slice(-5),
     nearestBull: bullish.length ? bullish[bullish.length-1] : null,
     nearestBear: bearish.length ? bearish[bearish.length-1] : null
   };
@@ -1078,7 +1080,7 @@ function detectStructure(ohlcData) {
   }
   const lastHigh = highs.length ? highs[highs.length-1] : null;
   const lastLow = lows.length ? lows[lows.length-1] : null;
-  return { trend, recentSwingHigh: lastHigh?.price.toFixed(4), recentSwingLow: lastLow?.price.toFixed(4) };
+  return { trend, recentSwingHigh: lastHigh?.price.toFixed(2), recentSwingLow: lastLow?.price.toFixed(2) };
 }
 
 function detectLiquiditySweep(ohlcData) {
@@ -1087,8 +1089,8 @@ function detectLiquiditySweep(ohlcData) {
   const last = ohlcData[ohlcData.length - 1];
   const recentHigh = Math.max(...highs.slice(-20, -1));
   const recentLow = Math.min(...lows.slice(-20, -1));
-  if (last.low < recentLow && last.close > recentLow) return { type: 'BULLISH_SWEEP (SSL)', sweptLevel: recentLow.toFixed(4), bias: 'BUY' };
-  if (last.high > recentHigh && last.close < recentHigh) return { type: 'BEARISH_SWEEP (BSL)', sweptLevel: recentHigh.toFixed(4), bias: 'SELL' };
+  if (last.low < recentLow && last.close > recentLow) return { type: 'BULLISH_SWEEP (SSL)', sweptLevel: recentLow.toFixed(2), bias: 'BUY' };
+  if (last.high > recentHigh && last.close < recentHigh) return { type: 'BEARISH_SWEEP (BSL)', sweptLevel: recentHigh.toFixed(2), bias: 'SELL' };
   return null;
 }
 
@@ -1102,9 +1104,9 @@ function detectEqualLevels(ohlcData, tolerance = 0.0015) {
   }
   const eqh = [], eql = [];
   for (let i = 0; i < recentHighs.length; i++) for (let j = i+1; j < recentHighs.length; j++)
-    if (Math.abs(recentHighs[i] - recentHighs[j]) / recentHighs[i] < tolerance) eqh.push(((recentHighs[i] + recentHighs[j]) / 2).toFixed(4));
+    if (Math.abs(recentHighs[i] - recentHighs[j]) / recentHighs[i] < tolerance) eqh.push(((recentHighs[i] + recentHighs[j]) / 2).toFixed(2));
   for (let i = 0; i < recentLows.length; i++) for (let j = i+1; j < recentLows.length; j++)
-    if (Math.abs(recentLows[i] - recentLows[j]) / recentLows[i] < tolerance) eql.push(((recentLows[i] + recentLows[j]) / 2).toFixed(4));
+    if (Math.abs(recentLows[i] - recentLows[j]) / recentLows[i] < tolerance) eql.push(((recentLows[i] + recentLows[j]) / 2).toFixed(2));
   return { eqh: [...new Set(eqh)].slice(-3), eql: [...new Set(eql)].slice(-3) };
 }
 
@@ -1140,9 +1142,6 @@ function detectPowerOf3(h1Data) {
   return { phase, desc, position: (pos*100).toFixed(1)+'%', bias: phase === 'DISTRIBUTION' ? (close > open ? 'BUY' : 'SELL') : 'WAIT' };
 }
 
-// ═══════════════════════════════════════════════════════════
-// ✅ v35.4 FIX: calculateOTE accepts raw ARRAY (not inst object)
-// ═══════════════════════════════════════════════════════════
 function calculateOTE(ohlcData, direction) {
   if (!Array.isArray(ohlcData) || ohlcData.length < 20) return null;
   const recent = ohlcData.slice(-30);
@@ -1150,9 +1149,9 @@ function calculateOTE(ohlcData, direction) {
   const range = swingHigh - swingLow;
   if (range === 0) return null;
   if (direction === 'BUY') {
-    return { swingHigh: swingHigh.toFixed(4), swingLow: swingLow.toFixed(4), ote_62: (swingHigh - range * 0.62).toFixed(4), ote_705: (swingHigh - range * 0.705).toFixed(4), ote_79: (swingHigh - range * 0.79).toFixed(4) };
+    return { swingHigh: swingHigh.toFixed(2), swingLow: swingLow.toFixed(2), ote_62: (swingHigh - range * 0.62).toFixed(2), ote_705: (swingHigh - range * 0.705).toFixed(2), ote_79: (swingHigh - range * 0.79).toFixed(2) };
   } else {
-    return { swingHigh: swingHigh.toFixed(4), swingLow: swingLow.toFixed(4), ote_62: (swingLow + range * 0.62).toFixed(4), ote_705: (swingLow + range * 0.705).toFixed(4), ote_79: (swingLow + range * 0.79).toFixed(4) };
+    return { swingHigh: swingHigh.toFixed(2), swingLow: swingLow.toFixed(2), ote_62: (swingLow + range * 0.62).toFixed(2), ote_705: (swingLow + range * 0.705).toFixed(2), ote_79: (swingLow + range * 0.79).toFixed(2) };
   }
 }
 
@@ -1220,7 +1219,7 @@ function calculateSupportResistance(ohlcData) {
   else if (currentPrice > s3) position = 'BELOW_S2';
   else position = 'BELOW_S3';
   if (currentPrice > pivot) bias = 'BULLISH_ZONE'; else if (currentPrice < pivot) bias = 'BEARISH_ZONE';
-  return { pivot: pivot.toFixed(4), r1: r1.toFixed(4), r2: r2.toFixed(4), r3: r3.toFixed(4), s1: s1.toFixed(4), s2: s2.toFixed(4), s3: s3.toFixed(4), currentPrice: currentPrice.toFixed(4), position, bias };
+  return { pivot: pivot.toFixed(2), r1: r1.toFixed(2), r2: r2.toFixed(2), r3: r3.toFixed(2), s1: s1.toFixed(2), s2: s2.toFixed(2), s3: s3.toFixed(2), currentPrice: currentPrice.toFixed(2), position, bias };
 }
 
 function computeInstitutionalBias(inst) {
@@ -1257,15 +1256,11 @@ function computeInstitutionalBias(inst) {
   return { score, bias, bull, bear, reasons };
 }
 
-// ═══════════════════════════════════════════════════════════
-// ✅ v35.4 FIX: Store h1Raw, h4Raw, m15Raw in inst
-// ═══════════════════════════════════════════════════════════
 function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
   if (!Array.isArray(h1) || h1.length < 30) return null;
   const closes = h1.map(d => d.close), highs = h1.map(d => d.high), lows = h1.map(d => d.low);
   const inst = {
     currentPrice: livePrice,
-    // ✅ Raw OHLC for calculateOTE & chart
     h1Raw: h1,
     h4Raw: Array.isArray(h4) ? h4 : null,
     m15Raw: Array.isArray(m15) ? m15 : null,
@@ -1326,84 +1321,104 @@ function getHTFBias(h4Data, h1Data) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// ✅ v35.4 FIX: Use inst.h1Raw (array) for calculateOTE
+// ✅ v35.5 — CLOSEST ZONE FINDER
+// ═══════════════════════════════════════════════════════════
+function findClosestZone(zones, currentPrice, maxDistancePct = MAX_ENTRY_DISTANCE_PCT) {
+  if (!Array.isArray(zones) || zones.length === 0) return null;
+  const maxDist = currentPrice * (maxDistancePct / 100);
+  let closest = null, minDist = Infinity;
+  zones.forEach(z => {
+    const mid = z.high !== undefined ? (z.high + z.low) / 2 : (z.top + z.bottom) / 2;
+    const dist = Math.abs(mid - currentPrice);
+    if (dist < minDist && dist <= maxDist) { minDist = dist; closest = z; }
+  });
+  return closest;
+}
+
+// ═══════════════════════════════════════════════════════════
+// ✅ v35.5 — REALISTIC INSTITUTIONAL ENTRY
 // ═══════════════════════════════════════════════════════════
 function calculateInstitutionalEntry(action, livePrice, inst, spec) {
   if (!inst || !action || action === 'HOLD') return null;
 
   const isBuy = action === 'BUY';
-  let entry, entrySource, sl, quality = 'B';
+  let entry, entrySource, sl, quality = 'B', entryDistance = 0;
+  let usedZone = null;
+
+  // Pata CLOSEST zones kwa kila aina (max 1.5% kutoka bei)
+  const closestBullOB = findClosestZone(inst.orderBlocks?.bullish || [], livePrice);
+  const closestBearOB = findClosestZone(inst.orderBlocks?.bearish || [], livePrice);
+  const closestBullFVG15 = findClosestZone(inst.m15FVG?.bullish || [], livePrice);
+  const closestBearFVG15 = findClosestZone(inst.m15FVG?.bearish || [], livePrice);
+  const closestBullFVG1H = findClosestZone(inst.fvg?.bullish || [], livePrice);
+  const closestBearFVG1H = findClosestZone(inst.fvg?.bearish || [], livePrice);
 
   if (isBuy) {
-    if (inst.orderBlocks?.nearestBull) {
-      const ob = inst.orderBlocks.nearestBull;
+    if (closestBullOB) {
+      const ob = closestBullOB;
       entry = (ob.high + ob.low) / 2;
       sl = ob.low - (ob.high - ob.low) * 0.3;
-      entrySource = `🟢 Bullish OB (1H) — ${ob.low.toFixed(4)} – ${ob.high.toFixed(4)}`;
-      quality = 'A+';
-    } else if (inst.m15FVG?.nearestBull) {
-      const fvg = inst.m15FVG.nearestBull;
+      entryDistance = Math.abs(entry - livePrice);
+      entrySource = `🟢 Bullish OB (1H) — ${ob.low.toFixed(2)}–${ob.high.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
+      quality = entryDistance < livePrice * 0.005 ? 'A+' : 'A';
+      usedZone = { type: 'OB_1H_BULL', high: ob.high, low: ob.low };
+    } else if (closestBullFVG15) {
+      const fvg = closestBullFVG15;
       entry = (fvg.top + fvg.bottom) / 2;
       sl = fvg.bottom - (fvg.top - fvg.bottom) * 0.5;
-      entrySource = `⚡ Bullish FVG (15M) — ${fvg.bottom.toFixed(4)} – ${fvg.top.toFixed(4)}`;
+      entryDistance = Math.abs(entry - livePrice);
+      entrySource = `⚡ Bullish FVG (15M) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
       quality = 'A';
-    } else if (inst.fvg?.nearestBull) {
-      const fvg = inst.fvg.nearestBull;
+      usedZone = { type: 'FVG_15M_BULL', high: fvg.top, low: fvg.bottom };
+    } else if (closestBullFVG1H) {
+      const fvg = closestBullFVG1H;
       entry = (fvg.top + fvg.bottom) / 2;
       sl = fvg.bottom - (fvg.top - fvg.bottom) * 0.5;
-      entrySource = `⚡ Bullish FVG (1H) — ${fvg.bottom.toFixed(4)} – ${fvg.top.toFixed(4)}`;
+      entryDistance = Math.abs(entry - livePrice);
+      entrySource = `⚡ Bullish FVG (1H) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
       quality = 'A';
+      usedZone = { type: 'FVG_1H_BULL', high: fvg.top, low: fvg.bottom };
     } else {
-      // ✅ FIX: tumia inst.h1Raw
-      const ote = calculateOTE(inst.h1Raw || inst.h4Raw || [], 'BUY');
-      if (ote) {
-        entry = parseFloat(ote.ote_705);
-        const atr = inst.atr || (livePrice * 0.005);
-        sl = entry - atr * 1.5;
-        entrySource = `📐 OTE 70.5% — ${ote.ote_705}`;
-        quality = 'B+';
-      } else {
-        entry = livePrice;
-        const atr = inst.atr || (livePrice * 0.005);
-        sl = livePrice - atr * 1.5;
-        entrySource = '⚠️ MARKET (hakuna zone)';
-        quality = 'C';
-      }
+      // Fallback: MARKET entry @ current price (realistic!)
+      entry = livePrice;
+      const atr = inst.atr || (livePrice * 0.005);
+      sl = livePrice - atr * 1.5;
+      entryDistance = 0;
+      entrySource = `💹 MARKET — hakuna OB/FVG karibu na bei (within ${MAX_ENTRY_DISTANCE_PCT}%)`;
+      quality = 'C';
     }
   } else {
-    if (inst.orderBlocks?.nearestBear) {
-      const ob = inst.orderBlocks.nearestBear;
+    if (closestBearOB) {
+      const ob = closestBearOB;
       entry = (ob.high + ob.low) / 2;
       sl = ob.high + (ob.high - ob.low) * 0.3;
-      entrySource = `🔴 Bearish OB (1H) — ${ob.low.toFixed(4)} – ${ob.high.toFixed(4)}`;
-      quality = 'A+';
-    } else if (inst.m15FVG?.nearestBear) {
-      const fvg = inst.m15FVG.nearestBear;
+      entryDistance = Math.abs(entry - livePrice);
+      entrySource = `🔴 Bearish OB (1H) — ${ob.low.toFixed(2)}–${ob.high.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
+      quality = entryDistance < livePrice * 0.005 ? 'A+' : 'A';
+      usedZone = { type: 'OB_1H_BEAR', high: ob.high, low: ob.low };
+    } else if (closestBearFVG15) {
+      const fvg = closestBearFVG15;
       entry = (fvg.top + fvg.bottom) / 2;
       sl = fvg.top + (fvg.top - fvg.bottom) * 0.5;
-      entrySource = `⚡ Bearish FVG (15M) — ${fvg.bottom.toFixed(4)} – ${fvg.top.toFixed(4)}`;
+      entryDistance = Math.abs(entry - livePrice);
+      entrySource = `⚡ Bearish FVG (15M) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
       quality = 'A';
-    } else if (inst.fvg?.nearestBear) {
-      const fvg = inst.fvg.nearestBear;
+      usedZone = { type: 'FVG_15M_BEAR', high: fvg.top, low: fvg.bottom };
+    } else if (closestBearFVG1H) {
+      const fvg = closestBearFVG1H;
       entry = (fvg.top + fvg.bottom) / 2;
       sl = fvg.top + (fvg.top - fvg.bottom) * 0.5;
-      entrySource = `⚡ Bearish FVG (1H) — ${fvg.bottom.toFixed(4)} – ${fvg.top.toFixed(4)}`;
+      entryDistance = Math.abs(entry - livePrice);
+      entrySource = `⚡ Bearish FVG (1H) — ${fvg.bottom.toFixed(2)}–${fvg.top.toFixed(2)} • ${(entryDistance/livePrice*100).toFixed(2)}% away`;
       quality = 'A';
+      usedZone = { type: 'FVG_1H_BEAR', high: fvg.top, low: fvg.bottom };
     } else {
-      const ote = calculateOTE(inst.h1Raw || inst.h4Raw || [], 'SELL');
-      if (ote) {
-        entry = parseFloat(ote.ote_705);
-        const atr = inst.atr || (livePrice * 0.005);
-        sl = entry + atr * 1.5;
-        entrySource = `📐 OTE 70.5% — ${ote.ote_705}`;
-        quality = 'B+';
-      } else {
-        entry = livePrice;
-        const atr = inst.atr || (livePrice * 0.005);
-        sl = livePrice + atr * 1.5;
-        entrySource = '⚠️ MARKET (hakuna zone)';
-        quality = 'C';
-      }
+      entry = livePrice;
+      const atr = inst.atr || (livePrice * 0.005);
+      sl = livePrice + atr * 1.5;
+      entryDistance = 0;
+      entrySource = `💹 MARKET — hakuna OB/FVG karibu na bei (within ${MAX_ENTRY_DISTANCE_PCT}%)`;
+      quality = 'C';
     }
   }
 
@@ -1414,14 +1429,14 @@ function calculateInstitutionalEntry(action, livePrice, inst, spec) {
   const tp2 = isBuy ? entry + slDist * 2.5 : entry - slDist * 2.5;
   const tp3 = isBuy ? entry + slDist * 4.0 : entry - slDist * 4.0;
 
-  const orderType = Math.abs(entry - livePrice) / livePrice > 0.001
-    ? (isBuy ? 'BUY_LIMIT' : 'SELL_LIMIT')
-    : 'MARKET';
+  const distPct = Math.abs(entry - livePrice) / livePrice * 100;
+  const orderType = distPct < 0.05 ? 'MARKET' : (isBuy ? 'BUY_LIMIT' : 'SELL_LIMIT');
 
   return {
     entry: entry.toFixed(spec.decimals),
     entrySource,
     quality,
+    usedZone,
     sl: sl.toFixed(spec.decimals),
     tp1: tp1.toFixed(spec.decimals),
     tp2: tp2.toFixed(spec.decimals),
@@ -1430,7 +1445,9 @@ function calculateInstitutionalEntry(action, livePrice, inst, spec) {
     tp1Pips: Math.round(Math.abs(tp1 - entry) / spec.pipSize),
     tp2Pips: Math.round(Math.abs(tp2 - entry) / spec.pipSize),
     tp3Pips: Math.round(Math.abs(tp3 - entry) / spec.pipSize),
-    orderType
+    orderType,
+    entryDistance,
+    entryDistancePct: distPct.toFixed(2)
   };
 }
 
@@ -1491,8 +1508,6 @@ function renderChartPreview(pair, h1Data, inst) {
   if (inst.htfStructure) html += `<div>Structure 4H: <strong>${inst.htfStructure.trend}</strong></div>`;
   if (inst.ltfStructure) html += `<div>Structure 15M: <strong>${inst.ltfStructure.trend}</strong></div>`;
   if (inst.sweep) html += `<div style="color:var(--cyan);">💧 Sweep: ${inst.sweep.type}</div>`;
-  if (inst.displacement?.detected) html += `<div style="color:var(--orange);">💥 1H Displacement: ${inst.displacement.direction}</div>`;
-  if (inst.m15Displacement?.detected) html += `<div style="color:var(--orange);">💥 15M Displacement: ${inst.m15Displacement.direction}</div>`;
   if (inst.killZone) html += `<div style="color:${inst.killZone.isActive ? 'var(--green)' : 'var(--muted)'};">⏰ ${inst.killZone.session}</div>`;
   c.innerHTML = html;
 }
@@ -1503,15 +1518,15 @@ function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, inst, 
 
   if (Array.isArray(h4Data)) {
     prompt += `\n════ 4-HOUR CANDLES (last 12) ════\n`;
-    h4Data.slice(-12).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(4)} H:${c.high.toFixed(4)} L:${c.low.toFixed(4)} C:${c.close.toFixed(4)}\n`);
+    h4Data.slice(-12).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
   }
   if (Array.isArray(h1Data)) {
     prompt += `\n════ 1-HOUR CANDLES (last 20) ════\n`;
-    h1Data.slice(-20).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(4)} H:${c.high.toFixed(4)} L:${c.low.toFixed(4)} C:${c.close.toFixed(4)}\n`);
+    h1Data.slice(-20).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
   }
   if (Array.isArray(m15Data)) {
     prompt += `\n════ 15-MIN CANDLES (last 24) ════\n`;
-    m15Data.slice(-24).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(4)} H:${c.high.toFixed(4)} L:${c.low.toFixed(4)} C:${c.close.toFixed(4)}\n`);
+    m15Data.slice(-24).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
   }
 
   if (inst) {
@@ -1520,50 +1535,35 @@ function buildDataPrompt(agent, pair, livePrice, h4Data, h1Data, m15Data, inst, 
     if (inst.volumeProfile) prompt += `\n📊 VOLUME PROFILE:\n- POC: ${inst.volumeProfile.poc}\n- VAH: ${inst.volumeProfile.vah}\n- VAL: ${inst.volumeProfile.val}\n`;
     if (inst.orderBlocks) {
       prompt += `\n🏦 ORDER BLOCKS (1H):\n`;
-      if (inst.orderBlocks.nearestBull) prompt += `- Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(4)}-${inst.orderBlocks.nearestBull.high.toFixed(4)}\n`;
-      if (inst.orderBlocks.nearestBear) prompt += `- Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(4)}-${inst.orderBlocks.nearestBear.high.toFixed(4)}\n`;
-    }
-    if (inst.fvg) {
-      prompt += `\n⚡ FVG (1H):\n`;
-      if (inst.fvg.nearestBull) prompt += `- Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(4)}-${inst.fvg.nearestBull.top.toFixed(4)}\n`;
-      if (inst.fvg.nearestBear) prompt += `- Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(4)}-${inst.fvg.nearestBear.top.toFixed(4)}\n`;
+      if (inst.orderBlocks.nearestBull) prompt += `- Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(2)}-${inst.orderBlocks.nearestBull.high.toFixed(2)}\n`;
+      if (inst.orderBlocks.nearestBear) prompt += `- Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(2)}-${inst.orderBlocks.nearestBear.high.toFixed(2)}\n`;
     }
     if (inst.structure) prompt += `\n🎯 STRUCTURE 1H: ${inst.structure.trend}\n`;
     if (inst.htfStructure) prompt += `🎯 STRUCTURE 4H: ${inst.htfStructure.trend}\n`;
     if (inst.ltfStructure) prompt += `🎯 STRUCTURE 15M: ${inst.ltfStructure.trend}\n`;
     if (inst.sweep) prompt += `\n💧 SWEEP (1H): ${inst.sweep.type} → ${inst.sweep.bias}\n`;
-    if (inst.m15Sweep) prompt += `💧 SWEEP (15M): ${inst.m15Sweep.type} → ${inst.m15Sweep.bias}\n`;
-    if (inst.displacement?.detected) prompt += `\n💥 1H DISPLACEMENT: ${inst.displacement.direction}\n`;
-    if (inst.m15Displacement?.detected) prompt += `💥 15M DISPLACEMENT: ${inst.m15Displacement.direction}\n`;
+    if (inst.displacement?.detected) prompt += `💥 1H DISPLACEMENT: ${inst.displacement.direction}\n`;
     if (inst.powerOf3) prompt += `\n🔄 PO3: ${inst.powerOf3.phase}\n`;
     if (inst.zone) prompt += `📐 PREMIUM/DISCOUNT: ${inst.zone.zone} (${inst.zone.position})\n`;
     if (inst.wyckoff) prompt += `🏦 WYCKOFF: ${inst.wyckoff.phase}\n`;
-    if (inst.killZone) prompt += `⏰ KILL ZONE: ${inst.killZone.session} (${inst.killZone.quality})\n`;
+    if (inst.killZone) prompt += `⏰ KILL ZONE: ${inst.killZone.session}\n`;
     if (inst.rsi) prompt += `RSI: ${inst.rsi.toFixed(1)}\n`;
-    if (inst.supportResistance) {
-      const sr = inst.supportResistance;
-      prompt += `\n📐 S/R: R3=${sr.r3} R2=${sr.r2} R1=${sr.r1} PIVOT=${sr.pivot} S1=${sr.s1} S2=${sr.s2} S3=${sr.s3}\n`;
-    }
   }
 
-  prompt += `\n════ RULES (CRITICAL) ════\n`;
+  prompt += `\n════ RULES ════\n`;
   prompt += `🚨 YOU MUST MAKE A DECISION. DO NOT DEFAULT TO HOLD.
-- HOLD is ONLY allowed when ALL true: Bias 45-55, 4H+1H RANGING, no displacement/sweep/OB/FVG near price.
-- Bias >= 65 → vote BUY. Bias <= 35 → vote SELL.
+- HOLD only if Bias 45-55, 4H+1H RANGING, no displacement/sweep/OB/FVG.
+- Bias >= 65 → BUY. Bias <= 35 → SELL.
 - 4H aligned with 1H → follow direction.
-- Unmitigated OB/FVG near price → use as entry, vote direction.
-- BURDEN OF PROOF is on HOLD, not on BUY/SELL.
-- Even with conflicts, pick DOMINANT direction with lower confidence (50-65).
-- 15M displacement aligned with 1H structure → A+ entry.
-- 4H and 1H bullish but 15M bearish → still BUY (60-70 confidence).
+- 4H+1H bullish but 15M bearish → still BUY (60-70 confidence).
 
-════ JSON FORMAT (STRICT) ════
-Respond with ONLY this JSON, no other text:
+════ JSON FORMAT ════
+Respond with ONLY this JSON:
 {
   "vote": "BUY",
   "confidence": 65,
-  "reasoning": "Your 2-3 sentence analysis",
-  "key_level": 2650.00,
+  "reasoning": "Your analysis",
+  "key_level": 4263.00,
   "order_type": "BUY_LIMIT"
 }`;
   return prompt;
@@ -1579,7 +1579,7 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, inst
         const body = {
           model: model,
           messages: [
-            { role: 'system', content: 'You are an institutional trading AI. You MUST respond with ONLY valid JSON. No markdown, no code fences, no explanation outside JSON.' },
+            { role: 'system', content: 'You are an institutional trading AI. Respond with ONLY valid JSON.' },
             { role: 'user', content: prompt }
           ],
           temperature: 0.2,
@@ -1605,7 +1605,7 @@ async function callMistral(agent, pair, livePrice, h4Data, h1Data, m15Data, inst
         const vote = (result.vote || 'HOLD').toUpperCase();
         if (!['BUY', 'SELL', 'HOLD'].includes(vote)) throw new Error(`${model}: Bad vote`);
         return { ...agent, vote: vote, confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)), reasoning: result.reasoning || 'No analysis.', key_level: result.key_level || null, order_type: result.order_type || 'MARKET', provider: 'Mistral' };
-      } catch (e) { lastError = e; console.warn(`Mistral ${model} attempt ${attempt}:`, e.message); }
+      } catch (e) { lastError = e; }
     }
   }
   throw new Error(lastError?.message || 'Mistral failed');
@@ -1670,30 +1670,11 @@ function computeConfluence(agentResults, inst) {
   const holdN = total > 0 ? (hold / total) * 100 : 0;
   const actionableVotes = buyCount + sellCount;
 
-  // FALLBACK: All HOLD → check Bias
   if (actionableVotes === 0) {
     if (inst?.biasScore) {
       const b = inst.biasScore.score;
-      if (b >= 65) {
-        return {
-          action: 'BUY',
-          confluenceScore: Math.round(Math.min(75, 55 + (b - 65) * 0.8)),
-          buyCount: 0, sellCount: 0, holdCount,
-          isNoTrade: false,
-          isFallback: true,
-          fallbackReason: `Masters wote HOLD lakini Institutional Bias ni ${b}/100 — auto BUY`
-        };
-      }
-      if (b <= 35) {
-        return {
-          action: 'SELL',
-          confluenceScore: Math.round(Math.min(75, 55 + (35 - b) * 0.8)),
-          buyCount: 0, sellCount: 0, holdCount,
-          isNoTrade: false,
-          isFallback: true,
-          fallbackReason: `Masters wote HOLD lakini Institutional Bias ni ${b}/100 — auto SELL`
-        };
-      }
+      if (b >= 65) return { action: 'BUY', confluenceScore: Math.round(Math.min(75, 55 + (b - 65) * 0.8)), buyCount: 0, sellCount: 0, holdCount, isNoTrade: false, isFallback: true, fallbackReason: `Masters wote HOLD lakini Bias ni ${b}/100 — auto BUY` };
+      if (b <= 35) return { action: 'SELL', confluenceScore: Math.round(Math.min(75, 55 + (35 - b) * 0.8)), buyCount: 0, sellCount: 0, holdCount, isNoTrade: false, isFallback: true, fallbackReason: `Masters wote HOLD lakini Bias ni ${b}/100 — auto SELL` };
     }
     return { action: 'HOLD', confluenceScore: 0, buyCount: 0, sellCount: 0, holdCount, isNoTrade: true };
   }
@@ -1710,19 +1691,10 @@ function computeConfluence(agentResults, inst) {
       if (b >= 60 && buyCount > 0) { action = 'BUY'; score = Math.max(buyN, 55); }
       else if (b <= 40 && sellCount > 0) { action = 'SELL'; score = Math.max(sellN, 55); }
       else { action = 'HOLD'; score = holdN; }
-    } else {
-      action = 'HOLD';
-      score = holdN;
-    }
+    } else { action = 'HOLD'; score = holdN; }
   }
 
-  return {
-    action,
-    confluenceScore: Math.round(Math.min(100, score)),
-    buyCount, sellCount, holdCount,
-    isNoTrade: false,
-    isMixed: action === 'HOLD' && buyCount > 0 && sellCount > 0
-  };
+  return { action, confluenceScore: Math.round(Math.min(100, score)), buyCount, sellCount, holdCount, isNoTrade: false, isMixed: action === 'HOLD' && buyCount > 0 && sellCount > 0 };
 }
 
 function capitalShield(confluence, entry, sl, tp, inst) {
@@ -1744,7 +1716,7 @@ function capitalShield(confluence, entry, sl, tp, inst) {
   else if (confluence.isNoTrade) msg += ` — NO TRADE`;
   else if (!checks.confluence) msg += ` — Low confluence`;
   else if (!checks.notHOLD) msg += ` — HOLD`;
-  else if (!checks.consensus) msg += ` — Not enough votes`;
+  else if (!checks.consensus) msg += ` — No votes`;
   else if (!checks.rrr) msg += ` — RRR < 1:2`;
   return { approved, checks, message: msg };
 }
@@ -1790,7 +1762,7 @@ async function runAnalysis() {
   try {
     const confluence = computeConfluence(agentResults, inst);
 
-    let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0, entrySource: 'N/A', quality: '—', orderType: 'N/A' };
+    let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0, entrySource: 'N/A', quality: '—', orderType: 'N/A', entryDistance: 0, entryDistancePct: '0', usedZone: null };
     if (confluence.action !== 'HOLD') {
       const instEntry = calculateInstitutionalEntry(confluence.action, livePrice, inst, spec);
       if (instEntry) sltp = { ...instEntry, entry: parseFloat(instEntry.entry), sl: parseFloat(instEntry.sl), tp1: parseFloat(instEntry.tp1), tp2: parseFloat(instEntry.tp2), tp3: parseFloat(instEntry.tp3) };
@@ -1803,6 +1775,7 @@ async function runAnalysis() {
 
     const record = {
       id: Date.now(), date: new Date().toLocaleString(), pair,
+      livePrice: livePrice,
       action: confluence.action,
       signalLabel: strengthInfo.label, signalStrength: strengthInfo.strength, signalHint: strengthInfo.hint,
       signalColor: confluence.action === 'BUY' ? 'buy' : confluence.action === 'SELL' ? 'sell' : (confluence.isNoTrade ? 'notrade' : 'wait'),
@@ -1816,6 +1789,9 @@ async function runAnalysis() {
       slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
       entrySource: sltp.entrySource || 'N/A',
       quality: sltp.quality || '—',
+      entryDistance: sltp.entryDistance || 0,
+      entryDistancePct: sltp.entryDistancePct || '0',
+      usedZone: sltp.usedZone || null,
       orderType, shield: shield.approved,
       agents: agentResults, confluence,
       indicators: {
@@ -1836,12 +1812,11 @@ async function runAnalysis() {
         wyckoff: inst?.wyckoff,
         killZone: inst?.killZone,
         supportResistance: inst?.supportResistance,
-        rsi: inst?.rsi,
-        atr: inst?.atr,
-        trend: inst?.trend,
+        rsi: inst?.rsi, atr: inst?.atr, trend: inst?.trend,
         m15Bias: inst?.m15Bias,
         biasScore: inst?.biasScore,
-        currentPrice: inst?.currentPrice
+        currentPrice: inst?.currentPrice,
+        h1Raw: inst?.h1Raw, h4Raw: inst?.h4Raw, m15Raw: inst?.m15Raw
       },
       institutional: inst,
       htfBias,
@@ -1900,6 +1875,9 @@ function renderFinalResults(record, shield) {
   document.getElementById('resultsContainer').innerHTML = buildAnalysisHTML(record, shield);
 }
 
+// ═══════════════════════════════════════════════════════════
+// ✅ v35.5 — CHART WITH LIVE PRICE LINE
+// ═══════════════════════════════════════════════════════════
 function drawAnalysisChart(canvasId, record) {
   const canvas = document.getElementById(canvasId);
   if (!canvas || !record) return;
@@ -1930,12 +1908,10 @@ function drawAnalysisChart(canvasId, record) {
   const addLevel = v => { if (v && isFinite(v)) { minP = Math.min(minP, v); maxP = Math.max(maxP, v); } };
   addLevel(record.entry); addLevel(record.sl);
   addLevel(record.tp1); addLevel(record.tp2); addLevel(record.tp3);
+  addLevel(record.livePrice);
 
-  const inst = record.institutional || record.indicators || {};
-  if (inst.orderBlocks?.nearestBull) { minP = Math.min(minP, inst.orderBlocks.nearestBull.low); maxP = Math.max(maxP, inst.orderBlocks.nearestBull.high); }
-  if (inst.orderBlocks?.nearestBear) { minP = Math.min(minP, inst.orderBlocks.nearestBear.low); maxP = Math.max(maxP, inst.orderBlocks.nearestBear.high); }
-  if (inst.fvg?.nearestBull) { minP = Math.min(minP, inst.fvg.nearestBull.bottom); maxP = Math.max(maxP, inst.fvg.nearestBull.top); }
-  if (inst.fvg?.nearestBear) { minP = Math.min(minP, inst.fvg.nearestBear.bottom); maxP = Math.max(maxP, inst.fvg.nearestBear.top); }
+  const inst = record.indicators || record.institutional || {};
+  if (record.usedZone) { minP = Math.min(minP, record.usedZone.low); maxP = Math.max(maxP, record.usedZone.high); }
   if (inst.volumeProfile) {
     addLevel(parseFloat(inst.volumeProfile.poc));
     addLevel(parseFloat(inst.volumeProfile.vah));
@@ -1944,7 +1920,7 @@ function drawAnalysisChart(canvasId, record) {
 
   const range = maxP - minP;
   if (range <= 0) return;
-  minP -= range * 0.04; maxP += range * 0.04;
+  minP -= range * 0.05; maxP += range * 0.05;
   const finalRange = maxP - minP;
 
   const priceToY = p => padT + (maxP - p) / finalRange * chartH;
@@ -1962,47 +1938,26 @@ function drawAnalysisChart(canvasId, record) {
     ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
     const price = maxP - (i / 5) * finalRange;
     ctx.fillStyle = '#64748b';
-    ctx.fillText(price.toFixed(price > 100 ? 1 : 4), padL + chartW + 68, y + 3);
+    ctx.fillText(price.toFixed(price > 100 ? 1 : 2), padL + chartW + 68, y + 3);
   }
 
-  if (inst.orderBlocks?.nearestBull) {
-    const ob = inst.orderBlocks.nearestBull;
-    const y1 = priceToY(ob.high), y2 = priceToY(ob.low);
-    ctx.fillStyle = 'rgba(16,185,129,0.15)';
+  // Used Zone (entry zone highlighting)
+  if (record.usedZone) {
+    const z = record.usedZone;
+    const y1 = priceToY(z.high), y2 = priceToY(z.low);
+    const isBull = z.type.includes('BULL');
+    ctx.fillStyle = isBull ? 'rgba(16,185,129,0.18)' : 'rgba(239,68,68,0.18)';
     ctx.fillRect(padL, y1, chartW, Math.max(2, y2 - y1));
-    ctx.strokeStyle = 'rgba(16,185,129,0.7)'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
+    ctx.strokeStyle = isBull ? 'rgba(16,185,129,0.8)' : 'rgba(239,68,68,0.8)';
+    ctx.lineWidth = 1; ctx.setLineDash([4,3]);
     ctx.strokeRect(padL, y1, chartW, Math.max(2, y2 - y1)); ctx.setLineDash([]);
-    ctx.fillStyle = 'rgba(16,185,129,0.95)'; ctx.font = 'bold 9px sans-serif';
-    ctx.textAlign = 'left'; ctx.fillText('BULL OB', padL + 4, y1 + 11);
-  }
-  if (inst.orderBlocks?.nearestBear) {
-    const ob = inst.orderBlocks.nearestBear;
-    const y1 = priceToY(ob.high), y2 = priceToY(ob.low);
-    ctx.fillStyle = 'rgba(239,68,68,0.15)';
-    ctx.fillRect(padL, y1, chartW, Math.max(2, y2 - y1));
-    ctx.strokeStyle = 'rgba(239,68,68,0.7)'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
-    ctx.strokeRect(padL, y1, chartW, Math.max(2, y2 - y1)); ctx.setLineDash([]);
-    ctx.fillStyle = 'rgba(239,68,68,0.95)'; ctx.font = 'bold 9px sans-serif';
-    ctx.textAlign = 'left'; ctx.fillText('BEAR OB', padL + 4, y1 + 11);
+    ctx.fillStyle = isBull ? 'rgba(16,185,129,0.95)' : 'rgba(239,68,68,0.95)';
+    ctx.font = 'bold 9px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(z.type.replace(/_/g, ' '), padL + 4, y1 + 11);
   }
 
-  if (inst.fvg?.nearestBull) {
-    const f = inst.fvg.nearestBull;
-    const y1 = priceToY(f.top), y2 = priceToY(f.bottom);
-    ctx.fillStyle = 'rgba(6,182,212,0.15)';
-    ctx.fillRect(padL, y1, chartW, Math.max(2, y2 - y1));
-    ctx.fillStyle = 'rgba(6,182,212,0.95)'; ctx.font = 'bold 9px sans-serif';
-    ctx.textAlign = 'right'; ctx.fillText('BULL FVG', padL + chartW - 4, y1 + 11);
-  }
-  if (inst.fvg?.nearestBear) {
-    const f = inst.fvg.nearestBear;
-    const y1 = priceToY(f.top), y2 = priceToY(f.bottom);
-    ctx.fillStyle = 'rgba(6,182,212,0.15)';
-    ctx.fillRect(padL, y1, chartW, Math.max(2, y2 - y1));
-    ctx.fillStyle = 'rgba(6,182,212,0.95)'; ctx.font = 'bold 9px sans-serif';
-    ctx.textAlign = 'right'; ctx.fillText('BEAR FVG', padL + chartW - 4, y1 + 11);
-  }
-
+  // Candles
   const gap = chartW / ohlc.length;
   const candleW = Math.max(1.5, gap * 0.65);
   ohlc.forEach((c, i) => {
@@ -2022,6 +1977,7 @@ function drawAnalysisChart(canvasId, record) {
     ctx.fillRect(x - candleW/2, bodyTop, candleW, Math.max(1, bodyBot - bodyTop));
   });
 
+  // VP lines
   if (inst.volumeProfile) {
     const vp = inst.volumeProfile;
     const drawVP = (price, color) => {
@@ -2032,11 +1988,10 @@ function drawAnalysisChart(canvasId, record) {
       ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
       ctx.setLineDash([]);
     };
-    drawVP(vp.poc, 'rgba(250,204,21,0.7)');
-    drawVP(vp.vah, 'rgba(248,113,113,0.55)');
-    drawVP(vp.val, 'rgba(74,222,128,0.55)');
+    drawVP(vp.poc, 'rgba(250,204,21,0.65)');
   }
 
+  // Draw levels
   const drawLevel = (price, color, label, dashed) => {
     if (!price || !isFinite(price)) return;
     const y = priceToY(price);
@@ -2060,11 +2015,30 @@ function drawAnalysisChart(canvasId, record) {
   if (record.tp3) drawLevel(record.tp3, '#22c55e', 'TP3', true);
   if (record.entry) drawLevel(record.entry, '#3b82f6', 'ENTRY', false);
 
-  const lastCandle = ohlc[ohlc.length - 1];
-  const lastY = priceToY(lastCandle.close);
-  ctx.fillStyle = '#fbbf24';
-  ctx.beginPath(); ctx.arc(padL + chartW, lastY, 4, 0, Math.PI * 2); ctx.fill();
+  // ✅ v35.5: LIVE PRICE line (yellow dashed)
+  if (record.livePrice) {
+    const y = priceToY(record.livePrice);
+    if (y >= padT - 2 && y <= padT + chartH + 2) {
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 4]);
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
+      ctx.setLineDash([]);
 
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillRect(padL + chartW + 2, y - 8, 66, 16);
+      ctx.fillStyle = '#000';
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('LIVE', padL + chartW + 5, y + 3);
+
+      // Circle marker at end
+      ctx.fillStyle = '#fbbf24';
+      ctx.beginPath(); ctx.arc(padL + chartW, y, 4, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  // Kill zone
   if (inst.killZone) {
     ctx.fillStyle = inst.killZone.isActive ? 'rgba(16,185,129,0.9)' : 'rgba(148,163,184,0.6)';
     ctx.font = 'bold 10px sans-serif';
@@ -2072,10 +2046,11 @@ function drawAnalysisChart(canvasId, record) {
     ctx.fillText('⏰ ' + inst.killZone.session, padL, padT + 12);
   }
 
+  // Bottom title
   ctx.fillStyle = '#fbbf24';
   ctx.font = 'bold 10px sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(record.pair + ' — M15 (Last ' + ohlc.length + ' candles)', padL, cssH - 10);
+  ctx.fillText(record.pair + ' — M15 (' + ohlc.length + ' candles)', padL, cssH - 10);
   ctx.fillStyle = '#64748b';
   ctx.font = '9px sans-serif';
   ctx.textAlign = 'right';
@@ -2103,6 +2078,9 @@ function buildAnalysisHTML(record, shield) {
   const qualityBadge = record.quality || '—';
   const qualityColor = qualityBadge === 'A+' ? 'var(--green)' : qualityBadge === 'A' ? 'var(--cyan)' : qualityBadge === 'B+' ? 'var(--yellow)' : qualityBadge === 'B' ? 'var(--orange)' : 'var(--muted)';
 
+  const distPct = parseFloat(record.entryDistancePct) || 0;
+  const distColor = distPct < 0.3 ? 'var(--green)' : distPct < 0.8 ? 'var(--yellow)' : distPct < 1.5 ? 'var(--orange)' : 'var(--red)';
+
   let html = `<div class="signal-hero ${signalColor}">
     <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
     <div class="signal-label" style="color:${signalTextColor};">${strength.label}</div>
@@ -2116,11 +2094,33 @@ function buildAnalysisHTML(record, shield) {
     </div>
   </div>`;
 
+  // Live vs Entry comparison (v35.5 NEW)
+  if (action !== 'HOLD') {
+    html += `<div style="background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:10px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:11px;color:var(--accent);font-weight:bold;letter-spacing:1px;margin-bottom:10px;">💹 LIVE vs ENTRY</div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center;">
+        <div>
+          <div style="font-size:10px;color:var(--muted);">LIVE PRICE</div>
+          <div style="font-size:18px;font-weight:900;color:var(--yellow);">${record.livePrice ? record.livePrice.toFixed(spec.decimals) : '—'}</div>
+        </div>
+        <div style="font-size:20px;color:var(--accent);">→</div>
+        <div>
+          <div style="font-size:10px;color:var(--muted);">ENTRY</div>
+          <div style="font-size:18px;font-weight:900;color:var(--accent);">${entry}</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:10px;padding:6px;background:rgba(0,0,0,.3);border-radius:6px;">
+        <span class="dist-badge" style="background:${distColor}22;color:${distColor};border:1px solid ${distColor};">
+          📏 ${distPct.toFixed(2)}% ${record.orderType === 'MARKET' ? '(MARKET)' : 'away'} • ${record.orderType}
+        </span>
+      </div>
+    </div>`;
+  }
+
   if (record.isFallback && record.fallbackReason) {
     html += `<div class="fallback-box">
       <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ INSTITUTIONAL BIAS OVERRIDE</div>
       <div style="font-size:12px;">${record.fallbackReason}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px;">Masters wote walisema HOLD, lakini metrics za institutional zinaonyesha direction ya wazi.</div>
     </div>`;
   }
 
@@ -2128,7 +2128,7 @@ function buildAnalysisHTML(record, shield) {
     html += `<div class="entry-source-box">
       <div style="color:var(--cyan);font-weight:bold;font-size:11px;letter-spacing:1px;margin-bottom:6px;">📍 ENTRY SOURCE</div>
       <div>${record.entrySource}</div>
-      <div style="margin-top:6px;font-size:11px;color:var(--muted);">Quality: <strong style="color:${qualityColor};">${qualityBadge}</strong> | Order Type: <strong style="color:var(--blue);">${orderType}</strong></div>
+      <div style="margin-top:6px;font-size:11px;color:var(--muted);">Quality: <strong style="color:${qualityColor};">${qualityBadge}</strong> | Order: <strong style="color:var(--blue);">${orderType}</strong></div>
     </div>`;
   }
 
@@ -2139,10 +2139,9 @@ function buildAnalysisHTML(record, shield) {
       <canvas id="${chartId}"></canvas>
     </div>
     <div class="chart-legend">
-      <span><i style="background:rgba(16,185,129,.5);border:1px solid #10b981;"></i>Bull OB</span>
-      <span><i style="background:rgba(239,68,68,.5);border:1px solid #ef4444;"></i>Bear OB</span>
-      <span><i style="background:rgba(6,182,212,.4);border:1px solid #06b6d4;"></i>FVG</span>
+      <span><i style="background:rgba(16,185,129,.5);border:1px solid #10b981;"></i>Entry Zone</span>
       <span><i style="background:#3b82f6;"></i>Entry</span>
+      <span><i style="background:#fbbf24;"></i>LIVE Price</span>
       <span><i style="background:#ef4444;"></i>SL</span>
       <span><i style="background:#22c55e;"></i>TP</span>
     </div>
@@ -2170,10 +2169,6 @@ function buildAnalysisHTML(record, shield) {
       const stColor = inst.ltfStructure.trend === 'BULLISH' ? 'var(--green)' : inst.ltfStructure.trend === 'BEARISH' ? 'var(--red)' : 'var(--yellow)';
       html += `<div class="inst-zone neutral"><div><strong>15M Structure</strong></div><span class="zone-badge" style="background:rgba(255,255,255,.05);color:${stColor};">${inst.ltfStructure.trend}</span></div>`;
     }
-    if (inst.m15Sweep) {
-      const sColor = inst.m15Sweep.bias === 'BUY' ? 'bull' : 'bear';
-      html += `<div class="inst-zone ${sColor}"><div><strong>💧 15M Sweep</strong></div><span class="zone-badge ${sColor}">${inst.m15Sweep.bias}</span></div>`;
-    }
     if (inst.m15Displacement?.detected) {
       const dColor = inst.m15Displacement.direction === 'BULLISH' ? 'bull' : 'bear';
       html += `<div class="inst-zone ${dColor}"><div><strong>💥 15M Displacement</strong></div><span class="zone-badge ${dColor}">${inst.m15Displacement.direction}</span></div>`;
@@ -2196,10 +2191,10 @@ function buildAnalysisHTML(record, shield) {
   if (inst?.orderBlocks || inst?.fvg) {
     html += `<div class="card" style="border-color:var(--pink);">
       <div class="ballistic-header">🏦 INSTITUTIONAL ZONES</div>`;
-    if (inst.orderBlocks?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bullish OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBull.low.toFixed(4)} – ${inst.orderBlocks.nearestBull.high.toFixed(4)}</small></div><span class="zone-badge bull">UNMITIGATED</span></div>`;
-    if (inst.orderBlocks?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bearish OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBear.low.toFixed(4)} – ${inst.orderBlocks.nearestBear.high.toFixed(4)}</small></div><span class="zone-badge bear">UNMITIGATED</span></div>`;
-    if (inst.fvg?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bullish FVG</strong><br><small style="color:var(--muted);">${inst.fvg.nearestBull.bottom.toFixed(4)} – ${inst.fvg.nearestBull.top.toFixed(4)}</small></div><span class="zone-badge bull">IMBALANCE</span></div>`;
-    if (inst.fvg?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bearish FVG</strong><br><small style="color:var(--muted);">${inst.fvg.nearestBear.bottom.toFixed(4)} – ${inst.fvg.nearestBear.top.toFixed(4)}</small></div><span class="zone-badge bear">IMBALANCE</span></div>`;
+    if (inst.orderBlocks?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bullish OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBull.low.toFixed(2)} – ${inst.orderBlocks.nearestBull.high.toFixed(2)}</small></div><span class="zone-badge bull">OB</span></div>`;
+    if (inst.orderBlocks?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bearish OB</strong><br><small style="color:var(--muted);">${inst.orderBlocks.nearestBear.low.toFixed(2)} – ${inst.orderBlocks.nearestBear.high.toFixed(2)}</small></div><span class="zone-badge bear">OB</span></div>`;
+    if (inst.fvg?.nearestBull) html += `<div class="inst-zone bull"><div><strong>Bullish FVG</strong><br><small style="color:var(--muted);">${inst.fvg.nearestBull.bottom.toFixed(2)} – ${inst.fvg.nearestBull.top.toFixed(2)}</small></div><span class="zone-badge bull">FVG</span></div>`;
+    if (inst.fvg?.nearestBear) html += `<div class="inst-zone bear"><div><strong>Bearish FVG</strong><br><small style="color:var(--muted);">${inst.fvg.nearestBear.bottom.toFixed(2)} – ${inst.fvg.nearestBear.top.toFixed(2)}</small></div><span class="zone-badge bear">FVG</span></div>`;
     html += `</div>`;
   }
 
@@ -2221,30 +2216,8 @@ function buildAnalysisHTML(record, shield) {
     html += `</div>`;
   }
 
-  html += `<div class="card" style="border-color:var(--orange);">
-    <div class="ballistic-header">💥 MARKET MAKER MODEL</div>`;
-  if (inst?.displacement?.detected) {
-    const dColor = inst.displacement.direction === 'BULLISH' ? 'bull' : 'bear';
-    html += `<div class="inst-zone ${dColor}"><div><strong>💥 Displacement</strong></div><span class="zone-badge ${dColor}">${inst.displacement.direction}</span></div>`;
-  }
-  if (inst?.powerOf3) html += `<div class="inst-zone neutral"><div><strong>🔄 Po3</strong></div><span class="zone-badge neutral">${inst.powerOf3.phase}</span></div>`;
-  if (inst?.zone) {
-    const zColor = inst.zone.bias.includes('BUY') ? 'bull' : inst.zone.bias.includes('SELL') ? 'bear' : 'neutral';
-    html += `<div class="inst-zone ${zColor}"><div><strong>📐 Premium/Discount</strong></div><span class="zone-badge ${zColor}">${inst.zone.zone}</span></div>`;
-  }
-  if (inst?.killZone) {
-    const kz = inst.killZone;
-    html += kz.isActive
-      ? `<div class="killzone-active"><div style="font-size:11px;color:var(--green);font-weight:bold;">⏰ ACTIVE KILL ZONE</div><div style="font-size:14px;font-weight:bold;color:var(--green);margin-top:4px;">${kz.session}</div></div>`
-      : `<div class="killzone-dead"><div style="font-size:13px;color:var(--muted);">⏰ ${kz.session}</div></div>`;
-  }
-  html += `</div>`;
-
   if (action === 'HOLD') {
-    let reasonSummary = '';
-    if (confluence.isNoTrade) reasonSummary = `Masters wote <strong>${confluence.holdCount} kati ya 4</strong> walisema HOLD.`;
-    else reasonSummary = `Masters wamegawanyika.`;
-
+    let reasonSummary = confluence.isNoTrade ? `Masters wote <strong>${confluence.holdCount} kati ya 4</strong> walisema HOLD.` : `Masters wamegawanyika.`;
     html += `<div class="card" style="border-color:var(--orange);">
       <div class="ballistic-header" style="color:var(--orange);">⏸ SABABU YA ${strength.label}</div>
       ${record.agents.map(a => `
@@ -2267,6 +2240,7 @@ function buildAnalysisHTML(record, shield) {
     html += `<div class="order-type-box">
       <div style="font-size:11px;color:var(--blue);font-weight:bold;letter-spacing:2px;">⚡ ORDER TYPE</div>
       <div class="order-type-value">${orderType}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:5px;">${orderType === 'MARKET' ? 'Ingia sasa kwa bei ya sasa' : orderType === 'BUY_LIMIT' ? 'Subiri bei irudi kwenye entry' : 'Subiri bei ipande kwenye entry'}</div>
     </div>`;
   }
 
@@ -2308,7 +2282,6 @@ function buildAnalysisHTML(record, shield) {
 
   if (action !== 'HOLD' && slPips > 0) {
     const autoLot = computeAutoLotSize(slPips, spec.pipValue);
-    // ✅ FIX: tumia inst.h1Raw
     const ote = calculateOTE(inst.h1Raw || inst.h4Raw || [], action);
     html += `<div class="card">
       <div class="ballistic-header">📊 TRADING PARAMETERS</div>
@@ -2402,15 +2375,6 @@ async function refreshOrderFlow() {
       <div style="font-size:13px;font-weight:bold;color:${bColor};">${b.bias.replace('_',' ')}</div>
       <div class="inst-bias-bar"><div class="inst-bias-fill" style="width:${b.score}%"></div></div>
     </div>`;
-    if (inst.volumeProfile) {
-      const vp = inst.volumeProfile;
-      html += `<div class="card" style="border-color:var(--inst);"><div class="ballistic-header">📊 VOLUME PROFILE</div>
-        <div class="grid-3">
-          <div class="mini-box" style="text-align:center;"><label>VAH</label><div style="font-size:12px;font-weight:bold;color:var(--red);">${vp.vah}</div></div>
-          <div class="mini-box" style="text-align:center;border-color:var(--yellow);"><label style="color:var(--yellow);">⭐ POC</label><div style="font-size:13px;font-weight:bold;color:var(--yellow);">${vp.poc}</div></div>
-          <div class="mini-box" style="text-align:center;"><label>VAL</label><div style="font-size:12px;font-weight:bold;color:var(--green);">${vp.val}</div></div>
-        </div></div>`;
-    }
     container.innerHTML = html;
   } catch (err) { container.innerHTML = `<div class="disclaimer-box">Error: ${err.message}</div>`; }
 }
@@ -2551,7 +2515,7 @@ function loadHistory() {
       <div style="flex-grow:1;">
         <strong>${r.pair} <span style="color:${strength.color};">${strength.label}</span></strong> ${sb}
         ${r.quality && r.quality !== '—' ? `<span style="color:var(--cyan);font-size:11px;"> • 🎯 ${r.quality}</span>` : ''}
-        ${r.isFallback ? '<span style="color:var(--pink);font-size:11px;"> • 🎯 OVERRIDE</span>' : ''}
+        ${r.isFallback ? '<span style="color:var(--pink);font-size:11px;"> • OVERRIDE</span>' : ''}
         <br><small style="color:var(--muted);">${r.date}</small>
       </div>
       <div class="chevron">›</div>
@@ -2605,11 +2569,11 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "35.4", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "35.5", exportedAt: new Date().toISOString() };
   const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v35.4-${Date.now()}.json`;
+  a.download = `lutynoel-v35.5-${Date.now()}.json`;
   a.click();
 }
 
