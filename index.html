@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v36.0 — Real Masters Full</title>
+<title>Lutynoel.fx v36.1 — Real Masters Full</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -84,6 +84,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .badge-status{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .badge-shield{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
 .badge-fallback{background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink)}
+.badge-override{background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(236,72,153,.2));color:var(--accent);border:2px solid var(--accent);padding:6px 14px;border-radius:12px;font-size:11px;font-weight:900;display:inline-block;margin:6px 0;letter-spacing:1px;box-shadow:0 0 20px rgba(251,191,36,.3)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .mini-box{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px}
@@ -124,7 +125,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .auto-lot-box{background:linear-gradient(135deg,rgba(236,72,153,.15),rgba(251,191,36,.1));border:2px solid var(--pink);border-radius:12px;padding:15px;margin-top:10px;text-align:center}
 .auto-lot-value{font-size:32px;font-weight:900;color:var(--pink);margin:8px 0}
 .order-type-box{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(168,85,247,.1));border:2px solid var(--blue);border-radius:10px;padding:15px;margin-bottom:10px;text-align:center}
-.order-type-value{font-size:22px;font-weight:900;color:var(--blue);letter-spacing:1px}
 .manage-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:12px;line-height:1.5}
 .manage-row .num{background:var(--accent);color:#000;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;font-weight:bold;flex-shrink:0}
 .sr-level{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-radius:8px;margin-bottom:6px;font-size:13px;font-weight:bold}
@@ -135,7 +135,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .sr-s1{background:rgba(16,185,129,.12);color:#6ee7b7;border-left:4px solid var(--green)}
 .sr-s2{background:rgba(16,185,129,.18);color:#6ee7b7;border-left:4px solid var(--green)}
 .sr-s3{background:rgba(16,185,129,.25);color:#6ee7b7;border-left:4px solid var(--green)}
-.sr-current{background:rgba(59,130,246,.2);color:#93c5fd;border-left:4px solid var(--blue);font-size:14px}
 .hero-banner{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:14px;padding:20px 18px;margin-bottom:15px;position:relative;overflow:hidden;border:1px solid var(--border)}
 .hero-banner .glow1{position:absolute;top:-50%;right:-10%;width:280px;height:280px;background:radial-gradient(circle,rgba(251,191,36,.35),transparent 70%);pointer-events:none}
 .hero-banner .glow2{position:absolute;bottom:-40%;left:-10%;width:220px;height:220px;background:radial-gradient(circle,rgba(139,92,246,.3),transparent 70%);pointer-events:none}
@@ -148,10 +147,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .inst-bias-score{font-size:38px;font-weight:900;letter-spacing:1px;margin:5px 0}
 .inst-bias-bar{height:8px;background:#222;border-radius:4px;overflow:hidden;margin-top:10px}
 .inst-bias-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green));transition:width .6s}
-.vp-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:11px}
-.vp-bar{flex:1;height:14px;background:#1a1a1f;border-radius:3px;overflow:hidden;position:relative}
-.vp-bar-fill{height:100%;background:linear-gradient(90deg,var(--inst),var(--pink))}
-.vp-label{font-weight:bold;width:50px;text-align:right;font-family:monospace}
 .inst-zone{background:#08080a;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .inst-zone.bull{border-left:4px solid var(--green)}
 .inst-zone.bear{border-left:4px solid var(--red)}
@@ -168,7 +163,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .chart-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:10px;color:var(--muted)}
 .chart-legend span{display:flex;align-items:center;gap:4px}
 .chart-legend i{display:inline-block;width:12px;height:8px;border-radius:2px}
-.dist-badge{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10px;font-weight:bold}
 .exec-panel{border-radius:12px;padding:16px;margin-bottom:15px;text-align:center}
 .exec-action{background:#000;color:#fff;border-radius:8px;padding:10px;margin-top:10px;text-align:center;font-weight:bold;font-size:13px}
 .voice-indicator{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold;background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink);margin-left:6px}
@@ -181,8 +175,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tf-h1{background:rgba(139,92,246,.2);color:var(--inst);border:1px solid var(--inst)}
 .tf-h4{background:rgba(251,191,36,.2);color:var(--accent);border:1px solid var(--accent)}
 .tf-preview-img{max-width:100%;border-radius:8px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain}
-.tf-result-card{background:#08080a;border-radius:8px;padding:12px;margin-top:10px;border-left:4px solid var(--muted)}
-.tf-vote{font-size:20px;font-weight:900;margin:6px 0}
 .tf-reasoning{font-size:11px;line-height:1.6;color:var(--muted);margin-top:6px}
 .mtf-confluence{border-radius:12px;padding:18px;text-align:center;margin-top:15px}
 .master-detail-card{background:#08080a;border-radius:10px;padding:14px;margin-bottom:10px;border-left:4px solid var(--muted)}
@@ -197,8 +189,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v36.0</div>
-    <div class="auth-subtitle">Real Masters + Live + Vision</div>
+    <div class="auth-title">Lutynoel.fx v36.1</div>
+    <div class="auth-subtitle">Real Masters + Override Logic</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
@@ -222,12 +214,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Alpha Vantage Key (Optional)</label>
       <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
       <div class="info-box">
-        🎯 <strong>v36.0 FULL:</strong><br>
-        📊 Live Analysis + Order Flow + Backtest<br>
-        📸 MTF Screenshot (M15+H1+H4)<br>
-        🏦 D&S+S/R + Price Action + Structure + Fundamental<br>
-        🔍 FVG/IFVG/Imbalance/Displacement/SAR<br>
-        🎙️ Voice Kiswahili
+        ⚡ <strong>v36.1 NEW:</strong><br>
+        🎯 High-Confidence Override<br>
+        📊 HOLD ina discount 50%<br>
+        🎙️ Voice ya override<br>
+        ✅ 4 Real Masters + Vision
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -249,7 +240,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v36.0</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v36.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -265,35 +256,28 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 
   <div class="main-content">
-    <!-- DASHBOARD -->
     <div id="view-overview" class="view-section">
       <div class="hero-banner">
-        <div class="glow1"></div>
-        <div class="glow2"></div>
+        <div class="glow1"></div><div class="glow2"></div>
         <div class="hero-banner-inner">
           <div style="width:80px;height:80px;flex-shrink:0;">
             <svg viewBox="0 0 100 100" style="width:100%;height:100%;filter:drop-shadow(0 0 15px #8b5cf6);">
-              <defs>
-                <radialGradient id="instGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.6"/>
-                  <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-              <circle cx="50" cy="50" r="48" fill="url(#instGlow)"/>
+              <defs><radialGradient id="ig"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.6"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient></defs>
+              <circle cx="50" cy="50" r="48" fill="url(#ig)"/>
               <rect x="28" y="22" width="44" height="42" rx="8" fill="#8b5cf6" stroke="#fbbf24" stroke-width="2"/>
-              <circle cx="40" cy="40" r="5" fill="#fbbf24"/>
-              <circle cx="60" cy="40" r="5" fill="#fbbf24"/>
+              <circle cx="40" cy="40" r="5" fill="#fbbf24"/><circle cx="60" cy="40" r="5" fill="#fbbf24"/>
               <line x1="38" y1="53" x2="62" y2="53" stroke="#fbbf24" stroke-width="1.5"/>
             </svg>
           </div>
           <div style="flex:1;">
             <div class="hero-title">LUTYNOEL.FX</div>
-            <div class="hero-sub">Real Masters • v36.0</div>
+            <div class="hero-sub">Override Logic • v36.1</div>
             <div class="hero-badges">
+              <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">⚡ OVERRIDE</span>
               <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">D&S+S/R</span>
-              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">PRICE ACTION</span>
-              <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">STRUCTURE</span>
-              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">FUNDAMENTAL</span>
+              <span style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);">PA</span>
+              <span style="background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan);">STRUCT</span>
+              <span style="background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple);">FUND</span>
             </div>
           </div>
         </div>
@@ -313,18 +297,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🎯 v36.0 REAL MASTERS</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">⚡ v36.1 — WHAT'S NEW</div>
         <div style="font-size:11px;line-height:1.9;">
-          🏦 <strong>D&S + S/R</strong> — Fresh zones, base, departure strength<br>
-          📊 <strong>Price Action</strong> — Candle patterns + body/wick ratio<br>
-          🎯 <strong>Structure</strong> — BOS/CHoCH/MSS + MTF alignment<br>
-          🌍 <strong>Fundamental</strong> — Session, kill zones, volatility<br>
-          🔍 <strong>Vision</strong> — FVG, IFVG, Imbalance, Displacement, SAR
+          ⚡ <strong>High-Confidence Override</strong> — Master mmoja ≥ 80% → override<br>
+          📊 <strong>HOLD Discount</strong> — HOLD ina uzito 50% tu<br>
+          🎯 <strong>Directional Priority</strong> — BUY/SELL > HOLD<br>
+          🎙️ <strong>Voice ya Override</strong> — Inatangaza override<br>
+          ✅ <strong>4 Masters wa kweli</strong> + Vision detections
         </div>
       </div>
     </div>
 
-    <!-- LIVE ANALYSIS -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🎯 Live Data Analysis</h3>
@@ -350,10 +333,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <input type="number" step="any" id="livePrice" value="2650.00">
           <button class="refresh-btn" id="refreshBtn" onclick="fetchLivePrice()">🔄 Refresh</button>
         </div>
-        <div id="priceStatus" class="price-status manual">
-          <span id="priceStatusText">⚪ Click Refresh</span>
-          <span id="priceTime">—</span>
-        </div>
+        <div id="priceStatus" class="price-status manual"><span id="priceStatusText">⚪ Click Refresh</span><span id="priceTime">—</span></div>
         <label>3. Fetch Institutional Data</label>
         <div class="data-status" id="dataStatus">
           <div class="data-status-item" id="data4H"><span>4H Data</span><span>—</span></div>
@@ -362,22 +342,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div class="data-status-item" id="dataIndicators"><span>Metrics + SAR</span><span>—</span></div>
         </div>
         <label>4. Institutional Snapshot</label>
-        <div class="chart-preview" id="chartPreview">
-          <div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div>
-        </div>
+        <div class="chart-preview" id="chartPreview"><div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div></div>
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
         <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN ANALYSIS</button>
       </div>
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- SCREENSHOT -->
     <div id="view-screenshot" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--inst);">
         <h3 style="margin:5px 0 15px;">📸 MTF Screenshot — 4 Real Masters</h3>
         <div class="info-box">
           📷 Upload <strong>screenshots 3 tofauti</strong>: M15 + H1 + H4<br>
-          <strong>Masters 4</strong> watazichambua kivyake kwa <strong>logic ya kweli</strong>: D&S+S/R, Price Action, Structure, Fundamental.
+          <strong>Masters 4</strong> watazichambua kivyake. <strong>High-confidence override</strong> itatumika kama master mmoja ana ≥ 80%.
         </div>
 
         <label>1. Chagua Pair</label>
@@ -404,28 +381,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <label>3. Upload Screenshots</label>
 
         <div class="tf-upload-box" id="tfBox-m15">
-          <div class="tf-label">
-            <span class="tf-label-name">⚡ M15 — Entry Timing (LTF)</span>
-            <span class="tf-label-badge tf-m15">LTF</span>
-          </div>
+          <div class="tf-label"><span class="tf-label-name">⚡ M15 — Entry Timing (LTF)</span><span class="tf-label-badge tf-m15">LTF</span></div>
           <input type="file" id="ssInput-m15" accept="image/*" style="padding:8px;margin-bottom:0;">
           <div id="ssPreview-m15" style="display:none;"><img id="ssImg-m15" class="tf-preview-img"></div>
         </div>
 
         <div class="tf-upload-box" id="tfBox-h1">
-          <div class="tf-label">
-            <span class="tf-label-name">🎯 H1 — Trend (MTF)</span>
-            <span class="tf-label-badge tf-h1">MTF</span>
-          </div>
+          <div class="tf-label"><span class="tf-label-name">🎯 H1 — Trend (MTF)</span><span class="tf-label-badge tf-h1">MTF</span></div>
           <input type="file" id="ssInput-h1" accept="image/*" style="padding:8px;margin-bottom:0;">
           <div id="ssPreview-h1" style="display:none;"><img id="ssImg-h1" class="tf-preview-img"></div>
         </div>
 
         <div class="tf-upload-box" id="tfBox-h4">
-          <div class="tf-label">
-            <span class="tf-label-name">🏛️ H4 — Bias (HTF)</span>
-            <span class="tf-label-badge tf-h4">HTF</span>
-          </div>
+          <div class="tf-label"><span class="tf-label-name">🏛️ H4 — Bias (HTF)</span><span class="tf-label-badge tf-h4">HTF</span></div>
           <input type="file" id="ssInput-h4" accept="image/*" style="padding:8px;margin-bottom:0;">
           <div id="ssPreview-h4" style="display:none;"><img id="ssImg-h4" class="tf-preview-img"></div>
         </div>
@@ -439,7 +407,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="ssResultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- ORDER FLOW MAP -->
     <div id="view-orderflow" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -455,13 +422,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="GBPUSD">GBPUSD</option>
           <option value="US30">US30</option>
         </select>
-        <div id="orderFlowContainer">
-          <div class="info-box">Click "Refresh".</div>
-        </div>
+        <div id="orderFlowContainer"><div class="info-box">Click "Refresh".</div></div>
       </div>
     </div>
 
-    <!-- BACKTEST -->
     <div id="view-backtest" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -472,7 +436,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- JOURNAL -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
@@ -484,12 +447,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div><label>SL (Pips)</label><input type="number" id="riskSlPips" value="30"></div>
           <div><label>Pair</label>
             <select id="riskPair" onchange="calculateRisk()">
-              <option value="XAUUSD">XAUUSD</option>
-              <option value="EURUSD">EURUSD</option>
-              <option value="GBPUSD">GBPUSD</option>
-              <option value="USDJPY">USDJPY</option>
-              <option value="XAGUSD">XAGUSD</option>
-              <option value="WTI">WTI</option>
+              <option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option>
+              <option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option>
+              <option value="XAGUSD">XAGUSD</option><option value="WTI">WTI</option>
             </select>
           </div>
         </div>
@@ -501,16 +461,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin:5px 0 10px;">📝 Trade Journal</h3>
         <label>Pair</label>
-        <select id="jPair">
-          <option value="XAUUSD">XAUUSD</option>
-          <option value="EURUSD">EURUSD</option>
-          <option value="GBPUSD">GBPUSD</option>
-        </select>
+        <select id="jPair"><option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option></select>
         <label>Action</label>
-        <select id="jAction">
-          <option value="BUY">BUY</option>
-          <option value="SELL">SELL</option>
-        </select>
+        <select id="jAction"><option value="BUY">BUY</option><option value="SELL">SELL</option></select>
         <div class="grid-2">
           <div><label>Entry</label><input type="number" step="any" id="jEntry"></div>
           <div><label>Lot</label><input type="number" step="0.01" id="jLot" value="0.01"></div>
@@ -520,16 +473,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div><label>TP</label><input type="number" step="any" id="jTP"></div>
         </div>
         <label>Outcome</label>
-        <select id="jOutcome">
-          <option value="PENDING">PENDING</option>
-          <option value="WIN">WIN</option>
-          <option value="LOSS">LOSS</option>
-        </select>
+        <select id="jOutcome"><option value="PENDING">PENDING</option><option value="WIN">WIN</option><option value="LOSS">LOSS</option></select>
         <button class="primary-btn" onclick="saveJournalTrade()">💾 Save Trade</button>
       </div>
     </div>
 
-    <!-- LIVE CHART -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -547,18 +495,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- PIPS -->
     <div id="view-pips" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator</h3>
         <label>Choose Pair</label>
         <select id="pipsPair" onchange="updatePipsPairInfo()">
-          <option value="XAUUSD">XAUUSD</option>
-          <option value="BTCUSD">BTCUSD</option>
-          <option value="EURUSD">EURUSD</option>
-          <option value="GBPUSD">GBPUSD</option>
-          <option value="USDJPY">USDJPY</option>
-          <option value="XAGUSD">XAGUSD</option>
+          <option value="XAUUSD">XAUUSD</option><option value="BTCUSD">BTCUSD</option>
+          <option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option>
+          <option value="USDJPY">USDJPY</option><option value="XAGUSD">XAGUSD</option>
           <option value="WTI">WTI</option>
         </select>
         <div class="grid-2">
@@ -567,19 +511,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
         <div class="grid-2">
           <div><label>Lot</label><input type="number" step="0.01" id="pipsLot" value="0.01"></div>
-          <div><label>Direction</label>
-            <select id="pipsDirection">
-              <option value="BUY">BUY</option>
-              <option value="SELL">SELL</option>
-            </select>
-          </div>
+          <div><label>Direction</label><select id="pipsDirection"><option value="BUY">BUY</option><option value="SELL">SELL</option></select></div>
         </div>
         <button class="primary-btn" onclick="calculatePips()">🧮 Calculate</button>
         <div id="pipsResultBox" style="display:none;"></div>
       </div>
     </div>
 
-    <!-- HISTORY -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -590,16 +528,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- SETTINGS -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v36.0 — Real Masters Full<br>
+          <strong>Version:</strong> v36.1 — High-Confidence Override<br>
           <strong>Masters:</strong> D&S+S/R • Price Action • Structure • Fundamental<br>
-          <strong>Vision:</strong> FVG/IFVG/Imbalance/Displacement/SAR<br>
-          <strong>Voice:</strong> Kiswahili TTS<br>
-          <strong>Entry:</strong> MARKET (day trading)
+          <strong>Override:</strong> Master ≥ 80% → override moja kwa moja<br>
+          <strong>HOLD Discount:</strong> 50%<br>
+          <strong>Vision:</strong> FVG/IFVG/Imbalance/Displacement/SAR
         </div>
         <div class="ballistic-header">🔊 SAUTI</div>
         <label>Voice Alerts</label>
@@ -691,205 +628,105 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', alphaSymbol: null, pipValue: 10.00, spoken: 'Oil' }
 };
 
-// ═══════════════════════════════════════════════════════════
-// 🎯 v36.0 — 4 REAL MASTERS (Deep Theory Logic)
-// ═══════════════════════════════════════════════════════════
 const MASTERS_4 = [
-  {
-    id: 1,
-    name: "Demand & Supply + S/R Master",
-    weight: 0.28,
-    icon: "🏦",
-    color: "var(--pink)",
+  { id: 1, name: "Demand & Supply + S/R Master", weight: 0.28, icon: "🏦", color: "var(--pink)",
     lens: `You are the DEMAND & SUPPLY + SUPPORT/RESISTANCE MASTER — the #1 institutional lens.
 
 ═══ REAL DEMAND/SUPPLY LOGIC ═══
-A VALID ZONE requires ALL of:
-1. STRONG DEPARTURE: price left zone with aggressive momentum (large bodies, no consolidation at edge)
-2. FRESH: NOT retested OR retested max 1x (fresh = highest probability)
-3. BASE: 1-4 tight candles (not chaotic)
+A VALID ZONE requires ALL:
+1. STRONG DEPARTURE: aggressive momentum (large bodies, no consolidation at edge)
+2. FRESH: NOT retested OR retested max 1x
+3. BASE: 1-4 tight candles
 4. TIME: formed recently (last 30-50 candles)
-5. LOCATION: aligns with HTF (H4 zone > H1 > M15)
+5. LOCATION: aligns with HTF (H4 > H1 > M15)
 
-ZONE GRADING:
-- A+: Fresh + strong departure + tight base + HTF aligned
-- A: Tested 1x + strong departure
-- B: Tested 2x + weak departure
-- DEAD: Tested 3x+ (skip)
+ZONE GRADING: A+ = Fresh+strong+tight+HTF aligned | A = Tested 1x+strong | B = Tested 2x | DEAD = 3x+
 
 SUPPORT/RESISTANCE:
-- Pivot points: R1/R2/R3, S1/S2/S3 (from prev day H/L/C)
+- Pivot points R1/R2/R3, S1/S2/S3
 - Round numbers = psychological S/R (4000, 2650, 100.00)
-- Role flip: broken Resistance → new Support (and vice versa)
+- Role flip: broken Resistance → Support (vice versa)
 - Multiple wick rejections at same level = strong S/R
 - Fresh levels > retested 3+ times
-
-═══ ANALYSIS ═══
-1. Identify ALL horizontal S/R lines visible
-2. Nearest Demand zone below price — grade A+/A/B/DEAD
-3. Nearest Supply zone above price — grade
-4. Round numbers near current price
-5. Role-flip levels
-6. Pivot levels if visible
 
 ═══ DECISION ═══
 - Bounce from Fresh Demand + HTF aligned → BUY (70-85%)
 - Reject from Fresh Supply + HTF aligned → SELL (70-85%)
-- Mid-range (between zones) → HOLD unless others agree
-- Break of 3x-tested level → strong continuation
+- Mid-range → HOLD unless others agree
+- Break of 3x-tested level → continuation
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"S/R + D/S analysis","key_zones":"List zones with grades","nearest_obstacle":"Nearest S/R","chart_observations":"Overall chart","fvg_detected":"FVG? location","ifvg_detected":"IFVG?","imbalance_detected":"Imbalance?","displacement_detected":"Displacement?","parabolic_sar":"SAR above/below? recent flip?"}`
-  },
-  {
-    id: 2,
-    name: "Price Action Master",
-    weight: 0.25,
-    icon: "📊",
-    color: "var(--green)",
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"S/R + D/S analysis","key_zones":"List zones with grades","nearest_obstacle":"Nearest S/R","chart_observations":"Overall","fvg_detected":"FVG? location","ifvg_detected":"IFVG?","imbalance_detected":"Imbalance?","displacement_detected":"Displacement?","parabolic_sar":"SAR above/below? recent flip?"}` },
+  { id: 2, name: "Price Action Master", weight: 0.25, icon: "📊", color: "var(--green)",
     lens: `You are the PRICE ACTION MASTER — read CANDLES like a book.
 
-═══ CANDLESTICK PATTERNS (with CONTEXT) ═══
-- Bullish Engulfing: 2nd body fully engulfs 1st; at Support/Demand
-- Bearish Engulfing: opposite; at Resistance/Supply
-- Pin Bar / Hammer: long lower wick (2x+ body), small upper wick, closes top 1/3 = bullish reversal at support
-- Shooting Star / Inv. Hammer: long upper wick = bearish reversal at resistance
-- Inside Bar: candle inside previous; consolidation; wait breakout
-- Morning Star: bearish + indecision + bullish = reversal up
-- Evening Star: opposite
-- Three White Soldiers: 3 consecutive strong bullish = momentum
-- Three Black Crows: opposite
-- Doji: open≈close; indecision; powerful at extremes
-- Tweezer Tops/Bottoms: two candles same high/low
+CANDLESTICK PATTERNS (with CONTEXT):
+- Bullish Engulfing at Support → BUY
+- Bearish Engulfing at Resistance → SELL
+- Pin Bar/Hammer: long lower wick (2x+ body), closes top 1/3 = bullish reversal at support
+- Shooting Star/Inv. Hammer: long upper wick = bearish reversal at resistance
+- Inside Bar: consolidation; wait breakout
+- Morning/Evening Star = reversal
+- Three White Soldiers/Black Crows = momentum
+- Doji at extremes = powerful reversal signal
+- Tweezer Tops/Bottoms
 
-BODY-TO-WICK RATIO:
-- Body > 70% of range = VERY STRONG
-- Body 50-70% = Strong
-- Body 30-50% = Weak
-- Body < 30% = Indecision
-
-CLOSE POSITION:
-- Close in TOP 1/3 of bullish = strong bulls
-- Close in BOTTOM 1/3 of bullish = bulls lost ground (warning)
-- Wick rejections at S/R = high probability reversal
-
-CONSECUTIVE:
-- 3+ same-direction near S/R = exhaustion (reversal)
-- Higher lows = bullish confirmation
-- Lower highs = bearish confirmation
+BODY-TO-WICK: >70% VERY STRONG | 50-70% Strong | 30-50% Weak | <30% Indecision
+CLOSE POSITION: top 1/3 of bullish = strong | bottom 1/3 = warning
+CONSECUTIVE: 3+ same-direction at S/R = exhaustion
 
 ═══ DECISION ═══
 - Bullish Engulfing at Support → BUY (65-80%)
 - Bearish Engulfing at Resistance → SELL (65-80%)
 - Pin Bar at key level → reversal (60-75%)
 - Doji at extreme → reversal (55-65%)
-- 3+ consecutive same-direction → exhaustion (reverse 55-65%)
-- Inside bar → HOLD (wait)
+- Inside bar → HOLD
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Candle analysis","patterns_detected":"List visible patterns","last_3_candles":"Description","momentum":"Strong/Weak/Indecision","chart_observations":"Overall","fvg_detected":"FVG?","ifvg_detected":"IFVG?","imbalance_detected":"?","displacement_detected":"?","parabolic_sar":"SAR position"}`
-  },
-  {
-    id: 3,
-    name: "Market Structure Master",
-    weight: 0.25,
-    icon: "🎯",
-    color: "var(--cyan)",
-    lens: `You are the MARKET STRUCTURE MASTER — map the skeleton of the market.
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Candle analysis","patterns_detected":"List","last_3_candles":"Description","momentum":"Strong/Weak/Indecision","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+  { id: 3, name: "Market Structure Master", weight: 0.25, icon: "🎯", color: "var(--cyan)",
+    lens: `You are the MARKET STRUCTURE MASTER — map the skeleton.
 
-═══ SWING POINTS (2-candle rule) ═══
-- Swing High: candle higher high than 2 candles each side
-- Swing Low: candle lower low than 2 candles each side
+SWING POINTS: 2-candle rule
+TREND: UPTREND HH+HL | DOWNTREND LH+LL | RANGE failing HH/LL
 
-TREND:
-- UPTREND: HH + HL
-- DOWNTREND: LH + LL
-- RANGE: swings failing HH or LL
-
-BOS (Break of Structure):
-- Bullish BOS: price breaks ABOVE previous swing high with CLOSED candle
-- Bearish BOS: breaks BELOW previous swing low with closed candle
-- BOS = CONTINUATION
-
-CHoCH (Change of Character):
-- Bullish CHoCH: in downtrend, breaks ABOVE last LH
-- Bearish CHoCH: in uptrend, breaks BELOW last HL
-- CHoCH = FIRST reversal signal (unconfirmed)
-
-MSS (Market Structure Shift):
-- MSS = CHoCH + BOS combo = HIGH probability reversal
-- Requires DISPLACEMENT candle
-
-LIQUIDITY SWEEP:
-- Wick above/below previous swing, closes back inside = STOP HUNT
-- Bullish sweep of SSL → BUY
-- Bearish sweep of BSL → SELL
-
-MULTI-TIMEFRAME:
-- H4 = BIAS, H1 = TREND, M15 = ENTRY
-- All 3 aligned = A+ setup
-- H4↑ + H1↑ + M15↓ = wait M15
+BOS: closed candle breaks prev swing → CONTINUATION
+CHoCH: breaks last LH/HL → FIRST reversal signal
+MSS: CHoCH + BOS = HIGH probability reversal (needs displacement)
+LIQUIDITY SWEEP: wick beyond swing then close back inside = STOP HUNT
+MTF: H4=BIAS, H1=TREND, M15=ENTRY. All aligned = A+
 
 ═══ DECISION ═══
-- All 3 TF aligned → follow direction (75%+)
-- H4+H1 aligned, M15 ranging → HOLD (wait)
-- H4 up, H1 CHoCH down → wait confirmation
-- Clear MSS with displacement → reversal (70-85%)
+- All 3 TF aligned → follow (75%+)
+- H4+H1 aligned, M15 ranging → HOLD
+- Clear MSS + displacement → reversal (70-85%)
 - Liquidity sweep → reversal entry (60-75%)
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Structure analysis","trend_htf":"H4 trend","trend_mtf":"H1 trend","trend_ltf":"M15 trend","recent_bos":"BOS? level?","recent_choch":"CHoCH? level?","sweep_detected":"Sweep? where?","mtf_aligned":"Yes/No","chart_observations":"Structure notes","fvg_detected":"?","ifvg_detected":"?","imbalance_detected":"?","displacement_detected":"?","parabolic_sar":"SAR trend"}`
-  },
-  {
-    id: 4,
-    name: "Fundamental Analysis Master",
-    weight: 0.22,
-    icon: "🌍",
-    color: "var(--purple)",
-    lens: `You are the FUNDAMENTAL ANALYSIS MASTER — read SESSION, VOLATILITY, MARKET CONTEXT.
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Structure","trend_htf":"H4","trend_mtf":"H1","trend_ltf":"M15","recent_bos":"BOS?","recent_choch":"CHoCH?","sweep_detected":"","mtf_aligned":"Yes/No","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+  { id: 4, name: "Fundamental Analysis Master", weight: 0.22, icon: "🌍", color: "var(--purple)",
+    lens: `You are the FUNDAMENTAL ANALYSIS MASTER — read SESSION, VOLATILITY.
 
-═══ SESSION AWARENESS ═══
-- ASIAN (00:00-08:00 GMT): Low volatility, range-bound, accumulation
-- LONDON OPEN (07:00-10:00 GMT): HIGH volatility, kill zone
+SESSIONS:
+- ASIAN (00:00-08:00 GMT): Low vol, range, accumulation
+- LONDON OPEN (07:00-10:00 GMT): HIGH vol, kill zone
 - LONDON-NY OVERLAP (12:00-15:00 GMT): VERY HIGH, strongest
-- NY AFTERNOON (15:00-17:00 GMT): Moderate, exhaustion
-- DEAD ZONE (17:00-00:00 GMT): Very low, avoid
+- NY AFTERNOON (15:00-17:00): Moderate, exhaustion
+- DEAD ZONE (17:00-00:00): Very low, avoid
 
-KILL ZONE QUALITY:
-- London + NY = A+ for entry
-- Asian only = C (avoid)
-- Dead zone = F (never trade)
-
-VOLATILITY (from chart):
-- Large spread candles = active session
-- Small clustered = dead zone
-- Sudden spike = news / institutional entry
-
-RISK SENTIMENT:
-- Gold breaking up = risk-off / USD weak
-- Gold breaking down = risk-on / USD strong
-- Crypto following NAS = risk-on
-- Crypto decoupling = crypto-specific
-
-SESSION-BASED TRADING:
-- Asian range break in London = high probability
-- NY reversal after London trend = common
-- Monday gap fade during Asian
-- Avoid new trades Friday late NY
+KILL ZONE QUALITY: London + NY = A+ | Asian = C | Dead zone = F
+VOLATILITY: Large candles = active | Small = dead | Spike = news
+RISK SENTIMENT: Gold up = risk-off | Gold down = risk-on
 
 ═══ DECISION ═══
 - Tight range + small candles = Asian → HOLD
 - Directional + expanding vol = London/NY → follow
-- Sudden spike = news → wait 3 candles (HOLD)
+- Sudden spike = news → wait 3 candles
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Session + volatility","session_inferred":"Asian/London/NY","volatility":"Low/Medium/High/Extreme","news_event_suspected":"Yes/No","risk_sentiment":"Risk-on/off/Unclear","chart_observations":"Session notes","fvg_detected":"?","ifvg_detected":"?","imbalance_detected":"?","displacement_detected":"?","parabolic_sar":"SAR trend"}`
-  }
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Session + vol","session_inferred":"","volatility":"","news_event_suspected":"","risk_sentiment":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` }
 ];
 
-// ═══════════════════════════════════════════════════════════
-// Helper Functions
-// ═══════════════════════════════════════════════════════════
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
   t.className = 'toast'; t.innerText = msg;
@@ -918,9 +755,6 @@ function getSignalStrength(action, confluenceScore, instBias) {
   return { label: '⏸ WAIT', color: 'var(--yellow)', strength: 'WAIT', emoji: '⏸', hint: 'Subiri' };
 }
 
-// ═══════════════════════════════════════════════════════════
-// 🔊 VOICE ALERTS
-// ═══════════════════════════════════════════════════════════
 function isVoiceEnabled() { return localStorage.getItem(STORAGE_KEYS.VOICE_ENABLED) !== 'false'; }
 function saveVoiceSetting() {
   localStorage.setItem(STORAGE_KEYS.VOICE_ENABLED, document.getElementById('settingsVoiceEnabled').value);
@@ -944,23 +778,26 @@ function speakText(text, options = {}) {
 }
 function speakSignal(pair, action, confidence, livePrice) {
   const spec = PAIR_SPECS[pair];
-  const pairSpoken = spec?.spoken || pair;
-  const actionSw = action === 'BUY' ? 'Nunua' : action === 'SELL' ? 'Uza' : 'Subiri';
+  const ps = spec?.spoken || pair;
+  const aSw = action === 'BUY' ? 'Nunua' : action === 'SELL' ? 'Uza' : 'Subiri';
   const level = confidence >= 80 ? 'uhakika mkubwa sana' : confidence >= 65 ? 'uhakika mkubwa' : confidence >= 50 ? 'uhakika wa kati' : 'uhakika mdogo';
-  speakText(`${actionSw} ${pairSpoken}. ${actionSw} sasa. Bei ni ${livePrice.toFixed(2)}. ${level}, asilimia ${confidence}. Ingia sasa.`);
+  speakText(`${aSw} ${ps}. ${aSw} sasa. Bei ni ${livePrice.toFixed(2)}. ${level}, asilimia ${confidence}. Ingia sasa.`);
 }
 function speakStrongSignal(pair, action, confidence, livePrice) {
   const spec = PAIR_SPECS[pair];
-  const pairSpoken = spec?.spoken || pair;
-  const actionSw = action === 'BUY' ? 'Nunua' : action === 'SELL' ? 'Uza' : 'Subiri';
-  speakText(`Tahadhari. ${actionSw} ${pairSpoken}. Signal kali. Bei ${livePrice.toFixed(2)}. Uhakika asilimia ${confidence}. Ingia sasa, haraka.`, { rate: 1.0, pitch: 1.1 });
+  const ps = spec?.spoken || pair;
+  const aSw = action === 'BUY' ? 'Nunua' : action === 'SELL' ? 'Uza' : 'Subiri';
+  speakText(`Tahadhari. ${aSw} ${ps}. Signal kali. Bei ${livePrice.toFixed(2)}. Uhakika asilimia ${confidence}. Ingia sasa, haraka.`, { rate: 1.0, pitch: 1.1 });
+}
+function speakOverrideSignal(pair, action, confidence, livePrice) {
+  const spec = PAIR_SPECS[pair];
+  const ps = spec?.spoken || pair;
+  const aSw = action === 'BUY' ? 'Nunua' : 'Uza';
+  speakText(`High confidence override. ${aSw} ${ps} sasa. Bei ${livePrice.toFixed(2)}. Uhakika asilimia ${confidence}. Ingia sasa.`, { rate: 1.0, pitch: 1.05 });
 }
 function testVoice() { speakText('Karibu Lutynoel FX. Mfumo uko tayari. Nunua dhahabu sasa, uhakika mkubwa asilimia themanini na tano.'); }
 function testStrongVoice() { speakText('Tahadhari. Uza dhahabu. Signal kali. Bei elfu nne mia mbili sitini na tatu. Uhakika asilimia themanini na tano. Ingia sasa, haraka.', { rate: 1.0, pitch: 1.1 }); }
 
-// ═══════════════════════════════════════════════════════════
-// Safe JSON Parser
-// ═══════════════════════════════════════════════════════════
 function safeJsonParse(text) {
   if (!text) return null;
   let clean = text.replace(/```json/gi, '').replace(/```/g, '').trim();
@@ -976,17 +813,10 @@ function safeJsonParse(text) {
     }
   } catch (e2) {}
   try {
-    const voteMatch = clean.match(/"vote"\s*:\s*"([^"]+)"/i) || clean.match(/vote["\s:]+(BUY|SELL|HOLD)/i);
-    const confMatch = clean.match(/"confidence"\s*:\s*(\d+)/i);
-    const reasonMatch = clean.match(/"reasoning"\s*:\s*"([^"]+)"/i);
-    if (voteMatch) {
-      return {
-        vote: voteMatch[1].toUpperCase().trim(),
-        confidence: parseInt(confMatch?.[1]) || 55,
-        reasoning: reasonMatch?.[1] || clean.substring(0, 250).replace(/\n/g, ' '),
-        order_type: 'MARKET'
-      };
-    }
+    const vm = clean.match(/"vote"\s*:\s*"([^"]+)"/i) || clean.match(/vote["\s:]+(BUY|SELL|HOLD)/i);
+    const cm = clean.match(/"confidence"\s*:\s*(\d+)/i);
+    const rm = clean.match(/"reasoning"\s*:\s*"([^"]+)"/i);
+    if (vm) return { vote: vm[1].toUpperCase().trim(), confidence: parseInt(cm?.[1]) || 55, reasoning: rm?.[1] || clean.substring(0, 250).replace(/\n/g, ' '), order_type: 'MARKET' };
   } catch (e3) {}
   return null;
 }
@@ -1001,233 +831,209 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   } catch (err) { clearTimeout(id); throw err; }
 }
 
-// ═══════════════════════════════════════════════════════════
-// 🌟 PARABOLIC SAR (Real Calculation)
-// ═══════════════════════════════════════════════════════════
 function calculateParabolicSAR(ohlcData, afStart = 0.02, afStep = 0.02, afMax = 0.2) {
   if (!Array.isArray(ohlcData) || ohlcData.length < 5) return null;
-  let isUptrend = ohlcData[1].close >= ohlcData[0].close;
-  let sar = isUptrend ? ohlcData[0].low : ohlcData[0].high;
-  let ep = isUptrend ? ohlcData[0].high : ohlcData[0].low;
+  let isUp = ohlcData[1].close >= ohlcData[0].close;
+  let sar = isUp ? ohlcData[0].low : ohlcData[0].high;
+  let ep = isUp ? ohlcData[0].high : ohlcData[0].low;
   let af = afStart;
-  const sarValues = [{ time: ohlcData[0].time, sar, trend: isUptrend ? 'BULLISH' : 'BEARISH' }];
+  const vals = [{ time: ohlcData[0].time, sar, trend: isUp ? 'BULLISH' : 'BEARISH' }];
   for (let i = 1; i < ohlcData.length; i++) {
-    const c = ohlcData[i], prev = ohlcData[i - 1], prev2 = ohlcData[i - 2];
+    const c = ohlcData[i], p = ohlcData[i - 1], p2 = ohlcData[i - 2];
     sar = sar + af * (ep - sar);
-    if (isUptrend) {
-      if (prev2) sar = Math.min(sar, prev.low, prev2.low); else sar = Math.min(sar, prev.low);
-      if (c.low < sar) { isUptrend = false; sar = ep; ep = c.low; af = afStart; }
-      else { if (c.high > ep) { ep = c.high; af = Math.min(af + afStep, afMax); } }
+    if (isUp) {
+      sar = p2 ? Math.min(sar, p.low, p2.low) : Math.min(sar, p.low);
+      if (c.low < sar) { isUp = false; sar = ep; ep = c.low; af = afStart; }
+      else if (c.high > ep) { ep = c.high; af = Math.min(af + afStep, afMax); }
     } else {
-      if (prev2) sar = Math.max(sar, prev.high, prev2.high); else sar = Math.max(sar, prev.high);
-      if (c.high > sar) { isUptrend = true; sar = ep; ep = c.high; af = afStart; }
-      else { if (c.low < ep) { ep = c.low; af = Math.min(af + afStep, afMax); } }
+      sar = p2 ? Math.max(sar, p.high, p2.high) : Math.max(sar, p.high);
+      if (c.high > sar) { isUp = true; sar = ep; ep = c.high; af = afStart; }
+      else if (c.low < ep) { ep = c.low; af = Math.min(af + afStep, afMax); }
     }
-    sarValues.push({ time: c.time, sar, trend: isUptrend ? 'BULLISH' : 'BEARISH' });
+    vals.push({ time: c.time, sar, trend: isUp ? 'BULLISH' : 'BEARISH' });
   }
-  const last = sarValues[sarValues.length - 1];
-  let lastFlip = null;
-  for (let i = sarValues.length - 2; i >= 0; i--) {
-    if (sarValues[i].trend !== last.trend) {
-      lastFlip = { from: sarValues[i].trend, to: last.trend, atPrice: sarValues[i + 1].sar };
-      break;
-    }
-  }
-  return { values: sarValues, current: last.sar, trend: last.trend, lastFlip, barsSinceFlip: sarValues.length };
+  const last = vals[vals.length - 1];
+  let flip = null;
+  for (let i = vals.length - 2; i >= 0; i--) if (vals[i].trend !== last.trend) { flip = { from: vals[i].trend, to: last.trend, atPrice: vals[i + 1].sar }; break; }
+  return { values: vals, current: last.sar, trend: last.trend, lastFlip: flip };
 }
 
-// ═══════════════════════════════════════════════════════════
-// OHLC HELPERS
-// ═══════════════════════════════════════════════════════════
 function calculateRSI(closes, period = 14) {
   if (closes.length < period + 1) return null;
-  let gains = 0, losses = 0;
-  for (let i = 1; i <= period; i++) { const d = closes[i] - closes[i-1]; if (d > 0) gains += d; else losses -= d; }
-  const avgGain = gains / period, avgLoss = losses / period;
-  if (avgLoss === 0) return 100;
-  return 100 - (100 / (1 + avgGain / avgLoss));
+  let g = 0, l = 0;
+  for (let i = 1; i <= period; i++) { const d = closes[i] - closes[i-1]; if (d > 0) g += d; else l -= d; }
+  const ag = g / period, al = l / period;
+  if (al === 0) return 100;
+  return 100 - (100 / (1 + ag / al));
 }
-function calculateSMA(values, period) { if (values.length < period) return null; return values.slice(-period).reduce((a, b) => a + b, 0) / period; }
-function calculateATR(highs, lows, closes, period = 14) {
-  if (highs.length < period + 1) return null;
-  const trs = [];
-  for (let i = 1; i < highs.length; i++) trs.push(Math.max(highs[i] - lows[i], Math.abs(highs[i] - closes[i-1]), Math.abs(lows[i] - closes[i-1])));
-  return trs.slice(-period).reduce((a, b) => a + b, 0) / period;
+function calculateSMA(v, p) { if (v.length < p) return null; return v.slice(-p).reduce((a, b) => a + b, 0) / p; }
+function calculateATR(h, l, c, p = 14) {
+  if (h.length < p + 1) return null;
+  const tr = [];
+  for (let i = 1; i < h.length; i++) tr.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i-1]), Math.abs(l[i] - c[i-1])));
+  return tr.slice(-p).reduce((a, b) => a + b, 0) / p;
 }
-function calculateVolumeProfile(ohlcData, bins = 40) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return null;
-  const highs = ohlcData.map(d => d.high), lows = ohlcData.map(d => d.low);
-  const maxP = Math.max(...highs), minP = Math.min(...lows);
-  const range = maxP - minP;
-  if (range === 0) return null;
-  const binSize = range / bins;
-  const profile = new Array(bins).fill(0);
-  ohlcData.forEach(c => {
-    const lb = Math.max(0, Math.min(bins-1, Math.floor((c.low - minP) / binSize)));
-    const hb = Math.max(0, Math.min(bins-1, Math.floor((c.high - minP) / binSize)));
-    const vol = c.volume || 1;
-    const span = Math.max(1, hb - lb + 1);
-    for (let i = lb; i <= hb; i++) profile[i] += vol / span;
+function calculateVolumeProfile(ohlc, bins = 40) {
+  if (!Array.isArray(ohlc) || ohlc.length < 20) return null;
+  const hi = ohlc.map(d => d.high), lo = ohlc.map(d => d.low);
+  const mx = Math.max(...hi), mn = Math.min(...lo);
+  const rng = mx - mn;
+  if (rng === 0) return null;
+  const bs = rng / bins;
+  const prof = new Array(bins).fill(0);
+  ohlc.forEach(c => {
+    const lb = Math.max(0, Math.min(bins-1, Math.floor((c.low - mn) / bs)));
+    const hb = Math.max(0, Math.min(bins-1, Math.floor((c.high - mn) / bs)));
+    const v = c.volume || 1;
+    const s = Math.max(1, hb - lb + 1);
+    for (let i = lb; i <= hb; i++) prof[i] += v / s;
   });
-  let pocIdx = 0, maxVol = 0;
-  profile.forEach((v, i) => { if (v > maxVol) { maxVol = v; pocIdx = i; } });
-  const poc = minP + pocIdx * binSize + binSize / 2;
-  const totalVol = profile.reduce((a, b) => a + b, 0);
-  const targetVol = totalVol * 0.70;
-  let vaVol = profile[pocIdx], upIdx = pocIdx, downIdx = pocIdx;
-  while (vaVol < targetVol && (upIdx < bins - 1 || downIdx > 0)) {
-    const un = upIdx < bins - 1 ? profile[upIdx + 1] : -1;
-    const dn = downIdx > 0 ? profile[downIdx - 1] : -1;
-    if (un > dn) { upIdx++; vaVol += un; } else { downIdx--; vaVol += dn; }
+  let pi = 0, mv = 0;
+  prof.forEach((v, i) => { if (v > mv) { mv = v; pi = i; } });
+  const poc = mn + pi * bs + bs / 2;
+  const tv = prof.reduce((a, b) => a + b, 0);
+  const tg = tv * 0.7;
+  let va = prof[pi], u = pi, d = pi;
+  while (va < tg && (u < bins - 1 || d > 0)) {
+    const un = u < bins - 1 ? prof[u + 1] : -1;
+    const dn = d > 0 ? prof[d - 1] : -1;
+    if (un > dn) { u++; va += un; } else { d--; va += dn; }
   }
-  return { poc: poc.toFixed(2), vah: (minP + upIdx * binSize + binSize / 2).toFixed(2), val: (minP + downIdx * binSize + binSize / 2).toFixed(2) };
+  return { poc: poc.toFixed(2), vah: (mn + u * bs + bs / 2).toFixed(2), val: (mn + d * bs + bs / 2).toFixed(2) };
 }
-function detectOrderBlocks(ohlcData, lookback = 60) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 10) return { bullish: [], bearish: [], nearestBull: null, nearestBear: null };
-  const data = ohlcData.slice(-lookback);
-  const bullish = [], bearish = [];
-  for (let i = 2; i < data.length - 3; i++) {
-    const c = data[i];
+function detectOrderBlocks(o, lb = 60) {
+  if (!Array.isArray(o) || o.length < 10) return { bullish: [], bearish: [], nearestBull: null, nearestBear: null };
+  const d = o.slice(-lb);
+  const bull = [], bear = [];
+  for (let i = 2; i < d.length - 3; i++) {
+    const c = d[i];
     if (c.close < c.open) {
-      const ms = (data[i+1].close - data[i+1].open) + (data[i+2].close - data[i+2].open);
-      const cs = Math.abs(c.close - c.open);
-      if (ms > cs * 1.8 && data[i+1].close > c.high) {
+      const ms = (d[i+1].close - d[i+1].open) + (d[i+2].close - d[i+2].open);
+      if (ms > Math.abs(c.close - c.open) * 1.8 && d[i+1].close > c.high) {
         let mit = false;
-        for (let j = i + 3; j < data.length; j++) if (data[j].low <= c.high && data[j].low >= c.low) { mit = true; break; }
-        if (!mit) bullish.push({ high: c.high, low: c.low });
+        for (let j = i + 3; j < d.length; j++) if (d[j].low <= c.high && d[j].low >= c.low) { mit = true; break; }
+        if (!mit) bull.push({ high: c.high, low: c.low });
       }
     }
     if (c.close > c.open) {
-      const ms = Math.abs((data[i+1].close - data[i+1].open) + (data[i+2].close - data[i+2].open));
-      const cs = Math.abs(c.close - c.open);
-      if ((data[i+1].close - data[i+1].open) < 0 && ms > cs * 1.8 && data[i+1].close < c.low) {
+      const ms = Math.abs((d[i+1].close - d[i+1].open) + (d[i+2].close - d[i+2].open));
+      if ((d[i+1].close - d[i+1].open) < 0 && ms > Math.abs(c.close - c.open) * 1.8 && d[i+1].close < c.low) {
         let mit = false;
-        for (let j = i + 3; j < data.length; j++) if (data[j].high >= c.low && data[j].high <= c.high) { mit = true; break; }
-        if (!mit) bearish.push({ high: c.high, low: c.low });
+        for (let j = i + 3; j < d.length; j++) if (d[j].high >= c.low && d[j].high <= c.high) { mit = true; break; }
+        if (!mit) bear.push({ high: c.high, low: c.low });
       }
     }
   }
-  return {
-    bullish: bullish.slice(-5), bearish: bearish.slice(-5),
-    nearestBull: bullish.length ? bullish[bullish.length-1] : null,
-    nearestBear: bearish.length ? bearish[bearish.length-1] : null
-  };
+  return { bullish: bull.slice(-5), bearish: bear.slice(-5), nearestBull: bull.length ? bull[bull.length-1] : null, nearestBear: bear.length ? bear[bear.length-1] : null };
 }
-function detectFVG(ohlcData, lookback = 60) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 5) return { bullish: [], bearish: [], nearestBull: null, nearestBear: null };
-  const data = ohlcData.slice(-lookback);
-  const bullish = [], bearish = [];
-  for (let i = 1; i < data.length - 1; i++) {
-    const prev = data[i-1], next = data[i+1];
-    if (next.low > prev.high) bullish.push({ top: next.low, bottom: prev.high });
-    if (next.high < prev.low) bearish.push({ top: prev.low, bottom: next.high });
+function detectFVG(o, lb = 60) {
+  if (!Array.isArray(o) || o.length < 5) return { bullish: [], bearish: [], nearestBull: null, nearestBear: null };
+  const d = o.slice(-lb);
+  const bull = [], bear = [];
+  for (let i = 1; i < d.length - 1; i++) {
+    const p = d[i-1], n = d[i+1];
+    if (n.low > p.high) bull.push({ top: n.low, bottom: p.high });
+    if (n.high < p.low) bear.push({ top: p.low, bottom: n.high });
   }
-  return {
-    bullish: bullish.slice(-5), bearish: bearish.slice(-5),
-    nearestBull: bullish.length ? bullish[bullish.length-1] : null,
-    nearestBear: bearish.length ? bearish[bearish.length-1] : null
-  };
+  return { bullish: bull.slice(-5), bearish: bear.slice(-5), nearestBull: bull.length ? bull[bull.length-1] : null, nearestBear: bear.length ? bear[bear.length-1] : null };
 }
-function detectStructure(ohlcData) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return { trend: 'NEUTRAL' };
-  const swings = [];
-  for (let i = 2; i < ohlcData.length - 2; i++) {
-    const h = ohlcData[i].high, l = ohlcData[i].low;
-    if (h > ohlcData[i-1].high && h > ohlcData[i-2].high && h > ohlcData[i+1].high && h > ohlcData[i+2].high) swings.push({ type: 'H', price: h });
-    if (l < ohlcData[i-1].low && l < ohlcData[i-2].low && l < ohlcData[i+1].low && l < ohlcData[i+2].low) swings.push({ type: 'L', price: l });
+function detectStructure(o) {
+  if (!Array.isArray(o) || o.length < 20) return { trend: 'NEUTRAL' };
+  const sw = [];
+  for (let i = 2; i < o.length - 2; i++) {
+    const h = o[i].high, l = o[i].low;
+    if (h > o[i-1].high && h > o[i-2].high && h > o[i+1].high && h > o[i+2].high) sw.push({ type: 'H', price: h });
+    if (l < o[i-1].low && l < o[i-2].low && l < o[i+1].low && l < o[i+2].low) sw.push({ type: 'L', price: l });
   }
-  if (swings.length < 4) return { trend: 'NEUTRAL' };
-  const recent = swings.slice(-6);
-  const highs = recent.filter(s => s.type === 'H');
-  const lows = recent.filter(s => s.type === 'L');
-  let trend = 'NEUTRAL';
-  if (highs.length >= 2 && lows.length >= 2) {
-    const hh = highs[highs.length-1].price > highs[highs.length-2].price;
-    const hl = lows[lows.length-1].price > lows[lows.length-2].price;
-    const lh = highs[highs.length-1].price < highs[highs.length-2].price;
-    const ll = lows[lows.length-1].price < lows[lows.length-2].price;
-    if (hh && hl) trend = 'BULLISH';
-    else if (lh && ll) trend = 'BEARISH';
-    else trend = 'RANGING';
+  if (sw.length < 4) return { trend: 'NEUTRAL' };
+  const rec = sw.slice(-6);
+  const hs = rec.filter(s => s.type === 'H'), ls = rec.filter(s => s.type === 'L');
+  let t = 'NEUTRAL';
+  if (hs.length >= 2 && ls.length >= 2) {
+    const hh = hs[hs.length-1].price > hs[hs.length-2].price;
+    const hl = ls[ls.length-1].price > ls[ls.length-2].price;
+    const lh = hs[hs.length-1].price < hs[hs.length-2].price;
+    const ll = ls[ls.length-1].price < ls[ls.length-2].price;
+    if (hh && hl) t = 'BULLISH';
+    else if (lh && ll) t = 'BEARISH';
+    else t = 'RANGING';
   }
-  return { trend };
+  return { trend: t };
 }
-function detectLiquiditySweep(ohlcData) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return null;
-  const highs = ohlcData.map(d => d.high), lows = ohlcData.map(d => d.low);
-  const last = ohlcData[ohlcData.length - 1];
-  const rH = Math.max(...highs.slice(-20, -1));
-  const rL = Math.min(...lows.slice(-20, -1));
+function detectLiquiditySweep(o) {
+  if (!Array.isArray(o) || o.length < 20) return null;
+  const hs = o.map(d => d.high), ls = o.map(d => d.low);
+  const last = o[o.length - 1];
+  const rH = Math.max(...hs.slice(-20, -1)), rL = Math.min(...ls.slice(-20, -1));
   if (last.low < rL && last.close > rL) return { type: 'BULLISH_SWEEP (SSL)', bias: 'BUY' };
   if (last.high > rH && last.close < rH) return { type: 'BEARISH_SWEEP (BSL)', bias: 'SELL' };
   return null;
 }
-function detectDisplacement(ohlcData) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 20) return { detected: false };
-  const closes = ohlcData.map(d => d.close), highs = ohlcData.map(d => d.high), lows = ohlcData.map(d => d.low);
-  const atr = calculateATR(highs, lows, closes, 14);
+function detectDisplacement(o) {
+  if (!Array.isArray(o) || o.length < 20) return { detected: false };
+  const c = o.map(d => d.close), h = o.map(d => d.high), l = o.map(d => d.low);
+  const atr = calculateATR(h, l, c, 14);
   if (!atr) return { detected: false };
-  const last = ohlcData[ohlcData.length-1];
+  const last = o[o.length-1];
   const body = Math.abs(last.close - last.open);
-  const range = last.high - last.low;
-  const bodyRatio = range > 0 ? body / range : 0;
-  if (body > atr * 1.5 && bodyRatio > 0.7) return { detected: true, direction: last.close > last.open ? 'BULLISH' : 'BEARISH', bodyATR: (body / atr).toFixed(2) };
+  const rng = last.high - last.low;
+  const br = rng > 0 ? body / rng : 0;
+  if (body > atr * 1.5 && br > 0.7) return { detected: true, direction: last.close > last.open ? 'BULLISH' : 'BEARISH', bodyATR: (body / atr).toFixed(2) };
   return { detected: false };
 }
 function getKillZoneInfo() {
-  const now = new Date();
-  const m = now.getUTCHours() * 60 + now.getUTCMinutes();
-  const zones = [
+  const n = new Date();
+  const m = n.getUTCHours() * 60 + n.getUTCMinutes();
+  const z = [
     { name: 'ASIAN_KZ', start: 0, end: 180, quality: 'LOW' },
     { name: 'LONDON_OPEN', start: 420, end: 600, quality: 'HIGH' },
     { name: 'LONDON_NY_OVERLAP', start: 720, end: 900, quality: 'VERY_HIGH' },
     { name: 'NY_AFTERNOON', start: 900, end: 1020, quality: 'MEDIUM' },
     { name: 'DEAD_ZONE', start: 1260, end: 1440, quality: 'VERY_LOW' }
   ];
-  for (const z of zones) if (m >= z.start && m < z.end) return { session: z.name, quality: z.quality, isActive: z.quality === 'HIGH' || z.quality === 'VERY_HIGH' };
+  for (const x of z) if (m >= x.start && m < x.end) return { session: x.name, quality: x.quality, isActive: x.quality === 'HIGH' || x.quality === 'VERY_HIGH' };
   return { session: 'OFF_HOURS', quality: 'LOW', isActive: false };
 }
-function calculateSupportResistance(ohlcData) {
-  if (!Array.isArray(ohlcData) || ohlcData.length < 5) return null;
-  const prev = ohlcData[ohlcData.length - 2];
-  const pivot = (prev.high + prev.low + prev.close) / 3;
-  const r1 = (2 * pivot) - prev.low, s1 = (2 * pivot) - prev.high;
-  const r2 = pivot + (prev.high - prev.low), s2 = pivot - (prev.high - prev.low);
-  const r3 = prev.high + 2 * (pivot - prev.low), s3 = prev.low - 2 * (prev.high - pivot);
-  return { pivot: pivot.toFixed(2), r1: r1.toFixed(2), r2: r2.toFixed(2), r3: r3.toFixed(2), s1: s1.toFixed(2), s2: s2.toFixed(2), s3: s3.toFixed(2), currentPrice: ohlcData[ohlcData.length - 1].close.toFixed(2) };
+function calculateSupportResistance(o) {
+  if (!Array.isArray(o) || o.length < 5) return null;
+  const p = o[o.length - 2];
+  const pv = (p.high + p.low + p.close) / 3;
+  const r1 = (2 * pv) - p.low, s1 = (2 * pv) - p.high;
+  const r2 = pv + (p.high - p.low), s2 = pv - (p.high - p.low);
+  const r3 = p.high + 2 * (pv - p.low), s3 = p.low - 2 * (p.high - pv);
+  return { pivot: pv.toFixed(2), r1: r1.toFixed(2), r2: r2.toFixed(2), r3: r3.toFixed(2), s1: s1.toFixed(2), s2: s2.toFixed(2), s3: s3.toFixed(2), currentPrice: o[o.length - 1].close.toFixed(2) };
 }
 function computeInstitutionalBias(inst) {
-  let score = 50;
-  if (inst.structure?.trend === 'BULLISH') score += 12;
-  if (inst.structure?.trend === 'BEARISH') score -= 12;
-  if (inst.htfStructure?.trend === 'BULLISH') score += 10;
-  if (inst.htfStructure?.trend === 'BEARISH') score -= 10;
-  if (inst.sweep?.bias === 'BUY') score += 10;
-  if (inst.sweep?.bias === 'SELL') score -= 10;
-  if (inst.displacement?.direction === 'BULLISH') score += 8;
-  if (inst.displacement?.direction === 'BEARISH') score -= 8;
-  if (inst.fvg?.nearestBull) score += 5;
-  if (inst.fvg?.nearestBear) score -= 5;
-  if (inst.orderBlocks?.nearestBull) score += 7;
-  if (inst.orderBlocks?.nearestBear) score -= 7;
-  if (inst.m15Bias === 'BUY') score += 4;
-  if (inst.m15Bias === 'SELL') score -= 4;
-  if (inst.sar?.trend === 'BULLISH') score += 6;
-  if (inst.sar?.trend === 'BEARISH') score -= 6;
-  score = Math.max(0, Math.min(100, score));
-  let bias = 'NEUTRAL';
-  if (score >= 68) bias = 'STRONG_BULLISH';
-  else if (score >= 57) bias = 'BULLISH';
-  else if (score <= 32) bias = 'STRONG_BEARISH';
-  else if (score <= 43) bias = 'BEARISH';
-  return { score, bias };
+  let s = 50;
+  if (inst.structure?.trend === 'BULLISH') s += 12;
+  if (inst.structure?.trend === 'BEARISH') s -= 12;
+  if (inst.htfStructure?.trend === 'BULLISH') s += 10;
+  if (inst.htfStructure?.trend === 'BEARISH') s -= 10;
+  if (inst.sweep?.bias === 'BUY') s += 10;
+  if (inst.sweep?.bias === 'SELL') s -= 10;
+  if (inst.displacement?.direction === 'BULLISH') s += 8;
+  if (inst.displacement?.direction === 'BEARISH') s -= 8;
+  if (inst.fvg?.nearestBull) s += 5;
+  if (inst.fvg?.nearestBear) s -= 5;
+  if (inst.orderBlocks?.nearestBull) s += 7;
+  if (inst.orderBlocks?.nearestBear) s -= 7;
+  if (inst.m15Bias === 'BUY') s += 4;
+  if (inst.m15Bias === 'SELL') s -= 4;
+  if (inst.sar?.trend === 'BULLISH') s += 6;
+  if (inst.sar?.trend === 'BEARISH') s -= 6;
+  s = Math.max(0, Math.min(100, s));
+  let b = 'NEUTRAL';
+  if (s >= 68) b = 'STRONG_BULLISH';
+  else if (s >= 57) b = 'BULLISH';
+  else if (s <= 32) b = 'STRONG_BEARISH';
+  else if (s <= 43) b = 'BEARISH';
+  return { score: s, bias: b };
 }
-function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
+function calculateInstitutionalMetrics(h4, h1, m15, lp) {
   if (!Array.isArray(h1) || h1.length < 30) return null;
-  const closes = h1.map(d => d.close), highs = h1.map(d => d.high), lows = h1.map(d => d.low);
+  const c = h1.map(d => d.close), h = h1.map(d => d.high), l = h1.map(d => d.low);
   const inst = {
-    currentPrice: livePrice,
-    h1Raw: h1, h4Raw: Array.isArray(h4) ? h4 : null, m15Raw: Array.isArray(m15) ? m15 : null,
+    currentPrice: lp, h1Raw: h1, h4Raw: Array.isArray(h4) ? h4 : null, m15Raw: Array.isArray(m15) ? m15 : null,
     volumeProfile: calculateVolumeProfile(h1, 40),
     orderBlocks: detectOrderBlocks(h1, 60),
     fvg: detectFVG(h1, 60),
@@ -1241,8 +1047,8 @@ function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
     displacement: detectDisplacement(h1),
     killZone: getKillZoneInfo(),
     supportResistance: calculateSupportResistance(h1),
-    rsi: calculateRSI(closes, 14),
-    atr: calculateATR(highs, lows, closes, 14),
+    rsi: calculateRSI(c, 14),
+    atr: calculateATR(h, l, c, 14),
     sar: calculateParabolicSAR(h1),
     m15Bias: null
   };
@@ -1253,21 +1059,20 @@ function calculateInstitutionalMetrics(h4, h1, m15, livePrice) {
   inst.biasScore = computeInstitutionalBias(inst);
   return inst;
 }
-function getHTFBias(h4Data, h1Data) {
-  if (!Array.isArray(h4Data) || h4Data.length < 50) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
-  const h4C = h4Data.map(d => d.close);
-  const h1C = Array.isArray(h1Data) ? h1Data.map(d => d.close) : [];
-  const h4MA20 = calculateSMA(h4C, 20), h4MA50 = calculateSMA(h4C, 50);
-  const h4P = h4C[h4C.length - 1];
+function getHTFBias(h4, h1) {
+  if (!Array.isArray(h4) || h4.length < 50) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
+  const h4C = h4.map(d => d.close), h1C = Array.isArray(h1) ? h1.map(d => d.close) : [];
+  const m20 = calculateSMA(h4C, 20), m50 = calculateSMA(h4C, 50);
+  const p = h4C[h4C.length - 1];
   let h4T = 'NEUTRAL';
-  if (h4MA20 && h4MA50 && h4P > h4MA20 && h4MA20 > h4MA50) h4T = 'BULLISH';
-  else if (h4MA20 && h4MA50 && h4P < h4MA20 && h4MA20 < h4MA50) h4T = 'BEARISH';
+  if (m20 && m50 && p > m20 && m20 > m50) h4T = 'BULLISH';
+  else if (m20 && m50 && p < m20 && m20 < m50) h4T = 'BEARISH';
   let h1T = 'NEUTRAL';
   if (h1C.length > 50) {
-    const h1MA20 = calculateSMA(h1C, 20), h1MA50 = calculateSMA(h1C, 50);
-    const h1P = h1C[h1C.length - 1];
-    if (h1MA20 && h1MA50 && h1P > h1MA20 && h1MA20 > h1MA50) h1T = 'BULLISH';
-    else if (h1MA20 && h1MA50 && h1P < h1MA20 && h1MA20 < h1MA50) h1T = 'BEARISH';
+    const m20h = calculateSMA(h1C, 20), m50h = calculateSMA(h1C, 50);
+    const ph = h1C[h1C.length - 1];
+    if (m20h && m50h && ph > m20h && m20h > m50h) h1T = 'BULLISH';
+    else if (m20h && m50h && ph < m20h && m20h < m50h) h1T = 'BEARISH';
   }
   return { h4: h4T, h1: h1T, aligned: h4T === h1T && h4T !== 'NEUTRAL' };
 }
@@ -1275,52 +1080,41 @@ function getDailyTarget() { return parseInt(localStorage.getItem(STORAGE_KEYS.DA
 function getTradesPerDay() { return parseInt(localStorage.getItem(STORAGE_KEYS.TRADES_PER_DAY)) || 3; }
 function getBalance() { return parseFloat(localStorage.getItem(STORAGE_KEYS.BALANCE)) || 1000; }
 function getRiskPct() { return parseFloat(localStorage.getItem(STORAGE_KEYS.RISK_PCT)) || 1.0; }
-function computeAutoLotSize(slPips, pipValueStd) {
-  const balance = getBalance(), riskPct = getRiskPct();
-  const riskAmt = balance * (riskPct / 100);
-  if (slPips <= 0 || pipValueStd <= 0) return null;
-  return { balance, riskPct, riskAmount: riskAmt.toFixed(2), lotSize: (riskAmt / (slPips * pipValueStd)).toFixed(2) };
+function computeAutoLotSize(slPips, pv) {
+  const b = getBalance(), r = getRiskPct();
+  const ra = b * (r / 100);
+  if (slPips <= 0 || pv <= 0) return null;
+  return { balance: b, riskPct: r, riskAmount: ra.toFixed(2), lotSize: (ra / (slPips * pv)).toFixed(2) };
 }
-function calculateInstitutionalEntry(action, livePrice, inst, spec) {
+function calculateInstitutionalEntry(action, lp, inst, spec) {
   if (!inst || !action || action === 'HOLD') return null;
   const isBuy = action === 'BUY';
-  const atr = inst.atr || (livePrice * 0.005);
-  const entry = livePrice;
-  const slDist = Math.max(atr * 1.2, livePrice * 0.003);
+  const atr = inst.atr || (lp * 0.005);
+  const entry = lp;
+  const slDist = Math.max(atr * 1.2, lp * 0.003);
   const sl = isBuy ? entry - slDist : entry + slDist;
-  const dailyTarget = getDailyTarget(), tradesPerDay = getTradesPerDay();
-  const targetPerTrade = dailyTarget / tradesPerDay;
+  const dt = getDailyTarget(), tpd = getTradesPerDay();
+  const tpt = dt / tpd;
   const slPips = Math.round(slDist / spec.pipSize);
   let m1 = 2.0, m2 = 3.5, m3 = 5.0;
-  if (slPips * m3 < targetPerTrade && slPips > 0) {
-    m3 = Math.min(targetPerTrade / slPips, 8.0);
-    m2 = m3 * 0.6;
-    m1 = m3 * 0.35;
-  }
+  if (slPips * m3 < tpt && slPips > 0) { m3 = Math.min(tpt / slPips, 8.0); m2 = m3 * 0.6; m1 = m3 * 0.35; }
   const tp1 = isBuy ? entry + slDist * m1 : entry - slDist * m1;
   const tp2 = isBuy ? entry + slDist * m2 : entry - slDist * m2;
   const tp3 = isBuy ? entry + slDist * m3 : entry - slDist * m3;
-  let quality = 'B';
-  let cc = 0;
+  let q = 'B', cc = 0;
   if (isBuy ? inst.orderBlocks?.nearestBull : inst.orderBlocks?.nearestBear) cc++;
   if (isBuy ? inst.fvg?.nearestBull : inst.fvg?.nearestBear) cc++;
   if (inst.sweep?.bias === action) cc++;
   if (inst.displacement?.detected && inst.displacement.direction === (isBuy ? 'BULLISH' : 'BEARISH')) cc++;
   if (inst.killZone?.isActive) cc++;
   if (inst.sar?.trend === (isBuy ? 'BULLISH' : 'BEARISH')) cc++;
-  if (cc >= 5) quality = 'A+';
-  else if (cc >= 4) quality = 'A';
-  else if (cc >= 2) quality = 'B+';
-  else if (cc >= 1) quality = 'B';
-  else quality = 'C';
+  if (cc >= 5) q = 'A+'; else if (cc >= 4) q = 'A'; else if (cc >= 2) q = 'B+'; else if (cc >= 1) q = 'B'; else q = 'C';
   return {
     entry: entry.toFixed(spec.decimals),
     entrySource: `💹 MARKET @ ${entry.toFixed(spec.decimals)} • SL: ${slPips}p • Confluences: ${cc}/6`,
-    quality,
+    quality: q,
     sl: sl.toFixed(spec.decimals),
-    tp1: tp1.toFixed(spec.decimals),
-    tp2: tp2.toFixed(spec.decimals),
-    tp3: tp3.toFixed(spec.decimals),
+    tp1: tp1.toFixed(spec.decimals), tp2: tp2.toFixed(spec.decimals), tp3: tp3.toFixed(spec.decimals),
     slPips, tp1Pips: Math.round(Math.abs(tp1 - entry) / spec.pipSize),
     tp2Pips: Math.round(Math.abs(tp2 - entry) / spec.pipSize),
     tp3Pips: Math.round(Math.abs(tp3 - entry) / spec.pipSize),
@@ -1329,97 +1123,183 @@ function calculateInstitutionalEntry(action, livePrice, inst, spec) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// 🎯 LIVE ANALYSIS — 4 Masters on OHLC Data
+// 🎯 v36.1 — MASTERS CONFLUENCE (HIGH-CONFIDENCE OVERRIDE)
 // ═══════════════════════════════════════════════════════════
-function buildLiveMasterPrompt(master, pair, livePrice, h4Data, h1Data, m15Data, inst, htfBias) {
-  let prompt = `${master.lens}\n\nYOUR WEIGHT: ${(master.weight * 100).toFixed(0)}%\n\nPAIR: ${pair} | Current Price: ${livePrice}\n`;
-  if (htfBias) prompt += `\nHTF BIAS: 4H=${htfBias.h4}, 1H=${htfBias.h1}, Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
-  if (Array.isArray(h4Data)) {
-    prompt += `\n════ 4H CANDLES (last 12) ════\n`;
-    h4Data.slice(-12).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
-  }
-  if (Array.isArray(h1Data)) {
-    prompt += `\n════ 1H CANDLES (last 20) ════\n`;
-    h1Data.slice(-20).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
-  }
-  if (Array.isArray(m15Data)) {
-    prompt += `\n════ 15M CANDLES (last 24) ════\n`;
-    m15Data.slice(-24).forEach(c => prompt += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
-  }
-  if (inst) {
-    prompt += `\n════ INSTITUTIONAL METRICS ════\n`;
-    if (inst.biasScore) prompt += `★ BIAS: ${inst.biasScore.score}/100 — ${inst.biasScore.bias}\n`;
-    if (inst.volumeProfile) prompt += `📊 POC: ${inst.volumeProfile.poc} | VAH: ${inst.volumeProfile.vah} | VAL: ${inst.volumeProfile.val}\n`;
-    if (inst.orderBlocks?.nearestBull) prompt += `🏦 Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(2)}-${inst.orderBlocks.nearestBull.high.toFixed(2)}\n`;
-    if (inst.orderBlocks?.nearestBear) prompt += `🏦 Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(2)}-${inst.orderBlocks.nearestBear.high.toFixed(2)}\n`;
-    if (inst.fvg?.nearestBull) prompt += `⚡ Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(2)}-${inst.fvg.nearestBull.top.toFixed(2)}\n`;
-    if (inst.fvg?.nearestBear) prompt += `⚡ Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(2)}-${inst.fvg.nearestBear.top.toFixed(2)}\n`;
-    if (inst.structure) prompt += `🎯 1H: ${inst.structure.trend}\n`;
-    if (inst.htfStructure) prompt += `🎯 4H: ${inst.htfStructure.trend}\n`;
-    if (inst.ltfStructure) prompt += `🎯 15M: ${inst.ltfStructure.trend}\n`;
-    if (inst.sweep) prompt += `💧 Sweep: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
-    if (inst.displacement?.detected) prompt += `💥 1H Displacement: ${inst.displacement.direction} (${inst.displacement.bodyATR}x ATR)\n`;
-    if (inst.killZone) prompt += `⏰ Session: ${inst.killZone.session} (${inst.killZone.quality})\n`;
-    if (inst.rsi) prompt += `RSI: ${inst.rsi.toFixed(1)}\n`;
-    if (inst.supportResistance) {
-      const sr = inst.supportResistance;
-      prompt += `📐 S/R: R3=${sr.r3} R2=${sr.r2} R1=${sr.r1} PIVOT=${sr.pivot} S1=${sr.s1} S2=${sr.s2} S3=${sr.s3}\n`;
-    }
-    if (inst.sar) {
-      prompt += `📈 PARABOLIC SAR: Trend=${inst.sar.trend}, Current=${inst.sar.current.toFixed(2)}`;
-      if (inst.sar.lastFlip) prompt += `, Last flip from ${inst.sar.lastFlip.from} to ${inst.sar.lastFlip.to} @ ${inst.sar.lastFlip.atPrice.toFixed(2)}`;
-      prompt += `\n`;
+function computeMastersConfluence(results) {
+  const valid = results.filter(r => r.provider !== 'Failed' && !r.error);
+  if (valid.length === 0) return { action: 'HOLD', confidence: 0, reason: 'All masters failed', buyCount: 0, sellCount: 0, holdCount: 0, total: 0, isOverride: false };
+
+  const directional = valid.filter(r => r.vote === 'BUY' || r.vote === 'SELL');
+  const holds = valid.filter(r => r.vote === 'HOLD');
+
+  // ═══ RULE 1: HIGH-CONFIDENCE OVERRIDE ═══
+  const highConf = directional.filter(r => r.confidence >= 80);
+  if (highConf.length > 0) {
+    const strongest = highConf.reduce((a, b) => a.confidence > b.confidence ? a : b);
+    const sameDir = directional.filter(v => v.vote === strongest.vote);
+    const sameDirHigh = sameDir.filter(v => v.confidence >= 70);
+
+    if (sameDirHigh.length >= 1) {
+      const avgConf = Math.round(sameDir.reduce((s, v) => s + v.confidence, 0) / sameDir.length);
+      const boosted = Math.min(95, avgConf + (sameDir.length - 1) * 5);
+      return {
+        action: strongest.vote,
+        confidence: boosted,
+        reason: `⚡ HIGH-CONFIDENCE OVERRIDE: ${strongest.masterName} = ${strongest.vote} ${strongest.confidence}%${sameDirHigh.length >= 2 ? ` (+${sameDirHigh.length - 1} masters)` : ''}`,
+        buyCount: strongest.vote === 'BUY' ? sameDir.length : 0,
+        sellCount: strongest.vote === 'SELL' ? sameDir.length : 0,
+        holdCount: holds.length,
+        total: valid.length,
+        isOverride: true
+      };
     }
   }
-  prompt += `\nRespond ONLY valid JSON with your vote:\n{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences","key_level":<price or null>,"fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}`;
-  return prompt;
+
+  // ═══ RULE 2: 2+ DIRECTIONS ≥ 65% ═══
+  if (directional.length >= 2) {
+    const buyDirs = directional.filter(r => r.vote === 'BUY');
+    const sellDirs = directional.filter(r => r.vote === 'SELL');
+    const strongBuy = buyDirs.filter(r => r.confidence >= 65);
+    const strongSell = sellDirs.filter(r => r.confidence >= 65);
+
+    if (strongSell.length >= 2) {
+      const avgConf = Math.round(strongSell.reduce((s, v) => s + v.confidence, 0) / strongSell.length);
+      return {
+        action: 'SELL', confidence: Math.min(90, avgConf + 5),
+        reason: `${strongSell.length} masters bearish (avg ${avgConf}%)`,
+        buyCount: 0, sellCount: strongSell.length, holdCount: holds.length, total: valid.length,
+        isOverride: false
+      };
+    }
+    if (strongBuy.length >= 2) {
+      const avgConf = Math.round(strongBuy.reduce((s, v) => s + v.confidence, 0) / strongBuy.length);
+      return {
+        action: 'BUY', confidence: Math.min(90, avgConf + 5),
+        reason: `${strongBuy.length} masters bullish (avg ${avgConf}%)`,
+        buyCount: strongBuy.length, sellCount: 0, holdCount: holds.length, total: valid.length,
+        isOverride: false
+      };
+    }
+  }
+
+  // ═══ RULE 3: WEIGHTED VOTE (HOLD discount 50%) ═══
+  const HOLD_DISCOUNT = 0.5;
+  let bW = 0, sW = 0, hW = 0;
+  let bC = 0, sC = 0, hC = 0;
+  valid.forEach(r => {
+    const w = r.masterWeight * (r.confidence / 100);
+    if (r.vote === 'BUY') { bW += w; bC++; }
+    else if (r.vote === 'SELL') { sW += w; sC++; }
+    else { hW += w * HOLD_DISCOUNT; hC++; }
+  });
+  const tot = bW + sW + hW;
+  const bN = tot > 0 ? (bW / tot) * 100 : 0;
+  const sN = tot > 0 ? (sW / tot) * 100 : 0;
+  const hN = tot > 0 ? (hW / tot) * 100 : 0;
+
+  let action = 'HOLD', confidence = 0, reason = '';
+
+  if (bN >= 30 && sN >= 30) {
+    action = 'HOLD'; confidence = Math.round(hN);
+    reason = `Masters wamegawanyika (${bC}B/${sC}S/${hC}H) — CONFLICT`;
+  } else if (sN > bN + 3 && sN >= 20) {
+    action = 'SELL';
+    confidence = Math.round(Math.min(85, sN + (sN / (bN + sN + 1)) * 20));
+    reason = `${sC} master${sC > 1 ? 's' : ''} bearish (hold ${hC})`;
+  } else if (bN > sN + 3 && bN >= 20) {
+    action = 'BUY';
+    confidence = Math.round(Math.min(85, bN + (bN / (bN + sN + 1)) * 20));
+    reason = `${bC} master${bC > 1 ? 's' : ''} bullish (hold ${hC})`;
+  } else {
+    action = 'HOLD'; confidence = Math.round(hN);
+    reason = 'Hakuna muafaka wazi — subiri';
+  }
+
+  if ((bC === valid.length || sC === valid.length) && action !== 'HOLD') {
+    confidence = Math.min(95, confidence + 10);
+    reason += ' + UNANIMOUS';
+  }
+
+  return { action, confidence, reason, buyCount: bC, sellCount: sC, holdCount: hC, total: valid.length, isOverride: false };
 }
 
-async function callLiveMaster(master, pair, livePrice, h4Data, h1Data, m15Data, inst, htfBias) {
-  const mistralKey = getMistralKey();
-  const geminiKey = getGeminiKey();
-  const prompt = buildLiveMasterPrompt(master, pair, livePrice, h4Data, h1Data, m15Data, inst, htfBias);
-  let result = null;
-  let provider = '';
+function buildLiveMasterPrompt(master, pair, lp, h4, h1, m15, inst, htfBias) {
+  let p = `${master.lens}\n\nYOUR WEIGHT: ${(master.weight * 100).toFixed(0)}%\n\nPAIR: ${pair} | Current Price: ${lp}\n`;
+  if (htfBias) p += `\nHTF: 4H=${htfBias.h4}, 1H=${htfBias.h1}, Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
+  if (Array.isArray(h4)) {
+    p += `\n4H CANDLES (last 12):\n`;
+    h4.slice(-12).forEach(c => p += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
+  }
+  if (Array.isArray(h1)) {
+    p += `\n1H CANDLES (last 20):\n`;
+    h1.slice(-20).forEach(c => p += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
+  }
+  if (Array.isArray(m15)) {
+    p += `\n15M CANDLES (last 24):\n`;
+    m15.slice(-24).forEach(c => p += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`);
+  }
+  if (inst) {
+    p += `\nMETRICS:\n`;
+    if (inst.biasScore) p += `★ BIAS: ${inst.biasScore.score}/100 — ${inst.biasScore.bias}\n`;
+    if (inst.volumeProfile) p += `POC: ${inst.volumeProfile.poc} | VAH: ${inst.volumeProfile.vah} | VAL: ${inst.volumeProfile.val}\n`;
+    if (inst.orderBlocks?.nearestBull) p += `Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(2)}-${inst.orderBlocks.nearestBull.high.toFixed(2)}\n`;
+    if (inst.orderBlocks?.nearestBear) p += `Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(2)}-${inst.orderBlocks.nearestBear.high.toFixed(2)}\n`;
+    if (inst.fvg?.nearestBull) p += `Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(2)}-${inst.fvg.nearestBull.top.toFixed(2)}\n`;
+    if (inst.fvg?.nearestBear) p += `Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(2)}-${inst.fvg.nearestBear.top.toFixed(2)}\n`;
+    if (inst.structure) p += `1H: ${inst.structure.trend} | `;
+    if (inst.htfStructure) p += `4H: ${inst.htfStructure.trend} | `;
+    if (inst.ltfStructure) p += `15M: ${inst.ltfStructure.trend}\n`;
+    if (inst.sweep) p += `Sweep: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
+    if (inst.displacement?.detected) p += `Displacement: ${inst.displacement.direction}\n`;
+    if (inst.killZone) p += `Session: ${inst.killZone.session} (${inst.killZone.quality})\n`;
+    if (inst.supportResistance) {
+      const sr = inst.supportResistance;
+      p += `S/R: R3=${sr.r3} R2=${sr.r2} R1=${sr.r1} PIVOT=${sr.pivot} S1=${sr.s1} S2=${sr.s2} S3=${sr.s3}\n`;
+    }
+    if (inst.sar) {
+      p += `PARABOLIC SAR: Trend=${inst.sar.trend}, Current=${inst.sar.current.toFixed(2)}`;
+      if (inst.sar.lastFlip) p += `, Last flip @ ${inst.sar.lastFlip.atPrice.toFixed(2)}`;
+      p += `\n`;
+    }
+  }
+  p += `\nRespond ONLY valid JSON:\n{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences","key_level":<price or null>,"fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}`;
+  return p;
+}
 
-  if (mistralKey) {
+async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
+  const mk = getMistralKey(), gk = getGeminiKey();
+  const p = buildLiveMasterPrompt(master, pair, lp, h4, h1, m15, inst, htfBias);
+  let result = null, provider = '';
+  if (mk) {
     for (const model of MISTRAL_MODELS) {
       try {
-        const resp = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+        const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
-          body: JSON.stringify({
-            model,
-            messages: [{ role: 'system', content: 'Respond ONLY with valid JSON. No markdown.' }, { role: 'user', content: prompt }],
-            temperature: 0.2, max_tokens: 2000,
-            response_format: { type: 'json_object' }
-          })
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
+          body: JSON.stringify({ model, messages: [{ role: 'system', content: 'Respond ONLY valid JSON.' }, { role: 'user', content: p }], temperature: 0.2, max_tokens: 2000, response_format: { type: 'json_object' } })
         }, 90000);
-        const rawText = await resp.text();
-        let data; try { data = JSON.parse(rawText); } catch (e) { continue; }
-        if (data.error) continue;
-        if (!data.choices?.[0]?.message?.content) continue;
-        const parsed = safeJsonParse(data.choices[0].message.content.trim());
-        if (parsed) { result = parsed; provider = 'Mistral'; break; }
+        const rt = await r.text();
+        let d; try { d = JSON.parse(rt); } catch (e) { continue; }
+        if (d.error) continue;
+        if (!d.choices?.[0]?.message?.content) continue;
+        const pr = safeJsonParse(d.choices[0].message.content.trim());
+        if (pr) { result = pr; provider = 'Mistral'; break; }
       } catch (e) {}
     }
   }
-  if (!result && geminiKey) {
+  if (!result && gk) {
     for (const model of GEMINI_MODELS) {
       try {
-        const resp = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${model}:generateContent?key=${geminiKey}`, {
+        const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${model}:generateContent?key=${gk}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { temperature: 0.2, responseMimeType: 'application/json' }
-          })
+          body: JSON.stringify({ contents: [{ parts: [{ text: p }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
         }, 90000);
-        const data = await resp.json();
-        if (data.error) continue;
-        if (!data.candidates?.[0]) continue;
-        const parsed = safeJsonParse(data.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
-        if (parsed) { result = parsed; provider = 'Gemini'; break; }
+        const d = await r.json();
+        if (d.error) continue;
+        if (!d.candidates?.[0]) continue;
+        const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
+        if (pr) { result = pr; provider = 'Gemini'; break; }
       } catch (e) {}
     }
   }
@@ -1430,39 +1310,14 @@ async function callLiveMaster(master, pair, livePrice, h4Data, h1Data, m15Data, 
     vote: (result.vote || 'HOLD').toUpperCase(),
     confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
     reasoning: result.reasoning || 'No analysis.',
-    keyZones: result.key_zones || '',
-    patternsDetected: result.patterns_detected || '',
+    keyZones: result.key_zones || '', patternsDetected: result.patterns_detected || '',
     trendHtf: result.trend_htf || '', trendMtf: result.trend_mtf || '', trendLtf: result.trend_ltf || '',
     recentBos: result.recent_bos || '', recentChoch: result.recent_choch || '',
     sessionInferred: result.session_inferred || '', volatility: result.volatility || '',
     fvgDetected: result.fvg_detected || '', ifvgDetected: result.ifvg_detected || '',
     imbalanceDetected: result.imbalance_detected || '', displacementDetected: result.displacement_detected || '',
-    sarInfo: result.parabolic_sar || '',
-    provider
+    sarInfo: result.parabolic_sar || '', provider
   };
-}
-
-function computeMastersConfluence(results) {
-  const valid = results.filter(r => r.provider !== 'Failed');
-  if (valid.length === 0) return { action: 'HOLD', confidence: 0, reason: 'All masters failed', buyCount: 0, sellCount: 0, holdCount: 0, total: 0 };
-  let buyW = 0, sellW = 0, holdW = 0;
-  let buyCount = 0, sellCount = 0, holdCount = 0;
-  valid.forEach(r => {
-    const w = r.masterWeight * (r.confidence / 100);
-    if (r.vote === 'BUY') { buyW += w; buyCount++; }
-    else if (r.vote === 'SELL') { sellW += w; sellCount++; }
-    else { holdW += w; holdCount++; }
-  });
-  const total = buyW + sellW + holdW;
-  const buyN = total > 0 ? (buyW / total) * 100 : 0;
-  const sellN = total > 0 ? (sellW / total) * 100 : 0;
-  const holdN = total > 0 ? (holdW / total) * 100 : 0;
-  let action = 'HOLD', confidence = 0, reason = '';
-  if (buyN > sellN && buyN > holdN && buyN >= 40) { action = 'BUY'; confidence = Math.round(buyN); reason = `${buyCount}/${valid.length} masters bullish`; }
-  else if (sellN > buyN && sellN > holdN && sellN >= 40) { action = 'SELL'; confidence = Math.round(sellN); reason = `${sellCount}/${valid.length} masters bearish`; }
-  else { action = 'HOLD'; confidence = Math.round(holdN); reason = `Masters split (${buyCount}B/${sellCount}S/${holdCount}H)`; }
-  if ((buyCount === valid.length || sellCount === valid.length) && action !== 'HOLD') { confidence = Math.min(95, confidence + 10); reason += ' + UNANIMOUS'; }
-  return { action, confidence, reason, buyCount, sellCount, holdCount, total: valid.length };
 }
 
 async function fetchLivePrice() {
@@ -1477,9 +1332,9 @@ async function fetchLivePrice() {
       const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 10000);
       if (r.ok) price = parseFloat((await r.json()).price);
     } else {
-      const key = getTwelveKey();
-      if (key) {
-        const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 10000);
+      const k = getTwelveKey();
+      if (k) {
+        const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${k}`, {}, 10000);
         if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
       }
     }
@@ -1492,53 +1347,30 @@ async function fetchLivePrice() {
   btn.disabled = false; btn.innerHTML = '🔄 Refresh';
 }
 
-async function fetchOHLC(pair, timeframe, limit = 200, retries = 3) {
+async function fetchOHLC(pair, tf, limit = 200, retries = 3) {
   const spec = PAIR_SPECS[pair];
   if (!spec) return null;
-  for (let attempt = 0; attempt < retries; attempt++) {
+  for (let a = 0; a < retries; a++) {
     try {
       if (spec.source === 'binance') {
-        const url = `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${timeframe}&limit=${limit}`;
-        const res = await fetchWithTimeout(url, {}, 12000);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        return data.map(d => ({ time: parseInt(d[0]), open: parseFloat(d[1]), high: parseFloat(d[2]), low: parseFloat(d[3]), close: parseFloat(d[4]), volume: parseFloat(d[5]) }));
+        const r = await fetchWithTimeout(`${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${tf}&limit=${limit}`, {}, 12000);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const d = await r.json();
+        return d.map(x => ({ time: parseInt(x[0]), open: parseFloat(x[1]), high: parseFloat(x[2]), low: parseFloat(x[3]), close: parseFloat(x[4]), volume: parseFloat(x[5]) }));
       }
       if (spec.source === 'twelve') {
-        const key = getTwelveKey();
-        if (key) {
-          const intervalMap = { '4h': '4h', '1h': '1h', '15m': '15min' };
-          const url = `${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${intervalMap[timeframe]}&outputsize=${limit}&apikey=${key}`;
-          const res = await fetchWithTimeout(url, {}, 20000);
-          if (res.ok) {
-            const data = await res.json();
-            if (data.status !== 'error' && data.values) {
-              return data.values.reverse().map(d => ({ time: new Date(d.datetime).getTime(), open: parseFloat(d.open), high: parseFloat(d.high), low: parseFloat(d.low), close: parseFloat(d.close), volume: parseFloat(d.volume || 0) }));
-            }
+        const k = getTwelveKey();
+        if (k) {
+          const im = { '4h': '4h', '1h': '1h', '15m': '15min' };
+          const r = await fetchWithTimeout(`${TWELVEDATA_API}/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${im[tf]}&outputsize=${limit}&apikey=${k}`, {}, 20000);
+          if (r.ok) {
+            const d = await r.json();
+            if (d.status !== 'error' && d.values) return d.values.reverse().map(x => ({ time: new Date(x.datetime).getTime(), open: parseFloat(x.open), high: parseFloat(x.high), low: parseFloat(x.low), close: parseFloat(x.close), volume: parseFloat(x.volume || 0) }));
           }
         }
       }
-      if (timeframe === '15m' && spec.alphaSymbol) {
-        const ak = getAlphaKey();
-        if (ak) {
-          try {
-            const url = `${ALPHAVANTAGE_API}?function=FX_INTRADAY&from_symbol=${spec.alphaSymbol.substring(0,3)}&to_symbol=${spec.alphaSymbol.substring(3,6)}&interval=15min&outputsize=compact&apikey=${ak}`;
-            const res = await fetchWithTimeout(url, {}, 20000);
-            if (res.ok) {
-              const data = await res.json();
-              const k = Object.keys(data).find(k => k.includes('Time Series'));
-              if (k && data[k]) {
-                return Object.entries(data[k]).slice(0, limit).reverse().map(([dt, v]) => ({ time: new Date(dt).getTime(), open: parseFloat(v['1. open']), high: parseFloat(v['2. high']), low: parseFloat(v['3. low']), close: parseFloat(v['4. close']), volume: 0 }));
-              }
-            }
-          } catch (e) {}
-        }
-      }
       throw new Error(`Failed`);
-    } catch (err) {
-      if (attempt < retries - 1) await new Promise(r => setTimeout(r, 3000));
-      else return null;
-    }
+    } catch (e) { if (a < retries - 1) await new Promise(r => setTimeout(r, 3000)); else return null; }
   }
   return null;
 }
@@ -1563,8 +1395,8 @@ async function fetchAllMarketData() {
     document.getElementById('data15M').className = `data-status-item ${m15 ? 'ok' : 'fail'}`;
     document.getElementById('data15M').querySelector('span:last-child').innerText = m15 ? `${m15.length} ✓` : 'FAIL';
 
-    const livePrice = parseFloat(document.getElementById('livePrice').value) || h1?.[h1.length-1]?.close || 0;
-    const inst = calculateInstitutionalMetrics(h4, h1, m15, livePrice);
+    const lp = parseFloat(document.getElementById('livePrice').value) || h1?.[h1.length-1]?.close || 0;
+    const inst = calculateInstitutionalMetrics(h4, h1, m15, lp);
     window.marketData = { h4, h1, m15, inst };
 
     document.getElementById('dataIndicators').className = `data-status-item ${inst ? 'ok' : 'fail'}`;
@@ -1572,24 +1404,22 @@ async function fetchAllMarketData() {
 
     const c = document.getElementById('chartPreview');
     if (inst) {
-      let html = `<div style="color:var(--inst);font-weight:bold;">🏦 ${pair}</div>`;
-      if (inst.biasScore) html += `<div>Bias: <strong>${inst.biasScore.score}/100 — ${inst.biasScore.bias}</strong></div>`;
-      if (inst.volumeProfile) html += `<div>📊 POC: ${inst.volumeProfile.poc}</div>`;
-      if (inst.structure) html += `<div>1H: <strong>${inst.structure.trend}</strong></div>`;
-      if (inst.htfStructure) html += `<div>4H: <strong>${inst.htfStructure.trend}</strong></div>`;
-      if (inst.ltfStructure) html += `<div>15M: <strong>${inst.ltfStructure.trend}</strong></div>`;
-      if (inst.sar) html += `<div>📈 SAR: <strong style="color:${inst.sar.trend === 'BULLISH' ? 'var(--green)' : 'var(--red)'};">${inst.sar.trend}</strong> @ ${inst.sar.current.toFixed(2)}</div>`;
-      if (inst.killZone) html += `<div>⏰ ${inst.killZone.session}</div>`;
-      c.innerHTML = html;
+      let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${pair}</div>`;
+      if (inst.biasScore) h += `<div>Bias: <strong>${inst.biasScore.score}/100 — ${inst.biasScore.bias}</strong></div>`;
+      if (inst.volumeProfile) h += `<div>📊 POC: ${inst.volumeProfile.poc}</div>`;
+      if (inst.structure) h += `<div>1H: <strong>${inst.structure.trend}</strong></div>`;
+      if (inst.htfStructure) h += `<div>4H: <strong>${inst.htfStructure.trend}</strong></div>`;
+      if (inst.ltfStructure) h += `<div>15M: <strong>${inst.ltfStructure.trend}</strong></div>`;
+      if (inst.sar) h += `<div>📈 SAR: <strong style="color:${inst.sar.trend === 'BULLISH' ? 'var(--green)' : 'var(--red)'};">${inst.sar.trend}</strong> @ ${inst.sar.current.toFixed(2)}</div>`;
+      if (inst.killZone) h += `<div>⏰ ${inst.killZone.session}</div>`;
+      c.innerHTML = h;
     }
 
     if (h1 && h1.length > 30 && m15 && m15.length > 30) {
       document.getElementById('runBtn').disabled = false;
       showToast('✅ Data ready');
-    } else {
-      showToast('❌ Data imefeli');
     }
-  } catch (err) { showToast(`❌ ${err.message}`); }
+  } catch (e) { showToast(`❌ ${e.message}`); }
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
 }
 
@@ -1602,12 +1432,12 @@ function onPairChange(pair) {
 }
 
 async function runAnalysis() {
-  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
-  if (!mistralKey && !geminiKey) { alert("Weka key."); return; }
+  const mk = getMistralKey(), gk = getGeminiKey();
+  if (!mk && !gk) { alert("Weka key."); return; }
   if (!window.marketData || !window.marketData.h1) { alert("Fetch data first."); return; }
 
   const pair = document.getElementById('selectedPair').value;
-  const livePrice = parseFloat(document.getElementById('livePrice').value);
+  const lp = parseFloat(document.getElementById('livePrice').value);
   const { h4, h1, m15, inst } = window.marketData;
   const spec = PAIR_SPECS[pair];
   const htfBias = getHTFBias(h4, h1);
@@ -1621,8 +1451,7 @@ async function runAnalysis() {
   container.innerHTML = `<div class="card" style="text-align:center;border-color:var(--inst);">
     <div class="ballistic-header" style="justify-content:center;">🎯 LUTYNOEL.FX — ${pair}</div>
     <div style="font-size:12px;color:var(--muted);">4 Real Masters wanaichambua...</div>
-  </div>
-  <div class="card"><div class="ballistic-header">👥 MASTERS 4</div><div id="mastersProgress"></div></div>`;
+  </div><div class="card"><div class="ballistic-header">👥 MASTERS 4</div><div id="mastersProgress"></div></div>`;
 
   const progDiv = document.getElementById('mastersProgress');
   const masterResults = [];
@@ -1633,10 +1462,8 @@ async function runAnalysis() {
       <div class="master-desc" id="live-desc-${master.id}">Analyzing...</div>
       <div class="master-confidence" id="live-conf-${master.id}">—</div>
     </div>`;
-
-    const r = await callLiveMaster(master, pair, livePrice, h4, h1, m15, inst, htfBias);
+    const r = await callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias);
     masterResults.push(r);
-
     const card = document.getElementById(`live-${master.id}`);
     if (card) {
       card.classList.remove('pending');
@@ -1650,67 +1477,75 @@ async function runAnalysis() {
     if (master.id < 4) await new Promise(r => setTimeout(r, 1500));
   }
 
-  const confluence = computeMastersConfluence(masterResults);
-  const isBuy = confluence.action === 'BUY';
-  let sltp = { entry: livePrice, sl: livePrice, tp1: livePrice, tp2: livePrice, tp3: livePrice, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0, entrySource: 'N/A', quality: '—', orderType: 'MARKET' };
-  if (confluence.action !== 'HOLD') {
-    const instEntry = calculateInstitutionalEntry(confluence.action, livePrice, inst, spec);
-    if (instEntry) sltp = { ...instEntry, entry: parseFloat(instEntry.entry), sl: parseFloat(instEntry.sl), tp1: parseFloat(instEntry.tp1), tp2: parseFloat(instEntry.tp2), tp3: parseFloat(instEntry.tp3) };
+  const conf = computeMastersConfluence(masterResults);
+  let sltp = { entry: lp, sl: lp, tp1: lp, tp2: lp, tp3: lp, slPips: 0, tp1Pips: 0, tp2Pips: 0, tp3Pips: 0, entrySource: 'N/A', quality: '—', orderType: 'MARKET' };
+  if (conf.action !== 'HOLD') {
+    const ie = calculateInstitutionalEntry(conf.action, lp, inst, spec);
+    if (ie) sltp = { ...ie, entry: parseFloat(ie.entry), sl: parseFloat(ie.sl), tp1: parseFloat(ie.tp1), tp2: parseFloat(ie.tp2), tp3: parseFloat(ie.tp3) };
   }
-  const instBiasScore = inst?.biasScore?.score;
-  const strengthInfo = getSignalStrength(confluence.action, confluence.confidence, instBiasScore);
+  const instBias = inst?.biasScore?.score;
+  const strength = getSignalStrength(conf.action, conf.confidence, instBias);
 
   const record = {
-    id: Date.now(), date: new Date().toLocaleString(), pair, livePrice,
-    action: confluence.action,
-    signalLabel: strengthInfo.label, signalStrength: strengthInfo.strength, signalHint: strengthInfo.hint,
-    signalColor: confluence.action === 'BUY' ? 'buy' : confluence.action === 'SELL' ? 'sell' : 'wait',
-    confluenceScore: confluence.confidence,
+    id: Date.now(), date: new Date().toLocaleString(), pair, livePrice: lp,
+    action: conf.action,
+    signalLabel: strength.label, signalStrength: strength.strength, signalHint: strength.hint,
+    signalColor: conf.action === 'BUY' ? 'buy' : conf.action === 'SELL' ? 'sell' : 'wait',
+    confluenceScore: conf.confidence,
+    isOverride: conf.isOverride || false,
+    overrideReason: conf.isOverride ? conf.reason : null,
     institutionalScore: inst?.biasScore?.score || 0,
     institutionalBias: inst?.biasScore?.bias || 'NEUTRAL',
     entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
     slPips: sltp.slPips, tp1Pips: sltp.tp1Pips, tp2Pips: sltp.tp2Pips, tp3Pips: sltp.tp3Pips,
     entrySource: sltp.entrySource, quality: sltp.quality, orderType: 'MARKET',
-    masters: masterResults, confluence, inst,
-    htfBias,
+    masters: masterResults, confluence: conf, inst, htfBias,
     autoTrackStart: Date.now(), outcome: 'PENDING'
   };
   saveToHistory(record);
-
   renderLiveResults(record, spec);
 
-  if (confluence.action !== 'HOLD') {
-    if (strengthInfo.strength === 'STRONG') speakStrongSignal(pair, confluence.action, confluence.confidence, livePrice);
-    else speakSignal(pair, confluence.action, confluence.confidence, livePrice);
-    if (navigator.vibrate) navigator.vibrate(strengthInfo.strength === 'STRONG' ? [300,100,300,100,300] : [200,100,200]);
+  if (conf.action !== 'HOLD') {
+    if (conf.isOverride) speakOverrideSignal(pair, conf.action, conf.confidence, lp);
+    else if (strength.strength === 'STRONG') speakStrongSignal(pair, conf.action, conf.confidence, lp);
+    else speakSignal(pair, conf.action, conf.confidence, lp);
+    if (navigator.vibrate) navigator.vibrate(strength.strength === 'STRONG' ? [300,100,300,100,300] : [200,100,200]);
   } else {
     speakText('Hakuna signal wazi. Subiri.');
   }
-
   btn.disabled = false; btn.innerHTML = '🚀 RUN ANALYSIS';
 }
 
 function renderLiveResults(record, spec) {
-  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence, inst } = record;
+  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence, inst, isOverride } = record;
   const slPips = record.slPips || 0;
   const tp1Pips = record.tp1Pips || 0, tp2Pips = record.tp2Pips || 0, tp3Pips = record.tp3Pips || 0;
   const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '—';
   const strength = getSignalStrength(action, confluenceScore, record.institutionalScore);
   const signalColor = record.signalColor;
   const signalTextColor = strength.color;
-  const qualityBadge = record.quality;
-  const qualityColor = qualityBadge === 'A+' ? 'var(--green)' : qualityBadge === 'A' ? 'var(--cyan)' : qualityBadge === 'B+' ? 'var(--yellow)' : qualityBadge === 'B' ? 'var(--orange)' : 'var(--muted)';
+  const qB = record.quality;
+  const qC = qB === 'A+' ? 'var(--green)' : qB === 'A' ? 'var(--cyan)' : qB === 'B+' ? 'var(--yellow)' : qB === 'B' ? 'var(--orange)' : 'var(--muted)';
 
   let html = `<div class="signal-hero ${signalColor}">
     <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
+    ${isOverride ? `<div class="badge-override">⚡ HIGH-CONFIDENCE OVERRIDE</div>` : ''}
     <div class="signal-label" style="color:${signalTextColor};">${strength.label}</div>
     <div class="signal-hint">${strength.hint} <span class="voice-indicator">🔊</span></div>
     <div class="signal-badge-container">
-      <span class="badge-conf">${confluenceScore}% CONFLUENCE</span>
+      <span class="badge-conf">${confluenceScore}% CONFIDENCE</span>
       <span class="badge-status">${confluence.buyCount}B / ${confluence.sellCount}S / ${confluence.holdCount}H</span>
-      ${action !== 'HOLD' ? `<span class="badge-shield" style="background:${qualityColor}22;color:${qualityColor};border:1px solid ${qualityColor};">🎯 ${qualityBadge}</span>` : ''}
+      ${action !== 'HOLD' ? `<span class="badge-shield" style="background:${qC}22;color:${qC};border:1px solid ${qC};">🎯 ${qB}</span>` : ''}
     </div>
   </div>`;
+
+  if (isOverride && record.overrideReason) {
+    html += `<div class="fallback-box">
+      <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ HIGH-CONFIDENCE OVERRIDE</div>
+      <div style="font-size:12px;">${record.overrideReason}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px;">Master mmoja alikuwa na uhakika mkubwa (≥80%) — amepitishwa moja kwa moja.</div>
+    </div>`;
+  }
 
   if (action !== 'HOLD') {
     html += `<div class="exec-panel" style="background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:3px solid var(--green);">
@@ -1719,12 +1554,10 @@ function renderLiveResults(record, spec) {
       <div style="background:#08080a;border-radius:8px;padding:12px;margin-top:10px;font-size:13px;line-height:1.8;text-align:left;">
         <div>💹 Bei: <strong style="color:var(--accent);">${record.livePrice.toFixed(spec.decimals)}</strong></div>
         <div>🎯 Action: <strong style="color:${signalTextColor};">${action} @ MARKET</strong></div>
-        <div>📊 Quality: <strong style="color:${qualityColor};">${qualityBadge}</strong></div>
+        <div>📊 Quality: <strong style="color:${qC};">${qB}</strong></div>
       </div>
     </div>`;
-  }
 
-  if (action !== 'HOLD' && slPips > 0) {
     const autoLot = computeAutoLotSize(slPips, spec.pipValue);
     html += `<div class="card">
       <div class="ballistic-header">📊 PARAMETERS</div>
@@ -1747,19 +1580,16 @@ function renderLiveResults(record, spec) {
   }
 
   if (inst?.sar) {
-    html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">📈 PARABOLIC SAR</div>
+    html += `<div class="card" style="border-color:var(--cyan);"><div class="ballistic-header">📈 PARABOLIC SAR</div>
       <div class="inst-zone ${inst.sar.trend === 'BULLISH' ? 'bull' : 'bear'}">
-        <div><strong>${inst.sar.trend === 'BULLISH' ? '🟢 BULLISH' : '🔴 BEARISH'}</strong><br><small style="color:var(--muted);">Current SAR: ${inst.sar.current.toFixed(spec.decimals)}${inst.sar.lastFlip ? ' • Last flip @ ' + inst.sar.lastFlip.atPrice.toFixed(spec.decimals) : ''}</small></div>
+        <div><strong>${inst.sar.trend === 'BULLISH' ? '🟢 BULLISH' : '🔴 BEARISH'}</strong><br><small style="color:var(--muted);">SAR @ ${inst.sar.current.toFixed(spec.decimals)}${inst.sar.lastFlip ? ' • Last flip @ ' + inst.sar.lastFlip.atPrice.toFixed(spec.decimals) : ''}</small></div>
         <span class="zone-badge ${inst.sar.trend === 'BULLISH' ? 'bull' : 'bear'}">${inst.sar.trend}</span>
-      </div>
-    </div>`;
+      </div></div>`;
   }
 
   if (inst?.supportResistance) {
     const sr = inst.supportResistance;
-    html += `<div class="card" style="border-color:var(--cyan);">
-      <div class="ballistic-header">📐 SUPPORT & RESISTANCE</div>
+    html += `<div class="card" style="border-color:var(--cyan);"><div class="ballistic-header">📐 S/R</div>
       <div class="sr-level sr-r3"><span>R3</span><span>${sr.r3}</span></div>
       <div class="sr-level sr-r2"><span>R2</span><span>${sr.r2}</span></div>
       <div class="sr-level sr-r1"><span>R1</span><span>${sr.r1}</span></div>
@@ -1770,29 +1600,28 @@ function renderLiveResults(record, spec) {
     </div>`;
   }
 
-  // Masters detail cards
   html += `<div class="card"><div class="ballistic-header">👥 MASTERS 4 — DETAILED</div>`;
   record.masters.forEach(r => {
-    const voteColor = r.vote === 'BUY' ? 'var(--green)' : r.vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
-    const voteIcon = r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸';
-    let detBadges = '';
-    if (r.fvgDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-fvg">FVG</span>`;
-    if (r.ifvgDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-ifvg">IFVG</span>`;
-    if (r.imbalanceDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-imb">IMBALANCE</span>`;
-    if (r.displacementDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-disp">DISPLACEMENT</span>`;
+    const vc = r.vote === 'BUY' ? 'var(--green)' : r.vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
+    const vi = r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸';
+    let db = '';
+    if (r.fvgDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-fvg">FVG</span>`;
+    if (r.ifvgDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-ifvg">IFVG</span>`;
+    if (r.imbalanceDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-imb">IMBALANCE</span>`;
+    if (r.displacementDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-disp">DISPLACEMENT</span>`;
     if (r.sarInfo) {
       const sl = r.sarInfo.toLowerCase();
-      if (sl.includes('above') || sl.includes('bear')) detBadges += `<span class="detection-badge det-sar-bear">SAR BEAR</span>`;
-      else if (sl.includes('below') || sl.includes('bull')) detBadges += `<span class="detection-badge det-sar-bull">SAR BULL</span>`;
+      if (sl.includes('above') || sl.includes('bear')) db += `<span class="detection-badge det-sar-bear">SAR BEAR</span>`;
+      else if (sl.includes('below') || sl.includes('bull')) db += `<span class="detection-badge det-sar-bull">SAR BULL</span>`;
     }
     html += `<div class="master-detail-card" style="border-left-color:${r.masterColor};">
       <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
         <strong style="font-size:13px;color:${r.masterColor};">${r.masterIcon} ${r.masterName}</strong>
-        <span style="font-size:10px;padding:2px 8px;border-radius:8px;background:${voteColor}22;color:${voteColor};border:1px solid ${voteColor};">${(r.masterWeight*100).toFixed(0)}%</span>
+        <span style="font-size:10px;padding:2px 8px;border-radius:8px;background:${vc}22;color:${vc};border:1px solid ${vc};">${(r.masterWeight*100).toFixed(0)}%</span>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin:8px 0;">
-        <span style="font-size:24px;">${voteIcon}</span>
-        <span style="font-size:18px;font-weight:900;color:${voteColor};">${r.vote}</span>
+        <span style="font-size:24px;">${vi}</span>
+        <span style="font-size:18px;font-weight:900;color:${vc};">${r.vote}</span>
         <span style="font-size:12px;color:var(--muted);">${r.confidence}%</span>
       </div>
       <div class="tf-reasoning"><strong style="color:var(--cyan);">🤖</strong> ${r.reasoning}</div>
@@ -1800,7 +1629,7 @@ function renderLiveResults(record, spec) {
       ${r.patternsDetected ? `<div class="tf-reasoning"><strong style="color:var(--green);">📊 Patterns:</strong> ${r.patternsDetected}</div>` : ''}
       ${(r.trendHtf || r.trendMtf || r.trendLtf) ? `<div class="tf-reasoning"><strong style="color:var(--cyan);">🎯 Trend:</strong> H4=${r.trendHtf || '?'} H1=${r.trendMtf || '?'} M15=${r.trendLtf || '?'}</div>` : ''}
       ${r.sessionInferred ? `<div class="tf-reasoning"><strong style="color:var(--purple);">⏰ Session:</strong> ${r.sessionInferred}</div>` : ''}
-      ${detBadges ? `<div style="margin-top:8px;">${detBadges}</div>` : ''}
+      ${db ? `<div style="margin-top:8px;">${db}</div>` : ''}
     </div>`;
   });
   html += `</div>`;
@@ -1808,113 +1637,100 @@ function renderLiveResults(record, spec) {
   document.getElementById('resultsContainer').innerHTML = html;
 }
 
-// ═══════════════════════════════════════════════════════════
-// 📸 SCREENSHOT ANALYSIS
-// ═══════════════════════════════════════════════════════════
 let uploadedScreenshots = { m15: null, h1: null, h4: null };
 
 function setupScreenshotUploads() {
   ['m15', 'h1', 'h4'].forEach(tf => {
-    const input = document.getElementById(`ssInput-${tf}`);
-    if (!input) return;
-    input.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      if (file.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: file.type };
+    const inp = document.getElementById(`ssInput-${tf}`);
+    if (!inp) return;
+    inp.addEventListener('change', function(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      if (f.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
+      const r = new FileReader();
+      r.onload = function(ev) {
+        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
         document.getElementById(`ssImg-${tf}`).src = ev.target.result;
         document.getElementById(`ssPreview-${tf}`).style.display = 'block';
         document.getElementById(`tfBox-${tf}`).classList.add('has-image');
         updateSSUploadStatus();
         showToast(`✅ ${tf.toUpperCase()} imepakiwa!`);
       };
-      reader.readAsDataURL(file);
+      r.readAsDataURL(f);
     });
   });
 }
 
 function updateSSUploadStatus() {
-  const count = Object.values(uploadedScreenshots).filter(x => x !== null).length;
-  const status = document.getElementById('ssUploadStatus');
-  if (status) {
-    status.innerHTML = `📤 Uploaded: <strong>${count}/3</strong> screenshots`;
-    status.style.borderColor = count >= 1 ? 'var(--green)' : 'var(--blue)';
-    status.style.color = count >= 1 ? '#6ee7b7' : '#93c5fd';
+  const c = Object.values(uploadedScreenshots).filter(x => x !== null).length;
+  const s = document.getElementById('ssUploadStatus');
+  if (s) {
+    s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong> screenshots`;
+    s.style.borderColor = c >= 1 ? 'var(--green)' : 'var(--blue)';
+    s.style.color = c >= 1 ? '#6ee7b7' : '#93c5fd';
   }
-  const btn = document.getElementById('analyzeSSBtn');
-  if (btn) btn.disabled = count === 0;
+  const b = document.getElementById('analyzeSSBtn');
+  if (b) b.disabled = c === 0;
 }
 
 function clearAllScreenshots() {
   uploadedScreenshots = { m15: null, h1: null, h4: null };
   ['m15','h1','h4'].forEach(tf => {
-    const input = document.getElementById(`ssInput-${tf}`);
-    if (input) input.value = '';
+    const i = document.getElementById(`ssInput-${tf}`);
+    if (i) i.value = '';
     document.getElementById(`ssPreview-${tf}`).style.display = 'none';
     document.getElementById(`tfBox-${tf}`).classList.remove('has-image');
   });
   updateSSUploadStatus();
   document.getElementById('ssResultsContainer').style.display = 'none';
-  showToast('🗑️ Screenshots cleared');
+  showToast('🗑️ Cleared');
 }
 
-async function analyzeWithMasterVision(master, screenshots, pair, livePrice) {
-  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
-  if (!mistralKey && !geminiKey) return { error: 'No API key' };
+async function analyzeWithMasterVision(master, screenshots, pair, lp) {
+  const mk = getMistralKey(), gk = getGeminiKey();
+  if (!mk && !gk) return { error: 'No API key' };
 
-  const contentParts = [{ type: 'text', text: master.lens + `\n\n=== SCREENSHOTS ===\nPAIR: ${pair} | Price: ${livePrice}\n\nAnalyze ALL: H4 (BIAS), H1 (TREND), M15 (ENTRY). Give ONE overall vote.\n\n` }];
-  if (screenshots.h4) {
-    contentParts.push({ type: 'text', text: '\n📸 H4 (BIAS):' });
-    contentParts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h4.mimeType};base64,${screenshots.h4.base64}` } });
-  }
-  if (screenshots.h1) {
-    contentParts.push({ type: 'text', text: '\n📸 H1 (TREND):' });
-    contentParts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h1.mimeType};base64,${screenshots.h1.base64}` } });
-  }
-  if (screenshots.m15) {
-    contentParts.push({ type: 'text', text: '\n📸 M15 (ENTRY):' });
-    contentParts.push({ type: 'image_url', image_url: { url: `data:${screenshots.m15.mimeType};base64,${screenshots.m15.base64}` } });
-  }
+  const parts = [{ type: 'text', text: master.lens + `\n\n=== SCREENSHOTS ===\nPAIR: ${pair} | Price: ${lp}\n\nAnalyze ALL: H4 (BIAS), H1 (TREND), M15 (ENTRY). Give ONE overall vote.\n\n` }];
+  if (screenshots.h4) { parts.push({ type: 'text', text: '\n📸 H4 (BIAS):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h4.mimeType};base64,${screenshots.h4.base64}` } }); }
+  if (screenshots.h1) { parts.push({ type: 'text', text: '\n📸 H1 (TREND):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h1.mimeType};base64,${screenshots.h1.base64}` } }); }
+  if (screenshots.m15) { parts.push({ type: 'text', text: '\n📸 M15 (ENTRY):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.m15.mimeType};base64,${screenshots.m15.base64}` } }); }
 
   let result = null, provider = '';
-  if (mistralKey) {
+  if (mk) {
     for (const vm of [MISTRAL_VISION_MODEL, MISTRAL_VISION_FALLBACK]) {
       try {
-        const resp = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+        const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mistralKey}` },
-          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: contentParts }], temperature: 0.2, max_tokens: 2500, response_format: { type: 'json_object' } })
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
+          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.2, max_tokens: 2500, response_format: { type: 'json_object' } })
         }, 120000);
-        const raw = await resp.text();
-        let data; try { data = JSON.parse(raw); } catch (e) { continue; }
-        if (data.error) continue;
-        if (!data.choices?.[0]?.message?.content) continue;
-        const parsed = safeJsonParse(data.choices[0].message.content.trim());
-        if (parsed) { result = parsed; provider = vm; break; }
+        const rt = await r.text();
+        let d; try { d = JSON.parse(rt); } catch (e) { continue; }
+        if (d.error) continue;
+        if (!d.choices?.[0]?.message?.content) continue;
+        const pr = safeJsonParse(d.choices[0].message.content.trim());
+        if (pr) { result = pr; provider = vm; break; }
       } catch (e) {}
     }
   }
-  if (!result && geminiKey) {
+  if (!result && gk) {
     try {
-      const gemParts = [{ text: master.lens + `\n\nPAIR: ${pair} | Price: ${livePrice}\nAnalyze ALL (H4=BIAS, H1=TREND, M15=ENTRY). One overall vote.` }];
-      if (screenshots.h4) { gemParts.push({ text: '\nH4:' }); gemParts.push({ inline_data: { mime_type: screenshots.h4.mimeType, data: screenshots.h4.base64 } }); }
-      if (screenshots.h1) { gemParts.push({ text: '\nH1:' }); gemParts.push({ inline_data: { mime_type: screenshots.h1.mimeType, data: screenshots.h1.base64 } }); }
-      if (screenshots.m15) { gemParts.push({ text: '\nM15:' }); gemParts.push({ inline_data: { mime_type: screenshots.m15.mimeType, data: screenshots.m15.base64 } }); }
-      const resp = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_VISION_MODEL}:generateContent?key=${geminiKey}`, {
+      const gp = [{ text: master.lens + `\n\nPAIR: ${pair} | Price: ${lp}\nAnalyze ALL (H4=BIAS, H1=TREND, M15=ENTRY). One vote.` }];
+      if (screenshots.h4) { gp.push({ text: '\nH4:' }); gp.push({ inline_data: { mime_type: screenshots.h4.mimeType, data: screenshots.h4.base64 } }); }
+      if (screenshots.h1) { gp.push({ text: '\nH1:' }); gp.push({ inline_data: { mime_type: screenshots.h1.mimeType, data: screenshots.h1.base64 } }); }
+      if (screenshots.m15) { gp.push({ text: '\nM15:' }); gp.push({ inline_data: { mime_type: screenshots.m15.mimeType, data: screenshots.m15.base64 } }); }
+      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_VISION_MODEL}:generateContent?key=${gk}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: gemParts }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
+        body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
       }, 90000);
-      const data = await resp.json();
-      if (!data.error && data.candidates?.[0]) {
-        const parsed = safeJsonParse(data.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
-        if (parsed) { result = parsed; provider = 'Gemini Vision'; }
+      const d = await r.json();
+      if (!d.error && d.candidates?.[0]) {
+        const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
+        if (pr) { result = pr; provider = 'Gemini Vision'; }
       }
     } catch (e) {}
   }
-
   if (!result) return { error: 'Analysis failed' };
 
   return {
@@ -1922,29 +1738,26 @@ async function analyzeWithMasterVision(master, screenshots, pair, livePrice) {
     vote: (result.vote || 'HOLD').toUpperCase(),
     confidence: Math.max(0, Math.min(100, parseInt(result.confidence) || 50)),
     reasoning: result.reasoning || 'No analysis.',
-    keyZones: result.key_zones || '',
-    patternsDetected: result.patterns_detected || '',
-    last3Candles: result.last_3_candles || '',
-    momentum: result.momentum || '',
+    keyZones: result.key_zones || '', patternsDetected: result.patterns_detected || '',
+    last3Candles: result.last_3_candles || '', momentum: result.momentum || '',
     trendHtf: result.trend_htf || '', trendMtf: result.trend_mtf || '', trendLtf: result.trend_ltf || '',
     recentBos: result.recent_bos || '', recentChoch: result.recent_choch || '',
     sweepDetected: result.sweep_detected || '', mtfAligned: result.mtf_aligned || '',
     sessionInferred: result.session_inferred || '', volatility: result.volatility || '', riskSentiment: result.risk_sentiment || '',
     fvgDetected: result.fvg_detected || '', ifvgDetected: result.ifvg_detected || '',
     imbalanceDetected: result.imbalance_detected || '', displacementDetected: result.displacement_detected || '',
-    sarInfo: result.parabolic_sar || '',
-    provider
+    sarInfo: result.parabolic_sar || '', provider
   };
 }
 
 async function analyzeAllScreenshots() {
-  const mistralKey = getMistralKey(), geminiKey = getGeminiKey();
-  if (!mistralKey && !geminiKey) { alert('Weka key.'); return; }
-  const uploadedCount = Object.values(uploadedScreenshots).filter(x => x !== null).length;
-  if (uploadedCount === 0) { alert('Upload screenshot.'); return; }
+  const mk = getMistralKey(), gk = getGeminiKey();
+  if (!mk && !gk) { alert('Weka key.'); return; }
+  const uc = Object.values(uploadedScreenshots).filter(x => x !== null).length;
+  if (uc === 0) { alert('Upload screenshot.'); return; }
 
   const pair = document.getElementById('ssPair').value;
-  const livePrice = parseFloat(document.getElementById('ssLivePrice').value) || 2650;
+  const lp = parseFloat(document.getElementById('ssLivePrice').value) || 2650;
   const spec = PAIR_SPECS[pair];
 
   const btn = document.getElementById('analyzeSSBtn');
@@ -1966,9 +1779,8 @@ async function analyzeAllScreenshots() {
     progDiv.innerHTML += `<div class="master-card pending" id="prog-${master.id}">
       <div class="master-header"><div class="master-name">${master.icon} ${master.name}</div><div class="master-vote vote-pending" id="prog-v-${master.id}">⏳</div></div>
     </div>`;
-    const r = await analyzeWithMasterVision(master, uploadedScreenshots, pair, livePrice);
+    const r = await analyzeWithMasterVision(master, uploadedScreenshots, pair, lp);
     masterResults.push(r);
-
     const card = document.getElementById(`prog-${master.id}`);
     const v = document.getElementById(`prog-v-${master.id}`);
     if (!r.error && card) {
@@ -1980,24 +1792,26 @@ async function analyzeAllScreenshots() {
     if (master.id < 4) await new Promise(r => setTimeout(r, 1500));
   }
 
-  renderSSResults(pair, livePrice, masterResults, spec);
+  renderSSResults(pair, lp, masterResults, spec);
   const mtf = computeMastersConfluence(masterResults);
   if (mtf.action !== 'HOLD') {
-    if (mtf.confidence >= 75) speakStrongSignal(pair, mtf.action, mtf.confidence, livePrice);
-    else speakSignal(pair, mtf.action, mtf.confidence, livePrice);
+    if (mtf.isOverride) speakOverrideSignal(pair, mtf.action, mtf.confidence, lp);
+    else if (mtf.confidence >= 75) speakStrongSignal(pair, mtf.action, mtf.confidence, lp);
+    else speakSignal(pair, mtf.action, mtf.confidence, lp);
     if (navigator.vibrate) navigator.vibrate(mtf.confidence >= 75 ? [300,100,300,100,300] : [200,100,200]);
   } else speakText('Hakuna signal wazi. Subiri.');
 
   btn.disabled = false; btn.innerHTML = '🔍 ANALYZE (4 Masters × 3 Screenshots)';
 }
 
-function renderSSResults(pair, livePrice, masterResults, spec) {
+function renderSSResults(pair, lp, masterResults, spec) {
   const mtf = computeMastersConfluence(masterResults);
   const mtfColor = mtf.action === 'BUY' ? 'var(--green)' : mtf.action === 'SELL' ? 'var(--red)' : 'var(--yellow)';
   const mtfIcon = mtf.action === 'BUY' ? '📈' : mtf.action === 'SELL' ? '📉' : '⏸';
 
   let html = `<div class="mtf-confluence" style="background:linear-gradient(135deg,${mtfColor}22,${mtfColor}11);border:3px solid ${mtfColor};">
     <div style="font-size:11px;color:var(--muted);letter-spacing:2px;font-weight:bold;">🔗 MTF MASTERS CONFLUENCE</div>
+    ${mtf.isOverride ? `<div class="badge-override">⚡ HIGH-CONFIDENCE OVERRIDE</div>` : ''}
     <div style="font-size:52px;margin:10px 0;">${mtfIcon}</div>
     <div style="font-size:28px;font-weight:900;color:${mtfColor};letter-spacing:2px;">${mtf.action}</div>
     <div style="font-size:13px;color:var(--muted);margin-top:8px;">Confidence: <strong style="color:${mtfColor};">${mtf.confidence}%</strong></div>
@@ -2012,26 +1826,25 @@ function renderSSResults(pair, livePrice, masterResults, spec) {
 
   if (mtf.action !== 'HOLD') {
     const isBuy = mtf.action === 'BUY';
-    const atr = livePrice * 0.005;
-    const slDist = Math.max(atr * 1.2, livePrice * 0.003);
-    const sl = isBuy ? livePrice - slDist : livePrice + slDist;
-    const slPips = Math.round(slDist / spec.pipSize);
+    const atr = lp * 0.005;
+    const slD = Math.max(atr * 1.2, lp * 0.003);
+    const sl = isBuy ? lp - slD : lp + slD;
+    const slP = Math.round(slD / spec.pipSize);
     const m3 = 5.0;
-    const tp1 = isBuy ? livePrice + slDist * 1.75 : livePrice - slDist * 1.75;
-    const tp2 = isBuy ? livePrice + slDist * 3.0 : livePrice - slDist * 3.0;
-    const tp3 = isBuy ? livePrice + slDist * m3 : livePrice - slDist * m3;
-    const tp3Pips = Math.round(slDist * m3 / spec.pipSize);
-
+    const tp1 = isBuy ? lp + slD * 1.75 : lp - slD * 1.75;
+    const tp2 = isBuy ? lp + slD * 3.0 : lp - slD * 3.0;
+    const tp3 = isBuy ? lp + slD * m3 : lp - slD * m3;
+    const tp3P = Math.round(slD * m3 / spec.pipSize);
     html += `<div class="exec-panel" style="background:linear-gradient(135deg,${mtfColor}22,${mtfColor}11);border:3px solid ${mtfColor};">
       <div style="font-size:36px;">🚀</div>
       <div style="font-size:16px;font-weight:900;color:${mtfColor};margin:6px 0;">INGIA SASA — MARKET</div>
       <div style="background:#08080a;border-radius:8px;padding:12px;margin-top:10px;font-size:13px;line-height:2;text-align:left;">
-        <div>💹 <strong>Entry:</strong> <span style="color:var(--accent);">${livePrice.toFixed(spec.decimals)}</span></div>
+        <div>💹 <strong>Entry:</strong> <span style="color:var(--accent);">${lp.toFixed(spec.decimals)}</span></div>
         <div>🎯 <strong>Action:</strong> <span style="color:${mtfColor};">${mtf.action}</span></div>
-        <div>🔴 <strong>SL:</strong> ${sl.toFixed(spec.decimals)} (${slPips}p)</div>
+        <div>🔴 <strong>SL:</strong> ${sl.toFixed(spec.decimals)} (${slP}p)</div>
         <div>🟢 <strong>TP1:</strong> ${tp1.toFixed(spec.decimals)}</div>
         <div>🟢 <strong>TP2:</strong> ${tp2.toFixed(spec.decimals)}</div>
-        <div>🎯 <strong>TP3:</strong> ${tp3.toFixed(spec.decimals)} (${tp3Pips}p)</div>
+        <div>🎯 <strong>TP3:</strong> ${tp3.toFixed(spec.decimals)} (${tp3P}p)</div>
       </div>
     </div>`;
   }
@@ -2042,27 +1855,26 @@ function renderSSResults(pair, livePrice, masterResults, spec) {
       html += `<div class="master-detail-card" style="border-left-color:var(--red);"><strong style="color:var(--red);">${r.masterName}</strong><div style="font-size:11px;color:var(--red);margin-top:6px;">❌ ${r.error}</div></div>`;
       return;
     }
-    const voteColor = r.vote === 'BUY' ? 'var(--green)' : r.vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
-    const voteIcon = r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸';
-    let detBadges = '';
-    if (r.fvgDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-fvg">FVG</span>`;
-    if (r.ifvgDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-ifvg">IFVG</span>`;
-    if (r.imbalanceDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-imb">IMBALANCE</span>`;
-    if (r.displacementDetected?.toLowerCase().includes('yes')) detBadges += `<span class="detection-badge det-disp">DISPLACEMENT</span>`;
+    const vc = r.vote === 'BUY' ? 'var(--green)' : r.vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
+    const vi = r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸';
+    let db = '';
+    if (r.fvgDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-fvg">FVG</span>`;
+    if (r.ifvgDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-ifvg">IFVG</span>`;
+    if (r.imbalanceDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-imb">IMBALANCE</span>`;
+    if (r.displacementDetected?.toLowerCase().includes('yes')) db += `<span class="detection-badge det-disp">DISPLACEMENT</span>`;
     if (r.sarInfo) {
       const sl = r.sarInfo.toLowerCase();
-      if (sl.includes('above') || sl.includes('bear')) detBadges += `<span class="detection-badge det-sar-bear">SAR BEAR</span>`;
-      else if (sl.includes('below') || sl.includes('bull')) detBadges += `<span class="detection-badge det-sar-bull">SAR BULL</span>`;
+      if (sl.includes('above') || sl.includes('bear')) db += `<span class="detection-badge det-sar-bear">SAR BEAR</span>`;
+      else if (sl.includes('below') || sl.includes('bull')) db += `<span class="detection-badge det-sar-bull">SAR BULL</span>`;
     }
-
     html += `<div class="master-detail-card" style="border-left-color:${r.masterColor};">
       <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
         <strong style="font-size:13px;color:${r.masterColor};">${r.masterIcon} ${r.masterName}</strong>
-        <span style="font-size:10px;padding:2px 8px;border-radius:8px;background:${voteColor}22;color:${voteColor};border:1px solid ${voteColor};">${(r.masterWeight*100).toFixed(0)}%</span>
+        <span style="font-size:10px;padding:2px 8px;border-radius:8px;background:${vc}22;color:${vc};border:1px solid ${vc};">${(r.masterWeight*100).toFixed(0)}%</span>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin:8px 0;">
-        <span style="font-size:26px;">${voteIcon}</span>
-        <span style="font-size:20px;font-weight:900;color:${voteColor};">${r.vote}</span>
+        <span style="font-size:26px;">${vi}</span>
+        <span style="font-size:20px;font-weight:900;color:${vc};">${r.vote}</span>
         <span style="font-size:12px;color:var(--muted);">${r.confidence}%</span>
       </div>
       <div class="tf-reasoning"><strong style="color:var(--cyan);">🤖</strong> ${r.reasoning}</div>
@@ -2071,7 +1883,7 @@ function renderSSResults(pair, livePrice, masterResults, spec) {
       ${r.last3Candles ? `<div class="tf-reasoning"><strong>🕯️ Last 3:</strong> ${r.last3Candles}</div>` : ''}
       ${(r.trendHtf || r.trendMtf || r.trendLtf) ? `<div class="tf-reasoning"><strong style="color:var(--cyan);">🎯 Trend:</strong> H4=${r.trendHtf || '?'} H1=${r.trendMtf || '?'} M15=${r.trendLtf || '?'}</div>` : ''}
       ${r.sessionInferred ? `<div class="tf-reasoning"><strong style="color:var(--purple);">⏰ Session:</strong> ${r.sessionInferred}</div>` : ''}
-      ${detBadges ? `<div style="margin-top:8px;">${detBadges}</div>` : ''}
+      ${db ? `<div style="margin-top:8px;">${db}</div>` : ''}
       <div style="margin-top:8px;font-size:9px;color:var(--muted);">Provider: ${r.provider}</div>
     </div>`;
   });
@@ -2081,11 +1893,8 @@ function renderSSResults(pair, livePrice, masterResults, spec) {
   document.getElementById('ssResultsContainer').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ═══════════════════════════════════════════════════════════
-// STORAGE / AUTH
-// ═══════════════════════════════════════════════════════════
-function saveKeys(name, g, m, t, a) {
-  localStorage.setItem(STORAGE_KEYS.NAME, name);
+function saveKeys(n, g, m, t, a) {
+  localStorage.setItem(STORAGE_KEYS.NAME, n);
   if (g) localStorage.setItem(STORAGE_KEYS.GEMINI, g);
   if (m) localStorage.setItem(STORAGE_KEYS.MISTRAL, m);
   if (t) localStorage.setItem(STORAGE_KEYS.TWELVE, t);
@@ -2130,7 +1939,7 @@ function enterApp(name, g, m, t, a) {
   loadHistory(); updateStats();
   startAutoRefreshPrice();
   startAutoBacktest();
-  showToast(`Welcome ${name}! 🎯 v36.0`, 3000);
+  showToast(`Welcome ${name}! ⚡ v36.1`, 3000);
   setTimeout(() => { fetchLivePrice(); setTimeout(() => speakText('Mfumo uko tayari. Karibu Lutynoel FX.'), 2500); }, 1000);
 }
 function showLoginForm() {
@@ -2193,18 +2002,17 @@ function navigate(view) {
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
 function goBack() { navigate('overview'); }
 
-// Auto-refresh price
 function startAutoRefreshPrice() {
   if (window.__priceInt) clearInterval(window.__priceInt);
   window.__priceInt = setInterval(async () => {
     if (document.hidden) return;
     const av = document.getElementById('view-analyst');
     const sv = document.getElementById('view-screenshot');
-    const aVisible = av && av.style.display !== 'none';
-    const sVisible = sv && sv.style.display !== 'none';
-    if (!aVisible && !sVisible) return;
+    const aV = av && av.style.display !== 'none';
+    const sV = sv && sv.style.display !== 'none';
+    if (!aV && !sV) return;
     try {
-      const pair = sVisible ? document.getElementById('ssPair').value : document.getElementById('selectedPair').value;
+      const pair = sV ? document.getElementById('ssPair').value : document.getElementById('selectedPair').value;
       const spec = PAIR_SPECS[pair];
       if (!spec) return;
       let price = null;
@@ -2212,39 +2020,38 @@ function startAutoRefreshPrice() {
         const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
         if (r.ok) price = parseFloat((await r.json()).price);
       } else {
-        const key = getTwelveKey();
-        if (key) {
-          const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
+        const k = getTwelveKey();
+        if (k) {
+          const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${k}`, {}, 8000);
           if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
         }
       }
       if (price > 0) {
         localStorage.setItem(`price_${pair}`, price.toString());
-        if (aVisible) document.getElementById('livePrice').value = price.toFixed(spec.decimals);
-        if (sVisible) document.getElementById('ssLivePrice').value = price.toFixed(spec.decimals);
+        if (aV) document.getElementById('livePrice').value = price.toFixed(spec.decimals);
+        if (sV) document.getElementById('ssLivePrice').value = price.toFixed(spec.decimals);
       }
     } catch (e) {}
   }, PRICE_REFRESH_INTERVAL);
 }
 
-// Order Flow
 async function refreshOrderFlow() {
-  const container = document.getElementById('orderFlowContainer');
+  const c = document.getElementById('orderFlowContainer');
   const pair = document.getElementById('ofPair').value;
-  container.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
   try {
     const h1 = await fetchOHLC(pair, '1h', 200);
     const h4 = await fetchOHLC(pair, '4h', 200);
     const m15 = await fetchOHLC(pair, '15m', 200);
     const lp = parseFloat(localStorage.getItem(`price_${pair}`)) || h1?.[h1.length-1]?.close || 0;
-    if (!h1) { container.innerHTML = '<div class="disclaimer-box">Failed.</div>'; return; }
+    if (!h1) { c.innerHTML = '<div class="disclaimer-box">Failed.</div>'; return; }
     const inst = calculateInstitutionalMetrics(h4, h1, m15, lp);
     const b = inst.biasScore;
-    const bColor = b.bias.includes('BULL') ? 'var(--green)' : b.bias.includes('BEAR') ? 'var(--red)' : 'var(--yellow)';
+    const bC = b.bias.includes('BULL') ? 'var(--green)' : b.bias.includes('BEAR') ? 'var(--red)' : 'var(--yellow)';
     let html = `<div class="inst-bias-panel">
       <div style="font-size:11px;color:var(--inst);font-weight:bold;letter-spacing:2px;">🧭 BIAS — ${pair}</div>
-      <div class="inst-bias-score" style="color:${bColor};">${b.score}<span style="font-size:20px;color:var(--muted);">/100</span></div>
-      <div style="font-size:13px;font-weight:bold;color:${bColor};">${b.bias.replace('_',' ')}</div>
+      <div class="inst-bias-score" style="color:${bC};">${b.score}<span style="font-size:20px;color:var(--muted);">/100</span></div>
+      <div style="font-size:13px;font-weight:bold;color:${bC};">${b.bias.replace('_',' ')}</div>
       <div class="inst-bias-bar"><div class="inst-bias-fill" style="width:${b.score}%"></div></div>
     </div>`;
     if (inst.volumeProfile) {
@@ -2257,27 +2064,27 @@ async function refreshOrderFlow() {
         </div></div>`;
     }
     if (inst.sar) html += `<div class="card" style="border-color:var(--cyan);"><div class="ballistic-header">📈 PARABOLIC SAR</div><div class="inst-zone ${inst.sar.trend === 'BULLISH' ? 'bull' : 'bear'}"><div><strong>${inst.sar.trend}</strong><br><small style="color:var(--muted);">SAR @ ${inst.sar.current.toFixed(2)}</small></div><span class="zone-badge ${inst.sar.trend === 'BULLISH' ? 'bull' : 'bear'}">${inst.sar.trend}</span></div></div>`;
-    container.innerHTML = html;
-  } catch (err) { container.innerHTML = `<div class="disclaimer-box">Error: ${err.message}</div>`; }
+    c.innerHTML = html;
+  } catch (e) { c.innerHTML = `<div class="disclaimer-box">Error: ${e.message}</div>`; }
 }
 
 function refreshBacktest() {
   const c = document.getElementById('backtestContainer');
   const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  const tracked = h.filter(x => x.autoTrackStart && x.action !== 'HOLD');
-  const closed = tracked.filter(x => x.outcome === 'WIN' || x.outcome === 'LOSS');
-  if (tracked.length === 0) { c.innerHTML = `<div class="info-box">Fanya analysis (BUY/SELL) na app itaanza kufuatilia.</div>`; return; }
-  const wins = closed.filter(x => x.outcome === 'WIN'), losses = closed.filter(x => x.outcome === 'LOSS');
-  const wr = closed.length > 0 ? ((wins.length / closed.length) * 100).toFixed(1) : '—';
+  const t = h.filter(x => x.autoTrackStart && x.action !== 'HOLD');
+  const cl = t.filter(x => x.outcome === 'WIN' || x.outcome === 'LOSS');
+  if (t.length === 0) { c.innerHTML = `<div class="info-box">Fanya analysis (BUY/SELL) na app itaanza kufuatilia.</div>`; return; }
+  const w = cl.filter(x => x.outcome === 'WIN'), l = cl.filter(x => x.outcome === 'LOSS');
+  const wr = cl.length > 0 ? ((w.length / cl.length) * 100).toFixed(1) : '—';
   c.innerHTML = `<div class="success-box">✅ Auto-Backtest Live</div>
     <div class="stats-grid">
-      <div class="stat-box"><div class="stat-value" style="color:${parseFloat(wr) >= 50 ? 'var(--green)' : 'var(--red)'};">${wr}${closed.length > 0 ? '%' : ''}</div><div class="stat-label">Win Rate</div></div>
-      <div class="stat-box"><div class="stat-value">${closed.length}</div><div class="stat-label">Closed</div></div>
+      <div class="stat-box"><div class="stat-value" style="color:${parseFloat(wr) >= 50 ? 'var(--green)' : 'var(--red)'};">${wr}${cl.length > 0 ? '%' : ''}</div><div class="stat-label">Win Rate</div></div>
+      <div class="stat-box"><div class="stat-value">${cl.length}</div><div class="stat-label">Closed</div></div>
     </div>
     <div class="grid-3">
-      <div class="mini-box" style="text-align:center;"><label style="color:var(--green);">Wins ✅</label><div style="font-size:20px;font-weight:bold;color:var(--green);">${wins.length}</div></div>
-      <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">Losses ❌</label><div style="font-size:20px;font-weight:bold;color:var(--red);">${losses.length}</div></div>
-      <div class="mini-box" style="text-align:center;"><label style="color:var(--yellow);">Pending ⏳</label><div style="font-size:20px;font-weight:bold;color:var(--yellow);">${tracked.length - closed.length}</div></div>
+      <div class="mini-box" style="text-align:center;"><label style="color:var(--green);">Wins ✅</label><div style="font-size:20px;font-weight:bold;color:var(--green);">${w.length}</div></div>
+      <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">Losses ❌</label><div style="font-size:20px;font-weight:bold;color:var(--red);">${l.length}</div></div>
+      <div class="mini-box" style="text-align:center;"><label style="color:var(--yellow);">Pending ⏳</label><div style="font-size:20px;font-weight:bold;color:var(--yellow);">${t.length - cl.length}</div></div>
     </div>`;
 }
 
@@ -2286,8 +2093,8 @@ function startAutoBacktest() {
   window.__backtestInt = setInterval(async () => {
     if (document.hidden) return;
     const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-    const pending = h.filter(x => x.outcome === 'PENDING' && x.autoTrackStart);
-    const pairs = [...new Set(pending.map(x => x.pair))];
+    const p = h.filter(x => x.outcome === 'PENDING' && x.autoTrackStart);
+    const pairs = [...new Set(p.map(x => x.pair))];
     for (const pair of pairs) {
       const spec = PAIR_SPECS[pair];
       if (!spec) continue;
@@ -2297,16 +2104,15 @@ function startAutoBacktest() {
           const r = await fetchWithTimeout(`${BINANCE_API}/ticker/price?symbol=${spec.binanceSymbol}`, {}, 8000);
           if (r.ok) price = parseFloat((await r.json()).price);
         } else {
-          const key = getTwelveKey();
-          if (key) {
-            const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${key}`, {}, 8000);
+          const k = getTwelveKey();
+          if (k) {
+            const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${k}`, {}, 8000);
             if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
           }
         }
         if (price) localStorage.setItem(`price_${pair}`, price.toString());
       } catch (e) {}
     }
-    // Check outcomes
     const now = Date.now();
     let updated = false;
     h.forEach(r => {
@@ -2322,7 +2128,6 @@ function startAutoBacktest() {
     if (updated) { localStorage.setItem('lutynoel_history', JSON.stringify(h)); updateStats(); }
     if (document.getElementById('view-backtest')?.style.display !== 'none') refreshBacktest();
   }, AUTO_CHECK_INTERVAL);
-  setTimeout(() => {}, 5000);
 }
 
 function calculateRisk() {
@@ -2330,10 +2135,10 @@ function calculateRisk() {
   const r = parseFloat(document.getElementById('riskPercent').value) || 1;
   const sl = parseFloat(document.getElementById('riskSlPips').value) || 30;
   const spec = PAIR_SPECS[document.getElementById('riskPair').value];
-  const riskAmt = b * (r / 100);
-  const lot = riskAmt / (sl * spec.pipValue);
+  const ra = b * (r / 100);
+  const lot = ra / (sl * spec.pipValue);
   document.getElementById('riskResultBox').style.display = 'block';
-  document.getElementById('riskResultText').innerHTML = `Balance: $${b.toFixed(2)}<br>Risk: $${riskAmt.toFixed(2)}<br><br><strong style="color:var(--accent);font-size:15px;">LOT: ${lot.toFixed(3)}</strong>`;
+  document.getElementById('riskResultText').innerHTML = `Balance: $${b.toFixed(2)}<br>Risk: $${ra.toFixed(2)}<br><br><strong style="color:var(--accent);font-size:15px;">LOT: ${lot.toFixed(3)}</strong>`;
 }
 
 function updatePipsPairInfo() {
@@ -2376,11 +2181,12 @@ function loadHistory() {
   const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
   if (h.length === 0) { c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">No history</div>'; return; }
   c.innerHTML = h.map((r, i) => {
-    const strength = getSignalStrength(r.action || r.vote, r.confluenceScore || 0, r.institutionalScore);
+    const st = getSignalStrength(r.action || r.vote, r.confluenceScore || 0, r.institutionalScore);
     let sb = r.outcome === 'WIN' ? '✅' : r.outcome === 'LOSS' ? '❌' : r.outcome === 'PENDING' ? '⏳' : r.outcome === 'SKIPPED' ? '⏭' : '⌛';
     return `<div class="history-card">
       <div style="flex-grow:1;">
-        <strong>${r.pair} <span style="color:${strength.color};">${strength.label}</span></strong> ${sb}
+        <strong>${r.pair} <span style="color:${st.color};">${st.label}</span></strong> ${sb}
+        ${r.isOverride ? '<span style="color:var(--accent);font-size:11px;"> ⚡ OVERRIDE</span>' : ''}
         ${r.quality ? `<span style="color:var(--cyan);font-size:11px;"> • 🎯 ${r.quality}</span>` : ''}
         <br><small style="color:var(--muted);">${r.date || ''}</small>
       </div>
@@ -2408,20 +2214,20 @@ function updateStats() {
   document.getElementById('statTotalAnalyses').innerText = h.length;
   const ap = h.filter(t => t.quality === 'A+').length;
   document.getElementById('statNetPips').innerText = ap;
-  const closed = h.filter(t => t.outcome === 'WIN' || t.outcome === 'LOSS');
-  if (closed.length === 0) document.getElementById('statWinRate').innerText = '—';
+  const cl = h.filter(t => t.outcome === 'WIN' || t.outcome === 'LOSS');
+  if (cl.length === 0) document.getElementById('statWinRate').innerText = '—';
   else {
-    const w = closed.filter(t => t.outcome === 'WIN').length;
-    document.getElementById('statWinRate').innerText = ((w / closed.length) * 100).toFixed(0) + '%';
+    const w = cl.filter(t => t.outcome === 'WIN').length;
+    document.getElementById('statWinRate').innerText = ((w / cl.length) * 100).toFixed(0) + '%';
   }
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "36.0", exportedAt: new Date().toISOString() };
-  const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "36.1", exportedAt: new Date().toISOString() };
+  const b = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `lutynoel-v36-${Date.now()}.json`;
+  a.href = URL.createObjectURL(b);
+  a.download = `lutynoel-v36.1-${Date.now()}.json`;
   a.click();
 }
 
