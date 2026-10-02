@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v36.2 — Real Masters Full</title>
+<title>Lutynoel.fx v36.3 — Real Masters Full</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -86,6 +86,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .badge-shield{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
 .badge-fallback{background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink)}
 .badge-override{background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(236,72,153,.2));color:var(--accent);border:2px solid var(--accent);padding:6px 14px;border-radius:12px;font-size:11px;font-weight:900;display:inline-block;margin:6px 0;letter-spacing:1px;box-shadow:0 0 20px rgba(251,191,36,.3)}
+.badge-tiebreak{background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(6,182,212,.2));color:var(--cyan);border:2px solid var(--cyan);padding:6px 14px;border-radius:12px;font-size:11px;font-weight:900;display:inline-block;margin:6px 0;letter-spacing:1px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .mini-box{background:#08080a;border:1px solid var(--border);padding:12px;border-radius:8px}
@@ -195,8 +196,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v36.2</div>
-    <div class="auth-subtitle">Real Masters + Override Logic</div>
+    <div class="auth-title">Lutynoel.fx v36.3</div>
+    <div class="auth-subtitle">Real Masters + Tie-Breaker Logic</div>
 
     <div class="disclaimer-box">
       ⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Trade at your own risk.
@@ -220,11 +221,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Alpha Vantage Key (Optional)</label>
       <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
       <div class="info-box">
-        ⚡ <strong>v36.2 NEW:</strong><br>
-        🎯 High-Confidence Override (≥85%)<br>
-        📊 HOLD ina discount 50%<br>
-        🎙️ Voice ya override<br>
-        ✅ 4 Real Masters + Vision<br>
+        ⚡ <strong>v36.3 NEW:</strong><br>
+        🎯 Override ≥75% (rahisi zaidi)<br>
+        🎯 Tie-Breaker kwa 2-2 split<br>
+        📊 Thresholds 55% (kutoka 65%)<br>
+        ⏰ Session detection FIXED<br>
         🔔 Push Notifications + PWA
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
@@ -247,7 +248,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v36.2</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v36.3</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -278,7 +279,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           </div>
           <div style="flex:1;">
             <div class="hero-title">LUTYNOEL.FX</div>
-            <div class="hero-sub">Override Logic • v36.2</div>
+            <div class="hero-sub">Tie-Breaker Logic • v36.3</div>
             <div class="hero-badges">
               <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">⚡ OVERRIDE</span>
               <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">D&S+S/R</span>
@@ -304,14 +305,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">⚡ v36.2 — WHAT'S NEW</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">⚡ v36.3 — WHAT'S NEW</div>
         <div style="font-size:11px;line-height:1.9;">
-          ⚡ <strong>High-Confidence Override</strong> — Master mmoja ≥ 85% → override<br>
-          📊 <strong>HOLD Discount</strong> — HOLD ina uzito 50% tu<br>
-          🎯 <strong>Directional Priority</strong> — BUY/SELL > HOLD<br>
-          🎙️ <strong>Voice ya Override</strong> — Inatangaza override<br>
-          ✅ <strong>4 Masters wa kweli</strong> + Vision detections<br>
-          🔔 <strong>Push Notifications</strong> — PWA installable
+          ⚡ <strong>Override ≥75%</strong> — rahisi kufanya kazi (kutoka 85%)<br>
+          🎯 <strong>Tie-Breaker</strong> — 2-2 split inatatuliwa<br>
+          📊 <strong>Thresholds 55%</strong> — kutoka 65%<br>
+          ⏰ <strong>Session detection</strong> — GAP imeondolewa<br>
+          🎙️ <strong>Voice ya override</strong> — inatangaza<br>
+          🔔 <strong>Push Notifications</strong> + PWA
         </div>
       </div>
     </div>
@@ -362,7 +363,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <h3 style="margin:5px 0 15px;">📸 MTF Screenshot — 4 Real Masters</h3>
         <div class="info-box">
           📷 Upload <strong>screenshots 3 tofauti</strong>: M15 + H1 + H4<br>
-          <strong>Masters 4</strong> watazichambua. <strong>Mode ya haraka</strong> inatuma picha mara MOJA kwa AI (inapunguza matumizi ya API kwa 75%).
+          <strong>Masters 4</strong> watazichambua. <strong>Tie-Breaker</strong> itatumika kama 2-2.
         </div>
 
         <label>Mode ya Uchambuzi</label>
@@ -547,11 +548,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v36.2 — High-Confidence Override<br>
+          <strong>Version:</strong> v36.3 — Tie-Breaker Logic<br>
           <strong>Masters:</strong> D&S+S/R • Price Action • Structure • Fundamental<br>
-          <strong>Override:</strong> Master ≥ 85% → override moja kwa moja<br>
-          <strong>HOLD Discount:</strong> 50%<br>
-          <strong>Vision:</strong> FVG/IFVG/Imbalance/Displacement/SAR
+          <strong>Override:</strong> Master ≥ 75% → override moja kwa moja<br>
+          <strong>Tie-Breaker:</strong> 2-2 split inatatuliwa kwa confidence<br>
+          <strong>HOLD Discount:</strong> 50%
         </div>
         <div class="ballistic-header">🔊 SAUTI</div>
         <label>Voice Alerts</label>
@@ -601,7 +602,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 /* ═══════════════════════════════════════════════════════════
-   Lutynoel.fx v36.2 — FIXED VERSION
+   Lutynoel.fx v36.3 — Tie-Breaker Logic
+   - Override ≥75% (kutoka 85%)
+   - Thresholds 55% (kutoka 65%)
+   - Tie-Breaker kwa 2-2 split
+   - Session detection FIXED (hakuna gap)
+   - Prompt inahimiza direction badala ya HOLD
    ═══════════════════════════════════════════════════════════ */
 'use strict';
 
@@ -658,28 +664,27 @@ const MASTERS_4 = [
 
 ═══ REAL DEMAND/SUPPLY LOGIC ═══
 A VALID ZONE requires ALL:
-1. STRONG DEPARTURE: aggressive momentum (large bodies, no consolidation at edge)
+1. STRONG DEPARTURE: aggressive momentum (large bodies)
 2. FRESH: NOT retested OR retested max 1x
 3. BASE: 1-4 tight candles
 4. TIME: formed recently (last 30-50 candles)
-5. LOCATION: aligns with HTF (H4 > H1 > M15)
+5. LOCATION: aligns with HTF
 
-ZONE GRADING: A+ = Fresh+strong+tight+HTF aligned | A = Tested 1x+strong | B = Tested 2x | DEAD = 3x+
+ZONE GRADING: A+ = Fresh+strong+tight+HTF aligned | A = Tested 1x | B = Tested 2x | DEAD = 3x+
 
 SUPPORT/RESISTANCE:
 - Pivot points R1/R2/R3, S1/S2/S3
 - Round numbers = psychological S/R
 - Role flip: broken Resistance → Support
-- Multiple wick rejections at same level = strong S/R
+- Multiple wick rejections = strong S/R
 
 ═══ DECISION ═══
 - Bounce from Fresh Demand + HTF aligned → BUY (70-85%)
 - Reject from Fresh Supply + HTF aligned → SELL (70-85%)
-- Mid-range → HOLD unless others agree
-- Break of 3x-tested level → continuation
+- Mid-range → decide based on bias
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"S/R + D/S analysis","key_zones":"List zones","nearest_obstacle":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"S/R + D/S analysis","key_zones":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
   { id: 2, name: "Price Action Master", weight: 0.25, icon: "📊", color: "var(--green)",
     lens: `You are the PRICE ACTION MASTER — read CANDLES like a book.
 
@@ -688,59 +693,60 @@ PATTERNS:
 - Bearish Engulfing at Resistance → SELL
 - Pin Bar/Hammer: long lower wick, closes top 1/3 = bullish at support
 - Shooting Star: long upper wick = bearish at resistance
-- Inside Bar: consolidation; wait breakout
+- Inside Bar: consolidation
 - Morning/Evening Star = reversal
 - Doji at extremes = reversal
 
-BODY-TO-WICK: >70% VERY STRONG | 50-70% Strong | 30-50% Weak | <30% Indecision
+BODY-TO-WICK: >70% VERY STRONG | 50-70% Strong | 30-50% Weak
 
 ═══ DECISION ═══
 - Bullish Engulfing at Support → BUY (65-80%)
 - Bearish Engulfing at Resistance → SELL (65-80%)
 - Pin Bar at key level → reversal (60-75%)
-- Inside bar → HOLD
+- Decide direction based on last 3 candle momentum
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Candle analysis","patterns_detected":"List","last_3_candles":"","momentum":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Candle analysis","patterns_detected":"","last_3_candles":"","momentum":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
   { id: 3, name: "Market Structure Master", weight: 0.25, icon: "🎯", color: "var(--cyan)",
     lens: `You are the MARKET STRUCTURE MASTER — map the skeleton.
 
 SWING POINTS: 2-candle rule
-TREND: UPTREND HH+HL | DOWNTREND LH+LL | RANGE failing HH/LL
+TREND: UPTREND HH+HL | DOWNTREND LH+LL | RANGE
 
 BOS: closed candle breaks prev swing → CONTINUATION
 CHoCH: breaks last LH/HL → FIRST reversal signal
 MSS: CHoCH + BOS = HIGH probability reversal
-LIQUIDITY SWEEP: wick beyond swing then close back inside
-MTF: H4=BIAS, H1=TREND, M15=ENTRY. All aligned = A+
+LIQUIDITY SWEEP: wick beyond swing then close back
+MTF: H4=BIAS, H1=TREND, M15=ENTRY
 
 ═══ DECISION ═══
 - All 3 TF aligned → follow (75%+)
+- H4 + H1 aligned → follow trend
 - Clear MSS + displacement → reversal (70-85%)
-- Liquidity sweep → reversal entry (60-75%)
+- Liquidity sweep → reversal entry
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Structure","trend_htf":"","trend_mtf":"","trend_ltf":"","recent_bos":"","recent_choch":"","sweep_detected":"","mtf_aligned":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Structure","trend_htf":"","trend_mtf":"","trend_ltf":"","recent_bos":"","recent_choch":"","sweep_detected":"","mtf_aligned":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
   { id: 4, name: "Fundamental Analysis Master", weight: 0.22, icon: "🌍", color: "var(--purple)",
     lens: `You are the FUNDAMENTAL ANALYSIS MASTER — read SESSION, VOLATILITY.
 
-SESSIONS:
-- ASIAN (00:00-08:00 GMT): Low vol, range
-- LONDON OPEN (07:00-10:00 GMT): HIGH vol, kill zone
-- LONDON-NY OVERLAP (12:00-15:00 GMT): VERY HIGH
-- NY AFTERNOON (15:00-17:00): Moderate
-- DEAD ZONE (17:00-00:00): Very low, avoid
+SESSIONS (UTC):
+- ASIAN (00:00-07:00): Low vol, accumulation
+- LONDON_OPEN (07:00-12:00): HIGH vol, kill zone
+- LONDON_NY_OVERLAP (12:00-16:00): VERY HIGH
+- NY_AFTERNOON (16:00-21:00): Moderate
+- DEAD_ZONE (21:00-00:00): Very low
 
-KILL ZONE: London + NY = A+ | Asian = C | Dead zone = F
-RISK SENTIMENT: Gold up = risk-off | Gold down = risk-on
+KILL ZONE: London + NY = A+ | Asian = B | Dead zone = C
+RISK SENTIMENT: Gold up = risk-off
 
 ═══ DECISION ═══
-- Tight range = Asian → HOLD
-- Directional + expanding vol = London/NY → follow
-- Sudden spike = news → wait 3 candles
+- Directional + expanding vol = London/NY → follow the direction
+- Asian session: still decide based on direction bias
+- Only HOLD if truly no direction
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Session + vol","session_inferred":"","volatility":"","news_event_suspected":"","risk_sentiment":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` }
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Session + vol","session_inferred":"","volatility":"","news_event_suspected":"","risk_sentiment":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` }
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -1024,19 +1030,26 @@ function detectDisplacement(o) {
   if (body > atr * 1.5 && br > 0.7) return { detected: true, direction: last.close > last.open ? 'BULLISH' : 'BEARISH', bodyATR: (body / atr).toFixed(2) };
   return { detected: false };
 }
+
+// ═══════════════════════════════════════════════════════════
+// ✅ SESSION DETECTION — FIXED (Hakuna GAP)
+// ═══════════════════════════════════════════════════════════
 function getKillZoneInfo() {
   const n = new Date();
   const m = n.getUTCHours() * 60 + n.getUTCMinutes();
   const z = [
-    { name: 'ASIAN_KZ', start: 0, end: 180, quality: 'LOW' },
-    { name: 'LONDON_OPEN', start: 420, end: 600, quality: 'HIGH' },
-    { name: 'LONDON_NY_OVERLAP', start: 720, end: 900, quality: 'VERY_HIGH' },
-    { name: 'NY_AFTERNOON', start: 900, end: 1020, quality: 'MEDIUM' },
+    { name: 'ASIAN', start: 0, end: 420, quality: 'LOW' },
+    { name: 'LONDON_OPEN', start: 420, end: 720, quality: 'HIGH' },
+    { name: 'LONDON_NY_OVERLAP', start: 720, end: 960, quality: 'VERY_HIGH' },
+    { name: 'NY_AFTERNOON', start: 960, end: 1260, quality: 'MEDIUM' },
     { name: 'DEAD_ZONE', start: 1260, end: 1440, quality: 'VERY_LOW' }
   ];
-  for (const x of z) if (m >= x.start && m < x.end) return { session: x.name, quality: x.quality, isActive: x.quality === 'HIGH' || x.quality === 'VERY_HIGH' };
-  return { session: 'OFF_HOURS', quality: 'LOW', isActive: false };
+  for (const x of z) if (m >= x.start && m < x.end) {
+    return { session: x.name, quality: x.quality, isActive: x.quality === 'HIGH' || x.quality === 'VERY_HIGH' };
+  }
+  return { session: 'DEAD_ZONE', quality: 'VERY_LOW', isActive: false };
 }
+
 function calculateSupportResistance(o) {
   if (!Array.isArray(o) || o.length < 5) return null;
   const p = o[o.length - 2];
@@ -1166,17 +1179,21 @@ function calculateInstitutionalEntry(action, lp, inst, spec) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// MASTERS CONFLUENCE
+// ✅ MASTERS CONFLUENCE — FIXED (Lower thresholds + Tie-Breaker)
 // ═══════════════════════════════════════════════════════════
 function computeMastersConfluence(results) {
   const valid = results.filter(r => r.provider !== 'Failed' && !r.error);
-  if (valid.length === 0) return { action: 'HOLD', confidence: 0, reason: 'All masters failed', buyCount: 0, sellCount: 0, holdCount: 0, total: 0, isOverride: false };
+  if (valid.length === 0) {
+    return { action: 'HOLD', confidence: 0, reason: 'All masters failed', buyCount: 0, sellCount: 0, holdCount: 0, total: 0, isOverride: false };
+  }
 
   const directional = valid.filter(r => r.vote === 'BUY' || r.vote === 'SELL');
   const holds = valid.filter(r => r.vote === 'HOLD');
+  const buys = directional.filter(r => r.vote === 'BUY');
+  const sells = directional.filter(r => r.vote === 'SELL');
 
-  // ═══ RULE 1: HIGH-CONFIDENCE OVERRIDE (≥85%) ═══
-  const highConf = directional.filter(r => r.confidence >= 85);
+  // ═══ RULE 1: HIGH-CONFIDENCE OVERRIDE (75% — ilikuwa 85%) ═══
+  const highConf = directional.filter(r => r.confidence >= 75);
   if (highConf.length > 0) {
     const strongest = highConf.reduce((a, b) => a.confidence > b.confidence ? a : b);
     const sameDir = directional.filter(v => v.vote === strongest.vote);
@@ -1185,43 +1202,59 @@ function computeMastersConfluence(results) {
     return {
       action: strongest.vote,
       confidence: boosted,
-      reason: `⚡ HIGH-CONFIDENCE OVERRIDE: ${strongest.masterName} = ${strongest.vote} ${strongest.confidence}%${sameDir.length > 1 ? ` (+${sameDir.length - 1} masters aligned)` : ''}`,
-      buyCount: strongest.vote === 'BUY' ? sameDir.length : 0,
-      sellCount: strongest.vote === 'SELL' ? sameDir.length : 0,
-      holdCount: holds.length,
-      total: valid.length,
-      isOverride: true
+      reason: `⚡ HIGH-CONFIDENCE OVERRIDE: ${strongest.masterName} = ${strongest.vote} ${strongest.confidence}%${sameDir.length > 1 ? ` (+${sameDir.length - 1} aligned)` : ''}`,
+      buyCount: buys.length, sellCount: sells.length, holdCount: holds.length,
+      total: valid.length, isOverride: true
     };
   }
 
-  // ═══ RULE 2: 2+ DIRECTIONS ≥ 65% ═══
-  if (directional.length >= 2) {
-    const buyDirs = directional.filter(r => r.vote === 'BUY');
-    const sellDirs = directional.filter(r => r.vote === 'SELL');
-    const strongBuy = buyDirs.filter(r => r.confidence >= 65);
-    const strongSell = sellDirs.filter(r => r.confidence >= 65);
+  // ═══ RULE 2: 2+ DIRECTIONS ≥ 55% (ilikuwa 65%) ═══
+  const strongBuy = buys.filter(r => r.confidence >= 55);
+  const strongSell = sells.filter(r => r.confidence >= 55);
 
-    if (strongSell.length >= 2) {
-      const avgConf = Math.round(strongSell.reduce((s, v) => s + v.confidence, 0) / strongSell.length);
+  if (strongSell.length >= 2) {
+    const avgConf = Math.round(strongSell.reduce((s, v) => s + v.confidence, 0) / strongSell.length);
+    return {
+      action: 'SELL', confidence: Math.min(90, avgConf + 5),
+      reason: `${strongSell.length} masters bearish (avg ${avgConf}%)`,
+      buyCount: buys.length, sellCount: sells.length, holdCount: holds.length,
+      total: valid.length, isOverride: false
+    };
+  }
+  if (strongBuy.length >= 2) {
+    const avgConf = Math.round(strongBuy.reduce((s, v) => s + v.confidence, 0) / strongBuy.length);
+    return {
+      action: 'BUY', confidence: Math.min(90, avgConf + 5),
+      reason: `${strongBuy.length} masters bullish (avg ${avgConf}%)`,
+      buyCount: buys.length, sellCount: sells.length, holdCount: holds.length,
+      total: valid.length, isOverride: false
+    };
+  }
+
+  // ═══ RULE 2.5: TIE-BREAKER (2-2, 1-1 split) ═══
+  if (buys.length >= 1 && sells.length >= 1 && Math.abs(buys.length - sells.length) <= 1) {
+    const buyAvg = buys.reduce((s, v) => s + v.confidence, 0) / buys.length;
+    const sellAvg = sells.reduce((s, v) => s + v.confidence, 0) / sells.length;
+
+    if (buyAvg > sellAvg + 8) {
       return {
-        action: 'SELL', confidence: Math.min(90, avgConf + 5),
-        reason: `${strongSell.length} masters bearish (avg ${avgConf}%)`,
-        buyCount: 0, sellCount: strongSell.length, holdCount: holds.length, total: valid.length,
-        isOverride: false
+        action: 'BUY', confidence: Math.min(80, Math.round(buyAvg)),
+        reason: `🎯 TIE-BREAKER: BUY (${buyAvg.toFixed(0)}%) > SELL (${sellAvg.toFixed(0)}%)`,
+        buyCount: buys.length, sellCount: sells.length, holdCount: holds.length,
+        total: valid.length, isOverride: false, isTieBreaker: true
       };
     }
-    if (strongBuy.length >= 2) {
-      const avgConf = Math.round(strongBuy.reduce((s, v) => s + v.confidence, 0) / strongBuy.length);
+    if (sellAvg > buyAvg + 8) {
       return {
-        action: 'BUY', confidence: Math.min(90, avgConf + 5),
-        reason: `${strongBuy.length} masters bullish (avg ${avgConf}%)`,
-        buyCount: strongBuy.length, sellCount: 0, holdCount: holds.length, total: valid.length,
-        isOverride: false
+        action: 'SELL', confidence: Math.min(80, Math.round(sellAvg)),
+        reason: `🎯 TIE-BREAKER: SELL (${sellAvg.toFixed(0)}%) > BUY (${buyAvg.toFixed(0)}%)`,
+        buyCount: buys.length, sellCount: sells.length, holdCount: holds.length,
+        total: valid.length, isOverride: false, isTieBreaker: true
       };
     }
   }
 
-  // ═══ RULE 3: WEIGHTED VOTE (HOLD discount 50%) ═══
+  // ═══ RULE 3: WEIGHTED VOTE (HOLD discount 50%, margin +1 badala ya +3) ═══
   const HOLD_DISCOUNT = 0.5;
   let bW = 0, sW = 0, hW = 0, bC = 0, sC = 0, hC = 0;
   valid.forEach(r => {
@@ -1230,6 +1263,7 @@ function computeMastersConfluence(results) {
     else if (r.vote === 'SELL') { sW += w; sC++; }
     else { hW += w * HOLD_DISCOUNT; hC++; }
   });
+
   const tot = bW + sW + hW;
   const bN = tot > 0 ? (bW / tot) * 100 : 0;
   const sN = tot > 0 ? (sW / tot) * 100 : 0;
@@ -1240,11 +1274,11 @@ function computeMastersConfluence(results) {
   if (bN >= 30 && sN >= 30) {
     action = 'HOLD'; confidence = Math.round(hN);
     reason = `Masters wamegawanyika (${bC}B/${sC}S/${hC}H) — CONFLICT`;
-  } else if (sN > bN + 3 && sN >= 20) {
+  } else if (sN > bN + 1 && sN >= 20) {
     action = 'SELL';
     confidence = Math.round(Math.min(85, sN + (sN / (bN + sN + 1)) * 20));
     reason = `${sC} master${sC > 1 ? 's' : ''} bearish (hold ${hC})`;
-  } else if (bN > sN + 3 && bN >= 20) {
+  } else if (bN > sN + 1 && bN >= 20) {
     action = 'BUY';
     confidence = Math.round(Math.min(85, bN + (bN / (bN + sN + 1)) * 20));
     reason = `${bC} master${bC > 1 ? 's' : ''} bullish (hold ${hC})`;
@@ -1262,7 +1296,7 @@ function computeMastersConfluence(results) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// AI LIVE MASTER CALLS
+// ✅ BUILD PROMPT — FIXED (Inahimiza direction badala ya HOLD)
 // ═══════════════════════════════════════════════════════════
 function buildLiveMasterPrompt(master, pair, lp, h4, h1, m15, inst, htfBias) {
   let p = `${master.lens}\n\nYOUR WEIGHT: ${(master.weight * 100).toFixed(0)}%\n\nPAIR: ${pair} | Current Price: ${lp}\n`;
@@ -1303,7 +1337,17 @@ function buildLiveMasterPrompt(master, pair, lp, h4, h1, m15, inst, htfBias) {
       p += `\n`;
     }
   }
-  p += `\nRespond ONLY valid JSON:\n{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences","key_level":<price or null>,"fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}`;
+
+  // ═══ MAELEKEZO YA KULAZIMISHA DIRECTION ═══
+  p += `\n═══ MUHIMU — KANUNI YA KUCHAGUA ═══
+- LAZIMA uchague "BUY" au "SELL" KAMA kuna dalili YOYOTE ya mwelekeo.
+- Tumia "HOLD" TU kama confidence yako ni chini ya 50% AU hakuna mwelekeo KABISA.
+- Confidence ya kawaida: 55-80%. Usiogope kutoa 60%+ kama kuna dalili.
+- Kama una mashaka, fuata SAR + HTF bias.
+- Bias 40-60 (neutral) haimaanishi HOLD — inamaanisha chagua upande wenye ushahidi mdogo.
+
+Respond ONLY valid JSON:
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences","key_level":null,"fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}`;
   return p;
 }
 
@@ -1319,12 +1363,12 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
         const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
-          body: JSON.stringify({ model, messages: [{ role: 'system', content: 'Respond ONLY valid JSON.' }, { role: 'user', content: p }], temperature: 0.2, max_tokens: 2000, response_format: { type: 'json_object' } })
+          body: JSON.stringify({ model, messages: [{ role: 'system', content: 'Respond ONLY valid JSON.' }, { role: 'user', content: p }], temperature: 0.3, max_tokens: 2000, response_format: { type: 'json_object' } })
         }, 90000);
         const rt = await r.text();
-        let d; try { d = JSON.parse(rt); } catch (e) { lastError = `Mistral ${model} parse error`; console.warn(lastError); continue; }
-        if (d.error) { lastError = `Mistral: ${d.error.message || JSON.stringify(d.error)}`; console.warn(lastError); continue; }
-        if (!d.choices?.[0]?.message?.content) { lastError = `Mistral ${model} empty response`; continue; }
+        let d; try { d = JSON.parse(rt); } catch (e) { lastError = `Mistral ${model} parse error`; continue; }
+        if (d.error) { lastError = `Mistral: ${d.error.message}`; continue; }
+        if (!d.choices?.[0]?.message?.content) { lastError = `Mistral ${model} empty`; continue; }
         const pr = safeJsonParse(d.choices[0].message.content.trim());
         if (pr) { result = pr; provider = 'Mistral'; break; }
       } catch (e) { lastError = `Mistral ${model}: ${e.message}`; console.warn(lastError); }
@@ -1336,10 +1380,10 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
         const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${model}:generateContent?key=${gk}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: p }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
+          body: JSON.stringify({ contents: [{ parts: [{ text: p }] }], generationConfig: { temperature: 0.3, responseMimeType: 'application/json' } })
         }, 90000);
         const d = await r.json();
-        if (d.error) { lastError = `Gemini: ${d.error.message}`; console.warn(lastError); continue; }
+        if (d.error) { lastError = `Gemini: ${d.error.message}`; continue; }
         if (!d.candidates?.[0]) { lastError = `Gemini ${model} empty`; continue; }
         const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
         if (pr) { result = pr; provider = 'Gemini'; break; }
@@ -1350,7 +1394,7 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
   if (!result) {
     return {
       masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight,
-      vote: 'HOLD', confidence: 0, reasoning: `❌ Analysis failed: ${lastError || 'Unknown error'}`,
+      vote: 'HOLD', confidence: 0, reasoning: `❌ Analysis failed: ${lastError || 'Unknown'}`,
       provider: 'Failed', fvgDetected: '', ifvgDetected: '', imbalanceDetected: '', displacementDetected: '', sarInfo: '',
       error: lastError
     };
@@ -1372,7 +1416,7 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// COMBINED MODE — API 1 tu kwa masters wote
+// COMBINED MODE — API 1 tu
 // ═══════════════════════════════════════════════════════════
 async function callAllMastersCombined(screenshots, pair, lp) {
   const mk = getMistralKey(), gk = getGeminiKey();
@@ -1384,24 +1428,27 @@ async function callAllMastersCombined(screenshots, pair, lp) {
 
   const combinedPrompt = `You are 4 elite masters analyzing an MTF setup for ${pair} at price ${lp}.
 
-You MUST analyze and provide a SEPARATE vote from EACH of the 4 masters below. Each master is INDEPENDENT.
+You MUST provide a SEPARATE vote from EACH of the 4 masters. Each master is INDEPENDENT.
 
 ${masterPrompts}
 
-═══ CRITICAL INSTRUCTIONS ═══
+═══ CRITICAL ═══
 Return ONLY valid JSON with exactly these keys: "master1", "master2", "master3", "master4".
-Each master's response must have: {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences explaining the analysis","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}
+Each: {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}
 
-Example format:
+IMPORTANT: 
+- Each master must vote based on THEIR specific lens.
+- Do NOT make them all agree.
+- LAZIMA uwe na angalau 2 masters wanaosema BUY au SELL (si HOLD wote).
+- Confidence ya kawaida: 55-80%.
+
+Example:
 {
   "master1": {"vote":"BUY","confidence":75,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
-  "master2": {"vote":"HOLD","confidence":55,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
-  "master3": {"vote":"BUY","confidence":70,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
+  "master2": {"vote":"SELL","confidence":60,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
+  "master3": {"vote":"BUY","confidence":65,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
   "master4": {"vote":"HOLD","confidence":50,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}
-}
-
-Each master must vote INDEPENDENTLY based on their specific lens. Do NOT make them all agree.
-Respond ONLY with valid JSON.`;
+}`;
 
   const parts = [{ type: 'text', text: combinedPrompt }];
   if (screenshots.h4) { parts.push({ type: 'text', text: '\n📸 H4 (BIAS):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h4.mimeType};base64,${screenshots.h4.base64}` } }); }
@@ -1410,14 +1457,13 @@ Respond ONLY with valid JSON.`;
 
   let result = null, provider = '', lastError = '';
 
-  // Jaribu Mistral kwanza
   if (mk) {
     for (const vm of [MISTRAL_VISION_MODEL, MISTRAL_VISION_FALLBACK]) {
       try {
         const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
-          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.2, max_tokens: 3000, response_format: { type: 'json_object' } })
+          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.3, max_tokens: 3000, response_format: { type: 'json_object' } })
         }, 120000);
         const rt = await r.text();
         let d; try { d = JSON.parse(rt); } catch (e) { lastError = `${vm} parse error`; continue; }
@@ -1429,7 +1475,6 @@ Respond ONLY with valid JSON.`;
     }
   }
 
-  // Fallback Gemini
   if (!result && gk) {
     try {
       const gp = [{ text: combinedPrompt }];
@@ -1439,7 +1484,7 @@ Respond ONLY with valid JSON.`;
       const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_VISION_MODEL}:generateContent?key=${gk}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
+        body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.3, responseMimeType: 'application/json' } })
       }, 90000);
       const d = await r.json();
       if (d.error) { lastError = `Gemini: ${d.error.message}`; }
@@ -1451,7 +1496,6 @@ Respond ONLY with valid JSON.`;
   }
 
   if (!result) return { error: lastError || 'Analysis failed' };
-
   return { result, provider };
 }
 
@@ -1542,9 +1586,6 @@ async function fetchOHLC(pair, tf, limit = 200, retries = 3) {
   return null;
 }
 
-// ═══════════════════════════════════════════════════════════
-// FETCH ALL MARKET DATA
-// ═══════════════════════════════════════════════════════════
 async function fetchAllMarketData() {
   const pair = document.getElementById('selectedPair').value;
   const btn = document.getElementById('fetchDataBtn');
@@ -1584,7 +1625,7 @@ async function fetchAllMarketData() {
       if (inst.htfStructure) h += `<div>4H: <strong>${inst.htfStructure.trend}</strong></div>`;
       if (inst.ltfStructure) h += `<div>15M: <strong>${inst.ltfStructure.trend}</strong></div>`;
       if (inst.sar) h += `<div>📈 SAR: <strong style="color:${inst.sar.trend === 'BULLISH' ? 'var(--green)' : 'var(--red)'};">${inst.sar.trend}</strong> @ ${inst.sar.current.toFixed(2)}</div>`;
-      if (inst.killZone) h += `<div>⏰ ${inst.killZone.session}</div>`;
+      if (inst.killZone) h += `<div>⏰ ${inst.killZone.session} (${inst.killZone.quality})</div>`;
       c.innerHTML = h;
     }
 
@@ -1675,7 +1716,8 @@ async function runAnalysis() {
     signalColor: conf.action === 'BUY' ? 'buy' : conf.action === 'SELL' ? 'sell' : 'wait',
     confluenceScore: conf.confidence,
     isOverride: conf.isOverride || false,
-    overrideReason: conf.isOverride ? conf.reason : null,
+    isTieBreaker: conf.isTieBreaker || false,
+    overrideReason: conf.reason,
     institutionalScore: inst?.biasScore?.score || 0,
     institutionalBias: inst?.biasScore?.bias || 'NEUTRAL',
     entry: sltp.entry, sl: sltp.sl, tp1: sltp.tp1, tp2: sltp.tp2, tp3: sltp.tp3,
@@ -1703,7 +1745,7 @@ async function runAnalysis() {
 // RENDER LIVE RESULTS
 // ═══════════════════════════════════════════════════════════
 function renderLiveResults(record, spec) {
-  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence, inst, isOverride } = record;
+  const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence, inst, isOverride, isTieBreaker } = record;
   const slPips = record.slPips || 0;
   const tp1Pips = record.tp1Pips || 0, tp2Pips = record.tp2Pips || 0, tp3Pips = record.tp3Pips || 0;
   const rrr = slPips > 0 ? (tp3Pips / slPips).toFixed(2) : '—';
@@ -1716,6 +1758,7 @@ function renderLiveResults(record, spec) {
   let html = `<div class="signal-hero ${signalColor}">
     <div style="font-size:13px;color:var(--accent);font-weight:bold;">${pair}</div>
     ${isOverride ? `<div class="badge-override">⚡ HIGH-CONFIDENCE OVERRIDE</div>` : ''}
+    ${isTieBreaker ? `<div class="badge-tiebreak">🎯 TIE-BREAKER (2-2 Split)</div>` : ''}
     <div class="signal-label" style="color:${signalTextColor};">${strength.label}</div>
     <div class="signal-hint">${strength.hint} <span class="voice-indicator">🔊</span></div>
     <div class="signal-badge-container">
@@ -1725,11 +1768,10 @@ function renderLiveResults(record, spec) {
     </div>
   </div>`;
 
-  if (isOverride && record.overrideReason) {
+  if (record.overrideReason && action !== 'HOLD') {
     html += `<div class="fallback-box">
-      <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ HIGH-CONFIDENCE OVERRIDE</div>
+      <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ SABABU YA SIGNAL</div>
       <div style="font-size:12px;">${record.overrideReason}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px;">Master mmoja alikuwa na uhakika mkubwa (≥85%) — amepitishwa moja kwa moja.</div>
     </div>`;
   }
 
@@ -1867,9 +1909,9 @@ function updateSSModeInfo() {
   const mode = document.getElementById('ssMode').value;
   const info = document.getElementById('ssModeInfo');
   if (mode === 'combined') {
-    info.innerHTML = '⚡ <strong>Combined:</strong> API 1 tu — haraka, inapunguza matumizi ya API kwa 75%. Inashauriwa kwa Gemini free tier.';
+    info.innerHTML = '⚡ <strong>Combined:</strong> API 1 tu — haraka, inapunguza matumizi ya API kwa 75%. Inashauriwa.';
   } else {
-    info.innerHTML = '🔍 <strong>Separate:</strong> API 4 (moja kwa master) — polepole zaidi, uchambuzi wa kina kwa kila master. Inaweza kukataliwa kwa rate limit.';
+    info.innerHTML = '🔍 <strong>Separate:</strong> API 4 (moja kwa master) — polepole zaidi, uchambuzi wa kina.';
   }
 }
 
@@ -1887,13 +1929,15 @@ function clearAllScreenshots() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// SEPARATE MODE — API call per master
+// SEPARATE MODE
 // ═══════════════════════════════════════════════════════════
 async function analyzeWithMasterVision(master, screenshots, pair, lp) {
   const mk = getMistralKey(), gk = getGeminiKey();
   if (!mk && !gk) return { error: 'No API key', masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight, vote: 'HOLD', confidence: 0, provider: 'Failed' };
 
-  const parts = [{ type: 'text', text: master.lens + `\n\n=== SCREENSHOTS ===\nPAIR: ${pair} | Price: ${lp}\n\nAnalyze ALL: H4 (BIAS), H1 (TREND), M15 (ENTRY). Give ONE overall vote.\n\n` }];
+  const directionHint = `\n\n═══ MUHIMU ═══\nLAZIMA uchague BUY au SELL kama kuna dalili. HOLD tu kama confidence < 50%.\n`;
+
+  const parts = [{ type: 'text', text: master.lens + directionHint + `\n=== SCREENSHOTS ===\nPAIR: ${pair} | Price: ${lp}\n\nAnalyze ALL: H4 (BIAS), H1 (TREND), M15 (ENTRY). Give ONE overall vote.\n\n` }];
   if (screenshots.h4) { parts.push({ type: 'text', text: '\n📸 H4 (BIAS):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h4.mimeType};base64,${screenshots.h4.base64}` } }); }
   if (screenshots.h1) { parts.push({ type: 'text', text: '\n📸 H1 (TREND):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h1.mimeType};base64,${screenshots.h1.base64}` } }); }
   if (screenshots.m15) { parts.push({ type: 'text', text: '\n📸 M15 (ENTRY):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.m15.mimeType};base64,${screenshots.m15.base64}` } }); }
@@ -1905,7 +1949,7 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
         const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
-          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.2, max_tokens: 2500, response_format: { type: 'json_object' } })
+          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.3, max_tokens: 2500, response_format: { type: 'json_object' } })
         }, 120000);
         const rt = await r.text();
         let d; try { d = JSON.parse(rt); } catch (e) { lastError = `${vm} parse error`; continue; }
@@ -1913,19 +1957,19 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
         if (!d.choices?.[0]?.message?.content) { lastError = `${vm} empty`; continue; }
         const pr = safeJsonParse(d.choices[0].message.content.trim());
         if (pr) { result = pr; provider = vm; break; }
-      } catch (e) { lastError = `Mistral ${vm}: ${e.message}`; console.warn(lastError); }
+      } catch (e) { lastError = `Mistral ${vm}: ${e.message}`; }
     }
   }
   if (!result && gk) {
     try {
-      const gp = [{ text: master.lens + `\n\nPAIR: ${pair} | Price: ${lp}\nAnalyze ALL (H4=BIAS, H1=TREND, M15=ENTRY). One vote.` }];
+      const gp = [{ text: master.lens + directionHint + `\n\nPAIR: ${pair} | Price: ${lp}\nAnalyze ALL (H4=BIAS, H1=TREND, M15=ENTRY). One vote.` }];
       if (screenshots.h4) { gp.push({ text: '\nH4:' }); gp.push({ inline_data: { mime_type: screenshots.h4.mimeType, data: screenshots.h4.base64 } }); }
       if (screenshots.h1) { gp.push({ text: '\nH1:' }); gp.push({ inline_data: { mime_type: screenshots.h1.mimeType, data: screenshots.h1.base64 } }); }
       if (screenshots.m15) { gp.push({ text: '\nM15:' }); gp.push({ inline_data: { mime_type: screenshots.m15.mimeType, data: screenshots.m15.base64 } }); }
       const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_VISION_MODEL}:generateContent?key=${gk}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
+        body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.3, responseMimeType: 'application/json' } })
       }, 90000);
       const d = await r.json();
       if (d.error) { lastError = `Gemini: ${d.error.message}`; }
@@ -1933,7 +1977,7 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
         const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
         if (pr) { result = pr; provider = 'Gemini Vision'; }
       }
-    } catch (e) { lastError = `Gemini: ${e.message}`; console.warn(lastError); }
+    } catch (e) { lastError = `Gemini: ${e.message}`; }
   }
 
   if (!result) return {
@@ -1960,11 +2004,11 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// ANALYZE ALL SCREENSHOTS (Main entry)
+// ANALYZE ALL SCREENSHOTS
 // ═══════════════════════════════════════════════════════════
 async function analyzeAllScreenshots() {
   const mk = getMistralKey(), gk = getGeminiKey();
-  if (!mk && !gk) { alert('Weka API key angalau moja (Mistral AU Gemini).'); return; }
+  if (!mk && !gk) { alert('Weka API key angalau moja.'); return; }
   const uc = Object.values(uploadedScreenshots).filter(x => x !== null).length;
   if (uc === 0) { alert('Upload angalau screenshot 1.'); return; }
 
@@ -1991,7 +2035,6 @@ async function analyzeAllScreenshots() {
 
   try {
     if (mode === 'combined') {
-      // ═══ COMBINED MODE — API 1 tu ═══
       progDiv.innerHTML = MASTERS_4.map(m =>
         `<div class="master-card pending"><div class="master-header"><div class="master-name">${m.icon} ${m.name}</div><div class="master-vote vote-pending">⏳</div></div></div>`
       ).join('');
@@ -2023,7 +2066,6 @@ async function analyzeAllScreenshots() {
         });
       }
 
-      // Update progress UI
       progDiv.innerHTML = '';
       masterResults.forEach(r => {
         const vc = r.vote === 'BUY' ? 'buy' : r.vote === 'SELL' ? 'sell' : 'hold';
@@ -2038,7 +2080,6 @@ async function analyzeAllScreenshots() {
       });
 
     } else {
-      // ═══ SEPARATE MODE — API 4 ═══
       for (const master of MASTERS_4) {
         progDiv.innerHTML += `<div class="master-card pending" id="prog-${master.id}">
           <div class="master-header"><div class="master-name">${master.icon} ${master.name}</div><div class="master-vote vote-pending" id="prog-v-${master.id}">⏳</div></div>
@@ -2090,6 +2131,7 @@ function renderSSResults(pair, lp, masterResults, spec) {
   let html = `<div class="mtf-confluence" style="background:linear-gradient(135deg,${mtfColor}22,${mtfColor}11);border:3px solid ${mtfColor};">
     <div style="font-size:11px;color:var(--muted);letter-spacing:2px;font-weight:bold;">🔗 MTF MASTERS CONFLUENCE</div>
     ${mtf.isOverride ? `<div class="badge-override">⚡ HIGH-CONFIDENCE OVERRIDE</div>` : ''}
+    ${mtf.isTieBreaker ? `<div class="badge-tiebreak">🎯 TIE-BREAKER (2-2 Split)</div>` : ''}
     <div style="font-size:52px;margin:10px 0;">${mtfIcon}</div>
     <div style="font-size:28px;font-weight:900;color:${mtfColor};letter-spacing:2px;">${mtf.action}</div>
     <div style="font-size:13px;color:var(--muted);margin-top:8px;">Confidence: <strong style="color:${mtfColor};">${mtf.confidence}%</strong></div>
@@ -2234,7 +2276,7 @@ function enterApp(name, g, m, t, a) {
   startAutoRefreshPrice();
   startAutoBacktest();
   warmUpVoice();
-  showToast(`Welcome ${name}! ⚡ v36.2`, 3000);
+  showToast(`Welcome ${name}! ⚡ v36.3`, 3000);
   setTimeout(() => {
     fetchLivePrice();
     setTimeout(() => speakText('Mfumo uko tayari. Karibu Lutynoel FX.'), 2500);
@@ -2305,9 +2347,6 @@ function navigate(view) {
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
 function goBack() { navigate('overview'); }
 
-// ═══════════════════════════════════════════════════════════
-// MODAL
-// ═══════════════════════════════════════════════════════════
 function openUniversalModal(html) {
   if (html) document.getElementById('modalInnerContent').innerHTML = html;
   document.getElementById('universalModal').classList.add('active');
@@ -2316,9 +2355,6 @@ function closeUniversalModal() {
   document.getElementById('universalModal').classList.remove('active');
 }
 
-// ═══════════════════════════════════════════════════════════
-// AUTO REFRESH PRICE
-// ═══════════════════════════════════════════════════════════
 function startAutoRefreshPrice() {
   if (window.__priceInt) clearInterval(window.__priceInt);
   window.__priceInt = setInterval(async () => {
@@ -2352,9 +2388,6 @@ function startAutoRefreshPrice() {
   }, PRICE_REFRESH_INTERVAL);
 }
 
-// ═══════════════════════════════════════════════════════════
-// ORDER FLOW
-// ═══════════════════════════════════════════════════════════
 async function refreshOrderFlow() {
   const c = document.getElementById('orderFlowContainer');
   const pair = document.getElementById('ofPair').value;
@@ -2391,9 +2424,6 @@ async function refreshOrderFlow() {
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// BACKTEST
-// ═══════════════════════════════════════════════════════════
 function refreshBacktest() {
   const c = document.getElementById('backtestContainer');
   const h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
@@ -2456,9 +2486,6 @@ function startAutoBacktest() {
   }, AUTO_CHECK_INTERVAL);
 }
 
-// ═══════════════════════════════════════════════════════════
-// RISK / PIPS CALC
-// ═══════════════════════════════════════════════════════════
 function calculateRisk() {
   const b = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const r = parseFloat(document.getElementById('riskPercent').value) || 1;
@@ -2492,9 +2519,6 @@ function calculatePips() {
   document.getElementById('pipsResultBox').innerHTML = `<div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:18px;margin-top:15px;"><div style="font-size:32px;font-weight:900;color:${isP ? 'var(--green)' : 'var(--red)'};text-align:center;">${isP ? '+' : '-'}${Math.abs(diff).toFixed(1)} PIPS</div><div style="text-align:center;font-size:22px;font-weight:bold;color:${isP ? 'var(--green)' : 'var(--red)'};">${isP ? '+' : '-'}$${usd.toFixed(2)}</div></div>`;
 }
 
-// ═══════════════════════════════════════════════════════════
-// JOURNAL / HISTORY
-// ═══════════════════════════════════════════════════════════
 function saveJournalTrade() {
   const t = { id: Date.now(), date: new Date().toLocaleString(), type: 'manual', pair: document.getElementById('jPair').value, action: document.getElementById('jAction').value, entry: parseFloat(document.getElementById('jEntry').value) || 0, lot: parseFloat(document.getElementById('jLot').value) || 0.01, sl: parseFloat(document.getElementById('jSL').value) || 0, tp: parseFloat(document.getElementById('jTP').value) || 0, outcome: document.getElementById('jOutcome').value };
   if (!t.entry) { showToast('⚠️ Weka entry price'); return; }
@@ -2520,6 +2544,7 @@ function loadHistory() {
       <div style="flex-grow:1;">
         <strong>${r.pair} <span style="color:${st.color};">${st.label}</span></strong> ${sb}
         ${r.isOverride ? '<span style="color:var(--accent);font-size:11px;"> ⚡ OVERRIDE</span>' : ''}
+        ${r.isTieBreaker ? '<span style="color:var(--cyan);font-size:11px;"> 🎯 TIE</span>' : ''}
         ${r.quality ? `<span style="color:var(--cyan);font-size:11px;"> • 🎯 ${r.quality}</span>` : ''}
         <br><small style="color:var(--muted);">${r.date || ''}</small>
       </div>
@@ -2558,24 +2583,18 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]'), version: "36.2", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]'), version: "36.3", exportedAt: new Date().toISOString() };
   const b = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(b);
-  a.download = `lutynoel-v36.2-${Date.now()}.json`;
+  a.download = `lutynoel-v36.3-${Date.now()}.json`;
   a.click();
 }
 
-// ═══════════════════════════════════════════════════════════
-// LIVE CHART
-// ═══════════════════════════════════════════════════════════
 function changeLiveChart(s) {
   document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${s}&interval=15&theme=dark&style=1`;
 }
 
-// ═══════════════════════════════════════════════════════════
-// TEST API KEYS
-// ═══════════════════════════════════════════════════════════
 async function testApiKeys() {
   const mk = getMistralKey(), gk = getGeminiKey();
   let results = [];
@@ -2613,9 +2632,6 @@ async function testApiKeys() {
     </div>`);
 }
 
-// ═══════════════════════════════════════════════════════════
-// NOTIFICATIONS
-// ═══════════════════════════════════════════════════════════
 function requestNotificationPermission() {
   if (!('Notification' in window)) { showToast('❌ Notifications hazitumiki'); return; }
   Notification.requestPermission().then(p => {
@@ -2624,11 +2640,7 @@ function requestNotificationPermission() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// DYNAMIC MANIFEST + SERVICE WORKER
-// ═══════════════════════════════════════════════════════════
 function setupPWA() {
-  // Generate manifest dynamic
   try {
     const manifest = {
       name: 'Lutynoel.fx Pro',
@@ -2658,35 +2670,24 @@ function setupPWA() {
     if (link) link.href = url;
   } catch (e) { console.warn('[PWA] Manifest generation failed:', e); }
 
-  // Register Service Worker (inline kwa kutumia Blob — inafanya kazi kwenye baadhi ya hosts)
   if ('serviceWorker' in navigator) {
-    // Kama una sw.js kwenye root ya host, register direct
     navigator.serviceWorker.register('sw.js')
       .then(reg => console.log('✅ SW registered:', reg.scope))
-      .catch(err => {
-        console.warn('[SW] sw.js not found, trying inline...', err.message);
-        // Fallback: hakuna SW
-      });
+      .catch(err => console.warn('[SW] sw.js not found (OK for single file):', err.message));
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('universalModal');
   if (modal) modal.addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
 
-  // Voice warmup
   document.body.addEventListener('click', function warmup() {
     warmUpVoice();
     document.body.removeEventListener('click', warmup);
   }, { once: true });
 
-  // PWA setup
   setupPWA();
 
-  // Auth check
   const k = loadKeys();
   if (k.name && (k.geminiKey || k.mistralKey)) {
     document.getElementById('returningUserSection').style.display = 'block';
