@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v37.1 — Honest Backtest</title>
+<title>Lutynoel.fx v37.2 — Honest Backtest</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -177,7 +177,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v37.1</div>
+    <div class="auth-title">Lutynoel.fx v37.2</div>
     <div class="auth-subtitle">Honest Backtest Edition</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
@@ -197,11 +197,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>TwelveData API Key (Forex/Gold/Indices — required)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v37.1:</strong> Backtest ya kweli (candles halisi, SL/TP, spread, R-multiple, sample size)<br>
+        ✅ <strong>v37.2:</strong> Backtest ya kweli (candles halisi, SL/TP, spread, R-multiple, sample size)<br>
         ✅ Bei na data zimehakikiwa kabla ya analysis<br>
         ✅ Override haipindui majority tena<br>
         ✅ Prompts hazilazimishi BUY/SELL<br>
-        ✅ <strong>Mistral Pixtral 12b</strong> + <strong>Gemini 3.6 Flash</strong>
+        ✅ <strong>Mistral NeMo 12B</strong> (text) + <strong>Pixtral 12B</strong> (vision) + <strong>Gemini 3.6 Flash</strong>
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -223,7 +223,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v37.1</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v37.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -245,7 +245,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div style="font-size:54px;">🏦</div>
           <div style="flex:1;">
             <div class="hero-title">LUTYNOEL.FX</div>
-            <div class="hero-sub">v37.1 • Honest Backtest Edition</div>
+            <div class="hero-sub">v37.2 • Honest Backtest Edition</div>
           </div>
         </div>
       </div>
@@ -502,7 +502,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.1 — Honest Backtest<br>
+          <strong>Version:</strong> v37.2 — Honest Backtest<br>
+          <strong>Mistral:</strong> NeMo 12B (text) + Pixtral 12B (vision)<br>
+          <strong>Gemini:</strong> 3.6 Flash (fallback: 2.5 Flash)<br>
           <strong>Override:</strong> Master ≥ 75% na hakuna upinzani mkubwa<br>
           <strong>Kumbuka:</strong> Masters 4 ni model moja inayopewa mitazamo 4 — si maoni huru.
         </div>
@@ -539,7 +541,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <label>Gemini models (text + vision)</label>
         <input type="text" id="settingsGeminiModels">
         <button class="secondary-btn" onclick="saveModels()">💾 Save Models</button>
-        <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset to Default (Pixtral 12b + Gemini 3.6)</button>
+        <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset (Mistral NeMo 12B + Pixtral 12B + Gemini 3.6)</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <div class="ballistic-header">🔑 API KEYS</div>
         <label>Mistral Key</label>
@@ -563,8 +565,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════
-   Lutynoel.fx v37.1 — Honest Backtest Edition
-   Mistral Pixtral 12b + Gemini 3.6 Flash
+   Lutynoel.fx v37.2 — Honest Backtest Edition
+   Mistral NeMo 12B + Pixtral 12B + Gemini 3.6 Flash
    ═══════════════════════════════════════════════════════════ */
 
 // ═════ CONSTANTS ═════
@@ -578,13 +580,13 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;          // 192 × M15 = masaa 48 ya soko
 const BT_FETCH_LIMIT = 600;          // ~6 siku za M15
 const TWELVE_GAP_MS = 7500;          // free plan ≈ 8 requests/dakika
-const MODELS_VERSION = 'v37.1';
+const MODELS_VERSION = 'v37.2';
 
-// ═════ DEFAULTS — Mistral Pixtral 12b + Gemini 3.6 Flash ═════
+// ═════ DEFAULTS — Mistral NeMo 12B + Pixtral 12B + Gemini 3.6 Flash ═════
 const DEFAULTS = {
-  geminiModels:  'gemini-3.6-flash,gemini-2.5-flash,gemini-flash-latest',
-  mistralModels: 'mistral-small-latest,mistral-medium-latest',
-  mistralVision: 'pixtral-12b-latest,pixtral-large-latest'
+  geminiModels:  'gemini-3.6-flash,gemini-2.5-flash',
+  mistralModels: 'mistral-nemo-latest',
+  mistralVision: 'pixtral-12b-latest'
 };
 
 const STORAGE_KEYS = {
@@ -614,7 +616,6 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-// Hakuna tena "hakikisha ni lazima uchague BUY/SELL". HOLD inaruhusiwa waziwazi.
 const CALIBRATION = `
 ═══ CALIBRATION (MUHIMU) ═══
 - Vote "HOLD" kama hakuna edge wazi kwenye lens yako. HOLD ni jibu halali na la kawaida.
@@ -676,7 +677,7 @@ function showToast(msg, duration = 3500) {
 
 function pipValueFor(pair, price) {
   const s = PAIR_SPECS[pair];
-  if (pair === 'USDJPY' && price > 0) return 1000 / price;   // 100000 × 0.01 JPY ÷ bei
+  if (pair === 'USDJPY' && price > 0) return 1000 / price;
   if (pair === 'USDCAD' && price > 0) return 10 / price;
   return s.pipValue;
 }
@@ -915,7 +916,7 @@ function detectFVG(o, lb = 60) {
   const d = o.slice(-lb), bull = [], bear = [];
   for (let i = 1; i < d.length - 1; i++) {
     const p = d[i - 1], n = d[i + 1];
-    if (n.low > p.high) {                       // gap ya bullish — puuza kama imejazwa kabisa
+    if (n.low > p.high) {
       let filled = false;
       for (let j = i + 2; j < d.length; j++) if (d[j].low <= p.high) { filled = true; break; }
       if (!filled) bull.push({ top: n.low, bottom: p.high });
@@ -968,7 +969,6 @@ function getKillZoneInfo() {
   for (const [name, s, e, q] of z) if (m >= s && m < e) return { session: name, quality: q, isActive: q === 'HIGH' || q === 'VERY_HIGH' };
   return { session: 'DEAD_ZONE', quality: 'VERY_LOW', isActive: false };
 }
-// ✅ Pivot ya SIKU ILIYOPITA (UTC), si candle ya saa moja
 function calculateSupportResistance(o) {
   if (!Array.isArray(o) || o.length < 30) return null;
   const day = t => Math.floor(t / 86400000), today = day(o.at(-1).time);
@@ -1038,7 +1038,6 @@ function getHTFBias(h4, h1) {
 }
 const algoDirection = inst => !inst?.biasScore ? null : inst.biasScore.score >= 57 ? 'BUY' : inst.biasScore.score <= 43 ? 'SELL' : null;
 
-// ✅ SL/TP kwa R-multiples (hakuna tena "daily target" inayopandisha TP)
 function calcLevels(action, lp, atr, spec, atrEstimated) {
   const isBuy = action === 'BUY';
   const slD = Math.max((atr || lp * 0.005) * getNum('SL_MULT', 1.2), lp * 0.002);
@@ -1050,7 +1049,6 @@ function calcLevels(action, lp, atr, spec, atrEstimated) {
     slPips: pips(slD), tp1Pips: pips(slD * m[0]), tp2Pips: pips(slD * m[1]), tp3Pips: pips(slD * m[2]), atrEstimated: !!atrEstimated
   };
 }
-// ✅ Quality inahesabu zones ZILIZO KARIBU na bei tu
 function gradeSetup(action, inst) {
   if (!inst || action === 'HOLD') return { q: '—', cc: 0 };
   const b = action === 'BUY';
@@ -1075,7 +1073,6 @@ function computeMastersConfluence(results) {
   const buys = dir.filter(r => r.vote === 'BUY'), sells = dir.filter(r => r.vote === 'SELL');
   const counts = { buyCount: buys.length, sellCount: sells.length, holdCount: holds.length, total: valid.length };
 
-  // RULE 1: override — lazima hakuna upinzani mkubwa
   const highConf = dir.filter(r => r.confidence >= 75);
   if (highConf.length) {
     const top = highConf.reduce((a, b) => a.confidence > b.confidence ? a : b);
@@ -1087,7 +1084,6 @@ function computeMastersConfluence(results) {
     }
   }
 
-  // RULE 2: 2+ wenye ≥55% — pande zote mbili zikiwa na 2+ → CONFLICT (hakuna upendeleo)
   const sB = buys.filter(r => r.confidence >= 55), sS = sells.filter(r => r.confidence >= 55);
   if (sB.length >= 2 && sS.length >= 2) return { ...counts, action: 'HOLD', confidence: 0, reason: 'Masters wamegawanyika 2-2 wenye nguvu — CONFLICT', isOverride: false };
   if (sS.length >= 2 && sS.length > sB.length) {
@@ -1099,7 +1095,6 @@ function computeMastersConfluence(results) {
     return { ...counts, action: 'BUY', confidence: Math.min(88, avg + 3), reason: `${sB.length} masters bullish (avg ${avg}%)`, isOverride: false };
   }
 
-  // RULE 2.5: tie-breaker (uhakika mdogo, umewekewa kikomo 70)
   if (buys.length && sells.length && Math.abs(buys.length - sells.length) <= 1) {
     const bA = buys.reduce((s, v) => s + v.confidence, 0) / buys.length, sA = sells.reduce((s, v) => s + v.confidence, 0) / sells.length;
     if (Math.abs(bA - sA) > 8) {
@@ -1109,7 +1104,6 @@ function computeMastersConfluence(results) {
     }
   }
 
-  // RULE 3: weighted
   let bW = 0, sW = 0, hW = 0;
   valid.forEach(r => {
     const w = r.masterWeight * (r.confidence / 100);
@@ -1175,7 +1169,6 @@ async function callGemini(models, parts, timeout) {
 }
 async function callLLM({ prompt, images, vision, maxTokens, timeout }) {
   let errs = [];
-  // Mistral
   let content = prompt, messages;
   if (images && images.length) {
     content = [{ type: 'text', text: prompt }];
@@ -1185,7 +1178,6 @@ async function callLLM({ prompt, images, vision, maxTokens, timeout }) {
   let r = await callMistral(getList(vision ? 'MISTRAL_VISION' : 'MISTRAL_MODELS', vision ? DEFAULTS.mistralVision : DEFAULTS.mistralModels), messages, maxTokens, timeout);
   if (r.result) return r;
   if (r.err) errs.push(r.err);
-  // Gemini
   const parts = [{ text: prompt }];
   (images || []).forEach(im => { parts.push({ text: `\n${im.label}:` }); parts.push({ inline_data: { mime_type: im.mimeType, data: im.base64 } }); });
   r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, timeout);
@@ -1339,7 +1331,6 @@ function saveHist(h) {
   }
   return false;
 }
-// ✅ History inajirefresh yenyewe kama view ipo wazi
 function saveToHistory(r) {
   const h = loadHist();
   h.unshift(r);
@@ -1568,7 +1559,6 @@ async function analyzeAllScreenshots() {
         if (m.id < 4) await sleep(2500);
       }
     }
-    // ATR halisi kutoka H1 (kama data ipo), vinginevyo kadiria na uweke alama
     let h1 = null; try { h1 = await fetchOHLC(pair, '1h', 100); } catch (e) {}
     const atr = h1 && h1.length > 20 ? calculateATR(h1.map(d => d.high), h1.map(d => d.low), h1.map(d => d.close), 14) : null;
     const conf = computeMastersConfluence(results);
@@ -1584,12 +1574,7 @@ async function analyzeAllScreenshots() {
   } finally { btn.disabled = false; btn.innerHTML = '🔍 ANALYZE'; }
 }
 
-// ═══════════════════════════════════════════════════════════
-// ✅ BACKTEST YA KWELI
-// Mbinu: candles halisi za M15 baada ya wakati wa signal. Kila exit model (TP1/TP2/TP3)
-// inapimwa kivyake. Spread inapunguza entry. Candle ikigusa SL na TP kwa pamoja → LOSS.
-// Haitegemei app kuwa wazi — inatumia historia ya candles.
-// ═══════════════════════════════════════════════════════════
+// ═════ BACKTEST YA KWELI ═════
 function evalRecord(rec, candles) {
   const spec = PAIR_SPECS[rec.pair];
   if (!candles || !candles.length) return null;
@@ -1694,7 +1679,6 @@ function renderBacktest() {
   else if (s.n >= 100 && (s.avgR <= 0 || s.ci[1] < s.be)) { verdict = `❌ <strong>Hakuna edge iliyothibitishwa.</strong> Wastani wa R ni ${s.avgR.toFixed(2)} baada ya spread. Usiweke pesa halisi kwa mfumo huu kama ulivyo.`; vcol = 'var(--red)'; }
   else { verdict = `🟡 <strong>Haijathibitika (n=${s.n}).</strong> Win rate ${pct(s.wr)} (95% CI ${pct(s.ci[0])}–${pct(s.ci[1])}) dhidi ya break-even ${pct(s.be)}. Endelea kukusanya data hadi 100+.`; vcol = 'var(--yellow)'; }
 
-  // equity curve
   const ordered = s.items.slice().sort((a, b) => a.r.ts - b.r.ts);
   let cum = 0; const pts = [0]; ordered.forEach(x => { cum += x.mm.r; pts.push(cum); });
   const mn = Math.min(...pts), mx = Math.max(...pts), W = 300, H = 70, span = (mx - mn) || 1;
@@ -1796,7 +1780,6 @@ function saveJournalTrade() {
 }
 
 // ═════ HISTORY UI ═════
-// ✅ Imeimarishwa: try/catch + ujumbe bora wa empty state
 function loadHistory() {
   const c = $('historyList');
   if (!c) { console.error('[history] container haipo'); return; }
@@ -1857,10 +1840,10 @@ function updateStats() {
   } catch (e) { console.error('[updateStats]', e); }
 }
 function exportData() {
-  const d = { history: loadHist(), version: '37.1', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), version: '37.2', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v37.1-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v37.2-${Date.now()}.json`; a.click();
 }
 
 // ═════ AUTH / SETTINGS ═════
@@ -1880,42 +1863,31 @@ function continueWithSavedKeys() {
   if (!k.name || (!k.geminiKey && !k.mistralKey)) { showLoginForm(); return; }
   enterApp(k.name);
 }
-// ═════ MIGRATION ya models + UI setup ═════
+// ═════ MIGRATION ya models ═════
 function migrateModelsIfNeeded() {
   if (store.get(STORAGE_KEYS.MODELS_VERSION) === MODELS_VERSION) return;
   try {
-    // Mistral vision: ongeza pixtral-12b-latest mwanzoni bila kufuta zilizopo
-    const curV = getList('MISTRAL_VISION', DEFAULTS.mistralVision);
-    if (!curV.includes('pixtral-12b-latest')) {
-      store.set(STORAGE_KEYS.MISTRAL_VISION, ['pixtral-12b-latest', ...curV].join(','));
-    }
-    // Gemini: ongeza gemini-3.6-flash mwanzoni bila kufuta zilizopo
-    const curG = getList('GEMINI_MODELS', DEFAULTS.geminiModels);
-    if (!curG.includes('gemini-3.6-flash')) {
-      store.set(STORAGE_KEYS.GEMINI_MODELS, ['gemini-3.6-flash', ...curG].join(','));
-    }
-    // Mistral text: hakikisha models zilizopo bado ziko
-    const curT = getList('MISTRAL_MODELS', DEFAULTS.mistralModels);
-    if (!curT.length) store.set(STORAGE_KEYS.MISTRAL_MODELS, DEFAULTS.mistralModels.join(','));
+    store.set(STORAGE_KEYS.MISTRAL_MODELS, 'mistral-nemo-latest');
+    store.set(STORAGE_KEYS.MISTRAL_VISION, 'pixtral-12b-latest');
+    store.set(STORAGE_KEYS.GEMINI_MODELS,  'gemini-3.6-flash,gemini-2.5-flash');
     store.set(STORAGE_KEYS.MODELS_VERSION, MODELS_VERSION);
   } catch (e) { console.error('[migrateModels]', e); }
 }
 function resetModelsToDefault() {
-  store.set(STORAGE_KEYS.MISTRAL_VISION, DEFAULTS.mistralVision.join(','));
-  store.set(STORAGE_KEYS.GEMINI_MODELS, DEFAULTS.geminiModels.join(','));
-  store.set(STORAGE_KEYS.MISTRAL_MODELS, DEFAULTS.mistralModels.join(','));
+  store.set(STORAGE_KEYS.MISTRAL_MODELS, 'mistral-nemo-latest');
+  store.set(STORAGE_KEYS.MISTRAL_VISION, 'pixtral-12b-latest');
+  store.set(STORAGE_KEYS.GEMINI_MODELS,  'gemini-3.6-flash,gemini-2.5-flash');
   store.set(STORAGE_KEYS.MODELS_VERSION, MODELS_VERSION);
-  $('settingsMistralVision').value = DEFAULTS.mistralVision.join(',');
-  $('settingsGeminiModels').value = DEFAULTS.geminiModels.join(',');
-  $('settingsMistralModels').value = DEFAULTS.mistralModels.join(',');
-  showToast('✅ Models zimerudishwa default (Pixtral 12b + Gemini 3.6)');
+  $('settingsMistralModels').value = 'mistral-nemo-latest';
+  $('settingsMistralVision').value = 'pixtral-12b-latest';
+  $('settingsGeminiModels').value  = 'gemini-3.6-flash,gemini-2.5-flash';
+  showToast('✅ Mistral NeMo 12B + Pixtral 12B + Gemini 3.6');
 }
 
 function enterApp(name) {
   $('authScreen').style.display = 'none'; $('appInterface').style.display = 'block';
   $('displayUserName').innerText = name.toUpperCase().substring(0, 12);
 
-  // ✅ Migration ya models (Mistral Pixtral 12b + Gemini 3.6 Flash)
   migrateModelsIfNeeded();
 
   $('settingsGeminiKey').value = getGeminiKey() || ''; 
@@ -1978,7 +1950,6 @@ function clearAllKeys() {
 }
 
 // ═════ NAVIGATION ═════
-// ✅ Imeimarishwa: try/catch ili view moja ikifeli isivunje nzima
 function navigate(view) {
   try {
     document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -2010,7 +1981,6 @@ function startAutoRefreshPrice() {
     if (document.hidden) return;
     const aV = $('view-analyst').style.display !== 'none', sV = $('view-screenshot').style.display !== 'none';
     if (!aV && !sV) return;
-    // Usiandike juu ya bei ambayo mtumiaji ameandika kwa mkono
     if (aV && priceMeta?.manual) return;
     const pair = sV ? $('ssPair').value : $('selectedPair').value, spec = PAIR_SPECS[pair];
     try {
@@ -2030,7 +2000,7 @@ async function testApiKeys() {
       const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/models`, { headers: { Authorization: `Bearer ${mk}` } }, 20000);
       const d = await r.json();
       if (!r.ok) out.push(`❌ Mistral: ${esc(d.message || d.error?.message || r.status)}`);
-      else out.push(`✅ Mistral OK<br><small style="color:var(--muted);">${esc((d.data || []).map(m => m.id).filter(id => /small|medium|large|pixtral/.test(id)).slice(0, 14).join(', '))}</small>`);
+      else out.push(`✅ Mistral OK<br><small style="color:var(--muted);">${esc((d.data || []).map(m => m.id).filter(id => /nemo|small|medium|large|pixtral/.test(id)).slice(0, 14).join(', '))}</small>`);
     } catch (e) { out.push(`❌ Mistral: ${esc(e.message)}`); }
   } else out.push('⚪ Mistral: No key');
   if (gk) {
@@ -2064,7 +2034,6 @@ window.addEventListener('DOMContentLoaded', () => {
   $('universalModal').addEventListener('click', e => { if (e.target.id === 'universalModal') closeUniversalModal(); });
   document.body.addEventListener('click', () => warmUpVoice(), { once: true });
   setupPWA();
-  // ✅ Migration ifanyike mapema hata kama mtumiaji bado hajaingia
   migrateModelsIfNeeded();
   const k = loadKeys();
   if (k.name && (k.geminiKey || k.mistralKey)) {
