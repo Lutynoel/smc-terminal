@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutynoel.fx v36.1 — Real Masters Full</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lutynoel.fx v36.2 — Real Masters Full</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#09090b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Lutynoel.fx Pro">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
 :root{--bg:#09090b;--card:#121215;--border:#222228;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15;--cyan:#06b6d4;--pink:#ec4899;--inst:#8b5cf6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px;min-height:100%}
 .auth-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
 .auth-box{background:var(--card);border:1px solid var(--border);padding:25px;border-radius:14px;width:100%;max-width:460px}
 .auth-title{text-align:center;font-size:22px;font-weight:bold;margin-bottom:5px}
@@ -106,7 +107,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .success-box{background:rgba(16,185,129,.1);border:1px solid var(--green);color:#6ee7b7;padding:10px 12px;border-radius:8px;font-size:11px;line-height:1.5;margin-bottom:12px}
 .fallback-box{background:linear-gradient(135deg,rgba(236,72,153,.15),rgba(251,191,36,.1));border:2px solid var(--pink);color:#fbcfe8;padding:12px;border-radius:8px;font-size:12px;line-height:1.6;margin-bottom:12px}
 .shield-box{background:rgba(168,85,247,.1);border:1px solid var(--purple);color:#d8b4fe;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;margin-bottom:12px}
-.toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:380px;margin:0 auto;background:var(--accent);color:#000;padding:12px 20px;border-radius:8px;z-index:9999;font-weight:bold;font-size:13px}
+.toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:380px;margin:0 auto;background:var(--accent);color:#000;padding:12px 20px;border-radius:8px;z-index:9999;font-weight:bold;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
 .spinner-white{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -178,18 +179,23 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tf-reasoning{font-size:11px;line-height:1.6;color:var(--muted);margin-top:6px}
 .mtf-confluence{border-radius:12px;padding:18px;text-align:center;margin-top:15px}
 .master-detail-card{background:#08080a;border-radius:10px;padding:14px;margin-bottom:10px;border-left:4px solid var(--muted)}
+.error-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px;border-radius:6px;font-size:11px;line-height:1.5;margin-top:6px}
 </style>
 </head>
 <body>
 
 <div id="universalModal" class="modal">
-  <div class="modal-content"><div id="modalInnerContent"></div></div>
+  <div class="modal-content">
+    <button class="modal-close-top" onclick="closeUniversalModal()">✕</button>
+    <div id="modalInnerContent"></div>
+    <button class="modal-close-bottom" onclick="closeUniversalModal()">Close</button>
+  </div>
 </div>
 
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v36.1</div>
+    <div class="auth-title">Lutynoel.fx v36.2</div>
     <div class="auth-subtitle">Real Masters + Override Logic</div>
 
     <div class="disclaimer-box">
@@ -214,11 +220,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>Alpha Vantage Key (Optional)</label>
       <input type="text" id="authAlphaKey" placeholder="Alpha Vantage key" autocomplete="off">
       <div class="info-box">
-        ⚡ <strong>v36.1 NEW:</strong><br>
-        🎯 High-Confidence Override<br>
+        ⚡ <strong>v36.2 NEW:</strong><br>
+        🎯 High-Confidence Override (≥85%)<br>
         📊 HOLD ina discount 50%<br>
         🎙️ Voice ya override<br>
-        ✅ 4 Real Masters + Vision
+        ✅ 4 Real Masters + Vision<br>
+        🔔 Push Notifications + PWA
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -240,7 +247,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v36.1</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v36.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -271,7 +278,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           </div>
           <div style="flex:1;">
             <div class="hero-title">LUTYNOEL.FX</div>
-            <div class="hero-sub">Override Logic • v36.1</div>
+            <div class="hero-sub">Override Logic • v36.2</div>
             <div class="hero-badges">
               <span style="background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent);">⚡ OVERRIDE</span>
               <span style="background:rgba(236,72,153,.15);color:var(--pink);border:1px solid var(--pink);">D&S+S/R</span>
@@ -297,13 +304,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="institutional-box">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">⚡ v36.1 — WHAT'S NEW</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">⚡ v36.2 — WHAT'S NEW</div>
         <div style="font-size:11px;line-height:1.9;">
-          ⚡ <strong>High-Confidence Override</strong> — Master mmoja ≥ 80% → override<br>
+          ⚡ <strong>High-Confidence Override</strong> — Master mmoja ≥ 85% → override<br>
           📊 <strong>HOLD Discount</strong> — HOLD ina uzito 50% tu<br>
           🎯 <strong>Directional Priority</strong> — BUY/SELL > HOLD<br>
           🎙️ <strong>Voice ya Override</strong> — Inatangaza override<br>
-          ✅ <strong>4 Masters wa kweli</strong> + Vision detections
+          ✅ <strong>4 Masters wa kweli</strong> + Vision detections<br>
+          🔔 <strong>Push Notifications</strong> — PWA installable
         </div>
       </div>
     </div>
@@ -354,8 +362,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <h3 style="margin:5px 0 15px;">📸 MTF Screenshot — 4 Real Masters</h3>
         <div class="info-box">
           📷 Upload <strong>screenshots 3 tofauti</strong>: M15 + H1 + H4<br>
-          <strong>Masters 4</strong> watazichambua kivyake. <strong>High-confidence override</strong> itatumika kama master mmoja ana ≥ 80%.
+          <strong>Masters 4</strong> watazichambua. <strong>Mode ya haraka</strong> inatuma picha mara MOJA kwa AI (inapunguza matumizi ya API kwa 75%).
         </div>
+
+        <label>Mode ya Uchambuzi</label>
+        <select id="ssMode" onchange="updateSSModeInfo()">
+          <option value="combined">⚡ Combined Mode (Inashauriwa — API 1)</option>
+          <option value="separate">🔍 Separate Mode (API 4 — slower, deep)</option>
+        </select>
+        <div id="ssModeInfo" class="info-box" style="font-size:10px;"></div>
 
         <label>1. Chagua Pair</label>
         <select id="ssPair">
@@ -532,9 +547,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v36.1 — High-Confidence Override<br>
+          <strong>Version:</strong> v36.2 — High-Confidence Override<br>
           <strong>Masters:</strong> D&S+S/R • Price Action • Structure • Fundamental<br>
-          <strong>Override:</strong> Master ≥ 80% → override moja kwa moja<br>
+          <strong>Override:</strong> Master ≥ 85% → override moja kwa moja<br>
           <strong>HOLD Discount:</strong> 50%<br>
           <strong>Vision:</strong> FVG/IFVG/Imbalance/Displacement/SAR
         </div>
@@ -546,6 +561,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </select>
         <button class="secondary-btn" onclick="testVoice()">🔊 Test Voice</button>
         <button class="secondary-btn" onclick="testStrongVoice()">🔥 Test Strong</button>
+        <button class="secondary-btn" onclick="requestNotificationPermission()">🔔 Enable Notifications</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <div class="ballistic-header">🎯 TRADING STYLE</div>
         <label>Daily Pips Target</label>
@@ -584,6 +600,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 </div>
 
 <script>
+/* ═══════════════════════════════════════════════════════════
+   Lutynoel.fx v36.2 — FIXED VERSION
+   ═══════════════════════════════════════════════════════════ */
+'use strict';
+
+// ═══════════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════════
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const GEMINI_MODELS = ['gemini-2.0-flash-exp', 'gemini-1.5-flash-latest'];
 const GEMINI_VISION_MODEL = 'gemini-2.0-flash-exp';
@@ -593,7 +617,6 @@ const MISTRAL_VISION_MODEL = 'pixtral-large-latest';
 const MISTRAL_VISION_FALLBACK = 'pixtral-12b-2409';
 const BINANCE_API = 'https://api.binance.com/api/v3';
 const TWELVEDATA_API = 'https://api.twelvedata.com';
-const ALPHAVANTAGE_API = 'https://www.alphavantage.co/query';
 const API_TIMEOUT = 120000;
 const AUTO_CHECK_INTERVAL = 60000;
 const PRICE_REFRESH_INTERVAL = 30000;
@@ -608,7 +631,8 @@ const STORAGE_KEYS = {
   RISK_PCT: 'lutynoel_riskPct',
   DAILY_TARGET: 'lutynoel_daily_target',
   TRADES_PER_DAY: 'lutynoel_trades_per_day',
-  VOICE_ENABLED: 'lutynoel_voice_enabled'
+  VOICE_ENABLED: 'lutynoel_voice_enabled',
+  HISTORY: 'lutynoel_history'
 };
 
 const PAIR_SPECS = {
@@ -644,10 +668,9 @@ ZONE GRADING: A+ = Fresh+strong+tight+HTF aligned | A = Tested 1x+strong | B = T
 
 SUPPORT/RESISTANCE:
 - Pivot points R1/R2/R3, S1/S2/S3
-- Round numbers = psychological S/R (4000, 2650, 100.00)
-- Role flip: broken Resistance → Support (vice versa)
+- Round numbers = psychological S/R
+- Role flip: broken Resistance → Support
 - Multiple wick rejections at same level = strong S/R
-- Fresh levels > retested 3+ times
 
 ═══ DECISION ═══
 - Bounce from Fresh Demand + HTF aligned → BUY (70-85%)
@@ -656,34 +679,29 @@ SUPPORT/RESISTANCE:
 - Break of 3x-tested level → continuation
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"S/R + D/S analysis","key_zones":"List zones with grades","nearest_obstacle":"Nearest S/R","chart_observations":"Overall","fvg_detected":"FVG? location","ifvg_detected":"IFVG?","imbalance_detected":"Imbalance?","displacement_detected":"Displacement?","parabolic_sar":"SAR above/below? recent flip?"}` },
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"S/R + D/S analysis","key_zones":"List zones","nearest_obstacle":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
   { id: 2, name: "Price Action Master", weight: 0.25, icon: "📊", color: "var(--green)",
     lens: `You are the PRICE ACTION MASTER — read CANDLES like a book.
 
-CANDLESTICK PATTERNS (with CONTEXT):
+PATTERNS:
 - Bullish Engulfing at Support → BUY
 - Bearish Engulfing at Resistance → SELL
-- Pin Bar/Hammer: long lower wick (2x+ body), closes top 1/3 = bullish reversal at support
-- Shooting Star/Inv. Hammer: long upper wick = bearish reversal at resistance
+- Pin Bar/Hammer: long lower wick, closes top 1/3 = bullish at support
+- Shooting Star: long upper wick = bearish at resistance
 - Inside Bar: consolidation; wait breakout
 - Morning/Evening Star = reversal
-- Three White Soldiers/Black Crows = momentum
-- Doji at extremes = powerful reversal signal
-- Tweezer Tops/Bottoms
+- Doji at extremes = reversal
 
 BODY-TO-WICK: >70% VERY STRONG | 50-70% Strong | 30-50% Weak | <30% Indecision
-CLOSE POSITION: top 1/3 of bullish = strong | bottom 1/3 = warning
-CONSECUTIVE: 3+ same-direction at S/R = exhaustion
 
 ═══ DECISION ═══
 - Bullish Engulfing at Support → BUY (65-80%)
 - Bearish Engulfing at Resistance → SELL (65-80%)
 - Pin Bar at key level → reversal (60-75%)
-- Doji at extreme → reversal (55-65%)
 - Inside bar → HOLD
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Candle analysis","patterns_detected":"List","last_3_candles":"Description","momentum":"Strong/Weak/Indecision","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Candle analysis","patterns_detected":"List","last_3_candles":"","momentum":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
   { id: 3, name: "Market Structure Master", weight: 0.25, icon: "🎯", color: "var(--cyan)",
     lens: `You are the MARKET STRUCTURE MASTER — map the skeleton.
 
@@ -692,34 +710,32 @@ TREND: UPTREND HH+HL | DOWNTREND LH+LL | RANGE failing HH/LL
 
 BOS: closed candle breaks prev swing → CONTINUATION
 CHoCH: breaks last LH/HL → FIRST reversal signal
-MSS: CHoCH + BOS = HIGH probability reversal (needs displacement)
-LIQUIDITY SWEEP: wick beyond swing then close back inside = STOP HUNT
+MSS: CHoCH + BOS = HIGH probability reversal
+LIQUIDITY SWEEP: wick beyond swing then close back inside
 MTF: H4=BIAS, H1=TREND, M15=ENTRY. All aligned = A+
 
 ═══ DECISION ═══
 - All 3 TF aligned → follow (75%+)
-- H4+H1 aligned, M15 ranging → HOLD
 - Clear MSS + displacement → reversal (70-85%)
 - Liquidity sweep → reversal entry (60-75%)
 
 Respond ONLY valid JSON:
-{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Structure","trend_htf":"H4","trend_mtf":"H1","trend_ltf":"M15","recent_bos":"BOS?","recent_choch":"CHoCH?","sweep_detected":"","mtf_aligned":"Yes/No","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
+{"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Structure","trend_htf":"","trend_mtf":"","trend_ltf":"","recent_bos":"","recent_choch":"","sweep_detected":"","mtf_aligned":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` },
   { id: 4, name: "Fundamental Analysis Master", weight: 0.22, icon: "🌍", color: "var(--purple)",
     lens: `You are the FUNDAMENTAL ANALYSIS MASTER — read SESSION, VOLATILITY.
 
 SESSIONS:
-- ASIAN (00:00-08:00 GMT): Low vol, range, accumulation
+- ASIAN (00:00-08:00 GMT): Low vol, range
 - LONDON OPEN (07:00-10:00 GMT): HIGH vol, kill zone
-- LONDON-NY OVERLAP (12:00-15:00 GMT): VERY HIGH, strongest
-- NY AFTERNOON (15:00-17:00): Moderate, exhaustion
+- LONDON-NY OVERLAP (12:00-15:00 GMT): VERY HIGH
+- NY AFTERNOON (15:00-17:00): Moderate
 - DEAD ZONE (17:00-00:00): Very low, avoid
 
-KILL ZONE QUALITY: London + NY = A+ | Asian = C | Dead zone = F
-VOLATILITY: Large candles = active | Small = dead | Spike = news
+KILL ZONE: London + NY = A+ | Asian = C | Dead zone = F
 RISK SENTIMENT: Gold up = risk-off | Gold down = risk-on
 
 ═══ DECISION ═══
-- Tight range + small candles = Asian → HOLD
+- Tight range = Asian → HOLD
 - Directional + expanding vol = London/NY → follow
 - Sudden spike = news → wait 3 candles
 
@@ -727,9 +743,13 @@ Respond ONLY valid JSON:
 {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"Session + vol","session_inferred":"","volatility":"","news_event_suspected":"","risk_sentiment":"","chart_observations":"","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}` }
 ];
 
+// ═══════════════════════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
-  t.className = 'toast'; t.innerText = msg;
+  t.className = 'toast';
+  t.innerText = msg;
   document.body.appendChild(t);
   setTimeout(() => t.remove(), duration);
 }
@@ -755,11 +775,16 @@ function getSignalStrength(action, confluenceScore, instBias) {
   return { label: '⏸ WAIT', color: 'var(--yellow)', strength: 'WAIT', emoji: '⏸', hint: 'Subiri' };
 }
 
+// ═══════════════════════════════════════════════════════════
+// VOICE
+// ═══════════════════════════════════════════════════════════
 function isVoiceEnabled() { return localStorage.getItem(STORAGE_KEYS.VOICE_ENABLED) !== 'false'; }
+
 function saveVoiceSetting() {
   localStorage.setItem(STORAGE_KEYS.VOICE_ENABLED, document.getElementById('settingsVoiceEnabled').value);
   showToast('✅ Saved');
 }
+
 function speakText(text, options = {}) {
   if (!isVoiceEnabled()) return;
   try {
@@ -774,8 +799,9 @@ function speakText(text, options = {}) {
     if (!v) v = voices.find(v => v.lang && v.lang.startsWith('en-GB')) || voices.find(v => v.lang && v.lang.startsWith('en'));
     if (v) { u.voice = v; if (!v.lang.startsWith('sw')) u.lang = 'sw-KE'; }
     window.speechSynthesis.speak(u);
-  } catch (e) {}
+  } catch (e) { console.warn('[Voice] Error:', e); }
 }
+
 function speakSignal(pair, action, confidence, livePrice) {
   const spec = PAIR_SPECS[pair];
   const ps = spec?.spoken || pair;
@@ -798,6 +824,20 @@ function speakOverrideSignal(pair, action, confidence, livePrice) {
 function testVoice() { speakText('Karibu Lutynoel FX. Mfumo uko tayari. Nunua dhahabu sasa, uhakika mkubwa asilimia themanini na tano.'); }
 function testStrongVoice() { speakText('Tahadhari. Uza dhahabu. Signal kali. Bei elfu nne mia mbili sitini na tatu. Uhakika asilimia themanini na tano. Ingia sasa, haraka.', { rate: 1.0, pitch: 1.1 }); }
 
+function warmUpVoice() {
+  if (!('speechSynthesis' in window)) return;
+  try {
+    const u = new SpeechSynthesisUtterance('');
+    u.volume = 0;
+    window.speechSynthesis.speak(u);
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  } catch (e) {}
+}
+
+// ═══════════════════════════════════════════════════════════
+// JSON PARSER
+// ═══════════════════════════════════════════════════════════
 function safeJsonParse(text) {
   if (!text) return null;
   let clean = text.replace(/```json/gi, '').replace(/```/g, '').trim();
@@ -831,6 +871,9 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   } catch (err) { clearTimeout(id); throw err; }
 }
 
+// ═══════════════════════════════════════════════════════════
+// TECHNICAL INDICATORS
+// ═══════════════════════════════════════════════════════════
 function calculateParabolicSAR(ohlcData, afStart = 0.02, afStep = 0.02, afMax = 0.2) {
   if (!Array.isArray(ohlcData) || ohlcData.length < 5) return null;
   let isUp = ohlcData[1].close >= ohlcData[0].close;
@@ -1123,7 +1166,7 @@ function calculateInstitutionalEntry(action, lp, inst, spec) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// 🎯 v36.1 — MASTERS CONFLUENCE (HIGH-CONFIDENCE OVERRIDE)
+// MASTERS CONFLUENCE
 // ═══════════════════════════════════════════════════════════
 function computeMastersConfluence(results) {
   const valid = results.filter(r => r.provider !== 'Failed' && !r.error);
@@ -1132,27 +1175,23 @@ function computeMastersConfluence(results) {
   const directional = valid.filter(r => r.vote === 'BUY' || r.vote === 'SELL');
   const holds = valid.filter(r => r.vote === 'HOLD');
 
-  // ═══ RULE 1: HIGH-CONFIDENCE OVERRIDE ═══
-  const highConf = directional.filter(r => r.confidence >= 80);
+  // ═══ RULE 1: HIGH-CONFIDENCE OVERRIDE (≥85%) ═══
+  const highConf = directional.filter(r => r.confidence >= 85);
   if (highConf.length > 0) {
     const strongest = highConf.reduce((a, b) => a.confidence > b.confidence ? a : b);
     const sameDir = directional.filter(v => v.vote === strongest.vote);
-    const sameDirHigh = sameDir.filter(v => v.confidence >= 70);
-
-    if (sameDirHigh.length >= 1) {
-      const avgConf = Math.round(sameDir.reduce((s, v) => s + v.confidence, 0) / sameDir.length);
-      const boosted = Math.min(95, avgConf + (sameDir.length - 1) * 5);
-      return {
-        action: strongest.vote,
-        confidence: boosted,
-        reason: `⚡ HIGH-CONFIDENCE OVERRIDE: ${strongest.masterName} = ${strongest.vote} ${strongest.confidence}%${sameDirHigh.length >= 2 ? ` (+${sameDirHigh.length - 1} masters)` : ''}`,
-        buyCount: strongest.vote === 'BUY' ? sameDir.length : 0,
-        sellCount: strongest.vote === 'SELL' ? sameDir.length : 0,
-        holdCount: holds.length,
-        total: valid.length,
-        isOverride: true
-      };
-    }
+    const avgConf = Math.round(sameDir.reduce((s, v) => s + v.confidence, 0) / sameDir.length);
+    const boosted = Math.min(95, avgConf + (sameDir.length - 1) * 5);
+    return {
+      action: strongest.vote,
+      confidence: boosted,
+      reason: `⚡ HIGH-CONFIDENCE OVERRIDE: ${strongest.masterName} = ${strongest.vote} ${strongest.confidence}%${sameDir.length > 1 ? ` (+${sameDir.length - 1} masters aligned)` : ''}`,
+      buyCount: strongest.vote === 'BUY' ? sameDir.length : 0,
+      sellCount: strongest.vote === 'SELL' ? sameDir.length : 0,
+      holdCount: holds.length,
+      total: valid.length,
+      isOverride: true
+    };
   }
 
   // ═══ RULE 2: 2+ DIRECTIONS ≥ 65% ═══
@@ -1184,8 +1223,7 @@ function computeMastersConfluence(results) {
 
   // ═══ RULE 3: WEIGHTED VOTE (HOLD discount 50%) ═══
   const HOLD_DISCOUNT = 0.5;
-  let bW = 0, sW = 0, hW = 0;
-  let bC = 0, sC = 0, hC = 0;
+  let bW = 0, sW = 0, hW = 0, bC = 0, sC = 0, hC = 0;
   valid.forEach(r => {
     const w = r.masterWeight * (r.confidence / 100);
     if (r.vote === 'BUY') { bW += w; bC++; }
@@ -1223,6 +1261,9 @@ function computeMastersConfluence(results) {
   return { action, confidence, reason, buyCount: bC, sellCount: sC, holdCount: hC, total: valid.length, isOverride: false };
 }
 
+// ═══════════════════════════════════════════════════════════
+// AI LIVE MASTER CALLS
+// ═══════════════════════════════════════════════════════════
 function buildLiveMasterPrompt(master, pair, lp, h4, h1, m15, inst, htfBias) {
   let p = `${master.lens}\n\nYOUR WEIGHT: ${(master.weight * 100).toFixed(0)}%\n\nPAIR: ${pair} | Current Price: ${lp}\n`;
   if (htfBias) p += `\nHTF: 4H=${htfBias.h4}, 1H=${htfBias.h1}, Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
@@ -1270,6 +1311,8 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
   const mk = getMistralKey(), gk = getGeminiKey();
   const p = buildLiveMasterPrompt(master, pair, lp, h4, h1, m15, inst, htfBias);
   let result = null, provider = '';
+  let lastError = '';
+
   if (mk) {
     for (const model of MISTRAL_MODELS) {
       try {
@@ -1279,12 +1322,12 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
           body: JSON.stringify({ model, messages: [{ role: 'system', content: 'Respond ONLY valid JSON.' }, { role: 'user', content: p }], temperature: 0.2, max_tokens: 2000, response_format: { type: 'json_object' } })
         }, 90000);
         const rt = await r.text();
-        let d; try { d = JSON.parse(rt); } catch (e) { continue; }
-        if (d.error) continue;
-        if (!d.choices?.[0]?.message?.content) continue;
+        let d; try { d = JSON.parse(rt); } catch (e) { lastError = `Mistral ${model} parse error`; console.warn(lastError); continue; }
+        if (d.error) { lastError = `Mistral: ${d.error.message || JSON.stringify(d.error)}`; console.warn(lastError); continue; }
+        if (!d.choices?.[0]?.message?.content) { lastError = `Mistral ${model} empty response`; continue; }
         const pr = safeJsonParse(d.choices[0].message.content.trim());
         if (pr) { result = pr; provider = 'Mistral'; break; }
-      } catch (e) {}
+      } catch (e) { lastError = `Mistral ${model}: ${e.message}`; console.warn(lastError); }
     }
   }
   if (!result && gk) {
@@ -1296,14 +1339,22 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
           body: JSON.stringify({ contents: [{ parts: [{ text: p }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
         }, 90000);
         const d = await r.json();
-        if (d.error) continue;
-        if (!d.candidates?.[0]) continue;
+        if (d.error) { lastError = `Gemini: ${d.error.message}`; console.warn(lastError); continue; }
+        if (!d.candidates?.[0]) { lastError = `Gemini ${model} empty`; continue; }
         const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
         if (pr) { result = pr; provider = 'Gemini'; break; }
-      } catch (e) {}
+      } catch (e) { lastError = `Gemini ${model}: ${e.message}`; console.warn(lastError); }
     }
   }
-  if (!result) return { masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight, vote: 'HOLD', confidence: 0, reasoning: 'Analysis failed', provider: 'Failed', fvgDetected: '', ifvgDetected: '', imbalanceDetected: '', displacementDetected: '', sarInfo: '' };
+
+  if (!result) {
+    return {
+      masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight,
+      vote: 'HOLD', confidence: 0, reasoning: `❌ Analysis failed: ${lastError || 'Unknown error'}`,
+      provider: 'Failed', fvgDetected: '', ifvgDetected: '', imbalanceDetected: '', displacementDetected: '', sarInfo: '',
+      error: lastError
+    };
+  }
 
   return {
     masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight,
@@ -1320,12 +1371,108 @@ async function callLiveMaster(master, pair, lp, h4, h1, m15, inst, htfBias) {
   };
 }
 
+// ═══════════════════════════════════════════════════════════
+// COMBINED MODE — API 1 tu kwa masters wote
+// ═══════════════════════════════════════════════════════════
+async function callAllMastersCombined(screenshots, pair, lp) {
+  const mk = getMistralKey(), gk = getGeminiKey();
+  if (!mk && !gk) return { error: 'No API key' };
+
+  const masterPrompts = MASTERS_4.map((m, i) =>
+    `═══ MASTER ${i + 1}: ${m.name} (${(m.weight*100).toFixed(0)}%) ═══\n${m.lens}`
+  ).join('\n\n');
+
+  const combinedPrompt = `You are 4 elite masters analyzing an MTF setup for ${pair} at price ${lp}.
+
+You MUST analyze and provide a SEPARATE vote from EACH of the 4 masters below. Each master is INDEPENDENT.
+
+${masterPrompts}
+
+═══ CRITICAL INSTRUCTIONS ═══
+Return ONLY valid JSON with exactly these keys: "master1", "master2", "master3", "master4".
+Each master's response must have: {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2-3 sentences explaining the analysis","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}
+
+Example format:
+{
+  "master1": {"vote":"BUY","confidence":75,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
+  "master2": {"vote":"HOLD","confidence":55,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
+  "master3": {"vote":"BUY","confidence":70,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""},
+  "master4": {"vote":"HOLD","confidence":50,"reasoning":"...","fvg_detected":"","ifvg_detected":"","imbalance_detected":"","displacement_detected":"","parabolic_sar":""}
+}
+
+Each master must vote INDEPENDENTLY based on their specific lens. Do NOT make them all agree.
+Respond ONLY with valid JSON.`;
+
+  const parts = [{ type: 'text', text: combinedPrompt }];
+  if (screenshots.h4) { parts.push({ type: 'text', text: '\n📸 H4 (BIAS):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h4.mimeType};base64,${screenshots.h4.base64}` } }); }
+  if (screenshots.h1) { parts.push({ type: 'text', text: '\n📸 H1 (TREND):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h1.mimeType};base64,${screenshots.h1.base64}` } }); }
+  if (screenshots.m15) { parts.push({ type: 'text', text: '\n📸 M15 (ENTRY):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.m15.mimeType};base64,${screenshots.m15.base64}` } }); }
+
+  let result = null, provider = '', lastError = '';
+
+  // Jaribu Mistral kwanza
+  if (mk) {
+    for (const vm of [MISTRAL_VISION_MODEL, MISTRAL_VISION_FALLBACK]) {
+      try {
+        const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
+          body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.2, max_tokens: 3000, response_format: { type: 'json_object' } })
+        }, 120000);
+        const rt = await r.text();
+        let d; try { d = JSON.parse(rt); } catch (e) { lastError = `${vm} parse error`; continue; }
+        if (d.error) { lastError = `Mistral: ${d.error.message}`; continue; }
+        if (!d.choices?.[0]?.message?.content) { lastError = `${vm} empty`; continue; }
+        const pr = safeJsonParse(d.choices[0].message.content.trim());
+        if (pr) { result = pr; provider = vm; break; }
+      } catch (e) { lastError = `Mistral ${vm}: ${e.message}`; console.warn(lastError); }
+    }
+  }
+
+  // Fallback Gemini
+  if (!result && gk) {
+    try {
+      const gp = [{ text: combinedPrompt }];
+      if (screenshots.h4) { gp.push({ text: '\nH4:' }); gp.push({ inline_data: { mime_type: screenshots.h4.mimeType, data: screenshots.h4.base64 } }); }
+      if (screenshots.h1) { gp.push({ text: '\nH1:' }); gp.push({ inline_data: { mime_type: screenshots.h1.mimeType, data: screenshots.h1.base64 } }); }
+      if (screenshots.m15) { gp.push({ text: '\nM15:' }); gp.push({ inline_data: { mime_type: screenshots.m15.mimeType, data: screenshots.m15.base64 } }); }
+      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${GEMINI_VISION_MODEL}:generateContent?key=${gk}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
+      }, 90000);
+      const d = await r.json();
+      if (d.error) { lastError = `Gemini: ${d.error.message}`; }
+      else if (d.candidates?.[0]) {
+        const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
+        if (pr) { result = pr; provider = 'Gemini Vision'; }
+      }
+    } catch (e) { lastError = `Gemini: ${e.message}`; }
+  }
+
+  if (!result) return { error: lastError || 'Analysis failed' };
+
+  return { result, provider };
+}
+
+// ═══════════════════════════════════════════════════════════
+// FETCH PRICE
+// ═══════════════════════════════════════════════════════════
 async function fetchLivePrice() {
   const pair = document.getElementById('selectedPair').value;
   const spec = PAIR_SPECS[pair];
   if (!spec) return;
+
   const btn = document.getElementById('refreshBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner-white"></span>';
+  const statusEl = document.getElementById('priceStatus');
+  const statusText = document.getElementById('priceStatusText');
+  const statusTime = document.getElementById('priceTime');
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-white"></span>';
+  statusEl.className = 'price-status loading';
+  statusText.innerHTML = '⏳ Fetching...';
+
   try {
     let price = null;
     if (spec.source === 'binance') {
@@ -1335,16 +1482,33 @@ async function fetchLivePrice() {
       const k = getTwelveKey();
       if (k) {
         const r = await fetchWithTimeout(`${TWELVEDATA_API}/price?symbol=${encodeURIComponent(spec.twelveSymbol)}&apikey=${k}`, {}, 10000);
-        if (r.ok) { const d = await r.json(); if (d.status !== 'error') price = parseFloat(d.price); }
+        if (r.ok) {
+          const d = await r.json();
+          if (d.status !== 'error') price = parseFloat(d.price);
+        }
       }
     }
+
     if (price > 0) {
       document.getElementById('livePrice').value = price.toFixed(spec.decimals);
       localStorage.setItem(`price_${pair}`, price.toString());
+      statusEl.className = 'price-status live';
+      statusText.innerHTML = `✅ LIVE: ${price.toFixed(spec.decimals)}`;
+      statusTime.innerText = new Date().toLocaleTimeString();
       showToast(`✅ ${price.toFixed(spec.decimals)}`, 2000);
+    } else {
+      statusEl.className = 'price-status error';
+      statusText.innerHTML = '❌ Failed (weka TwelveData key)';
+      statusTime.innerText = '—';
     }
-  } catch (e) {}
-  btn.disabled = false; btn.innerHTML = '🔄 Refresh';
+  } catch (e) {
+    statusEl.className = 'price-status error';
+    statusText.innerHTML = `❌ ${e.message}`;
+    console.error('[Price] Error:', e);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🔄 Refresh';
+  }
 }
 
 async function fetchOHLC(pair, tf, limit = 200, retries = 3) {
@@ -1369,27 +1533,36 @@ async function fetchOHLC(pair, tf, limit = 200, retries = 3) {
           }
         }
       }
-      throw new Error(`Failed`);
-    } catch (e) { if (a < retries - 1) await new Promise(r => setTimeout(r, 3000)); else return null; }
+      throw new Error(`Failed for ${pair} ${tf}`);
+    } catch (e) {
+      if (a < retries - 1) await new Promise(r => setTimeout(r, 3000));
+      else { console.warn(`[OHLC] ${pair} ${tf} failed:`, e.message); return null; }
+    }
   }
   return null;
 }
 
+// ═══════════════════════════════════════════════════════════
+// FETCH ALL MARKET DATA
+// ═══════════════════════════════════════════════════════════
 async function fetchAllMarketData() {
   const pair = document.getElementById('selectedPair').value;
   const btn = document.getElementById('fetchDataBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Fetching...';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Fetching...';
   try {
     document.getElementById('data4H').querySelector('span:last-child').innerText = '⏳';
     const h4 = await fetchOHLC(pair, '4h', 200);
     document.getElementById('data4H').className = `data-status-item ${h4 ? 'ok' : 'fail'}`;
     document.getElementById('data4H').querySelector('span:last-child').innerText = h4 ? `${h4.length} ✓` : 'FAIL';
     await new Promise(r => setTimeout(r, 800));
+
     document.getElementById('data1H').querySelector('span:last-child').innerText = '⏳';
     const h1 = await fetchOHLC(pair, '1h', 200);
     document.getElementById('data1H').className = `data-status-item ${h1 ? 'ok' : 'fail'}`;
     document.getElementById('data1H').querySelector('span:last-child').innerText = h1 ? `${h1.length} ✓` : 'FAIL';
     await new Promise(r => setTimeout(r, 800));
+
     document.getElementById('data15M').querySelector('span:last-child').innerText = '⏳';
     const m15 = await fetchOHLC(pair, '15m', 200);
     document.getElementById('data15M').className = `data-status-item ${m15 ? 'ok' : 'fail'}`;
@@ -1419,8 +1592,13 @@ async function fetchAllMarketData() {
       document.getElementById('runBtn').disabled = false;
       showToast('✅ Data ready');
     }
-  } catch (e) { showToast(`❌ ${e.message}`); }
-  finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
+  } catch (e) {
+    console.error('[FetchData] Error:', e);
+    showToast(`❌ ${e.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '📊 Fetch All Data';
+  }
 }
 
 function onPairChange(pair) {
@@ -1431,9 +1609,12 @@ function onPairChange(pair) {
   }
 }
 
+// ═══════════════════════════════════════════════════════════
+// RUN ANALYSIS (Live Data)
+// ═══════════════════════════════════════════════════════════
 async function runAnalysis() {
   const mk = getMistralKey(), gk = getGeminiKey();
-  if (!mk && !gk) { alert("Weka key."); return; }
+  if (!mk && !gk) { alert("Weka API key angalau moja (Mistral AU Gemini)."); return; }
   if (!window.marketData || !window.marketData.h1) { alert("Fetch data first."); return; }
 
   const pair = document.getElementById('selectedPair').value;
@@ -1443,7 +1624,8 @@ async function runAnalysis() {
   const htfBias = getHTFBias(h4, h1);
 
   const btn = document.getElementById('runBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> 4 Masters analyzing...';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 4 Masters analyzing...';
   speakText('Masters wanne wanaanza. Subiri kidogo.');
 
   const container = document.getElementById('resultsContainer');
@@ -1474,7 +1656,7 @@ async function runAnalysis() {
       document.getElementById(`live-desc-${master.id}`).innerHTML = r.reasoning;
       document.getElementById(`live-conf-${master.id}`).innerHTML = `Confidence: <strong style="color:var(--accent);">${r.confidence}%</strong> <span class="provider-badge provider-${r.provider === 'Mistral' ? 'mistral' : r.provider === 'Gemini' ? 'gemini' : 'failed'}">${r.provider}</span><div class="confidence-bar"><div class="confidence-fill" style="width:${r.confidence}%"></div></div>`;
     }
-    if (master.id < 4) await new Promise(r => setTimeout(r, 1500));
+    if (master.id < 4) await new Promise(r => setTimeout(r, 3000));
   }
 
   const conf = computeMastersConfluence(masterResults);
@@ -1513,9 +1695,13 @@ async function runAnalysis() {
   } else {
     speakText('Hakuna signal wazi. Subiri.');
   }
-  btn.disabled = false; btn.innerHTML = '🚀 RUN ANALYSIS';
+  btn.disabled = false;
+  btn.innerHTML = '🚀 RUN ANALYSIS';
 }
 
+// ═══════════════════════════════════════════════════════════
+// RENDER LIVE RESULTS
+// ═══════════════════════════════════════════════════════════
 function renderLiveResults(record, spec) {
   const { action, confluenceScore, entry, sl, tp1, tp2, tp3, pair, confluence, inst, isOverride } = record;
   const slPips = record.slPips || 0;
@@ -1543,7 +1729,7 @@ function renderLiveResults(record, spec) {
     html += `<div class="fallback-box">
       <div style="font-weight:bold;font-size:12px;margin-bottom:6px;">⚡ HIGH-CONFIDENCE OVERRIDE</div>
       <div style="font-size:12px;">${record.overrideReason}</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px;">Master mmoja alikuwa na uhakika mkubwa (≥80%) — amepitishwa moja kwa moja.</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px;">Master mmoja alikuwa na uhakika mkubwa (≥85%) — amepitishwa moja kwa moja.</div>
     </div>`;
   }
 
@@ -1630,6 +1816,7 @@ function renderLiveResults(record, spec) {
       ${(r.trendHtf || r.trendMtf || r.trendLtf) ? `<div class="tf-reasoning"><strong style="color:var(--cyan);">🎯 Trend:</strong> H4=${r.trendHtf || '?'} H1=${r.trendMtf || '?'} M15=${r.trendLtf || '?'}</div>` : ''}
       ${r.sessionInferred ? `<div class="tf-reasoning"><strong style="color:var(--purple);">⏰ Session:</strong> ${r.sessionInferred}</div>` : ''}
       ${db ? `<div style="margin-top:8px;">${db}</div>` : ''}
+      ${r.error ? `<div class="error-box">⚠️ ${r.error}</div>` : ''}
     </div>`;
   });
   html += `</div>`;
@@ -1637,6 +1824,9 @@ function renderLiveResults(record, spec) {
   document.getElementById('resultsContainer').innerHTML = html;
 }
 
+// ═══════════════════════════════════════════════════════════
+// SCREENSHOT UPLOADS
+// ═══════════════════════════════════════════════════════════
 let uploadedScreenshots = { m15: null, h1: null, h4: null };
 
 function setupScreenshotUploads() {
@@ -1673,6 +1863,16 @@ function updateSSUploadStatus() {
   if (b) b.disabled = c === 0;
 }
 
+function updateSSModeInfo() {
+  const mode = document.getElementById('ssMode').value;
+  const info = document.getElementById('ssModeInfo');
+  if (mode === 'combined') {
+    info.innerHTML = '⚡ <strong>Combined:</strong> API 1 tu — haraka, inapunguza matumizi ya API kwa 75%. Inashauriwa kwa Gemini free tier.';
+  } else {
+    info.innerHTML = '🔍 <strong>Separate:</strong> API 4 (moja kwa master) — polepole zaidi, uchambuzi wa kina kwa kila master. Inaweza kukataliwa kwa rate limit.';
+  }
+}
+
 function clearAllScreenshots() {
   uploadedScreenshots = { m15: null, h1: null, h4: null };
   ['m15','h1','h4'].forEach(tf => {
@@ -1686,16 +1886,19 @@ function clearAllScreenshots() {
   showToast('🗑️ Cleared');
 }
 
+// ═══════════════════════════════════════════════════════════
+// SEPARATE MODE — API call per master
+// ═══════════════════════════════════════════════════════════
 async function analyzeWithMasterVision(master, screenshots, pair, lp) {
   const mk = getMistralKey(), gk = getGeminiKey();
-  if (!mk && !gk) return { error: 'No API key' };
+  if (!mk && !gk) return { error: 'No API key', masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight, vote: 'HOLD', confidence: 0, provider: 'Failed' };
 
   const parts = [{ type: 'text', text: master.lens + `\n\n=== SCREENSHOTS ===\nPAIR: ${pair} | Price: ${lp}\n\nAnalyze ALL: H4 (BIAS), H1 (TREND), M15 (ENTRY). Give ONE overall vote.\n\n` }];
   if (screenshots.h4) { parts.push({ type: 'text', text: '\n📸 H4 (BIAS):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h4.mimeType};base64,${screenshots.h4.base64}` } }); }
   if (screenshots.h1) { parts.push({ type: 'text', text: '\n📸 H1 (TREND):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.h1.mimeType};base64,${screenshots.h1.base64}` } }); }
   if (screenshots.m15) { parts.push({ type: 'text', text: '\n📸 M15 (ENTRY):' }); parts.push({ type: 'image_url', image_url: { url: `data:${screenshots.m15.mimeType};base64,${screenshots.m15.base64}` } }); }
 
-  let result = null, provider = '';
+  let result = null, provider = '', lastError = '';
   if (mk) {
     for (const vm of [MISTRAL_VISION_MODEL, MISTRAL_VISION_FALLBACK]) {
       try {
@@ -1705,12 +1908,12 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
           body: JSON.stringify({ model: vm, messages: [{ role: 'user', content: parts }], temperature: 0.2, max_tokens: 2500, response_format: { type: 'json_object' } })
         }, 120000);
         const rt = await r.text();
-        let d; try { d = JSON.parse(rt); } catch (e) { continue; }
-        if (d.error) continue;
-        if (!d.choices?.[0]?.message?.content) continue;
+        let d; try { d = JSON.parse(rt); } catch (e) { lastError = `${vm} parse error`; continue; }
+        if (d.error) { lastError = `Mistral: ${d.error.message}`; continue; }
+        if (!d.choices?.[0]?.message?.content) { lastError = `${vm} empty`; continue; }
         const pr = safeJsonParse(d.choices[0].message.content.trim());
         if (pr) { result = pr; provider = vm; break; }
-      } catch (e) {}
+      } catch (e) { lastError = `Mistral ${vm}: ${e.message}`; console.warn(lastError); }
     }
   }
   if (!result && gk) {
@@ -1725,13 +1928,19 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
         body: JSON.stringify({ contents: [{ parts: gp }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
       }, 90000);
       const d = await r.json();
-      if (!d.error && d.candidates?.[0]) {
+      if (d.error) { lastError = `Gemini: ${d.error.message}`; }
+      else if (d.candidates?.[0]) {
         const pr = safeJsonParse(d.candidates[0].content.parts[0].text.trim().replace(/```json/g, '').replace(/```/g, '').trim());
         if (pr) { result = pr; provider = 'Gemini Vision'; }
       }
-    } catch (e) {}
+    } catch (e) { lastError = `Gemini: ${e.message}`; console.warn(lastError); }
   }
-  if (!result) return { error: 'Analysis failed' };
+
+  if (!result) return {
+    error: lastError || 'Analysis failed',
+    masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight,
+    vote: 'HOLD', confidence: 0, provider: 'Failed'
+  };
 
   return {
     masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight,
@@ -1750,60 +1959,129 @@ async function analyzeWithMasterVision(master, screenshots, pair, lp) {
   };
 }
 
+// ═══════════════════════════════════════════════════════════
+// ANALYZE ALL SCREENSHOTS (Main entry)
+// ═══════════════════════════════════════════════════════════
 async function analyzeAllScreenshots() {
   const mk = getMistralKey(), gk = getGeminiKey();
-  if (!mk && !gk) { alert('Weka key.'); return; }
+  if (!mk && !gk) { alert('Weka API key angalau moja (Mistral AU Gemini).'); return; }
   const uc = Object.values(uploadedScreenshots).filter(x => x !== null).length;
-  if (uc === 0) { alert('Upload screenshot.'); return; }
+  if (uc === 0) { alert('Upload angalau screenshot 1.'); return; }
 
   const pair = document.getElementById('ssPair').value;
   const lp = parseFloat(document.getElementById('ssLivePrice').value) || 2650;
   const spec = PAIR_SPECS[pair];
+  const mode = document.getElementById('ssMode').value;
 
   const btn = document.getElementById('analyzeSSBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> 4 Masters × Screenshots...';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Analyzing...';
   speakText('Masters wanne wanaanza. Subiri.');
 
   const container = document.getElementById('ssResultsContainer');
   container.style.display = 'block';
   container.innerHTML = `<div class="card" style="text-align:center;border-color:var(--inst);">
     <div class="ballistic-header" style="justify-content:center;">📸 ANALYZING MTF WITH 4 MASTERS</div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:15px;">D&S+S/R • Price Action • Structure • Fundamental</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:15px;">Mode: ${mode === 'combined' ? '⚡ Combined (API 1)' : '🔍 Separate (API 4)'}</div>
     <div id="ssProgress"></div>
   </div>`;
 
   const progDiv = document.getElementById('ssProgress');
-  const masterResults = [];
+  let masterResults = [];
 
-  for (const master of MASTERS_4) {
-    progDiv.innerHTML += `<div class="master-card pending" id="prog-${master.id}">
-      <div class="master-header"><div class="master-name">${master.icon} ${master.name}</div><div class="master-vote vote-pending" id="prog-v-${master.id}">⏳</div></div>
-    </div>`;
-    const r = await analyzeWithMasterVision(master, uploadedScreenshots, pair, lp);
-    masterResults.push(r);
-    const card = document.getElementById(`prog-${master.id}`);
-    const v = document.getElementById(`prog-v-${master.id}`);
-    if (!r.error && card) {
-      card.classList.remove('pending');
-      card.classList.add(r.vote.toLowerCase());
-      v.className = `master-vote vote-${r.vote.toLowerCase()}`;
-      v.innerText = `${r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸'} ${r.vote} • ${r.confidence}%`;
-    } else if (v) { v.className = 'master-vote vote-failed'; v.innerText = '❌ Failed'; }
-    if (master.id < 4) await new Promise(r => setTimeout(r, 1500));
+  try {
+    if (mode === 'combined') {
+      // ═══ COMBINED MODE — API 1 tu ═══
+      progDiv.innerHTML = MASTERS_4.map(m =>
+        `<div class="master-card pending"><div class="master-header"><div class="master-name">${m.icon} ${m.name}</div><div class="master-vote vote-pending">⏳</div></div></div>`
+      ).join('');
+
+      const res = await callAllMastersCombined(uploadedScreenshots, pair, lp);
+
+      if (res.error) {
+        masterResults = MASTERS_4.map(m => ({
+          masterId: m.id, masterName: m.name, masterIcon: m.icon, masterColor: m.color, masterWeight: m.weight,
+          vote: 'HOLD', confidence: 0, reasoning: `❌ ${res.error}`, provider: 'Failed', error: res.error
+        }));
+      } else {
+        masterResults = MASTERS_4.map((master, i) => {
+          const key = `master${i + 1}`;
+          const r = res.result[key] || res.result.masters?.[i] || res.result[`master_${i + 1}`] || {};
+          return {
+            masterId: master.id, masterName: master.name, masterIcon: master.icon, masterColor: master.color, masterWeight: master.weight,
+            vote: (r.vote || 'HOLD').toUpperCase(),
+            confidence: Math.max(0, Math.min(100, parseInt(r.confidence) || 50)),
+            reasoning: r.reasoning || 'No analysis returned.',
+            keyZones: r.key_zones || '', patternsDetected: r.patterns_detected || '',
+            trendHtf: r.trend_htf || '', trendMtf: r.trend_mtf || '', trendLtf: r.trend_ltf || '',
+            recentBos: r.recent_bos || '', recentChoch: r.recent_choch || '',
+            sessionInferred: r.session_inferred || '', volatility: r.volatility || '',
+            fvgDetected: r.fvg_detected || '', ifvgDetected: r.ifvg_detected || '',
+            imbalanceDetected: r.imbalance_detected || '', displacementDetected: r.displacement_detected || '',
+            sarInfo: r.parabolic_sar || '', provider: res.provider
+          };
+        });
+      }
+
+      // Update progress UI
+      progDiv.innerHTML = '';
+      masterResults.forEach(r => {
+        const vc = r.vote === 'BUY' ? 'buy' : r.vote === 'SELL' ? 'sell' : 'hold';
+        const vi = r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸';
+        progDiv.innerHTML += `<div class="master-card ${vc}">
+          <div class="master-header">
+            <div class="master-name">${r.masterIcon} ${r.masterName}</div>
+            <div class="master-vote vote-${vc}">${vi} ${r.vote} • ${r.confidence}%</div>
+          </div>
+          <div class="master-desc">${r.reasoning}</div>
+        </div>`;
+      });
+
+    } else {
+      // ═══ SEPARATE MODE — API 4 ═══
+      for (const master of MASTERS_4) {
+        progDiv.innerHTML += `<div class="master-card pending" id="prog-${master.id}">
+          <div class="master-header"><div class="master-name">${master.icon} ${master.name}</div><div class="master-vote vote-pending" id="prog-v-${master.id}">⏳</div></div>
+        </div>`;
+        const r = await analyzeWithMasterVision(master, uploadedScreenshots, pair, lp);
+        masterResults.push(r);
+        const card = document.getElementById(`prog-${master.id}`);
+        const v = document.getElementById(`prog-v-${master.id}`);
+        if (!r.error && card) {
+          card.classList.remove('pending');
+          card.classList.add(r.vote.toLowerCase());
+          v.className = `master-vote vote-${r.vote.toLowerCase()}`;
+          v.innerText = `${r.vote === 'BUY' ? '📈' : r.vote === 'SELL' ? '📉' : '⏸'} ${r.vote} • ${r.confidence}%`;
+        } else if (v) {
+          v.className = 'master-vote vote-failed';
+          v.innerText = `❌ ${r.error ? r.error.substring(0, 30) : 'Failed'}`;
+        }
+        if (master.id < 4) await new Promise(r => setTimeout(r, 3000));
+      }
+    }
+
+    renderSSResults(pair, lp, masterResults, spec);
+    const mtf = computeMastersConfluence(masterResults);
+    if (mtf.action !== 'HOLD') {
+      if (mtf.isOverride) speakOverrideSignal(pair, mtf.action, mtf.confidence, lp);
+      else if (mtf.confidence >= 75) speakStrongSignal(pair, mtf.action, mtf.confidence, lp);
+      else speakSignal(pair, mtf.action, mtf.confidence, lp);
+      if (navigator.vibrate) navigator.vibrate(mtf.confidence >= 75 ? [300,100,300,100,300] : [200,100,200]);
+    } else speakText('Hakuna signal wazi. Subiri.');
+
+  } catch (e) {
+    console.error('[Analyze] Fatal error:', e);
+    showToast(`❌ ${e.message}`);
+    progDiv.innerHTML = `<div class="error-box">Fatal error: ${e.message}</div>`;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🔍 ANALYZE (4 Masters × 3 Screenshots)';
   }
-
-  renderSSResults(pair, lp, masterResults, spec);
-  const mtf = computeMastersConfluence(masterResults);
-  if (mtf.action !== 'HOLD') {
-    if (mtf.isOverride) speakOverrideSignal(pair, mtf.action, mtf.confidence, lp);
-    else if (mtf.confidence >= 75) speakStrongSignal(pair, mtf.action, mtf.confidence, lp);
-    else speakSignal(pair, mtf.action, mtf.confidence, lp);
-    if (navigator.vibrate) navigator.vibrate(mtf.confidence >= 75 ? [300,100,300,100,300] : [200,100,200]);
-  } else speakText('Hakuna signal wazi. Subiri.');
-
-  btn.disabled = false; btn.innerHTML = '🔍 ANALYZE (4 Masters × 3 Screenshots)';
 }
 
+// ═══════════════════════════════════════════════════════════
+// RENDER SS RESULTS
+// ═══════════════════════════════════════════════════════════
 function renderSSResults(pair, lp, masterResults, spec) {
   const mtf = computeMastersConfluence(masterResults);
   const mtfColor = mtf.action === 'BUY' ? 'var(--green)' : mtf.action === 'SELL' ? 'var(--red)' : 'var(--yellow)';
@@ -1852,7 +2130,10 @@ function renderSSResults(pair, lp, masterResults, spec) {
   html += `<div class="card" style="border-color:var(--inst);"><div class="ballistic-header">🎯 PER-MASTER ANALYSIS</div>`;
   masterResults.forEach(r => {
     if (r.error) {
-      html += `<div class="master-detail-card" style="border-left-color:var(--red);"><strong style="color:var(--red);">${r.masterName}</strong><div style="font-size:11px;color:var(--red);margin-top:6px;">❌ ${r.error}</div></div>`;
+      html += `<div class="master-detail-card" style="border-left-color:var(--red);">
+        <strong style="color:${r.masterColor || 'var(--red)'};">${r.masterIcon || ''} ${r.masterName}</strong>
+        <div class="error-box">❌ ${r.error}</div>
+      </div>`;
       return;
     }
     const vc = r.vote === 'BUY' ? 'var(--green)' : r.vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
@@ -1893,6 +2174,9 @@ function renderSSResults(pair, lp, masterResults, spec) {
   document.getElementById('ssResultsContainer').scrollIntoView({ behavior: 'smooth' });
 }
 
+// ═══════════════════════════════════════════════════════════
+// AUTH / LOGIN
+// ═══════════════════════════════════════════════════════════
 function saveKeys(n, g, m, t, a) {
   localStorage.setItem(STORAGE_KEYS.NAME, n);
   if (g) localStorage.setItem(STORAGE_KEYS.GEMINI, g);
@@ -1900,7 +2184,15 @@ function saveKeys(n, g, m, t, a) {
   if (t) localStorage.setItem(STORAGE_KEYS.TWELVE, t);
   if (a) localStorage.setItem(STORAGE_KEYS.ALPHA, a);
 }
-function loadKeys() { return { name: localStorage.getItem(STORAGE_KEYS.NAME), geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI), mistralKey: localStorage.getItem(STORAGE_KEYS.MISTRAL), twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE), alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA) }; }
+function loadKeys() {
+  return {
+    name: localStorage.getItem(STORAGE_KEYS.NAME),
+    geminiKey: localStorage.getItem(STORAGE_KEYS.GEMINI),
+    mistralKey: localStorage.getItem(STORAGE_KEYS.MISTRAL),
+    twelveKey: localStorage.getItem(STORAGE_KEYS.TWELVE),
+    alphaKey: localStorage.getItem(STORAGE_KEYS.ALPHA)
+  };
+}
 function getGeminiKey() { return localStorage.getItem(STORAGE_KEYS.GEMINI); }
 function getMistralKey() { return localStorage.getItem(STORAGE_KEYS.MISTRAL); }
 function getTwelveKey() { return localStorage.getItem(STORAGE_KEYS.TWELVE); }
@@ -1912,8 +2204,8 @@ function handleLogin() {
   const m = document.getElementById('authMistralKey').value.trim();
   const t = document.getElementById('authTwelveKey').value.trim();
   const a = document.getElementById('authAlphaKey').value.trim();
-  if (!n) { alert("Enter name"); return; }
-  if (!g && !m) { alert("Enter at least one AI key"); return; }
+  if (!n) { alert("Tafadhali weka jina lako."); return; }
+  if (!g && !m) { alert("Weka API key angalau moja (Mistral AU Gemini)."); return; }
   saveKeys(n, g, m, t, a);
   enterApp(n, g, m, t, a);
 }
@@ -1936,11 +2228,17 @@ function enterApp(name, g, m, t, a) {
   document.getElementById('settingsDailyTarget').value = getDailyTarget();
   document.getElementById('settingsTradesPerDay').value = getTradesPerDay();
   setupScreenshotUploads();
-  loadHistory(); updateStats();
+  updateSSModeInfo();
+  loadHistory();
+  updateStats();
   startAutoRefreshPrice();
   startAutoBacktest();
-  showToast(`Welcome ${name}! ⚡ v36.1`, 3000);
-  setTimeout(() => { fetchLivePrice(); setTimeout(() => speakText('Mfumo uko tayari. Karibu Lutynoel FX.'), 2500); }, 1000);
+  warmUpVoice();
+  showToast(`Welcome ${name}! ⚡ v36.2`, 3000);
+  setTimeout(() => {
+    fetchLivePrice();
+    setTimeout(() => speakText('Mfumo uko tayari. Karibu Lutynoel FX.'), 2500);
+  }, 1000);
 }
 function showLoginForm() {
   document.getElementById('returningUserSection').style.display = 'none';
@@ -1965,10 +2263,10 @@ function logout() {
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${k.name}</strong>!`;
   } else showLoginForm();
 }
-function saveSettingsGeminiKey() { const k = document.getElementById('settingsGeminiKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.GEMINI, k); showToast('✅'); }
-function saveSettingsMistralKey() { const k = document.getElementById('settingsMistralKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.MISTRAL, k); showToast('✅'); }
-function saveSettingsTwelveKey() { const k = document.getElementById('settingsTwelveKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.TWELVE, k); showToast('✅'); }
-function saveSettingsAlphaKey() { const k = document.getElementById('settingsAlphaKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.ALPHA, k); showToast('✅'); }
+function saveSettingsGeminiKey() { const k = document.getElementById('settingsGeminiKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.GEMINI, k); showToast('✅ Gemini key saved'); }
+function saveSettingsMistralKey() { const k = document.getElementById('settingsMistralKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.MISTRAL, k); showToast('✅ Mistral key saved'); }
+function saveSettingsTwelveKey() { const k = document.getElementById('settingsTwelveKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.TWELVE, k); showToast('✅ TwelveData key saved'); }
+function saveSettingsAlphaKey() { const k = document.getElementById('settingsAlphaKey').value.trim(); if (k) localStorage.setItem(STORAGE_KEYS.ALPHA, k); showToast('✅ Alpha key saved'); }
 function saveRiskSettings() {
   localStorage.setItem(STORAGE_KEYS.BALANCE, document.getElementById('settingsBalance').value);
   localStorage.setItem(STORAGE_KEYS.RISK_PCT, document.getElementById('settingsRiskPct').value);
@@ -1980,13 +2278,18 @@ function saveTradingStyle() {
   showToast('✅ Saved');
 }
 function clearAllKeys() {
-  if (!confirm("Clear all?")) return;
+  if (!confirm("Clear all keys na history?")) return;
   Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
   location.reload();
 }
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
 function navigate(view) {
   document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
-  document.getElementById('view-' + view).style.display = 'block';
+  const target = document.getElementById('view-' + view);
+  if (target) target.style.display = 'block';
   document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.menu-item').forEach(item => {
     if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(view)) item.classList.add('active');
@@ -2002,6 +2305,20 @@ function navigate(view) {
 function toggleSidebar() { document.getElementById('appSidebar').classList.toggle('open'); }
 function goBack() { navigate('overview'); }
 
+// ═══════════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════════
+function openUniversalModal(html) {
+  if (html) document.getElementById('modalInnerContent').innerHTML = html;
+  document.getElementById('universalModal').classList.add('active');
+}
+function closeUniversalModal() {
+  document.getElementById('universalModal').classList.remove('active');
+}
+
+// ═══════════════════════════════════════════════════════════
+// AUTO REFRESH PRICE
+// ═══════════════════════════════════════════════════════════
 function startAutoRefreshPrice() {
   if (window.__priceInt) clearInterval(window.__priceInt);
   window.__priceInt = setInterval(async () => {
@@ -2035,6 +2352,9 @@ function startAutoRefreshPrice() {
   }, PRICE_REFRESH_INTERVAL);
 }
 
+// ═══════════════════════════════════════════════════════════
+// ORDER FLOW
+// ═══════════════════════════════════════════════════════════
 async function refreshOrderFlow() {
   const c = document.getElementById('orderFlowContainer');
   const pair = document.getElementById('ofPair').value;
@@ -2044,7 +2364,7 @@ async function refreshOrderFlow() {
     const h4 = await fetchOHLC(pair, '4h', 200);
     const m15 = await fetchOHLC(pair, '15m', 200);
     const lp = parseFloat(localStorage.getItem(`price_${pair}`)) || h1?.[h1.length-1]?.close || 0;
-    if (!h1) { c.innerHTML = '<div class="disclaimer-box">Failed.</div>'; return; }
+    if (!h1) { c.innerHTML = '<div class="disclaimer-box">Failed to fetch data.</div>'; return; }
     const inst = calculateInstitutionalMetrics(h4, h1, m15, lp);
     const b = inst.biasScore;
     const bC = b.bias.includes('BULL') ? 'var(--green)' : b.bias.includes('BEAR') ? 'var(--red)' : 'var(--yellow)';
@@ -2065,12 +2385,18 @@ async function refreshOrderFlow() {
     }
     if (inst.sar) html += `<div class="card" style="border-color:var(--cyan);"><div class="ballistic-header">📈 PARABOLIC SAR</div><div class="inst-zone ${inst.sar.trend === 'BULLISH' ? 'bull' : 'bear'}"><div><strong>${inst.sar.trend}</strong><br><small style="color:var(--muted);">SAR @ ${inst.sar.current.toFixed(2)}</small></div><span class="zone-badge ${inst.sar.trend === 'BULLISH' ? 'bull' : 'bear'}">${inst.sar.trend}</span></div></div>`;
     c.innerHTML = html;
-  } catch (e) { c.innerHTML = `<div class="disclaimer-box">Error: ${e.message}</div>`; }
+  } catch (e) {
+    console.error('[OrderFlow] Error:', e);
+    c.innerHTML = `<div class="disclaimer-box">Error: ${e.message}</div>`;
+  }
 }
 
+// ═══════════════════════════════════════════════════════════
+// BACKTEST
+// ═══════════════════════════════════════════════════════════
 function refreshBacktest() {
   const c = document.getElementById('backtestContainer');
-  const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   const t = h.filter(x => x.autoTrackStart && x.action !== 'HOLD');
   const cl = t.filter(x => x.outcome === 'WIN' || x.outcome === 'LOSS');
   if (t.length === 0) { c.innerHTML = `<div class="info-box">Fanya analysis (BUY/SELL) na app itaanza kufuatilia.</div>`; return; }
@@ -2092,7 +2418,7 @@ function startAutoBacktest() {
   if (window.__backtestInt) clearInterval(window.__backtestInt);
   window.__backtestInt = setInterval(async () => {
     if (document.hidden) return;
-    const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+    const h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
     const p = h.filter(x => x.outcome === 'PENDING' && x.autoTrackStart);
     const pairs = [...new Set(p.map(x => x.pair))];
     for (const pair of pairs) {
@@ -2125,11 +2451,14 @@ function startAutoBacktest() {
       if (r.action === 'BUY') { if (cp <= sl) { r.outcome = 'LOSS'; updated = true; } else if (cp >= tp) { r.outcome = 'WIN'; updated = true; } }
       else if (r.action === 'SELL') { if (cp >= sl) { r.outcome = 'LOSS'; updated = true; } else if (cp <= tp) { r.outcome = 'WIN'; updated = true; } }
     });
-    if (updated) { localStorage.setItem('lutynoel_history', JSON.stringify(h)); updateStats(); }
+    if (updated) { localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(h)); updateStats(); }
     if (document.getElementById('view-backtest')?.style.display !== 'none') refreshBacktest();
   }, AUTO_CHECK_INTERVAL);
 }
 
+// ═══════════════════════════════════════════════════════════
+// RISK / PIPS CALC
+// ═══════════════════════════════════════════════════════════
 function calculateRisk() {
   const b = parseFloat(document.getElementById('riskBalance').value) || 1000;
   const r = parseFloat(document.getElementById('riskPercent').value) || 1;
@@ -2163,22 +2492,26 @@ function calculatePips() {
   document.getElementById('pipsResultBox').innerHTML = `<div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:18px;margin-top:15px;"><div style="font-size:32px;font-weight:900;color:${isP ? 'var(--green)' : 'var(--red)'};text-align:center;">${isP ? '+' : '-'}${Math.abs(diff).toFixed(1)} PIPS</div><div style="text-align:center;font-size:22px;font-weight:bold;color:${isP ? 'var(--green)' : 'var(--red)'};">${isP ? '+' : '-'}$${usd.toFixed(2)}</div></div>`;
 }
 
+// ═══════════════════════════════════════════════════════════
+// JOURNAL / HISTORY
+// ═══════════════════════════════════════════════════════════
 function saveJournalTrade() {
   const t = { id: Date.now(), date: new Date().toLocaleString(), type: 'manual', pair: document.getElementById('jPair').value, action: document.getElementById('jAction').value, entry: parseFloat(document.getElementById('jEntry').value) || 0, lot: parseFloat(document.getElementById('jLot').value) || 0.01, sl: parseFloat(document.getElementById('jSL').value) || 0, tp: parseFloat(document.getElementById('jTP').value) || 0, outcome: document.getElementById('jOutcome').value };
-  if (!t.entry) return;
+  if (!t.entry) { showToast('⚠️ Weka entry price'); return; }
   saveToHistory(t); showToast('✅ Saved'); navigate('history');
 }
 
 function saveToHistory(r) {
-  let h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
-  h.unshift(r); if (h.length > 100) h = h.slice(0, 100);
-  localStorage.setItem('lutynoel_history', JSON.stringify(h));
+  let h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
+  h.unshift(r);
+  if (h.length > 100) h = h.slice(0, 100);
+  localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(h));
   updateStats();
 }
 
 function loadHistory() {
   const c = document.getElementById('historyList');
-  const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   if (h.length === 0) { c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">No history</div>'; return; }
   c.innerHTML = h.map((r, i) => {
     const st = getSignalStrength(r.action || r.vote, r.confluenceScore || 0, r.institutionalScore);
@@ -2197,20 +2530,22 @@ function loadHistory() {
 
 function deleteHistory(i) {
   if (!confirm("Delete?")) return;
-  let h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  let h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   h.splice(i, 1);
-  localStorage.setItem('lutynoel_history', JSON.stringify(h));
-  loadHistory(); updateStats();
+  localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(h));
+  loadHistory();
+  updateStats();
 }
 
 function clearHistory() {
-  if (!confirm("Clear all?")) return;
-  localStorage.removeItem('lutynoel_history');
-  loadHistory(); updateStats();
+  if (!confirm("Clear all history?")) return;
+  localStorage.removeItem(STORAGE_KEYS.HISTORY);
+  loadHistory();
+  updateStats();
 }
 
 function updateStats() {
-  const h = JSON.parse(localStorage.getItem('lutynoel_history') || '[]');
+  const h = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
   document.getElementById('statTotalAnalyses').innerText = h.length;
   const ap = h.filter(t => t.quality === 'A+').length;
   document.getElementById('statNetPips').innerText = ap;
@@ -2223,50 +2558,135 @@ function updateStats() {
 }
 
 function exportData() {
-  const d = { history: JSON.parse(localStorage.getItem('lutynoel_history') || '[]'), version: "36.1", exportedAt: new Date().toISOString() };
+  const d = { history: JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]'), version: "36.2", exportedAt: new Date().toISOString() };
   const b = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(b);
-  a.download = `lutynoel-v36.1-${Date.now()}.json`;
+  a.download = `lutynoel-v36.2-${Date.now()}.json`;
   a.click();
 }
 
+// ═══════════════════════════════════════════════════════════
+// LIVE CHART
+// ═══════════════════════════════════════════════════════════
 function changeLiveChart(s) {
   document.getElementById('tvIframe').src = `https://s.tradingview.com/widgetembed/?symbol=${s}&interval=15&theme=dark&style=1`;
 }
 
+// ═══════════════════════════════════════════════════════════
+// TEST API KEYS
+// ═══════════════════════════════════════════════════════════
 async function testApiKeys() {
   const mk = getMistralKey(), gk = getGeminiKey();
   let results = [];
+  showToast('🧪 Testing API keys...');
+
   if (mk) {
     try {
-      const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` }, body: JSON.stringify({ model: 'mistral-small-latest', messages: [{ role: 'user', content: 'OK' }], max_tokens: 5 }) }, 20000);
+      const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/chat/completions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${mk}` },
+        body: JSON.stringify({ model: 'mistral-small-latest', messages: [{ role: 'user', content: 'OK' }], max_tokens: 5 })
+      }, 20000);
       const d = await r.json();
-      if (d.error) results.push(`❌ Mistral: ${JSON.stringify(d.error).substring(0, 80)}`);
+      if (d.error) results.push(`❌ Mistral: ${d.error.message || JSON.stringify(d.error).substring(0, 100)}`);
       else results.push(`✅ Mistral: OK`);
     } catch (e) { results.push(`❌ Mistral: ${e.message}`); }
-  }
+  } else results.push(`⚪ Mistral: No key`);
+
   if (gk) {
     try {
-      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/gemini-2.0-flash-exp:generateContent?key=${gk}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: 'OK' }] }] }) }, 20000);
+      const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/gemini-2.0-flash-exp:generateContent?key=${gk}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: 'OK' }] }] })
+      }, 20000);
       const d = await r.json();
-      if (d.error) results.push(`❌ Gemini: ${d.error.message.substring(0, 60)}`);
+      if (d.error) results.push(`❌ Gemini: ${d.error.message}`);
       else results.push(`✅ Gemini: OK`);
     } catch (e) { results.push(`❌ Gemini: ${e.message}`); }
-  }
-  alert(results.join('\n') || 'No keys');
+  } else results.push(`⚪ Gemini: No key`);
+
+  openUniversalModal(`<h3 style="color:var(--accent);margin-top:0;">🧪 API Test Results</h3>
+    <div style="font-size:13px;line-height:2;background:#08080a;padding:12px;border-radius:8px;">
+      ${results.join('<br>')}
+    </div>`);
 }
 
+// ═══════════════════════════════════════════════════════════
+// NOTIFICATIONS
+// ═══════════════════════════════════════════════════════════
+function requestNotificationPermission() {
+  if (!('Notification' in window)) { showToast('❌ Notifications hazitumiki'); return; }
+  Notification.requestPermission().then(p => {
+    if (p === 'granted') showToast('✅ Notifications enabled');
+    else showToast('❌ Notifications blocked');
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// DYNAMIC MANIFEST + SERVICE WORKER
+// ═══════════════════════════════════════════════════════════
+function setupPWA() {
+  // Generate manifest dynamic
+  try {
+    const manifest = {
+      name: 'Lutynoel.fx Pro',
+      short_name: 'Lutynoel',
+      description: 'AI-Powered Forex Trading Analysis',
+      start_url: location.pathname,
+      scope: location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1) || '/',
+      display: 'standalone',
+      orientation: 'portrait',
+      background_color: '#09090b',
+      theme_color: '#fbbf24',
+      icons: [{
+        src: 'data:image/svg+xml;base64,' + btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="32" fill="#fbbf24"/><text x="96" y="130" font-size="120" font-weight="bold" text-anchor="middle" fill="#000">🏦</text></svg>`),
+        sizes: '192x192',
+        type: 'image/svg+xml',
+        purpose: 'any maskable'
+      }, {
+        src: 'data:image/svg+xml;base64,' + btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="64" fill="#fbbf24"/><text x="256" y="360" font-size="320" font-weight="bold" text-anchor="middle" fill="#000">🏦</text></svg>`),
+        sizes: '512x512',
+        type: 'image/svg+xml',
+        purpose: 'any maskable'
+      }]
+    };
+    const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.getElementById('dynamicManifest');
+    if (link) link.href = url;
+  } catch (e) { console.warn('[PWA] Manifest generation failed:', e); }
+
+  // Register Service Worker (inline kwa kutumia Blob — inafanya kazi kwenye baadhi ya hosts)
+  if ('serviceWorker' in navigator) {
+    // Kama una sw.js kwenye root ya host, register direct
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => {
+        console.warn('[SW] sw.js not found, trying inline...', err.message);
+        // Fallback: hakuna SW
+      });
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('universalModal').addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
+  const modal = document.getElementById('universalModal');
+  if (modal) modal.addEventListener('click', (e) => { if (e.target.id === 'universalModal') closeUniversalModal(); });
+
+  // Voice warmup
   document.body.addEventListener('click', function warmup() {
-    if ('speechSynthesis' in window) {
-      const u = new SpeechSynthesisUtterance(''); u.volume = 0;
-      window.speechSynthesis.speak(u); window.speechSynthesis.getVoices();
-    }
+    warmUpVoice();
     document.body.removeEventListener('click', warmup);
   }, { once: true });
-  if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+
+  // PWA setup
+  setupPWA();
+
+  // Auth check
   const k = loadKeys();
   if (k.name && (k.geminiKey || k.mistralKey)) {
     document.getElementById('returningUserSection').style.display = 'block';
@@ -2274,9 +2694,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${k.name}</strong>!`;
   } else showLoginForm();
 });
-
-function openUniversalModal() { document.getElementById('universalModal').classList.add('active'); }
-function closeUniversalModal() { document.getElementById('universalModal').classList.remove('active'); }
 </script>
 </body>
 </html>
