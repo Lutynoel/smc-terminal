@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v37.4 — Anchored Institutional Engine</title>
+<title>Lutynoel.fx v37.5 — Anchored Institutional Engine (Weekend-Safe)</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -85,9 +85,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .spinner,.spinner-white{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-radius:50%;border-top-color:#000;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
 .spinner-white{border-color:rgba(255,255,255,.3);border-top-color:#fff;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.tf-upload-box{background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
-.tf-upload-box.has-image{border-style:solid;border-color:var(--green)}
-.tf-preview-img{max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain}
 .error-box{background:rgba(239,68,68,.1);border:1px solid var(--red);color:#fca5a5;padding:10px;border-radius:8px;font-size:11px;line-height:1.5;margin-top:6px}
 .tbl{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px}
 .tbl th{color:var(--muted);font-size:10px;text-transform:uppercase;text-align:right;padding:6px 4px;border-bottom:1px solid var(--border)}
@@ -95,7 +92,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tbl th:first-child,.tbl td:first-child{text-align:left}
 .pos{color:var(--green)}.neg{color:var(--red)}
 
-/* ═══ SIGNAL CARD ═══ */
+/* SIGNAL CARD */
 .sig-wrap{background:linear-gradient(180deg,rgba(30,41,59,.98),rgba(15,23,42,.98));border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px -20px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.04)}
 .sig-head{padding:18px 20px;border-bottom:1px solid rgba(51,65,85,.6)}
 .sig-body{padding:18px 20px}
@@ -108,8 +105,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .pulse-dot.red{background:var(--red);box-shadow:0 0 0 0 rgba(239,68,68,.7);animation-name:pulseRed}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.7)}70%{box-shadow:0 0 0 10px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
 @keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
-.lvl-row{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-radius:12px;background:rgba(11,18,32,.6);border:1px solid rgba(51,65,85,.6);margin-bottom:9px;transition:transform .15s ease}
-.lvl-row:hover{transform:translateY(-1px)}
+.lvl-row{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-radius:12px;background:rgba(11,18,32,.6);border:1px solid rgba(51,65,85,.6);margin-bottom:9px}
 .lvl-row.sl{border-left:4px solid var(--red)}
 .lvl-row.entry{border-left:4px solid var(--accent)}
 .tp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
@@ -126,9 +122,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .chip-amber{background:rgba(251,191,36,.15);color:var(--accent);border-color:rgba(251,191,36,.3)}
 .chip-blue{background:rgba(59,130,246,.15);color:var(--blue);border-color:rgba(59,130,246,.3)}
 .chip-red{background:rgba(239,68,68,.15);color:var(--red);border-color:rgba(239,68,68,.3)}
-.copy-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:12px;background:var(--accent);color:#0f172a;border:none;font-weight:900;font-size:14px;letter-spacing:.3px;transition:transform .15s ease,background .2s ease;box-shadow:0 8px 24px -8px rgba(251,191,36,.5)}
-.copy-btn:active{transform:scale(.97)}
-.copy-btn:hover{background:#fcd34d}
+.copy-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:12px;background:var(--accent);color:#0f172a;border:none;font-weight:900;font-size:14px;letter-spacing:.3px;box-shadow:0 8px 24px -8px rgba(251,191,36,.5)}
 .anchor-box{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(6,182,212,.04));border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:12px;margin-bottom:12px}
 .anchor-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;font-family:ui-monospace,monospace}
 .tier-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:.6px}
@@ -151,8 +145,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v37.4</div>
-    <div class="auth-subtitle">Anchored Institutional Engine</div>
+    <div class="auth-title">Lutynoel.fx v37.5</div>
+    <div class="auth-subtitle">Weekend-Safe Anchored Engine</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -171,7 +165,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>TwelveData API Key (Forex/Gold/Indices)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v37.4:</strong> Anchored Previous-Day Levels (PDH/PDL/PDC + Fixed VP)<br>
+        ✅ <strong>v37.5:</strong> Weekend-Safe Anchors (skips Sat/Sun for forex)<br>
         ✅ Zero-Hallucination Guardrails (Pre-check + Post-validator)<br>
         ✅ Real-Time Alerts (Audio + Toast + Vibrate)<br>
         ✅ Killzone Tiering (London/NY)<br>
@@ -197,7 +191,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v37.4</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v37.5</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -212,14 +206,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 
   <div class="main-content">
-    <!-- ═══ OVERVIEW ═══ -->
     <div id="view-overview" class="view-section">
       <div class="card" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.4 • Anchored Institutional Engine</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.5 • Weekend-Safe Anchored Engine</div>
           </div>
         </div>
       </div>
@@ -252,18 +245,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
 
       <div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.1));border:2px solid var(--inst);">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ V37.4 ANCHORED ENGINE</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ V37.5 ANCHORED ENGINE</div>
         <div style="font-size:11px;line-height:1.9;">
-          1. <strong>Anchored Levels</strong> — PDH/PDL/PDC + Fixed VP (prev day only, static).<br>
-          2. <strong>Zero-Hallucination</strong> — Pre-check + Post-validator inakataa signals mbovu.<br>
-          3. <strong>Real-Time Alerts</strong> — Audio + Toast ukiwa karibu na PDH/PDL/POC.<br>
-          4. <strong>Killzone Tiering</strong> — London 10-13 EAT, NY 15-18 EAT = HIGH_PROBABILITY.<br>
-          5. <strong>Day Trading Only</strong> — No overnight holds. SL ≤ 1.5× ATR. RR ≥ 1:1.5.
+          1. <strong>Weekend-Safe Anchors</strong> — Forex inaskip Sat/Sun, crypto 24/7.<br>
+          2. <strong>Anchored Levels</strong> — PDH/PDL/PDC + Fixed VP (prev trading day only).<br>
+          3. <strong>Zero-Hallucination</strong> — Pre-check + Post-validator inakataa signals mbovu.<br>
+          4. <strong>Real-Time Alerts</strong> — Audio + Toast ukiwa karibu na PDH/PDL/POC.<br>
+          5. <strong>Killzone Tiering</strong> — London 10-13 EAT, NY 15-18 EAT = HIGH_PROBABILITY.<br>
+          6. <strong>Day Trading Only</strong> — No overnight holds. SL ≤ 1.5× ATR. RR ≥ 1:1.5.
         </div>
       </div>
     </div>
 
-    <!-- ═══ ANALYST ═══ -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🎯 Anchored Institutional Analysis</h3>
@@ -306,7 +299,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- ═══ ANCHORED LEVELS ═══ -->
     <div id="view-orderflow" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -323,7 +315,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ BACKTEST ═══ -->
     <div id="view-backtest" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -341,7 +332,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ JOURNAL / RISK ═══ -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
@@ -362,7 +352,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ LIVE CHART ═══ -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -378,7 +367,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ PIPS ═══ -->
     <div id="view-pips" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator</h3>
@@ -397,7 +385,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ HISTORY ═══ -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -408,15 +395,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ SETTINGS ═══ -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.4 — Anchored Institutional<br>
+          <strong>Version:</strong> v37.5 — Weekend-Safe Anchored<br>
           <strong>AI Order:</strong> Gemini 3.6 Flash (primary) → Mistral NeMo 12B (fallback)<br>
           <strong>Guardrails:</strong> Pre-check + Post-validator + Killzone tiering<br>
-          <strong>Anchors:</strong> PDH/PDL/PDC + Fixed Previous-Day VP
+          <strong>Anchors:</strong> PDH/PDL/PDC + Fixed Previous Trading Day VP
         </div>
 
         <div class="ballistic-header" style="margin-top:14px;">🚨 REAL-TIME PRICE ALERTS</div>
@@ -502,7 +488,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v37.4 — Anchored Institutional Engine
+   Lutynoel.fx v37.5 — Weekend-Safe Anchored Institutional Engine
    Gemini 3.6 Flash (primary) + Mistral NeMo 12B (fallback)
    ═══════════════════════════════════════════════════════════════ */
 
@@ -516,9 +502,8 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v37.4';
+const MODELS_VERSION = 'v37.5';
 
-/* ═══ v37.4 — Anchored Engine Constants ═══ */
 const KILLZONES = {
   LONDON: { startUTC: 7 * 60,  endUTC: 10 * 60, name: 'LONDON_KILLZONE' },
   NY:     { startUTC: 12 * 60, endUTC: 15 * 60, name: 'NY_KILLZONE' }
@@ -566,7 +551,6 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-/* ═══ INSTITUTIONAL MASTER PROMPT ═══ */
 const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), and Confirmation Indicators.
 
 ═══════════ CONFLUENCE RULES ═══════════
@@ -676,30 +660,62 @@ function getKillzoneState(now = new Date()) {
   return { session, inKillzone, label, utcMinutes: m };
 }
 
-/* ═══ DAY KEY HELPERS ═══ */
+/* ═══ WEEKEND / MARKET SESSION HELPERS ═══ */
 function getDayKey(t) { return Math.floor(t / 86400000); }
-function getPreviousDayCandles(candles, currentTime = Date.now()) {
-  if (!Array.isArray(candles) || !candles.length) return [];
+
+function isCryptoPair(pair) {
+  const spec = PAIR_SPECS[pair];
+  return spec && spec.source === 'binance';
+}
+
+function isWeekendUTC(t) {
+  const dow = new Date(t).getUTCDay();
+  return dow === 0 || dow === 6;  // Sunday=0, Saturday=6
+}
+
+function findPreviousTradingDayKey(candles, currentTime, skipWeekends) {
+  if (!Array.isArray(candles) || !candles.length) return null;
   const todayKey = getDayKey(currentTime);
-  let prevDayKey = null;
+  const seenDays = new Set();
+  const dayKeys = [];
   for (let i = candles.length - 1; i >= 0; i--) {
     const k = getDayKey(candles[i].time);
-    if (k < todayKey) { prevDayKey = k; break; }
+    if (k >= todayKey) continue;
+    if (seenDays.has(k)) continue;
+    if (skipWeekends && isWeekendUTC(candles[i].time)) continue;
+    seenDays.add(k);
+    dayKeys.push(k);
   }
-  if (prevDayKey === null) return [];
-  return candles.filter(c => getDayKey(c.time) === prevDayKey);
+  return dayKeys.length ? dayKeys[0] : null;
 }
-function getCurrentDayCandles(candles, currentTime = Date.now()) {
+
+function getPreviousDayCandles(candles, currentTime = Date.now(), pair = null) {
   if (!Array.isArray(candles) || !candles.length) return [];
-  const todayKey = getDayKey(currentTime);
+  const skipWeekends = pair ? !isCryptoPair(pair) : true;
+  const prevKey = findPreviousTradingDayKey(candles, currentTime, skipWeekends);
+  if (prevKey === null) return [];
+  return candles.filter(c => getDayKey(c.time) === prevKey);
+}
+
+function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
+  if (!Array.isArray(candles) || !candles.length) return [];
+  const skipWeekends = pair ? !isCryptoPair(pair) : true;
+  let todayKey = getDayKey(currentTime);
+  if (skipWeekends && isWeekendUTC(currentTime)) {
+    const prevKey = findPreviousTradingDayKey(candles, currentTime, skipWeekends);
+    if (prevKey !== null) todayKey = prevKey;
+  }
   return candles.filter(c => getDayKey(c.time) === todayKey);
 }
 
-/* ═══ ANCHORED PREVIOUS-DAY LEVELS ═══ */
-function computeAnchoredLevels(h1Candles, m15Candles) {
-  const prevDayH1  = getPreviousDayCandles(h1Candles);
-  const prevDayM15 = getPreviousDayCandles(m15Candles);
-  if (!prevDayH1.length) return { ok: false, reason: 'No previous-day H1 candles available' };
+/* ═══ ANCHORED PREVIOUS-DAY LEVELS (weekend-safe) ═══ */
+function computeAnchoredLevels(h1Candles, m15Candles, pair) {
+  const prevDayH1  = getPreviousDayCandles(h1Candles, Date.now(), pair);
+  const prevDayM15 = getPreviousDayCandles(m15Candles, Date.now(), pair);
+
+  if (!prevDayH1.length) {
+    return { ok: false, reason: 'No previous trading day candles available' };
+  }
 
   const PDH = Math.max(...prevDayH1.map(c => c.high));
   const PDL = Math.min(...prevDayH1.map(c => c.low));
@@ -714,7 +730,25 @@ function computeAnchoredLevels(h1Candles, m15Candles) {
     prevDayH1.map(c => c.low),
     prevDayH1.map(c => c.close),
     14
-  );
+  ) || prevDayRange;
+
+  // ─── SANITY CHECKS ───
+  const warnings = [];
+  if (prevDayH1.length < 12) {
+    warnings.push(`Only ${prevDayH1.length} H1 candles in anchor day (expected ≥12)`);
+  }
+  if (prevDayRange > 0 && prevDayATR > 0 && prevDayRange < prevDayATR * 0.5) {
+    warnings.push(`Anchor range ${prevDayRange.toFixed(2)} < 0.5× ATR (suspect weekend/holiday)`);
+  }
+  if (prevDayRange === 0) {
+    warnings.push('Zero range — anchor day invalid');
+  }
+
+  const anchorDay = new Date(prevDayH1[0].time).toISOString().slice(0, 10);
+  const anchorDow = new Date(prevDayH1[0].time).getUTCDay();
+  if (anchorDow === 0 || anchorDow === 6) {
+    warnings.push(`Anchor day ${anchorDay} is a weekend (${anchorDow === 6 ? 'Sat' : 'Sun'})`);
+  }
 
   return {
     ok: true,
@@ -723,11 +757,13 @@ function computeAnchoredLevels(h1Candles, m15Candles) {
     prevDayVAH: vp?.vah ?? null,
     prevDayVAL: vp?.val ?? null,
     prevDayRange,
-    prevDayATR: prevDayATR || prevDayRange,
+    prevDayATR,
     prevDayCandleCount: prevDayH1.length,
     prevDayM15Count: prevDayM15.length,
-    anchorDay: new Date(prevDayH1[0].time).toISOString().slice(0, 10),
-    computedAt: Date.now()
+    anchorDay,
+    computedAt: Date.now(),
+    warnings: warnings.length ? warnings : null,
+    valid: warnings.length === 0
   };
 }
 
@@ -1012,18 +1048,6 @@ function detectDisplacement(o) {
   if (body > atr * 1.5 && rng > 0 && body / rng > 0.7) return { detected: true, direction: last.close > last.open ? 'BULLISH' : 'BEARISH' };
   return { detected: false };
 }
-function calculateSupportResistance(o) {
-  if (!Array.isArray(o) || o.length < 30) return null;
-  const day = t => Math.floor(t / 86400000), today = day(o.at(-1).time);
-  let pd = null;
-  for (let i = o.length - 1; i >= 0; i--) { const d = day(o[i].time); if (d < today) { pd = d; break; } }
-  if (pd === null) return null;
-  const arr = o.filter(c => day(c.time) === pd);
-  if (arr.length < 4) return null;
-  const H = Math.max(...arr.map(c => c.high)), L = Math.min(...arr.map(c => c.low)), C = arr.at(-1).close;
-  const pv = (H + L + C) / 3, f = x => x.toFixed(2);
-  return { pivot: f(pv), r1: f(2 * pv - L), s1: f(2 * pv - H), r2: f(pv + (H - L)), s2: f(pv - (H - L)), r3: f(H + 2 * (pv - L)), s3: f(L - 2 * (H - pv)), basis: 'Daily (UTC) iliyopita' };
-}
 const nearZone = (lo, hi, lp, atr) => lp >= lo - 1.5 * atr && lp <= hi + 1.5 * atr;
 
 function computeInstitutionalBias(inst) {
@@ -1040,12 +1064,12 @@ function computeInstitutionalBias(inst) {
   return { score: s, bias: b };
 }
 
-/* ═══ INSTITUTIONAL METRICS (v37.4 — anchored) ═══ */
-function computeInstitutionalMetrics(h4, h1, m15, lp, anchored) {
+/* ═══ INSTITUTIONAL METRICS (anchored) ═══ */
+function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   if (!Array.isArray(h1) || h1.length < 30) return null;
 
-  const curH1  = getCurrentDayCandles(h1);
-  const curM15 = getCurrentDayCandles(m15);
+  const curH1  = getCurrentDayCandles(h1, Date.now(), pair);
+  const curM15 = getCurrentDayCandles(m15, Date.now(), pair);
   const flowH1  = curH1.length  >= 15 ? curH1  : h1.slice(-30);
   const flowM15 = curM15.length >= 30 ? curM15 : (Array.isArray(m15) ? m15.slice(-60) : []);
 
@@ -1058,7 +1082,7 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored) {
   const a   = atr || lp * 0.005;
 
   const structureH1 = detectStructure(flowH1);
-  const h4Slice = getCurrentDayCandles(h4);
+  const h4Slice = getCurrentDayCandles(h4, Date.now(), pair);
   const structureH4 = Array.isArray(h4) ? detectStructure(h4Slice.length > 5 ? h4Slice : h4) : null;
   const structureM15 = flowM15.length ? detectStructure(flowM15) : null;
   const sweep = detectLiquiditySweep(flowH1);
@@ -1076,7 +1100,6 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored) {
     PDC: anchored?.PDC ?? null,
     prevDayRange: anchored?.prevDayRange ?? null,
     prevDayATR: anchored?.prevDayATR ?? null,
-    volumeProfileLive: calculateVolumeProfile(flowH1, 40),
     orderBlocks: ob,
     fvg,
     near: {
@@ -1090,7 +1113,6 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored) {
     ltfStructure: structureM15,
     sweep, displacement,
     killZone: getKillzoneState(),
-    supportResistance: calculateSupportResistance(flowH1),
     rsi: calculateRSI(c, 14),
     atr, ema20: calculateSMA(c, 20), ema50: calculateSMA(c, 50), ema200: calculateSMA(c, 200),
     currentDayH1Count: curH1.length,
@@ -1110,8 +1132,8 @@ function getHTFBias(h4, h1) {
   return { h4: a, h1: b, aligned: a === b && a !== 'NEUTRAL' };
 }
 
-/* ═══ ZERO-HALLUCINATION PRE-CHECK ═══ */
-function preCheckSignalConditions(lp, anchored, m15, inst, pipSize) {
+/* ═══ PRE-CHECK ═══ */
+function preCheckSignalConditions(lp, anchored, m15, inst, pipSize, pair) {
   if (!anchored?.ok) return { ok: false, reason: 'Anchored levels not available' };
   if (!inst) return { ok: false, reason: 'Institutional metrics not available' };
 
@@ -1137,7 +1159,7 @@ function preCheckSignalConditions(lp, anchored, m15, inst, pipSize) {
   const hasRecentSweep = !!inst.sweep;
   const hasDisplacement = !!inst.displacement?.detected;
 
-  const recentM15 = getCurrentDayCandles(m15).slice(-8);
+  const recentM15 = getCurrentDayCandles(m15, Date.now(), pair).slice(-8);
   const recentRange = recentM15.length >= 4
     ? Math.max(...recentM15.map(c => c.high)) - Math.min(...recentM15.map(c => c.low))
     : 0;
@@ -1407,7 +1429,7 @@ function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, curren
 
 /* ═══ MAIN INSTITUTIONAL CALL ═══ */
 async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, pipSize) {
-  const pre = preCheckSignalConditions(lp, anchored, currentM15, inst, pipSize);
+  const pre = preCheckSignalConditions(lp, anchored, currentM15, inst, pipSize, pair);
   if (!pre.ok) {
     return {
       provider: 'PreCheck', pair, timeframe: 'M15',
@@ -1499,9 +1521,8 @@ async function fetchLivePrice() {
     $('priceStatusText').innerHTML = `✅ LIVE: ${price.toFixed(spec.decimals)}`;
     $('priceTime').innerText = new Date().toLocaleTimeString();
 
-    // Alerts check
     if (window.marketData?.pair === pair) {
-      const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15);
+      const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15, pair);
       if (anchored?.ok) {
         window.marketData.anchored = anchored;
         checkPriceAlerts(price, anchored, spec.pipSize, pair);
@@ -1550,25 +1571,26 @@ async function fetchAllMarketData() {
     const h4 = await get('data4H', '4h'), h1 = await get('data1H', '1h'), m15 = await get('data15M', '15m');
     if (!h1 || !m15) { $('chartPreview').innerHTML = `<div class="error-box">❌ ${esc(lastDataError)}</div>`; return; }
 
-    const anchored = computeAnchoredLevels(h1, m15);
+    const anchored = computeAnchoredLevels(h1, m15, pair);
     const lp = parseFloat($('livePrice').value) || h1.at(-1).close;
-    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored);
+    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
     window.marketData = { pair, h4, h1, m15, inst, anchored, fetchedAt: Date.now() };
 
     set('dataIndicators', !!inst, inst ? 'READY ✓' : 'FAIL');
     if (inst && anchored.ok) {
       const kz = getKillzoneState();
       let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)} — Anchor: ${anchored.anchorDay}</div>`;
-      h += `<div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(5)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(5)}</strong> | PDC: <strong>${anchored.PDC.toFixed(5)}</strong></div>`;
+      h += `<div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong> | PDC: <strong>${anchored.PDC.toFixed(spec.decimals)}</strong></div>`;
       if (anchored.prevDayPOC != null) {
-        h += `<div>VP: POC <strong style="color:var(--accent)">${anchored.prevDayPOC.toFixed(5)}</strong> | VAH ${anchored.prevDayVAH.toFixed(5)} | VAL ${anchored.prevDayVAL.toFixed(5)}</div>`;
+        h += `<div>VP: POC <strong style="color:var(--accent)">${anchored.prevDayPOC.toFixed(spec.decimals)}</strong> | VAH ${anchored.prevDayVAH.toFixed(spec.decimals)} | VAL ${anchored.prevDayVAL.toFixed(spec.decimals)}</div>`;
       }
       h += `<div>1H Structure: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
-      if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(5) : '—'}</div>`;
-      h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
+      if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(spec.decimals) : '—'}</div>`;
+      h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'} | Candles: ${anchored.prevDayCandleCount}H1 / ${anchored.prevDayM15Count}M15</div>`;
+      if (anchored.warnings) h += `<div style="color:var(--orange);margin-top:6px;">⚠️ ${anchored.warnings.join(' • ')}</div>`;
       $('chartPreview').innerHTML = h;
       $('runBtn').disabled = false;
-      showToast('✅ Anchored data ready');
+      showToast(anchored.warnings ? '⚠️ Data ready (warnings)' : '✅ Anchored data ready');
     }
   } catch (e) { showToast(`❌ ${e.message}`); }
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
@@ -1592,7 +1614,6 @@ function saveToHistory(r) {
   try { if ($('view-history') && $('view-history').style.display !== 'none') loadHistory(); } catch (e) {}
   return ok;
 }
-
 function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, anchored }) {
   const spec = PAIR_SPECS[pair], act = instMaster.signal_type;
   const spreadPips = spec.spreadPips * getNum('SPREAD_MULT', 1);
@@ -1610,7 +1631,7 @@ function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, ancho
     rejectReason: instMaster.rejectReason,
     validators: (validators || []).map(v => ({ id: v.masterId, name: v.masterName, vote: v.vote, conf: v.confidence, provider: v.provider })),
     instScore: inst?.biasScore?.score ?? null,
-    session: inst?.killZone?.session || getKillZoneState().session,
+    session: inst?.killZone?.session || getKillzoneState().session,
     anchored: anchored ? {
       PDH: anchored.PDH, PDL: anchored.PDL, PDC: anchored.PDC,
       POC: anchored.prevDayPOC, VAH: anchored.prevDayVAH, VAL: anchored.prevDayVAL,
@@ -1637,14 +1658,14 @@ async function runAnalysis() {
 
   const anchored = md.anchored && md.anchored.ok
     ? md.anchored
-    : computeAnchoredLevels(h1, m15);
-  if (!anchored.ok) { alert('Hakuna prev-day candles. Fetch data tena.'); return; }
+    : computeAnchoredLevels(h1, m15, pair);
+  if (!anchored.ok) { alert('Hakuna prev trading day candles. Fetch data tena.'); return; }
   md.anchored = anchored;
 
-  const curH1  = getCurrentDayCandles(h1);
-  const curM15 = getCurrentDayCandles(m15);
-  const curH4  = getCurrentDayCandles(h4);
-  const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored);
+  const curH1  = getCurrentDayCandles(h1, Date.now(), pair);
+  const curM15 = getCurrentDayCandles(m15, Date.now(), pair);
+  const curH4  = getCurrentDayCandles(h4, Date.now(), pair);
+  const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
   const htfBias = getHTFBias(h4, h1);
   const kz = getKillzoneState();
 
@@ -1656,12 +1677,13 @@ async function runAnalysis() {
   container.style.display = 'block';
   container.innerHTML = `
     <div class="card">
-      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.4)</div>
+      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.5)</div>
       <div style="font-size:11px;line-height:1.8;color:var(--muted);">
         <div>Anchor Day: <strong style="color:var(--accent)">${anchored.anchorDay}</strong></div>
-        <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(5)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(5)}</strong></div>
-        <div>PD-POC: <strong style="color:var(--accent)">${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : '—'}</strong> | VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : '—'} | VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : '—'}</div>
+        <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong></div>
+        <div>PD-POC: <strong style="color:var(--accent)">${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(spec.decimals) : '—'}</strong> | VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(spec.decimals) : '—'} | VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(spec.decimals) : '—'}</div>
         <div>Session: <strong style="color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'}">${kz.label}</strong></div>
+        ${anchored.warnings ? `<div style="color:var(--orange)">⚠️ ${anchored.warnings.join(' • ')}</div>` : ''}
       </div>
       <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pre-check + LLM + validation...</div>
     </div>`;
@@ -1723,7 +1745,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
                   : tier === 'LOW_PROBABILITY' ? 'tier-low' : 'tier-rejected';
   const tierLabel = tier.replace(/_/g, ' ');
 
-  // Anchored header
   const anc = rec.anchored;
   const anchorBlock = anc ? `
     <div class="anchor-box">
@@ -1763,7 +1784,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `PDH: ${f(anc?.PDH)} | PDL: ${f(anc?.PDL)} | PDC: ${f(anc?.PDC)}`,
     `PD-POC: ${f(anc?.POC)} | VAH: ${f(anc?.VAH)} | VAL: ${f(anc?.VAL)}`,
     `Confluences: ${(instMaster.confluences || []).join(' | ')}`,
-    `— Lutynoel.fx v37.4`
+    `— Lutynoel.fx v37.5`
   ].join('\n');
   window.__lastCopyText = copyText;
 
@@ -2035,8 +2056,8 @@ async function refreshOrderFlow() {
     if (!h1) { c.innerHTML = `<div class="disclaimer-box">Failed: ${esc(lastDataError)}</div>`; return; }
     const m15 = await fetchOHLC(pair, '15m', 200);
     const h4 = await fetchOHLC(pair, '4h', 200);
-    const anchored = computeAnchoredLevels(h1, m15);
-    if (!anchored.ok) { c.innerHTML = '<div class="disclaimer-box">Hakuna prev-day data.</div>'; return; }
+    const anchored = computeAnchoredLevels(h1, m15, pair);
+    if (!anchored.ok) { c.innerHTML = '<div class="disclaimer-box">Hakuna prev trading-day data.</div>'; return; }
     const lp = h1.at(-1).close;
     const spec = PAIR_SPECS[pair];
     const f = x => x == null ? '—' : Number(x).toFixed(spec.decimals);
@@ -2046,7 +2067,11 @@ async function refreshOrderFlow() {
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.12);margin-bottom:5px;border-left:4px solid var(--red);font-weight:bold;"><span>PDH</span><span>${f(anchored.PDH)}</span></div>
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(59,130,246,.12);margin-bottom:5px;border-left:4px solid var(--blue);font-weight:bold;"><span>PDC</span><span>${f(anchored.PDC)}</span></div>
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>PDL</span><span>${f(anchored.PDL)}</span></div>
-      <div style="margin-top:10px;font-size:10px;color:var(--muted);">Prev-Day Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)}</div>
+      <div style="margin-top:10px;font-size:10px;color:var(--muted);">Prev-Day Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)} • Candles: ${anchored.prevDayCandleCount}H1 / ${anchored.prevDayM15Count}M15</div>
+      ${anchored.warnings ? `<div style="margin-top:8px;padding:8px;background:rgba(249,115,22,.15);border:1px solid var(--orange);border-radius:8px;font-size:10px;color:#fdba74;line-height:1.6;">
+        <strong>⚠️ Anchor warnings:</strong><br>
+        ${anchored.warnings.map(w => '• ' + esc(w)).join('<br>')}
+      </div>` : ''}
     </div>`;
 
     if (anchored.prevDayPOC != null) {
@@ -2060,8 +2085,7 @@ async function refreshOrderFlow() {
       </div>`;
     }
 
-    // Live metric snapshot
-    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored);
+    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
     if (inst) {
       const kz = getKillzoneState();
       html += `<div class="card">
@@ -2072,7 +2096,7 @@ async function refreshOrderFlow() {
         </div>
         <div class="grid-2">
           ${inst.rsi ? `<div class="mini-box" style="text-align:center;"><label>RSI(14)</label><div style="font-weight:bold;">${inst.rsi.toFixed(1)}</div></div>` : ''}
-          ${inst.atr ? `<div class="mini-box" style="text-align:center;"><label>ATR(14)</label><div style="font-weight:bold;font-family:ui-monospace,monospace;">${inst.atr.toFixed(5)}</div></div>` : ''}
+          ${inst.atr ? `<div class="mini-box" style="text-align:center;"><label>ATR(14)</label><div style="font-weight:bold;font-family:ui-monospace,monospace;">${inst.atr.toFixed(spec.decimals)}</div></div>` : ''}
         </div>
       </div>`;
     }
@@ -2154,7 +2178,6 @@ function updateStats() {
     $('statNetPips').innerText = h.filter(t => t.conf >= 75 && (t.action === 'BUY' || t.action === 'SELL')).length;
     const s = btCalc(h.filter(r => r.tracked), 1);
     $('statWinRate').innerText = s.n ? `${pct(s.wr)} (n=${s.n})` : '—';
-    // Session state display
     const kz = getKillzoneState();
     const el = $('sessionStateLabel');
     if (el) {
@@ -2164,10 +2187,10 @@ function updateStats() {
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), version: '37.4', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), version: '37.5', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v37.4-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v37.5-${Date.now()}.json`; a.click();
 }
 
 /* ═══ AUTH / SETTINGS ═══ */
@@ -2226,7 +2249,6 @@ function enterApp(name) {
   $('settingsMistralModels').value = getList('MISTRAL_MODELS', DEFAULTS.mistralModels).join(',');
   $('settingsMistralVision').value = getList('MISTRAL_VISION', DEFAULTS.mistralVision).join(',');
 
-  // Initialize alert UI
   setAlertsMuted(isAlertsMuted());
   $('alertThresholdInput').value = getAlertThresholdPips();
 
@@ -2312,7 +2334,7 @@ function startAutoRefreshPrice() {
       $('livePrice').value = p.toFixed(spec.decimals);
       priceMeta = { pair, manual: false, ts: Date.now() };
       if (window.marketData?.pair === pair) {
-        const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15);
+        const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15, pair);
         if (anchored?.ok) {
           window.marketData.anchored = anchored;
           checkPriceAlerts(p, anchored, spec.pipSize, pair);
@@ -2371,7 +2393,6 @@ window.addEventListener('DOMContentLoaded', () => {
     $('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${esc(k.name)}</strong>!`;
   } else showLoginForm();
 
-  // Live session state label update
   setInterval(() => {
     const kz = getKillzoneState();
     const el = $('sessionStateLabel');
