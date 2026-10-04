@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v37.3 — Institutional Master</title>
+<title>Lutynoel.fx v37.4 — Anchored Institutional Engine</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -66,20 +66,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .vote-pending{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .vote-failed{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 .master-desc{font-size:12px;line-height:1.6;background:#131c30;padding:10px;border-radius:8px;border-left:2px solid var(--accent)}
-.detection-badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:bold;margin:3px 3px 0 0}
-.det-fvg{background:rgba(6,182,212,.2);color:var(--cyan);border:1px solid var(--cyan)}
-.det-choch{background:rgba(16,185,129,.2);color:var(--green);border:1px solid var(--green)}
-.det-ob{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
-.det-vp{background:rgba(251,191,36,.2);color:var(--accent);border:1px solid var(--accent)}
-.det-ema{background:rgba(59,130,246,.2);color:var(--blue);border:1px solid var(--blue)}
-.det-rsi{background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink)}
-.det-atr{background:rgba(148,163,184,.2);color:#cbd5e1;border:1px solid #64748b}
-.signal-badge-container{display:flex;justify-content:center;gap:6px;margin:10px 0;flex-wrap:wrap}
-.badge{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:bold}
-.badge-conf{background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green)}
-.badge-status{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
-.badge-shield{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
-.badge-ai{background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(6,182,212,.2));color:#c4b5fd;border:2px solid var(--inst);padding:6px 14px;border-radius:12px;font-size:11px;font-weight:900;display:inline-block;margin:6px 0;letter-spacing:1px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .mini-box{background:var(--card2);border:1px solid var(--border);padding:12px;border-radius:10px}
@@ -109,7 +95,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tbl th:first-child,.tbl td:first-child{text-align:left}
 .pos{color:var(--green)}.neg{color:var(--red)}
 
-/* ═══ SIGNAL CARD (modern) ═══ */
+/* ═══ SIGNAL CARD ═══ */
 .sig-wrap{background:linear-gradient(180deg,rgba(30,41,59,.98),rgba(15,23,42,.98));border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px -20px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.04)}
 .sig-head{padding:18px 20px;border-bottom:1px solid rgba(51,65,85,.6)}
 .sig-body{padding:18px 20px}
@@ -139,9 +125,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .chip-purple{background:rgba(168,85,247,.15);color:var(--purple);border-color:rgba(168,85,247,.3)}
 .chip-amber{background:rgba(251,191,36,.15);color:var(--accent);border-color:rgba(251,191,36,.3)}
 .chip-blue{background:rgba(59,130,246,.15);color:var(--blue);border-color:rgba(59,130,246,.3)}
+.chip-red{background:rgba(239,68,68,.15);color:var(--red);border-color:rgba(239,68,68,.3)}
 .copy-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:12px;background:var(--accent);color:#0f172a;border:none;font-weight:900;font-size:14px;letter-spacing:.3px;transition:transform .15s ease,background .2s ease;box-shadow:0 8px 24px -8px rgba(251,191,36,.5)}
 .copy-btn:active{transform:scale(.97)}
 .copy-btn:hover{background:#fcd34d}
+.anchor-box{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(6,182,212,.04));border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:12px;margin-bottom:12px}
+.anchor-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;font-family:ui-monospace,monospace}
+.tier-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:.6px}
+.tier-high{background:rgba(16,185,129,.2);color:var(--green);border:1px solid var(--green)}
+.tier-med{background:rgba(250,204,21,.2);color:var(--yellow);border:1px solid var(--yellow)}
+.tier-low{background:rgba(249,115,22,.2);color:var(--orange);border:1px solid var(--orange)}
+.tier-rejected{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 </style>
 </head>
 <body>
@@ -157,8 +151,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v37.3</div>
-    <div class="auth-subtitle">Institutional Master Edition</div>
+    <div class="auth-title">Lutynoel.fx v37.4</div>
+    <div class="auth-subtitle">Anchored Institutional Engine</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -170,17 +164,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="loginFormSection">
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
-      <label>Gemini API Key (Primary AI — Gemini 3.6 Flash)</label>
+      <label>Gemini API Key (Primary — Gemini 3.6 Flash)</label>
       <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
-      <label>Mistral API Key (Fallback AI — NeMo 12B)</label>
+      <label>Mistral API Key (Fallback — NeMo 12B)</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
       <label>TwelveData API Key (Forex/Gold/Indices)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v37.3:</strong> Institutional Master (Volume Profile + SMC + Indicators)<br>
-        ✅ <strong>Gemini 3.6 Flash = primary</strong> • Mistral NeMo 12B = fallback<br>
-        ✅ Backtest ya kweli (candles halisi, spread, R-multiple)<br>
-        ✅ Copy Signal kwa MT5/broker yoyote
+        ✅ <strong>v37.4:</strong> Anchored Previous-Day Levels (PDH/PDL/PDC + Fixed VP)<br>
+        ✅ Zero-Hallucination Guardrails (Pre-check + Post-validator)<br>
+        ✅ Real-Time Alerts (Audio + Toast + Vibrate)<br>
+        ✅ Killzone Tiering (London/NY)<br>
+        ✅ <strong>Gemini 3.6 Flash</strong> primary • Mistral NeMo 12B fallback
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -202,15 +197,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v37.3</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v37.4</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Live Analysis</div>
-    <div class="menu-item" onclick="navigate('screenshot')">📸 Screenshot (M15+H1+H4)</div>
-    <div class="menu-item" onclick="navigate('orderflow')">🌊 Order Flow Map</div>
-    <div class="menu-item" onclick="navigate('backtest')">📊 Backtest (Kweli)</div>
-    <div class="menu-item" onclick="navigate('journal')">💰 Risk & Journal</div>
+    <div class="menu-item" onclick="navigate('orderflow')">🌊 Anchored Levels</div>
+    <div class="menu-item" onclick="navigate('backtest')">📊 Backtest</div>
+    <div class="menu-item" onclick="navigate('journal')">💰 Risk Calculator</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('pips')">🧮 Pips Calculator</div>
     <div class="menu-item" onclick="navigate('history')">📁 History</div>
@@ -218,13 +212,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 
   <div class="main-content">
+    <!-- ═══ OVERVIEW ═══ -->
     <div id="view-overview" class="view-section">
       <div class="card" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.3 • Institutional Master Edition</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.4 • Anchored Institutional Engine</div>
           </div>
         </div>
       </div>
@@ -235,29 +230,44 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <div class="mini-box" style="text-align:center;"><label>A+ Setups</label><div id="statNetPips" style="font-size:18px;font-weight:bold;color:var(--pink);">0</div></div>
       </div>
 
+      <div class="mini-box" style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:bold;">Session State</div>
+            <div id="sessionStateLabel" style="font-size:14px;font-weight:900;color:var(--accent);">—</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:10px;color:var(--muted);">Alert Status</div>
+            <span id="alertStatusPill" class="badge" style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);font-size:11px;padding:4px 12px;border-radius:20px;font-weight:bold;">🔔 ACTIVE</span>
+          </div>
+        </div>
+      </div>
+
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Institutional Analysis</button>
-        <button class="secondary-btn" onclick="navigate('screenshot')">📸 MTF Screenshot Analysis</button>
-        <button class="secondary-btn" onclick="navigate('backtest')">📊 Matokeo ya Backtest</button>
+        <button class="primary-btn" onclick="navigate('analyst')">🎯 Anchored Institutional Analysis</button>
+        <button class="secondary-btn" onclick="navigate('orderflow')">📊 View Anchored Levels</button>
+        <button class="secondary-btn" onclick="navigate('backtest')">📈 Matokeo ya Backtest</button>
         <button class="secondary-btn" onclick="navigate('history')">📁 History</button>
       </div>
 
       <div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.1));border:2px solid var(--inst);">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ INSTITUTIONAL MASTER</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ V37.4 ANCHORED ENGINE</div>
         <div style="font-size:11px;line-height:1.9;">
-          1. <strong>Volume Profile</strong> — POC, VAH, VAL (Naked POC = high-probability zone).<br>
-          2. <strong>Smart Money Concepts</strong> — BOS/CHoCH, OB, FVG, Liquidity Sweeps.<br>
-          3. <strong>Indicators</strong> — EMA 20/50/200, RSI 14 Divergence, ATR 14.<br>
-          4. <strong>Confluence</strong> — Kilichoainishwa na Institutional Master kinapima uzito wa 40% kwenye uamuzi wa mwisho.
+          1. <strong>Anchored Levels</strong> — PDH/PDL/PDC + Fixed VP (prev day only, static).<br>
+          2. <strong>Zero-Hallucination</strong> — Pre-check + Post-validator inakataa signals mbovu.<br>
+          3. <strong>Real-Time Alerts</strong> — Audio + Toast ukiwa karibu na PDH/PDL/POC.<br>
+          4. <strong>Killzone Tiering</strong> — London 10-13 EAT, NY 15-18 EAT = HIGH_PROBABILITY.<br>
+          5. <strong>Day Trading Only</strong> — No overnight holds. SL ≤ 1.5× ATR. RR ≥ 1:1.5.
         </div>
       </div>
     </div>
 
+    <!-- ═══ ANALYST ═══ -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Institutional Analysis</h3>
-        <label>1. Choose Pair</label>
+        <h3 style="margin:5px 0 15px;">🎯 Anchored Institutional Analysis</h3>
+        <label>1. Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
           <option value="XAUUSD">XAUUSD (Gold)</option>
           <option value="BTCUSD">BTCUSD (Bitcoin)</option>
@@ -274,12 +284,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="XAGUSD">XAGUSD (Silver)</option>
           <option value="WTI">WTI (Crude Oil)</option>
         </select>
+
         <label>2. Current Price</label>
         <div class="price-row">
           <input type="number" step="any" id="livePrice" placeholder="Bonyeza Refresh" oninput="onManualPrice()">
           <button class="refresh-btn" id="refreshBtn" onclick="fetchLivePrice()">🔄 Refresh</button>
         </div>
         <div id="priceStatus" class="price-status manual"><span id="priceStatusText">⚪ Bonyeza Refresh</span><span id="priceTime">—</span></div>
+
         <label>3. Fetch Data</label>
         <div class="data-status" id="dataStatus">
           <div class="data-status-item" id="data4H"><span>4H Data</span><span>—</span></div>
@@ -289,54 +301,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
         <div class="chart-preview" id="chartPreview"><div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div></div>
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
-        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN INSTITUTIONAL ANALYSIS</button>
+        <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN ANCHORED ANALYSIS</button>
       </div>
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <div id="view-screenshot" class="view-section" style="display:none;">
-      <div class="card" style="border-color:var(--inst);">
-        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot — Institutional</h3>
-        <div class="info-box">📷 Upload screenshots: M15 + H1 + H4 kwa uchambuzi wa haraka.</div>
-        <label>1. Chagua Pair</label>
-        <select id="ssPair" onchange="onSSPairChange()">
-          <option value="XAUUSD">XAUUSD (Gold)</option>
-          <option value="BTCUSD">BTCUSD (Bitcoin)</option>
-          <option value="NAS100">NAS100 (NASDAQ)</option>
-          <option value="EURUSD">EUR/USD</option>
-          <option value="GBPUSD">GBP/USD</option>
-          <option value="USDJPY">USD/JPY</option>
-          <option value="US30">US30 (Dow Jones)</option>
-        </select>
-        <label>2. Current Price</label>
-        <input type="number" step="any" id="ssLivePrice" placeholder="Weka bei ya sasa">
-        <label>3. Upload Screenshots</label>
-        <div class="tf-upload-box" id="tfBox-m15">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:bold;color:var(--accent);">⚡ M15 — Entry</span></div>
-          <input type="file" id="ssInput-m15" accept="image/*" style="padding:8px;margin-bottom:0;">
-          <div id="ssPreview-m15" style="display:none;"><img id="ssImg-m15" class="tf-preview-img"></div>
-        </div>
-        <div class="tf-upload-box" id="tfBox-h1">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:bold;color:var(--accent);">🎯 H1 — Trend</span></div>
-          <input type="file" id="ssInput-h1" accept="image/*" style="padding:8px;margin-bottom:0;">
-          <div id="ssPreview-h1" style="display:none;"><img id="ssImg-h1" class="tf-preview-img"></div>
-        </div>
-        <div class="tf-upload-box" id="tfBox-h4">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:bold;color:var(--accent);">🏛️ H4 — Bias</span></div>
-          <input type="file" id="ssInput-h4" accept="image/*" style="padding:8px;margin-bottom:0;">
-          <div id="ssPreview-h4" style="display:none;"><img id="ssImg-h4" class="tf-preview-img"></div>
-        </div>
-        <div id="ssUploadStatus" class="info-box" style="margin-top:12px;">📤 Uploaded: 0/3</div>
-        <button class="primary-btn" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>🔍 ANALYZE</button>
-        <button class="secondary-btn" onclick="clearAllScreenshots()">🗑️ Clear</button>
-      </div>
-      <div id="ssResultsContainer" style="display:none;"></div>
-    </div>
-
+    <!-- ═══ ANCHORED LEVELS ═══ -->
     <div id="view-orderflow" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">🌊 Order Flow Map</h3>
+          <h3 style="margin:0;">🌊 Anchored Levels</h3>
           <button onclick="refreshOrderFlow()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <label>Pair</label>
@@ -349,10 +323,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ BACKTEST ═══ -->
     <div id="view-backtest" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">📊 Backtest ya Kweli</h3>
+          <h3 style="margin:0;">📊 Backtest</h3>
           <button onclick="runBacktestNow()" id="btRunBtn" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Update</button>
         </div>
         <label>Exit model</label>
@@ -366,6 +341,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ JOURNAL / RISK ═══ -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
@@ -376,7 +352,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <div class="grid-2">
           <div><label>SL (Pips)</label><input type="number" id="riskSlPips" value="30"></div>
           <div><label>Pair</label>
-            <select id="riskPair"><option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option></select>
+            <select id="riskPair"><option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option></select>
           </div>
         </div>
         <button class="secondary-btn" onclick="calculateRisk()">Calculate Lot Size</button>
@@ -386,6 +362,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ LIVE CHART ═══ -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -401,6 +378,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ PIPS ═══ -->
     <div id="view-pips" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator</h3>
@@ -419,6 +397,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ HISTORY ═══ -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -429,14 +408,39 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ SETTINGS ═══ -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.3 — Institutional Master<br>
+          <strong>Version:</strong> v37.4 — Anchored Institutional<br>
           <strong>AI Order:</strong> Gemini 3.6 Flash (primary) → Mistral NeMo 12B (fallback)<br>
-          <strong>Institutional Master:</strong> VP + SMC + Indicators (uzito 0.40)
+          <strong>Guardrails:</strong> Pre-check + Post-validator + Killzone tiering<br>
+          <strong>Anchors:</strong> PDH/PDL/PDC + Fixed Previous-Day VP
         </div>
+
+        <div class="ballistic-header" style="margin-top:14px;">🚨 REAL-TIME PRICE ALERTS</div>
+        <div class="mini-box" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:12px;font-weight:bold;">Alert Status</div>
+            <div style="font-size:10px;color:var(--muted);">PDH/PDL sweep + PD-POC retest</div>
+          </div>
+          <span id="alertStatusPill2" class="badge" style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);font-size:11px;padding:4px 12px;border-radius:20px;font-weight:bold;">🔔 ACTIVE</span>
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;text-transform:none;font-size:13px;">
+          <input type="checkbox" id="alertMutedToggle" onchange="setAlertsMuted(this.checked)" style="width:auto;margin:0;">
+          Mute all alerts
+        </label>
+
+        <label>Alert proximity (pips)</label>
+        <input type="number" id="alertThresholdInput" min="1" max="100" step="1" value="12"
+               onchange="setAlertThresholdPips(this.value)">
+
+        <button class="secondary-btn" onclick="playBeep('sweep')">🔊 Test Sweep Chime</button>
+        <button class="secondary-btn" onclick="playBeep('poc')">🎯 Test POC Beep</button>
+        <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
         <div class="ballistic-header">🔊 VOICE</div>
         <label>Voice Alerts</label>
         <select id="settingsVoiceEnabled" onchange="saveVoiceSetting()">
@@ -445,6 +449,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </select>
         <button class="secondary-btn" onclick="testVoice()">🔊 Test Voice</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
         <div class="ballistic-header">🎯 SL / TP / SPREAD</div>
         <label>SL = ATR(H1) × </label>
         <input type="number" step="0.1" id="settingsSlMult" value="1.2">
@@ -454,6 +459,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <input type="number" step="0.1" id="settingsSpreadMult" value="1">
         <button class="secondary-btn" onclick="saveTradeParams()">💾 Save</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
         <div class="ballistic-header">💰 RISK</div>
         <label>Balance (USD)</label>
         <input type="number" id="settingsBalance" value="1000">
@@ -461,6 +467,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <input type="number" step="0.1" id="settingsRiskPct" value="1.0">
         <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save Risk</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
         <div class="ballistic-header">🤖 MODELS</div>
         <label>Gemini models (primary)</label>
         <input type="text" id="settingsGeminiModels">
@@ -471,6 +478,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="secondary-btn" onclick="saveModels()">💾 Save Models</button>
         <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset to Default</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
         <div class="ballistic-header">🔑 API KEYS</div>
         <label>Gemini Key (primary)</label>
         <input type="password" id="settingsGeminiKey">
@@ -482,6 +490,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <input type="text" id="settingsTwelveKey">
         <button class="secondary-btn" onclick="saveKeyField('TWELVE','settingsTwelveKey','TwelveData')">💾 Save TwelveData</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
         <button class="secondary-btn" onclick="testApiKeys()">🧪 Test API Keys</button>
         <button class="secondary-btn" onclick="exportData()">📥 Export History</button>
         <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All</button>
@@ -492,10 +501,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
 <script>
 'use strict';
-/* ═══════════════════════════════════════════════════════════
-   Lutynoel.fx v37.3 — Institutional Master Edition
+/* ═══════════════════════════════════════════════════════════════
+   Lutynoel.fx v37.4 — Anchored Institutional Engine
    Gemini 3.6 Flash (primary) + Mistral NeMo 12B (fallback)
-   ═══════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
@@ -507,7 +516,23 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v37.3';
+const MODELS_VERSION = 'v37.4';
+
+/* ═══ v37.4 — Anchored Engine Constants ═══ */
+const KILLZONES = {
+  LONDON: { startUTC: 7 * 60,  endUTC: 10 * 60, name: 'LONDON_KILLZONE' },
+  NY:     { startUTC: 12 * 60, endUTC: 15 * 60, name: 'NY_KILLZONE' }
+};
+const PROXIMITY_PIPS_DEFAULT = 12;
+const MIN_RR_TP1 = 1.5;
+const SL_ATR_MULT_CAP = 1.5;
+const LOW_VOL_ATR_FRACTION = 0.4;
+const ALERT_COOLDOWN_MS = 90 * 1000;
+
+const ALERT_KEYS = {
+  MUTED: 'lutynoel_alerts_muted',
+  THRESHOLD: 'lutynoel_alert_threshold_pips'
+};
 
 const DEFAULTS = {
   geminiModels:  'gemini-3.6-flash,gemini-2.5-flash',
@@ -541,7 +566,7 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-/* ═════ INSTITUTIONAL MASTER PROMPT (v37.3 core) ═════ */
+/* ═══ INSTITUTIONAL MASTER PROMPT ═══ */
 const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), and Confirmation Indicators.
 
 ═══════════ CONFLUENCE RULES ═══════════
@@ -588,19 +613,6 @@ Respond with ONLY this JSON object, no other text before or after:
   "risk_reward_ratio": "STRING"
 }`;
 
-/* Validator masters (secondary opinions) */
-const VALIDATORS_4 = [
-  { id: 2, name: "Price Action Validator", weight: 0.15, icon: "📊",
-    lens: `You are a PRICE ACTION validator. Read candles: engulfing, pin bar, inside bar, momentum. Vote BUY/SELL/HOLD.
-Respond ONLY JSON: {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2 sentences","fvg_detected":"","choch_detected":"","ob_detected":""}` },
-  { id: 3, name: "Structure Validator", weight: 0.15, icon: "🎯",
-    lens: `You are a MARKET STRUCTURE validator. Identify BOS, CHoCH, HH/HL vs LH/LL, liquidity sweeps. Vote BUY/SELL/HOLD.
-Respond ONLY JSON: {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2 sentences","choch_detected":"","bos_detected":"","sweep_detected":""}` },
-  { id: 4, name: "Session & Volatility", weight: 0.15, icon: "🌍",
-    lens: `You are a SESSION & VOLATILITY validator (no news feed — do not invent news). Sessions UTC: ASIAN 00-07 low | LONDON 07-12 high | LONDON_NY 12-16 very high | NY_PM 16-21 mod | DEAD 21-24 very low. Vote BUY/SELL/HOLD.
-Respond ONLY JSON: {"vote":"BUY"|"SELL"|"HOLD","confidence":0-100,"reasoning":"2 sentences","session_inferred":""}` }
-];
-
 /* ═════ UTILITIES ═════ */
 const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -644,7 +656,82 @@ function getSignalStrength(action, conf) {
   return { label: `⚪ WEAK ${action}`, color: 'var(--muted)', hint: 'Epuka' };
 }
 
-/* ═════ VOICE ═════ */
+/* ═══ SESSION / KILLZONE ═══ */
+function getKillzoneState(now = new Date()) {
+  const m = now.getUTCHours() * 60 + now.getUTCMinutes();
+  let session = 'DEAD_ZONE', inKillzone = false, label = '';
+  if (m >= KILLZONES.LONDON.startUTC && m < KILLZONES.LONDON.endUTC) {
+    session = 'LONDON_KILLZONE'; inKillzone = true; label = '🇬🇧 London KZ';
+  } else if (m >= KILLZONES.NY.startUTC && m < KILLZONES.NY.endUTC) {
+    session = 'NY_KILLZONE'; inKillzone = true; label = '🇺🇸 NY KZ';
+  } else if (m < 7 * 60) {
+    session = 'ASIAN'; label = '🌙 Asian';
+  } else if (m >= 10 * 60 && m < 12 * 60) {
+    session = 'LONDON_MID'; label = '🇬🇧 London mid';
+  } else if (m >= 15 * 60 && m < 21 * 60) {
+    session = 'NY_PM'; label = '🇺🇸 NY PM';
+  } else {
+    session = 'DEAD_ZONE'; label = '💀 Dead zone';
+  }
+  return { session, inKillzone, label, utcMinutes: m };
+}
+
+/* ═══ DAY KEY HELPERS ═══ */
+function getDayKey(t) { return Math.floor(t / 86400000); }
+function getPreviousDayCandles(candles, currentTime = Date.now()) {
+  if (!Array.isArray(candles) || !candles.length) return [];
+  const todayKey = getDayKey(currentTime);
+  let prevDayKey = null;
+  for (let i = candles.length - 1; i >= 0; i--) {
+    const k = getDayKey(candles[i].time);
+    if (k < todayKey) { prevDayKey = k; break; }
+  }
+  if (prevDayKey === null) return [];
+  return candles.filter(c => getDayKey(c.time) === prevDayKey);
+}
+function getCurrentDayCandles(candles, currentTime = Date.now()) {
+  if (!Array.isArray(candles) || !candles.length) return [];
+  const todayKey = getDayKey(currentTime);
+  return candles.filter(c => getDayKey(c.time) === todayKey);
+}
+
+/* ═══ ANCHORED PREVIOUS-DAY LEVELS ═══ */
+function computeAnchoredLevels(h1Candles, m15Candles) {
+  const prevDayH1  = getPreviousDayCandles(h1Candles);
+  const prevDayM15 = getPreviousDayCandles(m15Candles);
+  if (!prevDayH1.length) return { ok: false, reason: 'No previous-day H1 candles available' };
+
+  const PDH = Math.max(...prevDayH1.map(c => c.high));
+  const PDL = Math.min(...prevDayH1.map(c => c.low));
+  const PDC = prevDayH1[prevDayH1.length - 1].close;
+
+  const vpSource = prevDayM15.length >= 20 ? prevDayM15 : prevDayH1;
+  const vp = calculateVolumeProfile(vpSource, 40);
+
+  const prevDayRange = PDH - PDL;
+  const prevDayATR = calculateATR(
+    prevDayH1.map(c => c.high),
+    prevDayH1.map(c => c.low),
+    prevDayH1.map(c => c.close),
+    14
+  );
+
+  return {
+    ok: true,
+    PDH, PDL, PDC,
+    prevDayPOC: vp?.poc ?? null,
+    prevDayVAH: vp?.vah ?? null,
+    prevDayVAL: vp?.val ?? null,
+    prevDayRange,
+    prevDayATR: prevDayATR || prevDayRange,
+    prevDayCandleCount: prevDayH1.length,
+    prevDayM15Count: prevDayM15.length,
+    anchorDay: new Date(prevDayH1[0].time).toISOString().slice(0, 10),
+    computedAt: Date.now()
+  };
+}
+
+/* ═══ VOICE ═══ */
 const isVoiceEnabled = () => store.get(STORAGE_KEYS.VOICE_ENABLED) !== 'false';
 function saveVoiceSetting() { store.set(STORAGE_KEYS.VOICE_ENABLED, $('settingsVoiceEnabled').value); showToast('✅ Saved'); }
 function speakText(text, o = {}) {
@@ -664,10 +751,10 @@ function speakSignal(pair, action, conf, price, tag) {
   const a = action === 'BUY' ? 'Nunua' : 'Uza';
   speakText(`${tag ? tag + '. ' : ''}${a} ${ps}. Bei ${price.toFixed(2)}. Uhakika asilimia ${conf}. Hakiki chati kabla ya kuingia.`);
 }
-function testVoice() { speakText('Karibu Lutynoel FX. Institutional Master uko tayari.'); }
+function testVoice() { speakText('Karibu Lutynoel FX. Anchored Engine uko tayari.'); }
 function warmUpVoice() { if (!('speechSynthesis' in window)) return; try { const u = new SpeechSynthesisUtterance(''); u.volume = 0; speechSynthesis.speak(u); speechSynthesis.getVoices(); } catch (e) {} }
 
-/* ═════ JSON / FETCH ═════ */
+/* ═══ JSON / FETCH ═══ */
 function safeJsonParse(text) {
   if (!text) return null;
   const clean = String(text).replace(/```json/gi, '').replace(/```/g, '').trim();
@@ -685,7 +772,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   finally { clearTimeout(id); }
 }
 
-/* ═════ AI CALLS — Gemini 3.6 PRIMARY, Mistral NeMo 12B FALLBACK ═════ */
+/* ═══ AI CALLS ═══ */
 const getGeminiKey = () => store.get(STORAGE_KEYS.GEMINI);
 const getMistralKey = () => store.get(STORAGE_KEYS.MISTRAL);
 const getTwelveKey = () => store.get(STORAGE_KEYS.TWELVE);
@@ -712,7 +799,6 @@ async function callMistral(models, messages, maxTokens, timeout) {
   }
   return { err };
 }
-
 async function callGemini(models, parts, timeout) {
   const gk = getGeminiKey();
   if (!gk) return { err: 'Hakuna Gemini key' };
@@ -735,17 +821,14 @@ async function callGemini(models, parts, timeout) {
   }
   return { err };
 }
-
-/* ═══ callLLM: GEMINI FIRST, MISTRAL FALLBACK ═══ */
 async function callLLM({ prompt, images, vision, maxTokens, timeout }) {
   const errs = [];
-  // 1) GEMINI PRIMARY
   const parts = [{ text: prompt }];
   (images || []).forEach(im => { parts.push({ text: `\n${im.label}:` }); parts.push({ inline_data: { mime_type: im.mimeType, data: im.base64 } }); });
   let r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, timeout);
   if (r.result) return r;
   if (r.err) errs.push(r.err);
-  // 2) MISTRAL FALLBACK
+
   let content = prompt, messages;
   if (images && images.length) {
     content = [{ type: 'text', text: prompt }];
@@ -758,96 +841,7 @@ async function callLLM({ prompt, images, vision, maxTokens, timeout }) {
   return { err: errs.join(' | ') || 'Imeshindwa' };
 }
 
-/* ═════ INSTITUTIONAL MASTER CALL ═════ */
-function buildInstitutionalPrompt(pair, lp, h4, h1, m15, inst, htfBias) {
-  let p = `${INSTITUTIONAL_MASTER_PROMPT}\n\n`;
-  p += `PAIR: ${pair}\nPRIMARY TIMEFRAME: M15 (entry) | H1 (trend) | H4 (bias)\nCURRENT PRICE: ${lp}\n`;
-  if (htfBias) p += `HTF EMA BIAS: 4H=${htfBias.h4} | 1H=${htfBias.h1} | Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
-
-  const dump = (name, arr, n) => {
-    if (!Array.isArray(arr)) return;
-    p += `\n═══ ${name} CANDLES (last ${n}) ═══\n`;
-    arr.slice(-n).forEach(c => {
-      p += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`;
-    });
-  };
-  dump('H4', h4, 15);
-  dump('H1', h1, 30);
-  dump('M15', m15, 40);
-
-  if (inst) {
-    p += `\n═══ COMPUTED METRICS (use these EXACT levels for VP data) ═══\n`;
-    if (inst.volumeProfile) {
-      p += `★ VOLUME PROFILE (H1):\n  POC = ${inst.volumeProfile.poc}\n  VAH = ${inst.volumeProfile.vah}\n  VAL = ${inst.volumeProfile.val}\n`;
-    }
-    if (inst.structure) p += `★ MARKET STRUCTURE 1H: ${inst.structure.trend}\n`;
-    if (inst.htfStructure) p += `★ MARKET STRUCTURE 4H: ${inst.htfStructure.trend}\n`;
-    if (inst.ltfStructure) p += `★ MARKET STRUCTURE M15: ${inst.ltfStructure.trend}\n`;
-    if (inst.sweep) p += `★ LIQUIDITY SWEEP: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
-    if (inst.displacement?.detected) p += `★ DISPLACEMENT: ${inst.displacement.direction}\n`;
-    if (inst.orderBlocks?.nearestBull) p += `★ BULL OB: ${inst.orderBlocks.nearestBull.low.toFixed(2)}–${inst.orderBlocks.nearestBull.high.toFixed(2)}${inst.near?.obBull ? ' (NEAR price)' : ''}\n`;
-    if (inst.orderBlocks?.nearestBear) p += `★ BEAR OB: ${inst.orderBlocks.nearestBear.low.toFixed(2)}–${inst.orderBlocks.nearestBear.high.toFixed(2)}${inst.near?.obBear ? ' (NEAR price)' : ''}\n`;
-    if (inst.fvg?.nearestBull) p += `★ BULL FVG: ${inst.fvg.nearestBull.bottom.toFixed(2)}–${inst.fvg.nearestBull.top.toFixed(2)}${inst.near?.fvgBull ? ' (NEAR)' : ''}\n`;
-    if (inst.fvg?.nearestBear) p += `★ BEAR FVG: ${inst.fvg.nearestBear.bottom.toFixed(2)}–${inst.fvg.nearestBear.top.toFixed(2)}${inst.near?.fvgBear ? ' (NEAR)' : ''}\n`;
-    if (inst.rsi) p += `★ RSI(14) H1: ${inst.rsi.toFixed(1)}\n`;
-    if (inst.atr) p += `★ ATR(14) H1: ${inst.atr.toFixed(4)}\n`;
-    if (inst.sar) p += `★ PARABOLIC SAR H1: ${inst.sar.trend} @ ${inst.sar.current.toFixed(2)}\n`;
-    if (inst.killZone) p += `★ SESSION (UTC now): ${inst.killZone.session} (${inst.killZone.quality})\n`;
-    if (inst.supportResistance) {
-      const s = inst.supportResistance;
-      p += `★ DAILY PIVOTS: R3=${s.r3} R2=${s.r2} R1=${s.r1} P=${s.pivot} S1=${s.s1} S2=${s.s2} S3=${s.s3}\n`;
-    }
-  }
-  p += `\n═══ TASK ═══\nProduce HIGH-PROBABILITY trade setup. Use the EXACT POC/VAH/VAL above for volume_profile_data. Use ATR for SL buffer. Give entry_zone (min/max) around current price ± small band.`;
-  return p;
-}
-
-async function callInstitutionalMaster(pair, lp, h4, h1, m15, inst, htfBias) {
-  const prompt = buildInstitutionalPrompt(pair, lp, h4, h1, m15, inst, htfBias);
-  const r = await callLLM({ prompt, maxTokens: 2000, timeout: 90000 });
-  if (!r.result) return { provider: 'Failed', error: r.err, signal_type: 'NO_TRADE', confidence_score: 0, confluences: [] };
-  const j = r.result;
-  return {
-    provider: r.provider,
-    pair: j.pair || pair,
-    timeframe: j.timeframe || 'M15',
-    signal_type: String(j.signal_type || 'NO_TRADE').toUpperCase(),
-    confidence_score: Math.max(0, Math.min(100, parseInt(j.confidence_score) || 0)),
-    entry_zone: j.entry_zone || { min_price: lp, max_price: lp },
-    stop_loss: j.stop_loss || { price: 0, pips: 0 },
-    take_profit: j.take_profit || { tp1: 0, tp2: 0, tp3: 0 },
-    volume_profile_data: j.volume_profile_data || { poc_price: 0, vah_price: 0, val_price: 0, confluence_note: '' },
-    confluences: Array.isArray(j.confluences) ? j.confluences : [],
-    risk_reward_ratio: j.risk_reward_ratio || '—'
-  };
-}
-
-async function callValidator(master, pair, lp, h4, h1, m15, inst) {
-  let p = `${master.lens}\n\nPAIR: ${pair} | Price: ${lp}\n`;
-  const dump = (name, arr, n) => { if (!Array.isArray(arr)) return; p += `\n${name}:\n`; arr.slice(-n).forEach(c => p += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(2)} H:${c.high.toFixed(2)} L:${c.low.toFixed(2)} C:${c.close.toFixed(2)}\n`); };
-  dump('H4', h4, 10); dump('H1', h1, 15); dump('M15', m15, 20);
-  if (inst) {
-    if (inst.volumeProfile) p += `\nVP: POC=${inst.volumeProfile.poc} VAH=${inst.volumeProfile.vah} VAL=${inst.volumeProfile.val}\n`;
-    if (inst.structure) p += `1H Structure: ${inst.structure.trend}\n`;
-    if (inst.sweep) p += `Sweep: ${inst.sweep.type}→${inst.sweep.bias}\n`;
-    if (inst.rsi) p += `RSI: ${inst.rsi.toFixed(1)}\n`;
-    p += `Session: ${inst.killZone?.session || '?'}\n`;
-  }
-  const r = await callLLM({ prompt: p, maxTokens: 800, timeout: 60000 });
-  if (!r.result) return { masterId: master.id, masterName: master.name, masterIcon: master.icon, masterWeight: master.weight, vote: 'HOLD', confidence: 0, reasoning: `❌ ${r.err}`, provider: 'Failed', error: r.err };
-  const vote = String(r.result.vote || 'HOLD').toUpperCase();
-  return {
-    masterId: master.id, masterName: master.name, masterIcon: master.icon, masterWeight: master.weight,
-    vote: ['BUY', 'SELL', 'HOLD'].includes(vote) ? vote : 'HOLD',
-    confidence: Math.max(0, Math.min(100, parseInt(r.result.confidence) || 50)),
-    reasoning: String(r.result.reasoning || ''),
-    chochDetected: r.result.choch_detected || '', bosDetected: r.result.bos_detected || '', sweepDetected: r.result.sweep_detected || '',
-    fvgDetected: r.result.fvg_detected || '', obDetected: r.result.ob_detected || '', sessionInferred: r.result.session_inferred || '',
-    provider: r.provider
-  };
-}
-
-/* ═════ MARKET DATA ═════ */
+/* ═══ MARKET DATA ═══ */
 let twelveNext = 0;
 async function twelveGate() {
   const now = Date.now(), start = Math.max(now, twelveNext);
@@ -912,7 +906,7 @@ async function fetchOHLC(pair, tf, limit = 200, fresh = false) {
   return null;
 }
 
-/* ═════ INDICATORS ═════ */
+/* ═══ INDICATORS ═══ */
 function calculateRSI(closes, period = 14) {
   if (closes.length < period + 1) return null;
   let g = 0, l = 0;
@@ -1018,12 +1012,6 @@ function detectDisplacement(o) {
   if (body > atr * 1.5 && rng > 0 && body / rng > 0.7) return { detected: true, direction: last.close > last.open ? 'BULLISH' : 'BEARISH' };
   return { detected: false };
 }
-function getKillZoneInfo() {
-  const n = new Date(), m = n.getUTCHours() * 60 + n.getUTCMinutes();
-  const z = [['ASIAN', 0, 420, 'LOW'], ['LONDON_OPEN', 420, 720, 'HIGH'], ['LONDON_NY_OVERLAP', 720, 960, 'VERY_HIGH'], ['NY_AFTERNOON', 960, 1260, 'MEDIUM'], ['DEAD_ZONE', 1260, 1440, 'VERY_LOW']];
-  for (const [name, s, e, q] of z) if (m >= s && m < e) return { session: name, quality: q, isActive: q === 'HIGH' || q === 'VERY_HIGH' };
-  return { session: 'DEAD_ZONE', quality: 'VERY_LOW', isActive: false };
-}
 function calculateSupportResistance(o) {
   if (!Array.isArray(o) || o.length < 30) return null;
   const day = t => Math.floor(t / 86400000), today = day(o.at(-1).time);
@@ -1038,34 +1026,77 @@ function calculateSupportResistance(o) {
 }
 const nearZone = (lo, hi, lp, atr) => lp >= lo - 1.5 * atr && lp <= hi + 1.5 * atr;
 
-function calculateInstitutionalMetrics(h4, h1, m15, lp) {
+function computeInstitutionalBias(inst) {
+  let s = 50;
+  const add = (c, v) => { if (c) s += v; };
+  add(inst.structure?.trend === 'BULLISH', 12); add(inst.structure?.trend === 'BEARISH', -12);
+  add(inst.htfStructure?.trend === 'BULLISH', 10); add(inst.htfStructure?.trend === 'BEARISH', -10);
+  add(inst.sweep?.bias === 'BUY', 10); add(inst.sweep?.bias === 'SELL', -10);
+  add(inst.displacement?.direction === 'BULLISH', 8); add(inst.displacement?.direction === 'BEARISH', -8);
+  add(inst.near?.fvgBull, 5); add(inst.near?.fvgBear, -5);
+  add(inst.near?.obBull, 7); add(inst.near?.obBear, -7);
+  s = Math.max(0, Math.min(100, s));
+  const b = s >= 68 ? 'STRONG_BULLISH' : s >= 57 ? 'BULLISH' : s <= 32 ? 'STRONG_BEARISH' : s <= 43 ? 'BEARISH' : 'NEUTRAL';
+  return { score: s, bias: b };
+}
+
+/* ═══ INSTITUTIONAL METRICS (v37.4 — anchored) ═══ */
+function computeInstitutionalMetrics(h4, h1, m15, lp, anchored) {
   if (!Array.isArray(h1) || h1.length < 30) return null;
-  const c = h1.map(d => d.close), h = h1.map(d => d.high), l = h1.map(d => d.low);
+
+  const curH1  = getCurrentDayCandles(h1);
+  const curM15 = getCurrentDayCandles(m15);
+  const flowH1  = curH1.length  >= 15 ? curH1  : h1.slice(-30);
+  const flowM15 = curM15.length >= 30 ? curM15 : (Array.isArray(m15) ? m15.slice(-60) : []);
+
+  const c = flowH1.map(d => d.close);
+  const h = flowH1.map(d => d.high);
+  const l = flowH1.map(d => d.low);
   const atr = calculateATR(h, l, c, 14);
-  const ob = detectOrderBlocks(h1, 60), fvg = detectFVG(h1, 60), a = atr || lp * 0.005;
+  const ob  = detectOrderBlocks(flowH1, 60);
+  const fvg = detectFVG(flowH1, 60);
+  const a   = atr || lp * 0.005;
+
+  const structureH1 = detectStructure(flowH1);
+  const h4Slice = getCurrentDayCandles(h4);
+  const structureH4 = Array.isArray(h4) ? detectStructure(h4Slice.length > 5 ? h4Slice : h4) : null;
+  const structureM15 = flowM15.length ? detectStructure(flowM15) : null;
+  const sweep = detectLiquiditySweep(flowH1);
+  const displacement = detectDisplacement(flowH1);
+
+  const vp = anchored?.ok ? {
+    poc: anchored.prevDayPOC, vah: anchored.prevDayVAH, val: anchored.prevDayVAL, source: 'previous_day_fixed'
+  } : calculateVolumeProfile(flowH1, 40);
+
   const inst = {
     currentPrice: lp,
-    volumeProfile: calculateVolumeProfile(h1, 40),
-    orderBlocks: ob, fvg,
+    anchoredVP: vp,
+    PDH: anchored?.PDH ?? null,
+    PDL: anchored?.PDL ?? null,
+    PDC: anchored?.PDC ?? null,
+    prevDayRange: anchored?.prevDayRange ?? null,
+    prevDayATR: anchored?.prevDayATR ?? null,
+    volumeProfileLive: calculateVolumeProfile(flowH1, 40),
+    orderBlocks: ob,
+    fvg,
     near: {
-      obBull: !!ob.nearestBull && nearZone(ob.nearestBull.low, ob.nearestBull.high, lp, a),
-      obBear: !!ob.nearestBear && nearZone(ob.nearestBear.low, ob.nearestBear.high, lp, a),
+      obBull:  !!ob.nearestBull  && nearZone(ob.nearestBull.low,  ob.nearestBull.high, lp, a),
+      obBear:  !!ob.nearestBear  && nearZone(ob.nearestBear.low,  ob.nearestBear.high, lp, a),
       fvgBull: !!fvg.nearestBull && nearZone(fvg.nearestBull.bottom, fvg.nearestBull.top, lp, a),
       fvgBear: !!fvg.nearestBear && nearZone(fvg.nearestBear.bottom, fvg.nearestBear.top, lp, a)
     },
-    structure: detectStructure(h1),
-    htfStructure: Array.isArray(h4) ? detectStructure(h4) : null,
-    ltfStructure: Array.isArray(m15) ? detectStructure(m15) : null,
-    sweep: detectLiquiditySweep(h1),
-    displacement: detectDisplacement(h1),
-    killZone: getKillZoneInfo(),
-    supportResistance: calculateSupportResistance(h1),
+    structure:    structureH1,
+    htfStructure: structureH4,
+    ltfStructure: structureM15,
+    sweep, displacement,
+    killZone: getKillzoneState(),
+    supportResistance: calculateSupportResistance(flowH1),
     rsi: calculateRSI(c, 14),
-    atr,
-    ema20: calculateSMA(c, 20),
-    ema50: calculateSMA(c, 50),
-    ema200: calculateSMA(c, 200)
+    atr, ema20: calculateSMA(c, 20), ema50: calculateSMA(c, 50), ema200: calculateSMA(c, 200),
+    currentDayH1Count: curH1.length,
+    currentDayM15Count: curM15.length
   };
+  inst.biasScore = computeInstitutionalBias(inst);
   return inst;
 }
 function getHTFBias(h4, h1) {
@@ -1079,7 +1110,371 @@ function getHTFBias(h4, h1) {
   return { h4: a, h1: b, aligned: a === b && a !== 'NEUTRAL' };
 }
 
-/* ═════ PRICE UI ═════ */
+/* ═══ ZERO-HALLUCINATION PRE-CHECK ═══ */
+function preCheckSignalConditions(lp, anchored, m15, inst, pipSize) {
+  if (!anchored?.ok) return { ok: false, reason: 'Anchored levels not available' };
+  if (!inst) return { ok: false, reason: 'Institutional metrics not available' };
+
+  const thresholdPips = getAlertThresholdPips();
+  const threshold = thresholdPips * pipSize;
+
+  const levels = [
+    { name: 'PDH',    price: anchored.PDH },
+    { name: 'PDL',    price: anchored.PDL },
+    { name: 'PD-POC', price: anchored.prevDayPOC },
+    { name: 'PD-VAH', price: anchored.prevDayVAH },
+    { name: 'PD-VAL', price: anchored.prevDayVAL }
+  ].filter(l => l.price != null);
+
+  const nearest = levels.reduce((best, l) => {
+    const d = Math.abs(lp - l.price);
+    return (!best || d < best.dist) ? { ...l, dist: d } : best;
+  }, null);
+
+  const nearKeyLevel = nearest && nearest.dist <= threshold * 2;
+  const nearOB  = inst.near?.obBull || inst.near?.obBear;
+  const nearFVG = inst.near?.fvgBull || inst.near?.fvgBear;
+  const hasRecentSweep = !!inst.sweep;
+  const hasDisplacement = !!inst.displacement?.detected;
+
+  const recentM15 = getCurrentDayCandles(m15).slice(-8);
+  const recentRange = recentM15.length >= 4
+    ? Math.max(...recentM15.map(c => c.high)) - Math.min(...recentM15.map(c => c.low))
+    : 0;
+  const atr = inst.atr || 0;
+  const lowVol = atr > 0 && recentRange < atr * LOW_VOL_ATR_FRACTION;
+
+  const kz = getKillzoneState();
+  const hasContext = nearKeyLevel || nearOB || nearFVG || hasRecentSweep || hasDisplacement;
+
+  if (!hasContext) {
+    return { ok: false, reason: `Price in no-man's-land (nearest ${nearest?.name || 'level'} = ${nearest?.dist.toFixed(5) || 'n/a'})` };
+  }
+
+  return {
+    ok: true, reason: 'Setup context detected',
+    nearLevel: nearest, nearOB, nearFVG, hasRecentSweep, hasDisplacement, lowVol,
+    inKillzone: kz.inKillzone, session: kz.session,
+    tier: (kz.inKillzone && !lowVol) ? 'HIGH_PROBABILITY' : lowVol ? 'LOW_PROBABILITY' : 'MEDIUM_PROBABILITY'
+  };
+}
+
+/* ═══ POST-VALIDATOR ═══ */
+function makeNoTrade(reason, pair = '', anchor = null) {
+  return {
+    pair, timeframe: 'M15', signal_type: 'NO_TRADE', confidence_score: 0,
+    entry_zone: { min_price: 0, max_price: 0 },
+    stop_loss: { price: 0, pips: 0 },
+    take_profit: { tp1: 0, tp2: 0, tp3: 0 },
+    volume_profile_data: {
+      poc_price: anchor?.prevDayPOC ?? 0,
+      vah_price: anchor?.prevDayVAH ?? 0,
+      val_price: anchor?.prevDayVAL ?? 0,
+      confluence_note: reason
+    },
+    confluences: [], risk_reward_ratio: '—',
+    tier: 'REJECTED', rejectReason: reason
+  };
+}
+
+function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyATR) {
+  const issues = [];
+  if (!signal || signal.signal_type === 'NO_TRADE') return { valid: true, signal, issues: [] };
+
+  const isBuy = signal.signal_type === 'BUY';
+  const isSell = signal.signal_type === 'SELL';
+  if (!isBuy && !isSell) return { valid: true, signal, issues: [] };
+
+  const zone = signal.entry_zone || {};
+  const entryMin = parseFloat(zone.min_price) || 0;
+  const entryMax = parseFloat(zone.max_price) || 0;
+  const entry = (entryMin && entryMax) ? (entryMin + entryMax) / 2 : (entryMin || entryMax || currentPrice);
+  const sl  = parseFloat(signal.stop_loss?.price) || 0;
+  const tp1 = parseFloat(signal.take_profit?.tp1) || 0;
+  const tp2 = parseFloat(signal.take_profit?.tp2) || 0;
+  const tp3 = parseFloat(signal.take_profit?.tp3) || 0;
+
+  if (!entry || !sl) {
+    return { valid: false, signal: makeNoTrade('Missing entry or SL', signal.pair, anchored), issues: ['missing_entry_sl'] };
+  }
+
+  if (isBuy && entry <= sl) issues.push(`BUY entry ${entry} ≤ SL ${sl}`);
+  if (isSell && entry >= sl) issues.push(`SELL entry ${entry} ≥ SL ${sl}`);
+
+  const maxDeviation = Math.max(currentPrice * 0.005, 15 * pipSize);
+  if (Math.abs(entry - currentPrice) > maxDeviation) {
+    issues.push(`Entry ${entry.toFixed(5)} too far from market ${currentPrice.toFixed(5)}`);
+  }
+
+  const risk = Math.abs(entry - sl);
+  if (risk <= 0) {
+    issues.push('Zero risk distance');
+  } else {
+    const r1 = Math.abs(tp1 - entry) / risk;
+    const r2 = Math.abs(tp2 - entry) / risk;
+    if (r1 < MIN_RR_TP1) issues.push(`TP1 R:R 1:${r1.toFixed(2)} < 1:${MIN_RR_TP1}`);
+    if (r2 && r2 < MIN_RR_TP1 * 1.2) issues.push(`TP2 R:R too tight`);
+  }
+
+  const dailyATRref = dailyATR || anchored?.prevDayATR || anchored?.prevDayRange;
+  if (dailyATRref && risk > dailyATRref * SL_ATR_MULT_CAP) {
+    issues.push(`SL ${risk.toFixed(5)} > ${SL_ATR_MULT_CAP}× daily ATR`);
+  }
+
+  const confl = Array.isArray(signal.confluences) ? signal.confluences : [];
+  const hasVPNote = (signal.volume_profile_data?.confluence_note || '').length > 10;
+  if (signal.confidence_score > 70 && confl.length < 1 && !hasVPNote) {
+    issues.push('High confidence without FVG/OB/Sweep evidence');
+  }
+
+  if (isBuy && !(tp1 < tp2 && tp2 < tp3)) issues.push('BUY TP order invalid');
+  if (isSell && !(tp1 > tp2 && tp2 > tp3)) issues.push('SELL TP order invalid');
+
+  const kz = getKillzoneState();
+  let adjusted = { ...signal };
+  if (!kz.inKillzone) {
+    adjusted.confidence_score = Math.min(adjusted.confidence_score, 55);
+    adjusted.tier = 'LOW_PROBABILITY';
+    adjusted.killzoneWarning = `Outside killzone (${kz.label})`;
+  } else {
+    adjusted.tier = 'HIGH_PROBABILITY';
+  }
+
+  if (issues.length) {
+    return { valid: false, signal: makeNoTrade(`Validation failed: ${issues.join(' | ')}`, signal.pair, anchored), issues };
+  }
+  return { valid: true, signal: adjusted, issues: [] };
+}
+
+/* ═══ ALERT ENGINE ═══ */
+let audioCtx = null;
+const alertCooldowns = {};
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+  return audioCtx;
+}
+function playBeep(kind = 'touch') {
+  if (isAlertsMuted()) return;
+  const ctx = ensureAudioCtx();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const patterns = {
+    sweep: { freqs: [880, 1320, 1760], duration: 0.14, gap: 0.16, gain: 0.20 },
+    poc:   { freqs: [660, 880],        duration: 0.18, gap: 0.20, gain: 0.16 },
+    touch: { freqs: [440],             duration: 0.14, gap: 0,    gain: 0.14 }
+  };
+  const p = patterns[kind] || patterns.touch;
+  p.freqs.forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const start = now + i * p.gap;
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(p.gain, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0008, start + p.duration);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + p.duration + 0.02);
+  });
+}
+function isAlertsMuted() { return store.get(ALERT_KEYS.MUTED) === 'true'; }
+function setAlertsMuted(muted) {
+  store.set(ALERT_KEYS.MUTED, muted ? 'true' : 'false');
+  const el = $('alertMutedToggle'); if (el) el.checked = muted;
+  ['alertStatusPill', 'alertStatusPill2'].forEach(id => {
+    const pill = $(id);
+    if (pill) {
+      pill.textContent = muted ? '🔕 MUTED' : '🔔 ACTIVE';
+      pill.style.background = muted ? 'rgba(239,68,68,.15)' : 'rgba(16,185,129,.15)';
+      pill.style.color = muted ? 'var(--red)' : 'var(--green)';
+      pill.style.borderColor = muted ? 'var(--red)' : 'var(--green)';
+    }
+  });
+}
+function getAlertThresholdPips() {
+  const v = parseFloat(store.get(ALERT_KEYS.THRESHOLD));
+  return Number.isFinite(v) && v > 0 ? v : PROXIMITY_PIPS_DEFAULT;
+}
+function setAlertThresholdPips(pips) {
+  const v = Math.max(1, Math.min(100, parseFloat(pips) || PROXIMITY_PIPS_DEFAULT));
+  store.set(ALERT_KEYS.THRESHOLD, String(v));
+  const el = $('alertThresholdInput'); if (el) el.value = v;
+  showToast(`✅ Alert threshold: ${v} pips`);
+}
+function checkPriceAlerts(currentPrice, anchored, pipSize, pair) {
+  if (!anchored?.ok || !currentPrice || !pair) return;
+  const threshold = getAlertThresholdPips() * pipSize;
+  const now = Date.now();
+
+  const levels = [
+    { key: 'PDH', price: anchored.PDH,        kind: 'sweep', label: 'PDH Liquidity Sweep' },
+    { key: 'PDL', price: anchored.PDL,        kind: 'sweep', label: 'PDL Liquidity Sweep' },
+    { key: 'POC', price: anchored.prevDayPOC, kind: 'poc',   label: 'PD POC Retest' },
+    { key: 'VAH', price: anchored.prevDayVAH, kind: 'poc',   label: 'PD VAH Test' },
+    { key: 'VAL', price: anchored.prevDayVAL, kind: 'poc',   label: 'PD VAL Test' }
+  ].filter(l => l.price != null);
+
+  levels.forEach(lvl => {
+    const dist = Math.abs(currentPrice - lvl.price);
+    if (dist > threshold) return;
+    const ck = `${pair}:${lvl.key}`;
+    const lastFire = alertCooldowns[ck] || 0;
+    if (now - lastFire < ALERT_COOLDOWN_MS) return;
+    alertCooldowns[ck] = now;
+    fireAlert(lvl, currentPrice, pair);
+  });
+}
+function fireAlert(lvl, price, pair) {
+  const title = lvl.kind === 'sweep' ? `⚡ LIQUIDITY SWEEP — ${pair}` : `🎯 ${lvl.label} — ${pair}`;
+  const body = `${lvl.label} @ ${price.toFixed(5)}`;
+  playBeep(lvl.kind === 'sweep' ? 'sweep' : 'poc');
+  showToast(`${title} — ${body}`, 6000);
+  if ('Notification' in window && Notification.permission === 'granted') {
+    try { new Notification(title, { body, tag: `lutynoel-${lvl.key}` }); } catch (e) {}
+  }
+  if (navigator.vibrate) navigator.vibrate(lvl.kind === 'sweep' ? [220, 90, 220] : [160]);
+}
+
+/* ═══ PROMPT BUILDER ═══ */
+function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz }) {
+  let p = `${INSTITUTIONAL_MASTER_PROMPT}\n\n`;
+
+  p += `═══ ANCHORED PREVIOUS-DAY LEVELS (FIXED, DO NOT MODIFY) ═══\n`;
+  p += `Anchor Day: ${anchored.anchorDay}\n`;
+  p += `PDH (Prev Day High):  ${anchored.PDH.toFixed(5)}\n`;
+  p += `PDL (Prev Day Low):   ${anchored.PDL.toFixed(5)}\n`;
+  p += `PDC (Prev Day Close): ${anchored.PDC.toFixed(5)}\n`;
+  p += `PD-POC: ${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : 'N/A'}\n`;
+  p += `PD-VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : 'N/A'}\n`;
+  p += `PD-VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : 'N/A'}\n`;
+  p += `Prev-Day Range (daily ATR proxy): ${anchored.prevDayRange.toFixed(5)}\n`;
+  p += `Prev-Day ATR(14): ${(anchored.prevDayATR || anchored.prevDayRange).toFixed(5)}\n\n`;
+
+  p += `═══ SESSION STATE ═══\n`;
+  p += `Session: ${kz.session} | Killzone: ${kz.inKillzone ? 'YES ✅' : 'NO ⚠️ — apply LOW_PROBABILITY tier'}\n\n`;
+
+  p += `═══ LIVE MARKET ═══\n`;
+  p += `PAIR: ${pair} | Current Price: ${lp.toFixed(5)}\n`;
+  if (htfBias) p += `HTF EMA Bias: 4H=${htfBias.h4} | 1H=${htfBias.h1} | Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
+
+  const dump = (name, arr, n) => {
+    if (!Array.isArray(arr) || !arr.length) return;
+    p += `\n═══ ${name} — CURRENT-DAY (last ${Math.min(n, arr.length)}) ═══\n`;
+    arr.slice(-n).forEach(c =>
+      p += `${c.close >= c.open ? 'BULL' : 'BEAR'} O:${c.open.toFixed(5)} H:${c.high.toFixed(5)} L:${c.low.toFixed(5)} C:${c.close.toFixed(5)}\n`
+    );
+  };
+  dump('H4',  currentH4,  12);
+  dump('H1',  currentH1,  20);
+  dump('M15', currentM15, 30);
+
+  if (inst) {
+    p += `\n═══ COMPUTED LIVE METRICS ═══\n`;
+    if (inst.rsi) p += `RSI(14) H1: ${inst.rsi.toFixed(1)}\n`;
+    if (inst.atr) p += `ATR(14) H1: ${inst.atr.toFixed(5)}\n`;
+    if (inst.structure)    p += `1H Structure:  ${inst.structure.trend}\n`;
+    if (inst.htfStructure) p += `4H Structure:  ${inst.htfStructure.trend}\n`;
+    if (inst.ltfStructure) p += `M15 Structure: ${inst.ltfStructure.trend}\n`;
+    if (inst.sweep) p += `Recent Sweep: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
+    if (inst.displacement?.detected) p += `Displacement: ${inst.displacement.direction}\n`;
+    if (inst.orderBlocks?.nearestBull)
+      p += `Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(5)}–${inst.orderBlocks.nearestBull.high.toFixed(5)}${inst.near?.obBull ? ' (NEAR)' : ''}\n`;
+    if (inst.orderBlocks?.nearestBear)
+      p += `Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(5)}–${inst.orderBlocks.nearestBear.high.toFixed(5)}${inst.near?.obBear ? ' (NEAR)' : ''}\n`;
+    if (inst.fvg?.nearestBull)
+      p += `Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(5)}–${inst.fvg.nearestBull.top.toFixed(5)}${inst.near?.fvgBull ? ' (NEAR)' : ''}\n`;
+    if (inst.fvg?.nearestBear)
+      p += `Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(5)}–${inst.fvg.nearestBear.top.toFixed(5)}${inst.near?.fvgBear ? ' (NEAR)' : ''}\n`;
+  }
+
+  p += `\n═══ MANDATORY TRADE CONSTRAINTS (DAY TRADING) ═══\n`;
+  p += `- DAY TRADING ONLY. No overnight holds. Max 2–3 trades per session.\n`;
+  p += `- Use the exact PD-POC / PD-VAH / PD-VAL anchors above for volume_profile_data.\n`;
+  p += `- Entry MUST be near PDH, PDL, PD-POC, PD-VAH, PD-VAL, an FVG, or an OB. Otherwise NO_TRADE.\n`;
+  p += `- Stop Loss MUST NOT exceed ${SL_ATR_MULT_CAP}× daily ATR (= ${((anchored.prevDayATR || anchored.prevDayRange) * SL_ATR_MULT_CAP).toFixed(5)}).\n`;
+  p += `- Minimum R:R for TP1 = 1:${MIN_RR_TP1}. Target 1:2 to 1:3 realistically intraday.\n`;
+  p += `- TP1/TP2 MUST stay within today's expected range (≤ ${anchored.prevDayRange.toFixed(5)} from entry).\n`;
+  p += `- If ANY setup criterion is ambiguous → return signal_type:"NO_TRADE", confidence_score:0.\n`;
+  if (!kz.inKillzone) {
+    p += `- Outside killzone → keep confidence_score ≤ 55 and mark LOW_PROBABILITY in confluences.\n`;
+  }
+  return p;
+}
+
+/* ═══ MAIN INSTITUTIONAL CALL ═══ */
+async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, pipSize) {
+  const pre = preCheckSignalConditions(lp, anchored, currentM15, inst, pipSize);
+  if (!pre.ok) {
+    return {
+      provider: 'PreCheck', pair, timeframe: 'M15',
+      signal_type: 'NO_TRADE', confidence_score: 0,
+      entry_zone: { min_price: lp, max_price: lp },
+      stop_loss: { price: 0, pips: 0 },
+      take_profit: { tp1: 0, tp2: 0, tp3: 0 },
+      volume_profile_data: {
+        poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
+        val_price: anchored.prevDayVAL ?? 0, confluence_note: pre.reason
+      },
+      confluences: [], risk_reward_ratio: '—',
+      tier: 'REJECTED', rejectReason: pre.reason, preCheck: pre
+    };
+  }
+
+  const kz = getKillzoneState();
+  const prompt = buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz });
+
+  const r = await callLLM({ prompt, maxTokens: 2000, timeout: 90000 });
+  if (!r.result) {
+    return {
+      provider: 'Failed', pair, timeframe: 'M15',
+      signal_type: 'NO_TRADE', confidence_score: 0,
+      entry_zone: { min_price: lp, max_price: lp },
+      stop_loss: { price: 0, pips: 0 },
+      take_profit: { tp1: 0, tp2: 0, tp3: 0 },
+      volume_profile_data: {
+        poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
+        val_price: anchored.prevDayVAL ?? 0, confluence_note: r.err || 'LLM failed'
+      },
+      confluences: [], risk_reward_ratio: '—',
+      tier: 'FAILED', rejectReason: r.err
+    };
+  }
+
+  const j = r.result;
+  let signal = {
+    provider: r.provider,
+    pair: j.pair || pair,
+    timeframe: j.timeframe || 'M15',
+    signal_type: String(j.signal_type || 'NO_TRADE').toUpperCase(),
+    confidence_score: Math.max(0, Math.min(100, parseInt(j.confidence_score) || 0)),
+    entry_zone: j.entry_zone || { min_price: lp, max_price: lp },
+    stop_loss: j.stop_loss || { price: 0, pips: 0 },
+    take_profit: j.take_profit || { tp1: 0, tp2: 0, tp3: 0 },
+    volume_profile_data: j.volume_profile_data || {
+      poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
+      val_price: anchored.prevDayVAL ?? 0, confluence_note: ''
+    },
+    confluences: Array.isArray(j.confluences) ? j.confluences : [],
+    risk_reward_ratio: j.risk_reward_ratio || '—'
+  };
+
+  const dailyATR = anchored.prevDayATR || anchored.prevDayRange;
+  const check = validateSignalIntegrity(signal, lp, pipSize, anchored, dailyATR);
+
+  return {
+    ...check.signal,
+    provider: r.provider,
+    validationIssues: check.issues,
+    preCheck: pre,
+    tier: check.signal.tier || (check.valid ? 'HIGH_PROBABILITY' : 'REJECTED')
+  };
+}
+
+/* ═══ PRICE UI ═══ */
 let priceMeta = null;
 function onManualPrice() {
   const v = parseFloat($('livePrice').value);
@@ -1103,6 +1498,15 @@ async function fetchLivePrice() {
     st.className = 'price-status live';
     $('priceStatusText').innerHTML = `✅ LIVE: ${price.toFixed(spec.decimals)}`;
     $('priceTime').innerText = new Date().toLocaleTimeString();
+
+    // Alerts check
+    if (window.marketData?.pair === pair) {
+      const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15);
+      if (anchored?.ok) {
+        window.marketData.anchored = anchored;
+        checkPriceAlerts(price, anchored, spec.pipSize, pair);
+      }
+    }
   } catch (e) {
     st.className = 'price-status error';
     $('priceStatusText').innerHTML = `❌ ${esc(e.message)}`;
@@ -1127,11 +1531,6 @@ function onPairChange() {
   $('resultsContainer').style.display = 'none';
   fetchLivePrice();
 }
-async function onSSPairChange() {
-  const pair = $('ssPair').value;
-  $('ssLivePrice').value = '';
-  try { const p = await getLivePrice(pair); $('ssLivePrice').value = p.toFixed(PAIR_SPECS[pair].decimals); } catch (e) { showToast('Weka bei kwa mkono: ' + e.message, 4500); }
-}
 async function fetchAllMarketData() {
   const pair = $('selectedPair').value;
   const btn = $('fetchDataBtn');
@@ -1149,26 +1548,33 @@ async function fetchAllMarketData() {
       return d;
     };
     const h4 = await get('data4H', '4h'), h1 = await get('data1H', '1h'), m15 = await get('data15M', '15m');
-    if (!h1 || !m15) { $('chartPreview').innerHTML = `<div class="error-box">❌ Data haikupatikana: ${esc(lastDataError)}</div>`; return; }
+    if (!h1 || !m15) { $('chartPreview').innerHTML = `<div class="error-box">❌ ${esc(lastDataError)}</div>`; return; }
+
+    const anchored = computeAnchoredLevels(h1, m15);
     const lp = parseFloat($('livePrice').value) || h1.at(-1).close;
-    const inst = calculateInstitutionalMetrics(h4, h1, m15, lp);
-    window.marketData = { pair, h4, h1, m15, inst, fetchedAt: Date.now() };
+    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored);
+    window.marketData = { pair, h4, h1, m15, inst, anchored, fetchedAt: Date.now() };
+
     set('dataIndicators', !!inst, inst ? 'READY ✓' : 'FAIL');
-    if (inst) {
-      let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)}</div>`;
-      if (inst.volumeProfile) h += `<div>VP: POC <strong style="color:var(--accent)">${inst.volumeProfile.poc.toFixed(2)}</strong> | VAH <strong style="color:var(--red)">${inst.volumeProfile.vah.toFixed(2)}</strong> | VAL <strong style="color:var(--green)">${inst.volumeProfile.val.toFixed(2)}</strong></div>`;
-      h += `<div>1H: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
-      if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(4) : '—'}</div>`;
-      h += `<div>⏰ ${inst.killZone.session} (${inst.killZone.quality})</div>`;
+    if (inst && anchored.ok) {
+      const kz = getKillzoneState();
+      let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)} — Anchor: ${anchored.anchorDay}</div>`;
+      h += `<div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(5)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(5)}</strong> | PDC: <strong>${anchored.PDC.toFixed(5)}</strong></div>`;
+      if (anchored.prevDayPOC != null) {
+        h += `<div>VP: POC <strong style="color:var(--accent)">${anchored.prevDayPOC.toFixed(5)}</strong> | VAH ${anchored.prevDayVAH.toFixed(5)} | VAL ${anchored.prevDayVAL.toFixed(5)}</div>`;
+      }
+      h += `<div>1H Structure: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
+      if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(5) : '—'}</div>`;
+      h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
       $('chartPreview').innerHTML = h;
       $('runBtn').disabled = false;
-      showToast('✅ Data ready');
+      showToast('✅ Anchored data ready');
     }
   } catch (e) { showToast(`❌ ${e.message}`); }
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
 }
 
-/* ═════ HISTORY ═════ */
+/* ═══ HISTORY STORE ═══ */
 const loadHist = () => { try { return JSON.parse(store.get(STORAGE_KEYS.HISTORY) || '[]'); } catch (e) { return []; } };
 function saveHist(h) {
   let arr = h.slice(0, 400), dropped = false;
@@ -1187,8 +1593,7 @@ function saveToHistory(r) {
   return ok;
 }
 
-/* ═════ BUILD RECORD ═════ */
-function buildRecord({ source, pair, lp, inst, instMaster, validators, lv }) {
+function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, anchored }) {
   const spec = PAIR_SPECS[pair], act = instMaster.signal_type;
   const spreadPips = spec.spreadPips * getNum('SPREAD_MULT', 1);
   return {
@@ -1201,87 +1606,105 @@ function buildRecord({ source, pair, lp, inst, instMaster, validators, lv }) {
     entryZone: instMaster.entry_zone,
     rr: instMaster.risk_reward_ratio,
     provider: instMaster.provider,
-    validators: validators.map(v => ({ id: v.masterId, name: v.masterName, vote: v.vote, conf: v.confidence, provider: v.provider })),
+    tier: instMaster.tier,
+    rejectReason: instMaster.rejectReason,
+    validators: (validators || []).map(v => ({ id: v.masterId, name: v.masterName, vote: v.vote, conf: v.confidence, provider: v.provider })),
     instScore: inst?.biasScore?.score ?? null,
-    session: inst?.killZone?.session || getKillZoneInfo().session,
-    tracked: act !== 'HOLD' && act !== 'NO_TRADE' && !!lv,
+    session: inst?.killZone?.session || getKillZoneState().session,
+    anchored: anchored ? {
+      PDH: anchored.PDH, PDL: anchored.PDL, PDC: anchored.PDC,
+      POC: anchored.prevDayPOC, VAH: anchored.prevDayVAH, VAL: anchored.prevDayVAL,
+      anchorDay: anchored.anchorDay
+    } : null,
+    tracked: act !== 'HOLD' && act !== 'NO_TRADE' && !!lv && instMaster.tier !== 'REJECTED',
     bt: null
   };
 }
 
-/* ═════ RUN ANALYSIS ═════ */
+/* ═══ RUN ANALYSIS ═══ */
 async function runAnalysis() {
   if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key angalau moja.'); return; }
+
   const md = window.marketData, pair = $('selectedPair').value;
   if (!md || !md.h1 || md.pair !== pair) { alert('Data si ya pair hii. Bonyeza "Fetch All Data".'); return; }
+
   const lp = parseFloat($('livePrice').value);
   if (!(lp > 0)) { alert('Weka bei ya sasa.'); return; }
   if (!priceMeta || priceMeta.pair !== pair) { alert('Bei haijahakikiwa. Bonyeza 🔄 Refresh.'); return; }
-  const lastClose = md.h1.at(-1).close;
-  if (Math.abs(lp - lastClose) / lastClose > 0.03) { alert(`Bei inatofautiana >3% na candle ya mwisho (${lastClose}).`); return; }
 
+  const spec = PAIR_SPECS[pair];
   const { h4, h1, m15 } = md;
-  const inst = calculateInstitutionalMetrics(h4, h1, m15, lp);
-  const spec = PAIR_SPECS[pair], htfBias = getHTFBias(h4, h1);
+
+  const anchored = md.anchored && md.anchored.ok
+    ? md.anchored
+    : computeAnchoredLevels(h1, m15);
+  if (!anchored.ok) { alert('Hakuna prev-day candles. Fetch data tena.'); return; }
+  md.anchored = anchored;
+
+  const curH1  = getCurrentDayCandles(h1);
+  const curM15 = getCurrentDayCandles(m15);
+  const curH4  = getCurrentDayCandles(h4);
+  const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored);
+  const htfBias = getHTFBias(h4, h1);
+  const kz = getKillzoneState();
 
   const btn = $('runBtn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Institutional Master analyzing...';
+
   const container = $('resultsContainer');
   container.style.display = 'block';
-  container.innerHTML = `<div class="card"><div class="ballistic-header">🏛️ INSTITUTIONAL MASTER</div><div id="progBox"><div style="text-align:center;color:var(--muted);"><span class="spinner"></span> AI inachambua Volume Profile, SMC, Indicators...</div></div></div>`;
-  const prog = $('progBox');
+  container.innerHTML = `
+    <div class="card">
+      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.4)</div>
+      <div style="font-size:11px;line-height:1.8;color:var(--muted);">
+        <div>Anchor Day: <strong style="color:var(--accent)">${anchored.anchorDay}</strong></div>
+        <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(5)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(5)}</strong></div>
+        <div>PD-POC: <strong style="color:var(--accent)">${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : '—'}</strong> | VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : '—'} | VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : '—'}</div>
+        <div>Session: <strong style="color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'}">${kz.label}</strong></div>
+      </div>
+      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pre-check + LLM + validation...</div>
+    </div>`;
 
-  // 1) Institutional Master (primary decider)
-  const instMaster = await callInstitutionalMaster(pair, lp, h4, h1, m15, inst, htfBias);
-  prog.innerHTML = `<div class="master-card ${instMaster.signal_type === 'BUY' ? 'buy' : instMaster.signal_type === 'SELL' ? 'sell' : 'hold'}">
-    <div class="master-header"><div class="master-name">🏛️ Institutional Master</div>
-    <div class="master-vote vote-${instMaster.signal_type === 'BUY' ? 'buy' : instMaster.signal_type === 'SELL' ? 'sell' : 'hold'}">${instMaster.signal_type} • ${instMaster.confidence_score}%</div></div>
-    <div class="master-desc">${esc((instMaster.confluences || []).join(' • ') || '—')}</div>
-    <div style="margin-top:8px;font-size:9px;color:var(--muted);">Provider: ${esc(instMaster.provider)}</div>
-  </div><div style="text-align:center;color:var(--muted);font-size:11px;"><span class="spinner"></span> Validators wakichunguza...</div>`;
+  const instMaster = await callInstitutionalMaster(
+    pair, lp, anchored, curH1, curM15, curH4, inst, htfBias, spec.pipSize
+  );
 
-  // 2) Validators (secondary)
-  const validators = [];
-  for (const v of VALIDATORS_4) {
-    const r = await callValidator(v, pair, lp, h4, h1, m15, inst);
-    validators.push(r);
-    await sleep(1500);
-  }
-
-  // 3) Levels: use Institutional Master's values if given, else compute
   let lv = null;
-  if (instMaster.signal_type === 'BUY' || instMaster.signal_type === 'SELL') {
+  if ((instMaster.signal_type === 'BUY' || instMaster.signal_type === 'SELL') && instMaster.tier !== 'REJECTED') {
     const ez = instMaster.entry_zone || {};
     const entry = ((ez.min_price || lp) + (ez.max_price || lp)) / 2;
-    const sl = instMaster.stop_loss?.price || (instMaster.signal_type === 'BUY' ? lp - (inst?.atr || lp * 0.005) * 1.2 : lp + (inst?.atr || lp * 0.005) * 1.2);
-    const t1 = instMaster.take_profit?.tp1 || 0, t2 = instMaster.take_profit?.tp2 || 0, t3 = instMaster.take_profit?.tp3 || 0;
+    const sl = instMaster.stop_loss?.price || 0;
+    const t1 = instMaster.take_profit?.tp1 || 0;
+    const t2 = instMaster.take_profit?.tp2 || 0;
+    const t3 = instMaster.take_profit?.tp3 || 0;
     const pips = d => Math.round(Math.abs(d) / spec.pipSize);
     lv = {
       entry, sl, tp1: t1, tp2: t2, tp3: t3,
-      slPips: pips(sl - entry),
+      slPips:  pips(sl - entry),
       tp1Pips: pips(t1 - entry),
       tp2Pips: pips(t2 - entry),
       tp3Pips: pips(t3 - entry)
     };
   }
 
-  const rec = buildRecord({ source: 'live', pair, lp, inst, instMaster, validators, lv });
+  const rec = buildRecord({ source: 'live', pair, lp, inst, instMaster, validators: [], lv, anchored });
   saveToHistory(rec);
-  renderSignalCard(rec, spec, inst, instMaster, validators, 'resultsContainer');
+  renderSignalCard(rec, spec, inst, instMaster, [], 'resultsContainer');
 
   if (instMaster.signal_type === 'BUY' || instMaster.signal_type === 'SELL') {
-    speakSignal(pair, instMaster.signal_type, instMaster.confidence_score, lp, 'Institutional');
+    speakSignal(pair, instMaster.signal_type, instMaster.confidence_score, lp,
+      instMaster.tier === 'LOW_PROBABILITY' ? 'Low probability' : 'Institutional');
   } else {
     speakText('Hakuna setup wazi. Subiri.');
   }
 
   btn.disabled = false;
-  btn.innerHTML = '🚀 RUN INSTITUTIONAL ANALYSIS';
+  btn.innerHTML = '🚀 RUN ANCHORED ANALYSIS';
   setTimeout(() => updateBacktest(), 500);
 }
 
-/* ═════ SIGNAL CARD RENDER (modern) ═════ */
+/* ═══ SIGNAL CARD RENDER ═══ */
 function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) {
   const a = rec.action;
   const isBuy = a === 'BUY', isSell = a === 'SELL';
@@ -1289,12 +1712,30 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
   const f = x => (x == null || isNaN(x)) ? '—' : Number(x).toFixed(spec.decimals);
   const conf = rec.conf;
   const cls = isBuy ? 'buy' : isSell ? 'sell' : 'wait';
-  const sigLabel = isBuy ? 'BUY' : isSell ? 'SELL' : 'NO TRADE';
+  const sigLabel = isBuy ? 'BUY' : isSell ? 'SELL' : (instMaster.tier === 'REJECTED' ? 'REJECTED' : 'NO TRADE');
 
   const vp = instMaster.volume_profile_data || {};
   const confColors = conf >= 75 ? 'var(--green)' : conf >= 55 ? 'var(--yellow)' : 'var(--muted)';
 
-  // Confluence chips
+  const tier = instMaster.tier || 'MEDIUM_PROBABILITY';
+  const tierClass = tier === 'HIGH_PROBABILITY' ? 'tier-high'
+                  : tier === 'MEDIUM_PROBABILITY' ? 'tier-med'
+                  : tier === 'LOW_PROBABILITY' ? 'tier-low' : 'tier-rejected';
+  const tierLabel = tier.replace(/_/g, ' ');
+
+  // Anchored header
+  const anc = rec.anchored;
+  const anchorBlock = anc ? `
+    <div class="anchor-box">
+      <div style="font-size:10px;color:var(--inst);font-weight:900;letter-spacing:.8px;margin-bottom:6px;">🏛️ ANCHORED PREVIOUS-DAY LEVELS — ${esc(anc.anchorDay || '—')}</div>
+      <div class="anchor-row"><span style="color:var(--muted);">PDH</span><span style="color:var(--red);font-weight:bold;">${f(anc.PDH)}</span></div>
+      <div class="anchor-row"><span style="color:var(--muted);">PDC</span><span style="color:var(--text);font-weight:bold;">${f(anc.PDC)}</span></div>
+      <div class="anchor-row"><span style="color:var(--muted);">PDL</span><span style="color:var(--green);font-weight:bold;">${f(anc.PDL)}</span></div>
+      ${anc.POC != null ? `<div class="anchor-row" style="border-top:1px dashed rgba(139,92,246,.3);margin-top:6px;padding-top:6px;"><span style="color:var(--muted);">PD-POC</span><span style="color:var(--accent);font-weight:bold;">${f(anc.POC)}</span></div>` : ''}
+      ${anc.VAH != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAH</span><span style="color:var(--red);">${f(anc.VAH)}</span></div>` : ''}
+      ${anc.VAL != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAL</span><span style="color:var(--green);">${f(anc.VAL)}</span></div>` : ''}
+    </div>` : '';
+
   const chips = (instMaster.confluences || []).slice(0, 6).map(c => {
     const low = c.toLowerCase();
     let cls = 'chip-blue';
@@ -1302,13 +1743,14 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     else if (low.includes('choch') || low.includes('bos') || low.includes('structure')) cls = 'chip-buy';
     else if (low.includes('fvg')) cls = 'chip-cyan';
     else if (low.includes('ob') || low.includes('order block')) cls = 'chip-purple';
+    else if (low.includes('low') && low.includes('prob')) cls = 'chip-red';
     return `<span class="chip ${cls}">✓ ${esc(c)}</span>`;
   }).join('');
 
-  // Copy signal text
   const copyText = [
     `📊 SIGNAL: ${rec.pair} (${instMaster.timeframe || 'M15'})`,
     `Direction: ${sigLabel}`,
+    `Tier: ${tierLabel}`,
     `Confidence: ${conf}%`,
     `─────────────────`,
     `Entry Zone: ${f(rec.entryZone?.min_price)} – ${f(rec.entryZone?.max_price)}`,
@@ -1318,15 +1760,15 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `TP3: ${f(rec.tp3)} (${rec.tp3Pips}p)`,
     `R:R = ${rec.rr}`,
     `─────────────────`,
-    `VP: POC=${f(vp.poc_price)} VAH=${f(vp.vah_price)} VAL=${f(vp.val_price)}`,
+    `PDH: ${f(anc?.PDH)} | PDL: ${f(anc?.PDL)} | PDC: ${f(anc?.PDC)}`,
+    `PD-POC: ${f(anc?.POC)} | VAH: ${f(anc?.VAH)} | VAL: ${f(anc?.VAL)}`,
     `Confluences: ${(instMaster.confluences || []).join(' | ')}`,
-    `— Lutynoel.fx v37.3`
+    `— Lutynoel.fx v37.4`
   ].join('\n');
   window.__lastCopyText = copyText;
 
   const html = `
   <div class="sig-wrap">
-    <!-- HEADER -->
     <div class="sig-head">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
         <div style="display:flex;align-items:center;gap:12px;">
@@ -1336,18 +1778,24 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
               <h2 style="font-size:18px;font-weight:900;margin:0;">${esc(rec.pair)}</h2>
               <span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(51,65,85,.6);color:#cbd5e1;border:1px solid rgba(51,65,85,.8);">${esc(instMaster.timeframe || 'M15')}</span>
             </div>
-            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Institutional • ${esc(instMaster.provider)}</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">Institutional • ${esc(instMaster.provider || '—')}</div>
           </div>
         </div>
-        <div class="sig-badge ${cls}">
-          ${isBuy || isSell ? `<span class="pulse-dot ${isSell ? 'red' : ''}"></span>` : ''}
-          ${sigLabel}
+        <div style="text-align:right;">
+          <div class="sig-badge ${cls}">
+            ${isBuy || isSell ? `<span class="pulse-dot ${isSell ? 'red' : ''}"></span>` : ''}
+            ${sigLabel}
+          </div>
+          <div style="margin-top:6px;"><span class="tier-pill ${tierClass}">${esc(tierLabel)}</span></div>
         </div>
       </div>
     </div>
 
-    <!-- BODY -->
     <div class="sig-body">
+      ${anchorBlock}
+
+      ${instMaster.rejectReason ? `<div class="warn-box" style="margin-bottom:12px;"><strong>Guardrail:</strong> ${esc(instMaster.rejectReason)}</div>` : ''}
+
       ${isBuy || isSell ? `
       <div class="lvl-row entry">
         <div style="display:flex;align-items:center;gap:12px;">
@@ -1389,11 +1837,10 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
         </div>
       </div>
       ` : `
-      <div class="warn-box" style="text-align:center;">⚠️ Hakuna setup ya high-probability kwa sasa. Subiri.</div>
+      <div class="warn-box" style="text-align:center;">⚠️ Hakuna high-probability setup kwa sasa. ${instMaster.preCheck?.reason ? esc(instMaster.preCheck.reason) : 'Subiri confluence.'}</div>
       `}
     </div>
 
-    <!-- CONFIDENCE -->
     ${isBuy || isSell ? `
     <div style="padding:0 20px 16px;">
       <div class="mini-box" style="background:rgba(11,18,32,.6);">
@@ -1406,17 +1853,16 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
         <div style="margin-top:10px;display:flex;gap:8px;font-size:10px;color:var(--muted);">
           <span>RR: <strong style="color:var(--accent);">${esc(rec.rr)}</strong></span>
           <span>|</span>
-          <span>POC: <strong style="color:var(--accent);font-family:ui-monospace,monospace;">${f(vp.poc_price)}</strong></span>
+          <span>Session: <strong style="color:var(--accent);">${esc(rec.session || '—')}</strong></span>
         </div>
       </div>
     </div>
     ` : ''}
 
-    <!-- VP PANEL -->
     ${vp.poc_price ? `
     <div style="padding:0 20px 16px;">
       <div class="mini-box" style="background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
-        <div class="ballistic-header" style="margin-bottom:8px;">📊 VOLUME PROFILE</div>
+        <div class="ballistic-header" style="margin-bottom:8px;">📊 PREVIOUS-DAY VOLUME PROFILE</div>
         <div class="grid-3">
           <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;">VAH</div><div style="font-size:12px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;">${f(vp.vah_price)}</div></div>
           <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;">POC</div><div style="font-size:12px;font-weight:900;color:var(--accent);font-family:ui-monospace,monospace;">${f(vp.poc_price)}</div></div>
@@ -1427,34 +1873,19 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     </div>
     ` : ''}
 
-    <!-- VALIDATORS -->
-    ${validators.length ? `
-    <div style="padding:0 20px 16px;">
-      <div class="ballistic-header">👥 VALIDATORS (Secondary)</div>
-      ${validators.map(v => {
-        const vc = v.vote === 'BUY' ? 'var(--green)' : v.vote === 'SELL' ? 'var(--red)' : 'var(--yellow)';
-        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(11,18,32,.5);border-radius:8px;margin-bottom:6px;border-left:3px solid ${vc};">
-          <div style="font-size:11px;">${v.masterIcon} ${esc(v.masterName)}</div>
-          <div style="font-size:11px;font-weight:800;color:${vc};">${v.vote} ${v.confidence}%</div>
-        </div>`;
-      }).join('')}
-    </div>
-    ` : ''}
-
-    <!-- FOOTER -->
+    ${isBuy || isSell ? `
     <div class="sig-foot">
-      ${isBuy || isSell ? `
       <button class="copy-btn" onclick="copySignalText()">
         <svg xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
         </svg>
         Copy Signal Data
       </button>
-      ` : ''}
       <p style="text-align:center;font-size:10px;color:var(--muted);margin:10px 0 0;">
         ⚠️ Educational tool only — not financial advice.
       </p>
     </div>
+    ` : `<div class="sig-foot"><p style="text-align:center;font-size:10px;color:var(--muted);margin:0;">⚠️ Educational tool only — not financial advice.</p></div>`}
   </div>`;
 
   const c = $(containerId);
@@ -1464,9 +1895,8 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
 
 async function copySignalText() {
   const txt = window.__lastCopyText || '';
-  try {
-    await navigator.clipboard.writeText(txt);
-  } catch (e) {
+  try { await navigator.clipboard.writeText(txt); }
+  catch (e) {
     const ta = document.createElement('textarea');
     ta.value = txt;
     document.body.appendChild(ta);
@@ -1477,98 +1907,7 @@ async function copySignalText() {
   showToast('✅ Signal copied — paste kwenye MT5/broker yako');
 }
 
-/* ═════ SCREENSHOTS ═════ */
-let uploadedScreenshots = { m15: null, h1: null, h4: null };
-function setupScreenshotUploads() {
-  ['m15', 'h1', 'h4'].forEach(tf => {
-    const inp = $(`ssInput-${tf}`);
-    if (!inp || inp.dataset.bound) return;
-    inp.dataset.bound = '1';
-    inp.addEventListener('change', e => {
-      const f = e.target.files[0]; if (!f) return;
-      if (f.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
-      const r = new FileReader();
-      r.onload = ev => {
-        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
-        $(`ssImg-${tf}`).src = ev.target.result;
-        $(`ssPreview-${tf}`).style.display = 'block';
-        $(`tfBox-${tf}`).classList.add('has-image');
-        updateSSUploadStatus();
-      };
-      r.readAsDataURL(f);
-    });
-  });
-}
-function updateSSUploadStatus() {
-  const c = Object.values(uploadedScreenshots).filter(Boolean).length, s = $('ssUploadStatus');
-  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong>`;
-  s.style.borderColor = c ? 'var(--green)' : 'var(--blue)';
-  s.style.color = c ? '#6ee7b7' : '#93c5fd';
-  $('analyzeSSBtn').disabled = c === 0;
-}
-function clearAllScreenshots() {
-  uploadedScreenshots = { m15: null, h1: null, h4: null };
-  ['m15', 'h1', 'h4'].forEach(tf => {
-    $(`ssInput-${tf}`).value = '';
-    $(`ssPreview-${tf}`).style.display = 'none';
-    $(`tfBox-${tf}`).classList.remove('has-image');
-  });
-  updateSSUploadStatus();
-  $('ssResultsContainer').style.display = 'none';
-}
-const shotList = s => [['h4', 'H4 (BIAS)'], ['h1', 'H1 (TREND)'], ['m15', 'M15 (ENTRY)']].filter(([k]) => s[k]).map(([k, label]) => ({ ...s[k], label }));
-
-async function analyzeAllScreenshots() {
-  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key angalau moja.'); return; }
-  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau 1.'); return; }
-  const pair = $('ssPair').value, lp = parseFloat($('ssLivePrice').value), spec = PAIR_SPECS[pair];
-  if (!(lp > 0)) { alert('Weka bei ya sasa.'); return; }
-  const btn = $('analyzeSSBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Analyzing...';
-  const container = $('ssResultsContainer');
-  container.style.display = 'block';
-  container.innerHTML = `<div class="card"><div class="ballistic-header">📸 INSTITUTIONAL MASTER (vision)</div><div style="text-align:center;color:var(--muted);"><span class="spinner"></span> Analyzing screenshots...</div></div>`;
-  try {
-    const prompt = `${INSTITUTIONAL_MASTER_PROMPT}\n\nPAIR: ${pair} | Price: ${lp}\nAnalyze the attached MTF screenshots (H4=BIAS, H1=TREND, M15=ENTRY).`;
-    const r = await callLLM({ prompt, images: shotList(uploadedScreenshots), vision: true, maxTokens: 2500, timeout: 120000 });
-    if (!r.result) throw new Error(r.err || 'Failed');
-    const j = r.result;
-    const instMaster = {
-      provider: r.provider,
-      pair: j.pair || pair,
-      timeframe: j.timeframe || 'M15',
-      signal_type: String(j.signal_type || 'NO_TRADE').toUpperCase(),
-      confidence_score: Math.max(0, Math.min(100, parseInt(j.confidence_score) || 0)),
-      entry_zone: j.entry_zone || { min_price: lp, max_price: lp },
-      stop_loss: j.stop_loss || { price: 0, pips: 0 },
-      take_profit: j.take_profit || { tp1: 0, tp2: 0, tp3: 0 },
-      volume_profile_data: j.volume_profile_data || { poc_price: 0, vah_price: 0, val_price: 0, confluence_note: '' },
-      confluences: Array.isArray(j.confluences) ? j.confluences : [],
-      risk_reward_ratio: j.risk_reward_ratio || '—'
-    };
-    let lv = null;
-    if (instMaster.signal_type === 'BUY' || instMaster.signal_type === 'SELL') {
-      const ez = instMaster.entry_zone || {};
-      const entry = ((ez.min_price || lp) + (ez.max_price || lp)) / 2;
-      const sl = instMaster.stop_loss?.price || lp;
-      const t1 = instMaster.take_profit?.tp1 || 0, t2 = instMaster.take_profit?.tp2 || 0, t3 = instMaster.take_profit?.tp3 || 0;
-      const pips = d => Math.round(Math.abs(d) / spec.pipSize);
-      lv = { entry, sl, tp1: t1, tp2: t2, tp3: t3, slPips: pips(sl - entry), tp1Pips: pips(t1 - entry), tp2Pips: pips(t2 - entry), tp3Pips: pips(t3 - entry) };
-    }
-    const rec = buildRecord({ source: 'screenshot', pair, lp, inst: null, instMaster, validators: [], lv });
-    saveToHistory(rec);
-    renderSignalCard(rec, spec, null, instMaster, [], 'ssResultsContainer');
-    $('ssResultsContainer').scrollIntoView({ behavior: 'smooth' });
-  } catch (e) {
-    showToast(`❌ ${e.message}`);
-    container.innerHTML = `<div class="card"><div class="error-box">Fatal: ${esc(e.message)}</div></div>`;
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '🔍 ANALYZE';
-  }
-}
-
-/* ═════ BACKTEST ═════ */
+/* ═══ BACKTEST ═══ */
 function evalRecord(rec, candles) {
   const spec = PAIR_SPECS[rec.pair];
   if (!candles || !candles.length) return null;
@@ -1687,48 +2026,62 @@ function renderBacktest() {
     ${curve}`;
 }
 
-/* ═════ ORDER FLOW ═════ */
+/* ═══ ANCHORED LEVELS VIEW ═══ */
 async function refreshOrderFlow() {
   const c = $('orderFlowContainer'), pair = $('ofPair').value;
   c.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
   try {
     const h1 = await fetchOHLC(pair, '1h', 200);
     if (!h1) { c.innerHTML = `<div class="disclaimer-box">Failed: ${esc(lastDataError)}</div>`; return; }
-    const h4 = await fetchOHLC(pair, '4h', 200), m15 = await fetchOHLC(pair, '15m', 200);
-    const inst = calculateInstitutionalMetrics(h4, h1, m15, h1.at(-1).close);
-    if (!inst) { c.innerHTML = '<div class="disclaimer-box">Data haitoshi.</div>'; return; }
-    let html = '';
-    if (inst.volumeProfile) {
-      const vp = inst.volumeProfile;
-      html += `<div class="card" style="background:rgba(139,92,246,.08);border-color:var(--inst);">
-        <div class="ballistic-header">📊 VOLUME PROFILE (H1)</div>
+    const m15 = await fetchOHLC(pair, '15m', 200);
+    const h4 = await fetchOHLC(pair, '4h', 200);
+    const anchored = computeAnchoredLevels(h1, m15);
+    if (!anchored.ok) { c.innerHTML = '<div class="disclaimer-box">Hakuna prev-day data.</div>'; return; }
+    const lp = h1.at(-1).close;
+    const spec = PAIR_SPECS[pair];
+    const f = x => x == null ? '—' : Number(x).toFixed(spec.decimals);
+
+    let html = `<div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(6,182,212,.04));border-color:var(--inst);">
+      <div class="ballistic-header">🏛️ ANCHORED LEVELS — ${esc(anchored.anchorDay)}</div>
+      <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.12);margin-bottom:5px;border-left:4px solid var(--red);font-weight:bold;"><span>PDH</span><span>${f(anchored.PDH)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(59,130,246,.12);margin-bottom:5px;border-left:4px solid var(--blue);font-weight:bold;"><span>PDC</span><span>${f(anchored.PDC)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>PDL</span><span>${f(anchored.PDL)}</span></div>
+      <div style="margin-top:10px;font-size:10px;color:var(--muted);">Prev-Day Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)}</div>
+    </div>`;
+
+    if (anchored.prevDayPOC != null) {
+      html += `<div class="card" style="border-color:var(--inst);">
+        <div class="ballistic-header">📊 PREVIOUS-DAY VOLUME PROFILE (FIXED)</div>
         <div class="grid-3">
-          <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">VAH</label><div style="font-weight:bold;color:var(--red);">${vp.vah.toFixed(2)}</div></div>
-          <div class="mini-box" style="text-align:center;"><label style="color:var(--accent);">POC</label><div style="font-weight:bold;color:var(--accent);">${vp.poc.toFixed(2)}</div></div>
-          <div class="mini-box" style="text-align:center;"><label style="color:var(--green);">VAL</label><div style="font-weight:bold;color:var(--green);">${vp.val.toFixed(2)}</div></div>
+          <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">VAH</label><div style="font-weight:bold;color:var(--red);font-family:ui-monospace,monospace;">${f(anchored.prevDayVAH)}</div></div>
+          <div class="mini-box" style="text-align:center;"><label style="color:var(--accent);">POC</label><div style="font-weight:bold;color:var(--accent);font-family:ui-monospace,monospace;">${f(anchored.prevDayPOC)}</div></div>
+          <div class="mini-box" style="text-align:center;"><label style="color:var(--green);">VAL</label><div style="font-weight:bold;color:var(--green);font-family:ui-monospace,monospace;">${f(anchored.prevDayVAL)}</div></div>
         </div>
       </div>`;
     }
-    if (inst.rsi || inst.atr) {
-      html += `<div class="card"><div class="ballistic-header">📈 INDICATORS</div>
+
+    // Live metric snapshot
+    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored);
+    if (inst) {
+      const kz = getKillzoneState();
+      html += `<div class="card">
+        <div class="ballistic-header">📈 LIVE SNAPSHOT</div>
+        <div class="grid-2">
+          <div class="mini-box"><label>Current Price</label><div style="font-weight:bold;color:var(--accent);font-family:ui-monospace,monospace;">${f(lp)}</div></div>
+          <div class="mini-box"><label>Session</label><div style="font-weight:bold;color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'};">${kz.label}</div></div>
+        </div>
         <div class="grid-2">
           ${inst.rsi ? `<div class="mini-box" style="text-align:center;"><label>RSI(14)</label><div style="font-weight:bold;">${inst.rsi.toFixed(1)}</div></div>` : ''}
-          ${inst.atr ? `<div class="mini-box" style="text-align:center;"><label>ATR(14)</label><div style="font-weight:bold;">${inst.atr.toFixed(4)}</div></div>` : ''}
-        </div></div>`;
+          ${inst.atr ? `<div class="mini-box" style="text-align:center;"><label>ATR(14)</label><div style="font-weight:bold;font-family:ui-monospace,monospace;">${inst.atr.toFixed(5)}</div></div>` : ''}
+        </div>
+      </div>`;
     }
-    if (inst.supportResistance) {
-      const sr = inst.supportResistance;
-      html += `<div class="card"><div class="ballistic-header">📐 DAILY PIVOTS</div>`;
-      ['r3', 'r2', 'r1'].forEach(k => html += `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.1);margin-bottom:5px;border-left:3px solid var(--red);font-weight:bold;"><span>${k.toUpperCase()}</span><span>${sr[k]}</span></div>`);
-      html += `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(250,204,21,.2);margin-bottom:5px;border-left:3px solid var(--yellow);font-weight:bold;"><span>⭐ PIVOT</span><span>${sr.pivot}</span></div>`;
-      ['s1', 's2', 's3'].forEach(k => html += `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.1);margin-bottom:5px;border-left:3px solid var(--green);font-weight:bold;"><span>${k.toUpperCase()}</span><span>${sr[k]}</span></div>`);
-      html += `</div>`;
-    }
-    c.innerHTML = html || '<div class="info-box">Data haitoshi.</div>';
+
+    c.innerHTML = html;
   } catch (e) { c.innerHTML = `<div class="disclaimer-box">Error: ${esc(e.message)}</div>`; }
 }
 
-/* ═════ CALCULATORS ═════ */
+/* ═══ CALCULATORS ═══ */
 function calculateRisk() {
   const b = parseFloat($('riskBalance').value) || 1000, r = parseFloat($('riskPercent').value) || 1, sl = parseFloat($('riskSlPips').value) || 30;
   const pair = $('riskPair').value, price = parseFloat(store.get(`price_${pair}`)) || PAIR_SPECS[pair].defaultPrice;
@@ -1745,23 +2098,23 @@ function calculatePips() {
   box.innerHTML = `<div style="border:2px solid var(--accent);border-radius:14px;padding:18px;margin-top:15px;"><div style="font-size:32px;font-weight:900;color:${col};text-align:center;font-family:ui-monospace,monospace;">${p ? '+' : '-'}${Math.abs(diff).toFixed(1)} PIPS</div><div style="text-align:center;font-size:22px;font-weight:bold;color:${col};">${p ? '+' : '-'}$${usd.toFixed(2)}</div></div>`;
 }
 
-/* ═════ HISTORY UI ═════ */
+/* ═══ HISTORY UI ═══ */
 function loadHistory() {
   const c = $('historyList');
   if (!c) return;
   try {
     const h = loadHist();
-    if (!h.length) {
-      c.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);line-height:1.8;">📭 Hakuna historia bado.</div>';
-      return;
-    }
+    if (!h.length) { c.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);line-height:1.8;">📭 Hakuna historia bado.</div>'; return; }
     c.innerHTML = h.map((r, i) => {
       let badge = '⏳';
       if (r.action === 'NO_TRADE' || r.action === 'HOLD') badge = '—';
+      else if (r.tier === 'REJECTED') badge = '🛑';
       else { const mm = r.bt?.models?.[getBtModel()]; if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛'; }
       const st = getSignalStrength(r.action, r.conf || 0);
+      const tierColor = r.tier === 'HIGH_PROBABILITY' ? 'var(--green)' : r.tier === 'LOW_PROBABILITY' ? 'var(--orange)' : r.tier === 'REJECTED' ? 'var(--red)' : 'var(--muted)';
       return `<div class="history-card" onclick="showHistoryDetail(${i})"><div style="flex-grow:1;">
         <strong>${esc(r.pair)} <span style="color:${st.color};">${esc(r.action)}</span></strong> ${badge}
+        <span style="color:${tierColor};font-size:9px;font-weight:bold;"> • ${esc(r.tier || '')}</span>
         <span style="color:var(--muted);font-size:10px;"> ${esc(r.source || '')} • ${r.conf || 0}%</span><br>
         <small style="color:var(--muted);">${esc(r.date || '')}</small>
       </div>
@@ -1774,9 +2127,20 @@ function showHistoryDetail(i) {
     const r = loadHist()[i]; if (!r) return;
     const spec = PAIR_SPECS[r.pair], d = spec?.decimals ?? 2, f = x => x == null || isNaN(x) ? '—' : Number(x).toFixed(d);
     let h = `<h3 style="margin-top:0;color:var(--accent);">${esc(r.pair)} — ${esc(r.action)}</h3>
-      <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${esc(r.source)} • ${r.conf || 0}%</div>`;
+      <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${esc(r.source)} • ${r.conf || 0}% • ${esc(r.tier || '')}</div>`;
+    if (r.anchored) {
+      h += `<div class="mini-box" style="margin:10px 0;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
+        <div style="font-size:10px;color:var(--inst);font-weight:bold;margin-bottom:6px;">ANCHOR: ${esc(r.anchored.anchorDay || '')}</div>
+        <div class="grid-3">
+          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);">PDH</div><div style="font-weight:bold;color:var(--red);font-family:ui-monospace,monospace;">${f(r.anchored.PDH)}</div></div>
+          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);">PDC</div><div style="font-weight:bold;font-family:ui-monospace,monospace;">${f(r.anchored.PDC)}</div></div>
+          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);">PDL</div><div style="font-weight:bold;color:var(--green);font-family:ui-monospace,monospace;">${f(r.anchored.PDL)}</div></div>
+        </div>
+      </div>`;
+    }
     if (r.entry) h += `<table class="tbl" style="margin-top:10px;"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th><th>TP3</th></tr><tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td><td>${f(r.tp3)}</td></tr></table>`;
     if (r.volumeProfile) h += `<div class="mini-box" style="margin:10px 0;"><div class="ballistic-header">📊 VP</div>POC: ${f(r.volumeProfile.poc_price)} | VAH: ${f(r.volumeProfile.vah_price)} | VAL: ${f(r.volumeProfile.val_price)}</div>`;
+    if (r.rejectReason) h += `<div class="warn-box" style="margin-top:10px;"><strong>Rejected:</strong> ${esc(r.rejectReason)}</div>`;
     if (r.bt?.models) h += `<table class="tbl"><tr><th>Exit</th><th>Result</th><th>R</th></tr>${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? rfmt(m.r) : '—'}</td></tr>`).join('')}</table>`;
     openUniversalModal(h);
   } catch (e) { showToast('❌ ' + e.message); }
@@ -1790,16 +2154,23 @@ function updateStats() {
     $('statNetPips').innerText = h.filter(t => t.conf >= 75 && (t.action === 'BUY' || t.action === 'SELL')).length;
     const s = btCalc(h.filter(r => r.tracked), 1);
     $('statWinRate').innerText = s.n ? `${pct(s.wr)} (n=${s.n})` : '—';
+    // Session state display
+    const kz = getKillzoneState();
+    const el = $('sessionStateLabel');
+    if (el) {
+      el.textContent = kz.label + (kz.inKillzone ? ' ✅' : ' ⚠️');
+      el.style.color = kz.inKillzone ? 'var(--green)' : 'var(--orange)';
+    }
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), version: '37.3', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), version: '37.4', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v37.3-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v37.4-${Date.now()}.json`; a.click();
 }
 
-/* ═════ AUTH / SETTINGS ═════ */
+/* ═══ AUTH / SETTINGS ═══ */
 function saveKeys(n, g, m, t) {
   store.set(STORAGE_KEYS.NAME, n);
   if (g) store.set(STORAGE_KEYS.GEMINI, g);
@@ -1854,12 +2225,15 @@ function enterApp(name) {
   $('settingsGeminiModels').value = getList('GEMINI_MODELS', DEFAULTS.geminiModels).join(',');
   $('settingsMistralModels').value = getList('MISTRAL_MODELS', DEFAULTS.mistralModels).join(',');
   $('settingsMistralVision').value = getList('MISTRAL_VISION', DEFAULTS.mistralVision).join(',');
-  setupScreenshotUploads();
+
+  // Initialize alert UI
+  setAlertsMuted(isAlertsMuted());
+  $('alertThresholdInput').value = getAlertThresholdPips();
+
   loadHistory(); updateStats();
   startAutoRefreshPrice(); startAutoBacktest(); warmUpVoice();
   showToast(`Welcome ${name}!`);
   onPairChange();
-  onSSPairChange();
 }
 function showLoginForm() {
   $('returningUserSection').style.display = 'none';
@@ -1901,10 +2275,11 @@ function saveModels() {
 function clearAllKeys() {
   if (!confirm('Clear all?')) return;
   Object.values(STORAGE_KEYS).forEach(k => store.del(k));
+  Object.values(ALERT_KEYS).forEach(k => store.del(k));
   location.reload();
 }
 
-/* ═════ NAVIGATION ═════ */
+/* ═══ NAVIGATION ═══ */
 function navigate(view) {
   try {
     document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -1936,6 +2311,13 @@ function startAutoRefreshPrice() {
       store.set(`price_${pair}`, String(p));
       $('livePrice').value = p.toFixed(spec.decimals);
       priceMeta = { pair, manual: false, ts: Date.now() };
+      if (window.marketData?.pair === pair) {
+        const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15);
+        if (anchored?.ok) {
+          window.marketData.anchored = anchored;
+          checkPriceAlerts(p, anchored, spec.pipSize, pair);
+        }
+      }
     } catch (e) {}
   }, PRICE_REFRESH_INTERVAL);
 }
@@ -1964,7 +2346,7 @@ async function testApiKeys() {
   openUniversalModal(`<h3 style="color:var(--accent);margin-top:0;">🧪 API Test</h3><div style="font-size:13px;line-height:1.9;background:var(--card2);padding:12px;border-radius:10px;">${out.join('<br><br>')}</div>`);
 }
 
-/* ═════ PWA ═════ */
+/* ═══ PWA ═══ */
 function setupPWA() {
   try {
     const icon = (s, r) => 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${s} ${s}"><rect width="${s}" height="${s}" rx="${r}" fill="#fbbf24"/><rect x="${s * .28}" y="${s * .22}" width="${s * .44}" height="${s * .5}" rx="${s * .08}" fill="#0f172a"/></svg>`);
@@ -1988,6 +2370,16 @@ window.addEventListener('DOMContentLoaded', () => {
     $('loginFormSection').style.display = 'none';
     $('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${esc(k.name)}</strong>!`;
   } else showLoginForm();
+
+  // Live session state label update
+  setInterval(() => {
+    const kz = getKillzoneState();
+    const el = $('sessionStateLabel');
+    if (el) {
+      el.textContent = kz.label + (kz.inKillzone ? ' ✅' : ' ⚠️');
+      el.style.color = kz.inKillzone ? 'var(--green)' : 'var(--orange)';
+    }
+  }, 60000);
 });
 </script>
 </body>
