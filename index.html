@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v37.5 — Anchored Institutional Engine (Weekend-Safe)</title>
+<title>Lutynoel.fx v37.6 — Anchored Engine + Retail Sentiment</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -145,8 +145,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v37.5</div>
-    <div class="auth-subtitle">Weekend-Safe Anchored Engine</div>
+    <div class="auth-title">Lutynoel.fx v37.6</div>
+    <div class="auth-subtitle">Anchored Engine + Retail Sentiment</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -165,8 +165,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>TwelveData API Key (Forex/Gold/Indices)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v37.5:</strong> Weekend-Safe Anchors (skips Sat/Sun for forex)<br>
-        ✅ Zero-Hallucination Guardrails (Pre-check + Post-validator)<br>
+        ✅ <strong>v37.6:</strong> Weekend-Safe Anchors + Retail Sentiment Contrarian Filter<br>
+        ✅ Anti-Trap Guardrails (Sell-Trap / Buy-Trap detection)<br>
         ✅ Real-Time Alerts (Audio + Toast + Vibrate)<br>
         ✅ Killzone Tiering (London/NY)<br>
         ✅ <strong>Gemini 3.6 Flash</strong> primary • Mistral NeMo 12B fallback
@@ -191,12 +191,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v37.5</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v37.6</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Live Analysis</div>
     <div class="menu-item" onclick="navigate('orderflow')">🌊 Anchored Levels</div>
+    <div class="menu-item" onclick="navigate('sentiment')">👥 Retail Sentiment</div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Backtest</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk Calculator</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -212,7 +213,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.5 • Weekend-Safe Anchored Engine</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.6 • Anchored Engine + Retail Sentiment</div>
           </div>
         </div>
       </div>
@@ -239,20 +240,21 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
         <button class="primary-btn" onclick="navigate('analyst')">🎯 Anchored Institutional Analysis</button>
+        <button class="secondary-btn" onclick="navigate('sentiment')">👥 Retail Sentiment Dashboard</button>
         <button class="secondary-btn" onclick="navigate('orderflow')">📊 View Anchored Levels</button>
         <button class="secondary-btn" onclick="navigate('backtest')">📈 Matokeo ya Backtest</button>
         <button class="secondary-btn" onclick="navigate('history')">📁 History</button>
       </div>
 
       <div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.1));border:2px solid var(--inst);">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ V37.5 ANCHORED ENGINE</div>
+        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ V37.6 ENGINE</div>
         <div style="font-size:11px;line-height:1.9;">
           1. <strong>Weekend-Safe Anchors</strong> — Forex inaskip Sat/Sun, crypto 24/7.<br>
-          2. <strong>Anchored Levels</strong> — PDH/PDL/PDC + Fixed VP (prev trading day only).<br>
-          3. <strong>Zero-Hallucination</strong> — Pre-check + Post-validator inakataa signals mbovu.<br>
-          4. <strong>Real-Time Alerts</strong> — Audio + Toast ukiwa karibu na PDH/PDL/POC.<br>
-          5. <strong>Killzone Tiering</strong> — London 10-13 EAT, NY 15-18 EAT = HIGH_PROBABILITY.<br>
-          6. <strong>Day Trading Only</strong> — No overnight holds. SL ≤ 1.5× ATR. RR ≥ 1:1.5.
+          2. <strong>Retail Sentiment</strong> — Myfxbook public + FXNewsBias + Volume mock.<br>
+          3. <strong>Anti-Trap Guardrails</strong> — Reject SELL kama retail short ≥80%, BUY kama long ≥80%.<br>
+          4. <strong>Zero-Hallucination</strong> — Pre-check + Post-validator.<br>
+          5. <strong>Real-Time Alerts</strong> — Audio + Toast ukiwa karibu na PDH/PDL/POC.<br>
+          6. <strong>Killzone Tiering</strong> — London 10-13 EAT, NY 15-18 EAT = HIGH_PROBABILITY.
         </div>
       </div>
     </div>
@@ -296,6 +298,44 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
         <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN ANCHORED ANALYSIS</button>
       </div>
+
+      <!-- ═══ RETAIL SENTIMENT INDEX ═══ -->
+      <div id="sentimentCard" class="card" style="background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(239,68,68,.04));border:1px solid rgba(139,92,246,.3);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.4);display:flex;align-items:center;justify-content:center;font-size:18px;">👥</div>
+            <div>
+              <div style="font-size:13px;font-weight:900;color:var(--inst);letter-spacing:.6px;">RETAIL SENTIMENT INDEX</div>
+              <div id="sentSymbolTime" style="font-size:10px;color:var(--muted);">— • —</div>
+            </div>
+          </div>
+          <button onclick="refreshSentimentNow()" style="background:var(--green);color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div class="mini-box" style="text-align:center;background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.4);">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);font-weight:800;">🔵 LONG</div>
+            <div id="sentLongPct" style="font-size:24px;font-weight:900;color:var(--blue);font-family:ui-monospace,monospace;margin-top:4px;">—%</div>
+          </div>
+          <div class="mini-box" style="text-align:center;background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--red);font-weight:800;">🔴 SHORT</div>
+            <div id="sentShortPct" style="font-size:24px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;margin-top:4px;">—%</div>
+          </div>
+        </div>
+
+        <div style="height:14px;border-radius:50px;overflow:hidden;background:#0b1220;border:1px solid var(--border);display:flex;margin-bottom:10px;">
+          <div id="sentBarLong" style="width:50%;background:linear-gradient(90deg,#3b82f6,#60a5fa);transition:width .6s ease;"></div>
+          <div id="sentBarShort" style="width:50%;background:linear-gradient(90deg,#f87171,#ef4444);transition:width .6s ease;"></div>
+        </div>
+
+        <div id="sentBiasBox" class="mini-box" style="text-align:center;background:rgba(148,163,184,.08);border-color:var(--muted);">
+          <div id="sentBiasLabel" style="font-size:11px;font-weight:900;letter-spacing:.8px;color:var(--muted);">⚖️ SMART MONEY BIAS: NEUTRAL</div>
+          <div id="sentBiasReason" style="font-size:10px;color:var(--muted);margin-top:4px;font-style:italic;">—</div>
+        </div>
+
+        <div id="sentSource" style="font-size:9px;color:var(--muted);margin-top:8px;text-align:right;font-family:ui-monospace,monospace;">source: —</div>
+      </div>
+
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
@@ -312,6 +352,24 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="GBPUSD">GBPUSD</option><option value="US30">US30</option>
         </select>
         <div id="orderFlowContainer"><div class="info-box">Click "Refresh".</div></div>
+      </div>
+    </div>
+
+    <div id="view-sentiment" class="view-section" style="display:none;">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h3 style="margin:0;">👥 Retail Sentiment Dashboard</h3>
+          <button onclick="refreshSentimentNow()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
+        </div>
+        <label>Pair</label>
+        <select id="sentMultiPair" onchange="renderMultiSentiment()">
+          <option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option>
+          <option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option>
+          <option value="AUDUSD">AUDUSD</option><option value="USDCAD">USDCAD</option>
+          <option value="BTCUSD">BTCUSD</option><option value="US30">US30</option>
+          <option value="NAS100">NAS100</option><option value="WTI">WTI</option>
+        </select>
+        <div id="multiSentContainer"><div class="info-box">Loading...</div></div>
       </div>
     </div>
 
@@ -399,13 +457,24 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.5 — Weekend-Safe Anchored<br>
+          <strong>Version:</strong> v37.6 — Weekend-Safe Anchored + Retail Sentiment<br>
           <strong>AI Order:</strong> Gemini 3.6 Flash (primary) → Mistral NeMo 12B (fallback)<br>
-          <strong>Guardrails:</strong> Pre-check + Post-validator + Killzone tiering<br>
+          <strong>Guardrails:</strong> Pre-check + Post-validator + Anti-Retail-Trap + Killzone tiering<br>
           <strong>Anchors:</strong> PDH/PDL/PDC + Fixed Previous Trading Day VP
         </div>
 
-        <div class="ballistic-header" style="margin-top:14px;">🚨 REAL-TIME PRICE ALERTS</div>
+        <div class="ballistic-header" style="margin-top:14px;">👥 RETAIL SENTIMENT SOURCE</div>
+        <label>FXNewsBias API Key (optional — backup source)</label>
+        <input type="password" id="settingsFxnbKey" placeholder="fxnb_live_...">
+        <button class="secondary-btn" onclick="saveFxnbKey()">💾 Save FXNewsBias Key</button>
+        <div class="info-box" style="font-size:10px;">
+          <strong>Free tier:</strong> 25 req/day, 8 major currencies, 3-hour delay.<br>
+          Sign up free at fxnewsbias.com.<br>
+          <strong>Primary:</strong> Myfxbook Public (no key). <strong>Fallback:</strong> Volume mock.
+        </div>
+        <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
+
+        <div class="ballistic-header">🚨 REAL-TIME PRICE ALERTS</div>
         <div class="mini-box" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
           <div>
             <div style="font-size:12px;font-weight:bold;">Alert Status</div>
@@ -488,7 +557,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v37.5 — Weekend-Safe Anchored Institutional Engine
+   Lutynoel.fx v37.6 — Anchored Engine + Retail Sentiment
    Gemini 3.6 Flash (primary) + Mistral NeMo 12B (fallback)
    ═══════════════════════════════════════════════════════════════ */
 
@@ -502,7 +571,9 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v37.5';
+const MODELS_VERSION = 'v37.6';
+const SENTIMENT_CACHE_MS = 5 * 60 * 1000;
+const SENTIMENT_REFRESH_INTERVAL = 5 * 60 * 1000;
 
 const KILLZONES = {
   LONDON: { startUTC: 7 * 60,  endUTC: 10 * 60, name: 'LONDON_KILLZONE' },
@@ -517,6 +588,19 @@ const ALERT_COOLDOWN_MS = 90 * 1000;
 const ALERT_KEYS = {
   MUTED: 'lutynoel_alerts_muted',
   THRESHOLD: 'lutynoel_alert_threshold_pips'
+};
+
+/* ─── SENTIMENT SYMBOL NORMALIZATION ─── */
+const SENTIMENT_SYMBOL_MAP = {
+  'XAUUSD': 'XAUUSD', 'XAGUSD': 'XAGUSD',
+  'EURUSD': 'EURUSD', 'GBPUSD': 'GBPUSD', 'USDJPY': 'USDJPY',
+  'AUDUSD': 'AUDUSD', 'USDCAD': 'USDCAD', 'NZDUSD': 'NZDUSD',
+  'EURGBP': 'EURGBP', 'EURJPY': 'EURJPY', 'GBPJPY': 'GBPJPY',
+  'AUDJPY': 'AUDJPY', 'CADJPY': 'CADJPY', 'CHFJPY': 'CHFJPY',
+  'EURAUD': 'EURAUD', 'GBPAUD': 'GBPAUD', 'GBPCAD': 'GBPCAD',
+  'US30': 'US30', 'NAS100': 'NAS100', 'SPX500': 'SPX500',
+  'WTI': 'USOIL', 'BTCUSD': 'BTCUSD', 'ETHUSD': 'ETHUSD',
+  'SOLUSD': 'SOLUSD'
 };
 
 const DEFAULTS = {
@@ -551,7 +635,7 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), and Confirmation Indicators.
+const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), Confirmation Indicators, and Contrarian Retail Sentiment.
 
 ═══════════ CONFLUENCE RULES ═══════════
 1. VOLUME PROFILE (SVP / VRVP):
@@ -570,6 +654,11 @@ const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto 
    - Dynamic Trend (EMA 20/50/200): Entry must align with higher-TF EMA direction.
    - Momentum (RSI 14): Check Regular or Hidden Divergence at FVG/POC.
    - Dynamic Risk (ATR 14): Stop Loss = ATR buffer + spread to avoid noise.
+
+4. RETAIL SENTIMENT (CONTRARIAN):
+   - When retail positioning is EXTREME (≥75% one side), institutions typically sweep the crowded side's stops.
+   - Align setups with the SMART MONEY BIAS (opposite of retail extremes).
+   - Avoid trades that agree with retail positioning at extremes — those are traps.
 
 ═══════════ CALIBRATION ═══════════
 - If NO clear confluence — vote "NO_TRADE" and confidence 0.
@@ -660,19 +749,16 @@ function getKillzoneState(now = new Date()) {
   return { session, inKillzone, label, utcMinutes: m };
 }
 
-/* ═══ WEEKEND / MARKET SESSION HELPERS ═══ */
+/* ═══ WEEKEND / MARKET HELPERS ═══ */
 function getDayKey(t) { return Math.floor(t / 86400000); }
-
 function isCryptoPair(pair) {
   const spec = PAIR_SPECS[pair];
   return spec && spec.source === 'binance';
 }
-
 function isWeekendUTC(t) {
   const dow = new Date(t).getUTCDay();
-  return dow === 0 || dow === 6;  // Sunday=0, Saturday=6
+  return dow === 0 || dow === 6;
 }
-
 function findPreviousTradingDayKey(candles, currentTime, skipWeekends) {
   if (!Array.isArray(candles) || !candles.length) return null;
   const todayKey = getDayKey(currentTime);
@@ -688,7 +774,6 @@ function findPreviousTradingDayKey(candles, currentTime, skipWeekends) {
   }
   return dayKeys.length ? dayKeys[0] : null;
 }
-
 function getPreviousDayCandles(candles, currentTime = Date.now(), pair = null) {
   if (!Array.isArray(candles) || !candles.length) return [];
   const skipWeekends = pair ? !isCryptoPair(pair) : true;
@@ -696,7 +781,6 @@ function getPreviousDayCandles(candles, currentTime = Date.now(), pair = null) {
   if (prevKey === null) return [];
   return candles.filter(c => getDayKey(c.time) === prevKey);
 }
-
 function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
   if (!Array.isArray(candles) || !candles.length) return [];
   const skipWeekends = pair ? !isCryptoPair(pair) : true;
@@ -708,14 +792,12 @@ function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
   return candles.filter(c => getDayKey(c.time) === todayKey);
 }
 
-/* ═══ ANCHORED PREVIOUS-DAY LEVELS (weekend-safe) ═══ */
+/* ═══ ANCHORED LEVELS ═══ */
 function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   const prevDayH1  = getPreviousDayCandles(h1Candles, Date.now(), pair);
   const prevDayM15 = getPreviousDayCandles(m15Candles, Date.now(), pair);
 
-  if (!prevDayH1.length) {
-    return { ok: false, reason: 'No previous trading day candles available' };
-  }
+  if (!prevDayH1.length) return { ok: false, reason: 'No previous trading day candles available' };
 
   const PDH = Math.max(...prevDayH1.map(c => c.high));
   const PDL = Math.min(...prevDayH1.map(c => c.low));
@@ -732,23 +814,14 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
     14
   ) || prevDayRange;
 
-  // ─── SANITY CHECKS ───
   const warnings = [];
-  if (prevDayH1.length < 12) {
-    warnings.push(`Only ${prevDayH1.length} H1 candles in anchor day (expected ≥12)`);
-  }
-  if (prevDayRange > 0 && prevDayATR > 0 && prevDayRange < prevDayATR * 0.5) {
-    warnings.push(`Anchor range ${prevDayRange.toFixed(2)} < 0.5× ATR (suspect weekend/holiday)`);
-  }
-  if (prevDayRange === 0) {
-    warnings.push('Zero range — anchor day invalid');
-  }
+  if (prevDayH1.length < 12) warnings.push(`Only ${prevDayH1.length} H1 candles in anchor day (expected ≥12)`);
+  if (prevDayRange > 0 && prevDayATR > 0 && prevDayRange < prevDayATR * 0.5) warnings.push(`Anchor range ${prevDayRange.toFixed(2)} < 0.5× ATR`);
+  if (prevDayRange === 0) warnings.push('Zero range — anchor day invalid');
 
   const anchorDay = new Date(prevDayH1[0].time).toISOString().slice(0, 10);
   const anchorDow = new Date(prevDayH1[0].time).getUTCDay();
-  if (anchorDow === 0 || anchorDow === 6) {
-    warnings.push(`Anchor day ${anchorDay} is a weekend (${anchorDow === 6 ? 'Sat' : 'Sun'})`);
-  }
+  if (anchorDow === 0 || anchorDow === 6) warnings.push(`Anchor day ${anchorDay} is a weekend`);
 
   return {
     ok: true,
@@ -756,15 +829,242 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
     prevDayPOC: vp?.poc ?? null,
     prevDayVAH: vp?.vah ?? null,
     prevDayVAL: vp?.val ?? null,
-    prevDayRange,
-    prevDayATR,
+    prevDayRange, prevDayATR,
     prevDayCandleCount: prevDayH1.length,
     prevDayM15Count: prevDayM15.length,
-    anchorDay,
-    computedAt: Date.now(),
+    anchorDay, computedAt: Date.now(),
     warnings: warnings.length ? warnings : null,
     valid: warnings.length === 0
   };
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RETAIL SENTIMENT ENGINE
+   ═══════════════════════════════════════════════════════════════ */
+let sentimentCache = {};
+
+function extractCurrencies(pair) {
+  if (pair.length === 6) return [pair.slice(0, 3), pair.slice(3)];
+  return null;
+}
+function interpretCurrencySentiment(pair, currencyScores) {
+  const c = extractCurrencies(pair);
+  if (!c) return null;
+  const [base, quote] = c;
+  const bScore = currencyScores[base];
+  const qScore = currencyScores[quote];
+  if (bScore == null || qScore == null) return null;
+  const longBias = (bScore + (100 - qScore)) / 2;
+  return {
+    retailLongPercent: Math.round(longBias),
+    retailShortPercent: Math.round(100 - longBias),
+    source: 'FXNewsBias-RelativeStrength'
+  };
+}
+
+async function fetchRetailSentimentForPair(symbol, options = {}) {
+  const forceFresh = options.force === true;
+  const cached = sentimentCache[symbol];
+  if (!forceFresh && cached && Date.now() - cached.ts < SENTIMENT_CACHE_MS) {
+    return cached.data;
+  }
+
+  const result = {
+    symbol,
+    retailLongPercent: null,
+    retailShortPercent: null,
+    sentimentRatio: '—',
+    smartMoneyBias: 'NEUTRAL',
+    biasReason: '',
+    source: 'unavailable',
+    updatedAt: Date.now()
+  };
+
+  // ── SOURCE 1: Myfxbook Community Outlook via CORS proxy ──
+  try {
+    const slug = SENTIMENT_SYMBOL_MAP[symbol] || symbol;
+    const proxy = 'https://corsproxy.io/?url=';
+    const target = encodeURIComponent(`https://www.myfxbook.com/api/get-community-outlook.json?symbols=${slug}`);
+    const r = await fetchWithTimeout(`${proxy}${target}`, {}, 12000);
+    if (r.ok) {
+      const d = await r.json();
+      const arr = d?.symbols || d?.outlook?.symbols || (Array.isArray(d) ? d : []);
+      const hit = arr.find(s => (s.name || s.symbol || '').toUpperCase() === slug);
+      if (hit) {
+        const longPct = parseFloat(hit.longPercentage ?? hit.long_pct ?? 0);
+        const shortPct = parseFloat(hit.shortPercentage ?? hit.short_pct ?? 0);
+        if (longPct + shortPct > 0) {
+          result.retailLongPercent = Math.round(longPct);
+          result.retailShortPercent = Math.round(shortPct);
+          result.source = 'Myfxbook-Public';
+        }
+      }
+    }
+  } catch (e) { /* silent */ }
+
+  // ── SOURCE 2: FXNewsBias (optional key) ──
+  if (result.retailLongPercent == null) {
+    const fxnbKey = store.get('lutynoel_fxnb_key');
+    if (fxnbKey) {
+      try {
+        const r = await fetchWithTimeout('https://fxnewsbias.com/api/v1/sentiment', {
+          headers: { 'Authorization': `Bearer ${fxnbKey}` }
+        }, 12000);
+        const d = await r.json();
+        if (d?.data && Array.isArray(d.data)) {
+          const scores = {};
+          d.data.forEach(x => { scores[x.currency] = x.score; });
+          const interpreted = interpretCurrencySentiment(symbol, scores);
+          if (interpreted) {
+            result.retailLongPercent = interpreted.retailLongPercent;
+            result.retailShortPercent = interpreted.retailShortPercent;
+            result.source = 'FXNewsBias';
+          }
+        }
+      } catch (e) { /* silent */ }
+    }
+  }
+
+  // ── SOURCE 3: Volume-imbalance mock ──
+  if (result.retailLongPercent == null) {
+    const mock = computeVolumeImbalanceMock(symbol);
+    if (mock) {
+      result.retailLongPercent = mock.longPct;
+      result.retailShortPercent = mock.shortPct;
+      result.source = 'Volume-Mock';
+    } else {
+      result.retailLongPercent = 50;
+      result.retailShortPercent = 50;
+      result.source = 'Neutral-Default';
+    }
+  }
+
+  const L = result.retailLongPercent;
+  const S = result.retailShortPercent;
+  result.sentimentRatio = `${S}% SELL / ${L}% BUY`;
+
+  if (S >= 75) {
+    result.smartMoneyBias = 'BULLISH';
+    result.biasReason = 'Retail heavily SHORT → upward liquidity sweep expected';
+  } else if (L >= 75) {
+    result.smartMoneyBias = 'BEARISH';
+    result.biasReason = 'Retail heavily LONG → downward liquidity sweep expected';
+  } else if (L >= 40 && L <= 60) {
+    result.smartMoneyBias = 'NEUTRAL';
+    result.biasReason = 'No extreme trap detected';
+  } else {
+    result.smartMoneyBias = 'LEAN_' + (L > 60 ? 'BEARISH' : 'BULLISH');
+    result.biasReason = `Mild retail tilt toward ${L > 60 ? 'LONG' : 'SHORT'}`;
+  }
+
+  sentimentCache[symbol] = { data: result, ts: Date.now() };
+  return result;
+}
+
+function computeVolumeImbalanceMock(symbol) {
+  try {
+    const md = window.marketData;
+    if (!md || md.pair !== symbol || !Array.isArray(md.m15)) return null;
+    const slice = md.m15.slice(-100);
+    let bullVol = 0, bearVol = 0;
+    slice.forEach(c => {
+      const v = c.volume || 1;
+      if (c.close >= c.open) bullVol += v; else bearVol += v;
+    });
+    const total = bullVol + bearVol;
+    if (total <= 0) return null;
+    return {
+      longPct: Math.round(bullVol / total * 100),
+      shortPct: Math.round(bearVol / total * 100)
+    };
+  } catch (e) { return null; }
+}
+
+/* ═══ RENDER SENTIMENT WIDGET ═══ */
+function renderSentimentWidget(sentiment, symbol) {
+  if (!sentiment) return;
+  const L = sentiment.retailLongPercent ?? 50;
+  const S = sentiment.retailShortPercent ?? 50;
+
+  const longEl = $('sentLongPct'); if (longEl) longEl.textContent = `${L}%`;
+  const shortEl = $('sentShortPct'); if (shortEl) shortEl.textContent = `${S}%`;
+  const barLong = $('sentBarLong'); if (barLong) barLong.style.width = `${L}%`;
+  const barShort = $('sentBarShort'); if (barShort) barShort.style.width = `${S}%`;
+
+  const ts = new Date(sentiment.updatedAt).toLocaleTimeString();
+  const stEl = $('sentSymbolTime'); if (stEl) stEl.textContent = `${symbol} • ${ts}`;
+  const srcEl = $('sentSource'); if (srcEl) srcEl.textContent = `source: ${sentiment.source}`;
+
+  const biasEl = $('sentBiasLabel');
+  const box = $('sentBiasBox');
+  const reasonEl = $('sentBiasReason');
+  if (reasonEl) reasonEl.textContent = sentiment.biasReason || '—';
+
+  const bias = sentiment.smartMoneyBias || 'NEUTRAL';
+  let label = '', cls = '';
+
+  if (bias === 'BULLISH') {
+    label = '🔥 SMART MONEY BIAS: BULLISH (Liquidity Sweep Upwards)';
+    cls = 'background:rgba(16,185,129,.15);border-color:var(--green);color:var(--green);';
+  } else if (bias === 'BEARISH') {
+    label = '🩸 SMART MONEY BIAS: BEARISH (Liquidity Sweep Downwards)';
+    cls = 'background:rgba(239,68,68,.15);border-color:var(--red);color:var(--red);';
+  } else if (bias === 'NEUTRAL') {
+    label = '⚖️ SMART MONEY BIAS: NEUTRAL (No Extreme Trap)';
+    cls = 'background:rgba(148,163,184,.08);border-color:var(--muted);color:var(--muted);';
+  } else if (bias.startsWith('LEAN_')) {
+    const dir = bias.replace('LEAN_', '');
+    label = `⚠️ SMART MONEY LEAN: ${dir}`;
+    cls = dir === 'BULLISH'
+      ? 'background:rgba(16,185,129,.08);border-color:var(--green);color:var(--green);'
+      : 'background:rgba(239,68,68,.08);border-color:var(--red);color:var(--red);';
+  }
+
+  if (biasEl) biasEl.textContent = label;
+  if (box) box.setAttribute('style', `text-align:center;${cls}`);
+  if (biasEl) biasEl.setAttribute('style', `font-size:11px;font-weight:900;letter-spacing:.8px;`);
+}
+
+async function refreshSentimentNow() {
+  const pair = $('selectedPair').value;
+  showToast('🔄 Refreshing sentiment...', 2000);
+  const s = await fetchRetailSentimentForPair(pair, { force: true });
+  renderSentimentWidget(s, pair);
+  showToast(`✅ Sentiment: ${s.sentimentRatio}`);
+}
+
+async function renderMultiSentiment() {
+  const c = $('multiSentContainer');
+  const symbol = $('sentMultiPair').value;
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
+  const s = await fetchRetailSentimentForPair(symbol);
+  const L = s.retailLongPercent ?? 50;
+  const S = s.retailShortPercent ?? 50;
+  const biasColor = s.smartMoneyBias === 'BULLISH' ? 'var(--green)'
+                  : s.smartMoneyBias === 'BEARISH' ? 'var(--red)'
+                  : s.smartMoneyBias === 'NEUTRAL' ? 'var(--muted)' : 'var(--yellow)';
+  c.innerHTML = `
+    <div class="mini-box" style="text-align:center;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);margin-bottom:12px;">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:bold;">${esc(symbol)}</div>
+      <div style="font-size:13px;font-weight:900;color:${biasColor};margin-top:4px;">${esc(s.smartMoneyBias)}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">${esc(s.biasReason || '')}</div>
+    </div>
+    <div class="grid-2">
+      <div class="mini-box" style="text-align:center;background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.4);">
+        <div style="font-size:10px;color:var(--blue);font-weight:800;">LONG</div>
+        <div style="font-size:22px;font-weight:900;color:var(--blue);font-family:ui-monospace,monospace;">${L}%</div>
+      </div>
+      <div class="mini-box" style="text-align:center;background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);">
+        <div style="font-size:10px;color:var(--red);font-weight:800;">SHORT</div>
+        <div style="font-size:22px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;">${S}%</div>
+      </div>
+    </div>
+    <div style="height:14px;border-radius:50px;overflow:hidden;background:#0b1220;border:1px solid var(--border);display:flex;margin:10px 0;">
+      <div style="width:${L}%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div>
+      <div style="width:${S}%;background:linear-gradient(90deg,#f87171,#ef4444);"></div>
+    </div>
+    <div style="font-size:10px;color:var(--muted);text-align:right;font-family:ui-monospace,monospace;">source: ${esc(s.source)}</div>
+  `;
 }
 
 /* ═══ VOICE ═══ */
@@ -1064,7 +1364,6 @@ function computeInstitutionalBias(inst) {
   return { score: s, bias: b };
 }
 
-/* ═══ INSTITUTIONAL METRICS (anchored) ═══ */
 function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   if (!Array.isArray(h1) || h1.length < 30) return null;
 
@@ -1181,7 +1480,7 @@ function preCheckSignalConditions(lp, anchored, m15, inst, pipSize, pair) {
   };
 }
 
-/* ═══ POST-VALIDATOR ═══ */
+/* ═══ POST-VALIDATOR with Anti-Retail-Trap ═══ */
 function makeNoTrade(reason, pair = '', anchor = null) {
   return {
     pair, timeframe: 'M15', signal_type: 'NO_TRADE', confidence_score: 0,
@@ -1199,13 +1498,36 @@ function makeNoTrade(reason, pair = '', anchor = null) {
   };
 }
 
-function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyATR) {
+function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyATR, sentiment) {
   const issues = [];
   if (!signal || signal.signal_type === 'NO_TRADE') return { valid: true, signal, issues: [] };
 
   const isBuy = signal.signal_type === 'BUY';
   const isSell = signal.signal_type === 'SELL';
   if (!isBuy && !isSell) return { valid: true, signal, issues: [] };
+
+  // ═══ ANTI-RETAIL TRAP LOGIC (highest priority) ═══
+  if (sentiment) {
+    const L = sentiment.retailLongPercent ?? 0;
+    const S = sentiment.retailShortPercent ?? 0;
+
+    if (isSell && S >= 80) {
+      return {
+        valid: false,
+        signal: makeNoTrade(`RETAIL_SELL_TRAP_ACTIVE (${S}% short)`, signal.pair, anchored),
+        issues: ['retail_sell_trap']
+      };
+    }
+    if (isBuy && L >= 80) {
+      return {
+        valid: false,
+        signal: makeNoTrade(`RETAIL_BUY_TRAP_ACTIVE (${L}% long)`, signal.pair, anchored),
+        issues: ['retail_buy_trap']
+      };
+    }
+    if (isSell && S >= 70) issues.push(`Retail ${S}% short — sell trap risk`);
+    if (isBuy && L >= 70) issues.push(`Retail ${L}% long — buy trap risk`);
+  }
 
   const zone = signal.entry_zone || {};
   const entryMin = parseFloat(zone.min_price) || 0;
@@ -1224,9 +1546,7 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
   if (isSell && entry >= sl) issues.push(`SELL entry ${entry} ≥ SL ${sl}`);
 
   const maxDeviation = Math.max(currentPrice * 0.005, 15 * pipSize);
-  if (Math.abs(entry - currentPrice) > maxDeviation) {
-    issues.push(`Entry ${entry.toFixed(5)} too far from market ${currentPrice.toFixed(5)}`);
-  }
+  if (Math.abs(entry - currentPrice) > maxDeviation) issues.push(`Entry ${entry.toFixed(5)} too far from market`);
 
   const risk = Math.abs(entry - sl);
   if (risk <= 0) {
@@ -1239,15 +1559,11 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
   }
 
   const dailyATRref = dailyATR || anchored?.prevDayATR || anchored?.prevDayRange;
-  if (dailyATRref && risk > dailyATRref * SL_ATR_MULT_CAP) {
-    issues.push(`SL ${risk.toFixed(5)} > ${SL_ATR_MULT_CAP}× daily ATR`);
-  }
+  if (dailyATRref && risk > dailyATRref * SL_ATR_MULT_CAP) issues.push(`SL exceeds ${SL_ATR_MULT_CAP}× daily ATR`);
 
   const confl = Array.isArray(signal.confluences) ? signal.confluences : [];
   const hasVPNote = (signal.volume_profile_data?.confluence_note || '').length > 10;
-  if (signal.confidence_score > 70 && confl.length < 1 && !hasVPNote) {
-    issues.push('High confidence without FVG/OB/Sweep evidence');
-  }
+  if (signal.confidence_score > 70 && confl.length < 1 && !hasVPNote) issues.push('High confidence without evidence');
 
   if (isBuy && !(tp1 < tp2 && tp2 < tp3)) issues.push('BUY TP order invalid');
   if (isSell && !(tp1 > tp2 && tp2 > tp3)) issues.push('SELL TP order invalid');
@@ -1272,9 +1588,7 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
 let audioCtx = null;
 const alertCooldowns = {};
 function ensureAudioCtx() {
-  if (!audioCtx) {
-    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
-  }
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
   if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
   return audioCtx;
 }
@@ -1331,7 +1645,6 @@ function checkPriceAlerts(currentPrice, anchored, pipSize, pair) {
   if (!anchored?.ok || !currentPrice || !pair) return;
   const threshold = getAlertThresholdPips() * pipSize;
   const now = Date.now();
-
   const levels = [
     { key: 'PDH', price: anchored.PDH,        kind: 'sweep', label: 'PDH Liquidity Sweep' },
     { key: 'PDL', price: anchored.PDL,        kind: 'sweep', label: 'PDL Liquidity Sweep' },
@@ -1421,14 +1734,16 @@ function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, curren
   p += `- Minimum R:R for TP1 = 1:${MIN_RR_TP1}. Target 1:2 to 1:3 realistically intraday.\n`;
   p += `- TP1/TP2 MUST stay within today's expected range (≤ ${anchored.prevDayRange.toFixed(5)} from entry).\n`;
   p += `- If ANY setup criterion is ambiguous → return signal_type:"NO_TRADE", confidence_score:0.\n`;
-  if (!kz.inKillzone) {
-    p += `- Outside killzone → keep confidence_score ≤ 55 and mark LOW_PROBABILITY in confluences.\n`;
-  }
+  if (!kz.inKillzone) p += `- Outside killzone → keep confidence_score ≤ 55 and mark LOW_PROBABILITY in confluences.\n`;
   return p;
 }
 
-/* ═══ MAIN INSTITUTIONAL CALL ═══ */
+/* ═══ MAIN CALL ═══ */
 async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, pipSize) {
+  // ── Fetch sentiment (uses cache if fresh) ──
+  const sentiment = await fetchRetailSentimentForPair(pair);
+  window.__lastSentiment = sentiment;
+
   const pre = preCheckSignalConditions(lp, anchored, currentM15, inst, pipSize, pair);
   if (!pre.ok) {
     return {
@@ -1442,14 +1757,28 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
         val_price: anchored.prevDayVAL ?? 0, confluence_note: pre.reason
       },
       confluences: [], risk_reward_ratio: '—',
-      tier: 'REJECTED', rejectReason: pre.reason, preCheck: pre
+      tier: 'REJECTED', rejectReason: pre.reason, preCheck: pre,
+      sentiment
     };
   }
 
   const kz = getKillzoneState();
   const prompt = buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz });
 
-  const r = await callLLM({ prompt, maxTokens: 2000, timeout: 90000 });
+  const sentimentBlock = `
+
+═══ RETAIL SENTIMENT (CONTRARIAN CONTEXT) ═══
+Symbol: ${sentiment.symbol}
+Long: ${sentiment.retailLongPercent}% | Short: ${sentiment.retailShortPercent}%
+Ratio: ${sentiment.sentimentRatio}
+Smart Money Bias: ${sentiment.smartMoneyBias} — ${sentiment.biasReason}
+Source: ${sentiment.source}
+
+CONTRARIAN RULE: When retail positioning is extreme (≥75% one side), institutional liquidity typically targets the crowded side. Align your trade with the SMART MONEY BIAS, not the retail crowd.`;
+
+  const fullPrompt = prompt + sentimentBlock;
+
+  const r = await callLLM({ prompt: fullPrompt, maxTokens: 2000, timeout: 90000 });
   if (!r.result) {
     return {
       provider: 'Failed', pair, timeframe: 'M15',
@@ -1462,7 +1791,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
         val_price: anchored.prevDayVAL ?? 0, confluence_note: r.err || 'LLM failed'
       },
       confluences: [], risk_reward_ratio: '—',
-      tier: 'FAILED', rejectReason: r.err
+      tier: 'FAILED', rejectReason: r.err, sentiment
     };
   }
 
@@ -1485,14 +1814,15 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
   };
 
   const dailyATR = anchored.prevDayATR || anchored.prevDayRange;
-  const check = validateSignalIntegrity(signal, lp, pipSize, anchored, dailyATR);
+  const check = validateSignalIntegrity(signal, lp, pipSize, anchored, dailyATR, sentiment);
 
   return {
     ...check.signal,
     provider: r.provider,
     validationIssues: check.issues,
     preCheck: pre,
-    tier: check.signal.tier || (check.valid ? 'HIGH_PROBABILITY' : 'REJECTED')
+    tier: check.signal.tier || (check.valid ? 'HIGH_PROBABILITY' : 'REJECTED'),
+    sentiment
   };
 }
 
@@ -1546,11 +1876,17 @@ function resetMarketData() {
   });
   $('chartPreview').innerHTML = '<div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div>';
 }
-function onPairChange() {
+async function onPairChange(pair) {
   resetMarketData(); priceMeta = null;
   $('livePrice').value = '';
   $('resultsContainer').style.display = 'none';
   fetchLivePrice();
+  // Fetch + render sentiment for new pair
+  const s = await fetchRetailSentimentForPair(pair);
+  renderSentimentWidget(s, pair);
+  // Update multi-sentiment selector if present
+  const multiSel = $('sentMultiPair');
+  if (multiSel) multiSel.value = pair;
 }
 async function fetchAllMarketData() {
   const pair = $('selectedPair').value;
@@ -1578,6 +1914,7 @@ async function fetchAllMarketData() {
 
     set('dataIndicators', !!inst, inst ? 'READY ✓' : 'FAIL');
     if (inst && anchored.ok) {
+      const spec = PAIR_SPECS[pair];
       const kz = getKillzoneState();
       let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)} — Anchor: ${anchored.anchorDay}</div>`;
       h += `<div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong> | PDC: <strong>${anchored.PDC.toFixed(spec.decimals)}</strong></div>`;
@@ -1591,6 +1928,10 @@ async function fetchAllMarketData() {
       $('chartPreview').innerHTML = h;
       $('runBtn').disabled = false;
       showToast(anchored.warnings ? '⚠️ Data ready (warnings)' : '✅ Anchored data ready');
+
+      // Refresh sentiment with fresh volume data
+      const s = await fetchRetailSentimentForPair(pair, { force: true });
+      renderSentimentWidget(s, pair);
     }
   } catch (e) { showToast(`❌ ${e.message}`); }
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
@@ -1629,6 +1970,12 @@ function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, ancho
     provider: instMaster.provider,
     tier: instMaster.tier,
     rejectReason: instMaster.rejectReason,
+    sentiment: instMaster.sentiment ? {
+      long: instMaster.sentiment.retailLongPercent,
+      short: instMaster.sentiment.retailShortPercent,
+      bias: instMaster.sentiment.smartMoneyBias,
+      source: instMaster.sentiment.source
+    } : null,
     validators: (validators || []).map(v => ({ id: v.masterId, name: v.masterName, vote: v.vote, conf: v.confidence, provider: v.provider })),
     instScore: inst?.biasScore?.score ?? null,
     session: inst?.killZone?.session || getKillzoneState().session,
@@ -1677,7 +2024,7 @@ async function runAnalysis() {
   container.style.display = 'block';
   container.innerHTML = `
     <div class="card">
-      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.5)</div>
+      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.6)</div>
       <div style="font-size:11px;line-height:1.8;color:var(--muted);">
         <div>Anchor Day: <strong style="color:var(--accent)">${anchored.anchorDay}</strong></div>
         <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong></div>
@@ -1685,7 +2032,7 @@ async function runAnalysis() {
         <div>Session: <strong style="color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'}">${kz.label}</strong></div>
         ${anchored.warnings ? `<div style="color:var(--orange)">⚠️ ${anchored.warnings.join(' • ')}</div>` : ''}
       </div>
-      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pre-check + LLM + validation...</div>
+      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pre-check + Sentiment + LLM + Validation...</div>
     </div>`;
 
   const instMaster = await callInstitutionalMaster(
@@ -1738,7 +2085,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
 
   const vp = instMaster.volume_profile_data || {};
   const confColors = conf >= 75 ? 'var(--green)' : conf >= 55 ? 'var(--yellow)' : 'var(--muted)';
-
   const tier = instMaster.tier || 'MEDIUM_PROBABILITY';
   const tierClass = tier === 'HIGH_PROBABILITY' ? 'tier-high'
                   : tier === 'MEDIUM_PROBABILITY' ? 'tier-med'
@@ -1757,6 +2103,27 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       ${anc.VAL != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAL</span><span style="color:var(--green);">${f(anc.VAL)}</span></div>` : ''}
     </div>` : '';
 
+  // Sentiment mini-block
+  const sent = instMaster.sentiment;
+  const sentimentBlock = sent ? `
+    <div class="mini-box" style="margin-bottom:12px;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--inst);font-weight:900;">👥 RETAIL SENTIMENT</span>
+        <span style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">${esc(sent.source || '')}</span>
+      </div>
+      <div style="display:flex;height:10px;border-radius:50px;overflow:hidden;background:#0b1220;border:1px solid var(--border);margin-bottom:6px;">
+        <div style="width:${sent.retailLongPercent}%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div>
+        <div style="width:${sent.retailShortPercent}%;background:linear-gradient(90deg,#f87171,#ef4444);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;font-family:ui-monospace,monospace;">
+        <span style="color:var(--blue);font-weight:800;">🔵 LONG ${sent.retailLongPercent}%</span>
+        <span style="color:var(--red);font-weight:800;">SHORT ${sent.retailShortPercent}% 🔴</span>
+      </div>
+      <div style="margin-top:6px;font-size:10px;text-align:center;font-weight:900;color:${sent.smartMoneyBias === 'BULLISH' ? 'var(--green)' : sent.smartMoneyBias === 'BEARISH' ? 'var(--red)' : 'var(--muted)'};">
+        ${sent.smartMoneyBias === 'BULLISH' ? '🔥 SMART MONEY: BULLISH' : sent.smartMoneyBias === 'BEARISH' ? '🩸 SMART MONEY: BEARISH' : '⚖️ SMART MONEY: NEUTRAL'}
+      </div>
+    </div>` : '';
+
   const chips = (instMaster.confluences || []).slice(0, 6).map(c => {
     const low = c.toLowerCase();
     let cls = 'chip-blue';
@@ -1764,7 +2131,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     else if (low.includes('choch') || low.includes('bos') || low.includes('structure')) cls = 'chip-buy';
     else if (low.includes('fvg')) cls = 'chip-cyan';
     else if (low.includes('ob') || low.includes('order block')) cls = 'chip-purple';
-    else if (low.includes('low') && low.includes('prob')) cls = 'chip-red';
+    else if (low.includes('trap')) cls = 'chip-red';
     return `<span class="chip ${cls}">✓ ${esc(c)}</span>`;
   }).join('');
 
@@ -1783,9 +2150,10 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `─────────────────`,
     `PDH: ${f(anc?.PDH)} | PDL: ${f(anc?.PDL)} | PDC: ${f(anc?.PDC)}`,
     `PD-POC: ${f(anc?.POC)} | VAH: ${f(anc?.VAH)} | VAL: ${f(anc?.VAL)}`,
+    sent ? `Retail: ${sent.sentimentRatio} (${sent.smartMoneyBias})` : '',
     `Confluences: ${(instMaster.confluences || []).join(' | ')}`,
-    `— Lutynoel.fx v37.5`
-  ].join('\n');
+    `— Lutynoel.fx v37.6`
+  ].filter(Boolean).join('\n');
   window.__lastCopyText = copyText;
 
   const html = `
@@ -1814,6 +2182,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
 
     <div class="sig-body">
       ${anchorBlock}
+      ${sentimentBlock}
 
       ${instMaster.rejectReason ? `<div class="warn-box" style="margin-bottom:12px;"><strong>Guardrail:</strong> ${esc(instMaster.rejectReason)}</div>` : ''}
 
@@ -2162,6 +2531,16 @@ function showHistoryDetail(i) {
         </div>
       </div>`;
     }
+    if (r.sentiment) {
+      h += `<div class="mini-box" style="margin:10px 0;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
+        <div style="font-size:10px;color:var(--inst);font-weight:bold;margin-bottom:6px;">👥 RETAIL SENTIMENT</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;font-family:ui-monospace,monospace;">
+          <span style="color:var(--blue);">LONG ${r.sentiment.long}%</span>
+          <span style="color:${r.sentiment.bias === 'BULLISH' ? 'var(--green)' : r.sentiment.bias === 'BEARISH' ? 'var(--red)' : 'var(--muted)'};font-weight:900;">${esc(r.sentiment.bias)}</span>
+          <span style="color:var(--red);">SHORT ${r.sentiment.short}%</span>
+        </div>
+      </div>`;
+    }
     if (r.entry) h += `<table class="tbl" style="margin-top:10px;"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th><th>TP3</th></tr><tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td><td>${f(r.tp3)}</td></tr></table>`;
     if (r.volumeProfile) h += `<div class="mini-box" style="margin:10px 0;"><div class="ballistic-header">📊 VP</div>POC: ${f(r.volumeProfile.poc_price)} | VAH: ${f(r.volumeProfile.vah_price)} | VAL: ${f(r.volumeProfile.val_price)}</div>`;
     if (r.rejectReason) h += `<div class="warn-box" style="margin-top:10px;"><strong>Rejected:</strong> ${esc(r.rejectReason)}</div>`;
@@ -2187,10 +2566,10 @@ function updateStats() {
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), version: '37.5', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), version: '37.6', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v37.5-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v37.6-${Date.now()}.json`; a.click();
 }
 
 /* ═══ AUTH / SETTINGS ═══ */
@@ -2231,6 +2610,11 @@ function resetModelsToDefault() {
   $('settingsGeminiModels').value = 'gemini-3.6-flash,gemini-2.5-flash';
   showToast('✅ Reset: Gemini 3.6 primary + Mistral NeMo 12B');
 }
+function saveFxnbKey() {
+  const k = $('settingsFxnbKey').value.trim();
+  if (k) store.set('lutynoel_fxnb_key', k);
+  showToast(`✅ FXNewsBias key saved`);
+}
 function enterApp(name) {
   $('authScreen').style.display = 'none';
   $('appInterface').style.display = 'block';
@@ -2239,6 +2623,7 @@ function enterApp(name) {
   $('settingsGeminiKey').value = getGeminiKey() || '';
   $('settingsMistralKey').value = getMistralKey() || '';
   $('settingsTwelveKey').value = getTwelveKey() || '';
+  if (store.get('lutynoel_fxnb_key')) $('settingsFxnbKey').value = store.get('lutynoel_fxnb_key');
   $('settingsBalance').value = getBalance();
   $('settingsRiskPct').value = getRiskPct();
   $('settingsVoiceEnabled').value = isVoiceEnabled() ? 'true' : 'false';
@@ -2254,8 +2639,18 @@ function enterApp(name) {
 
   loadHistory(); updateStats();
   startAutoRefreshPrice(); startAutoBacktest(); warmUpVoice();
+
+  // Sentiment auto-refresh (5 min)
+  if (window.__sentInt) clearInterval(window.__sentInt);
+  window.__sentInt = setInterval(async () => {
+    if (document.hidden) return;
+    const pair = $('selectedPair').value;
+    const s = await fetchRetailSentimentForPair(pair);
+    renderSentimentWidget(s, pair);
+  }, SENTIMENT_REFRESH_INTERVAL);
+
   showToast(`Welcome ${name}!`);
-  onPairChange();
+  onPairChange($('selectedPair').value);
 }
 function showLoginForm() {
   $('returningUserSection').style.display = 'none';
@@ -2267,7 +2662,7 @@ function showLoginForm() {
   if (k.twelveKey) $('authTwelveKey').value = k.twelveKey;
 }
 function logout() {
-  clearInterval(window.__priceInt); clearInterval(window.__btInt);
+  clearInterval(window.__priceInt); clearInterval(window.__btInt); clearInterval(window.__sentInt);
   if ('speechSynthesis' in window) speechSynthesis.cancel();
   $('appInterface').style.display = 'none';
   $('authScreen').style.display = 'flex';
@@ -2298,6 +2693,7 @@ function clearAllKeys() {
   if (!confirm('Clear all?')) return;
   Object.values(STORAGE_KEYS).forEach(k => store.del(k));
   Object.values(ALERT_KEYS).forEach(k => store.del(k));
+  store.del('lutynoel_fxnb_key');
   location.reload();
 }
 
@@ -2312,6 +2708,7 @@ function navigate(view) {
     if (view === 'overview') updateStats();
     if (view === 'backtest') { renderBacktest(); updateBacktest(); }
     if (view === 'orderflow') refreshOrderFlow();
+    if (view === 'sentiment') renderMultiSentiment();
     window.scrollTo(0, 0);
   } catch (e) { showToast('❌ ' + e.message); }
 }
