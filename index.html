@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v38.0 — Liquidity Sweep & Retail Trap Engine</title>
+<title>Lutynoel.fx v38.1 — 4H Anchor Institutional Scanner</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,7 +47,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .price-status.manual{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .price-status.error{background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red)}
 .price-status.loading{background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent)}
-.chart-preview{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:12px;font-family:ui-monospace,monospace;font-size:11px;color:var(--muted);max-height:340px;overflow-y:auto;line-height:1.6}
+.chart-preview{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:12px;font-family:ui-monospace,monospace;font-size:11px;color:var(--muted);max-height:400px;overflow-y:auto;line-height:1.6}
 .data-status{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .data-status-item{background:var(--card2);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:11px;display:flex;justify-content:space-between}
 .data-status-item.ok{border-color:var(--green)}
@@ -119,6 +119,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tier-pattern{background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink)}
 .tf-upload-box.has-image{border-style:solid !important;border-color:var(--green) !important;}
 
+/* Anchor 4H badge */
+.anchor-4h-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:9px;font-weight:900;letter-spacing:.5px;margin-left:4px}
+.anchor-res{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
+.anchor-sup{background:rgba(16,185,129,.2);color:var(--green);border:1px solid var(--green)}
+
 /* Pattern Trap block */
 .pattern-block{background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.05));border:2px solid var(--pink);border-radius:12px;padding:14px;margin-bottom:12px}
 .pattern-step{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:11px}
@@ -141,8 +146,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v38.0</div>
-    <div class="auth-subtitle">Liquidity Sweep & Retail Trap Engine</div>
+    <div class="auth-title">Lutynoel.fx v38.1</div>
+    <div class="auth-subtitle">4H Anchor Institutional Scanner</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -158,13 +163,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
       <label>Mistral API Key (pixtral-12b-latest — vision)</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
-      <label>TwelveData API Key (Forex/Gold/Indices)</label>
+      <label>TwelveData API Key</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v38.0:</strong> Liquidity Sweep & Retail Trap Engine<br>
-        ✅ Ascending Triangle / Equal Highs Detection<br>
-        ✅ 4-Step Phase: FORMING → SWEEP → BOS → RETEST<br>
-        ✅ Gemini 3.6 flash (primary) • Pixtral 12B (fallback)
+        ✅ <strong>v38.1:</strong> 4H Candle Anchor Engine (RES_4H / SUP_4H)<br>
+        ✅ Pattern Liquidity Sweep + Zone-Based Confluence<br>
+        ✅ 5-Layer Vision AI + No-Key Retail Sentiment<br>
+        ✅ Conditional Forecast & Auto Alert System
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -186,7 +191,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v38.0</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v38.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -212,7 +217,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v38.0 • Liquidity Sweep & Retail Trap Engine</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v38.1 • 4H Anchor + Pattern Trap + Conditional Alerts</div>
           </div>
         </div>
       </div>
@@ -290,7 +295,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div class="data-status-item" id="data4H"><span>4H Data</span><span>—</span></div>
           <div class="data-status-item" id="data1H"><span>1H Data</span><span>—</span></div>
           <div class="data-status-item" id="data15M"><span>15M Data</span><span>—</span></div>
-          <div class="data-status-item" id="dataIndicators"><span>VP + SMC</span><span>—</span></div>
+          <div class="data-status-item" id="dataIndicators"><span>4H Anchor + VP</span><span>—</span></div>
         </div>
         <div class="chart-preview" id="chartPreview"><div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div></div>
         <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
@@ -339,8 +344,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <!-- SCREENSHOT -->
     <div id="view-screenshot" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--inst);">
-        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot Analysis (6-Layer)</h3>
-        <div class="info-box">📷 Upload screenshots: <strong>M15 → H1 → H4</strong>. Vision AI itachambua layers 6 (ikiwemo Pattern Traps).</div>
+        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot Analysis (5-Layer)</h3>
+        <div class="info-box">📷 Upload: <strong>M15 → H1 → H4</strong>. Vision AI itachambua layers 5 + 4H anchors.</div>
 
         <label>1. Chagua Pair</label>
         <select id="ssPair" onchange="onSSPairChange()">
@@ -352,8 +357,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="USDJPY">USD/JPY</option>
           <option value="AUDUSD">AUD/USD</option>
           <option value="USDCAD">USD/CAD</option>
-          <option value="ETHUSD">ETHUSD</option>
-          <option value="SOLUSD">SOLUSD</option>
           <option value="US30">US30 (Dow Jones)</option>
           <option value="SPX500">SPX500 (S&amp;P 500)</option>
           <option value="XAGUSD">XAGUSD (Silver)</option>
@@ -378,7 +381,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
         <div class="tf-upload-box" id="tfBox-m15" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--cyan);">⚡ M15 — Entry</span>
+            <span style="font-size:13px;font-weight:bold;color:var(--cyan);">⚡ M15</span>
             <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(6,182,212,.2);color:var(--cyan);border:1px solid var(--cyan);">LTF</span>
           </div>
           <input type="file" id="ssInput-m15" accept="image/*" style="padding:8px;margin-bottom:0;">
@@ -387,7 +390,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
         <div class="tf-upload-box" id="tfBox-h1" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--inst);">🎯 H1 — Trend</span>
+            <span style="font-size:13px;font-weight:bold;color:var(--inst);">🎯 H1</span>
             <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(139,92,246,.2);color:var(--inst);border:1px solid var(--inst);">MTF</span>
           </div>
           <input type="file" id="ssInput-h1" accept="image/*" style="padding:8px;margin-bottom:0;">
@@ -396,15 +399,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
         <div class="tf-upload-box" id="tfBox-h4" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--accent);">🏛️ H4 — Bias</span>
+            <span style="font-size:13px;font-weight:bold;color:var(--accent);">🏛️ H4</span>
             <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(251,191,36,.2);color:var(--accent);border:1px solid var(--accent);">HTF</span>
           </div>
           <input type="file" id="ssInput-h4" accept="image/*" style="padding:8px;margin-bottom:0;">
           <div id="ssPreview-h4" style="display:none;"><img id="ssImg-h4" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
         </div>
 
-        <div id="ssUploadStatus" class="info-box" style="margin-top:12px;">📤 Uploaded: <strong>0/3</strong> screenshots</div>
-        <button class="primary-btn" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>🔍 ANALYZE SCREENSHOTS</button>
+        <div id="ssUploadStatus" class="info-box" style="margin-top:12px;">📤 Uploaded: <strong>0/3</strong></div>
+        <button class="primary-btn" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>🔍 ANALYZE</button>
         <button class="secondary-btn" onclick="clearAllScreenshots()">🗑️ Clear</button>
       </div>
       <div id="ssResultsContainer" style="display:none;"></div>
@@ -415,9 +418,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card" style="border-color:var(--pink);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
           <h3 style="margin:0;">🪤 Liquidity Trap Engine</h3>
-          <button onclick="runTrapScan()" id="trapScanBtn" style="background:var(--pink);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔍 Scan Now</button>
+          <button onclick="runTrapScan()" id="trapScanBtn" style="background:var(--pink);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔍 Scan</button>
         </div>
-        <div class="info-box">Inagundua Ascending Triangle, Equal Highs, na Breakout Fakeouts (Sweep + BOS + Retest).</div>
+        <div class="info-box">Inagundua Ascending Triangle, Equal Highs, na Sweep juu/chini ya <strong>4H Anchors</strong> (RES_4H / SUP_4H).</div>
 
         <label>Pair</label>
         <select id="trapPair" onchange="runTrapScan()">
@@ -433,7 +436,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <option value="WTI">WTI</option>
         </select>
 
-        <div id="trapContainer"><div class="info-box">Bonyeza "Scan Now" kuanza.</div></div>
+        <div id="trapContainer"><div class="info-box">Bonyeza "Scan" kuanza.</div></div>
       </div>
     </div>
 
@@ -441,7 +444,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="view-orderflow" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">🌊 Anchored Levels</h3>
+          <h3 style="margin:0;">🌊 Anchored Levels (PD + 4H)</h3>
           <button onclick="refreshOrderFlow()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <label>Pair</label>
@@ -458,7 +461,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="view-sentiment" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">👥 Retail Sentiment Dashboard</h3>
+          <h3 style="margin:0;">👥 Retail Sentiment</h3>
           <button onclick="renderMultiSentiment()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <label>Pair</label>
@@ -575,26 +578,22 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v38.0 — Liquidity Sweep & Retail Trap Engine<br>
-          <strong>AI Text:</strong> gemini-3.6-flash → pixtral-12b-latest<br>
-          <strong>AI Vision:</strong> gemini-3.6-flash → pixtral-12b-latest<br>
-          <strong>Trap Engine:</strong> Ascending Triangle / Equal Highs / Fakeout Detection
+          <strong>Version:</strong> v38.1 — 4H Anchor Institutional Scanner<br>
+          <strong>Anchor:</strong> 2nd 4H Candle (RES_4H / SUP_4H)<br>
+          <strong>AI:</strong> gemini-3.6-flash → pixtral-12b-latest
         </div>
 
-        <div class="ballistic-header" style="margin-top:14px;">👥 RETAIL SENTIMENT SOURCE</div>
+        <div class="ballistic-header" style="margin-top:14px;">👥 SENTIMENT SOURCE</div>
         <label>FXNewsBias API Key (optional)</label>
         <input type="password" id="settingsFxnbKey" placeholder="fxnb_live_...">
-        <button class="secondary-btn" onclick="saveFxnbKey()">💾 Save FXNewsBias Key</button>
-        <div class="info-box" style="font-size:10px;">
-          <strong>Priority:</strong> LIVE-IGCS → LIVE-MYFX → LIVE-FXNB → MOCK-OFFLINE
-        </div>
+        <button class="secondary-btn" onclick="saveFxnbKey()">💾 Save</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🚨 ALERTS</div>
         <div class="mini-box" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
           <div>
             <div style="font-size:12px;font-weight:bold;">Alert Status</div>
-            <div style="font-size:10px;color:var(--muted);">PDH/PDL + Conditional triggers</div>
+            <div style="font-size:10px;color:var(--muted);">4H Anchor + Conditional triggers</div>
           </div>
           <span id="alertStatusPill2" class="badge" style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);font-size:11px;padding:4px 12px;border-radius:20px;font-weight:bold;">🔔 ACTIVE</span>
         </div>
@@ -608,12 +607,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <input type="number" id="alertThresholdInput" min="1" max="100" step="1" value="12"
                onchange="setAlertThresholdPips(this.value)">
 
-        <button class="secondary-btn" onclick="playBeep('sweep')">🔊 Test Sweep Chime</button>
-        <button class="secondary-btn" onclick="playBeep('poc')">🎯 Test POC Beep</button>
+        <button class="secondary-btn" onclick="playBeep('sweep')">🔊 Test Sweep</button>
+        <button class="secondary-btn" onclick="playBeep('poc')">🎯 Test POC</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🔊 VOICE</div>
-        <label>Voice Alerts</label>
         <select id="settingsVoiceEnabled" onchange="saveVoiceSetting()">
           <option value="true">✅ Iwezekane</option>
           <option value="false">❌ Zima</option>
@@ -624,7 +622,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <div class="ballistic-header">🎯 SL / TP / SPREAD</div>
         <label>SL = ATR(H1) × </label>
         <input type="number" step="0.1" id="settingsSlMult" value="1.2">
-        <label>TP1, TP2, TP3 (R multiples)</label>
+        <label>TP1, TP2, TP3</label>
         <input type="text" id="settingsTpMults" value="1.5,2.5,4">
         <label>Spread multiplier</label>
         <input type="number" step="0.1" id="settingsSpreadMult" value="1">
@@ -636,34 +634,34 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <input type="number" id="settingsBalance" value="1000">
         <label>Risk Per Trade (%)</label>
         <input type="number" step="0.1" id="settingsRiskPct" value="1.0">
-        <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save Risk</button>
+        <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🤖 MODELS</div>
         <label>Gemini models</label>
         <input type="text" id="settingsGeminiModels" value="gemini-3.6-flash">
-        <label>Mistral text models</label>
+        <label>Mistral text</label>
         <input type="text" id="settingsMistralModels" value="pixtral-12b-latest">
-        <label>Mistral vision models</label>
+        <label>Mistral vision</label>
         <input type="text" id="settingsMistralVision" value="pixtral-12b-latest">
-        <button class="secondary-btn" onclick="saveModels()">💾 Save Models</button>
-        <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset (Gemini 3.6 + Pixtral 12B)</button>
+        <button class="secondary-btn" onclick="saveModels()">💾 Save</button>
+        <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🔑 API KEYS</div>
         <label>Gemini Key</label>
         <input type="password" id="settingsGeminiKey">
-        <button class="secondary-btn" onclick="saveKeyField('GEMINI','settingsGeminiKey','Gemini')">💾 Save Gemini</button>
+        <button class="secondary-btn" onclick="saveKeyField('GEMINI','settingsGeminiKey','Gemini')">💾 Save</button>
         <label>Mistral Key</label>
         <input type="password" id="settingsMistralKey">
-        <button class="secondary-btn" onclick="saveKeyField('MISTRAL','settingsMistralKey','Mistral')">💾 Save Mistral</button>
+        <button class="secondary-btn" onclick="saveKeyField('MISTRAL','settingsMistralKey','Mistral')">💾 Save</button>
         <label>TwelveData Key</label>
         <input type="text" id="settingsTwelveKey">
-        <button class="secondary-btn" onclick="saveKeyField('TWELVE','settingsTwelveKey','TwelveData')">💾 Save TwelveData</button>
+        <button class="secondary-btn" onclick="saveKeyField('TWELVE','settingsTwelveKey','TwelveData')">💾 Save</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <button class="secondary-btn" onclick="testApiKeys()">🧪 Test API Keys</button>
-        <button class="secondary-btn" onclick="exportData()">📥 Export History</button>
+        <button class="secondary-btn" onclick="exportData()">📥 Export</button>
         <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All</button>
       </div>
     </div>
@@ -673,8 +671,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v38.0 — Liquidity Sweep & Retail Trap Engine
-   Gemini 3.6 Flash + Pixtral 12B
+   Lutynoel.fx v38.1 — 4H Anchor Institutional Scanner
    ═══════════════════════════════════════════════════════════════ */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -687,22 +684,25 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v38.0';
+const MODELS_VERSION = 'v38.1';
 const SENTIMENT_CACHE_MS = 5 * 60 * 1000;
 const SENTIMENT_REFRESH_INTERVAL = 5 * 60 * 1000;
 
-/* ═══ Zone-Based + Pattern Trap Constants ═══ */
+/* ═══ Zone-Based + Pattern Trap + 4H Anchor Constants ═══ */
 const ZONE_BUFFER_PIPS = 20;
 const ZONE_BUFFER_WIDE_PIPS = 25;
 const ALERT_TRIGGER_TOLERANCE_PIPS = 3;
 const CONDITIONAL_ALERT_COOLDOWN_MS = 5 * 60 * 1000;
 
-/* Pattern Trap Engine constants */
 const TRAP_SWING_LOOKBACK = 60;
 const TRAP_RESISTANCE_TOLERANCE_ATR = 0.3;
 const TRAP_MIN_TOUCHES = 2;
 const TRAP_SL_BUFFER_PIPS = 4;
 const TRAP_BOS_BODY_MULT = 0.8;
+
+/* 4H Anchor config */
+const ANCHOR_4H_CANDLE_INDEX = 1;  // 0-indexed → 2nd 4H candle
+const ANCHOR_4H_BUFFER_PIPS = 5;   // Buffer around anchor levels
 
 const KILLZONES = {
   LONDON: { startUTC: 7 * 60,  endUTC: 10 * 60, name: 'LONDON_KILLZONE' },
@@ -763,42 +763,36 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-/* ═══ INSTITUTIONAL MASTER PROMPT ═══ */
-const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), Confirmation Indicators, Contrarian Retail Sentiment, and Liquidity Trap Patterns.
+/* ═══ INSTITUTIONAL MASTER PROMPT (v38.1) ═══ */
+const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Produce a HIGH-PROBABILITY trade setup using institutional methodology: Volume Profile, SMC/ICT, 4H Candle Anchors, Confirmation Indicators, Contrarian Retail Sentiment, and Liquidity Trap Patterns.
 
-═══════════ CONFLUENCE RULES ═══════════
-1. VOLUME PROFILE (SVP / VRVP):
-   - Identify Point of Control (POC).
-   - Naked/Unmitigated POC retest = HIGH-PROBABILITY ZONE.
-   - Price BELOW VAL + bullish → BUY (target POC then VAH).
-   - Price ABOVE VAH + bearish → SELL (target POC then VAL).
+═══════════ 1. 4H CANDLE ANCHORS (PRIMARY REFERENCE) ═══════════
+- RES_4H = HIGH of the 2nd 4-hour candle of the current trading day (dynamic daily resistance).
+- SUP_4H = LOW of the 2nd 4-hour candle of the current trading day (dynamic daily support).
+- SELL: Sweep ABOVE RES_4H + M15/M5 BOS + Retest supply/breaker block.
+- BUY: Sweep BELOW SUP_4H + M15/M5 BOS + Retest demand/breaker block.
+- These anchors override lower-probability signals. Highest conviction.
 
-2. SMART MONEY CONCEPTS (SMC / ICT):
-   - MUST have BOS or CHoCH.
-   - Entry MUST sit inside an OB or FVG near the Value Area.
-   - Liquidity Sweeps must occur BEFORE entry.
+═══════════ 2. VOLUME PROFILE ═══════════
+- POC retest + VAH/VAL breaks. Price BELOW VAL + bullish → BUY. Price ABOVE VAH + bearish → SELL.
 
-3. INDICATOR CONFIRMATIONS:
-   - EMA 20/50/200 alignment with higher-TF direction.
-   - RSI 14 divergence at FVG/POC.
-   - ATR 14 for SL buffer + spread.
+═══════════ 3. SMC / ICT ═══════════
+- BOS or CHoCH mandatory. Entry inside OB/FVG near Value Area. Liquidity Sweep before entry.
 
-4. RETAIL SENTIMENT (CONTRARIAN):
-   - Extreme retail (≥75% one side) → align with SMART MONEY BIAS (opposite retail).
+═══════════ 4. INDICATORS ═══════════
+- EMA 20/50/200 alignment, RSI(14) divergence, ATR(14) for SL buffer.
 
-5. LIQUIDITY TRAP PATTERNS (NEW v38.0):
-   - ASCENDING_TRIANGLE_LIQUIDITY_TRAP: Flat resistance + Higher Lows + Sweep above resistance then close back below + BOS below nearest HL + Retest of broken resistance/breaker block = HIGH_PROBABILITY_SELL.
-   - DESCENDING_TRIANGLE_LIQUIDITY_TRAP: Flat support + Lower Highs + Sweep below support then close back above + BOS above nearest LH + Retest of broken support/breaker block = HIGH_PROBABILITY_BUY.
-   - DOUBLE_TOP_LIQUIDITY: Two tests of same high + sweep above + reversal.
-   - DOUBLE_BOTTOM_LIQUIDITY: Two tests of same low + sweep below + reversal.
+═══════════ 5. RETAIL SENTIMENT (CONTRARIAN) ═══════════
+- Retail ≥75% one side → align with SMART MONEY BIAS (opposite retail).
 
-═══════════ ZONE-BASED ENTRIES ═══════════
-- Price within 15-25 pips of PD-VAL / PD-POC / PD-VAH + valid Demand/Supply zone + M15 CHoCH = HIGH_PROBABILITY_ZONE_SETUP.
+═══════════ 6. LIQUIDITY TRAP PATTERNS ═══════════
+- ASCENDING_TRIANGLE_LIQUIDITY_TRAP: Flat resistance + Higher Lows + Sweep above + BOS below HL + Retest = HIGH_PROBABILITY_SELL.
+- DESCENDING_TRIANGLE_LIQUIDITY_TRAP: Flat support + Lower Highs + Sweep below + BOS above LH + Retest = HIGH_PROBABILITY_BUY.
+- Double Top/Bottom liquidity pools.
 
 ═══════════ CALIBRATION ═══════════
-- If NO immediate trigger but setup is FORMING → signal_type:"PENDING_ALERT", execution_mode:"CONDITIONAL_TRIGGER".
-- Only use signal_type:"NO_TRADE" as absolute last resort.
-- Confidence 50 = no edge. 75+ = textbook A+.
+- If no immediate trigger but setup is FORMING → signal_type:"PENDING_ALERT", execution_mode:"CONDITIONAL_TRIGGER".
+- signal_type:"NO_TRADE" only as absolute last resort.
 
 ═══════════ OUTPUT (STRICT JSON) ═══════════
 Respond with ONLY this JSON object:
@@ -807,97 +801,7 @@ Respond with ONLY this JSON object:
   "timeframe": "STRING",
   "signal_type": "BUY" | "SELL" | "PENDING_ALERT" | "NO_TRADE",
   "execution_mode": "IMMEDIATE" | "CONDITIONAL_TRIGGER" | "STANDBY",
-  "confidence_score": NUMBER,
-  "entry_price": NUMBER,
-  "entry_zone": { "min_price": NUMBER, "max_price": NUMBER },
-  "stop_loss": NUMBER,
-  "sl_pips": NUMBER,
-  "take_profit_1": NUMBER,
-  "take_profit_2": NUMBER,
-  "take_profit_3": NUMBER,
-  "risk_reward_ratio": "STRING",
-  "confluences": ["STRING_1", "STRING_2", "STRING_3"],
-  "macro_geopolitical_bias": "BULLISH_SAFE_HAVEN" | "BEARISH_SAFE_HAVEN" | "BULLISH_INFLATION_HEDGE" | "BEARISH_RISK_OFF" | "NEUTRAL_MACRO",
-  "macro_reasoning": "STRING",
-  "pattern_trap": {
-    "pattern_detected": "ASCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DESCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DOUBLE_TOP_LIQUIDITY" | "DOUBLE_BOTTOM_LIQUIDITY" | "NONE",
-    "sweep_status": "CONFIRMED" | "PENDING" | "NONE",
-    "bos_status": "CONFIRMED" | "PENDING" | "NONE",
-    "setup_phase": "PATTERN_FORMING" | "WAITING_FOR_SWEEP" | "WAITING_FOR_BOS" | "WAITING_FOR_RETEST" | "READY_TO_EXECUTE",
-    "retest_zone": "STRING",
-    "sweep_high": NUMBER,
-    "resistance_level": NUMBER,
-    "nearest_hl": NUMBER
-  },
-  "volume_profile_data": {
-    "poc_price": NUMBER,
-    "vah_price": NUMBER,
-    "val_price": NUMBER,
-    "confluence_note": "STRING"
-  },
-  "conditional_alert": {
-    "trigger_zone": "STRING",
-    "action_if_reached": "STRING",
-    "alert_price_buy": NUMBER,
-    "alert_price_sell": NUMBER
-  }
-}`;
-
-/* ═══ 6-LAYER VISION MASTER PROMPT ═══ */
-const VISION_MASTER_PROMPT = `You are a Senior Institutional FX & XAUUSD Analyst analyzing MTF chart screenshots.
-Evaluate EVERY chart across EXACTLY 6 layers:
-
-═══════════ LAYER 1: PRICE ACTION & CANDLESTICK PATTERNS ═══════════
-- Identify: engulfing, pin bars, hammer/shooting star, doji at extremes
-- Detect liquidity sweeps (wick beyond swing high/low then close back)
-- Rate body-to-wick ratio
-- Note displacement candles
-
-═══════════ LAYER 2: DEMAND & SUPPLY ZONES (Discount/Premium) ═══════════
-- Mark DEMAND zones (fresh, unmitigated, strong departure)
-- Mark SUPPLY zones (fresh, unmitigated, strong departure)
-- Classify as DISCOUNT (below equilibrium) or PREMIUM (above)
-- Identify the equilibrium line
-
-═══════════ LAYER 3: SUPPORT & RESISTANCE ═══════════
-- Mark horizontal intraday S/R levels
-- Identify role flips
-- Count touches at each level
-- Note cluster zones
-
-═══════════ LAYER 4: MARKET STRUCTURE (SMC/ICT) ═══════════
-- Identify swing highs/lows (2-candle rule)
-- Detect: BOS, CHoCH, MSS
-- Confirm HH+HL vs LH+LL vs range
-- Note liquidity targets
-
-═══════════ LAYER 5: FUNDAMENTAL & GEOPOLITICAL (XAUUSD) ═══════════
-For Gold:
-- War/conflict escalation → BULLISH_SAFE_HAVEN
-- Inflation / CPI / PPI → BULLISH_INFLATION_HEDGE
-- Dovish CB → BULLISH_GOLD
-- Hawkish CB → BEARISH_GOLD
-- USD safe-haven flows during risk-off
-Do NOT invent news. If no clear driver → "NEUTRAL_MACRO".
-
-═══════════ LAYER 6: LIQUIDITY TRAP PATTERNS (NEW v38.0) ═══════════
-Explicitly identify these patterns in the screenshots:
-a) **Ascending Triangles**: Flat horizontal resistance line touched 2+ times, with Higher Lows forming below (rising trendline). Retail traders buy the breakout. Look for the FAKEOUT.
-b) **Descending Triangles**: Flat horizontal support touched 2+ times, with Lower Highs forming above. Retail traders sell the breakdown. Look for the FAKEOUT.
-c) **Double Tops / Double Bottoms**: Two touches at the same level. Liquidity pools above/below.
-d) **Liquidity Sweeps (Fakeouts)**: Price WICKS above resistance (or below support) then CLOSES BACK inside the range in the same or next candle. This is the trap trigger.
-e) **BOS Lines**: Strong displacement candle that breaks and closes below the nearest Higher Low (for bearish) or above the nearest Lower High (for bullish).
-f) **Supply / Breaker Retest Boxes**: The broken resistance becomes new supply. Highlight the retest zone.
-
-Rate each detected pattern with confidence. If a pattern is forming but not confirmed, mark setup_phase accordingly.
-
-═══════════ OUTPUT (STRICT JSON) ═══════════
-Respond with ONLY this JSON object:
-{
-  "pair": "STRING",
-  "timeframe": "STRING",
-  "signal_type": "BUY" | "SELL" | "PENDING_ALERT" | "NO_TRADE",
-  "execution_mode": "IMMEDIATE" | "CONDITIONAL_TRIGGER" | "STANDBY",
+  "pattern_detected": "ASCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DESCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DOUBLE_TOP_LIQUIDITY" | "DOUBLE_BOTTOM_LIQUIDITY" | "4H_SWEEP_RETEST" | "NONE",
   "confidence_score": NUMBER,
   "entry_price": NUMBER,
   "entry_zone": { "min_price": NUMBER, "max_price": NUMBER },
@@ -910,17 +814,81 @@ Respond with ONLY this JSON object:
   "confluences": ["STRING_1", "STRING_2"],
   "macro_geopolitical_bias": "BULLISH_SAFE_HAVEN" | "BEARISH_SAFE_HAVEN" | "BULLISH_INFLATION_HEDGE" | "BEARISH_RISK_OFF" | "NEUTRAL_MACRO",
   "macro_reasoning": "STRING",
+  "anchors_4h": { "resistance_2nd_4h": NUMBER, "support_2nd_4h": NUMBER },
   "pattern_trap": {
-    "pattern_detected": "ASCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DESCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DOUBLE_TOP_LIQUIDITY" | "DOUBLE_BOTTOM_LIQUIDITY" | "NONE",
+    "pattern_detected": "STRING",
     "sweep_status": "CONFIRMED" | "PENDING" | "NONE",
     "bos_status": "CONFIRMED" | "PENDING" | "NONE",
-    "setup_phase": "PATTERN_FORMING" | "WAITING_FOR_SWEEP" | "WAITING_FOR_BOS" | "WAITING_FOR_RETEST" | "READY_TO_EXECUTE",
+    "setup_phase": "PATTERN_FORMING" | "WAITING_FOR_SWEEP" | "WAITING_FOR_BOS" | "WAITING_FOR_RETEST" | "READY_TO_EXECUTE" | "SCANNING",
     "retest_zone": "STRING",
     "sweep_high": NUMBER,
     "resistance_level": NUMBER,
     "nearest_hl": NUMBER
   },
-  "layer_scores": { "price_action": NUMBER, "demand_supply": NUMBER, "support_resistance": NUMBER, "market_structure": NUMBER, "macro_geopolitical": NUMBER, "pattern_trap": NUMBER },
+  "volume_profile_data": { "poc_price": NUMBER, "vah_price": NUMBER, "val_price": NUMBER, "confluence_note": "STRING" },
+  "conditional_alert": { "trigger_zone": "STRING", "action_if_reached": "STRING", "alert_price_buy": NUMBER, "alert_price_sell": NUMBER }
+}`;
+
+/* ═══ 5-LAYER VISION MASTER PROMPT ═══ */
+const VISION_MASTER_PROMPT = `You are a Senior Institutional FX & XAUUSD Analyst analyzing MTF chart screenshots.
+Evaluate EVERY chart across EXACTLY 5 layers:
+
+═══════════ LAYER 1: PRICE ACTION & CANDLESTICK ANATOMY ═══════════
+- Engulfing, pin bars, hammer/shooting star, doji at extremes
+- Liquidity sweeps (wick beyond swing high/low then close back)
+- Body-to-wick ratio (>70% strong)
+- Displacement candles (body > 1.5× ATR)
+
+═══════════ LAYER 2: DEMAND & SUPPLY ZONES ═══════════
+- Demand zones (fresh, unmitigated, strong departure)
+- Supply zones (fresh, unmitigated, strong departure)
+- DISCOUNT (below equilibrium) vs PREMIUM (above)
+- Equilibrium line
+
+═══════════ LAYER 3: SUPPORT & RESISTANCE ═══════════
+- Horizontal intraday S/R
+- 4H Candle Anchors (2nd 4H high/low of current day) — CRITICAL
+- Role flips, cluster zones
+- Round numbers
+
+═══════════ LAYER 4: MARKET STRUCTURE (SMC/ICT) ═══════════
+- Swing highs/lows (2-candle rule)
+- BOS, CHoCH, MSS
+- HH+HL vs LH+LL vs range
+- Liquidity targets
+
+═══════════ LAYER 5: MACRO & GEOPOLITICAL (XAUUSD Focus) ═══════════
+For Gold:
+- War/conflict escalation → BULLISH_SAFE_HAVEN
+- Inflation / CPI / PPI → BULLISH_INFLATION_HEDGE
+- Central bank rate cuts → BULLISH_GOLD
+- Rate hikes → BEARISH_GOLD
+- USD safe-haven flows
+Do NOT invent news. If no clear driver → "NEUTRAL_MACRO".
+
+═══════════ OUTPUT (STRICT JSON) ═══════════
+Respond with ONLY this JSON object:
+{
+  "pair": "STRING",
+  "timeframe": "STRING",
+  "signal_type": "BUY" | "SELL" | "PENDING_ALERT" | "NO_TRADE",
+  "execution_mode": "IMMEDIATE" | "CONDITIONAL_TRIGGER" | "STANDBY",
+  "pattern_detected": "STRING",
+  "confidence_score": NUMBER,
+  "entry_price": NUMBER,
+  "entry_zone": { "min_price": NUMBER, "max_price": NUMBER },
+  "stop_loss": NUMBER,
+  "sl_pips": NUMBER,
+  "take_profit_1": NUMBER,
+  "take_profit_2": NUMBER,
+  "take_profit_3": NUMBER,
+  "risk_reward_ratio": "STRING",
+  "confluences": ["STRING_1"],
+  "macro_geopolitical_bias": "STRING",
+  "macro_reasoning": "STRING",
+  "anchors_4h": { "resistance_2nd_4h": NUMBER, "support_2nd_4h": NUMBER },
+  "pattern_trap": { "pattern_detected": "STRING", "sweep_status": "STRING", "bos_status": "STRING", "setup_phase": "STRING", "retest_zone": "STRING" },
+  "layer_scores": { "price_action": NUMBER, "demand_supply": NUMBER, "support_resistance": NUMBER, "market_structure": NUMBER, "macro_geopolitical": NUMBER },
   "volume_profile_data": { "poc_price": NUMBER, "vah_price": NUMBER, "val_price": NUMBER, "confluence_note": "STRING" },
   "conditional_alert": { "trigger_zone": "STRING", "action_if_reached": "STRING", "alert_price_buy": NUMBER, "alert_price_sell": NUMBER }
 }`;
@@ -1019,7 +987,55 @@ function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
   return candles.filter(c => getDayKey(c.time) === todayKey);
 }
 
-/* ═══ ANCHORED LEVELS ═══ */
+/* ═══════════════════════════════════════════════════════════════
+   ⭐ v38.1 — 4H CANDLE ANCHOR ENGINE
+   RES_4H = HIGH of 2nd 4H candle of current trading day
+   SUP_4H = LOW  of 2nd 4H candle of current trading day
+   ═══════════════════════════════════════════════════════════════ */
+function compute4HAnchors(h4Candles, pair, currentTime = Date.now()) {
+  if (!Array.isArray(h4Candles) || h4Candles.length < 3) {
+    return { ok: false, reason: 'Insufficient 4H candles for anchor' };
+  }
+
+  // Get current trading day's 4H candles only
+  const curDay4H = getCurrentDayCandles(h4Candles, currentTime, pair);
+  // Fallback: if current day has <2 candles (early in day), use last N days' first two candles
+  const source = curDay4H.length >= 2 ? curDay4H : h4Candles.slice(-6);
+
+  if (source.length < 2) {
+    return { ok: false, reason: 'No 2nd 4H candle available yet' };
+  }
+
+  // 2nd 4H candle = index 1 (0-indexed)
+  const c2 = source[ANCHOR_4H_CANDLE_INDEX];
+  if (!c2) return { ok: false, reason: '2nd 4H candle missing' };
+
+  const RES_4H = c2.high;
+  const SUP_4H = c2.low;
+  const candleOpenTime = c2.time;
+  const candleCloseTime = c2.time + 4 * 3600 * 1000;
+  const anchorDay = new Date(c2.time).toISOString().slice(0, 10);
+  const candleHourUTC = new Date(c2.time).getUTCHours();
+
+  const warnings = [];
+  if (source.length < 2) warnings.push('Fewer than 2 candles in current day');
+  if (RES_4H === SUP_4H) warnings.push('Zero range on anchor candle');
+
+  return {
+    ok: true,
+    RES_4H: +RES_4H.toFixed(5),
+    SUP_4H: +SUP_4H.toFixed(5),
+    anchorRange: +(RES_4H - SUP_4H).toFixed(5),
+    candleOpenTime, candleCloseTime,
+    anchorDay,
+    candleHourUTC,
+    candleCount: source.length,
+    fromCurrentDay: curDay4H.length >= 2,
+    warnings: warnings.length ? warnings : null
+  };
+}
+
+/* ═══ ANCHORED LEVELS (Previous Day) ═══ */
 function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   const prevDayH1  = getPreviousDayCandles(h1Candles, Date.now(), pair);
   const prevDayM15 = getPreviousDayCandles(m15Candles, Date.now(), pair);
@@ -1043,6 +1059,8 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   if (prevDayRange === 0) warnings.push('Zero range');
 
   const anchorDay = new Date(prevDayH1[0].time).toISOString().slice(0, 10);
+  const anchorDow = new Date(prevDayH1[0].time).getUTCDay();
+  if (anchorDow === 0 || anchorDow === 6) warnings.push(`Anchor day ${anchorDay} is weekend`);
 
   return {
     ok: true, PDH, PDL, PDC,
@@ -1055,17 +1073,17 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   🪤 PATTERN LIQUIDITY SWEEP ENGINE (v38.0)
-   Detects: Ascending Triangle / Equal Highs / Breakout Fakeouts
+   🪤 PATTERN LIQUIDITY SWEEP ENGINE (v38.1)
+   Uses 4H Anchors as PRIMARY reference (RES_4H / SUP_4H)
    ═══════════════════════════════════════════════════════════════ */
-function detectPatternLiquiditySweep(candles, pair, pipSize) {
+function detectPatternLiquiditySweep(candles, anchors4h, pair, pipSize) {
   if (!Array.isArray(candles) || candles.length < 30) return null;
 
   const lb = candles.slice(-TRAP_SWING_LOOKBACK);
   const atr = calculateATR(lb.map(c => c.high), lb.map(c => c.low), lb.map(c => c.close), 14);
   const atrVal = atr || (lb.at(-1).close * 0.005);
 
-  // ─── 1. Swing highs & lows (2-candle rule) ───
+  // ─── Swing highs & lows ───
   const swingHighs = [];
   const swingLows = [];
   for (let i = 2; i < lb.length - 2; i++) {
@@ -1079,10 +1097,13 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
       swingLows.push({ idx: i, price: c.low, time: c.time });
     }
   }
-
   if (swingHighs.length < 2 || swingLows.length < 2) return null;
 
-  // ─── 2. Detect flat resistance (Equal Highs cluster) ───
+  // ─── Primary reference: 4H Anchor (if available) ───
+  const anchorRes = anchors4h?.ok ? anchors4h.RES_4H : null;
+  const anchorSup = anchors4h?.ok ? anchors4h.SUP_4H : null;
+
+  // ─── Detect flat resistance (Equal Highs cluster) ───
   const resTolerance = atrVal * TRAP_RESISTANCE_TOLERANCE_ATR;
   const resistanceClusters = [];
   const used = new Set();
@@ -1101,20 +1122,31 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
     if (group.length >= TRAP_MIN_TOUCHES) resistanceClusters.push(group);
   }
 
-  if (!resistanceClusters.length) return null;
+  // If we have 4H anchor but no cluster, create synthetic cluster from anchor
+  let resistanceLevel = null;
+  let best = null;
+  let using4HAnchor = false;
 
-  // Pick cluster with most touches & most recent
-  const best = resistanceClusters.reduce((b, g) => {
-    if (g.length > b.length) return g;
-    if (g.length === b.length && g.at(-1).idx > b.at(-1).idx) return g;
-    return b;
-  });
+  if (resistanceClusters.length) {
+    best = resistanceClusters.reduce((b, g) => {
+      if (g.length > b.length) return g;
+      if (g.length === b.length && g.at(-1).idx > b.at(-1).idx) return g;
+      return b;
+    });
+    resistanceLevel = best.reduce((s, h) => s + h.price, 0) / best.length;
+  } else if (anchorRes) {
+    // Use 4H anchor directly as resistance
+    resistanceLevel = anchorRes;
+    best = [{ idx: 0, price: anchorRes }];
+    using4HAnchor = true;
+  } else {
+    return null;
+  }
 
-  const resistanceLevel = best.reduce((s, h) => s + h.price, 0) / best.length;
   const lastResTouchIdx = best.at(-1).idx;
 
-  // ─── 3. Check for Higher Lows (ascending pattern) ───
-  const recentLows = swingLows.filter(l => l.idx > best[0].idx).slice(-3);
+  // ─── Higher Lows (ascending pattern) ───
+  const recentLows = swingLows.filter(l => l.idx > (best[0].idx || 0)).slice(-3);
   if (recentLows.length < 2) return null;
 
   let higherLows = true;
@@ -1123,13 +1155,12 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
   }
   const nearestHL = recentLows.at(-1);
 
-  // ─── 4. Detect LIQUIDITY SWEEP above resistance ───
+  // ─── Detect LIQUIDITY SWEEP above resistance ───
   const afterRes = lb.slice(lastResTouchIdx + 1);
   let sweepCandle = null;
   let sweepIdx = -1;
   for (let i = 0; i < afterRes.length; i++) {
     const c = afterRes[i];
-    // Wick above resistance + close back below
     if (c.high > resistanceLevel + resTolerance * 0.3 && c.close < resistanceLevel) {
       sweepCandle = c;
       sweepIdx = i;
@@ -1137,7 +1168,7 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
     }
   }
 
-  // ─── 5. Detect BOS below nearest HL ───
+  // ─── Detect BOS below nearest HL ───
   let bosCandle = null;
   if (sweepCandle) {
     const afterSweep = afterRes.slice(sweepIdx + 1);
@@ -1151,17 +1182,17 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
     }
   }
 
-  // ─── 6. Retest zone (broken resistance / breaker block) ───
+  // ─── Retest zone ───
   const retestZone = {
     low: resistanceLevel - atrVal * 0.15,
     high: resistanceLevel + atrVal * 0.15
   };
 
-  // ─── 7. Current price relative to retest ───
+  // ─── Current price ───
   const currentPrice = lb.at(-1).close;
   const inRetestZone = currentPrice >= retestZone.low && currentPrice <= retestZone.high;
 
-  // ─── 8. SL / TP ───
+  // ─── SL / TP ───
   const sweepHigh = sweepCandle ? sweepCandle.high : resistanceLevel + atrVal;
   const slBuffer = pipSize * TRAP_SL_BUFFER_PIPS;
   const stopLoss = sweepHigh + slBuffer;
@@ -1177,27 +1208,22 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
   const rr1 = risk > 0 ? (reward1 / risk) : 0;
   const rr2 = risk > 0 ? (reward2 / risk) : 0;
 
-  // ─── 9. Setup phase ───
+  // ─── Setup phase ───
   let setupPhase = 'SCANNING';
   let sweepStatus = 'NONE';
   let bosStatus = 'NONE';
-
   if (sweepCandle) sweepStatus = 'CONFIRMED';
   if (bosCandle) bosStatus = 'CONFIRMED';
 
-  if (sweepCandle && bosCandle && inRetestZone) {
-    setupPhase = 'READY_TO_EXECUTE';
-  } else if (sweepCandle && bosCandle) {
-    setupPhase = 'WAITING_FOR_RETEST';
-  } else if (sweepCandle) {
-    setupPhase = 'WAITING_FOR_BOS';
-  } else if (best.length >= 2 && higherLows) {
-    setupPhase = 'PATTERN_FORMING';
-  }
+  if (sweepCandle && bosCandle && inRetestZone) setupPhase = 'READY_TO_EXECUTE';
+  else if (sweepCandle && bosCandle) setupPhase = 'WAITING_FOR_RETEST';
+  else if (sweepCandle) setupPhase = 'WAITING_FOR_BOS';
+  else if (best.length >= 2 && higherLows) setupPhase = 'PATTERN_FORMING';
 
-  // ─── 10. Pattern classification ───
+  // ─── Pattern classification ───
   let patternType = 'NONE';
-  if (best.length >= 2 && higherLows) patternType = 'ASCENDING_TRIANGLE_LIQUIDITY_TRAP';
+  if (using4HAnchor && sweepCandle) patternType = '4H_SWEEP_RETEST';
+  else if (best.length >= 2 && higherLows) patternType = 'ASCENDING_TRIANGLE_LIQUIDITY_TRAP';
   else if (best.length >= 2) patternType = 'EQUAL_HIGHS_LIQUIDITY';
 
   return {
@@ -1205,6 +1231,8 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
     sweep_status: sweepStatus,
     bos_status: bosStatus,
     setup_phase: setupPhase,
+    using4HAnchor,
+    anchor_used: using4HAnchor ? 'RES_4H' : 'Equal_Highs',
     resistance_level: +resistanceLevel.toFixed(5),
     nearest_hl: +nearestHL.price.toFixed(5),
     sweep_high: +sweepHigh.toFixed(5),
@@ -1223,7 +1251,8 @@ function detectPatternLiquiditySweep(candles, pair, pipSize) {
     touches: best.length,
     higher_lows_count: recentLows.length,
     inRetestZone,
-    atr: +atrVal.toFixed(5)
+    atr: +atrVal.toFixed(5),
+    anchors4h: anchors4h?.ok ? { RES_4H: anchors4h.RES_4H, SUP_4H: anchors4h.SUP_4H } : null
   };
 }
 
@@ -1238,7 +1267,7 @@ function interpretCurrencySentiment(pair, currencyScores) {
   const longBias = (bScore + (100 - qScore)) / 2;
   return { retailLongPercent: Math.round(longBias), retailShortPercent: Math.round(100 - longBias), source: 'LIVE-FXNB' };
 }
-async function fetchRetailSentimentForPair(symbol, options = {}) {
+async function fetchPublicRetailSentiment(symbol, options = {}) {
   const forceFresh = options.force === true;
   const cached = sentimentCache[symbol];
   if (!forceFresh && cached && Date.now() - cached.ts < SENTIMENT_CACHE_MS) return cached.data;
@@ -1375,7 +1404,7 @@ function renderSentimentWidget(sentiment, symbol) {
 async function refreshSentimentNow() {
   const pair = $('selectedPair').value;
   showToast('🔄 Refreshing sentiment...', 2000);
-  const s = await fetchRetailSentimentForPair(pair, { force: true });
+  const s = await fetchPublicRetailSentiment(pair, { force: true });
   renderSentimentWidget(s, pair);
   showToast(`✅ Sentiment: ${s.sentimentRatio} (${s.source})`);
 }
@@ -1383,7 +1412,7 @@ async function renderMultiSentiment() {
   const c = $('multiSentContainer');
   const symbol = $('sentMultiPair').value;
   c.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
-  const s = await fetchRetailSentimentForPair(symbol);
+  const s = await fetchPublicRetailSentiment(symbol);
   const L = s.retailLongPercent ?? 50, S = s.retailShortPercent ?? 50;
   const biasColor = s.smartMoneyBias === 'BULLISH' ? 'var(--green)' : s.smartMoneyBias === 'BEARISH' ? 'var(--red)' : s.smartMoneyBias === 'NEUTRAL' ? 'var(--muted)' : 'var(--yellow)';
   c.innerHTML = `
@@ -1430,7 +1459,7 @@ function speakSignal(pair, action, conf, price, tag) {
   const a = action === 'BUY' ? 'Nunua' : 'Uza';
   speakText(`${tag ? tag + '. ' : ''}${a} ${ps}. Bei ${price.toFixed(2)}. Uhakika asilimia ${conf}.`);
 }
-function testVoice() { speakText('Karibu Lutynoel FX. Trap engine uko tayari.'); }
+function testVoice() { speakText('Karibu Lutynoel FX. 4H anchor engine uko tayari.'); }
 function warmUpVoice() { if (!('speechSynthesis' in window)) return; try { const u = new SpeechSynthesisUtterance(''); u.volume = 0; speechSynthesis.speak(u); speechSynthesis.getVoices(); } catch (e) {} }
 
 /* ═══ JSON/FETCH ═══ */
@@ -1703,6 +1732,7 @@ function computeInstitutionalBias(inst) {
   add(inst.near?.fvgBull, 5); add(inst.near?.fvgBear, -5);
   add(inst.near?.obBull, 7); add(inst.near?.obBear, -7);
   add(inst.patternTrap?.pattern_detected === 'ASCENDING_TRIANGLE_LIQUIDITY_TRAP', -10);
+  add(inst.patternTrap?.pattern_detected === '4H_SWEEP_RETEST', -12);
   s = Math.max(0, Math.min(100, s));
   const b = s >= 68 ? 'STRONG_BULLISH' : s >= 57 ? 'BULLISH' : s <= 32 ? 'STRONG_BEARISH' : s <= 43 ? 'BEARISH' : 'NEUTRAL';
   return { score: s, bias: b };
@@ -1738,15 +1768,25 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   const narrowBuf = ZONE_BUFFER_PIPS * pipSize;
   const wideBuf   = ZONE_BUFFER_WIDE_PIPS * pipSize;
 
-  const anchorZones = anchored?.ok ? [
-    { name: 'PDH',    price: anchored.PDH,        buf: narrowBuf, type: 'supply' },
-    { name: 'PDL',    price: anchored.PDL,        buf: narrowBuf, type: 'demand' },
-    { name: 'PD-POC', price: anchored.prevDayPOC, buf: wideBuf,   type: 'equilibrium' },
-    { name: 'PD-VAH', price: anchored.prevDayVAH, buf: wideBuf,   type: 'supply' },
-    { name: 'PD-VAL', price: anchored.prevDayVAL, buf: wideBuf,   type: 'demand' }
-  ].filter(z => z.price != null) : [];
+  // ⭐ v38.1: 4H Candle Anchors (primary reference)
+  const anchors4h = compute4HAnchors(h4, pair);
 
-  const activeAnchorZones = anchorZones.filter(z =>
+  // Anchor zones built from 4H + PD levels
+  const anchorZones = [];
+  if (anchors4h?.ok) {
+    const buf4h = ANCHOR_4H_BUFFER_PIPS * pipSize;
+    anchorZones.push({ name: 'RES_4H', price: anchors4h.RES_4H, buf: buf4h, type: 'supply' });
+    anchorZones.push({ name: 'SUP_4H', price: anchors4h.SUP_4H, buf: buf4h, type: 'demand' });
+  }
+  if (anchored?.ok) {
+    anchorZones.push({ name: 'PDH', price: anchored.PDH, buf: narrowBuf, type: 'supply' });
+    anchorZones.push({ name: 'PDL', price: anchored.PDL, buf: narrowBuf, type: 'demand' });
+    anchorZones.push({ name: 'PD-POC', price: anchored.prevDayPOC, buf: wideBuf, type: 'equilibrium' });
+    anchorZones.push({ name: 'PD-VAH', price: anchored.prevDayVAH, buf: wideBuf, type: 'supply' });
+    anchorZones.push({ name: 'PD-VAL', price: anchored.prevDayVAL, buf: wideBuf, type: 'demand' });
+  }
+  const validAnchorZones = anchorZones.filter(z => z.price != null);
+  const activeAnchorZones = validAnchorZones.filter(z =>
     lp >= z.price - z.buf && lp <= z.price + z.buf
   );
 
@@ -1757,8 +1797,13 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   const sweep = detectLiquiditySweep(flowH1);
   const displacement = detectDisplacement(flowH1);
 
-  // v38.0 — Pattern Trap detection (on M15 for intraday precision)
-  const patternTrap = detectPatternLiquiditySweep(flowM15.length >= 30 ? flowM15 : m15, pair, pipSize);
+  // Pattern trap uses 4H anchors as PRIMARY reference
+  const patternTrap = detectPatternLiquiditySweep(
+    flowM15.length >= 30 ? flowM15 : m15,
+    anchors4h,
+    pair,
+    pipSize
+  );
 
   const vp = anchored?.ok ? {
     poc: anchored.prevDayPOC, vah: anchored.prevDayVAH, val: anchored.prevDayVAL, source: 'previous_day_fixed'
@@ -1768,6 +1813,7 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
     currentPrice: lp, anchoredVP: vp,
     PDH: anchored?.PDH ?? null, PDL: anchored?.PDL ?? null, PDC: anchored?.PDC ?? null,
     prevDayRange: anchored?.prevDayRange ?? null, prevDayATR: anchored?.prevDayATR ?? null,
+    anchors4h,  // ⭐ 4H anchors
     orderBlocks: ob, fvg,
     near: {
       obBull:  !!ob.nearestBull  && nearZone(ob.nearestBull.low,  ob.nearestBull.high, lp, a),
@@ -1777,7 +1823,7 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
     },
     zones: {
       active: activeAnchorZones,
-      all: anchorZones,
+      all: validAnchorZones,
       rangeHigh, rangeLow, equilibrium,
       pricePositionPct: +pricePositionPct.toFixed(1),
       isInDiscount, isInPremium, isInEquilibrium,
@@ -1808,24 +1854,32 @@ function getHTFBias(h4, h1) {
   return { h4: a, h1: b, aligned: a === b && a !== 'NEUTRAL' };
 }
 
-/* ═══ PRE-CHECK (Zone-Based) ═══ */
+/* ═══ ZONE-BASED PRE-CHECK (v38.1) ═══ */
 function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
-  if (!anchored?.ok) return { ok: false, reason: 'Anchored levels not available', mode: 'STANDBY' };
   if (!inst) return { ok: false, reason: 'Institutional metrics not available', mode: 'STANDBY' };
 
+  const anchors4h = inst.anchors4h;
   const narrow = ZONE_BUFFER_PIPS * pipSize;
-  const wide   = ZONE_BUFFER_WIDE_PIPS * pipSize;
+  const wide = ZONE_BUFFER_WIDE_PIPS * pipSize;
+  const buf4h = ANCHOR_4H_BUFFER_PIPS * pipSize;
 
-  const zones = [
-    { name: 'PDH',    price: anchored.PDH,        buffer: narrow, type: 'supply' },
-    { name: 'PDL',    price: anchored.PDL,        buffer: narrow, type: 'demand' },
-    { name: 'PD-POC', price: anchored.prevDayPOC, buffer: wide,   type: 'equilibrium' },
-    { name: 'PD-VAH', price: anchored.prevDayVAH, buffer: wide,   type: 'supply' },
-    { name: 'PD-VAL', price: anchored.prevDayVAL, buffer: wide,   type: 'demand' }
-  ].filter(z => z.price != null);
+  // Build zones — 4H anchors take priority
+  const zones = [];
+  if (anchors4h?.ok) {
+    zones.push({ name: 'RES_4H', price: anchors4h.RES_4H, buffer: buf4h, type: 'supply', priority: 'HIGH' });
+    zones.push({ name: 'SUP_4H', price: anchors4h.SUP_4H, buffer: buf4h, type: 'demand', priority: 'HIGH' });
+  }
+  if (anchored?.ok) {
+    zones.push({ name: 'PDH', price: anchored.PDH, buffer: narrow, type: 'supply' });
+    zones.push({ name: 'PDL', price: anchored.PDL, buffer: narrow, type: 'demand' });
+    zones.push({ name: 'PD-POC', price: anchored.prevDayPOC, buffer: wide, type: 'equilibrium' });
+    zones.push({ name: 'PD-VAH', price: anchored.prevDayVAH, buffer: wide, type: 'supply' });
+    zones.push({ name: 'PD-VAL', price: anchored.prevDayVAL, buffer: wide, type: 'demand' });
+  }
+  const validZones = zones.filter(z => z.price != null);
 
-  const activeZones = zones.filter(z => lp >= z.price - z.buffer && lp <= z.price + z.buffer);
-  const nearestZone = zones.reduce((best, z) => {
+  const activeZones = validZones.filter(z => lp >= z.price - z.buffer && lp <= z.price + z.buffer);
+  const nearestZone = validZones.reduce((best, z) => {
     const d = Math.abs(lp - z.price);
     return (!best || d < best.dist) ? { ...z, dist: d } : best;
   }, null);
@@ -1849,12 +1903,12 @@ function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
 
   const kz = getKillzoneState();
 
-  // Pattern trap takes priority
+  // Trap priority (uses 4H anchors)
   if (trapActive) {
     return {
       ok: true,
       mode: trap.setup_phase === 'READY_TO_EXECUTE' ? 'IMMEDIATE' : 'CONDITIONAL',
-      reason: `🪤 ${trap.pattern_detected} — phase: ${trap.setup_phase}`,
+      reason: `🪤 ${trap.pattern_detected} (${trap.anchor_used}) — ${trap.setup_phase}`,
       activeZones, nearOB, nearFVG, hasM15Structure, hasSweep, hasDisplacement,
       lowVol, inKillzone: kz.inKillzone, session: kz.session,
       tier: 'HIGH_PROBABILITY_PATTERN_TRAP',
@@ -1863,10 +1917,24 @@ function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
     };
   }
 
+  // 4H Anchor immediate
+  const hit4HZone = activeZones.find(z => z.priority === 'HIGH');
+  if (hit4HZone && hasStructuralContext && !lowVol) {
+    return {
+      ok: true, mode: 'IMMEDIATE',
+      reason: `Price at ${hit4HZone.name} (4H Anchor) WITH context`,
+      activeZones, nearOB, nearFVG, hasM15Structure, hasSweep, hasDisplacement,
+      lowVol, inKillzone: kz.inKillzone, session: kz.session,
+      tier: 'HIGH_PROBABILITY_4H_ANCHOR',
+      setupType: 'HIGH_PROBABILITY_4H_ANCHOR'
+    };
+  }
+
+  // Zone immediate
   if (inKeyZone && hasStructuralContext && !lowVol) {
     return {
       ok: true, mode: 'IMMEDIATE',
-      reason: `Price inside ${activeZones.map(z => z.name).join(' + ')} zone WITH context`,
+      reason: `Price inside ${activeZones.map(z => z.name).join(' + ')} WITH context`,
       activeZones, nearOB, nearFVG, hasM15Structure, hasSweep, hasDisplacement,
       lowVol, inKillzone: kz.inKillzone, session: kz.session,
       tier: kz.inKillzone ? 'HIGH_PROBABILITY_ZONE_SETUP' : 'MEDIUM_PROBABILITY_ZONE_SETUP',
@@ -1919,6 +1987,7 @@ function makeNoTrade(reason, pair = '', anchor = null) {
     risk_reward_ratio: '—', confluences: [],
     macro_geopolitical_bias: 'NEUTRAL_MACRO', macro_reasoning: '',
     pattern_trap: null,
+    anchors_4h: anchor?.anchors4h || null,
     volume_profile_data: {
       poc_price: anchor?.prevDayPOC ?? 0, vah_price: anchor?.prevDayVAH ?? 0,
       val_price: anchor?.prevDayVAL ?? 0, confluence_note: reason
@@ -1935,11 +2004,12 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
   const isSell = signal.signal_type === 'SELL';
   if (!isBuy && !isSell) return { valid: true, signal, issues: [] };
 
+  // ⭐ Anti-retail trap
   if (sentiment) {
     const L = sentiment.retailLongPercent ?? 0;
     const S = sentiment.retailShortPercent ?? 0;
-    if (isSell && S >= 80) return { valid: false, signal: makeNoTrade(`RETAIL_SELL_TRAP_ACTIVE (${S}% short)`, signal.pair, anchored), issues: ['retail_sell_trap'] };
-    if (isBuy && L >= 80) return { valid: false, signal: makeNoTrade(`RETAIL_BUY_TRAP_ACTIVE (${L}% long)`, signal.pair, anchored), issues: ['retail_buy_trap'] };
+    if (isSell && S >= 80) return { valid: false, signal: makeNoTrade(`RETAIL_TRAP_DETECTED_MIND_THE_SWEEP (${S}% short)`, signal.pair, anchored), issues: ['retail_sell_trap'] };
+    if (isBuy && L >= 80) return { valid: false, signal: makeNoTrade(`RETAIL_TRAP_DETECTED_MIND_THE_SWEEP (${L}% long)`, signal.pair, anchored), issues: ['retail_buy_trap'] };
     if (isSell && S >= 70) issues.push(`Retail ${S}% short — sell trap risk`);
     if (isBuy && L >= 70) issues.push(`Retail ${L}% long — buy trap risk`);
   }
@@ -2010,8 +2080,8 @@ function explainNoTrade(instMaster) {
       icon: '🚫', code: 'NO_CONTEXT',
       title: 'HAKUNA TRADE KABISA',
       subtitle: 'Soko haliko kwenye eneo la maamuzi',
-      detail: pre.reason || 'Price is in no-man\'s-land — no zone, FVG, OB, or sweep detected.',
-      action: 'Subiri price ifike PDH / PDL / PD-POC / VAH / VAL / FVG / OB au pattern trap ifanye kazi.',
+      detail: pre.reason || 'Price is in no-man\'s-land.',
+      action: 'Subiri price ifike RES_4H / SUP_4H / PDH / PDL / PD-POC / VAH / VAL au pattern ifanye kazi.',
       color: 'var(--red)'
     };
   }
@@ -2020,12 +2090,12 @@ function explainNoTrade(instMaster) {
       icon: '⏸️', code: 'LLM_NO_CONFLUENCE',
       title: 'HAKUNA SETUP YENYE CONFLUENCE',
       subtitle: 'AI haikuona mchanganyiko wa kutosha',
-      detail: 'BOS/CHoCH + FVG/OB + Sweep + Volume Profile alignment hazikuonekana pamoja.',
-      action: 'Subiri mchanganyiko wa confluences 3+ uonekane.',
+      detail: '4H anchor + BOS/CHoCH + FVG/OB + Sweep + VP alignment hazikuonekana pamoja.',
+      action: 'Subiri confluences 3+ uonekane.',
       color: 'var(--yellow)'
     };
   }
-  if (reject.includes('Validation failed')) {
+  if (reject.includes('Validation failed') || reject.includes('RETAIL_TRAP')) {
     const rules = reject.replace('Validation failed:', '').trim().split('|').map(s => s.trim()).filter(Boolean);
     return {
       icon: '🛑', code: 'VALIDATOR_REJECTED',
@@ -2114,31 +2184,52 @@ function setAlertThresholdPips(pips) {
   showToast(`✅ Alert threshold: ${v} pips`);
 }
 function checkPriceAlerts(currentPrice, anchored, pipSize, pair) {
-  if (!anchored?.ok || !currentPrice || !pair) return;
-  const threshold = getAlertThresholdPips() * pipSize;
+  if (!currentPrice || !pair) return;
   const now = Date.now();
-  const levels = [
-    { key: 'PDH', price: anchored.PDH,        kind: 'sweep', label: 'PDH Liquidity Sweep' },
-    { key: 'PDL', price: anchored.PDL,        kind: 'sweep', label: 'PDL Liquidity Sweep' },
-    { key: 'POC', price: anchored.prevDayPOC, kind: 'poc',   label: 'PD POC Retest' },
-    { key: 'VAH', price: anchored.prevDayVAH, kind: 'poc',   label: 'PD VAH Test' },
-    { key: 'VAL', price: anchored.prevDayVAL, kind: 'poc',   label: 'PD VAL Test' }
-  ].filter(l => l.price != null);
 
-  levels.forEach(lvl => {
-    const dist = Math.abs(currentPrice - lvl.price);
-    if (dist > threshold) return;
-    const ck = `${pair}:${lvl.key}`;
-    const lastFire = alertCooldowns[ck] || 0;
-    if (now - lastFire < ALERT_COOLDOWN_MS) return;
-    alertCooldowns[ck] = now;
-    fireAlert(lvl, currentPrice, pair);
-  });
+  // 4H anchors (from inst)
+  const inst = window.marketData?.inst;
+  if (inst?.anchors4h?.ok) {
+    const a4 = inst.anchors4h;
+    const threshold = ANCHOR_4H_BUFFER_PIPS * pipSize;
+    [
+      { key: 'RES_4H', price: a4.RES_4H, kind: 'sweep', label: '4H Anchor Resistance Sweep' },
+      { key: 'SUP_4H', price: a4.SUP_4H, kind: 'sweep', label: '4H Anchor Support Sweep' }
+    ].forEach(lvl => {
+      const dist = Math.abs(currentPrice - lvl.price);
+      if (dist > threshold) return;
+      const ck = `${pair}:${lvl.key}`;
+      const lastFire = alertCooldowns[ck] || 0;
+      if (now - lastFire < ALERT_COOLDOWN_MS) return;
+      alertCooldowns[ck] = now;
+      fireAlert(lvl, currentPrice, pair);
+    });
+  }
+
+  // Previous day levels
+  if (anchored?.ok) {
+    const threshold = getAlertThresholdPips() * pipSize;
+    [
+      { key: 'PDH', price: anchored.PDH,        kind: 'sweep', label: 'PDH Sweep' },
+      { key: 'PDL', price: anchored.PDL,        kind: 'sweep', label: 'PDL Sweep' },
+      { key: 'POC', price: anchored.prevDayPOC, kind: 'poc',   label: 'PD POC Retest' },
+      { key: 'VAH', price: anchored.prevDayVAH, kind: 'poc',   label: 'PD VAH Test' },
+      { key: 'VAL', price: anchored.prevDayVAL, kind: 'poc',   label: 'PD VAL Test' }
+    ].filter(l => l.price != null).forEach(lvl => {
+      const dist = Math.abs(currentPrice - lvl.price);
+      if (dist > threshold) return;
+      const ck = `${pair}:${lvl.key}`;
+      const lastFire = alertCooldowns[ck] || 0;
+      if (now - lastFire < ALERT_COOLDOWN_MS) return;
+      alertCooldowns[ck] = now;
+      fireAlert(lvl, currentPrice, pair);
+    });
+  }
 
   evaluateConditionalAlerts(currentPrice, pair, pipSize);
 }
 function fireAlert(lvl, price, pair) {
-  const title = lvl.kind === 'sweep' ? `⚡ LIQUIDITY SWEEP — ${pair}` : `🎯 ${lvl.label} — ${pair}`;
+  const title = lvl.kind === 'sweep' ? `⚡ ${lvl.label} — ${pair}` : `🎯 ${lvl.label} — ${pair}`;
   const body = `${lvl.label} @ ${price.toFixed(5)}`;
   playBeep(lvl.kind === 'sweep' ? 'sweep' : 'poc');
   showToast(`${title}\n${body}`, 6000);
@@ -2162,9 +2253,11 @@ function registerConditionalAlert(pair, instMaster, pipSize) {
     triggerZone: ca.trigger_zone || '',
     action: ca.action_if_reached || '',
     signalType: instMaster.signal_type || 'PENDING_ALERT',
+    patternDetected: instMaster.pattern_detected || 'NONE',
     confluenceSummary: (instMaster.confluences || []).slice(0, 3).join(' • '),
     macroBias: instMaster.macro_geopolitical_bias || 'NEUTRAL_MACRO',
     patternTrap: instMaster.pattern_trap || null,
+    anchors4h: instMaster.anchors_4h || null,
     registeredAt: Date.now(),
     firedAt: {}
   };
@@ -2179,7 +2272,6 @@ function registerConditionalAlert(pair, instMaster, pipSize) {
 function evaluateConditionalAlerts(currentPrice, pair, pipSize) {
   const alert = conditionalAlerts[pair];
   if (!alert) return;
-
   const tol = ALERT_TRIGGER_TOLERANCE_PIPS * pipSize;
   const now = Date.now();
 
@@ -2211,17 +2303,13 @@ function fireConditionalAlert(pair, direction, price, alert) {
   const ps = PAIR_SPECS[pair]?.spoken || pair;
   const swVerb = direction === 'BUY' ? 'Nunua' : 'Uza';
   speakText(`Trigger. ${swVerb} ${ps}. Bei imefika ${price.toFixed(2)}.`);
-  console.log(`[ALERT FIRED] ${title} @ ${price} (zone: ${alert.triggerZone})`);
 }
 
 function renderActiveAlerts() {
   const c = $('activeAlertsContainer');
   if (!c) return;
   const entries = Object.entries(conditionalAlerts);
-  if (!entries.length) {
-    c.innerHTML = '<div class="info-box">Hakuna active alerts bado.</div>';
-    return;
-  }
+  if (!entries.length) { c.innerHTML = '<div class="info-box">Hakuna active alerts bado.</div>'; return; }
 
   c.innerHTML = entries.map(([pair, alert]) => {
     const spec = PAIR_SPECS[pair];
@@ -2264,10 +2352,7 @@ function updateActiveAlertsSummary() {
   const listEl = $('activeAlertsList');
   if (!summaryEl || !listEl) return;
   const entries = Object.entries(conditionalAlerts);
-  if (!entries.length) {
-    summaryEl.style.display = 'none';
-    return;
-  }
+  if (!entries.length) { summaryEl.style.display = 'none'; return; }
   summaryEl.style.display = 'block';
   listEl.innerHTML = entries.map(([pair, alert]) => {
     const spec = PAIR_SPECS[pair];
@@ -2279,7 +2364,7 @@ function updateActiveAlertsSummary() {
 }
 
 /* ═══ ACTIVE TRAPS TRACKING ═══ */
-const activeTraps = {}; // { [pair]: patternTrap }
+const activeTraps = {};
 
 function registerActiveTrap(pair, patternTrap) {
   if (!patternTrap || patternTrap.pattern_detected === 'NONE') return;
@@ -2298,44 +2383,55 @@ function updateActiveTrapsSummary() {
   listEl.innerHTML = entries.map(([pair, t]) => {
     const phaseColor = t.setup_phase === 'READY_TO_EXECUTE' ? 'var(--green)'
       : t.setup_phase === 'WAITING_FOR_RETEST' ? 'var(--yellow)'
-      : t.setup_phase === 'WAITING_FOR_BOS' ? 'var(--orange)'
-      : 'var(--muted)';
-    return `• <strong style="color:var(--pink)">${esc(pair)}</strong>: <span style="color:${phaseColor};font-weight:bold;">${esc(t.setup_phase)}</span> ${t.signal ? '(' + t.signal + ')' : ''}`;
+      : t.setup_phase === 'WAITING_FOR_BOS' ? 'var(--orange)' : 'var(--muted)';
+    const anchorTag = t.using4HAnchor ? ' [4H]' : '';
+    return `• <strong style="color:var(--pink)">${esc(pair)}</strong>: <span style="color:${phaseColor};font-weight:bold;">${esc(t.setup_phase)}</span> ${t.signal ? '(' + t.signal + ')' : ''}${anchorTag}`;
   }).join('<br>');
 }
 
-/* ═══ PROMPT BUILDER ═══ */
+/* ═══ PROMPT BUILDER (v38.1 with 4H anchors) ═══ */
 function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz }) {
   let p = `${INSTITUTIONAL_MASTER_PROMPT}\n\n`;
-  p += `═══ ANCHORED PREVIOUS-DAY LEVELS ═══\n`;
-  p += `Anchor Day: ${anchored.anchorDay}\n`;
-  p += `PDH: ${anchored.PDH.toFixed(5)}\nPDL: ${anchored.PDL.toFixed(5)}\nPDC: ${anchored.PDC.toFixed(5)}\n`;
-  p += `PD-POC: ${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : 'N/A'}\n`;
-  p += `PD-VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : 'N/A'}\n`;
-  p += `PD-VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : 'N/A'}\n`;
-  p += `Prev-Day Range: ${anchored.prevDayRange.toFixed(5)} | ATR: ${(anchored.prevDayATR || anchored.prevDayRange).toFixed(5)}\n\n`;
+
+  // ⭐ 4H Anchors (PRIMARY)
+  if (inst?.anchors4h?.ok) {
+    const a4 = inst.anchors4h;
+    p += `═══ 4H CANDLE ANCHORS (PRIMARY REFERENCE) ═══\n`;
+    p += `Anchor Day: ${a4.anchorDay} | Candle Hour (UTC): ${a4.candleHourUTC}:00\n`;
+    p += `RES_4H (2nd 4H HIGH): ${a4.RES_4H}\n`;
+    p += `SUP_4H (2nd 4H LOW):  ${a4.SUP_4H}\n`;
+    p += `Anchor Range: ${a4.anchorRange}\n`;
+    if (a4.warnings) p += `Warnings: ${a4.warnings.join(' | ')}\n`;
+    p += `\nSELL when: Sweep ABOVE RES_4H + M15/M5 BOS + Retest supply/breaker.\n`;
+    p += `BUY when: Sweep BELOW SUP_4H + M15/M5 BOS + Retest demand/breaker.\n\n`;
+  }
+
+  // Previous-day anchors
+  if (anchored?.ok) {
+    p += `═══ PREVIOUS-DAY ANCHORED LEVELS ═══\n`;
+    p += `Anchor Day: ${anchored.anchorDay}\n`;
+    p += `PDH: ${anchored.PDH.toFixed(5)} | PDL: ${anchored.PDL.toFixed(5)} | PDC: ${anchored.PDC.toFixed(5)}\n`;
+    p += `PD-POC: ${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : 'N/A'} | `;
+    p += `PD-VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : 'N/A'} | `;
+    p += `PD-VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : 'N/A'}\n`;
+    p += `Prev-Day Range: ${anchored.prevDayRange.toFixed(5)} | ATR: ${(anchored.prevDayATR || anchored.prevDayRange).toFixed(5)}\n\n`;
+  }
+
   p += `═══ SESSION ═══\n${kz.session} | Killzone: ${kz.inKillzone ? 'YES ✅' : 'NO ⚠️'}\n\n`;
   p += `═══ LIVE ═══\nPAIR: ${pair} | Price: ${lp.toFixed(5)}\n`;
   if (htfBias) p += `HTF EMA: 4H=${htfBias.h4} | 1H=${htfBias.h1} | Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
 
-  // Add pattern trap context
+  // Pattern trap
   if (inst?.patternTrap && inst.patternTrap.pattern_detected !== 'NONE') {
     const t = inst.patternTrap;
-    p += `\n═══ PATTERN TRAP ENGINE (v38.0) ═══\n`;
+    p += `\n═══ PATTERN TRAP ENGINE ═══\n`;
     p += `Pattern: ${t.pattern_detected}\n`;
-    p += `Sweep Status: ${t.sweep_status}\n`;
-    p += `BOS Status: ${t.bos_status}\n`;
-    p += `Setup Phase: ${t.setup_phase}\n`;
-    p += `Resistance Level: ${t.resistance_level}\n`;
-    p += `Nearest HL: ${t.nearest_hl}\n`;
-    p += `Sweep High: ${t.sweep_high}\n`;
+    p += `Anchor Used: ${t.anchor_used} | 4H: ${t.using4HAnchor ? 'YES' : 'NO'}\n`;
+    p += `Sweep: ${t.sweep_status} | BOS: ${t.bos_status} | Phase: ${t.setup_phase}\n`;
+    p += `Resistance: ${t.resistance_level} | Nearest HL: ${t.nearest_hl} | Sweep High: ${t.sweep_high}\n`;
     p += `Retest Zone: ${t.retest_zone}\n`;
-    p += `Suggested Signal: ${t.signal || 'NONE'}\n`;
-    p += `Suggested Entry: ${t.entry}\n`;
-    p += `Suggested SL: ${t.stop_loss} (${t.sl_pips}p)\n`;
-    p += `Suggested TP1: ${t.take_profit_1}\n`;
-    p += `Suggested TP2: ${t.take_profit_2}\n`;
-    p += `Touches: ${t.touches} | Higher Lows: ${t.higher_lows_count}\n`;
+    p += `Signal: ${t.signal || 'NONE'} | Entry: ${t.entry} | SL: ${t.stop_loss} (${t.sl_pips}p)\n`;
+    p += `TP1: ${t.take_profit_1} | TP2: ${t.take_profit_2} | R:R ${t.risk_reward_ratio}\n`;
   }
 
   const dump = (name, arr, n) => {
@@ -2377,10 +2473,11 @@ function buildZoneContextBlock(pre, inst, anchored, pipSize) {
 function buildConditionalFromZones(pre, inst, lp, pipSize) {
   const zones = inst?.zones || {};
   const anchored = inst?.anchoredVP || {};
+  const anchors4h = inst?.anchors4h;
   const buyZone = zones.discountZone || (inst.PDL != null ? { low: inst.PDL - 20 * pipSize, high: inst.PDL + 20 * pipSize } : null);
   const sellZone = zones.premiumZone || (inst.PDH != null ? { low: inst.PDH - 20 * pipSize, high: inst.PDH + 20 * pipSize } : null);
-  const alertBuy = anchored.val ?? buyZone?.high ?? null;
-  const alertSell = anchored.vah ?? sellZone?.low ?? null;
+  const alertBuy = anchors4h?.SUP_4H ?? anchored.val ?? buyZone?.high ?? null;
+  const alertSell = anchors4h?.RES_4H ?? anchored.vah ?? sellZone?.low ?? null;
   return {
     trigger_zone: buyZone ? `${buyZone.low.toFixed(5)} - ${buyZone.high.toFixed(5)}` : '—',
     action_if_reached: 'Wait for M5 reversal + M15 CHoCH confirmation before entry',
@@ -2391,7 +2488,6 @@ function buildConditionalFromZones(pre, inst, lp, pipSize) {
 
 function buildConditionalFromTrap(trap, pipSize) {
   if (!trap) return null;
-  // For descending trap, trigger when price pulls back into retest zone
   return {
     trigger_zone: trap.retest_zone || '—',
     action_if_reached: `Pattern trap retest — look for ${trap.signal || 'reversal'} confirmation`,
@@ -2400,38 +2496,41 @@ function buildConditionalFromTrap(trap, pipSize) {
   };
 }
 
-function buildForecastFromAnchors(anchored) {
+function buildForecastFromAnchors(anchored, inst) {
+  const a4 = inst?.anchors4h;
   return {
     conditional_alert: {
-      trigger_zone: anchored.ok ? `${anchored.prevDayVAL?.toFixed(5) || '—'} - ${anchored.prevDayVAH?.toFixed(5) || '—'}` : '—',
+      trigger_zone: a4?.ok ? `${a4.SUP_4H} - ${a4.RES_4H}` : (anchored?.ok ? `${anchored.prevDayVAL?.toFixed(5) || '—'} - ${anchored.prevDayVAH?.toFixed(5) || '—'}` : '—'),
       action_if_reached: 'Monitor for M15 CHoCH + zone retest',
-      alert_price_buy: anchored.prevDayVAL ?? null,
-      alert_price_sell: anchored.prevDayVAH ?? null
+      alert_price_buy: a4?.SUP_4H ?? anchored?.prevDayVAL ?? null,
+      alert_price_sell: a4?.RES_4H ?? anchored?.prevDayVAH ?? null
     }
   };
 }
 
-/* ═══ CALL INSTITUTIONAL MASTER ═══ */
+/* ═══ CALL INSTITUTIONAL MASTER (v38.1 unified JSON) ═══ */
 async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, pipSize) {
-  const sentiment = await fetchRetailSentimentForPair(pair);
+  const sentiment = await fetchPublicRetailSentiment(pair);
   window.__lastSentiment = sentiment;
 
   const pre = preCheckZoneBased(lp, anchored, currentM15, inst, pipSize, pair);
-
-  // Extract pattern trap
   const trap = inst?.patternTrap || null;
+  const anchors4h = inst?.anchors4h || null;
 
   if (!pre.ok && pre.mode === 'STANDBY') {
-    const forecast = buildForecastFromAnchors(anchored);
+    const forecast = buildForecastFromAnchors(anchored, inst);
     return {
       provider: 'ZonePreCheck', pair, timeframe: 'M15',
       signal_type: 'NO_TRADE', execution_mode: 'STANDBY', confidence_score: 0,
+      pattern_detected: trap?.pattern_detected || 'NONE',
       entry_price: lp, entry_zone: { min_price: lp, max_price: lp },
       stop_loss: 0, sl_pips: 0,
       take_profit_1: 0, take_profit_2: 0, take_profit_3: 0,
       risk_reward_ratio: '—', confluences: [],
       macro_geopolitical_bias: 'NEUTRAL_MACRO', macro_reasoning: '',
+      anchors_4h: anchors4h?.ok ? { resistance_2nd_4h: anchors4h.RES_4H, support_2nd_4h: anchors4h.SUP_4H } : null,
       pattern_trap: trap,
+      retail_sentiment: { long_pct: sentiment.retailLongPercent, short_pct: sentiment.retailShortPercent, smart_money_bias: sentiment.smartMoneyBias },
       volume_profile_data: {
         poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
         val_price: anchored.prevDayVAL ?? 0, confluence_note: pre.reason
@@ -2444,7 +2543,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
   const kz = getKillzoneState();
   const basePrompt = buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz });
   const zoneContext = buildZoneContextBlock(pre, inst, anchored, pipSize);
-  const sentimentBlock = `\n\n═══ RETAIL SENTIMENT ═══\nLong: ${sentiment.retailLongPercent}% | Short: ${sentiment.retailShortPercent}%\nSmart Money Bias: ${sentiment.smartMoneyBias} — ${sentiment.biasReason}\nSource: ${sentiment.source}\n\nCONTRARIAN RULE: Extreme retail (≥75% one side) → align with SMART MONEY BIAS.`;
+  const sentimentBlock = `\n\n═══ RETAIL SENTIMENT ═══\nLong: ${sentiment.retailLongPercent}% | Short: ${sentiment.retailShortPercent}%\nSmart Money Bias: ${sentiment.smartMoneyBias} — ${sentiment.biasReason}\nSource: ${sentiment.source}\n`;
 
   const fullPrompt = basePrompt + zoneContext + sentimentBlock;
   const r = await callLLM({ prompt: fullPrompt, maxTokens: 2400, timeout: 90000 });
@@ -2453,12 +2552,15 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
     return {
       provider: 'Failed', pair, timeframe: 'M15',
       signal_type: 'NO_TRADE', execution_mode: 'STANDBY', confidence_score: 0,
+      pattern_detected: trap?.pattern_detected || 'NONE',
       entry_price: lp, entry_zone: { min_price: lp, max_price: lp },
       stop_loss: 0, sl_pips: 0,
       take_profit_1: 0, take_profit_2: 0, take_profit_3: 0,
       risk_reward_ratio: '—', confluences: [],
       macro_geopolitical_bias: 'NEUTRAL_MACRO', macro_reasoning: '',
+      anchors_4h: anchors4h?.ok ? { resistance_2nd_4h: anchors4h.RES_4H, support_2nd_4h: anchors4h.SUP_4H } : null,
       pattern_trap: trap,
+      retail_sentiment: { long_pct: sentiment.retailLongPercent, short_pct: sentiment.retailShortPercent, smart_money_bias: sentiment.smartMoneyBias },
       volume_profile_data: {
         poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
         val_price: anchored.prevDayVAL ?? 0, confluence_note: r.err || 'LLM failed'
@@ -2479,12 +2581,10 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
   const tp3 = parseFloat(j.take_profit_3) || 0;
   const slPips = parseInt(j.sl_pips) || Math.round(Math.abs(entryPrice - slPrice) / pipSize);
 
-  // Use AI-returned pattern_trap if present, else our detected one
-  const patternTrap = j.pattern_trap || trap;
-
   const unified = {
     provider: r.provider, pair: j.pair || pair, timeframe: j.timeframe || 'M15',
     signal_type: signalType, execution_mode: executionMode,
+    pattern_detected: j.pattern_detected || trap?.pattern_detected || 'NONE',
     confidence_score: Math.max(0, Math.min(100, parseInt(j.confidence_score) || 0)),
     entry_price: entryPrice,
     entry_zone: j.entry_zone || { min_price: entryPrice, max_price: entryPrice },
@@ -2495,7 +2595,13 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
     macro_geopolitical_bias: j.macro_geopolitical_bias || 'NEUTRAL_MACRO',
     macro_reasoning: j.macro_reasoning || '',
     layer_scores: j.layer_scores || {},
-    pattern_trap: patternTrap,
+    anchors_4h: j.anchors_4h || (anchors4h?.ok ? { resistance_2nd_4h: anchors4h.RES_4H, support_2nd_4h: anchors4h.SUP_4H } : null),
+    pattern_trap: j.pattern_trap || trap,
+    retail_sentiment: {
+      long_pct: sentiment.retailLongPercent,
+      short_pct: sentiment.retailShortPercent,
+      smart_money_bias: sentiment.smartMoneyBias
+    },
     volume_profile_data: j.volume_profile_data || {
       poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
       val_price: anchored.prevDayVAL ?? 0, confluence_note: ''
@@ -2526,7 +2632,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
       unified.execution_mode = 'CONDITIONAL_TRIGGER';
       unified.confidence_score = Math.min(unified.confidence_score, 55);
       unified.tier = 'CONDITIONAL_SETUP';
-      unified.rejectReason = check.signal.rejectReason || 'Validator rejected — downgraded to conditional';
+      unified.rejectReason = check.signal.rejectReason || 'Validator rejected';
       if (!unified.conditional_alert) {
         unified.conditional_alert = buildConditionalFromZones(pre, inst, lp, pipSize);
       }
@@ -2535,10 +2641,9 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
     }
   }
 
-  // PENDING_ALERT must have conditional_alert
   if (signalType === 'PENDING_ALERT' && !unified.conditional_alert) {
-    unified.conditional_alert = patternTrap && patternTrap.retest_zone
-      ? buildConditionalFromTrap(patternTrap, pipSize)
+    unified.conditional_alert = trap && trap.retest_zone
+      ? buildConditionalFromTrap(trap, pipSize)
       : buildConditionalFromZones(pre, inst, lp, pipSize);
   }
 
@@ -2601,7 +2706,7 @@ async function onPairChange(pair) {
   $('livePrice').value = '';
   $('resultsContainer').style.display = 'none';
   fetchLivePrice();
-  const s = await fetchRetailSentimentForPair(pair);
+  const s = await fetchPublicRetailSentiment(pair);
   renderSentimentWidget(s, pair);
   const multiSel = $('sentMultiPair');
   if (multiSel) multiSel.value = pair;
@@ -2632,35 +2737,49 @@ async function fetchAllMarketData() {
     window.marketData = { pair, h4, h1, m15, inst, anchored, fetchedAt: Date.now() };
 
     set('dataIndicators', !!inst, inst ? 'READY ✓' : 'FAIL');
-    if (inst && anchored.ok) {
+    if (inst) {
       const spec = PAIR_SPECS[pair];
       const kz = getKillzoneState();
-      let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)} — Anchor: ${anchored.anchorDay}</div>`;
-      h += `<div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong> | PDC: <strong>${anchored.PDC.toFixed(spec.decimals)}</strong></div>`;
-      if (anchored.prevDayPOC != null) {
-        h += `<div>VP: POC <strong style="color:var(--accent)">${anchored.prevDayPOC.toFixed(spec.decimals)}</strong> | VAH ${anchored.prevDayVAH.toFixed(spec.decimals)} | VAL ${anchored.prevDayVAL.toFixed(spec.decimals)}</div>`;
+      let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)}</div>`;
+
+      // 4H Anchor block FIRST
+      if (inst.anchors4h?.ok) {
+        const a4 = inst.anchors4h;
+        h += `<div style="margin-top:6px;padding:8px;background:rgba(236,72,153,.08);border-left:3px solid var(--pink);border-radius:6px;">
+          <div style="color:var(--pink);font-weight:900;">⭐ 4H ANCHORS (${esc(a4.anchorDay)})</div>
+          <div style="font-size:10px;">RES_4H (2nd 4H High): <strong style="color:var(--red);">${a4.RES_4H.toFixed(spec.decimals)}</strong></div>
+          <div style="font-size:10px;">SUP_4H (2nd 4H Low): <strong style="color:var(--green);">${a4.SUP_4H.toFixed(spec.decimals)}</strong></div>
+          <div style="font-size:10px;color:var(--muted);">Range: ${a4.anchorRange.toFixed(spec.decimals)} | Candle: ${a4.candleHourUTC}:00 UTC</div>
+        </div>`;
+      } else {
+        h += `<div style="color:var(--orange);font-size:10px;">⚠️ 4H Anchors: ${esc(inst.anchors4h?.reason || 'not available')}</div>`;
+      }
+
+      if (anchored.ok) {
+        h += `<div style="margin-top:6px;">PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong> | PDC: <strong>${anchored.PDC.toFixed(spec.decimals)}</strong></div>`;
+        if (anchored.prevDayPOC != null) {
+          h += `<div>VP: POC <strong style="color:var(--accent)">${anchored.prevDayPOC.toFixed(spec.decimals)}</strong> | VAH ${anchored.prevDayVAH.toFixed(spec.decimals)} | VAL ${anchored.prevDayVAL.toFixed(spec.decimals)}</div>`;
+        }
       }
       h += `<div>1H: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
       if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(spec.decimals) : '—'}</div>`;
       if (inst.zones) h += `<div>Zone: <strong style="color:${inst.zones.isInDiscount ? 'var(--green)' : inst.zones.isInPremium ? 'var(--red)' : 'var(--yellow)'}">${inst.zones.isInDiscount ? 'DISCOUNT' : inst.zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM'} (${inst.zones.pricePositionPct}%)</strong></div>`;
-      // Trap info
       if (inst.patternTrap && inst.patternTrap.pattern_detected !== 'NONE') {
         const t = inst.patternTrap;
         h += `<div style="margin-top:6px;padding:8px;background:rgba(236,72,153,.1);border-left:3px solid var(--pink);border-radius:6px;">
-          <div style="color:var(--pink);font-weight:900;">🪤 ${esc(t.pattern_detected)}</div>
+          <div style="color:var(--pink);font-weight:900;">🪤 ${esc(t.pattern_detected)}${t.using4HAnchor ? ' (4H Anchor)' : ''}</div>
           <div style="font-size:10px;">Phase: <strong>${esc(t.setup_phase)}</strong></div>
           <div style="font-size:10px;">Sweep: ${esc(t.sweep_status)} | BOS: ${esc(t.bos_status)}</div>
-          <div style="font-size:10px;">Resistance: ${t.resistance_level} | HL: ${t.nearest_hl}</div>
-          <div style="font-size:10px;">Retest Zone: <strong style="color:var(--accent);">${esc(t.retest_zone)}</strong></div>
+          <div style="font-size:10px;">Retest: <strong style="color:var(--accent);">${esc(t.retest_zone)}</strong></div>
         </div>`;
       }
       h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
       if (anchored.warnings) h += `<div style="color:var(--orange);margin-top:6px;">⚠️ ${anchored.warnings.join(' • ')}</div>`;
       $('chartPreview').innerHTML = h;
       $('runBtn').disabled = false;
-      showToast(anchored.warnings ? '⚠️ Data ready (warnings)' : '✅ Data ready');
+      showToast('✅ 4H Anchor data ready');
 
-      const s = await fetchRetailSentimentForPair(pair, { force: true });
+      const s = await fetchPublicRetailSentiment(pair, { force: true });
       renderSentimentWidget(s, pair);
     }
   } catch (e) { showToast(`❌ ${e.message}`); }
@@ -2716,26 +2835,34 @@ async function runTrapScan() {
   const c = $('trapContainer');
   const btn = $('trapScanBtn');
   btn.disabled = true; btn.innerHTML = '<span class="spinner-white"></span>';
-  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Scanning for liquidity traps...</div>';
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Scanning 4H anchors + traps...</div>';
   try {
+    const h4 = await fetchOHLC(pair, '4h', 100, true);
     const m15 = await fetchOHLC(pair, '15m', 200, true);
     if (!m15) throw new Error(lastDataError || 'Failed to fetch M15');
+
     const spec = PAIR_SPECS[pair];
-    const trap = detectPatternLiquiditySweep(m15, pair, spec.pipSize);
+    const anchors4h = compute4HAnchors(h4, pair);
+    const trap = detectPatternLiquiditySweep(m15, anchors4h, pair, spec.pipSize);
+
     if (!trap || trap.pattern_detected === 'NONE') {
-      c.innerHTML = '<div class="info-box">Hakuna pattern trap iliyogundulika kwa sasa kwa ' + esc(pair) + '.</div>';
+      c.innerHTML = `<div class="info-box">Hakuna pattern trap iliyogundulika kwa ${esc(pair)}.</div>
+        ${anchors4h?.ok ? `<div class="mini-box" style="margin-top:10px;"><div class="ballistic-header">⭐ 4H ANCHORS</div>
+          <div style="font-size:11px;">RES_4H: <strong style="color:var(--red);">${anchors4h.RES_4H}</strong></div>
+          <div style="font-size:11px;">SUP_4H: <strong style="color:var(--green);">${anchors4h.SUP_4H}</strong></div>
+        </div>` : ''}`;
       return;
     }
     registerActiveTrap(pair, trap);
-    renderTrapCard(pair, trap, spec);
+    renderTrapCard(pair, trap, spec, anchors4h);
   } catch (e) {
     c.innerHTML = `<div class="error-box">❌ ${esc(e.message)}</div>`;
   } finally {
-    btn.disabled = false; btn.innerHTML = '🔍 Scan Now';
+    btn.disabled = false; btn.innerHTML = '🔍 Scan';
   }
 }
 
-function renderTrapCard(pair, trap, spec) {
+function renderTrapCard(pair, trap, spec, anchors4h) {
   const c = $('trapContainer');
   const f = x => x == null ? '—' : Number(x).toFixed(spec.decimals);
   const phaseColor = trap.setup_phase === 'READY_TO_EXECUTE' ? 'var(--green)'
@@ -2744,15 +2871,21 @@ function renderTrapCard(pair, trap, spec) {
     : trap.setup_phase === 'PATTERN_FORMING' ? 'var(--cyan)' : 'var(--muted)';
 
   c.innerHTML = `
+    ${anchors4h?.ok ? `<div class="mini-box" style="margin-bottom:12px;background:rgba(236,72,153,.06);border-color:rgba(236,72,153,.3);">
+      <div class="ballistic-header" style="color:var(--pink);">⭐ 4H CANDLE ANCHORS (${esc(anchors4h.anchorDay)})</div>
+      <div style="font-size:11px;">RES_4H (2nd 4H High): <strong style="color:var(--red);font-family:ui-monospace,monospace;">${f(anchors4h.RES_4H)}</strong></div>
+      <div style="font-size:11px;">SUP_4H (2nd 4H Low): <strong style="color:var(--green);font-family:ui-monospace,monospace;">${f(anchors4h.SUP_4H)}</strong></div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">Range: ${f(anchors4h.anchorRange)} | Candle hour: ${anchors4h.candleHourUTC}:00 UTC</div>
+    </div>` : ''}
     <div class="pattern-block">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-        <div style="font-size:13px;font-weight:900;color:var(--pink);">🪤 ${esc(trap.pattern_detected)}</div>
+        <div style="font-size:13px;font-weight:900;color:var(--pink);">🪤 ${esc(trap.pattern_detected)}${trap.using4HAnchor ? ' <span style="color:var(--yellow);">[4H Anchor]</span>' : ''}</div>
         <div style="font-size:10px;font-weight:900;padding:3px 8px;border-radius:8px;background:${phaseColor}22;color:${phaseColor};border:1px solid ${phaseColor};">${esc(trap.setup_phase)}</div>
       </div>
 
       <div class="pattern-step">
         <div class="step-icon ${trap.touches >= 2 ? 'step-done' : 'step-pending'}">1</div>
-        <div>Resistance Touches: <strong>${trap.touches}×</strong> @ ${f(trap.resistance_level)}</div>
+        <div>Resistance (${trap.anchor_used}): <strong>${f(trap.resistance_level)}</strong></div>
       </div>
       <div class="pattern-step">
         <div class="step-icon ${trap.higher_lows_count >= 2 ? 'step-done' : 'step-pending'}">2</div>
@@ -2760,7 +2893,7 @@ function renderTrapCard(pair, trap, spec) {
       </div>
       <div class="pattern-step">
         <div class="step-icon ${trap.sweep_status === 'CONFIRMED' ? 'step-done' : 'step-pending'}">3</div>
-        <div>Liquidity Sweep: <strong>${esc(trap.sweep_status)}</strong> ${trap.sweep_high ? `(High: ${f(trap.sweep_high)})` : ''}</div>
+        <div>Liquidity Sweep: <strong>${esc(trap.sweep_status)}</strong> (High: ${f(trap.sweep_high)})</div>
       </div>
       <div class="pattern-step">
         <div class="step-icon ${trap.bos_status === 'CONFIRMED' ? 'step-done' : 'step-pending'}">4</div>
@@ -2783,16 +2916,14 @@ function renderTrapCard(pair, trap, spec) {
           <div><span style="color:var(--muted);">TP1:</span> <strong style="color:var(--green);">${f(trap.take_profit_1)}</strong></div>
           <div><span style="color:var(--muted);">TP2:</span> <strong style="color:var(--green);">${f(trap.take_profit_2)}</strong></div>
         </div>
-        <div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.6;">
-          ${trap.inRetestZone
-            ? '✅ <strong style="color:var(--green);">Price iko kwenye retest zone — READY TO EXECUTE</strong>'
-            : '⏳ Subiri price irudi kwenye retest zone kwa entry.'}
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);">
+          ${trap.inRetestZone ? '✅ <strong style="color:var(--green);">Price iko kwenye retest zone — READY TO EXECUTE</strong>' : '⏳ Subiri price irudi kwenye retest zone kwa entry.'}
         </div>
       </div>
       ` : `
       <div style="margin-top:12px;padding:12px;background:rgba(11,18,32,.7);border-radius:10px;border-left:4px solid var(--yellow);">
         <div style="font-size:12px;color:var(--yellow);font-weight:900;">⏳ PATTERN FORMING — NOT READY</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:6px;">Subiri hatua zote 5 zikamilike. Bonyeza Scan Now kila baada ya muda.</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:6px;">Subiri hatua zote 5 zikamilike.</div>
       </div>
       `}
 
@@ -2803,7 +2934,7 @@ function renderTrapCard(pair, trap, spec) {
   `;
 }
 
-/* ═══ VISION AI ═══ */
+/* ═══ VISION AI (5-Layer) ═══ */
 async function processVisionChartAnalysis(pair, lp, mode, uploadedScreenshots, spec) {
   const shotList = [
     ['m15', 'M15 (ENTRY TIMING)'],
@@ -2818,8 +2949,11 @@ async function processVisionChartAnalysis(pair, lp, mode, uploadedScreenshots, s
 ═══ MTF SCREENSHOT ANALYSIS TASK ═══
 Pair: ${pair} | Current Price: ${lp}
 Analyze ALL attached screenshots (M15, H1, H4).
-Apply the 6-layer framework — ESPECIALLY Layer 6 (Liquidity Trap Patterns).
-Look for: Ascending/Descending Triangles, Double Top/Bottom, Fakeouts, BOS lines, Supply/Breaker retest boxes.
+Apply the 5-layer framework. Especially focus on:
+- 4H Candle Anchors (2nd 4H high/low of current day) — CRITICAL reference
+- Ascending/Descending Triangles, Double Top/Bottom liquidity pools
+- Fakeouts / Liquidity Sweeps above resistance
+- BOS lines and Supply/Breaker retest boxes
 Return unified JSON.`;
 
   if (mode === 'combined') {
@@ -2837,8 +2971,7 @@ Return unified JSON.`;
 
 ═══ SINGLE-TIMEFRAME ANALYSIS ═══
 Analyze ONLY the ${shot.label} chart for ${pair} at ${lp}.
-Focus on the 6 layers as they apply to THIS timeframe.
-Return unified JSON.`;
+Focus on the 5 layers. Return unified JSON.`;
     const r = await callLLM({ prompt, images: [shot], vision: true, maxTokens: 1800, timeout: 90000 });
     if (r.result) tfResults[shot.label] = r.result;
   }
@@ -2887,16 +3020,15 @@ function setupScreenshotUploads() {
 function updateSSUploadStatus() {
   const c = Object.values(uploadedScreenshots).filter(Boolean).length, s = $('ssUploadStatus');
   if (!s) return;
-  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong> screenshots`;
+  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong>`;
   s.style.borderColor = c === 3 ? 'var(--green)' : c > 0 ? 'var(--yellow)' : 'var(--blue)';
-  s.style.color = c === 3 ? '#6ee7b7' : c > 0 ? '#fef08a' : '#93c5fd';
   const btn = $('analyzeSSBtn'); if (btn) btn.disabled = c === 0;
 }
 function updateSSModeInfo() {
   const el = $('ssModeInfo'); if (!el) return;
   el.innerHTML = $('ssMode').value === 'combined'
-    ? '⚡ <strong>Combined:</strong> API call 1 tu — haraka.'
-    : '🔍 <strong>Separate:</strong> API calls 3 — kila TF peke yake.';
+    ? '⚡ <strong>Combined:</strong> API call 1 tu.'
+    : '🔍 <strong>Separate:</strong> API calls 3.';
 }
 function clearAllScreenshots() {
   uploadedScreenshots = { m15: null, h1: null, h4: null };
@@ -2911,7 +3043,7 @@ function clearAllScreenshots() {
 
 async function analyzeAllScreenshots() {
   if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key angalau moja.'); return; }
-  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau screenshot 1.'); return; }
+  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau 1.'); return; }
 
   const pair = $('ssPair').value;
   const lp = parseFloat($('ssLivePrice').value);
@@ -2925,8 +3057,8 @@ async function analyzeAllScreenshots() {
   const container = $('ssResultsContainer');
   container.style.display = 'block';
   container.innerHTML = `<div class="card">
-    <div class="ballistic-header">📸 SCREENSHOT ANALYSIS (6-Layer + Trap Engine)</div>
-    <div style="text-align:center;color:var(--muted);"><span class="spinner"></span> Vision inachambua M15 → H1 → H4...</div>
+    <div class="ballistic-header">📸 SCREENSHOT ANALYSIS (5-Layer)</div>
+    <div style="text-align:center;color:var(--muted);"><span class="spinner"></span> Vision inachambua...</div>
   </div>`;
 
   try {
@@ -2956,6 +3088,7 @@ async function analyzeAllScreenshots() {
     const instMaster = {
       provider, pair: vj.pair || pair, timeframe: vj.timeframe || 'M15',
       signal_type: signalType, execution_mode: executionMode,
+      pattern_detected: vj.pattern_detected || 'NONE',
       confidence_score: Math.max(0, Math.min(100, parseInt(vj.confidence_score) || 0)),
       entry_price: entryPrice,
       entry_zone: vj.entry_zone || { min_price: entryPrice, max_price: entryPrice },
@@ -2966,7 +3099,9 @@ async function analyzeAllScreenshots() {
       macro_geopolitical_bias: vj.macro_geopolitical_bias || 'NEUTRAL_MACRO',
       macro_reasoning: vj.macro_reasoning || '',
       layer_scores: vj.layer_scores || {},
+      anchors_4h: vj.anchors_4h || null,
       pattern_trap: vj.pattern_trap || null,
+      retail_sentiment: vj.retail_sentiment || null,
       volume_profile_data: vj.volume_profile_data || { poc_price: 0, vah_price: 0, val_price: 0, confluence_note: 'From screenshot' },
       conditional_alert: vj.conditional_alert || null,
       tier: 'MEDIUM_PROBABILITY', sentiment: null,
@@ -2993,7 +3128,7 @@ async function analyzeAllScreenshots() {
       finalSignal.tier = 'CONDITIONAL_SETUP';
       finalSignal.rejectReason = check.signal.rejectReason || 'Validator rejected';
       if (!finalSignal.conditional_alert) {
-        finalSignal.conditional_alert = buildConditionalFromZones({}, null, lp, spec.pipSize);
+        finalSignal.conditional_alert = { trigger_zone: '—', action_if_reached: 'Wait for confirmation', alert_price_buy: null, alert_price_sell: null };
       }
     } else {
       finalSignal.tier = check.signal.tier || 'MEDIUM_PROBABILITY';
@@ -3016,7 +3151,7 @@ async function analyzeAllScreenshots() {
     showToast(`❌ ${e.message}`, 5000);
     container.innerHTML = `<div class="card"><div class="error-box">Fatal: ${esc(e.message)}</div></div>`;
   } finally {
-    btn.disabled = false; btn.innerHTML = '🔍 ANALYZE SCREENSHOTS';
+    btn.disabled = false; btn.innerHTML = '🔍 ANALYZE';
   }
 }
 
@@ -3058,9 +3193,12 @@ function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, ancho
     provider: instMaster.provider,
     tier: instMaster.tier,
     execution_mode: instMaster.execution_mode || 'STANDBY',
+    pattern_detected: instMaster.pattern_detected || 'NONE',
     macro_bias: instMaster.macro_geopolitical_bias || 'NEUTRAL_MACRO',
     macro_reasoning: instMaster.macro_reasoning || '',
+    anchors_4h: instMaster.anchors_4h || null,
     pattern_trap: instMaster.pattern_trap || null,
+    retail_sentiment: instMaster.retail_sentiment || null,
     conditional_alert: instMaster.conditional_alert || null,
     rejectReason: instMaster.rejectReason,
     sentiment: instMaster.sentiment ? {
@@ -3069,7 +3207,6 @@ function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, ancho
       bias: instMaster.sentiment.smartMoneyBias,
       source: instMaster.sentiment.source
     } : null,
-    validators: (validators || []).map(v => ({ id: v.masterId, name: v.masterName, vote: v.vote, conf: v.confidence, provider: v.provider })),
     instScore: inst?.biasScore?.score ?? null,
     session: inst?.killZone?.session || getKillzoneState().session,
     anchored: anchored ? {
@@ -3097,7 +3234,6 @@ async function runAnalysis() {
   const { h4, h1, m15 } = md;
 
   const anchored = md.anchored && md.anchored.ok ? md.anchored : computeAnchoredLevels(h1, m15, pair);
-  if (!anchored.ok) { alert('Hakuna prev trading day candles.'); return; }
   md.anchored = anchored;
 
   const curH1  = getCurrentDayCandles(h1, Date.now(), pair);
@@ -3109,20 +3245,22 @@ async function runAnalysis() {
 
   const btn = $('runBtn');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Institutional Master analyzing...';
+  btn.innerHTML = '<span class="spinner"></span> Analyzing with 4H anchors...';
 
   const container = $('resultsContainer');
   container.style.display = 'block';
   container.innerHTML = `
     <div class="card">
-      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v38.0)</div>
+      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v38.1)</div>
       <div style="font-size:11px;line-height:1.8;color:var(--muted);">
-        <div>Anchor Day: <strong style="color:var(--accent)">${anchored.anchorDay}</strong></div>
-        <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong></div>
+        ${inst?.anchors4h?.ok ? `
+          <div>⭐ RES_4H (2nd 4H High): <strong style="color:var(--red)">${inst.anchors4h.RES_4H.toFixed(spec.decimals)}</strong></div>
+          <div>⭐ SUP_4H (2nd 4H Low): <strong style="color:var(--green)">${inst.anchors4h.SUP_4H.toFixed(spec.decimals)}</strong></div>
+        ` : '<div style="color:var(--orange)">⚠️ 4H anchors not available</div>'}
         <div>Session: <strong style="color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'}">${kz.label}</strong></div>
         ${inst?.patternTrap && inst.patternTrap.pattern_detected !== 'NONE' ? `<div style="color:var(--pink);margin-top:4px;">🪤 ${esc(inst.patternTrap.pattern_detected)} — ${esc(inst.patternTrap.setup_phase)}</div>` : ''}
       </div>
-      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pattern Trap + Zone-based + LLM...</div>
+      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> LLM analyzing with 4H anchors...</div>
     </div>`;
 
   const instMaster = await callInstitutionalMaster(
@@ -3179,8 +3317,8 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
   const vp = instMaster.volume_profile_data || {};
   const confColors = conf >= 75 ? 'var(--green)' : conf >= 55 ? 'var(--yellow)' : 'var(--muted)';
   const tier = instMaster.tier || 'MEDIUM_PROBABILITY';
-  const tierClass = tier === 'HIGH_PROBABILITY' || tier === 'HIGH_PROBABILITY_ZONE_SETUP' || tier === 'HIGH_PROBABILITY_PATTERN_TRAP' ? 'tier-high'
-                  : tier === 'MEDIUM_PROBABILITY' || tier === 'MEDIUM_PROBABILITY_ZONE_SETUP' ? 'tier-med'
+  const tierClass = tier.includes('HIGH_PROBABILITY') || tier.includes('4H_ANCHOR') ? 'tier-high'
+                  : tier.includes('MEDIUM_PROBABILITY') ? 'tier-med'
                   : tier === 'LOW_PROBABILITY' ? 'tier-low'
                   : tier === 'CONDITIONAL_SETUP' ? 'tier-conditional'
                   : tier === 'PATTERN_TRAP' ? 'tier-pattern' : 'tier-rejected';
@@ -3192,10 +3330,19 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     ? `<span style="font-size:8px;padding:2px 6px;background:rgba(250,204,21,.2);color:var(--yellow);border:1px solid var(--yellow);border-radius:6px;font-weight:900;margin-left:4px;">⏰ CONDITIONAL</span>`
     : '';
 
+  // ⭐ 4H Anchor block
+  const a4 = instMaster.anchors_4h;
+  const anchor4HBlock = a4 ? `
+    <div class="mini-box" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.05));border-color:rgba(236,72,153,.4);border-left:4px solid var(--pink);">
+      <div style="font-size:10px;color:var(--pink);font-weight:900;letter-spacing:.8px;margin-bottom:6px;">⭐ 4H CANDLE ANCHORS</div>
+      <div class="anchor-row"><span style="color:var(--muted);">RES_4H</span><span style="color:var(--red);font-weight:bold;">${f(a4.resistance_2nd_4h)}</span></div>
+      <div class="anchor-row"><span style="color:var(--muted);">SUP_4H</span><span style="color:var(--green);font-weight:bold;">${f(a4.support_2nd_4h)}</span></div>
+    </div>` : '';
+
   const anc = rec.anchored;
   const anchorBlock = anc ? `
     <div class="anchor-box">
-      <div style="font-size:10px;color:var(--inst);font-weight:900;letter-spacing:.8px;margin-bottom:6px;">🏛️ ANCHORED LEVELS — ${esc(anc.anchorDay || '—')}</div>
+      <div style="font-size:10px;color:var(--inst);font-weight:900;letter-spacing:.8px;margin-bottom:6px;">🏛️ PREVIOUS-DAY LEVELS — ${esc(anc.anchorDay || '—')}</div>
       <div class="anchor-row"><span style="color:var(--muted);">PDH</span><span style="color:var(--red);font-weight:bold;">${f(anc.PDH)}</span></div>
       <div class="anchor-row"><span style="color:var(--muted);">PDC</span><span style="color:var(--text);font-weight:bold;">${f(anc.PDC)}</span></div>
       <div class="anchor-row"><span style="color:var(--muted);">PDL</span><span style="color:var(--green);font-weight:bold;">${f(anc.PDL)}</span></div>
@@ -3204,17 +3351,17 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       ${anc.VAL != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAL</span><span style="color:var(--green);">${f(anc.VAL)}</span></div>` : ''}
     </div>` : '';
 
-  // Pattern Trap Block
+  // Pattern Trap block
   const trap = instMaster.pattern_trap;
   const trapBlock = trap && trap.pattern_detected !== 'NONE' ? `
     <div class="pattern-block">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-        <div style="font-size:12px;font-weight:900;color:var(--pink);">🪤 ${esc(trap.pattern_detected)}</div>
+        <div style="font-size:12px;font-weight:900;color:var(--pink);">🪤 ${esc(trap.pattern_detected)}${trap.using4HAnchor ? ' <span style="color:var(--yellow);">[4H]</span>' : ''}</div>
         <div style="font-size:10px;font-weight:900;padding:3px 8px;border-radius:8px;background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink);">${esc(trap.setup_phase)}</div>
       </div>
       <div class="pattern-step">
         <div class="step-icon ${trap.touches >= 2 ? 'step-done' : 'step-pending'}">1</div>
-        <div>Resistance: ${trap.touches}× touches @ <strong>${f(trap.resistance_level)}</strong></div>
+        <div>Resistance: ${trap.touches}× @ <strong>${f(trap.resistance_level)}</strong></div>
       </div>
       <div class="pattern-step">
         <div class="step-icon ${trap.higher_lows_count >= 2 ? 'step-done' : 'step-pending'}">2</div>
@@ -3234,20 +3381,24 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       </div>
     </div>` : '';
 
-  const sent = instMaster.sentiment;
+  const sent = instMaster.retail_sentiment || (instMaster.sentiment ? {
+    long_pct: instMaster.sentiment.retailLongPercent,
+    short_pct: instMaster.sentiment.retailShortPercent,
+    smart_money_bias: instMaster.sentiment.smartMoneyBias
+  } : null);
   const sentimentBlock = sent ? `
     <div class="mini-box" style="margin-bottom:12px;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
         <span style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--inst);font-weight:900;">👥 RETAIL SENTIMENT</span>
-        <span style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">${esc(sent.source || '')}</span>
+        <span style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">${esc(instMaster.sentiment?.source || 'LIVE')}</span>
       </div>
       <div style="display:flex;height:10px;border-radius:50px;overflow:hidden;background:#0b1220;border:1px solid var(--border);margin-bottom:6px;">
-        <div style="width:${sent.retailLongPercent}%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div>
-        <div style="width:${sent.retailShortPercent}%;background:linear-gradient(90deg,#f87171,#ef4444);"></div>
+        <div style="width:${sent.long_pct}%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div>
+        <div style="width:${sent.short_pct}%;background:linear-gradient(90deg,#f87171,#ef4444);"></div>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:10px;font-family:ui-monospace,monospace;">
-        <span style="color:var(--blue);font-weight:800;">🔵 LONG ${sent.retailLongPercent}%</span>
-        <span style="color:var(--red);font-weight:800;">SHORT ${sent.retailShortPercent}% 🔴</span>
+        <span style="color:var(--blue);font-weight:800;">🔵 LONG ${sent.long_pct}%</span>
+        <span style="color:var(--red);font-weight:800;">SHORT ${sent.short_pct}% 🔴</span>
       </div>
     </div>` : '';
 
@@ -3260,7 +3411,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     </div>` : '';
 
   const ca = instMaster.conditional_alert;
-  const conditionalBlock = ca ? `
+  const conditionalBlock = ca && (ca.alert_price_buy || ca.alert_price_sell) ? `
     <div class="mini-box" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(250,204,21,.08),rgba(249,115,22,.05));border-color:rgba(250,204,21,.4);border-left:4px solid var(--yellow);">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span style="font-size:18px;">⏰</span>
@@ -3282,7 +3433,8 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
   const chips = (instMaster.confluences || []).slice(0, 6).map(c => {
     const low = c.toLowerCase();
     let cls = 'chip-blue';
-    if (low.includes('vp') || low.includes('poc') || low.includes('vah') || low.includes('val')) cls = 'chip-amber';
+    if (low.includes('4h') || low.includes('anchor')) cls = 'chip-red';
+    else if (low.includes('vp') || low.includes('poc') || low.includes('vah') || low.includes('val')) cls = 'chip-amber';
     else if (low.includes('choch') || low.includes('bos') || low.includes('structure')) cls = 'chip-buy';
     else if (low.includes('fvg')) cls = 'chip-cyan';
     else if (low.includes('ob') || low.includes('order block') || low.includes('demand') || low.includes('supply')) cls = 'chip-purple';
@@ -3295,19 +3447,17 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `Direction: ${sigLabel} | Mode: ${executionMode}`,
     `Tier: ${tierLabel}`,
     `Confidence: ${conf}%`,
-    trap ? `Pattern: ${trap.pattern_detected} | Phase: ${trap.setup_phase}` : '',
+    instMaster.pattern_detected !== 'NONE' ? `Pattern: ${instMaster.pattern_detected}` : '',
     `─────────────────`,
-    `Entry Zone: ${f(rec.entryZone?.min_price)} – ${f(rec.entryZone?.max_price)}`,
-    `Stop Loss: ${f(instMaster.stop_loss)} (${instMaster.sl_pips}p)`,
+    a4 ? `⭐ RES_4H: ${a4.resistance_2nd_4h} | SUP_4H: ${a4.support_2nd_4h}` : '',
+    `Entry: ${f(instMaster.entry_price)}`,
+    `SL: ${f(instMaster.stop_loss)} (${instMaster.sl_pips}p)`,
     `TP1: ${f(instMaster.take_profit_1)}`,
     `TP2: ${f(instMaster.take_profit_2)}`,
-    `TP3: ${f(instMaster.take_profit_3)}`,
     `R:R = ${instMaster.risk_reward_ratio}`,
-    sent ? `Retail: ${sent.sentimentRatio} (${sent.smartMoneyBias}) [${sent.source}]` : '',
-    macroBias !== 'NEUTRAL_MACRO' ? `Macro: ${macroBias}` : '',
+    sent ? `Retail: ${sent.short_pct}% SELL / ${sent.long_pct}% BUY (${sent.smart_money_bias})` : '',
     ca ? `ALERT BUY @ ${ca.alert_price_buy || '—'} | SELL @ ${ca.alert_price_sell || '—'}` : '',
-    `Confluences: ${(instMaster.confluences || []).join(' | ')}`,
-    `— Lutynoel.fx v38.0`
+    `— Lutynoel.fx v38.1`
   ].filter(Boolean).join('\n');
   window.__lastCopyText = copyText;
 
@@ -3336,6 +3486,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     </div>
 
     <div class="sig-body">
+      ${anchor4HBlock}
       ${anchorBlock}
       ${trapBlock}
       ${sentimentBlock}
@@ -3372,7 +3523,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       </div>
       ` : isPending ? `
       <div class="mini-box" style="background:rgba(11,18,32,.7);border:1px solid var(--yellow);border-left:5px solid var(--yellow);padding:16px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
           <div style="font-size:32px;line-height:1;">⏰</div>
           <div>
             <div style="font-size:13px;font-weight:900;color:var(--yellow);letter-spacing:.6px;">PENDING ALERT — WAITING FOR TRIGGER</div>
@@ -3417,30 +3568,12 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     </div>
     ` : ''}
 
-    ${vp.poc_price ? `
-    <div style="padding:0 20px 16px;">
-      <div class="mini-box" style="background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
-        <div class="ballistic-header" style="margin-bottom:8px;">📊 PREVIOUS-DAY VOLUME PROFILE</div>
-        <div class="grid-3">
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">VAH</div><div style="font-size:12px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;">${f(vp.vah_price)}</div></div>
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">POC</div><div style="font-size:12px;font-weight:900;color:var(--accent);font-family:ui-monospace,monospace;">${f(vp.poc_price)}</div></div>
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">VAL</div><div style="font-size:12px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;">${f(vp.val_price)}</div></div>
-        </div>
-      </div>
-    </div>
-    ` : ''}
-
     ${(isBuy || isSell) ? `
     <div class="sig-foot">
-      <button class="copy-btn" onclick="copySignalText()">
-        <svg xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-        </svg>
-        Copy Signal Data
-      </button>
+      <button class="copy-btn" onclick="copySignalText()">📋 Copy Signal Data</button>
       <p style="text-align:center;font-size:10px;color:var(--muted);margin:10px 0 0;">⚠️ Educational tool only — not financial advice.</p>
     </div>
-    ` : `<div class="sig-foot"><p style="text-align:center;font-size:10px;color:var(--muted);margin:0;">⚠️ Educational tool only — not financial advice.</p></div>`}
+    ` : `<div class="sig-foot"><p style="text-align:center;font-size:10px;color:var(--muted);margin:0;">⚠️ Educational tool only.</p></div>`}
   </div>`;
 
   const c = $(containerId);
@@ -3557,14 +3690,8 @@ function renderBacktest() {
   let verdict, vcol;
   if (s.n < 30) { verdict = `⚠️ <strong>Sample ndogo (n=${s.n}).</strong> Subiri signals 100+.`; vcol = 'var(--orange)'; }
   else if (s.n >= 100 && s.avgR > 0 && s.ci[0] > s.be) { verdict = `✅ <strong>Dalili za edge.</strong> CI ${pct(s.ci[0])} > BE ${pct(s.be)}.`; vcol = 'var(--green)'; }
-  else if (s.n >= 100 && (s.avgR <= 0 || s.ci[1] < s.be)) { verdict = `❌ <strong>Hakuna edge.</strong> Wastani R = ${s.avgR.toFixed(2)}.`; vcol = 'var(--red)'; }
-  else { verdict = `🟡 <strong>Haijathibitika (n=${s.n}).</strong> WR ${pct(s.wr)} | BE ${pct(s.be)}.`; vcol = 'var(--yellow)'; }
-
-  const ordered = s.items.slice().sort((a, b) => a.r.ts - b.r.ts);
-  let cum = 0; const pts = [0]; ordered.forEach(x => { cum += x.mm.r; pts.push(cum); });
-  const mn = Math.min(...pts), mx = Math.max(...pts), W = 300, H = 70, span = (mx - mn) || 1;
-  const poly = pts.map((v, i) => `${(i / Math.max(1, pts.length - 1) * W).toFixed(1)},${(H - (v - mn) / span * H).toFixed(1)}`).join(' ');
-  const curve = pts.length > 1 ? `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:80px;background:var(--card2);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;"><polyline points="${poly}" fill="none" stroke="${cum >= 0 ? '#10b981' : '#ef4444'}" stroke-width="2"/></svg>` : '';
+  else if (s.n >= 100 && (s.avgR <= 0 || s.ci[1] < s.be)) { verdict = `❌ <strong>Hakuna edge.</strong>`; vcol = 'var(--red)'; }
+  else { verdict = `🟡 <strong>Haijathibitika (n=${s.n}).</strong>`; vcol = 'var(--yellow)'; }
 
   c.innerHTML = `
     <div class="card" style="border-color:${vcol};padding:12px;margin-bottom:12px;">${verdict}</div>
@@ -3577,8 +3704,7 @@ function renderBacktest() {
       <div class="mini-box" style="text-align:center;"><label>PF</label><div style="font-weight:bold;">${s.n ? (isFinite(s.pf) ? s.pf.toFixed(2) : '∞') : '—'}</div></div>
       <div class="mini-box" style="text-align:center;"><label>BE WR</label><div style="font-weight:bold;">${s.n ? pct(s.be) : '—'}</div></div>
     </div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">95% CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN}</div>
-    ${curve}`;
+    <div style="font-size:11px;color:var(--muted);">95% CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN}</div>`;
 }
 
 /* ═══ ANCHORED LEVELS VIEW ═══ */
@@ -3591,35 +3717,50 @@ async function refreshOrderFlow() {
     const m15 = await fetchOHLC(pair, '15m', 200);
     const h4 = await fetchOHLC(pair, '4h', 200);
     const anchored = computeAnchoredLevels(h1, m15, pair);
-    if (!anchored.ok) { c.innerHTML = '<div class="disclaimer-box">Hakuna prev trading-day data.</div>'; return; }
+    const anchors4h = compute4HAnchors(h4, pair);
     const lp = h1.at(-1).close;
     const spec = PAIR_SPECS[pair];
     const f = x => x == null ? '—' : Number(x).toFixed(spec.decimals);
 
-    let html = `<div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(6,182,212,.04));border-color:var(--inst);">
-      <div class="ballistic-header">🏛️ ANCHORED LEVELS — ${esc(anchored.anchorDay)}</div>
-      <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.12);margin-bottom:5px;border-left:4px solid var(--red);font-weight:bold;"><span>PDH</span><span>${f(anchored.PDH)}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(59,130,246,.12);margin-bottom:5px;border-left:4px solid var(--blue);font-weight:bold;"><span>PDC</span><span>${f(anchored.PDC)}</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>PDL</span><span>${f(anchored.PDL)}</span></div>
-      <div style="margin-top:10px;font-size:10px;color:var(--muted);">Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)}</div>
-    </div>`;
+    let html = '';
+
+    // 4H anchors first
+    if (anchors4h?.ok) {
+      html += `<div class="card" style="background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.05));border-color:var(--pink);">
+        <div class="ballistic-header" style="color:var(--pink);">⭐ 4H CANDLE ANCHORS — ${esc(anchors4h.anchorDay)}</div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.12);margin-bottom:5px;border-left:4px solid var(--red);font-weight:bold;"><span>RES_4H (2nd High)</span><span>${f(anchors4h.RES_4H)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>SUP_4H (2nd Low)</span><span>${f(anchors4h.SUP_4H)}</span></div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted);">Range: ${f(anchors4h.anchorRange)} | Candle hour: ${anchors4h.candleHourUTC}:00 UTC</div>
+      </div>`;
+    }
+
+    if (anchored.ok) {
+      html += `<div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(6,182,212,.04));border-color:var(--inst);">
+        <div class="ballistic-header">🏛️ PREVIOUS-DAY LEVELS — ${esc(anchored.anchorDay)}</div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.12);margin-bottom:5px;border-left:4px solid var(--red);font-weight:bold;"><span>PDH</span><span>${f(anchored.PDH)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(59,130,246,.12);margin-bottom:5px;border-left:4px solid var(--blue);font-weight:bold;"><span>PDC</span><span>${f(anchored.PDC)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>PDL</span><span>${f(anchored.PDL)}</span></div>
+      </div>`;
+    }
 
     const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
     if (inst) {
-      if (inst.zones) {
-        html += `<div class="card" style="border-color:var(--inst);">
+      const kz = getKillzoneState();
+      html += `<div class="card">
+        <div class="ballistic-header">📈 LIVE SNAPSHOT</div>
+        <div class="grid-2">
+          <div class="mini-box"><label>Current Price</label><div style="font-weight:bold;color:var(--accent);font-family:ui-monospace,monospace;">${f(lp)}</div></div>
+          <div class="mini-box"><label>Session</label><div style="font-weight:bold;color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'};">${kz.label}</div></div>
+        </div>
+        ${inst.zones ? `<div class="mini-box" style="margin-top:10px;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
           <div class="ballistic-header">🎯 DISCOUNT / PREMIUM</div>
           <div style="font-size:11px;color:var(--muted);">Position: <strong style="color:var(--accent)">${inst.zones.pricePositionPct}%</strong></div>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">Zone: <strong style="color:${inst.zones.isInDiscount ? 'var(--green)' : inst.zones.isInPremium ? 'var(--red)' : 'var(--yellow)'}">${inst.zones.isInDiscount ? 'DISCOUNT' : inst.zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM'}</strong></div>
-          <div style="font-size:10px;color:var(--muted);margin-top:4px;">Equilibrium: ${f(inst.zones.equilibrium)}</div>
-        </div>`;
-      }
-      if (inst.patternTrap && inst.patternTrap.pattern_detected !== 'NONE') {
-        renderTrapCard(pair, inst.patternTrap, spec);
-      }
+        </div>` : ''}
+      </div>`;
     }
 
-    c.innerHTML = html;
+    c.innerHTML = html || '<div class="info-box">No data.</div>';
   } catch (e) { c.innerHTML = `<div class="disclaimer-box">Error: ${esc(e.message)}</div>`; }
 }
 
@@ -3654,9 +3795,10 @@ function loadHistory() {
       else if (r.tier === 'REJECTED') badge = '🛑';
       else { const mm = r.bt?.models?.[getBtModel()]; if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛'; }
       const st = getSignalStrength(r.action, r.conf || 0);
-      const trapTag = r.pattern_trap?.pattern_detected && r.pattern_trap.pattern_detected !== 'NONE' ? ' 🪤' : '';
+      const trapTag = r.pattern_detected && r.pattern_detected !== 'NONE' ? ' 🪤' : '';
+      const a4Tag = r.anchors_4h ? ' ⭐' : '';
       return `<div class="history-card" onclick="showHistoryDetail(${i})"><div style="flex-grow:1;">
-        <strong>${esc(r.pair)} <span style="color:${st.color};">${esc(r.action)}</span></strong> ${badge}${trapTag}
+        <strong>${esc(r.pair)} <span style="color:${st.color};">${esc(r.action)}</span></strong> ${badge}${trapTag}${a4Tag}
         <span style="color:var(--muted);font-size:10px;"> ${esc(r.source || '')} • ${r.conf || 0}%</span><br>
         <small style="color:var(--muted);">${esc(r.date || '')}</small>
       </div>
@@ -3669,25 +3811,27 @@ function showHistoryDetail(i) {
     const r = loadHist()[i]; if (!r) return;
     const spec = PAIR_SPECS[r.pair], d = spec?.decimals ?? 2, f = x => x == null || isNaN(x) ? '—' : Number(x).toFixed(d);
     let h = `<h3 style="margin-top:0;color:var(--accent);">${esc(r.pair)} — ${esc(r.action)}</h3>
-      <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${esc(r.source)} • ${r.conf || 0}% • ${esc(r.tier || '')}</div>`;
-    if (r.pattern_trap?.pattern_detected && r.pattern_trap.pattern_detected !== 'NONE') {
+      <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${esc(r.source)} • ${r.conf || 0}%</div>`;
+    if (r.anchors_4h) {
+      h += `<div class="mini-box" style="margin:10px 0;background:rgba(236,72,153,.06);border-color:rgba(236,72,153,.3);">
+        <div style="font-size:10px;color:var(--pink);font-weight:bold;margin-bottom:6px;">⭐ 4H ANCHORS</div>
+        <div style="font-size:11px;">RES_4H: <strong style="color:var(--red);">${f(r.anchors_4h.resistance_2nd_4h)}</strong></div>
+        <div style="font-size:11px;">SUP_4H: <strong style="color:var(--green);">${f(r.anchors_4h.support_2nd_4h)}</strong></div>
+      </div>`;
+    }
+    if (r.pattern_detected && r.pattern_detected !== 'NONE') {
       h += `<div class="pattern-block" style="margin:10px 0;">
-        <div style="font-size:12px;font-weight:900;color:var(--pink);">🪤 ${esc(r.pattern_trap.pattern_detected)}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:6px;">Phase: <strong>${esc(r.pattern_trap.setup_phase)}</strong></div>
-        <div style="font-size:11px;color:var(--muted);">Sweep: ${esc(r.pattern_trap.sweep_status)} | BOS: ${esc(r.pattern_trap.bos_status)}</div>
-        <div style="font-size:11px;color:var(--muted);">Retest: <strong style="color:var(--accent);">${esc(r.pattern_trap.retest_zone)}</strong></div>
+        <div style="font-size:12px;font-weight:900;color:var(--pink);">🪤 ${esc(r.pattern_detected)}</div>
+        ${r.pattern_trap ? `<div style="font-size:11px;color:var(--muted);margin-top:6px;">Phase: <strong>${esc(r.pattern_trap.setup_phase || '')}</strong></div>` : ''}
       </div>`;
     }
-    if (r.entry) h += `<table class="tbl" style="margin-top:10px;"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th><th>TP3</th></tr><tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td><td>${f(r.tp3)}</td></tr></table>`;
+    if (r.entry) h += `<table class="tbl"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th></tr><tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td></tr></table>`;
     if (r.conditional_alert) {
-      h += `<div class="mini-box" style="margin:10px 0;background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.3);">
-        <div style="font-size:10px;color:var(--yellow);font-weight:bold;margin-bottom:6px;">⏰ CONDITIONAL ALERT</div>
-        ${r.conditional_alert.trigger_zone ? `<div style="font-size:11px;">Zone: <strong style="color:var(--accent);">${esc(r.conditional_alert.trigger_zone)}</strong></div>` : ''}
-        ${r.conditional_alert.alert_price_buy ? `<div style="font-size:11px;color:var(--green);">🟢 BUY: ${f(r.conditional_alert.alert_price_buy)}</div>` : ''}
-        ${r.conditional_alert.alert_price_sell ? `<div style="font-size:11px;color:var(--red);">🔴 SELL: ${f(r.conditional_alert.alert_price_sell)}</div>` : ''}
-      </div>`;
+      h += `<div class="mini-box" style="margin:10px 0;"><div style="font-size:10px;color:var(--yellow);font-weight:bold;">⏰ ALERT</div>`;
+      if (r.conditional_alert.alert_price_buy) h += `<div style="font-size:11px;color:var(--green);">🟢 BUY: ${f(r.conditional_alert.alert_price_buy)}</div>`;
+      if (r.conditional_alert.alert_price_sell) h += `<div style="font-size:11px;color:var(--red);">🔴 SELL: ${f(r.conditional_alert.alert_price_sell)}</div>`;
+      h += `</div>`;
     }
-    if (r.rejectReason) h += `<div class="warn-box" style="margin-top:10px;"><strong>Rejected:</strong> ${esc(r.rejectReason)}</div>`;
     if (r.bt?.models) h += `<table class="tbl"><tr><th>Exit</th><th>Result</th><th>R</th></tr>${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? rfmt(m.r) : '—'}</td></tr>`).join('')}</table>`;
     openUniversalModal(h);
   } catch (e) { showToast('❌ ' + e.message); }
@@ -3710,10 +3854,10 @@ function updateStats() {
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), alerts: conditionalAlerts, traps: activeTraps, version: '38.0', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), alerts: conditionalAlerts, traps: activeTraps, version: '38.1', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v38.0-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v38.1-${Date.now()}.json`; a.click();
 }
 
 /* ═══ AUTH / SETTINGS ═══ */
@@ -3794,7 +3938,7 @@ function enterApp(name) {
   window.__sentInt = setInterval(async () => {
     if (document.hidden) return;
     const pair = $('selectedPair').value;
-    const s = await fetchRetailSentimentForPair(pair);
+    const s = await fetchPublicRetailSentiment(pair);
     renderSentimentWidget(s, pair);
   }, SENTIMENT_REFRESH_INTERVAL);
 
@@ -3876,8 +4020,7 @@ function startAutoRefreshPrice() {
     if (document.hidden) return;
     const aV = $('view-analyst').style.display !== 'none';
     const sV = $('view-screenshot').style.display !== 'none';
-    const tV = $('view-trap').style.display !== 'none';
-    if (!aV && !sV && !tV) return;
+    if (!aV && !sV) return;
     if (aV && !priceMeta?.manual) {
       const pair = $('selectedPair').value, spec = PAIR_SPECS[pair];
       try {
