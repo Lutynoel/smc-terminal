@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v37.6 — Anchored Engine + Retail Sentiment</title>
+<title>Lutynoel.fx v37.7 — Gemini 3.6 + Pixtral 12B</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -130,6 +130,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tier-med{background:rgba(250,204,21,.2);color:var(--yellow);border:1px solid var(--yellow)}
 .tier-low{background:rgba(249,115,22,.2);color:var(--orange);border:1px solid var(--orange)}
 .tier-rejected{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
+.tf-upload-box.has-image{border-style:solid !important;border-color:var(--green) !important;}
 </style>
 </head>
 <body>
@@ -145,8 +146,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v37.6</div>
-    <div class="auth-subtitle">Anchored Engine + Retail Sentiment</div>
+    <div class="auth-title">Lutynoel.fx v37.7</div>
+    <div class="auth-subtitle">Gemini 3.6 + Pixtral 12B Edition</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -158,18 +159,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="loginFormSection">
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
-      <label>Gemini API Key (Primary — Gemini 3.6 Flash)</label>
+      <label>Gemini API Key (gemini-3.6-flash)</label>
       <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
-      <label>Mistral API Key (Fallback — NeMo 12B)</label>
+      <label>Mistral API Key (pixtral-12b-latest — vision fallback)</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
       <label>TwelveData API Key (Forex/Gold/Indices)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v37.6:</strong> Weekend-Safe Anchors + Retail Sentiment Contrarian Filter<br>
-        ✅ Anti-Trap Guardrails (Sell-Trap / Buy-Trap detection)<br>
-        ✅ Real-Time Alerts (Audio + Toast + Vibrate)<br>
-        ✅ Killzone Tiering (London/NY)<br>
-        ✅ <strong>Gemini 3.6 Flash</strong> primary • Mistral NeMo 12B fallback
+        ✅ <strong>v37.7:</strong> Gemini 3.6 flash (primary) • Pixtral 12B (fallback)<br>
+        ✅ Screenshot Analysis (M15 → H1 → H4)<br>
+        ✅ Weekend-Safe Anchors + Retail Sentiment + Anti-Trap
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -191,11 +190,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v37.6</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v37.7</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Live Analysis</div>
+    <div class="menu-item" onclick="navigate('screenshot')">📸 Screenshot Analysis</div>
     <div class="menu-item" onclick="navigate('orderflow')">🌊 Anchored Levels</div>
     <div class="menu-item" onclick="navigate('sentiment')">👥 Retail Sentiment</div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Backtest</div>
@@ -207,13 +207,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 
   <div class="main-content">
+    <!-- ═══ OVERVIEW ═══ -->
     <div id="view-overview" class="view-section">
       <div class="card" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.6 • Anchored Engine + Retail Sentiment</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.7 • Gemini 3.6 + Pixtral 12B Edition</div>
           </div>
         </div>
       </div>
@@ -239,26 +240,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Anchored Institutional Analysis</button>
-        <button class="secondary-btn" onclick="navigate('sentiment')">👥 Retail Sentiment Dashboard</button>
-        <button class="secondary-btn" onclick="navigate('orderflow')">📊 View Anchored Levels</button>
-        <button class="secondary-btn" onclick="navigate('backtest')">📈 Matokeo ya Backtest</button>
-        <button class="secondary-btn" onclick="navigate('history')">📁 History</button>
-      </div>
-
-      <div class="card" style="background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.1));border:2px solid var(--inst);">
-        <div style="color:var(--inst);font-weight:bold;font-size:13px;margin-bottom:8px;">🏛️ V37.6 ENGINE</div>
-        <div style="font-size:11px;line-height:1.9;">
-          1. <strong>Weekend-Safe Anchors</strong> — Forex inaskip Sat/Sun, crypto 24/7.<br>
-          2. <strong>Retail Sentiment</strong> — Myfxbook public + FXNewsBias + Volume mock.<br>
-          3. <strong>Anti-Trap Guardrails</strong> — Reject SELL kama retail short ≥80%, BUY kama long ≥80%.<br>
-          4. <strong>Zero-Hallucination</strong> — Pre-check + Post-validator.<br>
-          5. <strong>Real-Time Alerts</strong> — Audio + Toast ukiwa karibu na PDH/PDL/POC.<br>
-          6. <strong>Killzone Tiering</strong> — London 10-13 EAT, NY 15-18 EAT = HIGH_PROBABILITY.
-        </div>
+        <button class="primary-btn" onclick="navigate('analyst')">🎯 Anchored Analysis</button>
+        <button class="secondary-btn" onclick="navigate('screenshot')">📸 Screenshot Analysis</button>
+        <button class="secondary-btn" onclick="navigate('sentiment')">👥 Retail Sentiment</button>
+        <button class="secondary-btn" onclick="navigate('orderflow')">📊 Anchored Levels</button>
+        <button class="secondary-btn" onclick="navigate('backtest')">📈 Backtest</button>
       </div>
     </div>
 
+    <!-- ═══ ANALYST ═══ -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🎯 Anchored Institutional Analysis</h3>
@@ -299,7 +289,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN ANCHORED ANALYSIS</button>
       </div>
 
-      <!-- ═══ RETAIL SENTIMENT INDEX ═══ -->
+      <!-- RETAIL SENTIMENT WIDGET -->
       <div id="sentimentCard" class="card" style="background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(239,68,68,.04));border:1px solid rgba(139,92,246,.3);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
           <div style="display:flex;align-items:center;gap:10px;">
@@ -339,6 +329,77 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
+    <!-- ═══ SCREENSHOT ANALYSIS ═══ -->
+    <div id="view-screenshot" class="view-section" style="display:none;">
+      <div class="card" style="border-color:var(--inst);">
+        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot Analysis</h3>
+        <div class="info-box">📷 Upload screenshots kwa mpangilio: <strong>M15 → H1 → H4</strong>. Bei lazima iwe ya sasa ya pair hiyo.</div>
+
+        <label>1. Chagua Pair</label>
+        <select id="ssPair" onchange="onSSPairChange()">
+          <option value="XAUUSD">XAUUSD (Gold)</option>
+          <option value="BTCUSD">BTCUSD (Bitcoin)</option>
+          <option value="NAS100">NAS100 (NASDAQ)</option>
+          <option value="EURUSD">EUR/USD</option>
+          <option value="GBPUSD">GBP/USD</option>
+          <option value="USDJPY">USD/JPY</option>
+          <option value="AUDUSD">AUD/USD</option>
+          <option value="USDCAD">USD/CAD</option>
+          <option value="ETHUSD">ETHUSD</option>
+          <option value="SOLUSD">SOLUSD</option>
+          <option value="US30">US30 (Dow Jones)</option>
+          <option value="SPX500">SPX500 (S&amp;P 500)</option>
+          <option value="XAGUSD">XAGUSD (Silver)</option>
+          <option value="WTI">WTI (Crude Oil)</option>
+        </select>
+
+        <label>2. Current Price</label>
+        <input type="number" step="any" id="ssLivePrice" placeholder="Weka bei ya sasa">
+
+        <label>3. Mode ya Uchambuzi</label>
+        <select id="ssMode" onchange="updateSSModeInfo()">
+          <option value="combined">⚡ Combined (API 1 — haraka)</option>
+          <option value="separate">🔍 Separate (API 3 — kila TF peke yake)</option>
+        </select>
+        <div id="ssModeInfo" class="info-box" style="font-size:10px;"></div>
+
+        <label>4. Upload Screenshots (M15 → H1 → H4)</label>
+
+        <div class="tf-upload-box" id="tfBox-m15" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:bold;color:var(--cyan);">⚡ M15 — Entry Timing</span>
+            <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(6,182,212,.2);color:var(--cyan);border:1px solid var(--cyan);">LTF</span>
+          </div>
+          <input type="file" id="ssInput-m15" accept="image/*" style="padding:8px;margin-bottom:0;">
+          <div id="ssPreview-m15" style="display:none;"><img id="ssImg-m15" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
+        </div>
+
+        <div class="tf-upload-box" id="tfBox-h1" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:bold;color:var(--inst);">🎯 H1 — Trend</span>
+            <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(139,92,246,.2);color:var(--inst);border:1px solid var(--inst);">MTF</span>
+          </div>
+          <input type="file" id="ssInput-h1" accept="image/*" style="padding:8px;margin-bottom:0;">
+          <div id="ssPreview-h1" style="display:none;"><img id="ssImg-h1" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
+        </div>
+
+        <div class="tf-upload-box" id="tfBox-h4" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:bold;color:var(--accent);">🏛️ H4 — Bias</span>
+            <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(251,191,36,.2);color:var(--accent);border:1px solid var(--accent);">HTF</span>
+          </div>
+          <input type="file" id="ssInput-h4" accept="image/*" style="padding:8px;margin-bottom:0;">
+          <div id="ssPreview-h4" style="display:none;"><img id="ssImg-h4" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
+        </div>
+
+        <div id="ssUploadStatus" class="info-box" style="margin-top:12px;">📤 Uploaded: <strong>0/3</strong> screenshots</div>
+        <button class="primary-btn" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>🔍 ANALYZE SCREENSHOTS</button>
+        <button class="secondary-btn" onclick="clearAllScreenshots()">🗑️ Clear Screenshots</button>
+      </div>
+      <div id="ssResultsContainer" style="display:none;"></div>
+    </div>
+
+    <!-- ═══ ANCHORED LEVELS ═══ -->
     <div id="view-orderflow" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -355,11 +416,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ SENTIMENT DASHBOARD ═══ -->
     <div id="view-sentiment" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
           <h3 style="margin:0;">👥 Retail Sentiment Dashboard</h3>
-          <button onclick="refreshSentimentNow()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
+          <button onclick="renderMultiSentiment()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄 Refresh</button>
         </div>
         <label>Pair</label>
         <select id="sentMultiPair" onchange="renderMultiSentiment()">
@@ -373,6 +435,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ BACKTEST ═══ -->
     <div id="view-backtest" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -390,6 +453,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ JOURNAL ═══ -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
@@ -410,6 +474,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ LIVE CHART ═══ -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -425,6 +490,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ PIPS ═══ -->
     <div id="view-pips" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 15px;">🧮 Pips Calculator</h3>
@@ -443,6 +509,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ HISTORY ═══ -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -453,25 +520,21 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
+    <!-- ═══ SETTINGS ═══ -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.6 — Weekend-Safe Anchored + Retail Sentiment<br>
-          <strong>AI Order:</strong> Gemini 3.6 Flash (primary) → Mistral NeMo 12B (fallback)<br>
-          <strong>Guardrails:</strong> Pre-check + Post-validator + Anti-Retail-Trap + Killzone tiering<br>
-          <strong>Anchors:</strong> PDH/PDL/PDC + Fixed Previous Trading Day VP
+          <strong>Version:</strong> v37.7 — Gemini 3.6 + Pixtral 12B<br>
+          <strong>AI Text:</strong> gemini-3.6-flash → pixtral-12b-latest<br>
+          <strong>AI Vision:</strong> gemini-3.6-flash → pixtral-12b-latest<br>
+          <strong>Guardrails:</strong> Pre-check + Post-validator + Anti-Retail-Trap
         </div>
 
         <div class="ballistic-header" style="margin-top:14px;">👥 RETAIL SENTIMENT SOURCE</div>
-        <label>FXNewsBias API Key (optional — backup source)</label>
+        <label>FXNewsBias API Key (optional — backup)</label>
         <input type="password" id="settingsFxnbKey" placeholder="fxnb_live_...">
         <button class="secondary-btn" onclick="saveFxnbKey()">💾 Save FXNewsBias Key</button>
-        <div class="info-box" style="font-size:10px;">
-          <strong>Free tier:</strong> 25 req/day, 8 major currencies, 3-hour delay.<br>
-          Sign up free at fxnewsbias.com.<br>
-          <strong>Primary:</strong> Myfxbook Public (no key). <strong>Fallback:</strong> Volume mock.
-        </div>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🚨 REAL-TIME PRICE ALERTS</div>
@@ -523,22 +586,22 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save Risk</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
-        <div class="ballistic-header">🤖 MODELS</div>
-        <label>Gemini models (primary)</label>
-        <input type="text" id="settingsGeminiModels">
-        <label>Mistral text models (fallback)</label>
-        <input type="text" id="settingsMistralModels">
+        <div class="ballistic-header">🤖 MODELS (Gemini 3.6 + Pixtral 12B)</div>
+        <label>Gemini models</label>
+        <input type="text" id="settingsGeminiModels" value="gemini-3.6-flash">
+        <label>Mistral text models</label>
+        <input type="text" id="settingsMistralModels" value="pixtral-12b-latest">
         <label>Mistral vision models</label>
-        <input type="text" id="settingsMistralVision">
+        <input type="text" id="settingsMistralVision" value="pixtral-12b-latest">
         <button class="secondary-btn" onclick="saveModels()">💾 Save Models</button>
-        <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset to Default</button>
+        <button class="secondary-btn" onclick="resetModelsToDefault()">↺ Reset (Gemini 3.6 + Pixtral 12B)</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🔑 API KEYS</div>
         <label>Gemini Key (primary)</label>
         <input type="password" id="settingsGeminiKey">
         <button class="secondary-btn" onclick="saveKeyField('GEMINI','settingsGeminiKey','Gemini')">💾 Save Gemini</button>
-        <label>Mistral Key (fallback)</label>
+        <label>Mistral Key (fallback — vision)</label>
         <input type="password" id="settingsMistralKey">
         <button class="secondary-btn" onclick="saveKeyField('MISTRAL','settingsMistralKey','Mistral')">💾 Save Mistral</button>
         <label>TwelveData Key</label>
@@ -557,8 +620,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v37.6 — Anchored Engine + Retail Sentiment
-   Gemini 3.6 Flash (primary) + Mistral NeMo 12B (fallback)
+   Lutynoel.fx v37.7 — Gemini 3.6 Flash + Pixtral 12B
    ═══════════════════════════════════════════════════════════════ */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -571,7 +633,7 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v37.6';
+const MODELS_VERSION = 'v37.7';
 const SENTIMENT_CACHE_MS = 5 * 60 * 1000;
 const SENTIMENT_REFRESH_INTERVAL = 5 * 60 * 1000;
 
@@ -590,7 +652,6 @@ const ALERT_KEYS = {
   THRESHOLD: 'lutynoel_alert_threshold_pips'
 };
 
-/* ─── SENTIMENT SYMBOL NORMALIZATION ─── */
 const SENTIMENT_SYMBOL_MAP = {
   'XAUUSD': 'XAUUSD', 'XAGUSD': 'XAGUSD',
   'EURUSD': 'EURUSD', 'GBPUSD': 'GBPUSD', 'USDJPY': 'USDJPY',
@@ -603,9 +664,10 @@ const SENTIMENT_SYMBOL_MAP = {
   'SOLUSD': 'SOLUSD'
 };
 
+/* ═══ DEFAULTS — Gemini 3.6 + Pixtral 12B TU ═══ */
 const DEFAULTS = {
-  geminiModels:  'gemini-3.6-flash,gemini-2.5-flash',
-  mistralModels: 'mistral-nemo-latest',
+  geminiModels:  'gemini-3.6-flash',
+  mistralModels: 'pixtral-12b-latest',
   mistralVision: 'pixtral-12b-latest'
 };
 
@@ -658,16 +720,14 @@ const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto 
 4. RETAIL SENTIMENT (CONTRARIAN):
    - When retail positioning is EXTREME (≥75% one side), institutions typically sweep the crowded side's stops.
    - Align setups with the SMART MONEY BIAS (opposite of retail extremes).
-   - Avoid trades that agree with retail positioning at extremes — those are traps.
 
 ═══════════ CALIBRATION ═══════════
 - If NO clear confluence — vote "NO_TRADE" and confidence 0.
 - Confidence 50 = no edge. 60-70 = decent. 75-85 = strong. 85+ = textbook A+.
-- Do NOT inflate confidence. A wrong guess is more expensive than NO_TRADE.
-- Use ONLY data given. Do not invent levels not in data/screenshots.
+- Do NOT inflate confidence. Use ONLY data given. Do not invent levels.
 
 ═══════════ OUTPUT (STRICT JSON) ═══════════
-Respond with ONLY this JSON object, no other text before or after:
+Respond with ONLY this JSON object:
 {
   "pair": "STRING",
   "timeframe": "STRING",
@@ -729,7 +789,7 @@ function getSignalStrength(action, conf) {
   return { label: `⚪ WEAK ${action}`, color: 'var(--muted)', hint: 'Epuka' };
 }
 
-/* ═══ SESSION / KILLZONE ═══ */
+/* ═══ KILLZONE ═══ */
 function getKillzoneState(now = new Date()) {
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
   let session = 'DEAD_ZONE', inKillzone = false, label = '';
@@ -737,28 +797,17 @@ function getKillzoneState(now = new Date()) {
     session = 'LONDON_KILLZONE'; inKillzone = true; label = '🇬🇧 London KZ';
   } else if (m >= KILLZONES.NY.startUTC && m < KILLZONES.NY.endUTC) {
     session = 'NY_KILLZONE'; inKillzone = true; label = '🇺🇸 NY KZ';
-  } else if (m < 7 * 60) {
-    session = 'ASIAN'; label = '🌙 Asian';
-  } else if (m >= 10 * 60 && m < 12 * 60) {
-    session = 'LONDON_MID'; label = '🇬🇧 London mid';
-  } else if (m >= 15 * 60 && m < 21 * 60) {
-    session = 'NY_PM'; label = '🇺🇸 NY PM';
-  } else {
-    session = 'DEAD_ZONE'; label = '💀 Dead zone';
-  }
+  } else if (m < 7 * 60) { session = 'ASIAN'; label = '🌙 Asian'; }
+  else if (m >= 10 * 60 && m < 12 * 60) { session = 'LONDON_MID'; label = '🇬🇧 London mid'; }
+  else if (m >= 15 * 60 && m < 21 * 60) { session = 'NY_PM'; label = '🇺🇸 NY PM'; }
+  else { session = 'DEAD_ZONE'; label = '💀 Dead zone'; }
   return { session, inKillzone, label, utcMinutes: m };
 }
 
-/* ═══ WEEKEND / MARKET HELPERS ═══ */
+/* ═══ WEEKEND HELPERS ═══ */
 function getDayKey(t) { return Math.floor(t / 86400000); }
-function isCryptoPair(pair) {
-  const spec = PAIR_SPECS[pair];
-  return spec && spec.source === 'binance';
-}
-function isWeekendUTC(t) {
-  const dow = new Date(t).getUTCDay();
-  return dow === 0 || dow === 6;
-}
+function isCryptoPair(pair) { const spec = PAIR_SPECS[pair]; return spec && spec.source === 'binance'; }
+function isWeekendUTC(t) { const dow = new Date(t).getUTCDay(); return dow === 0 || dow === 6; }
 function findPreviousTradingDayKey(candles, currentTime, skipWeekends) {
   if (!Array.isArray(candles) || !candles.length) return null;
   const todayKey = getDayKey(currentTime);
@@ -769,8 +818,7 @@ function findPreviousTradingDayKey(candles, currentTime, skipWeekends) {
     if (k >= todayKey) continue;
     if (seenDays.has(k)) continue;
     if (skipWeekends && isWeekendUTC(candles[i].time)) continue;
-    seenDays.add(k);
-    dayKeys.push(k);
+    seenDays.add(k); dayKeys.push(k);
   }
   return dayKeys.length ? dayKeys[0] : null;
 }
@@ -796,7 +844,6 @@ function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
 function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   const prevDayH1  = getPreviousDayCandles(h1Candles, Date.now(), pair);
   const prevDayM15 = getPreviousDayCandles(m15Candles, Date.now(), pair);
-
   if (!prevDayH1.length) return { ok: false, reason: 'No previous trading day candles available' };
 
   const PDH = Math.max(...prevDayH1.map(c => c.high));
@@ -838,9 +885,7 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   };
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RETAIL SENTIMENT ENGINE
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ SENTIMENT ENGINE ═══ */
 let sentimentCache = {};
 
 function extractCurrencies(pair) {
@@ -855,32 +900,21 @@ function interpretCurrencySentiment(pair, currencyScores) {
   const qScore = currencyScores[quote];
   if (bScore == null || qScore == null) return null;
   const longBias = (bScore + (100 - qScore)) / 2;
-  return {
-    retailLongPercent: Math.round(longBias),
-    retailShortPercent: Math.round(100 - longBias),
-    source: 'FXNewsBias-RelativeStrength'
-  };
+  return { retailLongPercent: Math.round(longBias), retailShortPercent: Math.round(100 - longBias), source: 'FXNewsBias-RelativeStrength' };
 }
 
 async function fetchRetailSentimentForPair(symbol, options = {}) {
   const forceFresh = options.force === true;
   const cached = sentimentCache[symbol];
-  if (!forceFresh && cached && Date.now() - cached.ts < SENTIMENT_CACHE_MS) {
-    return cached.data;
-  }
+  if (!forceFresh && cached && Date.now() - cached.ts < SENTIMENT_CACHE_MS) return cached.data;
 
   const result = {
-    symbol,
-    retailLongPercent: null,
-    retailShortPercent: null,
-    sentimentRatio: '—',
-    smartMoneyBias: 'NEUTRAL',
-    biasReason: '',
-    source: 'unavailable',
-    updatedAt: Date.now()
+    symbol, retailLongPercent: null, retailShortPercent: null,
+    sentimentRatio: '—', smartMoneyBias: 'NEUTRAL', biasReason: '',
+    source: 'unavailable', updatedAt: Date.now()
   };
 
-  // ── SOURCE 1: Myfxbook Community Outlook via CORS proxy ──
+  // Source 1: Myfxbook via CORS proxy
   try {
     const slug = SENTIMENT_SYMBOL_MAP[symbol] || symbol;
     const proxy = 'https://corsproxy.io/?url=';
@@ -900,9 +934,9 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
         }
       }
     }
-  } catch (e) { /* silent */ }
+  } catch (e) {}
 
-  // ── SOURCE 2: FXNewsBias (optional key) ──
+  // Source 2: FXNewsBias
   if (result.retailLongPercent == null) {
     const fxnbKey = store.get('lutynoel_fxnb_key');
     if (fxnbKey) {
@@ -921,11 +955,11 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
             result.source = 'FXNewsBias';
           }
         }
-      } catch (e) { /* silent */ }
+      } catch (e) {}
     }
   }
 
-  // ── SOURCE 3: Volume-imbalance mock ──
+  // Source 3: Volume-imbalance mock
   if (result.retailLongPercent == null) {
     const mock = computeVolumeImbalanceMock(symbol);
     if (mock) {
@@ -943,19 +977,10 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
   const S = result.retailShortPercent;
   result.sentimentRatio = `${S}% SELL / ${L}% BUY`;
 
-  if (S >= 75) {
-    result.smartMoneyBias = 'BULLISH';
-    result.biasReason = 'Retail heavily SHORT → upward liquidity sweep expected';
-  } else if (L >= 75) {
-    result.smartMoneyBias = 'BEARISH';
-    result.biasReason = 'Retail heavily LONG → downward liquidity sweep expected';
-  } else if (L >= 40 && L <= 60) {
-    result.smartMoneyBias = 'NEUTRAL';
-    result.biasReason = 'No extreme trap detected';
-  } else {
-    result.smartMoneyBias = 'LEAN_' + (L > 60 ? 'BEARISH' : 'BULLISH');
-    result.biasReason = `Mild retail tilt toward ${L > 60 ? 'LONG' : 'SHORT'}`;
-  }
+  if (S >= 75) { result.smartMoneyBias = 'BULLISH'; result.biasReason = 'Retail heavily SHORT → upward sweep expected'; }
+  else if (L >= 75) { result.smartMoneyBias = 'BEARISH'; result.biasReason = 'Retail heavily LONG → downward sweep expected'; }
+  else if (L >= 40 && L <= 60) { result.smartMoneyBias = 'NEUTRAL'; result.biasReason = 'No extreme trap detected'; }
+  else { result.smartMoneyBias = 'LEAN_' + (L > 60 ? 'BEARISH' : 'BULLISH'); result.biasReason = `Mild retail tilt toward ${L > 60 ? 'LONG' : 'SHORT'}`; }
 
   sentimentCache[symbol] = { data: result, ts: Date.now() };
   return result;
@@ -973,14 +998,10 @@ function computeVolumeImbalanceMock(symbol) {
     });
     const total = bullVol + bearVol;
     if (total <= 0) return null;
-    return {
-      longPct: Math.round(bullVol / total * 100),
-      shortPct: Math.round(bearVol / total * 100)
-    };
+    return { longPct: Math.round(bullVol / total * 100), shortPct: Math.round(bearVol / total * 100) };
   } catch (e) { return null; }
 }
 
-/* ═══ RENDER SENTIMENT WIDGET ═══ */
 function renderSentimentWidget(sentiment, symbol) {
   if (!sentiment) return;
   const L = sentiment.retailLongPercent ?? 50;
@@ -1085,12 +1106,12 @@ function speakText(text, o = {}) {
 function speakSignal(pair, action, conf, price, tag) {
   const ps = PAIR_SPECS[pair]?.spoken || pair;
   const a = action === 'BUY' ? 'Nunua' : 'Uza';
-  speakText(`${tag ? tag + '. ' : ''}${a} ${ps}. Bei ${price.toFixed(2)}. Uhakika asilimia ${conf}. Hakiki chati kabla ya kuingia.`);
+  speakText(`${tag ? tag + '. ' : ''}${a} ${ps}. Bei ${price.toFixed(2)}. Uhakika asilimia ${conf}.`);
 }
-function testVoice() { speakText('Karibu Lutynoel FX. Anchored Engine uko tayari.'); }
+function testVoice() { speakText('Karibu Lutynoel FX. Mfumo uko tayari.'); }
 function warmUpVoice() { if (!('speechSynthesis' in window)) return; try { const u = new SpeechSynthesisUtterance(''); u.volume = 0; speechSynthesis.speak(u); speechSynthesis.getVoices(); } catch (e) {} }
 
-/* ═══ JSON / FETCH ═══ */
+/* ═══ JSON/FETCH ═══ */
 function safeJsonParse(text) {
   if (!text) return null;
   const clean = String(text).replace(/```json/gi, '').replace(/```/g, '').trim();
@@ -1108,7 +1129,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   finally { clearTimeout(id); }
 }
 
-/* ═══ AI CALLS ═══ */
+/* ═══ AI ═══ */
 const getGeminiKey = () => store.get(STORAGE_KEYS.GEMINI);
 const getMistralKey = () => store.get(STORAGE_KEYS.MISTRAL);
 const getTwelveKey = () => store.get(STORAGE_KEYS.TWELVE);
@@ -1135,6 +1156,7 @@ async function callMistral(models, messages, maxTokens, timeout) {
   }
   return { err };
 }
+
 async function callGemini(models, parts, timeout) {
   const gk = getGeminiKey();
   if (!gk) return { err: 'Hakuna Gemini key' };
@@ -1157,6 +1179,7 @@ async function callGemini(models, parts, timeout) {
   }
   return { err };
 }
+
 async function callLLM({ prompt, images, vision, maxTokens, timeout }) {
   const errs = [];
   const parts = [{ text: prompt }];
@@ -1392,15 +1415,10 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   } : calculateVolumeProfile(flowH1, 40);
 
   const inst = {
-    currentPrice: lp,
-    anchoredVP: vp,
-    PDH: anchored?.PDH ?? null,
-    PDL: anchored?.PDL ?? null,
-    PDC: anchored?.PDC ?? null,
-    prevDayRange: anchored?.prevDayRange ?? null,
-    prevDayATR: anchored?.prevDayATR ?? null,
-    orderBlocks: ob,
-    fvg,
+    currentPrice: lp, anchoredVP: vp,
+    PDH: anchored?.PDH ?? null, PDL: anchored?.PDL ?? null, PDC: anchored?.PDC ?? null,
+    prevDayRange: anchored?.prevDayRange ?? null, prevDayATR: anchored?.prevDayATR ?? null,
+    orderBlocks: ob, fvg,
     near: {
       obBull:  !!ob.nearestBull  && nearZone(ob.nearestBull.low,  ob.nearestBull.high, lp, a),
       obBear:  !!ob.nearestBear  && nearZone(ob.nearestBear.low,  ob.nearestBear.high, lp, a),
@@ -1414,8 +1432,7 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
     killZone: getKillzoneState(),
     rsi: calculateRSI(c, 14),
     atr, ema20: calculateSMA(c, 20), ema50: calculateSMA(c, 50), ema200: calculateSMA(c, 200),
-    currentDayH1Count: curH1.length,
-    currentDayM15Count: curM15.length
+    currentDayH1Count: curH1.length, currentDayM15Count: curM15.length
   };
   inst.biasScore = computeInstitutionalBias(inst);
   return inst;
@@ -1440,8 +1457,7 @@ function preCheckSignalConditions(lp, anchored, m15, inst, pipSize, pair) {
   const threshold = thresholdPips * pipSize;
 
   const levels = [
-    { name: 'PDH',    price: anchored.PDH },
-    { name: 'PDL',    price: anchored.PDL },
+    { name: 'PDH', price: anchored.PDH }, { name: 'PDL', price: anchored.PDL },
     { name: 'PD-POC', price: anchored.prevDayPOC },
     { name: 'PD-VAH', price: anchored.prevDayVAH },
     { name: 'PD-VAL', price: anchored.prevDayVAL }
@@ -1460,8 +1476,7 @@ function preCheckSignalConditions(lp, anchored, m15, inst, pipSize, pair) {
 
   const recentM15 = getCurrentDayCandles(m15, Date.now(), pair).slice(-8);
   const recentRange = recentM15.length >= 4
-    ? Math.max(...recentM15.map(c => c.high)) - Math.min(...recentM15.map(c => c.low))
-    : 0;
+    ? Math.max(...recentM15.map(c => c.high)) - Math.min(...recentM15.map(c => c.low)) : 0;
   const atr = inst.atr || 0;
   const lowVol = atr > 0 && recentRange < atr * LOW_VOL_ATR_FRACTION;
 
@@ -1480,7 +1495,7 @@ function preCheckSignalConditions(lp, anchored, m15, inst, pipSize, pair) {
   };
 }
 
-/* ═══ POST-VALIDATOR with Anti-Retail-Trap ═══ */
+/* ═══ VALIDATOR ═══ */
 function makeNoTrade(reason, pair = '', anchor = null) {
   return {
     pair, timeframe: 'M15', signal_type: 'NO_TRADE', confidence_score: 0,
@@ -1488,10 +1503,8 @@ function makeNoTrade(reason, pair = '', anchor = null) {
     stop_loss: { price: 0, pips: 0 },
     take_profit: { tp1: 0, tp2: 0, tp3: 0 },
     volume_profile_data: {
-      poc_price: anchor?.prevDayPOC ?? 0,
-      vah_price: anchor?.prevDayVAH ?? 0,
-      val_price: anchor?.prevDayVAL ?? 0,
-      confluence_note: reason
+      poc_price: anchor?.prevDayPOC ?? 0, vah_price: anchor?.prevDayVAH ?? 0,
+      val_price: anchor?.prevDayVAL ?? 0, confluence_note: reason
     },
     confluences: [], risk_reward_ratio: '—',
     tier: 'REJECTED', rejectReason: reason
@@ -1506,25 +1519,11 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
   const isSell = signal.signal_type === 'SELL';
   if (!isBuy && !isSell) return { valid: true, signal, issues: [] };
 
-  // ═══ ANTI-RETAIL TRAP LOGIC (highest priority) ═══
   if (sentiment) {
     const L = sentiment.retailLongPercent ?? 0;
     const S = sentiment.retailShortPercent ?? 0;
-
-    if (isSell && S >= 80) {
-      return {
-        valid: false,
-        signal: makeNoTrade(`RETAIL_SELL_TRAP_ACTIVE (${S}% short)`, signal.pair, anchored),
-        issues: ['retail_sell_trap']
-      };
-    }
-    if (isBuy && L >= 80) {
-      return {
-        valid: false,
-        signal: makeNoTrade(`RETAIL_BUY_TRAP_ACTIVE (${L}% long)`, signal.pair, anchored),
-        issues: ['retail_buy_trap']
-      };
-    }
+    if (isSell && S >= 80) return { valid: false, signal: makeNoTrade(`RETAIL_SELL_TRAP_ACTIVE (${S}% short)`, signal.pair, anchored), issues: ['retail_sell_trap'] };
+    if (isBuy && L >= 80) return { valid: false, signal: makeNoTrade(`RETAIL_BUY_TRAP_ACTIVE (${L}% long)`, signal.pair, anchored), issues: ['retail_buy_trap'] };
     if (isSell && S >= 70) issues.push(`Retail ${S}% short — sell trap risk`);
     if (isBuy && L >= 70) issues.push(`Retail ${L}% long — buy trap risk`);
   }
@@ -1538,20 +1537,16 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
   const tp2 = parseFloat(signal.take_profit?.tp2) || 0;
   const tp3 = parseFloat(signal.take_profit?.tp3) || 0;
 
-  if (!entry || !sl) {
-    return { valid: false, signal: makeNoTrade('Missing entry or SL', signal.pair, anchored), issues: ['missing_entry_sl'] };
-  }
-
-  if (isBuy && entry <= sl) issues.push(`BUY entry ${entry} ≤ SL ${sl}`);
-  if (isSell && entry >= sl) issues.push(`SELL entry ${entry} ≥ SL ${sl}`);
+  if (!entry || !sl) return { valid: false, signal: makeNoTrade('Missing entry or SL', signal.pair, anchored), issues: ['missing_entry_sl'] };
+  if (isBuy && entry <= sl) issues.push(`BUY entry ≤ SL`);
+  if (isSell && entry >= sl) issues.push(`SELL entry ≥ SL`);
 
   const maxDeviation = Math.max(currentPrice * 0.005, 15 * pipSize);
-  if (Math.abs(entry - currentPrice) > maxDeviation) issues.push(`Entry ${entry.toFixed(5)} too far from market`);
+  if (Math.abs(entry - currentPrice) > maxDeviation) issues.push(`Entry too far from market`);
 
   const risk = Math.abs(entry - sl);
-  if (risk <= 0) {
-    issues.push('Zero risk distance');
-  } else {
+  if (risk <= 0) issues.push('Zero risk distance');
+  else {
     const r1 = Math.abs(tp1 - entry) / risk;
     const r2 = Math.abs(tp2 - entry) / risk;
     if (r1 < MIN_RR_TP1) issues.push(`TP1 R:R 1:${r1.toFixed(2)} < 1:${MIN_RR_TP1}`);
@@ -1584,7 +1579,7 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
   return { valid: true, signal: adjusted, issues: [] };
 }
 
-/* ═══ ALERT ENGINE ═══ */
+/* ═══ ALERTS ═══ */
 let audioCtx = null;
 const alertCooldowns = {};
 function ensureAudioCtx() {
@@ -1677,7 +1672,6 @@ function fireAlert(lvl, price, pair) {
 /* ═══ PROMPT BUILDER ═══ */
 function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz }) {
   let p = `${INSTITUTIONAL_MASTER_PROMPT}\n\n`;
-
   p += `═══ ANCHORED PREVIOUS-DAY LEVELS (FIXED, DO NOT MODIFY) ═══\n`;
   p += `Anchor Day: ${anchored.anchorDay}\n`;
   p += `PDH (Prev Day High):  ${anchored.PDH.toFixed(5)}\n`;
@@ -1686,14 +1680,10 @@ function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, curren
   p += `PD-POC: ${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : 'N/A'}\n`;
   p += `PD-VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : 'N/A'}\n`;
   p += `PD-VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : 'N/A'}\n`;
-  p += `Prev-Day Range (daily ATR proxy): ${anchored.prevDayRange.toFixed(5)}\n`;
+  p += `Prev-Day Range: ${anchored.prevDayRange.toFixed(5)}\n`;
   p += `Prev-Day ATR(14): ${(anchored.prevDayATR || anchored.prevDayRange).toFixed(5)}\n\n`;
-
-  p += `═══ SESSION STATE ═══\n`;
-  p += `Session: ${kz.session} | Killzone: ${kz.inKillzone ? 'YES ✅' : 'NO ⚠️ — apply LOW_PROBABILITY tier'}\n\n`;
-
-  p += `═══ LIVE MARKET ═══\n`;
-  p += `PAIR: ${pair} | Current Price: ${lp.toFixed(5)}\n`;
+  p += `═══ SESSION STATE ═══\nSession: ${kz.session} | Killzone: ${kz.inKillzone ? 'YES ✅' : 'NO ⚠️'}\n\n`;
+  p += `═══ LIVE MARKET ═══\nPAIR: ${pair} | Current Price: ${lp.toFixed(5)}\n`;
   if (htfBias) p += `HTF EMA Bias: 4H=${htfBias.h4} | 1H=${htfBias.h1} | Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
 
   const dump = (name, arr, n) => {
@@ -1713,34 +1703,27 @@ function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, curren
     if (inst.atr) p += `ATR(14) H1: ${inst.atr.toFixed(5)}\n`;
     if (inst.structure)    p += `1H Structure:  ${inst.structure.trend}\n`;
     if (inst.htfStructure) p += `4H Structure:  ${inst.htfStructure.trend}\n`;
-    if (inst.ltfStructure) p += `M15 Structure: ${inst.ltfStructure.trend}\n`;
     if (inst.sweep) p += `Recent Sweep: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
     if (inst.displacement?.detected) p += `Displacement: ${inst.displacement.direction}\n`;
-    if (inst.orderBlocks?.nearestBull)
-      p += `Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(5)}–${inst.orderBlocks.nearestBull.high.toFixed(5)}${inst.near?.obBull ? ' (NEAR)' : ''}\n`;
-    if (inst.orderBlocks?.nearestBear)
-      p += `Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(5)}–${inst.orderBlocks.nearestBear.high.toFixed(5)}${inst.near?.obBear ? ' (NEAR)' : ''}\n`;
-    if (inst.fvg?.nearestBull)
-      p += `Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(5)}–${inst.fvg.nearestBull.top.toFixed(5)}${inst.near?.fvgBull ? ' (NEAR)' : ''}\n`;
-    if (inst.fvg?.nearestBear)
-      p += `Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(5)}–${inst.fvg.nearestBear.top.toFixed(5)}${inst.near?.fvgBear ? ' (NEAR)' : ''}\n`;
+    if (inst.orderBlocks?.nearestBull) p += `Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(5)}–${inst.orderBlocks.nearestBull.high.toFixed(5)}\n`;
+    if (inst.orderBlocks?.nearestBear) p += `Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(5)}–${inst.orderBlocks.nearestBear.high.toFixed(5)}\n`;
+    if (inst.fvg?.nearestBull) p += `Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(5)}–${inst.fvg.nearestBull.top.toFixed(5)}\n`;
+    if (inst.fvg?.nearestBear) p += `Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(5)}–${inst.fvg.nearestBear.top.toFixed(5)}\n`;
   }
 
-  p += `\n═══ MANDATORY TRADE CONSTRAINTS (DAY TRADING) ═══\n`;
-  p += `- DAY TRADING ONLY. No overnight holds. Max 2–3 trades per session.\n`;
-  p += `- Use the exact PD-POC / PD-VAH / PD-VAL anchors above for volume_profile_data.\n`;
-  p += `- Entry MUST be near PDH, PDL, PD-POC, PD-VAH, PD-VAL, an FVG, or an OB. Otherwise NO_TRADE.\n`;
-  p += `- Stop Loss MUST NOT exceed ${SL_ATR_MULT_CAP}× daily ATR (= ${((anchored.prevDayATR || anchored.prevDayRange) * SL_ATR_MULT_CAP).toFixed(5)}).\n`;
-  p += `- Minimum R:R for TP1 = 1:${MIN_RR_TP1}. Target 1:2 to 1:3 realistically intraday.\n`;
-  p += `- TP1/TP2 MUST stay within today's expected range (≤ ${anchored.prevDayRange.toFixed(5)} from entry).\n`;
-  p += `- If ANY setup criterion is ambiguous → return signal_type:"NO_TRADE", confidence_score:0.\n`;
-  if (!kz.inKillzone) p += `- Outside killzone → keep confidence_score ≤ 55 and mark LOW_PROBABILITY in confluences.\n`;
+  p += `\n═══ MANDATORY TRADE CONSTRAINTS ═══\n`;
+  p += `- DAY TRADING ONLY. No overnight holds. Max 2-3 trades per session.\n`;
+  p += `- Use the exact PD-POC / PD-VAH / PD-VAL anchors for volume_profile_data.\n`;
+  p += `- Entry MUST be near PDH, PDL, PD-POC, PD-VAH, PD-VAL, an FVG, or an OB.\n`;
+  p += `- Stop Loss MUST NOT exceed ${SL_ATR_MULT_CAP}× daily ATR.\n`;
+  p += `- Minimum R:R for TP1 = 1:${MIN_RR_TP1}.\n`;
+  p += `- If ANY setup criterion is ambiguous → signal_type:"NO_TRADE", confidence_score:0.\n`;
+  if (!kz.inKillzone) p += `- Outside killzone → keep confidence ≤ 55, mark LOW_PROBABILITY.\n`;
   return p;
 }
 
-/* ═══ MAIN CALL ═══ */
+/* ═══ CALL INSTITUTIONAL MASTER ═══ */
 async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, pipSize) {
-  // ── Fetch sentiment (uses cache if fresh) ──
   const sentiment = await fetchRetailSentimentForPair(pair);
   window.__lastSentiment = sentiment;
 
@@ -1757,13 +1740,12 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
         val_price: anchored.prevDayVAL ?? 0, confluence_note: pre.reason
       },
       confluences: [], risk_reward_ratio: '—',
-      tier: 'REJECTED', rejectReason: pre.reason, preCheck: pre,
-      sentiment
+      tier: 'REJECTED', rejectReason: pre.reason, preCheck: pre, sentiment
     };
   }
 
   const kz = getKillzoneState();
-  const prompt = buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz });
+  const basePrompt = buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz });
 
   const sentimentBlock = `
 
@@ -1774,9 +1756,9 @@ Ratio: ${sentiment.sentimentRatio}
 Smart Money Bias: ${sentiment.smartMoneyBias} — ${sentiment.biasReason}
 Source: ${sentiment.source}
 
-CONTRARIAN RULE: When retail positioning is extreme (≥75% one side), institutional liquidity typically targets the crowded side. Align your trade with the SMART MONEY BIAS, not the retail crowd.`;
+CONTRARIAN RULE: When retail positioning is extreme (≥75% one side), institutions typically target the crowded side. Align with SMART MONEY BIAS, not retail crowd.`;
 
-  const fullPrompt = prompt + sentimentBlock;
+  const fullPrompt = basePrompt + sentimentBlock;
 
   const r = await callLLM({ prompt: fullPrompt, maxTokens: 2000, timeout: 90000 });
   if (!r.result) {
@@ -1871,20 +1853,19 @@ function resetMarketData() {
   window.marketData = null;
   $('runBtn').disabled = true;
   ['data4H', 'data1H', 'data15M', 'dataIndicators'].forEach(id => {
-    const e = $(id); e.className = 'data-status-item';
+    const e = $(id); if (!e) return;
+    e.className = 'data-status-item';
     e.querySelector('span:last-child').innerText = '—';
   });
-  $('chartPreview').innerHTML = '<div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div>';
+  const cp = $('chartPreview'); if (cp) cp.innerHTML = '<div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div>';
 }
 async function onPairChange(pair) {
   resetMarketData(); priceMeta = null;
   $('livePrice').value = '';
   $('resultsContainer').style.display = 'none';
   fetchLivePrice();
-  // Fetch + render sentiment for new pair
   const s = await fetchRetailSentimentForPair(pair);
   renderSentimentWidget(s, pair);
-  // Update multi-sentiment selector if present
   const multiSel = $('sentMultiPair');
   if (multiSel) multiSel.value = pair;
 }
@@ -1921,7 +1902,7 @@ async function fetchAllMarketData() {
       if (anchored.prevDayPOC != null) {
         h += `<div>VP: POC <strong style="color:var(--accent)">${anchored.prevDayPOC.toFixed(spec.decimals)}</strong> | VAH ${anchored.prevDayVAH.toFixed(spec.decimals)} | VAL ${anchored.prevDayVAL.toFixed(spec.decimals)}</div>`;
       }
-      h += `<div>1H Structure: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
+      h += `<div>1H: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
       if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(spec.decimals) : '—'}</div>`;
       h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'} | Candles: ${anchored.prevDayCandleCount}H1 / ${anchored.prevDayM15Count}M15</div>`;
       if (anchored.warnings) h += `<div style="color:var(--orange);margin-top:6px;">⚠️ ${anchored.warnings.join(' • ')}</div>`;
@@ -1929,7 +1910,6 @@ async function fetchAllMarketData() {
       $('runBtn').disabled = false;
       showToast(anchored.warnings ? '⚠️ Data ready (warnings)' : '✅ Anchored data ready');
 
-      // Refresh sentiment with fresh volume data
       const s = await fetchRetailSentimentForPair(pair, { force: true });
       renderSentimentWidget(s, pair);
     }
@@ -1937,7 +1917,7 @@ async function fetchAllMarketData() {
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
 }
 
-/* ═══ HISTORY STORE ═══ */
+/* ═══ HISTORY ═══ */
 const loadHist = () => { try { return JSON.parse(store.get(STORAGE_KEYS.HISTORY) || '[]'); } catch (e) { return []; } };
 function saveHist(h) {
   let arr = h.slice(0, 400), dropped = false;
@@ -2003,9 +1983,7 @@ async function runAnalysis() {
   const spec = PAIR_SPECS[pair];
   const { h4, h1, m15 } = md;
 
-  const anchored = md.anchored && md.anchored.ok
-    ? md.anchored
-    : computeAnchoredLevels(h1, m15, pair);
+  const anchored = md.anchored && md.anchored.ok ? md.anchored : computeAnchoredLevels(h1, m15, pair);
   if (!anchored.ok) { alert('Hakuna prev trading day candles. Fetch data tena.'); return; }
   md.anchored = anchored;
 
@@ -2024,15 +2002,14 @@ async function runAnalysis() {
   container.style.display = 'block';
   container.innerHTML = `
     <div class="card">
-      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.6)</div>
+      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.7)</div>
       <div style="font-size:11px;line-height:1.8;color:var(--muted);">
         <div>Anchor Day: <strong style="color:var(--accent)">${anchored.anchorDay}</strong></div>
         <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong></div>
-        <div>PD-POC: <strong style="color:var(--accent)">${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(spec.decimals) : '—'}</strong> | VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(spec.decimals) : '—'} | VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(spec.decimals) : '—'}</div>
         <div>Session: <strong style="color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'}">${kz.label}</strong></div>
         ${anchored.warnings ? `<div style="color:var(--orange)">⚠️ ${anchored.warnings.join(' • ')}</div>` : ''}
       </div>
-      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pre-check + Sentiment + LLM + Validation...</div>
+      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pre-check + Sentiment + LLM (gemini-3.6-flash)...</div>
     </div>`;
 
   const instMaster = await callInstitutionalMaster(
@@ -2050,10 +2027,8 @@ async function runAnalysis() {
     const pips = d => Math.round(Math.abs(d) / spec.pipSize);
     lv = {
       entry, sl, tp1: t1, tp2: t2, tp3: t3,
-      slPips:  pips(sl - entry),
-      tp1Pips: pips(t1 - entry),
-      tp2Pips: pips(t2 - entry),
-      tp3Pips: pips(t3 - entry)
+      slPips:  pips(sl - entry), tp1Pips: pips(t1 - entry),
+      tp2Pips: pips(t2 - entry), tp3Pips: pips(t3 - entry)
     };
   }
 
@@ -2073,7 +2048,227 @@ async function runAnalysis() {
   setTimeout(() => updateBacktest(), 500);
 }
 
-/* ═══ SIGNAL CARD RENDER ═══ */
+/* ═══ SCREENSHOT ANALYSIS ═══ */
+let uploadedScreenshots = { m15: null, h1: null, h4: null };
+
+function setupScreenshotUploads() {
+  ['m15', 'h1', 'h4'].forEach(tf => {
+    const inp = $(`ssInput-${tf}`);
+    if (!inp || inp.dataset.bound) return;
+    inp.dataset.bound = '1';
+    inp.addEventListener('change', e => {
+      const f = e.target.files[0];
+      if (!f) return;
+      if (f.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
+      const r = new FileReader();
+      r.onload = ev => {
+        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
+        const img = $(`ssImg-${tf}`); if (img) img.src = ev.target.result;
+        const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'block';
+        const box = $(`tfBox-${tf}`); if (box) box.classList.add('has-image');
+        updateSSUploadStatus();
+      };
+      r.readAsDataURL(f);
+    });
+  });
+}
+
+function updateSSUploadStatus() {
+  const c = Object.values(uploadedScreenshots).filter(Boolean).length, s = $('ssUploadStatus');
+  if (!s) return;
+  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong> screenshots`;
+  s.style.borderColor = c === 3 ? 'var(--green)' : c > 0 ? 'var(--yellow)' : 'var(--blue)';
+  s.style.color = c === 3 ? '#6ee7b7' : c > 0 ? '#fef08a' : '#93c5fd';
+  const btn = $('analyzeSSBtn'); if (btn) btn.disabled = c === 0;
+}
+
+function updateSSModeInfo() {
+  const el = $('ssModeInfo'); if (!el) return;
+  el.innerHTML = $('ssMode').value === 'combined'
+    ? '⚡ <strong>Combined:</strong> API call 1 tu — haraka. AI inaona M15+H1+H4 pamoja.'
+    : '🔍 <strong>Separate:</strong> API calls 3 — M15, H1, H4 kila mmoja peke yake.';
+}
+
+function clearAllScreenshots() {
+  uploadedScreenshots = { m15: null, h1: null, h4: null };
+  ['m15', 'h1', 'h4'].forEach(tf => {
+    const inp = $(`ssInput-${tf}`); if (inp) inp.value = '';
+    const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'none';
+    const box = $(`tfBox-${tf}`); if (box) box.classList.remove('has-image');
+  });
+  updateSSUploadStatus();
+  const rc = $('ssResultsContainer'); if (rc) rc.style.display = 'none';
+}
+
+async function onSSPairChange() {
+  const pair = $('ssPair').value;
+  $('ssLivePrice').value = '';
+  try {
+    const p = await getLivePrice(pair);
+    $('ssLivePrice').value = p.toFixed(PAIR_SPECS[pair].decimals);
+  } catch (e) { showToast('Weka bei kwa mkono: ' + e.message, 4500); }
+}
+
+const shotList = s => [
+  ['m15', 'M15 (ENTRY TIMING)'],
+  ['h1',  'H1 (TREND)'],
+  ['h4',  'H4 (BIAS)']
+].filter(([k]) => s[k]).map(([k, label]) => ({ ...s[k], label }));
+
+async function analyzeAllScreenshots() {
+  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key angalau moja.'); return; }
+  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau screenshot 1.'); return; }
+
+  const pair = $('ssPair').value;
+  const lp = parseFloat($('ssLivePrice').value);
+  const spec = PAIR_SPECS[pair];
+  const mode = $('ssMode').value;
+  if (!(lp > 0)) { alert('Weka bei ya sasa ya pair hii.'); return; }
+
+  const btn = $('analyzeSSBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+
+  const container = $('ssResultsContainer');
+  container.style.display = 'block';
+  container.innerHTML = `<div class="card">
+    <div class="ballistic-header">📸 SCREENSHOT ANALYSIS (${mode === 'combined' ? 'Combined' : 'Separate'})</div>
+    <div style="text-align:center;color:var(--muted);"><span class="spinner"></span> Vision inachambua M15 → H1 → H4...</div>
+  </div>`;
+
+  try {
+    let visionResult = null;
+    let provider = '';
+
+    if (mode === 'combined') {
+      const prompt = `${INSTITUTIONAL_MASTER_PROMPT}
+
+═══ SCREENSHOT ANALYSIS TASK ═══
+You are analyzing 3 screenshots in ORDER: M15 (entry) → H1 (trend) → H4 (bias).
+Pair: ${pair} | Current Price: ${lp}
+
+Read the candles, structure, FVGs, order blocks, and liquidity sweeps from the VISUAL chart.
+Apply the same Volume Profile + SMC + Institutional methodology.
+
+Return STRICT JSON only.`;
+
+      const r = await callLLM({
+        prompt,
+        images: shotList(uploadedScreenshots),
+        vision: true,
+        maxTokens: 2500,
+        timeout: 120000
+      });
+      if (!r.result) throw new Error(r.err || 'Vision failed');
+      visionResult = r.result;
+      provider = r.provider;
+
+    } else {
+      const tfResults = {};
+      const tfLabels = { m15: 'M15 (Entry)', h1: 'H1 (Trend)', h4: 'H4 (Bias)' };
+
+      for (const [tf, label] of Object.entries(tfLabels)) {
+        if (!uploadedScreenshots[tf]) continue;
+        const prompt = `${INSTITUTIONAL_MASTER_PROMPT}
+
+═══ SINGLE-TIMEFRAME ANALYSIS ═══
+Analyze ONLY the ${label} chart for ${pair} at price ${lp}.
+Focus on what THIS timeframe shows: structure, FVG, OB, sweeps.
+Return STRICT JSON.`;
+        const r = await callLLM({
+          prompt,
+          images: [{ ...uploadedScreenshots[tf], label }],
+          vision: true,
+          maxTokens: 1200,
+          timeout: 90000
+        });
+        if (r.result) {
+          tfResults[tf] = r.result;
+          provider = provider || r.provider;
+        }
+      }
+
+      const results = Object.entries(tfResults).map(([tf, r]) => ({
+        tf, signal_type: String(r.signal_type || 'NO_TRADE').toUpperCase(),
+        confidence_score: parseInt(r.confidence_score) || 0,
+        r
+      }));
+      results.sort((a, b) => b.confidence_score - a.confidence_score);
+      const top = results[0];
+
+      if (top) {
+        visionResult = {
+          ...top.r,
+          pair, timeframe: top.tf.toUpperCase(),
+          signal_type: top.signal_type,
+          confidence_score: top.confidence_score,
+          confluences: (top.r.confluences || []).map(c => `[${top.tf.toUpperCase()}] ${c}`)
+        };
+      }
+    }
+
+    if (!visionResult) throw new Error('Vision returned no data');
+
+    const signalType = String(visionResult.signal_type || 'NO_TRADE').toUpperCase();
+    let lv = null;
+    if (signalType === 'BUY' || signalType === 'SELL') {
+      const ez = visionResult.entry_zone || {};
+      const entry = ((ez.min_price || lp) + (ez.max_price || lp)) / 2;
+      const sl = parseFloat(visionResult.stop_loss?.price) || 0;
+      const t1 = parseFloat(visionResult.take_profit?.tp1) || 0;
+      const t2 = parseFloat(visionResult.take_profit?.tp2) || 0;
+      const t3 = parseFloat(visionResult.take_profit?.tp3) || 0;
+      const pips = d => Math.round(Math.abs(d) / spec.pipSize);
+      if (sl > 0 && t1 > 0) {
+        lv = {
+          entry, sl, tp1: t1, tp2: t2, tp3: t3,
+          slPips: pips(sl - entry), tp1Pips: pips(t1 - entry),
+          tp2Pips: pips(t2 - entry), tp3Pips: pips(t3 - entry)
+        };
+      }
+    }
+
+    const instMaster = {
+      provider,
+      pair: visionResult.pair || pair,
+      timeframe: visionResult.timeframe || 'M15',
+      signal_type: signalType,
+      confidence_score: Math.max(0, Math.min(100, parseInt(visionResult.confidence_score) || 0)),
+      entry_zone: visionResult.entry_zone || { min_price: lp, max_price: lp },
+      stop_loss: visionResult.stop_loss || { price: 0, pips: 0 },
+      take_profit: visionResult.take_profit || { tp1: 0, tp2: 0, tp3: 0 },
+      volume_profile_data: visionResult.volume_profile_data || {
+        poc_price: 0, vah_price: 0, val_price: 0, confluence_note: 'From screenshot'
+      },
+      confluences: Array.isArray(visionResult.confluences) ? visionResult.confluences : [],
+      risk_reward_ratio: visionResult.risk_reward_ratio || '—',
+      tier: 'MEDIUM_PROBABILITY',
+      sentiment: null
+    };
+
+    const check = validateSignalIntegrity(instMaster, lp, spec.pipSize, null, null, null);
+    const finalSignal = check.signal;
+
+    const rec = buildRecord({
+      source: 'screenshot', pair, lp, inst: null,
+      instMaster: { ...instMaster, ...finalSignal },
+      validators: [], lv, anchored: null
+    });
+    rec.tier = finalSignal.tier || 'MEDIUM_PROBABILITY';
+
+    saveToHistory(rec);
+    renderSignalCard(rec, spec, null, { ...instMaster, ...finalSignal }, [], 'ssResultsContainer');
+    container.scrollIntoView({ behavior: 'smooth' });
+
+  } catch (e) {
+    showToast(`❌ ${e.message}`, 5000);
+    container.innerHTML = `<div class="card"><div class="error-box">Fatal: ${esc(e.message)}</div></div>`;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🔍 ANALYZE SCREENSHOTS';
+  }
+}
+
+/* ═══ SIGNAL CARD ═══ */
 function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) {
   const a = rec.action;
   const isBuy = a === 'BUY', isSell = a === 'SELL';
@@ -2103,7 +2298,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       ${anc.VAL != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAL</span><span style="color:var(--green);">${f(anc.VAL)}</span></div>` : ''}
     </div>` : '';
 
-  // Sentiment mini-block
   const sent = instMaster.sentiment;
   const sentimentBlock = sent ? `
     <div class="mini-box" style="margin-bottom:12px;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
@@ -2152,7 +2346,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `PD-POC: ${f(anc?.POC)} | VAH: ${f(anc?.VAH)} | VAL: ${f(anc?.VAL)}`,
     sent ? `Retail: ${sent.sentimentRatio} (${sent.smartMoneyBias})` : '',
     `Confluences: ${(instMaster.confluences || []).join(' | ')}`,
-    `— Lutynoel.fx v37.6`
+    `— Lutynoel.fx v37.7`
   ].filter(Boolean).join('\n');
   window.__lastCopyText = copyText;
 
@@ -2210,21 +2404,9 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       </div>
 
       <div class="tp-grid">
-        <div class="tp-box">
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:rgba(16,185,129,.9);font-weight:800;">TP1</div>
-          <div style="font-size:13px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;margin-top:4px;">${f(rec.tp1)}</div>
-          <div style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">+${rec.tp1Pips}p</div>
-        </div>
-        <div class="tp-box tp2">
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:rgba(16,185,129,.9);font-weight:800;">TP2</div>
-          <div style="font-size:13px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;margin-top:4px;">${f(rec.tp2)}</div>
-          <div style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">+${rec.tp2Pips}p</div>
-        </div>
-        <div class="tp-box tp3">
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--green);font-weight:800;">TP3</div>
-          <div style="font-size:13px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;margin-top:4px;">${f(rec.tp3)}</div>
-          <div style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">+${rec.tp3Pips}p</div>
-        </div>
+        <div class="tp-box"><div style="font-size:10px;color:rgba(16,185,129,.9);font-weight:800;">TP1</div><div style="font-size:13px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;margin-top:4px;">${f(rec.tp1)}</div><div style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">+${rec.tp1Pips}p</div></div>
+        <div class="tp-box tp2"><div style="font-size:10px;color:rgba(16,185,129,.9);font-weight:800;">TP2</div><div style="font-size:13px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;margin-top:4px;">${f(rec.tp2)}</div><div style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">+${rec.tp2Pips}p</div></div>
+        <div class="tp-box tp3"><div style="font-size:10px;color:var(--green);font-weight:800;">TP3</div><div style="font-size:13px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;margin-top:4px;">${f(rec.tp3)}</div><div style="font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;">+${rec.tp3Pips}p</div></div>
       </div>
       ` : `
       <div class="warn-box" style="text-align:center;">⚠️ Hakuna high-probability setup kwa sasa. ${instMaster.preCheck?.reason ? esc(instMaster.preCheck.reason) : 'Subiri confluence.'}</div>
@@ -2254,9 +2436,9 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
       <div class="mini-box" style="background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
         <div class="ballistic-header" style="margin-bottom:8px;">📊 PREVIOUS-DAY VOLUME PROFILE</div>
         <div class="grid-3">
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;">VAH</div><div style="font-size:12px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;">${f(vp.vah_price)}</div></div>
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;">POC</div><div style="font-size:12px;font-weight:900;color:var(--accent);font-family:ui-monospace,monospace;">${f(vp.poc_price)}</div></div>
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:700;">VAL</div><div style="font-size:12px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;">${f(vp.val_price)}</div></div>
+          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">VAH</div><div style="font-size:12px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;">${f(vp.vah_price)}</div></div>
+          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">POC</div><div style="font-size:12px;font-weight:900;color:var(--accent);font-family:ui-monospace,monospace;">${f(vp.poc_price)}</div></div>
+          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">VAL</div><div style="font-size:12px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;">${f(vp.val_price)}</div></div>
         </div>
         ${vp.confluence_note ? `<div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.5;font-style:italic;">${esc(vp.confluence_note)}</div>` : ''}
       </div>
@@ -2271,9 +2453,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
         </svg>
         Copy Signal Data
       </button>
-      <p style="text-align:center;font-size:10px;color:var(--muted);margin:10px 0 0;">
-        ⚠️ Educational tool only — not financial advice.
-      </p>
+      <p style="text-align:center;font-size:10px;color:var(--muted);margin:10px 0 0;">⚠️ Educational tool only — not financial advice.</p>
     </div>
     ` : `<div class="sig-foot"><p style="text-align:center;font-size:10px;color:var(--muted);margin:0;">⚠️ Educational tool only — not financial advice.</p></div>`}
   </div>`;
@@ -2294,7 +2474,7 @@ async function copySignalText() {
     document.execCommand('copy');
     ta.remove();
   }
-  showToast('✅ Signal copied — paste kwenye MT5/broker yako');
+  showToast('✅ Signal copied');
 }
 
 /* ═══ BACKTEST ═══ */
@@ -2386,7 +2566,7 @@ function renderBacktest() {
   const c = $('backtestContainer'), m = getBtModel();
   $('btModel').value = String(m);
   const all = loadHist().filter(r => r.tracked);
-  if (!all.length) { c.innerHTML = `<div class="info-box">Hakuna signals bado. Fanya analysis kwanza.</div>`; return; }
+  if (!all.length) { c.innerHTML = `<div class="info-box">Hakuna signals bado.</div>`; return; }
   const s = btCalc(all, m);
   const pendingN = all.filter(r => !r.bt || r.bt.status === 'PENDING').length;
   let verdict, vcol;
@@ -2412,7 +2592,7 @@ function renderBacktest() {
       <div class="mini-box" style="text-align:center;"><label>PF</label><div style="font-weight:bold;">${s.n ? (isFinite(s.pf) ? s.pf.toFixed(2) : '∞') : '—'}</div></div>
       <div class="mini-box" style="text-align:center;"><label>BE WR</label><div style="font-weight:bold;">${s.n ? pct(s.be) : '—'}</div></div>
     </div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.6;">95% CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">95% CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN}</div>
     ${curve}`;
 }
 
@@ -2437,10 +2617,7 @@ async function refreshOrderFlow() {
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(59,130,246,.12);margin-bottom:5px;border-left:4px solid var(--blue);font-weight:bold;"><span>PDC</span><span>${f(anchored.PDC)}</span></div>
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>PDL</span><span>${f(anchored.PDL)}</span></div>
       <div style="margin-top:10px;font-size:10px;color:var(--muted);">Prev-Day Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)} • Candles: ${anchored.prevDayCandleCount}H1 / ${anchored.prevDayM15Count}M15</div>
-      ${anchored.warnings ? `<div style="margin-top:8px;padding:8px;background:rgba(249,115,22,.15);border:1px solid var(--orange);border-radius:8px;font-size:10px;color:#fdba74;line-height:1.6;">
-        <strong>⚠️ Anchor warnings:</strong><br>
-        ${anchored.warnings.map(w => '• ' + esc(w)).join('<br>')}
-      </div>` : ''}
+      ${anchored.warnings ? `<div style="margin-top:8px;padding:8px;background:rgba(249,115,22,.15);border:1px solid var(--orange);border-radius:8px;font-size:10px;color:#fdba74;"><strong>⚠️ Anchor warnings:</strong><br>${anchored.warnings.map(w => '• ' + esc(w)).join('<br>')}</div>` : ''}
     </div>`;
 
     if (anchored.prevDayPOC != null) {
@@ -2497,7 +2674,7 @@ function loadHistory() {
   if (!c) return;
   try {
     const h = loadHist();
-    if (!h.length) { c.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);line-height:1.8;">📭 Hakuna historia bado.</div>'; return; }
+    if (!h.length) { c.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);">📭 Hakuna historia bado.</div>'; return; }
     c.innerHTML = h.map((r, i) => {
       let badge = '⏳';
       if (r.action === 'NO_TRADE' || r.action === 'HOLD') badge = '—';
@@ -2566,10 +2743,10 @@ function updateStats() {
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), version: '37.6', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), version: '37.7', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v37.6-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v37.7-${Date.now()}.json`; a.click();
 }
 
 /* ═══ AUTH / SETTINGS ═══ */
@@ -2583,7 +2760,7 @@ const loadKeys = () => ({ name: store.get(STORAGE_KEYS.NAME), geminiKey: getGemi
 function handleLogin() {
   const n = $('loginName').value.trim(), g = $('authGeminiKey').value.trim(), m = $('authMistralKey').value.trim(), t = $('authTwelveKey').value.trim();
   if (!n) { alert('Weka jina.'); return; }
-  if (!g && !m) { alert('Weka API key angalau moja (Gemini au Mistral).'); return; }
+  if (!g && !m) { alert('Weka API key angalau moja.'); return; }
   saveKeys(n, g, m, t); enterApp(n);
 }
 function continueWithSavedKeys() {
@@ -2594,21 +2771,21 @@ function continueWithSavedKeys() {
 function migrateModelsIfNeeded() {
   if (store.get(STORAGE_KEYS.MODELS_VERSION) === MODELS_VERSION) return;
   try {
-    store.set(STORAGE_KEYS.MISTRAL_MODELS, 'mistral-nemo-latest');
+    store.set(STORAGE_KEYS.GEMINI_MODELS,  'gemini-3.6-flash');
+    store.set(STORAGE_KEYS.MISTRAL_MODELS, 'pixtral-12b-latest');
     store.set(STORAGE_KEYS.MISTRAL_VISION, 'pixtral-12b-latest');
-    store.set(STORAGE_KEYS.GEMINI_MODELS, 'gemini-3.6-flash,gemini-2.5-flash');
     store.set(STORAGE_KEYS.MODELS_VERSION, MODELS_VERSION);
   } catch (e) {}
 }
 function resetModelsToDefault() {
-  store.set(STORAGE_KEYS.MISTRAL_MODELS, 'mistral-nemo-latest');
+  store.set(STORAGE_KEYS.GEMINI_MODELS,  'gemini-3.6-flash');
+  store.set(STORAGE_KEYS.MISTRAL_MODELS, 'pixtral-12b-latest');
   store.set(STORAGE_KEYS.MISTRAL_VISION, 'pixtral-12b-latest');
-  store.set(STORAGE_KEYS.GEMINI_MODELS, 'gemini-3.6-flash,gemini-2.5-flash');
   store.set(STORAGE_KEYS.MODELS_VERSION, MODELS_VERSION);
-  $('settingsMistralModels').value = 'mistral-nemo-latest';
-  $('settingsMistralVision').value = 'pixtral-12b-latest';
-  $('settingsGeminiModels').value = 'gemini-3.6-flash,gemini-2.5-flash';
-  showToast('✅ Reset: Gemini 3.6 primary + Mistral NeMo 12B');
+  if ($('settingsGeminiModels'))  $('settingsGeminiModels').value  = 'gemini-3.6-flash';
+  if ($('settingsMistralModels')) $('settingsMistralModels').value = 'pixtral-12b-latest';
+  if ($('settingsMistralVision')) $('settingsMistralVision').value = 'pixtral-12b-latest';
+  showToast('✅ Gemini 3.6 + Pixtral 12B tu');
 }
 function saveFxnbKey() {
   const k = $('settingsFxnbKey').value.trim();
@@ -2637,10 +2814,13 @@ function enterApp(name) {
   setAlertsMuted(isAlertsMuted());
   $('alertThresholdInput').value = getAlertThresholdPips();
 
+  // Screenshot setup
+  setupScreenshotUploads();
+  updateSSModeInfo();
+
   loadHistory(); updateStats();
   startAutoRefreshPrice(); startAutoBacktest(); warmUpVoice();
 
-  // Sentiment auto-refresh (5 min)
   if (window.__sentInt) clearInterval(window.__sentInt);
   window.__sentInt = setInterval(async () => {
     if (document.hidden) return;
@@ -2709,6 +2889,7 @@ function navigate(view) {
     if (view === 'backtest') { renderBacktest(); updateBacktest(); }
     if (view === 'orderflow') refreshOrderFlow();
     if (view === 'sentiment') renderMultiSentiment();
+    if (view === 'screenshot') { setupScreenshotUploads(); updateSSModeInfo(); }
     window.scrollTo(0, 0);
   } catch (e) { showToast('❌ ' + e.message); }
 }
@@ -2748,7 +2929,10 @@ async function testApiKeys() {
       const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models?pageSize=100`, { headers: { 'x-goog-api-key': gk } }, 20000);
       const d = await r.json();
       if (d.error) out.push(`❌ Gemini: ${esc(d.error.message)}`);
-      else out.push(`✅ <strong>Gemini OK (primary)</strong><br><small style="color:var(--muted);">${esc((d.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent')).map(m => m.name.replace('models/', '')).filter(n => /flash/.test(n)).slice(0, 10).join(', '))}</small>`);
+      else {
+        const flashModels = (d.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent')).map(m => m.name.replace('models/', '')).filter(n => /flash/.test(n));
+        out.push(`✅ <strong>Gemini OK</strong><br><small style="color:var(--muted);">Flash models zilizopo: ${esc(flashModels.slice(0, 15).join(', '))}</small>`);
+      }
     } catch (e) { out.push(`❌ Gemini: ${esc(e.message)}`); }
   } else out.push('⚪ Gemini: No key');
   if (mk) {
@@ -2756,7 +2940,10 @@ async function testApiKeys() {
       const r = await fetchWithTimeout(`${MISTRAL_BASE_URL}/models`, { headers: { Authorization: `Bearer ${mk}` } }, 20000);
       const d = await r.json();
       if (!r.ok) out.push(`❌ Mistral: ${esc(d.message || r.status)}`);
-      else out.push(`✅ <strong>Mistral OK (fallback)</strong><br><small style="color:var(--muted);">${esc((d.data || []).map(m => m.id).filter(id => /nemo|pixtral/.test(id)).slice(0, 10).join(', '))}</small>`);
+      else {
+        const pixtralModels = (d.data || []).map(m => m.id).filter(id => /pixtral/i.test(id));
+        out.push(`✅ <strong>Mistral OK</strong><br><small style="color:var(--muted);">Pixtral models: ${esc(pixtralModels.slice(0, 10).join(', '))}</small>`);
+      }
     } catch (e) { out.push(`❌ Mistral: ${esc(e.message)}`); }
   } else out.push('⚪ Mistral: No key');
   if (getTwelveKey()) {
