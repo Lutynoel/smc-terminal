@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v37.9 — Zone-Based SMC + Conditional Alerts</title>
+<title>Lutynoel.fx v38.0 — Liquidity Sweep & Retail Trap Engine</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -52,7 +52,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .data-status-item{background:var(--card2);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:11px;display:flex;justify-content:space-between}
 .data-status-item.ok{border-color:var(--green)}
 .data-status-item.fail{border-color:var(--red)}
-.master-card{background:var(--card2);border:1px solid var(--border);padding:14px;border-radius:12px;margin-bottom:10px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .mini-box{background:var(--card2);border:1px solid var(--border);padding:12px;border-radius:10px}
@@ -117,7 +116,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tier-low{background:rgba(249,115,22,.2);color:var(--orange);border:1px solid var(--orange)}
 .tier-rejected{background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red)}
 .tier-conditional{background:rgba(250,204,21,.2);color:var(--yellow);border:1px solid var(--yellow)}
+.tier-pattern{background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink)}
 .tf-upload-box.has-image{border-style:solid !important;border-color:var(--green) !important;}
+
+/* Pattern Trap block */
+.pattern-block{background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.05));border:2px solid var(--pink);border-radius:12px;padding:14px;margin-bottom:12px}
+.pattern-step{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:11px}
+.pattern-step .step-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;flex-shrink:0}
+.step-done{background:var(--green);color:#000}
+.step-pending{background:rgba(148,163,184,.3);color:var(--muted)}
+.step-active{background:var(--yellow);color:#000;animation:pulse 2s infinite}
 </style>
 </head>
 <body>
@@ -133,8 +141,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v37.9</div>
-    <div class="auth-subtitle">Zone-Based SMC + Conditional Alerts</div>
+    <div class="auth-title">Lutynoel.fx v38.0</div>
+    <div class="auth-subtitle">Liquidity Sweep & Retail Trap Engine</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice. Signals za AI hazijathibitishwa — tumia Backtest kupima kabla ya kuweka pesa halisi.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -153,9 +161,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>TwelveData API Key (Forex/Gold/Indices)</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v37.9:</strong> Zone-Based Pre-Check + 5-Layer Vision + Conditional Alerts<br>
-        ✅ Gemini 3.6 flash (primary) • Pixtral 12B (fallback)<br>
-        ✅ Live Sentiment (LIVE-IGCS / LIVE-MYFX) • Macro & Geopolitical bias
+        ✅ <strong>v38.0:</strong> Liquidity Sweep & Retail Trap Engine<br>
+        ✅ Ascending Triangle / Equal Highs Detection<br>
+        ✅ 4-Step Phase: FORMING → SWEEP → BOS → RETEST<br>
+        ✅ Gemini 3.6 flash (primary) • Pixtral 12B (fallback)
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -177,12 +186,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v37.9</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v38.0</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Live Analysis</div>
     <div class="menu-item" onclick="navigate('screenshot')">📸 Screenshot Analysis</div>
+    <div class="menu-item" onclick="navigate('trap')">🪤 Liquidity Traps</div>
     <div class="menu-item" onclick="navigate('orderflow')">🌊 Anchored Levels</div>
     <div class="menu-item" onclick="navigate('sentiment')">👥 Retail Sentiment</div>
     <div class="menu-item" onclick="navigate('alerts')">⏰ Active Alerts</div>
@@ -202,7 +212,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v37.9 • Zone-Based SMC + Conditional Alerts</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v38.0 • Liquidity Sweep & Retail Trap Engine</div>
           </div>
         </div>
       </div>
@@ -226,6 +236,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
       </div>
 
+      <div class="mini-box" id="activeTrapsSummary" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.05));border-color:var(--pink);display:none;">
+        <div style="font-size:11px;color:var(--pink);font-weight:900;letter-spacing:.6px;">🪤 ACTIVE PATTERN TRAPS</div>
+        <div id="activeTrapsList" style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7;"></div>
+      </div>
+
       <div class="mini-box" id="activeAlertsSummary" style="margin-bottom:12px;background:linear-gradient(135deg,rgba(250,204,21,.08),rgba(249,115,22,.04));border-color:rgba(250,204,21,.3);display:none;">
         <div style="font-size:11px;color:var(--yellow);font-weight:900;letter-spacing:.6px;">⏰ ACTIVE CONDITIONAL ALERTS</div>
         <div id="activeAlertsList" style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7;"></div>
@@ -234,10 +249,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
         <button class="primary-btn" onclick="navigate('analyst')">🎯 Anchored Analysis</button>
+        <button class="secondary-btn" onclick="navigate('trap')">🪤 Liquidity Traps</button>
         <button class="secondary-btn" onclick="navigate('screenshot')">📸 Screenshot Analysis</button>
-        <button class="secondary-btn" onclick="navigate('alerts')">⏰ Active Conditional Alerts</button>
+        <button class="secondary-btn" onclick="navigate('alerts')">⏰ Active Alerts</button>
         <button class="secondary-btn" onclick="navigate('sentiment')">👥 Retail Sentiment</button>
-        <button class="secondary-btn" onclick="navigate('orderflow')">📊 Anchored Levels</button>
       </div>
     </div>
 
@@ -321,11 +336,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- SCREENSHOT ANALYSIS -->
+    <!-- SCREENSHOT -->
     <div id="view-screenshot" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--inst);">
-        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot Analysis (5-Layer)</h3>
-        <div class="info-box">📷 Upload screenshots kwa mpangilio: <strong>M15 → H1 → H4</strong>. Vision AI itachambua layers 5.</div>
+        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot Analysis (6-Layer)</h3>
+        <div class="info-box">📷 Upload screenshots: <strong>M15 → H1 → H4</strong>. Vision AI itachambua layers 6 (ikiwemo Pattern Traps).</div>
 
         <label>1. Chagua Pair</label>
         <select id="ssPair" onchange="onSSPairChange()">
@@ -352,10 +367,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
         <div id="ssPriceStatus" class="price-status manual"><span id="ssPriceStatusText">⚪ Bonyeza Refresh</span><span id="ssPriceTime">—</span></div>
 
-        <label>3. Mode ya Uchambuzi</label>
+        <label>3. Mode</label>
         <select id="ssMode" onchange="updateSSModeInfo()">
-          <option value="combined">⚡ Combined (API 1 — haraka)</option>
-          <option value="separate">🔍 Separate (API 3 — kila TF peke yake)</option>
+          <option value="combined">⚡ Combined (API 1)</option>
+          <option value="separate">🔍 Separate (API 3)</option>
         </select>
         <div id="ssModeInfo" class="info-box" style="font-size:10px;"></div>
 
@@ -363,7 +378,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
         <div class="tf-upload-box" id="tfBox-m15" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--cyan);">⚡ M15 — Entry Timing</span>
+            <span style="font-size:13px;font-weight:bold;color:var(--cyan);">⚡ M15 — Entry</span>
             <span style="font-size:9px;font-weight:bold;padding:2px 8px;border-radius:8px;background:rgba(6,182,212,.2);color:var(--cyan);border:1px solid var(--cyan);">LTF</span>
           </div>
           <input type="file" id="ssInput-m15" accept="image/*" style="padding:8px;margin-bottom:0;">
@@ -390,9 +405,36 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
         <div id="ssUploadStatus" class="info-box" style="margin-top:12px;">📤 Uploaded: <strong>0/3</strong> screenshots</div>
         <button class="primary-btn" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>🔍 ANALYZE SCREENSHOTS</button>
-        <button class="secondary-btn" onclick="clearAllScreenshots()">🗑️ Clear Screenshots</button>
+        <button class="secondary-btn" onclick="clearAllScreenshots()">🗑️ Clear</button>
       </div>
       <div id="ssResultsContainer" style="display:none;"></div>
+    </div>
+
+    <!-- LIQUIDITY TRAPS -->
+    <div id="view-trap" class="view-section" style="display:none;">
+      <div class="card" style="border-color:var(--pink);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h3 style="margin:0;">🪤 Liquidity Trap Engine</h3>
+          <button onclick="runTrapScan()" id="trapScanBtn" style="background:var(--pink);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔍 Scan Now</button>
+        </div>
+        <div class="info-box">Inagundua Ascending Triangle, Equal Highs, na Breakout Fakeouts (Sweep + BOS + Retest).</div>
+
+        <label>Pair</label>
+        <select id="trapPair" onchange="runTrapScan()">
+          <option value="XAUUSD">XAUUSD (Gold)</option>
+          <option value="EURUSD">EUR/USD</option>
+          <option value="GBPUSD">GBP/USD</option>
+          <option value="USDJPY">USD/JPY</option>
+          <option value="AUDUSD">AUD/USD</option>
+          <option value="USDCAD">USD/CAD</option>
+          <option value="BTCUSD">BTCUSD</option>
+          <option value="NAS100">NAS100</option>
+          <option value="US30">US30</option>
+          <option value="WTI">WTI</option>
+        </select>
+
+        <div id="trapContainer"><div class="info-box">Bonyeza "Scan Now" kuanza.</div></div>
+      </div>
     </div>
 
     <!-- ANCHORED LEVELS -->
@@ -412,7 +454,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- SENTIMENT DASHBOARD -->
+    <!-- SENTIMENT -->
     <div id="view-sentiment" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -431,7 +473,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ACTIVE ALERTS -->
+    <!-- ALERTS -->
     <div id="view-alerts" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -533,26 +575,26 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v37.9 — Zone-Based SMC + Conditional Alerts<br>
+          <strong>Version:</strong> v38.0 — Liquidity Sweep & Retail Trap Engine<br>
           <strong>AI Text:</strong> gemini-3.6-flash → pixtral-12b-latest<br>
           <strong>AI Vision:</strong> gemini-3.6-flash → pixtral-12b-latest<br>
-          <strong>Zone Buffer:</strong> 20 pips narrow / 25 pips wide
+          <strong>Trap Engine:</strong> Ascending Triangle / Equal Highs / Fakeout Detection
         </div>
 
         <div class="ballistic-header" style="margin-top:14px;">👥 RETAIL SENTIMENT SOURCE</div>
-        <label>FXNewsBias API Key (optional — backup)</label>
+        <label>FXNewsBias API Key (optional)</label>
         <input type="password" id="settingsFxnbKey" placeholder="fxnb_live_...">
         <button class="secondary-btn" onclick="saveFxnbKey()">💾 Save FXNewsBias Key</button>
         <div class="info-box" style="font-size:10px;">
-          <strong>Priority chain:</strong> LIVE-IGCS → LIVE-MYFX → LIVE-FXNB → MOCK-OFFLINE
+          <strong>Priority:</strong> LIVE-IGCS → LIVE-MYFX → LIVE-FXNB → MOCK-OFFLINE
         </div>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
-        <div class="ballistic-header">🚨 REAL-TIME PRICE ALERTS</div>
+        <div class="ballistic-header">🚨 ALERTS</div>
         <div class="mini-box" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
           <div>
             <div style="font-size:12px;font-weight:bold;">Alert Status</div>
-            <div style="font-size:10px;color:var(--muted);">PDH/PDL sweep + Conditional triggers</div>
+            <div style="font-size:10px;color:var(--muted);">PDH/PDL + Conditional triggers</div>
           </div>
           <span id="alertStatusPill2" class="badge" style="background:rgba(16,185,129,.15);color:var(--green);border:1px solid var(--green);font-size:11px;padding:4px 12px;border-radius:20px;font-weight:bold;">🔔 ACTIVE</span>
         </div>
@@ -609,10 +651,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
 
         <div class="ballistic-header">🔑 API KEYS</div>
-        <label>Gemini Key (primary)</label>
+        <label>Gemini Key</label>
         <input type="password" id="settingsGeminiKey">
         <button class="secondary-btn" onclick="saveKeyField('GEMINI','settingsGeminiKey','Gemini')">💾 Save Gemini</button>
-        <label>Mistral Key (fallback — vision)</label>
+        <label>Mistral Key</label>
         <input type="password" id="settingsMistralKey">
         <button class="secondary-btn" onclick="saveKeyField('MISTRAL','settingsMistralKey','Mistral')">💾 Save Mistral</button>
         <label>TwelveData Key</label>
@@ -631,7 +673,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v37.9 — Zone-Based SMC + Conditional Alerts
+   Lutynoel.fx v38.0 — Liquidity Sweep & Retail Trap Engine
    Gemini 3.6 Flash + Pixtral 12B
    ═══════════════════════════════════════════════════════════════ */
 
@@ -645,15 +687,22 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v37.9';
+const MODELS_VERSION = 'v38.0';
 const SENTIMENT_CACHE_MS = 5 * 60 * 1000;
 const SENTIMENT_REFRESH_INTERVAL = 5 * 60 * 1000;
 
-/* ═══ v37.9 — Zone-Based + Conditional Alert Constants ═══ */
+/* ═══ Zone-Based + Pattern Trap Constants ═══ */
 const ZONE_BUFFER_PIPS = 20;
 const ZONE_BUFFER_WIDE_PIPS = 25;
 const ALERT_TRIGGER_TOLERANCE_PIPS = 3;
 const CONDITIONAL_ALERT_COOLDOWN_MS = 5 * 60 * 1000;
+
+/* Pattern Trap Engine constants */
+const TRAP_SWING_LOOKBACK = 60;
+const TRAP_RESISTANCE_TOLERANCE_ATR = 0.3;
+const TRAP_MIN_TOUCHES = 2;
+const TRAP_SL_BUFFER_PIPS = 4;
+const TRAP_BOS_BODY_MULT = 0.8;
 
 const KILLZONES = {
   LONDON: { startUTC: 7 * 60,  endUTC: 10 * 60, name: 'LONDON_KILLZONE' },
@@ -714,7 +763,8 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), Confirmation Indicators, and Contrarian Retail Sentiment.
+/* ═══ INSTITUTIONAL MASTER PROMPT ═══ */
+const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto Analyst and Master AI Signal Engine. Your task is to analyze market data and produce a HIGH-PROBABILITY trade setup following strict institutional methodology: Volume Profile, Smart Money Concepts (SMC/ICT), Confirmation Indicators, Contrarian Retail Sentiment, and Liquidity Trap Patterns.
 
 ═══════════ CONFLUENCE RULES ═══════════
 1. VOLUME PROFILE (SVP / VRVP):
@@ -736,9 +786,14 @@ const INSTITUTIONAL_MASTER_PROMPT = `You are a Senior Institutional FX & Crypto 
 4. RETAIL SENTIMENT (CONTRARIAN):
    - Extreme retail (≥75% one side) → align with SMART MONEY BIAS (opposite retail).
 
-═══════════ ZONE-BASED ENTRIES (v37.9) ═══════════
+5. LIQUIDITY TRAP PATTERNS (NEW v38.0):
+   - ASCENDING_TRIANGLE_LIQUIDITY_TRAP: Flat resistance + Higher Lows + Sweep above resistance then close back below + BOS below nearest HL + Retest of broken resistance/breaker block = HIGH_PROBABILITY_SELL.
+   - DESCENDING_TRIANGLE_LIQUIDITY_TRAP: Flat support + Lower Highs + Sweep below support then close back above + BOS above nearest LH + Retest of broken support/breaker block = HIGH_PROBABILITY_BUY.
+   - DOUBLE_TOP_LIQUIDITY: Two tests of same high + sweep above + reversal.
+   - DOUBLE_BOTTOM_LIQUIDITY: Two tests of same low + sweep below + reversal.
+
+═══════════ ZONE-BASED ENTRIES ═══════════
 - Price within 15-25 pips of PD-VAL / PD-POC / PD-VAH + valid Demand/Supply zone + M15 CHoCH = HIGH_PROBABILITY_ZONE_SETUP.
-- DO NOT reject setup just because price hasn't touched exact VP line.
 
 ═══════════ CALIBRATION ═══════════
 - If NO immediate trigger but setup is FORMING → signal_type:"PENDING_ALERT", execution_mode:"CONDITIONAL_TRIGGER".
@@ -764,6 +819,16 @@ Respond with ONLY this JSON object:
   "confluences": ["STRING_1", "STRING_2", "STRING_3"],
   "macro_geopolitical_bias": "BULLISH_SAFE_HAVEN" | "BEARISH_SAFE_HAVEN" | "BULLISH_INFLATION_HEDGE" | "BEARISH_RISK_OFF" | "NEUTRAL_MACRO",
   "macro_reasoning": "STRING",
+  "pattern_trap": {
+    "pattern_detected": "ASCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DESCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DOUBLE_TOP_LIQUIDITY" | "DOUBLE_BOTTOM_LIQUIDITY" | "NONE",
+    "sweep_status": "CONFIRMED" | "PENDING" | "NONE",
+    "bos_status": "CONFIRMED" | "PENDING" | "NONE",
+    "setup_phase": "PATTERN_FORMING" | "WAITING_FOR_SWEEP" | "WAITING_FOR_BOS" | "WAITING_FOR_RETEST" | "READY_TO_EXECUTE",
+    "retest_zone": "STRING",
+    "sweep_high": NUMBER,
+    "resistance_level": NUMBER,
+    "nearest_hl": NUMBER
+  },
   "volume_profile_data": {
     "poc_price": NUMBER,
     "vah_price": NUMBER,
@@ -778,8 +843,9 @@ Respond with ONLY this JSON object:
   }
 }`;
 
+/* ═══ 6-LAYER VISION MASTER PROMPT ═══ */
 const VISION_MASTER_PROMPT = `You are a Senior Institutional FX & XAUUSD Analyst analyzing MTF chart screenshots.
-Evaluate EVERY chart across EXACTLY 5 layers:
+Evaluate EVERY chart across EXACTLY 6 layers:
 
 ═══════════ LAYER 1: PRICE ACTION & CANDLESTICK PATTERNS ═══════════
 - Identify: engulfing, pin bars, hammer/shooting star, doji at extremes
@@ -814,6 +880,17 @@ For Gold:
 - USD safe-haven flows during risk-off
 Do NOT invent news. If no clear driver → "NEUTRAL_MACRO".
 
+═══════════ LAYER 6: LIQUIDITY TRAP PATTERNS (NEW v38.0) ═══════════
+Explicitly identify these patterns in the screenshots:
+a) **Ascending Triangles**: Flat horizontal resistance line touched 2+ times, with Higher Lows forming below (rising trendline). Retail traders buy the breakout. Look for the FAKEOUT.
+b) **Descending Triangles**: Flat horizontal support touched 2+ times, with Lower Highs forming above. Retail traders sell the breakdown. Look for the FAKEOUT.
+c) **Double Tops / Double Bottoms**: Two touches at the same level. Liquidity pools above/below.
+d) **Liquidity Sweeps (Fakeouts)**: Price WICKS above resistance (or below support) then CLOSES BACK inside the range in the same or next candle. This is the trap trigger.
+e) **BOS Lines**: Strong displacement candle that breaks and closes below the nearest Higher Low (for bearish) or above the nearest Lower High (for bullish).
+f) **Supply / Breaker Retest Boxes**: The broken resistance becomes new supply. Highlight the retest zone.
+
+Rate each detected pattern with confidence. If a pattern is forming but not confirmed, mark setup_phase accordingly.
+
 ═══════════ OUTPUT (STRICT JSON) ═══════════
 Respond with ONLY this JSON object:
 {
@@ -833,7 +910,17 @@ Respond with ONLY this JSON object:
   "confluences": ["STRING_1", "STRING_2"],
   "macro_geopolitical_bias": "BULLISH_SAFE_HAVEN" | "BEARISH_SAFE_HAVEN" | "BULLISH_INFLATION_HEDGE" | "BEARISH_RISK_OFF" | "NEUTRAL_MACRO",
   "macro_reasoning": "STRING",
-  "layer_scores": { "price_action": NUMBER, "demand_supply": NUMBER, "support_resistance": NUMBER, "market_structure": NUMBER, "macro_geopolitical": NUMBER },
+  "pattern_trap": {
+    "pattern_detected": "ASCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DESCENDING_TRIANGLE_LIQUIDITY_TRAP" | "DOUBLE_TOP_LIQUIDITY" | "DOUBLE_BOTTOM_LIQUIDITY" | "NONE",
+    "sweep_status": "CONFIRMED" | "PENDING" | "NONE",
+    "bos_status": "CONFIRMED" | "PENDING" | "NONE",
+    "setup_phase": "PATTERN_FORMING" | "WAITING_FOR_SWEEP" | "WAITING_FOR_BOS" | "WAITING_FOR_RETEST" | "READY_TO_EXECUTE",
+    "retest_zone": "STRING",
+    "sweep_high": NUMBER,
+    "resistance_level": NUMBER,
+    "nearest_hl": NUMBER
+  },
+  "layer_scores": { "price_action": NUMBER, "demand_supply": NUMBER, "support_resistance": NUMBER, "market_structure": NUMBER, "macro_geopolitical": NUMBER, "pattern_trap": NUMBER },
   "volume_profile_data": { "poc_price": NUMBER, "vah_price": NUMBER, "val_price": NUMBER, "confluence_note": "STRING" },
   "conditional_alert": { "trigger_zone": "STRING", "action_if_reached": "STRING", "alert_price_buy": NUMBER, "alert_price_sell": NUMBER }
 }`;
@@ -936,7 +1023,7 @@ function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
 function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   const prevDayH1  = getPreviousDayCandles(h1Candles, Date.now(), pair);
   const prevDayM15 = getPreviousDayCandles(m15Candles, Date.now(), pair);
-  if (!prevDayH1.length) return { ok: false, reason: 'No previous trading day candles available' };
+  if (!prevDayH1.length) return { ok: false, reason: 'No previous trading day candles' };
 
   const PDH = Math.max(...prevDayH1.map(c => c.high));
   const PDL = Math.min(...prevDayH1.map(c => c.low));
@@ -947,20 +1034,15 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
 
   const prevDayRange = PDH - PDL;
   const prevDayATR = calculateATR(
-    prevDayH1.map(c => c.high),
-    prevDayH1.map(c => c.low),
-    prevDayH1.map(c => c.close),
-    14
+    prevDayH1.map(c => c.high), prevDayH1.map(c => c.low), prevDayH1.map(c => c.close), 14
   ) || prevDayRange;
 
   const warnings = [];
-  if (prevDayH1.length < 12) warnings.push(`Only ${prevDayH1.length} H1 candles (expected ≥12)`);
+  if (prevDayH1.length < 12) warnings.push(`Only ${prevDayH1.length} H1 candles`);
   if (prevDayRange > 0 && prevDayATR > 0 && prevDayRange < prevDayATR * 0.5) warnings.push(`Range < 0.5× ATR`);
-  if (prevDayRange === 0) warnings.push('Zero range — invalid');
+  if (prevDayRange === 0) warnings.push('Zero range');
 
   const anchorDay = new Date(prevDayH1[0].time).toISOString().slice(0, 10);
-  const anchorDow = new Date(prevDayH1[0].time).getUTCDay();
-  if (anchorDow === 0 || anchorDow === 6) warnings.push(`Anchor day ${anchorDay} is weekend`);
 
   return {
     ok: true, PDH, PDL, PDC,
@@ -972,7 +1054,180 @@ function computeAnchoredLevels(h1Candles, m15Candles, pair) {
   };
 }
 
-/* ═══ SENTIMENT ENGINE (v37.9 — Live priority) ═══ */
+/* ═══════════════════════════════════════════════════════════════
+   🪤 PATTERN LIQUIDITY SWEEP ENGINE (v38.0)
+   Detects: Ascending Triangle / Equal Highs / Breakout Fakeouts
+   ═══════════════════════════════════════════════════════════════ */
+function detectPatternLiquiditySweep(candles, pair, pipSize) {
+  if (!Array.isArray(candles) || candles.length < 30) return null;
+
+  const lb = candles.slice(-TRAP_SWING_LOOKBACK);
+  const atr = calculateATR(lb.map(c => c.high), lb.map(c => c.low), lb.map(c => c.close), 14);
+  const atrVal = atr || (lb.at(-1).close * 0.005);
+
+  // ─── 1. Swing highs & lows (2-candle rule) ───
+  const swingHighs = [];
+  const swingLows = [];
+  for (let i = 2; i < lb.length - 2; i++) {
+    const c = lb[i];
+    if (c.high > lb[i-1].high && c.high > lb[i-2].high &&
+        c.high > lb[i+1].high && c.high > lb[i+2].high) {
+      swingHighs.push({ idx: i, price: c.high, time: c.time });
+    }
+    if (c.low < lb[i-1].low && c.low < lb[i-2].low &&
+        c.low < lb[i+1].low && c.low < lb[i+2].low) {
+      swingLows.push({ idx: i, price: c.low, time: c.time });
+    }
+  }
+
+  if (swingHighs.length < 2 || swingLows.length < 2) return null;
+
+  // ─── 2. Detect flat resistance (Equal Highs cluster) ───
+  const resTolerance = atrVal * TRAP_RESISTANCE_TOLERANCE_ATR;
+  const resistanceClusters = [];
+  const used = new Set();
+
+  for (let i = 0; i < swingHighs.length; i++) {
+    if (used.has(i)) continue;
+    const group = [swingHighs[i]];
+    used.add(i);
+    for (let j = i + 1; j < swingHighs.length; j++) {
+      if (used.has(j)) continue;
+      if (Math.abs(swingHighs[j].price - swingHighs[i].price) <= resTolerance) {
+        group.push(swingHighs[j]);
+        used.add(j);
+      }
+    }
+    if (group.length >= TRAP_MIN_TOUCHES) resistanceClusters.push(group);
+  }
+
+  if (!resistanceClusters.length) return null;
+
+  // Pick cluster with most touches & most recent
+  const best = resistanceClusters.reduce((b, g) => {
+    if (g.length > b.length) return g;
+    if (g.length === b.length && g.at(-1).idx > b.at(-1).idx) return g;
+    return b;
+  });
+
+  const resistanceLevel = best.reduce((s, h) => s + h.price, 0) / best.length;
+  const lastResTouchIdx = best.at(-1).idx;
+
+  // ─── 3. Check for Higher Lows (ascending pattern) ───
+  const recentLows = swingLows.filter(l => l.idx > best[0].idx).slice(-3);
+  if (recentLows.length < 2) return null;
+
+  let higherLows = true;
+  for (let i = 1; i < recentLows.length; i++) {
+    if (recentLows[i].price <= recentLows[i-1].price) { higherLows = false; break; }
+  }
+  const nearestHL = recentLows.at(-1);
+
+  // ─── 4. Detect LIQUIDITY SWEEP above resistance ───
+  const afterRes = lb.slice(lastResTouchIdx + 1);
+  let sweepCandle = null;
+  let sweepIdx = -1;
+  for (let i = 0; i < afterRes.length; i++) {
+    const c = afterRes[i];
+    // Wick above resistance + close back below
+    if (c.high > resistanceLevel + resTolerance * 0.3 && c.close < resistanceLevel) {
+      sweepCandle = c;
+      sweepIdx = i;
+      break;
+    }
+  }
+
+  // ─── 5. Detect BOS below nearest HL ───
+  let bosCandle = null;
+  if (sweepCandle) {
+    const afterSweep = afterRes.slice(sweepIdx + 1);
+    for (const c of afterSweep) {
+      const body = Math.abs(c.close - c.open);
+      const isBearish = c.close < c.open;
+      if (isBearish && c.close < nearestHL.price && body > atrVal * TRAP_BOS_BODY_MULT) {
+        bosCandle = c;
+        break;
+      }
+    }
+  }
+
+  // ─── 6. Retest zone (broken resistance / breaker block) ───
+  const retestZone = {
+    low: resistanceLevel - atrVal * 0.15,
+    high: resistanceLevel + atrVal * 0.15
+  };
+
+  // ─── 7. Current price relative to retest ───
+  const currentPrice = lb.at(-1).close;
+  const inRetestZone = currentPrice >= retestZone.low && currentPrice <= retestZone.high;
+
+  // ─── 8. SL / TP ───
+  const sweepHigh = sweepCandle ? sweepCandle.high : resistanceLevel + atrVal;
+  const slBuffer = pipSize * TRAP_SL_BUFFER_PIPS;
+  const stopLoss = sweepHigh + slBuffer;
+
+  const lowestLow = Math.min(...recentLows.map(l => l.price));
+  const midpoint = (resistanceLevel + lowestLow) / 2;
+  const target2 = lowestLow - atrVal * 0.5;
+
+  const entryPrice = inRetestZone ? currentPrice : retestZone.high;
+  const risk = stopLoss - entryPrice;
+  const reward1 = entryPrice - midpoint;
+  const reward2 = entryPrice - target2;
+  const rr1 = risk > 0 ? (reward1 / risk) : 0;
+  const rr2 = risk > 0 ? (reward2 / risk) : 0;
+
+  // ─── 9. Setup phase ───
+  let setupPhase = 'SCANNING';
+  let sweepStatus = 'NONE';
+  let bosStatus = 'NONE';
+
+  if (sweepCandle) sweepStatus = 'CONFIRMED';
+  if (bosCandle) bosStatus = 'CONFIRMED';
+
+  if (sweepCandle && bosCandle && inRetestZone) {
+    setupPhase = 'READY_TO_EXECUTE';
+  } else if (sweepCandle && bosCandle) {
+    setupPhase = 'WAITING_FOR_RETEST';
+  } else if (sweepCandle) {
+    setupPhase = 'WAITING_FOR_BOS';
+  } else if (best.length >= 2 && higherLows) {
+    setupPhase = 'PATTERN_FORMING';
+  }
+
+  // ─── 10. Pattern classification ───
+  let patternType = 'NONE';
+  if (best.length >= 2 && higherLows) patternType = 'ASCENDING_TRIANGLE_LIQUIDITY_TRAP';
+  else if (best.length >= 2) patternType = 'EQUAL_HIGHS_LIQUIDITY';
+
+  return {
+    pattern_detected: patternType,
+    sweep_status: sweepStatus,
+    bos_status: bosStatus,
+    setup_phase: setupPhase,
+    resistance_level: +resistanceLevel.toFixed(5),
+    nearest_hl: +nearestHL.price.toFixed(5),
+    sweep_high: +sweepHigh.toFixed(5),
+    retest_zone: `${retestZone.low.toFixed(5)} - ${retestZone.high.toFixed(5)}`,
+    retest_zone_low: +retestZone.low.toFixed(5),
+    retest_zone_high: +retestZone.high.toFixed(5),
+    signal: (sweepStatus === 'CONFIRMED' && bosStatus === 'CONFIRMED') ? 'SELL' : null,
+    entry: +entryPrice.toFixed(5),
+    stop_loss: +stopLoss.toFixed(5),
+    sl_pips: Math.round(Math.abs(stopLoss - entryPrice) / pipSize),
+    take_profit_1: +midpoint.toFixed(5),
+    take_profit_2: +target2.toFixed(5),
+    risk_reward_ratio: `1:${rr2.toFixed(2)}`,
+    rr_tp1: `1:${rr1.toFixed(2)}`,
+    rr_tp2: `1:${rr2.toFixed(2)}`,
+    touches: best.length,
+    higher_lows_count: recentLows.length,
+    inRetestZone,
+    atr: +atrVal.toFixed(5)
+  };
+}
+
+/* ═══ SENTIMENT ENGINE ═══ */
 let sentimentCache = {};
 function extractCurrencies(pair) { if (pair.length === 6) return [pair.slice(0, 3), pair.slice(3)]; return null; }
 function interpretCurrencySentiment(pair, currencyScores) {
@@ -994,7 +1249,6 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
     source: 'unavailable', updatedAt: Date.now()
   };
 
-  // ─── SOURCE 1: IG CS (DailyFX) ───
   try {
     const slug = SENTIMENT_SYMBOL_MAP[symbol] || symbol;
     const proxy = 'https://corsproxy.io/?url=';
@@ -1014,7 +1268,6 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
     }
   } catch (e) {}
 
-  // ─── SOURCE 2: Myfxbook Community Outlook ───
   if (result.retailLongPercent == null) {
     try {
       const slug = SENTIMENT_SYMBOL_MAP[symbol] || symbol;
@@ -1038,7 +1291,6 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
     } catch (e) {}
   }
 
-  // ─── SOURCE 3: FXNewsBias (optional key) ───
   if (result.retailLongPercent == null) {
     const fxnbKey = store.get('lutynoel_fxnb_key');
     if (fxnbKey) {
@@ -1061,7 +1313,6 @@ async function fetchRetailSentimentForPair(symbol, options = {}) {
     }
   }
 
-  // ─── LAST RESORT: Volume-mock (clearly labeled MOCK) ───
   if (result.retailLongPercent == null) {
     const mock = computeVolumeImbalanceMock(symbol);
     if (mock) {
@@ -1179,7 +1430,7 @@ function speakSignal(pair, action, conf, price, tag) {
   const a = action === 'BUY' ? 'Nunua' : 'Uza';
   speakText(`${tag ? tag + '. ' : ''}${a} ${ps}. Bei ${price.toFixed(2)}. Uhakika asilimia ${conf}.`);
 }
-function testVoice() { speakText('Karibu Lutynoel FX. Zone-based engine uko tayari.'); }
+function testVoice() { speakText('Karibu Lutynoel FX. Trap engine uko tayari.'); }
 function warmUpVoice() { if (!('speechSynthesis' in window)) return; try { const u = new SpeechSynthesisUtterance(''); u.volume = 0; speechSynthesis.speak(u); speechSynthesis.getVoices(); } catch (e) {} }
 
 /* ═══ JSON/FETCH ═══ */
@@ -1200,7 +1451,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   finally { clearTimeout(id); }
 }
 
-/* ═══ AI ═══ */
+/* ═══ AI CALLS ═══ */
 const getGeminiKey = () => store.get(STORAGE_KEYS.GEMINI);
 const getMistralKey = () => store.get(STORAGE_KEYS.MISTRAL);
 const getTwelveKey = () => store.get(STORAGE_KEYS.TWELVE);
@@ -1451,12 +1702,12 @@ function computeInstitutionalBias(inst) {
   add(inst.displacement?.direction === 'BULLISH', 8); add(inst.displacement?.direction === 'BEARISH', -8);
   add(inst.near?.fvgBull, 5); add(inst.near?.fvgBear, -5);
   add(inst.near?.obBull, 7); add(inst.near?.obBear, -7);
+  add(inst.patternTrap?.pattern_detected === 'ASCENDING_TRIANGLE_LIQUIDITY_TRAP', -10);
   s = Math.max(0, Math.min(100, s));
   const b = s >= 68 ? 'STRONG_BULLISH' : s >= 57 ? 'BULLISH' : s <= 32 ? 'STRONG_BEARISH' : s <= 43 ? 'BEARISH' : 'NEUTRAL';
   return { score: s, bias: b };
 }
 
-/* ═══ INSTITUTIONAL METRICS (v37.9) ═══ */
 function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   if (!Array.isArray(h1) || h1.length < 30) return null;
 
@@ -1473,7 +1724,6 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   const fvg = detectFVG(flowH1, 60);
   const a   = atr || lp * 0.005;
 
-  // Discount/Premium
   const recent20 = flowM15.slice(-20);
   const rangeHigh = recent20.length ? Math.max(...recent20.map(c => c.high)) : lp;
   const rangeLow  = recent20.length ? Math.min(...recent20.map(c => c.low))  : lp;
@@ -1507,6 +1757,9 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
   const sweep = detectLiquiditySweep(flowH1);
   const displacement = detectDisplacement(flowH1);
 
+  // v38.0 — Pattern Trap detection (on M15 for intraday precision)
+  const patternTrap = detectPatternLiquiditySweep(flowM15.length >= 30 ? flowM15 : m15, pair, pipSize);
+
   const vp = anchored?.ok ? {
     poc: anchored.prevDayPOC, vah: anchored.prevDayVAH, val: anchored.prevDayVAL, source: 'previous_day_fixed'
   } : calculateVolumeProfile(flowH1, 40);
@@ -1531,6 +1784,7 @@ function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
       discountZone: { low: rangeLow, high: rangeLow + rangeSpan * 0.4 },
       premiumZone:  { low: rangeLow + rangeSpan * 0.6, high: rangeHigh }
     },
+    patternTrap,
     structure:    structureH1,
     htfStructure: structureH4,
     ltfStructure: structureM15,
@@ -1554,7 +1808,7 @@ function getHTFBias(h4, h1) {
   return { h4: a, h1: b, aligned: a === b && a !== 'NEUTRAL' };
 }
 
-/* ═══ ZONE-BASED PRE-CHECK (v37.9) ═══ */
+/* ═══ PRE-CHECK (Zone-Based) ═══ */
 function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
   if (!anchored?.ok) return { ok: false, reason: 'Anchored levels not available', mode: 'STANDBY' };
   if (!inst) return { ok: false, reason: 'Institutional metrics not available', mode: 'STANDBY' };
@@ -1578,13 +1832,14 @@ function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
 
   const nearOB  = inst.near?.obBull || inst.near?.obBear;
   const nearFVG = inst.near?.fvgBull || inst.near?.fvgBear;
-  const m15Structure = inst.ltfStructure?.trend;
-  const hasM15Structure = m15Structure === 'BULLISH' || m15Structure === 'BEARISH';
+  const hasM15Structure = inst.ltfStructure?.trend === 'BULLISH' || inst.ltfStructure?.trend === 'BEARISH';
   const hasSweep = !!inst.sweep;
   const hasDisplacement = !!inst.displacement?.detected;
+  const trap = inst.patternTrap;
+  const trapActive = trap && (trap.setup_phase === 'READY_TO_EXECUTE' || trap.setup_phase === 'WAITING_FOR_RETEST');
 
   const inKeyZone = activeZones.length > 0;
-  const hasStructuralContext = nearOB || nearFVG || hasM15Structure || hasSweep || hasDisplacement;
+  const hasStructuralContext = nearOB || nearFVG || hasM15Structure || hasSweep || hasDisplacement || trapActive;
 
   const recentM15 = getCurrentDayCandles(m15, Date.now(), pair).slice(-8);
   const recentRange = recentM15.length >= 4
@@ -1594,11 +1849,24 @@ function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
 
   const kz = getKillzoneState();
 
-  // IMMEDIATE
+  // Pattern trap takes priority
+  if (trapActive) {
+    return {
+      ok: true,
+      mode: trap.setup_phase === 'READY_TO_EXECUTE' ? 'IMMEDIATE' : 'CONDITIONAL',
+      reason: `🪤 ${trap.pattern_detected} — phase: ${trap.setup_phase}`,
+      activeZones, nearOB, nearFVG, hasM15Structure, hasSweep, hasDisplacement,
+      lowVol, inKillzone: kz.inKillzone, session: kz.session,
+      tier: 'HIGH_PROBABILITY_PATTERN_TRAP',
+      setupType: 'PATTERN_TRAP',
+      patternTrap: trap
+    };
+  }
+
   if (inKeyZone && hasStructuralContext && !lowVol) {
     return {
       ok: true, mode: 'IMMEDIATE',
-      reason: `Price inside ${activeZones.map(z => z.name).join(' + ')} zone WITH structural context`,
+      reason: `Price inside ${activeZones.map(z => z.name).join(' + ')} zone WITH context`,
       activeZones, nearOB, nearFVG, hasM15Structure, hasSweep, hasDisplacement,
       lowVol, inKillzone: kz.inKillzone, session: kz.session,
       tier: kz.inKillzone ? 'HIGH_PROBABILITY_ZONE_SETUP' : 'MEDIUM_PROBABILITY_ZONE_SETUP',
@@ -1606,29 +1874,25 @@ function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
     };
   }
 
-  // CONDITIONAL (near zone but not inside)
   if (nearestZone && hasStructuralContext) {
-    const isBuyZone = nearestZone.type === 'demand';
-    const distancePips = Math.abs(lp - nearestZone.price) / pipSize;
     return {
       ok: true, mode: 'CONDITIONAL',
-      reason: `Price ${distancePips.toFixed(1)} pips from ${nearestZone.name} (${nearestZone.type}) — awaiting zone touch`,
+      reason: `Price ${(Math.abs(lp - nearestZone.price) / pipSize).toFixed(1)} pips from ${nearestZone.name}`,
       nearestZone, activeZones: [],
       nearOB, nearFVG, hasM15Structure, hasSweep, hasDisplacement,
       lowVol, inKillzone: kz.inKillzone, session: kz.session,
       tier: 'CONDITIONAL_SETUP',
       setupType: 'CONDITIONAL_WAIT_FOR_TRIGGER',
       triggerPrice: nearestZone.price,
-      triggerType: isBuyZone ? 'BUY' : 'SELL',
+      triggerType: nearestZone.type === 'demand' ? 'BUY' : 'SELL',
       bufferPips: nearestZone.buffer / pipSize
     };
   }
 
-  // CONDITIONAL (OB/FVG without structure)
   if (nearOB || nearFVG) {
     return {
       ok: true, mode: 'CONDITIONAL',
-      reason: `Valid ${nearOB ? 'OB' : 'FVG'} zone but no M15 structure confirmation`,
+      reason: `Valid ${nearOB ? 'OB' : 'FVG'} zone but no M15 structure yet`,
       nearOB, nearFVG, hasM15Structure: false, hasSweep, hasDisplacement,
       lowVol, inKillzone: kz.inKillzone, session: kz.session,
       tier: 'CONDITIONAL_SETUP',
@@ -1636,7 +1900,6 @@ function preCheckZoneBased(lp, anchored, m15, inst, pipSize, pair) {
     };
   }
 
-  // STANDBY
   return {
     ok: false, mode: 'STANDBY',
     reason: `Price in no-man's-land (nearest ${nearestZone?.name || 'level'} = ${nearestZone?.dist?.toFixed(5) || 'n/a'})`,
@@ -1655,6 +1918,7 @@ function makeNoTrade(reason, pair = '', anchor = null) {
     take_profit_1: 0, take_profit_2: 0, take_profit_3: 0,
     risk_reward_ratio: '—', confluences: [],
     macro_geopolitical_bias: 'NEUTRAL_MACRO', macro_reasoning: '',
+    pattern_trap: null,
     volume_profile_data: {
       poc_price: anchor?.prevDayPOC ?? 0, vah_price: anchor?.prevDayVAH ?? 0,
       val_price: anchor?.prevDayVAL ?? 0, confluence_note: reason
@@ -1735,8 +1999,7 @@ function validateSignalIntegrity(signal, currentPrice, pipSize, anchored, dailyA
 function explainNoTrade(instMaster) {
   if (!instMaster) return null;
   const type = String(instMaster.signal_type || '').toUpperCase();
-  if (type === 'BUY' || type === 'SELL') return null;
-  if (type === 'PENDING_ALERT') return null; // handled separately
+  if (type === 'BUY' || type === 'SELL' || type === 'PENDING_ALERT') return null;
 
   const reject = String(instMaster.rejectReason || '').trim();
   const pre = instMaster.preCheck || {};
@@ -1748,7 +2011,7 @@ function explainNoTrade(instMaster) {
       title: 'HAKUNA TRADE KABISA',
       subtitle: 'Soko haliko kwenye eneo la maamuzi',
       detail: pre.reason || 'Price is in no-man\'s-land — no zone, FVG, OB, or sweep detected.',
-      action: 'Subiri price ifike PDH / PDL / PD-POC / VAH / VAL / FVG / OB ndipo uangalie tena.',
+      action: 'Subiri price ifike PDH / PDL / PD-POC / VAH / VAL / FVG / OB au pattern trap ifanye kazi.',
       color: 'var(--red)'
     };
   }
@@ -1793,7 +2056,7 @@ function explainNoTrade(instMaster) {
   };
 }
 
-/* ═══ AUDIO/ALERTS ═══ */
+/* ═══ AUDIO / ALERTS ═══ */
 let audioCtx = null;
 const alertCooldowns = {};
 function ensureAudioCtx() {
@@ -1872,7 +2135,6 @@ function checkPriceAlerts(currentPrice, anchored, pipSize, pair) {
     fireAlert(lvl, currentPrice, pair);
   });
 
-  // ═══ Conditional alerts ═══
   evaluateConditionalAlerts(currentPrice, pair, pipSize);
 }
 function fireAlert(lvl, price, pair) {
@@ -1886,8 +2148,8 @@ function fireAlert(lvl, price, pair) {
   if (navigator.vibrate) navigator.vibrate(lvl.kind === 'sweep' ? [220, 90, 220] : [160]);
 }
 
-/* ═══ CONDITIONAL ALERTS (v37.9) ═══ */
-const conditionalAlerts = {}; // { [pair]: { buy, sell, triggerZone, action, signalType, confluenceSummary, macroBias, registeredAt, firedAt: {} } }
+/* ═══ CONDITIONAL ALERTS ═══ */
+const conditionalAlerts = {};
 
 function registerConditionalAlert(pair, instMaster, pipSize) {
   if (!instMaster) return;
@@ -1902,6 +2164,7 @@ function registerConditionalAlert(pair, instMaster, pipSize) {
     signalType: instMaster.signal_type || 'PENDING_ALERT',
     confluenceSummary: (instMaster.confluences || []).slice(0, 3).join(' • '),
     macroBias: instMaster.macro_geopolitical_bias || 'NEUTRAL_MACRO',
+    patternTrap: instMaster.pattern_trap || null,
     registeredAt: Date.now(),
     firedAt: {}
   };
@@ -1956,7 +2219,7 @@ function renderActiveAlerts() {
   if (!c) return;
   const entries = Object.entries(conditionalAlerts);
   if (!entries.length) {
-    c.innerHTML = '<div class="info-box">Hakuna active alerts bado. Alerts zinaundwa baada ya analysis yenye conditional_alert.</div>';
+    c.innerHTML = '<div class="info-box">Hakuna active alerts bado.</div>';
     return;
   }
 
@@ -2015,19 +2278,65 @@ function updateActiveAlertsSummary() {
   }).join('<br>');
 }
 
+/* ═══ ACTIVE TRAPS TRACKING ═══ */
+const activeTraps = {}; // { [pair]: patternTrap }
+
+function registerActiveTrap(pair, patternTrap) {
+  if (!patternTrap || patternTrap.pattern_detected === 'NONE') return;
+  if (patternTrap.setup_phase === 'SCANNING') return;
+  activeTraps[pair] = { ...patternTrap, registeredAt: Date.now() };
+  updateActiveTrapsSummary();
+}
+
+function updateActiveTrapsSummary() {
+  const summaryEl = $('activeTrapsSummary');
+  const listEl = $('activeTrapsList');
+  if (!summaryEl || !listEl) return;
+  const entries = Object.entries(activeTraps);
+  if (!entries.length) { summaryEl.style.display = 'none'; return; }
+  summaryEl.style.display = 'block';
+  listEl.innerHTML = entries.map(([pair, t]) => {
+    const phaseColor = t.setup_phase === 'READY_TO_EXECUTE' ? 'var(--green)'
+      : t.setup_phase === 'WAITING_FOR_RETEST' ? 'var(--yellow)'
+      : t.setup_phase === 'WAITING_FOR_BOS' ? 'var(--orange)'
+      : 'var(--muted)';
+    return `• <strong style="color:var(--pink)">${esc(pair)}</strong>: <span style="color:${phaseColor};font-weight:bold;">${esc(t.setup_phase)}</span> ${t.signal ? '(' + t.signal + ')' : ''}`;
+  }).join('<br>');
+}
+
 /* ═══ PROMPT BUILDER ═══ */
 function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, kz }) {
   let p = `${INSTITUTIONAL_MASTER_PROMPT}\n\n`;
-  p += `═══ ANCHORED PREVIOUS-DAY LEVELS (FIXED) ═══\n`;
+  p += `═══ ANCHORED PREVIOUS-DAY LEVELS ═══\n`;
   p += `Anchor Day: ${anchored.anchorDay}\n`;
   p += `PDH: ${anchored.PDH.toFixed(5)}\nPDL: ${anchored.PDL.toFixed(5)}\nPDC: ${anchored.PDC.toFixed(5)}\n`;
   p += `PD-POC: ${anchored.prevDayPOC != null ? anchored.prevDayPOC.toFixed(5) : 'N/A'}\n`;
   p += `PD-VAH: ${anchored.prevDayVAH != null ? anchored.prevDayVAH.toFixed(5) : 'N/A'}\n`;
   p += `PD-VAL: ${anchored.prevDayVAL != null ? anchored.prevDayVAL.toFixed(5) : 'N/A'}\n`;
-  p += `Prev-Day Range: ${anchored.prevDayRange.toFixed(5)}\nPrev-Day ATR(14): ${(anchored.prevDayATR || anchored.prevDayRange).toFixed(5)}\n\n`;
-  p += `═══ SESSION ═══\nSession: ${kz.session} | Killzone: ${kz.inKillzone ? 'YES ✅' : 'NO ⚠️'}\n\n`;
-  p += `═══ LIVE MARKET ═══\nPAIR: ${pair} | Current Price: ${lp.toFixed(5)}\n`;
+  p += `Prev-Day Range: ${anchored.prevDayRange.toFixed(5)} | ATR: ${(anchored.prevDayATR || anchored.prevDayRange).toFixed(5)}\n\n`;
+  p += `═══ SESSION ═══\n${kz.session} | Killzone: ${kz.inKillzone ? 'YES ✅' : 'NO ⚠️'}\n\n`;
+  p += `═══ LIVE ═══\nPAIR: ${pair} | Price: ${lp.toFixed(5)}\n`;
   if (htfBias) p += `HTF EMA: 4H=${htfBias.h4} | 1H=${htfBias.h1} | Aligned=${htfBias.aligned ? 'YES' : 'NO'}\n`;
+
+  // Add pattern trap context
+  if (inst?.patternTrap && inst.patternTrap.pattern_detected !== 'NONE') {
+    const t = inst.patternTrap;
+    p += `\n═══ PATTERN TRAP ENGINE (v38.0) ═══\n`;
+    p += `Pattern: ${t.pattern_detected}\n`;
+    p += `Sweep Status: ${t.sweep_status}\n`;
+    p += `BOS Status: ${t.bos_status}\n`;
+    p += `Setup Phase: ${t.setup_phase}\n`;
+    p += `Resistance Level: ${t.resistance_level}\n`;
+    p += `Nearest HL: ${t.nearest_hl}\n`;
+    p += `Sweep High: ${t.sweep_high}\n`;
+    p += `Retest Zone: ${t.retest_zone}\n`;
+    p += `Suggested Signal: ${t.signal || 'NONE'}\n`;
+    p += `Suggested Entry: ${t.entry}\n`;
+    p += `Suggested SL: ${t.stop_loss} (${t.sl_pips}p)\n`;
+    p += `Suggested TP1: ${t.take_profit_1}\n`;
+    p += `Suggested TP2: ${t.take_profit_2}\n`;
+    p += `Touches: ${t.touches} | Higher Lows: ${t.higher_lows_count}\n`;
+  }
 
   const dump = (name, arr, n) => {
     if (!Array.isArray(arr) || !arr.length) return;
@@ -2039,34 +2348,32 @@ function buildAnchoredPrompt({ pair, lp, anchored, currentH1, currentM15, curren
   dump('H4', currentH4, 12); dump('H1', currentH1, 20); dump('M15', currentM15, 30);
 
   if (inst) {
-    p += `\n═══ COMPUTED METRICS ═══\n`;
-    if (inst.rsi) p += `RSI(14) H1: ${inst.rsi.toFixed(1)}\n`;
-    if (inst.atr) p += `ATR(14) H1: ${inst.atr.toFixed(5)}\n`;
-    if (inst.structure)    p += `1H Structure:  ${inst.structure.trend}\n`;
-    if (inst.htfStructure) p += `4H Structure:  ${inst.htfStructure.trend}\n`;
+    p += `\n═══ METRICS ═══\n`;
+    if (inst.rsi) p += `RSI(14): ${inst.rsi.toFixed(1)}\n`;
+    if (inst.atr) p += `ATR(14): ${inst.atr.toFixed(5)}\n`;
+    if (inst.structure)    p += `1H Structure: ${inst.structure.trend}\n`;
+    if (inst.htfStructure) p += `4H Structure: ${inst.htfStructure.trend}\n`;
     if (inst.sweep) p += `Sweep: ${inst.sweep.type} → ${inst.sweep.bias}\n`;
     if (inst.displacement?.detected) p += `Displacement: ${inst.displacement.direction}\n`;
-    if (inst.orderBlocks?.nearestBull) p += `Bull OB: ${inst.orderBlocks.nearestBull.low.toFixed(5)}–${inst.orderBlocks.nearestBull.high.toFixed(5)}\n`;
-    if (inst.orderBlocks?.nearestBear) p += `Bear OB: ${inst.orderBlocks.nearestBear.low.toFixed(5)}–${inst.orderBlocks.nearestBear.high.toFixed(5)}\n`;
-    if (inst.fvg?.nearestBull) p += `Bull FVG: ${inst.fvg.nearestBull.bottom.toFixed(5)}–${inst.fvg.nearestBull.top.toFixed(5)}\n`;
-    if (inst.fvg?.nearestBear) p += `Bear FVG: ${inst.fvg.nearestBear.bottom.toFixed(5)}–${inst.fvg.nearestBear.top.toFixed(5)}\n`;
+    if (inst.zones) p += `Zone: ${inst.zones.isInDiscount ? 'DISCOUNT' : inst.zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM'} (${inst.zones.pricePositionPct}%)\n`;
   }
   return p;
 }
+
 function buildZoneContextBlock(pre, inst, anchored, pipSize) {
   const zones = inst?.zones || {};
-  let block = `\n\n═══ ZONE CONTEXT (v37.9) ═══\n`;
-  block += `Execution Mode Suggested: ${pre.mode} (${pre.reason})\n`;
-  if (zones.active && zones.active.length) block += `Active Zones: ${zones.active.map(z => z.name).join(' + ')}\n`;
+  let block = `\n\n═══ ZONE CONTEXT ═══\n`;
+  block += `Pre-Check Mode: ${pre.mode} (${pre.reason})\n`;
+  if (zones.active?.length) block += `Active Zones: ${zones.active.map(z => z.name).join(' + ')}\n`;
   if (zones.rangeHigh) {
     block += `Range: ${zones.rangeLow.toFixed(5)} – ${zones.rangeHigh.toFixed(5)}\n`;
-    block += `Equilibrium: ${zones.equilibrium.toFixed(5)} | Price Position: ${zones.pricePositionPct}%\n`;
-    block += `Zone: ${zones.isInDiscount ? 'DISCOUNT (buy-side)' : zones.isInPremium ? 'PREMIUM (sell-side)' : 'EQUILIBRIUM'}\n`;
+    block += `Equilibrium: ${zones.equilibrium.toFixed(5)} | Position: ${zones.pricePositionPct}%\n`;
+    block += `Zone: ${zones.isInDiscount ? 'DISCOUNT' : zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM'}\n`;
   }
-  block += `\nZONE RULE: A zone-based entry (price within 15-25 pips of key level + valid demand/supply + M15 CHoCH) = HIGH_PROBABILITY_ZONE_SETUP.\n`;
-  block += `If setup is FORMED but not triggered → use PENDING_ALERT with conditional_alert.trigger_zone + alert_price_buy/sell.\n`;
+  block += `\nIf setup is FORMED but not triggered → PENDING_ALERT with conditional_alert.\n`;
   return block;
 }
+
 function buildConditionalFromZones(pre, inst, lp, pipSize) {
   const zones = inst?.zones || {};
   const anchored = inst?.anchoredVP || {};
@@ -2081,7 +2388,19 @@ function buildConditionalFromZones(pre, inst, lp, pipSize) {
     alert_price_sell: alertSell
   };
 }
-function buildForecastFromAnchors(anchored, inst, lp, pipSize) {
+
+function buildConditionalFromTrap(trap, pipSize) {
+  if (!trap) return null;
+  // For descending trap, trigger when price pulls back into retest zone
+  return {
+    trigger_zone: trap.retest_zone || '—',
+    action_if_reached: `Pattern trap retest — look for ${trap.signal || 'reversal'} confirmation`,
+    alert_price_buy: null,
+    alert_price_sell: trap.retest_zone_high || null
+  };
+}
+
+function buildForecastFromAnchors(anchored) {
   return {
     conditional_alert: {
       trigger_zone: anchored.ok ? `${anchored.prevDayVAL?.toFixed(5) || '—'} - ${anchored.prevDayVAH?.toFixed(5) || '—'}` : '—',
@@ -2092,16 +2411,18 @@ function buildForecastFromAnchors(anchored, inst, lp, pipSize) {
   };
 }
 
-/* ═══ CALL INSTITUTIONAL MASTER (v37.9) ═══ */
+/* ═══ CALL INSTITUTIONAL MASTER ═══ */
 async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15, currentH4, inst, htfBias, pipSize) {
   const sentiment = await fetchRetailSentimentForPair(pair);
   window.__lastSentiment = sentiment;
 
   const pre = preCheckZoneBased(lp, anchored, currentM15, inst, pipSize, pair);
 
-  // ─── STANDBY: return early ───
+  // Extract pattern trap
+  const trap = inst?.patternTrap || null;
+
   if (!pre.ok && pre.mode === 'STANDBY') {
-    const forecast = buildForecastFromAnchors(anchored, inst, lp, pipSize);
+    const forecast = buildForecastFromAnchors(anchored);
     return {
       provider: 'ZonePreCheck', pair, timeframe: 'M15',
       signal_type: 'NO_TRADE', execution_mode: 'STANDBY', confidence_score: 0,
@@ -2110,6 +2431,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
       take_profit_1: 0, take_profit_2: 0, take_profit_3: 0,
       risk_reward_ratio: '—', confluences: [],
       macro_geopolitical_bias: 'NEUTRAL_MACRO', macro_reasoning: '',
+      pattern_trap: trap,
       volume_profile_data: {
         poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
         val_price: anchored.prevDayVAL ?? 0, confluence_note: pre.reason
@@ -2125,7 +2447,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
   const sentimentBlock = `\n\n═══ RETAIL SENTIMENT ═══\nLong: ${sentiment.retailLongPercent}% | Short: ${sentiment.retailShortPercent}%\nSmart Money Bias: ${sentiment.smartMoneyBias} — ${sentiment.biasReason}\nSource: ${sentiment.source}\n\nCONTRARIAN RULE: Extreme retail (≥75% one side) → align with SMART MONEY BIAS.`;
 
   const fullPrompt = basePrompt + zoneContext + sentimentBlock;
-  const r = await callLLM({ prompt: fullPrompt, maxTokens: 2200, timeout: 90000 });
+  const r = await callLLM({ prompt: fullPrompt, maxTokens: 2400, timeout: 90000 });
 
   if (!r.result) {
     return {
@@ -2136,6 +2458,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
       take_profit_1: 0, take_profit_2: 0, take_profit_3: 0,
       risk_reward_ratio: '—', confluences: [],
       macro_geopolitical_bias: 'NEUTRAL_MACRO', macro_reasoning: '',
+      pattern_trap: trap,
       volume_profile_data: {
         poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
         val_price: anchored.prevDayVAL ?? 0, confluence_note: r.err || 'LLM failed'
@@ -2156,6 +2479,9 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
   const tp3 = parseFloat(j.take_profit_3) || 0;
   const slPips = parseInt(j.sl_pips) || Math.round(Math.abs(entryPrice - slPrice) / pipSize);
 
+  // Use AI-returned pattern_trap if present, else our detected one
+  const patternTrap = j.pattern_trap || trap;
+
   const unified = {
     provider: r.provider, pair: j.pair || pair, timeframe: j.timeframe || 'M15',
     signal_type: signalType, execution_mode: executionMode,
@@ -2169,6 +2495,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
     macro_geopolitical_bias: j.macro_geopolitical_bias || 'NEUTRAL_MACRO',
     macro_reasoning: j.macro_reasoning || '',
     layer_scores: j.layer_scores || {},
+    pattern_trap: patternTrap,
     volume_profile_data: j.volume_profile_data || {
       poc_price: anchored.prevDayPOC ?? 0, vah_price: anchored.prevDayVAH ?? 0,
       val_price: anchored.prevDayVAL ?? 0, confluence_note: ''
@@ -2181,7 +2508,7 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
     rejectReason: (signalType === 'NO_TRADE') ? (j.reject_reason || pre.reason || 'No confluence') : ''
   };
 
-  // ─── Validate executable signals ───
+  // Validate executable signals
   if (signalType === 'BUY' || signalType === 'SELL') {
     const check = validateSignalIntegrity({
       signal_type: signalType,
@@ -2208,9 +2535,11 @@ async function callInstitutionalMaster(pair, lp, anchored, currentH1, currentM15
     }
   }
 
-  // ─── PENDING_ALERT must have conditional_alert ───
+  // PENDING_ALERT must have conditional_alert
   if (signalType === 'PENDING_ALERT' && !unified.conditional_alert) {
-    unified.conditional_alert = buildConditionalFromZones(pre, inst, lp, pipSize);
+    unified.conditional_alert = patternTrap && patternTrap.retest_zone
+      ? buildConditionalFromTrap(patternTrap, pipSize)
+      : buildConditionalFromZones(pre, inst, lp, pipSize);
   }
 
   return unified;
@@ -2314,11 +2643,22 @@ async function fetchAllMarketData() {
       h += `<div>1H: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
       if (inst.rsi) h += `<div>RSI(14): ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(spec.decimals) : '—'}</div>`;
       if (inst.zones) h += `<div>Zone: <strong style="color:${inst.zones.isInDiscount ? 'var(--green)' : inst.zones.isInPremium ? 'var(--red)' : 'var(--yellow)'}">${inst.zones.isInDiscount ? 'DISCOUNT' : inst.zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM'} (${inst.zones.pricePositionPct}%)</strong></div>`;
-      h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'} | Candles: ${anchored.prevDayCandleCount}H1 / ${anchored.prevDayM15Count}M15</div>`;
+      // Trap info
+      if (inst.patternTrap && inst.patternTrap.pattern_detected !== 'NONE') {
+        const t = inst.patternTrap;
+        h += `<div style="margin-top:6px;padding:8px;background:rgba(236,72,153,.1);border-left:3px solid var(--pink);border-radius:6px;">
+          <div style="color:var(--pink);font-weight:900;">🪤 ${esc(t.pattern_detected)}</div>
+          <div style="font-size:10px;">Phase: <strong>${esc(t.setup_phase)}</strong></div>
+          <div style="font-size:10px;">Sweep: ${esc(t.sweep_status)} | BOS: ${esc(t.bos_status)}</div>
+          <div style="font-size:10px;">Resistance: ${t.resistance_level} | HL: ${t.nearest_hl}</div>
+          <div style="font-size:10px;">Retest Zone: <strong style="color:var(--accent);">${esc(t.retest_zone)}</strong></div>
+        </div>`;
+      }
+      h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
       if (anchored.warnings) h += `<div style="color:var(--orange);margin-top:6px;">⚠️ ${anchored.warnings.join(' • ')}</div>`;
       $('chartPreview').innerHTML = h;
       $('runBtn').disabled = false;
-      showToast(anchored.warnings ? '⚠️ Data ready (warnings)' : '✅ Anchored data ready');
+      showToast(anchored.warnings ? '⚠️ Data ready (warnings)' : '✅ Data ready');
 
       const s = await fetchRetailSentimentForPair(pair, { force: true });
       renderSentimentWidget(s, pair);
@@ -2370,6 +2710,316 @@ async function onSSPairChange() {
   fetchSSLivePrice();
 }
 
+/* ═══ TRAP SCAN ═══ */
+async function runTrapScan() {
+  const pair = $('trapPair').value;
+  const c = $('trapContainer');
+  const btn = $('trapScanBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner-white"></span>';
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Scanning for liquidity traps...</div>';
+  try {
+    const m15 = await fetchOHLC(pair, '15m', 200, true);
+    if (!m15) throw new Error(lastDataError || 'Failed to fetch M15');
+    const spec = PAIR_SPECS[pair];
+    const trap = detectPatternLiquiditySweep(m15, pair, spec.pipSize);
+    if (!trap || trap.pattern_detected === 'NONE') {
+      c.innerHTML = '<div class="info-box">Hakuna pattern trap iliyogundulika kwa sasa kwa ' + esc(pair) + '.</div>';
+      return;
+    }
+    registerActiveTrap(pair, trap);
+    renderTrapCard(pair, trap, spec);
+  } catch (e) {
+    c.innerHTML = `<div class="error-box">❌ ${esc(e.message)}</div>`;
+  } finally {
+    btn.disabled = false; btn.innerHTML = '🔍 Scan Now';
+  }
+}
+
+function renderTrapCard(pair, trap, spec) {
+  const c = $('trapContainer');
+  const f = x => x == null ? '—' : Number(x).toFixed(spec.decimals);
+  const phaseColor = trap.setup_phase === 'READY_TO_EXECUTE' ? 'var(--green)'
+    : trap.setup_phase === 'WAITING_FOR_RETEST' ? 'var(--yellow)'
+    : trap.setup_phase === 'WAITING_FOR_BOS' ? 'var(--orange)'
+    : trap.setup_phase === 'PATTERN_FORMING' ? 'var(--cyan)' : 'var(--muted)';
+
+  c.innerHTML = `
+    <div class="pattern-block">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="font-size:13px;font-weight:900;color:var(--pink);">🪤 ${esc(trap.pattern_detected)}</div>
+        <div style="font-size:10px;font-weight:900;padding:3px 8px;border-radius:8px;background:${phaseColor}22;color:${phaseColor};border:1px solid ${phaseColor};">${esc(trap.setup_phase)}</div>
+      </div>
+
+      <div class="pattern-step">
+        <div class="step-icon ${trap.touches >= 2 ? 'step-done' : 'step-pending'}">1</div>
+        <div>Resistance Touches: <strong>${trap.touches}×</strong> @ ${f(trap.resistance_level)}</div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.higher_lows_count >= 2 ? 'step-done' : 'step-pending'}">2</div>
+        <div>Higher Lows: <strong>${trap.higher_lows_count}×</strong> (Nearest HL: ${f(trap.nearest_hl)})</div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.sweep_status === 'CONFIRMED' ? 'step-done' : 'step-pending'}">3</div>
+        <div>Liquidity Sweep: <strong>${esc(trap.sweep_status)}</strong> ${trap.sweep_high ? `(High: ${f(trap.sweep_high)})` : ''}</div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.bos_status === 'CONFIRMED' ? 'step-done' : 'step-pending'}">4</div>
+        <div>BOS Confirmation: <strong>${esc(trap.bos_status)}</strong></div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.inRetestZone ? 'step-active' : 'step-pending'}">5</div>
+        <div>Retest Zone: <strong style="color:var(--accent);">${esc(trap.retest_zone)}</strong></div>
+      </div>
+
+      ${trap.signal ? `
+      <div style="margin-top:12px;padding:12px;background:rgba(11,18,32,.7);border-radius:10px;border-left:4px solid var(--red);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-size:14px;font-weight:900;color:var(--red);">${trap.signal}</span>
+          <span style="font-size:11px;color:var(--accent);font-weight:900;">R:R ${esc(trap.risk_reward_ratio)}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;font-family:ui-monospace,monospace;">
+          <div><span style="color:var(--muted);">Entry:</span> <strong style="color:var(--accent);">${f(trap.entry)}</strong></div>
+          <div><span style="color:var(--muted);">SL:</span> <strong style="color:var(--red);">${f(trap.stop_loss)}</strong> (${trap.sl_pips}p)</div>
+          <div><span style="color:var(--muted);">TP1:</span> <strong style="color:var(--green);">${f(trap.take_profit_1)}</strong></div>
+          <div><span style="color:var(--muted);">TP2:</span> <strong style="color:var(--green);">${f(trap.take_profit_2)}</strong></div>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.6;">
+          ${trap.inRetestZone
+            ? '✅ <strong style="color:var(--green);">Price iko kwenye retest zone — READY TO EXECUTE</strong>'
+            : '⏳ Subiri price irudi kwenye retest zone kwa entry.'}
+        </div>
+      </div>
+      ` : `
+      <div style="margin-top:12px;padding:12px;background:rgba(11,18,32,.7);border-radius:10px;border-left:4px solid var(--yellow);">
+        <div style="font-size:12px;color:var(--yellow);font-weight:900;">⏳ PATTERN FORMING — NOT READY</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:6px;">Subiri hatua zote 5 zikamilike. Bonyeza Scan Now kila baada ya muda.</div>
+      </div>
+      `}
+
+      <div style="margin-top:10px;font-size:9px;color:var(--muted);font-family:ui-monospace,monospace;text-align:right;">
+        ATR: ${f(trap.atr)} • Detected: ${new Date().toLocaleTimeString()}
+      </div>
+    </div>
+  `;
+}
+
+/* ═══ VISION AI ═══ */
+async function processVisionChartAnalysis(pair, lp, mode, uploadedScreenshots, spec) {
+  const shotList = [
+    ['m15', 'M15 (ENTRY TIMING)'],
+    ['h1',  'H1 (TREND)'],
+    ['h4',  'H4 (BIAS)']
+  ].filter(([k]) => uploadedScreenshots[k]).map(([k, label]) => ({ ...uploadedScreenshots[k], label }));
+
+  if (!shotList.length) throw new Error('No screenshots uploaded');
+
+  const basePrompt = `${VISION_MASTER_PROMPT}
+
+═══ MTF SCREENSHOT ANALYSIS TASK ═══
+Pair: ${pair} | Current Price: ${lp}
+Analyze ALL attached screenshots (M15, H1, H4).
+Apply the 6-layer framework — ESPECIALLY Layer 6 (Liquidity Trap Patterns).
+Look for: Ascending/Descending Triangles, Double Top/Bottom, Fakeouts, BOS lines, Supply/Breaker retest boxes.
+Return unified JSON.`;
+
+  if (mode === 'combined') {
+    const r = await callLLM({
+      prompt: basePrompt, images: shotList, vision: true,
+      maxTokens: 3500, timeout: 120000
+    });
+    if (!r.result) throw new Error(r.err || 'Vision failed');
+    return { result: r.result, provider: r.provider };
+  }
+
+  const tfResults = {};
+  for (const shot of shotList) {
+    const prompt = `${VISION_MASTER_PROMPT}
+
+═══ SINGLE-TIMEFRAME ANALYSIS ═══
+Analyze ONLY the ${shot.label} chart for ${pair} at ${lp}.
+Focus on the 6 layers as they apply to THIS timeframe.
+Return unified JSON.`;
+    const r = await callLLM({ prompt, images: [shot], vision: true, maxTokens: 1800, timeout: 90000 });
+    if (r.result) tfResults[shot.label] = r.result;
+  }
+
+  const results = Object.values(tfResults);
+  if (!results.length) throw new Error('No vision results returned');
+  results.sort((a, b) => (b.confidence_score || 0) - (a.confidence_score || 0));
+  const top = results[0];
+  const allConf = results.flatMap(r => r.confluences || []);
+  const uniqueConf = [...new Set(allConf)];
+
+  return {
+    result: {
+      ...top, confluences: uniqueConf,
+      macro_geopolitical_bias: top.macro_geopolitical_bias || 'NEUTRAL_MACRO',
+      macro_reasoning: top.macro_reasoning || ''
+    },
+    provider: 'Mistral/pixtral-12b-latest'
+  };
+}
+
+/* ═══ SCREENSHOT UI ═══ */
+let uploadedScreenshots = { m15: null, h1: null, h4: null };
+
+function setupScreenshotUploads() {
+  ['m15', 'h1', 'h4'].forEach(tf => {
+    const inp = $(`ssInput-${tf}`);
+    if (!inp || inp.dataset.bound) return;
+    inp.dataset.bound = '1';
+    inp.addEventListener('change', e => {
+      const f = e.target.files[0];
+      if (!f) return;
+      if (f.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
+      const r = new FileReader();
+      r.onload = ev => {
+        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
+        const img = $(`ssImg-${tf}`); if (img) img.src = ev.target.result;
+        const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'block';
+        const box = $(`tfBox-${tf}`); if (box) box.classList.add('has-image');
+        updateSSUploadStatus();
+      };
+      r.readAsDataURL(f);
+    });
+  });
+}
+function updateSSUploadStatus() {
+  const c = Object.values(uploadedScreenshots).filter(Boolean).length, s = $('ssUploadStatus');
+  if (!s) return;
+  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong> screenshots`;
+  s.style.borderColor = c === 3 ? 'var(--green)' : c > 0 ? 'var(--yellow)' : 'var(--blue)';
+  s.style.color = c === 3 ? '#6ee7b7' : c > 0 ? '#fef08a' : '#93c5fd';
+  const btn = $('analyzeSSBtn'); if (btn) btn.disabled = c === 0;
+}
+function updateSSModeInfo() {
+  const el = $('ssModeInfo'); if (!el) return;
+  el.innerHTML = $('ssMode').value === 'combined'
+    ? '⚡ <strong>Combined:</strong> API call 1 tu — haraka.'
+    : '🔍 <strong>Separate:</strong> API calls 3 — kila TF peke yake.';
+}
+function clearAllScreenshots() {
+  uploadedScreenshots = { m15: null, h1: null, h4: null };
+  ['m15', 'h1', 'h4'].forEach(tf => {
+    const inp = $(`ssInput-${tf}`); if (inp) inp.value = '';
+    const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'none';
+    const box = $(`tfBox-${tf}`); if (box) box.classList.remove('has-image');
+  });
+  updateSSUploadStatus();
+  const rc = $('ssResultsContainer'); if (rc) rc.style.display = 'none';
+}
+
+async function analyzeAllScreenshots() {
+  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key angalau moja.'); return; }
+  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau screenshot 1.'); return; }
+
+  const pair = $('ssPair').value;
+  const lp = parseFloat($('ssLivePrice').value);
+  const spec = PAIR_SPECS[pair];
+  const mode = $('ssMode').value;
+  if (!(lp > 0)) { alert('Weka bei ya sasa.'); return; }
+
+  const btn = $('analyzeSSBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+
+  const container = $('ssResultsContainer');
+  container.style.display = 'block';
+  container.innerHTML = `<div class="card">
+    <div class="ballistic-header">📸 SCREENSHOT ANALYSIS (6-Layer + Trap Engine)</div>
+    <div style="text-align:center;color:var(--muted);"><span class="spinner"></span> Vision inachambua M15 → H1 → H4...</div>
+  </div>`;
+
+  try {
+    const visionRes = await processVisionChartAnalysis(pair, lp, mode, uploadedScreenshots, spec);
+    const vj = visionRes.result;
+    const provider = visionRes.provider;
+
+    const signalType = String(vj.signal_type || 'NO_TRADE').toUpperCase();
+    const executionMode = String(vj.execution_mode || 'STANDBY').toUpperCase();
+    const entryPrice = parseFloat(vj.entry_price) || parseFloat(vj.entry_zone?.min_price) || lp;
+    const slPrice = parseFloat(vj.stop_loss) || 0;
+    const t1 = parseFloat(vj.take_profit_1) || 0;
+    const t2 = parseFloat(vj.take_profit_2) || 0;
+    const t3 = parseFloat(vj.take_profit_3) || 0;
+    const slPips = parseInt(vj.sl_pips) || Math.round(Math.abs(entryPrice - slPrice) / spec.pipSize);
+
+    let lv = null;
+    if ((signalType === 'BUY' || signalType === 'SELL') && slPrice > 0 && t1 > 0) {
+      const pips = d => Math.round(Math.abs(d) / spec.pipSize);
+      lv = {
+        entry: entryPrice, sl: slPrice, tp1: t1, tp2: t2, tp3: t3,
+        slPips: pips(slPrice - entryPrice), tp1Pips: pips(t1 - entryPrice),
+        tp2Pips: pips(t2 - entryPrice), tp3Pips: pips(t3 - entryPrice)
+      };
+    }
+
+    const instMaster = {
+      provider, pair: vj.pair || pair, timeframe: vj.timeframe || 'M15',
+      signal_type: signalType, execution_mode: executionMode,
+      confidence_score: Math.max(0, Math.min(100, parseInt(vj.confidence_score) || 0)),
+      entry_price: entryPrice,
+      entry_zone: vj.entry_zone || { min_price: entryPrice, max_price: entryPrice },
+      stop_loss: slPrice, sl_pips: slPips,
+      take_profit_1: t1, take_profit_2: t2, take_profit_3: t3,
+      risk_reward_ratio: vj.risk_reward_ratio || '—',
+      confluences: Array.isArray(vj.confluences) ? vj.confluences : [],
+      macro_geopolitical_bias: vj.macro_geopolitical_bias || 'NEUTRAL_MACRO',
+      macro_reasoning: vj.macro_reasoning || '',
+      layer_scores: vj.layer_scores || {},
+      pattern_trap: vj.pattern_trap || null,
+      volume_profile_data: vj.volume_profile_data || { poc_price: 0, vah_price: 0, val_price: 0, confluence_note: 'From screenshot' },
+      conditional_alert: vj.conditional_alert || null,
+      tier: 'MEDIUM_PROBABILITY', sentiment: null,
+      stop_loss_obj: { price: slPrice, pips: slPips },
+      take_profit: { tp1: t1, tp2: t2, tp3: t3 }
+    };
+
+    const check = validateSignalIntegrity({
+      signal_type: signalType,
+      entry_zone: instMaster.entry_zone,
+      stop_loss: { price: slPrice },
+      take_profit: { tp1: t1, tp2: t2, tp3: t3 },
+      confidence_score: instMaster.confidence_score,
+      confluences: instMaster.confluences,
+      volume_profile_data: instMaster.volume_profile_data,
+      pair
+    }, lp, spec.pipSize, null, null, null);
+
+    const finalSignal = { ...instMaster };
+    if (!check.valid && (signalType === 'BUY' || signalType === 'SELL')) {
+      finalSignal.signal_type = 'PENDING_ALERT';
+      finalSignal.execution_mode = 'CONDITIONAL_TRIGGER';
+      finalSignal.confidence_score = Math.min(finalSignal.confidence_score, 55);
+      finalSignal.tier = 'CONDITIONAL_SETUP';
+      finalSignal.rejectReason = check.signal.rejectReason || 'Validator rejected';
+      if (!finalSignal.conditional_alert) {
+        finalSignal.conditional_alert = buildConditionalFromZones({}, null, lp, spec.pipSize);
+      }
+    } else {
+      finalSignal.tier = check.signal.tier || 'MEDIUM_PROBABILITY';
+    }
+
+    const rec = buildRecord({
+      source: 'screenshot', pair, lp, inst: null,
+      instMaster: finalSignal, validators: [], lv, anchored: null
+    });
+    rec.tier = finalSignal.tier;
+
+    saveToHistory(rec);
+    renderSignalCard(rec, spec, null, finalSignal, [], 'ssResultsContainer');
+    container.scrollIntoView({ behavior: 'smooth' });
+
+    if (finalSignal.conditional_alert) registerConditionalAlert(pair, finalSignal, spec.pipSize);
+    if (finalSignal.pattern_trap) registerActiveTrap(pair, finalSignal.pattern_trap);
+
+  } catch (e) {
+    showToast(`❌ ${e.message}`, 5000);
+    container.innerHTML = `<div class="card"><div class="error-box">Fatal: ${esc(e.message)}</div></div>`;
+  } finally {
+    btn.disabled = false; btn.innerHTML = '🔍 ANALYZE SCREENSHOTS';
+  }
+}
+
 /* ═══ HISTORY ═══ */
 const loadHist = () => { try { return JSON.parse(store.get(STORAGE_KEYS.HISTORY) || '[]'); } catch (e) { return []; } };
 function saveHist(h) {
@@ -2410,6 +3060,7 @@ function buildRecord({ source, pair, lp, inst, instMaster, validators, lv, ancho
     execution_mode: instMaster.execution_mode || 'STANDBY',
     macro_bias: instMaster.macro_geopolitical_bias || 'NEUTRAL_MACRO',
     macro_reasoning: instMaster.macro_reasoning || '',
+    pattern_trap: instMaster.pattern_trap || null,
     conditional_alert: instMaster.conditional_alert || null,
     rejectReason: instMaster.rejectReason,
     sentiment: instMaster.sentiment ? {
@@ -2464,13 +3115,14 @@ async function runAnalysis() {
   container.style.display = 'block';
   container.innerHTML = `
     <div class="card">
-      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v37.9)</div>
+      <div class="ballistic-header">🏛️ INSTITUTIONAL MASTER (v38.0)</div>
       <div style="font-size:11px;line-height:1.8;color:var(--muted);">
         <div>Anchor Day: <strong style="color:var(--accent)">${anchored.anchorDay}</strong></div>
         <div>PDH: <strong style="color:var(--red)">${anchored.PDH.toFixed(spec.decimals)}</strong> | PDL: <strong style="color:var(--green)">${anchored.PDL.toFixed(spec.decimals)}</strong></div>
         <div>Session: <strong style="color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'}">${kz.label}</strong></div>
+        ${inst?.patternTrap && inst.patternTrap.pattern_detected !== 'NONE' ? `<div style="color:var(--pink);margin-top:4px;">🪤 ${esc(inst.patternTrap.pattern_detected)} — ${esc(inst.patternTrap.setup_phase)}</div>` : ''}
       </div>
-      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Zone-based pre-check + LLM...</div>
+      <div style="text-align:center;color:var(--muted);margin-top:10px;"><span class="spinner"></span> Pattern Trap + Zone-based + LLM...</div>
     </div>`;
 
   const instMaster = await callInstitutionalMaster(
@@ -2497,9 +3149,8 @@ async function runAnalysis() {
   saveToHistory(rec);
   renderSignalCard(rec, spec, inst, instMaster, [], 'resultsContainer');
 
-  if (instMaster.conditional_alert) {
-    registerConditionalAlert(pair, instMaster, spec.pipSize);
-  }
+  if (instMaster.conditional_alert) registerConditionalAlert(pair, instMaster, spec.pipSize);
+  if (instMaster.pattern_trap) registerActiveTrap(pair, instMaster.pattern_trap);
 
   if (instMaster.signal_type === 'BUY' || instMaster.signal_type === 'SELL') {
     speakSignal(pair, instMaster.signal_type, instMaster.confidence_score, lp,
@@ -2515,227 +3166,6 @@ async function runAnalysis() {
   setTimeout(() => updateBacktest(), 500);
 }
 
-/* ═══ SCREENSHOT ANALYSIS ═══ */
-let uploadedScreenshots = { m15: null, h1: null, h4: null };
-
-function setupScreenshotUploads() {
-  ['m15', 'h1', 'h4'].forEach(tf => {
-    const inp = $(`ssInput-${tf}`);
-    if (!inp || inp.dataset.bound) return;
-    inp.dataset.bound = '1';
-    inp.addEventListener('change', e => {
-      const f = e.target.files[0];
-      if (!f) return;
-      if (f.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
-      const r = new FileReader();
-      r.onload = ev => {
-        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
-        const img = $(`ssImg-${tf}`); if (img) img.src = ev.target.result;
-        const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'block';
-        const box = $(`tfBox-${tf}`); if (box) box.classList.add('has-image');
-        updateSSUploadStatus();
-      };
-      r.readAsDataURL(f);
-    });
-  });
-}
-function updateSSUploadStatus() {
-  const c = Object.values(uploadedScreenshots).filter(Boolean).length, s = $('ssUploadStatus');
-  if (!s) return;
-  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong> screenshots`;
-  s.style.borderColor = c === 3 ? 'var(--green)' : c > 0 ? 'var(--yellow)' : 'var(--blue)';
-  s.style.color = c === 3 ? '#6ee7b7' : c > 0 ? '#fef08a' : '#93c5fd';
-  const btn = $('analyzeSSBtn'); if (btn) btn.disabled = c === 0;
-}
-function updateSSModeInfo() {
-  const el = $('ssModeInfo'); if (!el) return;
-  el.innerHTML = $('ssMode').value === 'combined'
-    ? '⚡ <strong>Combined:</strong> API call 1 tu — haraka. AI inaona M15+H1+H4 pamoja.'
-    : '🔍 <strong>Separate:</strong> API calls 3 — kila TF peke yake.';
-}
-function clearAllScreenshots() {
-  uploadedScreenshots = { m15: null, h1: null, h4: null };
-  ['m15', 'h1', 'h4'].forEach(tf => {
-    const inp = $(`ssInput-${tf}`); if (inp) inp.value = '';
-    const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'none';
-    const box = $(`tfBox-${tf}`); if (box) box.classList.remove('has-image');
-  });
-  updateSSUploadStatus();
-  const rc = $('ssResultsContainer'); if (rc) rc.style.display = 'none';
-}
-
-/* ═══ VISION AI (5-Layer) ═══ */
-async function processVisionChartAnalysis(pair, lp, mode, uploadedScreenshots, spec) {
-  const shotList = [
-    ['m15', 'M15 (ENTRY TIMING)'],
-    ['h1',  'H1 (TREND)'],
-    ['h4',  'H4 (BIAS)']
-  ].filter(([k]) => uploadedScreenshots[k]).map(([k, label]) => ({ ...uploadedScreenshots[k], label }));
-
-  if (!shotList.length) throw new Error('No screenshots uploaded');
-
-  const basePrompt = `${VISION_MASTER_PROMPT}
-
-═══ MTF SCREENSHOT ANALYSIS TASK ═══
-Pair: ${pair} | Current Price: ${lp}
-Analyze ALL attached screenshots (M15, H1, H4).
-Apply the 5-layer framework. Return unified JSON.`;
-
-  if (mode === 'combined') {
-    const r = await callLLM({
-      prompt: basePrompt, images: shotList, vision: true,
-      maxTokens: 3000, timeout: 120000
-    });
-    if (!r.result) throw new Error(r.err || 'Vision failed');
-    return { result: r.result, provider: r.provider };
-  }
-
-  const tfResults = {};
-  for (const shot of shotList) {
-    const tfLabel = shot.label;
-    const prompt = `${VISION_MASTER_PROMPT}
-
-═══ SINGLE-TIMEFRAME ANALYSIS ═══
-Analyze ONLY the ${tfLabel} chart for ${pair} at price ${lp}.
-Focus on the 5 layers for THIS timeframe. Return unified JSON.`;
-    const r = await callLLM({ prompt, images: [shot], vision: true, maxTokens: 1500, timeout: 90000 });
-    if (r.result) tfResults[shot.label] = r.result;
-  }
-
-  const results = Object.values(tfResults);
-  if (!results.length) throw new Error('No vision results returned');
-  results.sort((a, b) => (b.confidence_score || 0) - (a.confidence_score || 0));
-  const top = results[0];
-  const allConf = results.flatMap(r => r.confluences || []);
-  const uniqueConf = [...new Set(allConf)];
-
-  return {
-    result: {
-      ...top, confluences: uniqueConf,
-      macro_geopolitical_bias: top.macro_geopolitical_bias || 'NEUTRAL_MACRO',
-      macro_reasoning: top.macro_reasoning || ''
-    },
-    provider: 'Mistral/pixtral-12b-latest'
-  };
-}
-
-async function analyzeAllScreenshots() {
-  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key angalau moja.'); return; }
-  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau screenshot 1.'); return; }
-
-  const pair = $('ssPair').value;
-  const lp = parseFloat($('ssLivePrice').value);
-  const spec = PAIR_SPECS[pair];
-  const mode = $('ssMode').value;
-  if (!(lp > 0)) { alert('Weka bei ya sasa.'); return; }
-
-  const btn = $('analyzeSSBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Analyzing...';
-
-  const container = $('ssResultsContainer');
-  container.style.display = 'block';
-  container.innerHTML = `<div class="card">
-    <div class="ballistic-header">📸 SCREENSHOT ANALYSIS (${mode === 'combined' ? 'Combined' : 'Separate'})</div>
-    <div style="text-align:center;color:var(--muted);"><span class="spinner"></span> 5-Layer Vision inachambua M15 → H1 → H4...</div>
-  </div>`;
-
-  try {
-    const visionRes = await processVisionChartAnalysis(pair, lp, mode, uploadedScreenshots, spec);
-    const vj = visionRes.result;
-    const provider = visionRes.provider;
-
-    const signalType = String(vj.signal_type || 'NO_TRADE').toUpperCase();
-    const executionMode = String(vj.execution_mode || 'STANDBY').toUpperCase();
-
-    const entryPrice = parseFloat(vj.entry_price) || parseFloat(vj.entry_zone?.min_price) || lp;
-    const slPrice = parseFloat(vj.stop_loss) || 0;
-    const t1 = parseFloat(vj.take_profit_1) || 0;
-    const t2 = parseFloat(vj.take_profit_2) || 0;
-    const t3 = parseFloat(vj.take_profit_3) || 0;
-    const slPips = parseInt(vj.sl_pips) || Math.round(Math.abs(entryPrice - slPrice) / spec.pipSize);
-
-    let lv = null;
-    if ((signalType === 'BUY' || signalType === 'SELL') && slPrice > 0 && t1 > 0) {
-      const pips = d => Math.round(Math.abs(d) / spec.pipSize);
-      lv = {
-        entry: entryPrice, sl: slPrice, tp1: t1, tp2: t2, tp3: t3,
-        slPips: pips(slPrice - entryPrice), tp1Pips: pips(t1 - entryPrice),
-        tp2Pips: pips(t2 - entryPrice), tp3Pips: pips(t3 - entryPrice)
-      };
-    }
-
-    const instMaster = {
-      provider,
-      pair: vj.pair || pair,
-      timeframe: vj.timeframe || 'M15',
-      signal_type: signalType,
-      execution_mode: executionMode,
-      confidence_score: Math.max(0, Math.min(100, parseInt(vj.confidence_score) || 0)),
-      entry_price: entryPrice,
-      entry_zone: vj.entry_zone || { min_price: entryPrice, max_price: entryPrice },
-      stop_loss: slPrice, sl_pips: slPips,
-      take_profit_1: t1, take_profit_2: t2, take_profit_3: t3,
-      risk_reward_ratio: vj.risk_reward_ratio || '—',
-      confluences: Array.isArray(vj.confluences) ? vj.confluences : [],
-      macro_geopolitical_bias: vj.macro_geopolitical_bias || 'NEUTRAL_MACRO',
-      macro_reasoning: vj.macro_reasoning || '',
-      layer_scores: vj.layer_scores || {},
-      volume_profile_data: vj.volume_profile_data || { poc_price: 0, vah_price: 0, val_price: 0, confluence_note: 'From screenshot' },
-      conditional_alert: vj.conditional_alert || null,
-      tier: 'MEDIUM_PROBABILITY',
-      sentiment: null,
-      stop_loss_obj: { price: slPrice, pips: slPips },
-      take_profit: { tp1: t1, tp2: t2, tp3: t3 }
-    };
-
-    const check = validateSignalIntegrity({
-      signal_type: signalType,
-      entry_zone: instMaster.entry_zone,
-      stop_loss: { price: slPrice },
-      take_profit: { tp1: t1, tp2: t2, tp3: t3 },
-      confidence_score: instMaster.confidence_score,
-      confluences: instMaster.confluences,
-      volume_profile_data: instMaster.volume_profile_data,
-      pair
-    }, lp, spec.pipSize, null, null, null);
-
-    const finalSignal = { ...instMaster };
-    if (!check.valid && (signalType === 'BUY' || signalType === 'SELL')) {
-      finalSignal.signal_type = 'PENDING_ALERT';
-      finalSignal.execution_mode = 'CONDITIONAL_TRIGGER';
-      finalSignal.confidence_score = Math.min(finalSignal.confidence_score, 55);
-      finalSignal.tier = 'CONDITIONAL_SETUP';
-      finalSignal.rejectReason = check.signal.rejectReason || 'Validator rejected';
-      if (!finalSignal.conditional_alert) {
-        finalSignal.conditional_alert = buildConditionalFromZones({}, null, lp, spec.pipSize);
-      }
-    } else {
-      finalSignal.tier = check.signal.tier || 'MEDIUM_PROBABILITY';
-    }
-
-    const rec = buildRecord({
-      source: 'screenshot', pair, lp, inst: null,
-      instMaster: finalSignal, validators: [], lv, anchored: null
-    });
-    rec.tier = finalSignal.tier;
-
-    saveToHistory(rec);
-    renderSignalCard(rec, spec, null, finalSignal, [], 'ssResultsContainer');
-    container.scrollIntoView({ behavior: 'smooth' });
-
-    if (finalSignal.conditional_alert) {
-      registerConditionalAlert(pair, finalSignal, spec.pipSize);
-    }
-
-  } catch (e) {
-    showToast(`❌ ${e.message}`, 5000);
-    container.innerHTML = `<div class="card"><div class="error-box">Fatal: ${esc(e.message)}</div></div>`;
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '🔍 ANALYZE SCREENSHOTS';
-  }
-}
-
 /* ═══ SIGNAL CARD ═══ */
 function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) {
   const a = rec.action;
@@ -2749,10 +3179,11 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
   const vp = instMaster.volume_profile_data || {};
   const confColors = conf >= 75 ? 'var(--green)' : conf >= 55 ? 'var(--yellow)' : 'var(--muted)';
   const tier = instMaster.tier || 'MEDIUM_PROBABILITY';
-  const tierClass = tier === 'HIGH_PROBABILITY' || tier === 'HIGH_PROBABILITY_ZONE_SETUP' ? 'tier-high'
+  const tierClass = tier === 'HIGH_PROBABILITY' || tier === 'HIGH_PROBABILITY_ZONE_SETUP' || tier === 'HIGH_PROBABILITY_PATTERN_TRAP' ? 'tier-high'
                   : tier === 'MEDIUM_PROBABILITY' || tier === 'MEDIUM_PROBABILITY_ZONE_SETUP' ? 'tier-med'
                   : tier === 'LOW_PROBABILITY' ? 'tier-low'
-                  : tier === 'CONDITIONAL_SETUP' ? 'tier-conditional' : 'tier-rejected';
+                  : tier === 'CONDITIONAL_SETUP' ? 'tier-conditional'
+                  : tier === 'PATTERN_TRAP' ? 'tier-pattern' : 'tier-rejected';
   const tierLabel = tier.replace(/_/g, ' ');
   const executionMode = instMaster.execution_mode || 'STANDBY';
   const modeBadge = executionMode === 'IMMEDIATE'
@@ -2764,13 +3195,43 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
   const anc = rec.anchored;
   const anchorBlock = anc ? `
     <div class="anchor-box">
-      <div style="font-size:10px;color:var(--inst);font-weight:900;letter-spacing:.8px;margin-bottom:6px;">🏛️ ANCHORED PREVIOUS-DAY LEVELS — ${esc(anc.anchorDay || '—')}</div>
+      <div style="font-size:10px;color:var(--inst);font-weight:900;letter-spacing:.8px;margin-bottom:6px;">🏛️ ANCHORED LEVELS — ${esc(anc.anchorDay || '—')}</div>
       <div class="anchor-row"><span style="color:var(--muted);">PDH</span><span style="color:var(--red);font-weight:bold;">${f(anc.PDH)}</span></div>
       <div class="anchor-row"><span style="color:var(--muted);">PDC</span><span style="color:var(--text);font-weight:bold;">${f(anc.PDC)}</span></div>
       <div class="anchor-row"><span style="color:var(--muted);">PDL</span><span style="color:var(--green);font-weight:bold;">${f(anc.PDL)}</span></div>
       ${anc.POC != null ? `<div class="anchor-row" style="border-top:1px dashed rgba(139,92,246,.3);margin-top:6px;padding-top:6px;"><span style="color:var(--muted);">PD-POC</span><span style="color:var(--accent);font-weight:bold;">${f(anc.POC)}</span></div>` : ''}
       ${anc.VAH != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAH</span><span style="color:var(--red);">${f(anc.VAH)}</span></div>` : ''}
       ${anc.VAL != null ? `<div class="anchor-row"><span style="color:var(--muted);">PD-VAL</span><span style="color:var(--green);">${f(anc.VAL)}</span></div>` : ''}
+    </div>` : '';
+
+  // Pattern Trap Block
+  const trap = instMaster.pattern_trap;
+  const trapBlock = trap && trap.pattern_detected !== 'NONE' ? `
+    <div class="pattern-block">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:900;color:var(--pink);">🪤 ${esc(trap.pattern_detected)}</div>
+        <div style="font-size:10px;font-weight:900;padding:3px 8px;border-radius:8px;background:rgba(236,72,153,.2);color:var(--pink);border:1px solid var(--pink);">${esc(trap.setup_phase)}</div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.touches >= 2 ? 'step-done' : 'step-pending'}">1</div>
+        <div>Resistance: ${trap.touches}× touches @ <strong>${f(trap.resistance_level)}</strong></div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.higher_lows_count >= 2 ? 'step-done' : 'step-pending'}">2</div>
+        <div>Higher Lows: <strong>${trap.higher_lows_count}×</strong> (HL: ${f(trap.nearest_hl)})</div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.sweep_status === 'CONFIRMED' ? 'step-done' : 'step-pending'}">3</div>
+        <div>Sweep: <strong>${esc(trap.sweep_status)}</strong> (High: ${f(trap.sweep_high)})</div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.bos_status === 'CONFIRMED' ? 'step-done' : 'step-pending'}">4</div>
+        <div>BOS: <strong>${esc(trap.bos_status)}</strong></div>
+      </div>
+      <div class="pattern-step">
+        <div class="step-icon ${trap.inRetestZone ? 'step-active' : 'step-pending'}">5</div>
+        <div>Retest: <strong style="color:var(--accent);">${esc(trap.retest_zone)}</strong>${trap.inRetestZone ? ' ✅' : ''}</div>
+      </div>
     </div>` : '';
 
   const sent = instMaster.sentiment;
@@ -2788,19 +3249,14 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
         <span style="color:var(--blue);font-weight:800;">🔵 LONG ${sent.retailLongPercent}%</span>
         <span style="color:var(--red);font-weight:800;">SHORT ${sent.retailShortPercent}% 🔴</span>
       </div>
-      <div style="margin-top:6px;font-size:10px;text-align:center;font-weight:900;color:${sent.smartMoneyBias === 'BULLISH' ? 'var(--green)' : sent.smartMoneyBias === 'BEARISH' ? 'var(--red)' : 'var(--muted)'};">
-        ${sent.smartMoneyBias === 'BULLISH' ? '🔥 SMART MONEY: BULLISH' : sent.smartMoneyBias === 'BEARISH' ? '🩸 SMART MONEY: BEARISH' : '⚖️ SMART MONEY: NEUTRAL'}
-      </div>
     </div>` : '';
 
   const macroBias = instMaster.macro_geopolitical_bias || 'NEUTRAL_MACRO';
   const macroBlock = macroBias !== 'NEUTRAL_MACRO' ? `
     <div class="mini-box" style="margin-bottom:12px;background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.3);">
-      <div>
-        <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--purple);font-weight:900;">🌍 MACRO / GEOPOLITICAL</div>
-        <div style="font-size:11px;font-weight:900;color:var(--purple);margin-top:2px;">${esc(macroBias.replace(/_/g, ' '))}</div>
-      </div>
-      ${instMaster.macro_reasoning ? `<div style="font-size:10px;color:var(--muted);margin-top:6px;line-height:1.5;">${esc(instMaster.macro_reasoning)}</div>` : ''}
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--purple);font-weight:900;">🌍 MACRO</div>
+      <div style="font-size:11px;font-weight:900;color:var(--purple);margin-top:2px;">${esc(macroBias.replace(/_/g, ' '))}</div>
+      ${instMaster.macro_reasoning ? `<div style="font-size:10px;color:var(--muted);margin-top:6px;">${esc(instMaster.macro_reasoning)}</div>` : ''}
     </div>` : '';
 
   const ca = instMaster.conditional_alert;
@@ -2810,7 +3266,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
         <span style="font-size:18px;">⏰</span>
         <div>
           <div style="font-size:11px;font-weight:900;color:var(--yellow);letter-spacing:.6px;">CONDITIONAL ALERT REGISTERED</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Watch for these trigger prices</div>
         </div>
       </div>
       ${ca.trigger_zone ? `<div style="font-size:10px;color:var(--muted);margin-bottom:6px;">📍 Zone: <strong style="color:var(--accent);font-family:ui-monospace,monospace;">${esc(ca.trigger_zone)}</strong></div>` : ''}
@@ -2822,7 +3277,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
         <span style="color:var(--red);font-weight:800;">🔴 SELL TRIGGER</span>
         <span style="color:var(--red);font-weight:900;">${Number(ca.alert_price_sell).toFixed(spec.decimals)}</span>
       </div>` : ''}
-      ${ca.action_if_reached ? `<div style="font-size:10px;color:#fde047;margin-top:6px;font-style:italic;">🎯 ${esc(ca.action_if_reached)}</div>` : ''}
     </div>` : '';
 
   const chips = (instMaster.confluences || []).slice(0, 6).map(c => {
@@ -2832,7 +3286,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     else if (low.includes('choch') || low.includes('bos') || low.includes('structure')) cls = 'chip-buy';
     else if (low.includes('fvg')) cls = 'chip-cyan';
     else if (low.includes('ob') || low.includes('order block') || low.includes('demand') || low.includes('supply')) cls = 'chip-purple';
-    else if (low.includes('trap')) cls = 'chip-red';
+    else if (low.includes('trap') || low.includes('sweep')) cls = 'chip-red';
     return `<span class="chip ${cls}">✓ ${esc(c)}</span>`;
   }).join('');
 
@@ -2841,6 +3295,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `Direction: ${sigLabel} | Mode: ${executionMode}`,
     `Tier: ${tierLabel}`,
     `Confidence: ${conf}%`,
+    trap ? `Pattern: ${trap.pattern_detected} | Phase: ${trap.setup_phase}` : '',
     `─────────────────`,
     `Entry Zone: ${f(rec.entryZone?.min_price)} – ${f(rec.entryZone?.max_price)}`,
     `Stop Loss: ${f(instMaster.stop_loss)} (${instMaster.sl_pips}p)`,
@@ -2848,14 +3303,11 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     `TP2: ${f(instMaster.take_profit_2)}`,
     `TP3: ${f(instMaster.take_profit_3)}`,
     `R:R = ${instMaster.risk_reward_ratio}`,
-    `─────────────────`,
-    `PDH: ${f(anc?.PDH)} | PDL: ${f(anc?.PDL)} | PDC: ${f(anc?.PDC)}`,
-    `PD-POC: ${f(anc?.POC)} | VAH: ${f(anc?.VAH)} | VAL: ${f(anc?.VAL)}`,
     sent ? `Retail: ${sent.sentimentRatio} (${sent.smartMoneyBias}) [${sent.source}]` : '',
     macroBias !== 'NEUTRAL_MACRO' ? `Macro: ${macroBias}` : '',
     ca ? `ALERT BUY @ ${ca.alert_price_buy || '—'} | SELL @ ${ca.alert_price_sell || '—'}` : '',
     `Confluences: ${(instMaster.confluences || []).join(' | ')}`,
-    `— Lutynoel.fx v37.9`
+    `— Lutynoel.fx v38.0`
   ].filter(Boolean).join('\n');
   window.__lastCopyText = copyText;
 
@@ -2885,6 +3337,7 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
 
     <div class="sig-body">
       ${anchorBlock}
+      ${trapBlock}
       ${sentimentBlock}
       ${macroBlock}
       ${conditionalBlock}
@@ -2926,10 +3379,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
             <div style="font-size:10px;color:var(--muted);margin-top:2px;">${esc(instMaster.rejectReason || 'Alert registered. Awaiting price trigger.')}</div>
           </div>
         </div>
-        <div style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:8px;padding:10px 12px;">
-          <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);font-weight:800;margin-bottom:4px;">NINI UFANYE</div>
-          <div style="font-size:11px;line-height:1.6;color:#93c5fd;">Subiri price ifike trigger price. Ukipata notification → hakiki chati kwa M5 reversal kabla ya kuingia.</div>
-        </div>
       </div>
       ` : (() => {
         const ex = explainNoTrade(instMaster);
@@ -2947,12 +3396,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
             <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;margin-bottom:4px;">SABABU</div>
             <div style="font-size:11px;line-height:1.6;color:var(--text);">${esc(ex.detail)}</div>
           </div>
-          ${ex.rules && ex.rules.length ? `
-            <div style="margin-bottom:10px;">
-              <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--orange);font-weight:800;margin-bottom:6px;">VIGEZO VILIVYOKIUKWA</div>
-              ${ex.rules.map(r => `<div style="font-size:10px;color:#fdba74;padding:4px 0;border-bottom:1px dashed rgba(249,115,22,.3);">• ${esc(r)}</div>`).join('')}
-            </div>
-          ` : ''}
           <div style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:8px;padding:10px 12px;">
             <div style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);font-weight:800;margin-bottom:4px;">NINI UFANYE</div>
             <div style="font-size:11px;line-height:1.6;color:#93c5fd;">${esc(ex.action)}</div>
@@ -2965,16 +3408,11 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
     <div style="padding:0 20px 16px;">
       <div class="mini-box" style="background:rgba(11,18,32,.6);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-          <span style="font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;">🏛️ Institutional Confidence</span>
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;">🏛️ Confidence</span>
           <span style="font-size:20px;font-weight:900;color:${confColors};font-family:ui-monospace,monospace;">${conf}%</span>
         </div>
         <div class="conf-bar"><div class="conf-fill" style="width:${conf}%"></div></div>
         ${chips ? `<div style="margin-top:10px;">${chips}</div>` : ''}
-        <div style="margin-top:10px;display:flex;gap:8px;font-size:10px;color:var(--muted);">
-          <span>RR: <strong style="color:var(--accent);">${esc(instMaster.risk_reward_ratio || '—')}</strong></span>
-          <span>|</span>
-          <span>Session: <strong style="color:var(--accent);">${esc(rec.session || '—')}</strong></span>
-        </div>
       </div>
     </div>
     ` : ''}
@@ -2988,7 +3426,6 @@ function renderSignalCard(rec, spec, inst, instMaster, validators, containerId) 
           <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">POC</div><div style="font-size:12px;font-weight:900;color:var(--accent);font-family:ui-monospace,monospace;">${f(vp.poc_price)}</div></div>
           <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);font-weight:700;">VAL</div><div style="font-size:12px;font-weight:900;color:var(--green);font-family:ui-monospace,monospace;">${f(vp.val_price)}</div></div>
         </div>
-        ${vp.confluence_note ? `<div style="margin-top:8px;font-size:10px;color:var(--muted);line-height:1.5;font-style:italic;">${esc(vp.confluence_note)}</div>` : ''}
       </div>
     </div>
     ` : ''}
@@ -3164,41 +3601,22 @@ async function refreshOrderFlow() {
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(239,68,68,.12);margin-bottom:5px;border-left:4px solid var(--red);font-weight:bold;"><span>PDH</span><span>${f(anchored.PDH)}</span></div>
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(59,130,246,.12);margin-bottom:5px;border-left:4px solid var(--blue);font-weight:bold;"><span>PDC</span><span>${f(anchored.PDC)}</span></div>
       <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(16,185,129,.12);margin-bottom:5px;border-left:4px solid var(--green);font-weight:bold;"><span>PDL</span><span>${f(anchored.PDL)}</span></div>
-      <div style="margin-top:10px;font-size:10px;color:var(--muted);">Prev-Day Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)} • Candles: ${anchored.prevDayCandleCount}H1 / ${anchored.prevDayM15Count}M15</div>
-      ${anchored.warnings ? `<div style="margin-top:8px;padding:8px;background:rgba(249,115,22,.15);border:1px solid var(--orange);border-radius:8px;font-size:10px;color:#fdba74;"><strong>⚠️ Anchor warnings:</strong><br>${anchored.warnings.map(w => '• ' + esc(w)).join('<br>')}</div>` : ''}
+      <div style="margin-top:10px;font-size:10px;color:var(--muted);">Range: ${f(anchored.prevDayRange)} • ATR: ${f(anchored.prevDayATR)}</div>
     </div>`;
-
-    if (anchored.prevDayPOC != null) {
-      html += `<div class="card" style="border-color:var(--inst);">
-        <div class="ballistic-header">📊 PREVIOUS-DAY VOLUME PROFILE (FIXED)</div>
-        <div class="grid-3">
-          <div class="mini-box" style="text-align:center;"><label style="color:var(--red);">VAH</label><div style="font-weight:bold;color:var(--red);font-family:ui-monospace,monospace;">${f(anchored.prevDayVAH)}</div></div>
-          <div class="mini-box" style="text-align:center;"><label style="color:var(--accent);">POC</label><div style="font-weight:bold;color:var(--accent);font-family:ui-monospace,monospace;">${f(anchored.prevDayPOC)}</div></div>
-          <div class="mini-box" style="text-align:center;"><label style="color:var(--green);">VAL</label><div style="font-weight:bold;color:var(--green);font-family:ui-monospace,monospace;">${f(anchored.prevDayVAL)}</div></div>
-        </div>
-      </div>`;
-    }
 
     const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
     if (inst) {
-      const kz = getKillzoneState();
-      html += `<div class="card">
-        <div class="ballistic-header">📈 LIVE SNAPSHOT</div>
-        <div class="grid-2">
-          <div class="mini-box"><label>Current Price</label><div style="font-weight:bold;color:var(--accent);font-family:ui-monospace,monospace;">${f(lp)}</div></div>
-          <div class="mini-box"><label>Session</label><div style="font-weight:bold;color:${kz.inKillzone ? 'var(--green)' : 'var(--orange)'};">${kz.label}</div></div>
-        </div>
-        <div class="grid-2">
-          ${inst.rsi ? `<div class="mini-box" style="text-align:center;"><label>RSI(14)</label><div style="font-weight:bold;">${inst.rsi.toFixed(1)}</div></div>` : ''}
-          ${inst.atr ? `<div class="mini-box" style="text-align:center;"><label>ATR(14)</label><div style="font-weight:bold;font-family:ui-monospace,monospace;">${inst.atr.toFixed(spec.decimals)}</div></div>` : ''}
-        </div>
-        ${inst.zones ? `<div class="mini-box" style="margin-top:10px;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
-          <div class="ballistic-header">🎯 DISCOUNT / PREMIUM ZONE</div>
-          <div style="font-size:11px;color:var(--muted);">Price Position: <strong style="color:var(--accent)">${inst.zones.pricePositionPct}%</strong></div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Zone: <strong style="color:${inst.zones.isInDiscount ? 'var(--green)' : inst.zones.isInPremium ? 'var(--red)' : 'var(--yellow)'}">${inst.zones.isInDiscount ? 'DISCOUNT (buy-side)' : inst.zones.isInPremium ? 'PREMIUM (sell-side)' : 'EQUILIBRIUM'}</strong></div>
+      if (inst.zones) {
+        html += `<div class="card" style="border-color:var(--inst);">
+          <div class="ballistic-header">🎯 DISCOUNT / PREMIUM</div>
+          <div style="font-size:11px;color:var(--muted);">Position: <strong style="color:var(--accent)">${inst.zones.pricePositionPct}%</strong></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">Zone: <strong style="color:${inst.zones.isInDiscount ? 'var(--green)' : inst.zones.isInPremium ? 'var(--red)' : 'var(--yellow)'}">${inst.zones.isInDiscount ? 'DISCOUNT' : inst.zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM'}</strong></div>
           <div style="font-size:10px;color:var(--muted);margin-top:4px;">Equilibrium: ${f(inst.zones.equilibrium)}</div>
-        </div>` : ''}
-      </div>`;
+        </div>`;
+      }
+      if (inst.patternTrap && inst.patternTrap.pattern_detected !== 'NONE') {
+        renderTrapCard(pair, inst.patternTrap, spec);
+      }
     }
 
     c.innerHTML = html;
@@ -3236,14 +3654,9 @@ function loadHistory() {
       else if (r.tier === 'REJECTED') badge = '🛑';
       else { const mm = r.bt?.models?.[getBtModel()]; if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛'; }
       const st = getSignalStrength(r.action, r.conf || 0);
-      const tierColor = (r.tier === 'HIGH_PROBABILITY' || r.tier === 'HIGH_PROBABILITY_ZONE_SETUP') ? 'var(--green)'
-        : (r.tier === 'MEDIUM_PROBABILITY' || r.tier === 'MEDIUM_PROBABILITY_ZONE_SETUP') ? 'var(--yellow)'
-        : r.tier === 'LOW_PROBABILITY' ? 'var(--orange)'
-        : r.tier === 'CONDITIONAL_SETUP' ? 'var(--yellow)'
-        : r.tier === 'REJECTED' ? 'var(--red)' : 'var(--muted)';
+      const trapTag = r.pattern_trap?.pattern_detected && r.pattern_trap.pattern_detected !== 'NONE' ? ' 🪤' : '';
       return `<div class="history-card" onclick="showHistoryDetail(${i})"><div style="flex-grow:1;">
-        <strong>${esc(r.pair)} <span style="color:${st.color};">${esc(r.action)}</span></strong> ${badge}
-        <span style="color:${tierColor};font-size:9px;font-weight:bold;"> • ${esc(r.tier || '')}</span>
+        <strong>${esc(r.pair)} <span style="color:${st.color};">${esc(r.action)}</span></strong> ${badge}${trapTag}
         <span style="color:var(--muted);font-size:10px;"> ${esc(r.source || '')} • ${r.conf || 0}%</span><br>
         <small style="color:var(--muted);">${esc(r.date || '')}</small>
       </div>
@@ -3257,42 +3670,23 @@ function showHistoryDetail(i) {
     const spec = PAIR_SPECS[r.pair], d = spec?.decimals ?? 2, f = x => x == null || isNaN(x) ? '—' : Number(x).toFixed(d);
     let h = `<h3 style="margin-top:0;color:var(--accent);">${esc(r.pair)} — ${esc(r.action)}</h3>
       <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${esc(r.source)} • ${r.conf || 0}% • ${esc(r.tier || '')}</div>`;
-    if (r.anchored) {
-      h += `<div class="mini-box" style="margin:10px 0;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
-        <div style="font-size:10px;color:var(--inst);font-weight:bold;margin-bottom:6px;">ANCHOR: ${esc(r.anchored.anchorDay || '')}</div>
-        <div class="grid-3">
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);">PDH</div><div style="font-weight:bold;color:var(--red);font-family:ui-monospace,monospace;">${f(r.anchored.PDH)}</div></div>
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);">PDC</div><div style="font-weight:bold;font-family:ui-monospace,monospace;">${f(r.anchored.PDC)}</div></div>
-          <div style="text-align:center;"><div style="font-size:9px;color:var(--muted);">PDL</div><div style="font-weight:bold;color:var(--green);font-family:ui-monospace,monospace;">${f(r.anchored.PDL)}</div></div>
-        </div>
-      </div>`;
-    }
-    if (r.sentiment) {
-      h += `<div class="mini-box" style="margin:10px 0;background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3);">
-        <div style="font-size:10px;color:var(--inst);font-weight:bold;margin-bottom:6px;">👥 RETAIL SENTIMENT (${esc(r.sentiment.source)})</div>
-        <div style="display:flex;justify-content:space-between;font-size:11px;font-family:ui-monospace,monospace;">
-          <span style="color:var(--blue);">LONG ${r.sentiment.long}%</span>
-          <span style="color:${r.sentiment.bias === 'BULLISH' ? 'var(--green)' : r.sentiment.bias === 'BEARISH' ? 'var(--red)' : 'var(--muted)'};font-weight:900;">${esc(r.sentiment.bias)}</span>
-          <span style="color:var(--red);">SHORT ${r.sentiment.short}%</span>
-        </div>
-      </div>`;
-    }
-    if (r.macro_bias && r.macro_bias !== 'NEUTRAL_MACRO') {
-      h += `<div class="mini-box" style="margin:10px 0;background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.3);">
-        <div style="font-size:10px;color:var(--purple);font-weight:bold;">🌍 MACRO: ${esc(r.macro_bias.replace(/_/g, ' '))}</div>
-        ${r.macro_reasoning ? `<div style="font-size:10px;color:var(--muted);margin-top:4px;">${esc(r.macro_reasoning)}</div>` : ''}
-      </div>`;
-    }
-    if (r.conditional_alert) {
-      h += `<div class="mini-box" style="margin:10px 0;background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.3);">
-        <div style="font-size:10px;color:var(--yellow);font-weight:bold;margin-bottom:6px;">⏰ CONDITIONAL ALERT</div>
-        ${r.conditional_alert.trigger_zone ? `<div style="font-size:11px;color:var(--muted);">Zone: <strong style="color:var(--accent);">${esc(r.conditional_alert.trigger_zone)}</strong></div>` : ''}
-        ${r.conditional_alert.alert_price_buy ? `<div style="font-size:11px;color:var(--green);font-family:ui-monospace,monospace;">🟢 BUY: ${f(r.conditional_alert.alert_price_buy)}</div>` : ''}
-        ${r.conditional_alert.alert_price_sell ? `<div style="font-size:11px;color:var(--red);font-family:ui-monospace,monospace;">🔴 SELL: ${f(r.conditional_alert.alert_price_sell)}</div>` : ''}
+    if (r.pattern_trap?.pattern_detected && r.pattern_trap.pattern_detected !== 'NONE') {
+      h += `<div class="pattern-block" style="margin:10px 0;">
+        <div style="font-size:12px;font-weight:900;color:var(--pink);">🪤 ${esc(r.pattern_trap.pattern_detected)}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">Phase: <strong>${esc(r.pattern_trap.setup_phase)}</strong></div>
+        <div style="font-size:11px;color:var(--muted);">Sweep: ${esc(r.pattern_trap.sweep_status)} | BOS: ${esc(r.pattern_trap.bos_status)}</div>
+        <div style="font-size:11px;color:var(--muted);">Retest: <strong style="color:var(--accent);">${esc(r.pattern_trap.retest_zone)}</strong></div>
       </div>`;
     }
     if (r.entry) h += `<table class="tbl" style="margin-top:10px;"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th><th>TP3</th></tr><tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td><td>${f(r.tp3)}</td></tr></table>`;
-    if (r.volumeProfile) h += `<div class="mini-box" style="margin:10px 0;"><div class="ballistic-header">📊 VP</div>POC: ${f(r.volumeProfile.poc_price)} | VAH: ${f(r.volumeProfile.vah_price)} | VAL: ${f(r.volumeProfile.val_price)}</div>`;
+    if (r.conditional_alert) {
+      h += `<div class="mini-box" style="margin:10px 0;background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.3);">
+        <div style="font-size:10px;color:var(--yellow);font-weight:bold;margin-bottom:6px;">⏰ CONDITIONAL ALERT</div>
+        ${r.conditional_alert.trigger_zone ? `<div style="font-size:11px;">Zone: <strong style="color:var(--accent);">${esc(r.conditional_alert.trigger_zone)}</strong></div>` : ''}
+        ${r.conditional_alert.alert_price_buy ? `<div style="font-size:11px;color:var(--green);">🟢 BUY: ${f(r.conditional_alert.alert_price_buy)}</div>` : ''}
+        ${r.conditional_alert.alert_price_sell ? `<div style="font-size:11px;color:var(--red);">🔴 SELL: ${f(r.conditional_alert.alert_price_sell)}</div>` : ''}
+      </div>`;
+    }
     if (r.rejectReason) h += `<div class="warn-box" style="margin-top:10px;"><strong>Rejected:</strong> ${esc(r.rejectReason)}</div>`;
     if (r.bt?.models) h += `<table class="tbl"><tr><th>Exit</th><th>Result</th><th>R</th></tr>${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? rfmt(m.r) : '—'}</td></tr>`).join('')}</table>`;
     openUniversalModal(h);
@@ -3316,10 +3710,10 @@ function updateStats() {
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), alerts: conditionalAlerts, version: '37.9', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), alerts: conditionalAlerts, traps: activeTraps, version: '38.0', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v37.9-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v38.0-${Date.now()}.json`; a.click();
 }
 
 /* ═══ AUTH / SETTINGS ═══ */
@@ -3394,6 +3788,7 @@ function enterApp(name) {
   startAutoRefreshPrice(); startAutoBacktest(); warmUpVoice();
   renderActiveAlerts();
   updateActiveAlertsSummary();
+  updateActiveTrapsSummary();
 
   if (window.__sentInt) clearInterval(window.__sentInt);
   window.__sentInt = setInterval(async () => {
@@ -3460,11 +3855,12 @@ function navigate(view) {
     document.querySelectorAll('.menu-item').forEach(el => el.classList.toggle('active', (el.getAttribute('onclick') || '').includes(`'${view}'`)));
     $('appSidebar').classList.remove('open');
     if (view === 'history') loadHistory();
-    if (view === 'overview') { updateStats(); updateActiveAlertsSummary(); }
+    if (view === 'overview') { updateStats(); updateActiveAlertsSummary(); updateActiveTrapsSummary(); }
     if (view === 'backtest') { renderBacktest(); updateBacktest(); }
     if (view === 'orderflow') refreshOrderFlow();
     if (view === 'sentiment') renderMultiSentiment();
     if (view === 'alerts') renderActiveAlerts();
+    if (view === 'trap') runTrapScan();
     if (view === 'screenshot') { setupScreenshotUploads(); updateSSModeInfo(); if (!$('ssLivePrice').value) fetchSSLivePrice(); }
     window.scrollTo(0, 0);
   } catch (e) { showToast('❌ ' + e.message); }
@@ -3480,7 +3876,8 @@ function startAutoRefreshPrice() {
     if (document.hidden) return;
     const aV = $('view-analyst').style.display !== 'none';
     const sV = $('view-screenshot').style.display !== 'none';
-    if (!aV && !sV) return;
+    const tV = $('view-trap').style.display !== 'none';
+    if (!aV && !sV && !tV) return;
     if (aV && !priceMeta?.manual) {
       const pair = $('selectedPair').value, spec = PAIR_SPECS[pair];
       try {
