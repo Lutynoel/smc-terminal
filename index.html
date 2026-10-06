@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v38.4 — Masters Analysis v12.1</title>
+<title>Lutynoel.fx v39.2 — Chart Analysis MTF</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,15 +11,15 @@
 <meta name="apple-mobile-web-app-title" content="Lutynoel.fx">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#0b1220;--border:#334155;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15;--cyan:#06b6d4;--pink:#ec4899;--inst:#8b5cf6}
+:root{--bg:#0f172a;--card:#1e293b;--card2:#0b1220;--border:#334155;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15;--cyan:#06b6d4;--pink:#ec4899;--inst:#8b5cf6;--surface:#1a1f2e;--surface2:#141824}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{background:radial-gradient(1000px 400px at 50% -10%,rgba(251,191,36,.06),transparent 60%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px;min-height:100%}
+body{background:#0a0e17;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px;min-height:100%}
 .auth-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
 .auth-box{background:var(--card);border:1px solid var(--border);padding:25px;border-radius:16px;width:100%;max-width:460px;box-shadow:0 20px 60px -20px rgba(0,0,0,.7)}
 .auth-title{text-align:center;font-size:22px;font-weight:bold;margin-bottom:5px}
 .auth-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:20px}
 #appInterface{display:none;padding-bottom:40px}
-header{display:flex;justify-content:space-between;align-items:center;background:var(--card);padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+header{display:flex;justify-content:space-between;align-items:center;background:#0a0e17;padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));border-bottom:1px solid rgba(51,65,85,.4);position:sticky;top:0;z-index:100}
 .logo-area{display:flex;align-items:center;gap:10px;font-weight:bold;font-size:17px;color:var(--accent)}
 .logo-icon{background:var(--accent);color:#000;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:bold;font-size:16px}
 .header-icons{display:flex;align-items:center;gap:10px}
@@ -47,7 +47,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .price-status.manual{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid var(--blue)}
 .price-status.error{background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red)}
 .price-status.loading{background:rgba(251,191,36,.15);color:var(--accent);border:1px solid var(--accent)}
-.chart-preview{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:12px;font-family:ui-monospace,monospace;font-size:11px;color:var(--muted);max-height:400px;overflow-y:auto;line-height:1.6}
+.chart-preview{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:12px;font-family:ui-monospace,monospace;font-size:11px;color:var(--muted);max-height:500px;overflow-y:auto;line-height:1.6}
 .data-status{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .data-status-item{background:var(--card2);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:11px;display:flex;justify-content:space-between}
 .data-status-item.ok{border-color:var(--green)}
@@ -76,9 +76,81 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tbl th{color:var(--muted);font-size:10px;text-transform:uppercase;text-align:right;padding:6px 4px;border-bottom:1px solid var(--border)}
 .tbl td{text-align:right;padding:7px 4px;border-bottom:1px solid #1a2438}
 .tbl th:first-child,.tbl td:first-child{text-align:left}
-.pos{color:var(--green)}.neg{color:var(--red)}
 
-/* ═══ MASTERS ANALYSIS v12.1 — 8-Part Layout ═══ */
+/* ═══ CHART ANALYSIS REDESIGN ═══ */
+.ca-wrap{background:#0a0e17;min-height:100vh;padding:0}
+.ca-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.ca-subtitle{font-size:11px;color:var(--muted);letter-spacing:.3px}
+.ca-tabs{display:flex;gap:6px;padding:8px 14px 12px;overflow-x:auto}
+.ca-tab{flex:1;padding:10px 14px;border-radius:20px;background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.6);color:var(--muted);font-weight:900;font-size:11px;letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;cursor:pointer;transition:all .2s}
+.ca-tab.active{background:var(--accent);color:#0f172a;border-color:var(--accent)}
+.ca-tab .tab-icon{font-size:14px}
+.ca-card{background:var(--surface);border:1px solid rgba(51,65,85,.4);border-radius:20px;padding:22px 20px;margin:0 12px 16px;box-shadow:0 8px 30px -12px rgba(0,0,0,.5)}
+.ca-title{font-size:22px;font-weight:900;letter-spacing:.5px;margin:0 0 14px;color:var(--text)}
+.ca-title .ca-accent{color:var(--accent)}
+.ca-desc{font-size:13px;color:var(--muted);line-height:1.6;padding-left:12px;border-left:3px solid var(--accent);margin-bottom:18px}
+.ca-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:22px;border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.06);color:var(--accent);font-weight:900;font-size:12px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;margin-bottom:20px}
+.ca-pill:hover{background:rgba(251,191,36,.12)}
+.ca-field{margin-bottom:18px}
+.ca-field-label{font-size:10px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.ca-select{background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:16px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
+.ca-select-icon{width:38px;height:38px;border-radius:10px;background:rgba(51,65,85,.6);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);flex-shrink:0}
+.ca-select-val{flex:1;font-size:20px;font-weight:900;color:var(--text);letter-spacing:.3px}
+.ca-select-val.small{font-size:16px;font-style:italic;font-weight:700}
+.ca-select-arrow{color:var(--muted);font-size:16px}
+.ca-select select{background:transparent;border:none;color:var(--text);font-size:20px;font-weight:900;width:100%;padding:0;margin:0;appearance:none;-webkit-appearance:none;font-family:inherit;cursor:pointer}
+.ca-select select:focus{outline:none}
+.ca-badge{display:inline-block;padding:5px 10px;border-radius:6px;font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;border:1px solid}
+.ca-badge.required{background:rgba(251,191,36,.15);color:var(--accent);border-color:rgba(251,191,36,.4)}
+.ca-badge.confirm{background:rgba(6,182,212,.15);color:var(--cyan);border-color:rgba(6,182,212,.5)}
+.ca-badge.std{background:rgba(139,92,246,.12);color:var(--inst);border-color:rgba(139,92,246,.4);border-radius:20px;padding:5px 12px}
+.ca-badge.optional{background:rgba(148,163,184,.12);color:var(--muted);border-color:rgba(148,163,184,.3)}
+.ca-tf-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid rgba(51,65,85,.35);margin-bottom:14px}
+.ca-tf-label{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:.4px}
+.ca-tf-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(251,191,36,.6)}
+.ca-tf-dot.cyan{background:var(--cyan);box-shadow:0 0 12px rgba(6,182,212,.6)}
+.ca-tf-card{background:var(--surface);border:1px solid rgba(51,65,85,.4);border-radius:20px;padding:20px;margin:0 12px 14px}
+.ca-upload{display:block;background:#0a0f1a;border:2px dashed rgba(51,65,85,.6);border-radius:14px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.ca-upload:hover{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.03)}
+.ca-upload.has-image{border-style:solid;border-color:var(--green);background:rgba(16,185,129,.04);padding:12px}
+.ca-upload-icon{width:56px;height:56px;border-radius:14px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:24px;color:var(--accent)}
+.ca-upload-title{font-size:15px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--text);margin-bottom:6px}
+.ca-upload-sub{font-size:11px;color:var(--muted);letter-spacing:.3px}
+.ca-upload input[type=file]{display:none}
+.ca-preview{margin-top:12px;display:none}
+.ca-preview img{max-width:100%;border-radius:10px;border:1px solid rgba(16,185,129,.4);max-height:220px;object-fit:contain}
+.ca-preview-actions{margin-top:10px;display:flex;gap:8px;justify-content:center}
+.ca-preview-actions button{padding:6px 12px;background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.4);border-radius:8px;font-size:11px;font-weight:bold;letter-spacing:.4px}
+.ca-submit{width:calc(100% - 24px);margin:20px 12px 24px;padding:18px 20px;background:linear-gradient(135deg,#fbbf24,#f59e0b);border:none;border-radius:16px;color:#0f172a;font-size:15px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 12px 32px -8px rgba(251,191,36,.5);cursor:pointer}
+.ca-submit:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;background:#3f3f46;color:#a1a1aa}
+.ca-submit .star{font-size:20px}
+.ca-status-bar{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);padding:0 14px 8px}
+.ca-required-count{display:flex;align-items:center;gap:6px;font-weight:900;color:var(--accent)}
+.ca-price-inline{display:flex;gap:8px;margin-top:8px}
+.ca-price-inline input{flex:1;padding:12px;background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:12px;color:#fff;font-size:14px;margin:0}
+.ca-price-inline button{padding:12px 16px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:13px}
+.ca-capital-panel{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:16px;margin-bottom:18px;display:none}
+.ca-capital-panel.open{display:block}
+.ca-capital-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ca-capital-item label{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;display:block}
+.ca-capital-item input{width:100%;padding:10px 12px;background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:10px;color:#fff;font-size:14px;margin:0}
+
+/* ═══ MTF MATRIX ═══ */
+.m-mtf-matrix{background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:12px;padding:12px;overflow-x:auto}
+.m-mtf-matrix table{width:100%;border-collapse:collapse;font-size:11px;font-family:ui-monospace,monospace}
+.m-mtf-matrix th{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:800;text-align:center;padding:6px 4px;border-bottom:1px solid var(--border)}
+.m-mtf-matrix td{text-align:center;padding:8px 4px;border-bottom:1px solid #1a2438;font-weight:700;font-size:11px}
+.m-mtf-matrix tr:last-child td{border-bottom:none}
+.m-mtf-matrix .tf-cell{font-weight:900;color:var(--accent);background:rgba(251,191,36,.05)}
+.m-mtf-matrix .bull{color:var(--green)}
+.m-mtf-matrix .bear{color:var(--red)}
+.m-mtf-matrix .neutral{color:var(--yellow)}
+.m-mtf-matrix .rsi-hot{color:var(--red);font-weight:900}
+.m-mtf-matrix .rsi-cold{color:var(--green);font-weight:900}
+.m-mtf-matrix .rsi-mid{color:var(--muted)}
+.m-mtf-matrix .na{color:var(--muted);font-style:italic;font-size:10px}
+
+/* ═══ MASTERS ANALYSIS ═══ */
 .masters-wrap{display:flex;flex-direction:column;gap:14px}
 .m-hero{border-radius:20px;padding:24px 20px;position:relative;overflow:hidden;border:2px solid var(--border);background:linear-gradient(180deg,#1e293b,#0f172a)}
 .m-hero.strong-sell{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.04));border-color:var(--red)}
@@ -149,8 +221,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .m-meta-val{font-size:14px;font-weight:900;font-family:ui-monospace,monospace;color:var(--orange)}
 .m-trailing-note{padding:12px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.3);border-radius:10px;font-size:11px;line-height:1.6;color:#fdba74}
 .m-trailing-note strong{color:var(--orange)}
-
-/* ═══ CALCULATOR (Section 05) ═══ */
 .m-calc{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(168,85,247,.05));border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:14px}
 .m-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .m-calc-item{background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
@@ -163,7 +233,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .m-calc-hero-num{font-size:28px;font-weight:900;font-family:ui-monospace,monospace;color:var(--accent);letter-spacing:-0.5px}
 .m-calc-hero-sub{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800;margin-top:4px}
 .m-calc-warn{padding:10px 12px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.35);border-radius:10px;font-size:11px;line-height:1.6;color:#fdba74}
-
 .m-specialists{display:flex;flex-direction:column;gap:10px}
 .m-specialist{padding:12px 14px;border-radius:10px;background:rgba(11,18,32,.6);border-left:4px solid var(--border)}
 .m-specialist.price-action{border-left-color:var(--green)}
@@ -176,23 +245,16 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .m-mtf{display:flex;flex-direction:column;gap:10px}
 .m-tf{display:flex;gap:12px;padding:12px;border-radius:10px;background:rgba(11,18,32,.6);border:1px solid var(--border)}
 .m-tf-badge{flex-shrink:0;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;font-family:ui-monospace,monospace}
-.m-tf-badge.h4{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
-.m-tf-badge.h1{background:rgba(139,92,246,.15);color:#a5b4fc;border:1px solid #6366f1}
+.m-tf-badge.m5{background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan)}
 .m-tf-badge.m15{background:rgba(6,182,212,.15);color:var(--cyan);border:1px solid var(--cyan)}
+.m-tf-badge.h1{background:rgba(139,92,246,.15);color:#a5b4fc;border:1px solid #6366f1}
+.m-tf-badge.h4{background:rgba(168,85,247,.15);color:var(--purple);border:1px solid var(--purple)}
 .m-tf-body{flex:1;font-size:11px;line-height:1.6;color:#cbd5e1}
 .m-tf-title{font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:900;color:var(--muted);margin-bottom:4px}
 .m-final{background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(236,72,153,.06));border:2px solid var(--accent);border-radius:14px;padding:18px;font-size:13px;line-height:1.8;color:#fef3c7;font-weight:500}
 .m-final::before{content:"⚡";display:block;font-size:24px;margin-bottom:8px}
 .m-state{padding:40px 20px;text-align:center;color:var(--muted);background:var(--card);border:1px dashed var(--border);border-radius:16px;font-size:13px;line-height:1.8}
 .m-state .big-spinner{display:inline-block;width:24px;height:24px;border:3px solid rgba(251,191,36,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
-
-.pattern-block{background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.05));border:2px solid var(--pink);border-radius:12px;padding:14px;margin-bottom:12px}
-.pattern-step{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:11px}
-.pattern-step .step-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;flex-shrink:0}
-.step-done{background:var(--green);color:#000}
-.step-pending{background:rgba(148,163,184,.3);color:var(--muted)}
-.step-active{background:var(--yellow);color:#000;animation:spin 2s linear infinite}
-.tf-upload-box.has-image{border-style:solid !important;border-color:var(--green) !important;}
 </style>
 </head>
 <body>
@@ -208,8 +270,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v38.4</div>
-    <div class="auth-subtitle">Masters Analysis v12.1 — 8-Part Layout</div>
+    <div class="auth-title">Lutynoel.fx v39.2</div>
+    <div class="auth-subtitle">Chart Analysis MTF — Same-Day Intraday</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -221,16 +283,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <div id="loginFormSection">
       <label>Your Name</label>
       <input type="text" id="loginName" placeholder="e.g. Noel Nkungu" maxlength="30">
-      <label>Gemini API Key (gemini-3.6-flash)</label>
+      <label>Gemini API Key</label>
       <input type="password" id="authGeminiKey" placeholder="AIza..." autocomplete="off">
-      <label>Mistral API Key (pixtral-12b-latest)</label>
+      <label>Mistral API Key</label>
       <input type="password" id="authMistralKey" placeholder="Mistral key" autocomplete="off">
       <label>TwelveData API Key</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v38.4:</strong> Masters Analysis v12.1 8-Part Layout<br>
-        ✅ Main Signal + Ballistic AI + Pre-Flight + Execution<br>
-        ✅ Position Calculator + Specialists + MTF + Final Plan
+        ✅ <strong>v39.2:</strong> Chart Analysis (4H → 1H → 15M → 5M)<br>
+        ✅ PSAR + RSI kwenye TFs zote<br>
+        ✅ SMC/ICT: Sweeps, OB, FVG, BOS/CHoCH<br>
+        ✅ Same-Day Intraday • Full Sentiment + Alerts
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -252,17 +315,17 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v38.4</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v39.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Masters Analysis</div>
-    <div class="menu-item" onclick="navigate('screenshot')">📸 Screenshot Analysis</div>
+    <div class="menu-item" onclick="navigate('screenshot')">📊 Chart Analysis</div>
+    <div class="menu-item" onclick="navigate('mtf')">📡 MTF Indicators</div>
     <div class="menu-item" onclick="navigate('trap')">🪤 Liquidity Traps</div>
     <div class="menu-item" onclick="navigate('alerts')">⏰ Active Alerts</div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Backtest</div>
     <div class="menu-item" onclick="navigate('history')">📁 History</div>
-    <div class="menu-item" onclick="navigate('orderflow')">🌊 Anchored Levels</div>
     <div class="menu-item" onclick="navigate('sentiment')">👥 Retail Sentiment</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk Calculator</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
@@ -277,14 +340,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v38.4 • Masters Analysis v12.1</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v39.2 • Chart Analysis MTF</div>
           </div>
         </div>
       </div>
 
       <div class="grid-3">
         <div class="mini-box" style="text-align:center;"><label>Signals</label><div id="statTotalAnalyses" style="font-size:20px;font-weight:bold;color:var(--accent);">0</div></div>
-        <div class="mini-box" style="text-align:center;"><label>Win Rate (TP2)</label><div id="statWinRate" style="font-size:16px;font-weight:bold;color:var(--green);">—</div></div>
+        <div class="mini-box" style="text-align:center;"><label>Win Rate</label><div id="statWinRate" style="font-size:16px;font-weight:bold;color:var(--green);">—</div></div>
         <div class="mini-box" style="text-align:center;"><label>Tracked</label><div id="statNetPips" style="font-size:18px;font-weight:bold;color:var(--pink);">0</div></div>
       </div>
 
@@ -308,9 +371,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Masters Analysis v12.1</button>
-        <button class="secondary-btn" onclick="navigate('screenshot')">📸 Screenshot Analysis</button>
-        <button class="secondary-btn" onclick="navigate('alerts')">⏰ Active Alerts</button>
+        <button class="primary-btn" onclick="navigate('screenshot')">📊 Chart Analysis</button>
+        <button class="secondary-btn" onclick="navigate('analyst')">🎯 Masters Analysis</button>
+        <button class="secondary-btn" onclick="navigate('mtf')">📡 MTF Indicators</button>
         <button class="secondary-btn" onclick="navigate('backtest')">📊 Backtest</button>
       </div>
     </div>
@@ -318,8 +381,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
     <!-- ANALYST -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters Analysis v12.1</h3>
-        <div class="info-box" style="font-size:10px;">8-Part Layout: Main Signal • Ballistic AI • Pre-Flight • Execution • Calculator • Specialists • MTF • Final Plan</div>
+        <h3 style="margin:5px 0 15px;">🎯 Masters Intraday MTF v13.2</h3>
+        <div class="info-box" style="font-size:10px;">⚡ Same-Day Only • PSAR + RSI across M5/M15/H1/H4</div>
 
         <label>1. Pair</label>
         <select id="selectedPair" onchange="onPairChange(this.value)">
@@ -342,15 +405,15 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
         <div id="priceStatus" class="price-status manual"><span id="priceStatusText">⚪ Refresh</span><span id="priceTime">—</span></div>
 
-        <label>3. Fetch Data</label>
+        <label>3. Fetch Same-Day Data</label>
         <div class="data-status" id="dataStatus">
-          <div class="data-status-item" id="data4H"><span>4H Data</span><span>—</span></div>
-          <div class="data-status-item" id="data1H"><span>1H Data</span><span>—</span></div>
-          <div class="data-status-item" id="data15M"><span>15M Data</span><span>—</span></div>
-          <div class="data-status-item" id="dataIndicators"><span>4H Anchor</span><span>—</span></div>
+          <div class="data-status-item" id="data5M"><span>M5 (Today)</span><span>—</span></div>
+          <div class="data-status-item" id="data15M"><span>M15 (Today)</span><span>—</span></div>
+          <div class="data-status-item" id="data1H"><span>H1 (Today)</span><span>—</span></div>
+          <div class="data-status-item" id="data4H"><span>H4 (Today)</span><span>—</span></div>
         </div>
-        <div class="chart-preview" id="chartPreview"><div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div></div>
-        <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch All Data</button>
+        <div class="chart-preview" id="chartPreview"><div style="text-align:center;color:var(--muted);">Bonyeza "Fetch TODAY Only"</div></div>
+        <button class="secondary-btn" id="fetchDataBtn" onclick="fetchAllMarketData()">📊 Fetch TODAY Only</button>
         <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN MASTERS ANALYSIS</button>
       </div>
 
@@ -386,79 +449,252 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- SCREENSHOT -->
+    <!-- ═══ CHART ANALYSIS ═══ -->
     <div id="view-screenshot" class="view-section" style="display:none;">
-      <div class="card" style="border-color:var(--inst);">
-        <h3 style="margin:5px 0 15px;">📸 MTF Screenshot Analysis</h3>
-        <div class="info-box">📷 Upload: M15 → H1 → H4</div>
-
-        <label>1. Pair</label>
-        <select id="ssPair" onchange="onSSPairChange()">
-          <option value="XAUUSD">XAUUSD (Gold)</option>
-          <option value="EURUSD">EUR/USD</option>
-          <option value="GBPUSD">GBP/USD</option>
-          <option value="USDJPY">USD/JPY</option>
-          <option value="BTCUSD">BTCUSD</option>
-          <option value="NAS100">NAS100</option>
-        </select>
-
-        <label>2. Current Price</label>
-        <div class="price-row">
-          <input type="number" step="any" id="ssLivePrice" placeholder="Bonyeza Refresh" oninput="onSSManualPrice()">
-          <button class="refresh-btn" id="ssRefreshBtn" onclick="fetchSSLivePrice()">🔄 Refresh</button>
+      <div class="ca-wrap">
+        <div class="ca-topbar">
+          <div class="ca-subtitle">Institutional multi-confluence AI market analysis.</div>
         </div>
-        <div id="ssPriceStatus" class="price-status manual"><span id="ssPriceStatusText">⚪ Refresh</span><span id="ssPriceTime">—</span></div>
 
-        <label>3. Mode</label>
-        <select id="ssMode" onchange="updateSSModeInfo()">
-          <option value="combined">⚡ Combined (API 1)</option>
-          <option value="separate">🔍 Separate (API 3)</option>
-        </select>
-        <div id="ssModeInfo" class="info-box" style="font-size:10px;"></div>
-
-        <label>4. Upload Screenshots</label>
-        <div class="tf-upload-box" id="tfBox-m15" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--cyan);">⚡ M15</span>
+        <div class="ca-tabs">
+          <div class="ca-tab active" onclick="switchCATab('new')">
+            <span class="tab-icon">✦</span> NEW ANALYSIS
           </div>
-          <input type="file" id="ssInput-m15" accept="image/*" style="padding:8px;margin-bottom:0;">
-          <div id="ssPreview-m15" style="display:none;"><img id="ssImg-m15" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
-        </div>
-        <div class="tf-upload-box" id="tfBox-h1" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--inst);">🎯 H1</span>
+          <div class="ca-tab" onclick="switchCATab('history')">
+            <span class="tab-icon">🕐</span> HISTORY
           </div>
-          <input type="file" id="ssInput-h1" accept="image/*" style="padding:8px;margin-bottom:0;">
-          <div id="ssPreview-h1" style="display:none;"><img id="ssImg-h1" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
-        </div>
-        <div class="tf-upload-box" id="tfBox-h4" style="background:var(--card2);border:2px dashed var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:bold;color:var(--accent);">🏛️ H4</span>
+          <div class="ca-tab" onclick="switchCATab('guide')">
+            <span class="tab-icon">📖</span> GUIDELINES
           </div>
-          <input type="file" id="ssInput-h4" accept="image/*" style="padding:8px;margin-bottom:0;">
-          <div id="ssPreview-h4" style="display:none;"><img id="ssImg-h4" style="max-width:100%;border-radius:10px;border:1px solid var(--border);margin-top:8px;max-height:200px;object-fit:contain;"></div>
         </div>
 
-        <div id="ssUploadStatus" class="info-box" style="margin-top:12px;">📤 Uploaded: <strong>0/3</strong></div>
-        <button class="primary-btn" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>🔍 ANALYZE</button>
-        <button class="secondary-btn" onclick="clearAllScreenshots()">🗑️ Clear</button>
+        <!-- NEW ANALYSIS TAB -->
+        <div id="caTab-new">
+          <div class="ca-card">
+            <h2 class="ca-title"><span class="ca-accent">AI</span> ON-CHART ANALYST</h2>
+            <div class="ca-desc">
+              Select your trading style and upload charts for a complete multi-timeframe analysis. <strong style="color:var(--accent);">5M chart serves as entry confirmation.</strong>
+            </div>
+
+            <div class="ca-pill" onclick="toggleCapitalPanel()">
+              <span>🛡️</span> Capital &amp; Risk Setup
+            </div>
+
+            <div id="capitalPanel" class="ca-capital-panel">
+              <div class="ca-capital-grid">
+                <div class="ca-capital-item">
+                  <label>Balance (USD)</label>
+                  <input type="number" id="caBalance" value="1000" onchange="saveCapital()">
+                </div>
+                <div class="ca-capital-item">
+                  <label>Risk %</label>
+                  <input type="number" step="0.1" id="caRiskPct" value="1.0" onchange="saveCapital()">
+                </div>
+              </div>
+            </div>
+
+            <div class="ca-field">
+              <div class="ca-field-label">INSTRUMENT SYMBOL</div>
+              <div class="ca-select">
+                <div class="ca-select-icon">⇄</div>
+                <select id="ssPair" onchange="onSSPairChange()">
+                  <option value="XAUUSD">XAU/USD</option>
+                  <option value="EURUSD">EUR/USD</option>
+                  <option value="GBPUSD">GBP/USD</option>
+                  <option value="USDJPY">USD/JPY</option>
+                  <option value="AUDUSD">AUD/USD</option>
+                  <option value="USDCAD">USD/CAD</option>
+                  <option value="BTCUSD">BTC/USD</option>
+                  <option value="NAS100">NAS100</option>
+                  <option value="US30">US30</option>
+                  <option value="WTI">WTI/USD</option>
+                </select>
+                <div class="ca-select-arrow">▾</div>
+              </div>
+            </div>
+
+            <div class="ca-field">
+              <div class="ca-field-label">ANALYSIS FRAMEWORK</div>
+              <div class="ca-select">
+                <div class="ca-select-val small" style="font-style:normal;font-weight:900;">Day Trader</div>
+                <div style="color:var(--muted);font-size:18px;">🕐</div>
+              </div>
+            </div>
+
+            <div class="ca-field">
+              <div class="ca-field-label">
+                CURRENT PRICE
+                <span style="margin-left:auto;color:var(--cyan);font-size:9px;">REQUIRED</span>
+              </div>
+              <div class="ca-price-inline">
+                <input type="number" step="any" id="ssLivePrice" placeholder="Bonyeza Refresh" oninput="onSSManualPrice()">
+                <button id="ssRefreshBtn" onclick="fetchSSLivePrice()">🔄</button>
+              </div>
+              <div id="ssPriceStatus" class="price-status manual" style="margin-top:8px;"><span id="ssPriceStatusText">⚪ Refresh</span><span id="ssPriceTime">—</span></div>
+            </div>
+
+            <div class="ca-field" style="margin-bottom:0;">
+              <div class="ca-field-label" style="display:flex;justify-content:space-between;align-items:center;">
+                <span>REQUIRED MARKET TIMEFRAMES</span>
+                <span class="ca-badge std">INSTITUTIONAL STANDARD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4H (REQUIRED) -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot"></span> 4H</div>
+              <span class="ca-badge required">REQUIRED</span>
+            </div>
+            <label class="ca-upload" id="caUpload-h4" for="ssInput-h4">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 4H Chart</div>
+              <div class="ca-upload-sub">Higher timeframe bias · Click or drop screenshot</div>
+              <input type="file" id="ssInput-h4" accept="image/*">
+              <div class="ca-preview" id="ssPreview-h4">
+                <img id="ssImg-h4">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('h4')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 1H -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot"></span> 1H</div>
+              <span class="ca-badge optional">OPTIONAL</span>
+            </div>
+            <label class="ca-upload" id="caUpload-h1" for="ssInput-h1">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 1H Chart</div>
+              <div class="ca-upload-sub">Intraday structure · Click or drop screenshot</div>
+              <input type="file" id="ssInput-h1" accept="image/*">
+              <div class="ca-preview" id="ssPreview-h1">
+                <img id="ssImg-h1">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('h1')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 15M -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot"></span> 15M</div>
+              <span class="ca-badge optional">OPTIONAL</span>
+            </div>
+            <label class="ca-upload" id="caUpload-m15" for="ssInput-m15">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 15M Chart</div>
+              <div class="ca-upload-sub">Setup timeframe (OB/FVG) · Click or drop screenshot</div>
+              <input type="file" id="ssInput-m15" accept="image/*">
+              <div class="ca-preview" id="ssPreview-m15">
+                <img id="ssImg-m15">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('m15')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 5M (ENTRY CONFIRMATION) -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot cyan"></span> 5M</div>
+              <span class="ca-badge confirm">ENTRY CONFIRMATION</span>
+            </div>
+            <label class="ca-upload" id="caUpload-m5" for="ssInput-m5">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 5M Chart</div>
+              <div class="ca-upload-sub">Micro trigger for precise entry · Click or drop screenshot</div>
+              <input type="file" id="ssInput-m5" accept="image/*">
+              <div class="ca-preview" id="ssPreview-m5">
+                <img id="ssImg-m5">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('m5')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="ca-status-bar">
+            <span>📤 Uploaded: <strong id="caUploadCount" style="color:var(--accent);">0/4</strong></span>
+            <span class="ca-required-count">● 4H required</span>
+          </div>
+
+          <button class="ca-submit" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>
+            <span class="star">★</span> GET MULTI-TIMEFRAME ANALYSIS
+          </button>
+        </div>
+
+        <!-- HISTORY TAB -->
+        <div id="caTab-history" style="display:none;">
+          <div class="ca-card">
+            <h3 class="ca-title">Chart Analysis History</h3>
+            <div id="caHistoryContainer"><div class="ca-desc" style="border-color:var(--cyan);">Hakuna analysis bado. Upload charts kuanza.</div></div>
+          </div>
+        </div>
+
+        <!-- GUIDELINES TAB -->
+        <div id="caTab-guide" style="display:none;">
+          <div class="ca-card">
+            <h3 class="ca-title">Guidelines</h3>
+            <div class="ca-desc">
+              <strong style="color:var(--accent);">Upload Priority:</strong><br>
+              1️⃣ <strong>4H (REQUIRED)</strong> — Higher timeframe bias<br>
+              2️⃣ <strong>1H (Optional)</strong> — Intraday structure<br>
+              3️⃣ <strong>15M (Optional)</strong> — Setup timeframe (OB/FVG)<br>
+              4️⃣ <strong>5M (Optional)</strong> — Entry confirmation
+              <br><br>
+              <strong style="color:var(--cyan);">PSAR:</strong> Primary indicator for SL.<br>
+              <strong style="color:var(--purple);">RSI:</strong> Cross-TF momentum read.<br>
+              <strong style="color:var(--green);">SMC/ICT:</strong> Sweeps, OB, FVG, BOS/CHoCH.<br>
+              <strong style="color:var(--red);">Same-Day Only:</strong> No multi-day macro.
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="ssResultsContainer" style="display:none;"></div>
+
+      <div id="ssResultsContainer" style="display:none;padding:0 12px;"></div>
+    </div>
+
+    <!-- MTF INDICATORS -->
+    <div id="view-mtf" class="view-section" style="display:none;">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h3 style="margin:0;">📡 MTF Indicators</h3>
+          <button onclick="renderMTFView()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
+        </div>
+        <label>Pair</label>
+        <select id="mtfPair" onchange="fetchMTFOnly()">
+          <option value="XAUUSD">XAUUSD</option>
+          <option value="EURUSD">EURUSD</option>
+          <option value="GBPUSD">GBPUSD</option>
+          <option value="USDJPY">USDJPY</option>
+          <option value="BTCUSD">BTCUSD</option>
+        </select>
+        <button class="secondary-btn" onclick="fetchMTFOnly()">📊 Fetch MTF Data</button>
+        <div id="mtfContainer" style="margin-top:12px;"><div class="info-box">Bonyeza "Fetch MTF Data".</div></div>
+      </div>
     </div>
 
     <!-- TRAPS -->
     <div id="view-trap" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--pink);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">🪤 Liquidity Traps</h3>
+          <h3 style="margin:0;">🪤 Liquidity Traps (Today)</h3>
           <button onclick="runTrapScan()" id="trapScanBtn" style="background:var(--pink);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔍 Scan</button>
         </div>
         <label>Pair</label>
         <select id="trapPair" onchange="runTrapScan()">
-          <option value="XAUUSD">XAUUSD (Gold)</option>
-          <option value="EURUSD">EUR/USD</option>
-          <option value="GBPUSD">GBP/USD</option>
-          <option value="USDJPY">USD/JPY</option>
+          <option value="XAUUSD">XAUUSD</option>
+          <option value="EURUSD">EURUSD</option>
+          <option value="GBPUSD">GBPUSD</option>
+          <option value="USDJPY">USDJPY</option>
           <option value="BTCUSD">BTCUSD</option>
         </select>
         <div id="trapContainer"><div class="info-box">Bonyeza "Scan".</div></div>
@@ -502,17 +738,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="clearHistory()" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid var(--red);padding:4px 8px;border-radius:8px;font-size:11px;">Clear</button>
         </div>
         <div id="historyList"></div>
-      </div>
-    </div>
-
-    <!-- ORDER FLOW -->
-    <div id="view-orderflow" class="view-section" style="display:none;">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">🌊 Anchored Levels</h3>
-          <button onclick="refreshOrderFlow()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
-        </div>
-        <div id="orderFlowContainer"><div class="info-box">Loading...</div></div>
       </div>
     </div>
 
@@ -585,7 +810,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v38.4 — Masters Analysis v12.1<br>
+          <strong>Version:</strong> v39.2 — Chart Analysis MTF<br>
+          <strong>Mode:</strong> Same-Day Only<br>
           <strong>AI:</strong> gemini-3.6-flash → pixtral-12b-latest
         </div>
         <div class="ballistic-header" style="margin-top:14px;">🚨 ALERTS</div>
@@ -598,9 +824,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="secondary-btn" onclick="playBeep('sweep')">🔊 Test Sweep</button>
         <button class="secondary-btn" onclick="playBeep('poc')">🎯 Test POC</button>
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
-        <div class="ballistic-header">🎯 SL / TP</div>
-        <label>SL = ATR × </label>
-        <input type="number" step="0.1" id="settingsSlMult" value="1.2">
+        <div class="ballistic-header">🎯 TP MULTS</div>
         <label>TP1, TP2, TP3 (R multiples)</label>
         <input type="text" id="settingsTpMults" value="1.5,2.5,4">
         <button class="secondary-btn" onclick="saveTradeParams()">💾 Save</button>
@@ -633,12 +857,9 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v38.4 — Masters Analysis v12.1
-   Fixed: Section 07 h2→h3, scroll, active alerts, OB/FVG wiring,
-          robust pips parse, symbol fallbacks, saveHist shrink,
-          narrow retry classification, firstErr preservation,
-          rr prefix, safe-area toast, alert cooldown prune,
-          key validation in screenshot mode.
+   Lutynoel.fx v39.2 — Chart Analysis MTF (FULL)
+   All features preserved: Sentiment, Alerts, Beeps, Backtest,
+   Voice, History, Trap scan, MTF matrix, Chart Analysis redesign.
    ═══════════════════════════════════════════════════════════════ */
 
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -651,22 +872,8 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v38.4';
-
-const ZONE_BUFFER_PIPS = 20;
-const ZONE_BUFFER_WIDE_PIPS = 25;
-const ALERT_TRIGGER_TOLERANCE_PIPS = 3;
-const CONDITIONAL_ALERT_COOLDOWN_MS = 5 * 60 * 1000;
-const ANCHOR_4H_CANDLE_INDEX = 1;
-const ANCHOR_4H_BUFFER_PIPS = 5;
-
-const KILLZONES = {
-  LONDON: { startUTC: 7 * 60, endUTC: 10 * 60, name: 'LONDON_KILLZONE' },
-  NY: { startUTC: 12 * 60, endUTC: 15 * 60, name: 'NY_KILLZONE' }
-};
+const MODELS_VERSION = 'v39.2';
 const PROXIMITY_PIPS_DEFAULT = 12;
-const MIN_RR_TP1 = 1.5;
-const SL_ATR_MULT_CAP = 1.5;
 const ALERT_COOLDOWN_MS = 90 * 1000;
 const TZS_PER_USD = 2700;
 
@@ -688,21 +895,11 @@ const DEFAULTS = {
 const STORAGE_KEYS = {
   NAME: 'lutynoel_saved_name', GEMINI: 'lutynoel_saved_geminiKey', MISTRAL: 'lutynoel_saved_mistralKey',
   TWELVE: 'lutynoel_saved_twelveKey', BALANCE: 'lutynoel_balance', RISK_PCT: 'lutynoel_riskPct',
-  VOICE_ENABLED: 'lutynoel_voice_enabled', HISTORY: 'lutynoel_history_v37',
+  VOICE_ENABLED: 'lutynoel_voice_enabled', HISTORY: 'lutynoel_history_v39_2',
   GEMINI_MODELS: 'lutynoel_gemini_models', MISTRAL_MODELS: 'lutynoel_mistral_models', MISTRAL_VISION: 'lutynoel_mistral_vision',
-  SL_MULT: 'lutynoel_sl_mult', TP_MULTS: 'lutynoel_tp_mults', SPREAD_MULT: 'lutynoel_spread_mult', BT_MODEL: 'lutynoel_bt_model',
-  MODELS_VERSION: 'lutynoel_models_version'
+  TP_MULTS: 'lutynoel_tp_mults', BT_MODEL: 'lutynoel_bt_model', MODELS_VERSION: 'lutynoel_models_version'
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   PAIR SPECS — pipValue = USD per pip per 1.00 lot
-   Verified: FX = $10/pip/1lot @ 1.00000 rate;
-             XAUUSD = $10/pip (0.1 move × 100oz);
-             BTCUSD = $1/pip ($1 move × 1 BTC);
-             NAS100/US30 = $1/pip (1 pt × $1 multiplier);
-             WTI = $10/pip (0.01 × 1000bbl);
-             USDJPY/USDCAD use dynamic 1000/price, 10/price.
-   ═══════════════════════════════════════════════════════════════ */
 const PAIR_SPECS = {
   XAUUSD: { pipSize: 0.1, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', pipValue: 10, spreadPips: 3, spoken: 'Gold' },
   EURUSD: { pipSize: 0.0001, defaultPrice: 1.085, decimals: 5, source: 'twelve', twelveSymbol: 'EUR/USD', pipValue: 10, spreadPips: 1, spoken: 'Euro Dollar' },
@@ -714,37 +911,59 @@ const PAIR_SPECS = {
   ETHUSD: { pipSize: 1, defaultPrice: 3200, decimals: 2, source: 'binance', binanceSymbol: 'ETHUSDT', pipValue: 1, spreadPips: 2, spoken: 'Ethereum' },
   NAS100: { pipSize: 1, defaultPrice: 20000, decimals: 2, source: 'twelve', twelveSymbol: 'NDX', pipValue: 1, spreadPips: 2, spoken: 'Nasdaq' },
   US30: { pipSize: 1, defaultPrice: 42000, decimals: 2, source: 'twelve', twelveSymbol: 'DJI', pipValue: 1, spreadPips: 3, spoken: 'Dow' },
-  SPX500: { pipSize: 0.1, defaultPrice: 5800, decimals: 2, source: 'twelve', twelveSymbol: 'SPX', pipValue: 1, spreadPips: 5, spoken: 'S and P' },
-  XAGUSD: { pipSize: 0.001, defaultPrice: 30, decimals: 3, source: 'twelve', twelveSymbol: 'XAG/USD', pipValue: 5, spreadPips: 30, spoken: 'Silver' },
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil' }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   MASTERS ANALYSIS v12.1 — SYSTEM PROMPT (stricter about numbers)
-   ═══════════════════════════════════════════════════════════════ */
-const MASTERS_ANALYSIS_SYSTEM_PROMPT = `You are the INSTITUTIONAL INTELLIGENCE PROTOCOL v12.1 for XAUUSD & FX trading.
-You combine 4 specialist perspectives (Price Action, Supply/Demand, Market Structure, Fundamentals) into ONE unified institutional signal.
+const MASTERS_ANALYSIS_SYSTEM_PROMPT = `You are the INSTITUTIONAL CHART ANALYSIS PROTOCOL v13.2 for XAUUSD & FX trading.
+You specialize in Price Action, SMC, and ICT protocols.
 
-═══════════ ANALYTICAL FRAMEWORK ═══════════
-1. LIQUIDITY: Detect liquidity sweeps (wick beyond swing high/low then close back).
-2. MARKET STRUCTURE: Require BOS or CHoCH before any entry. M15/M5 precision.
-3. SUPPLY/DEMAND: Entry inside FRESH OB or FVG near value area (not tested >1x).
-4. SESSIONS: Prefer London (07-12 UTC) or NY (12-16 UTC). Dead zone → NEUTRAL.
-5. RISK: SL = ATR(H1) × 1.2 minimum. Minimum R:R for TP1 = 1:1.5.
-6. PROJECTION: For XAUUSD, 1 pip = $0.10 per 0.01 lot. Convert to TZS (rate ≈ 2700 TZS/USD).
+═══════════ ANALYSIS HIERARCHY (STRICT ORDER) ═══════════
+1. 4H = HIGHER TIMEFRAME BIAS (REQUIRED). Never contradict it without strong reason.
+2. 1H = INTRADAY STRUCTURE. BOS/CHoCH, OB, FVG on H1.
+3. 15M = SETUP TIMEFRAME. Entry zones from OB/FVG.
+4. 5M = ENTRY CONFIRMATION (CRITICAL). Only enter when 5M confirms:
+   - PSAR flip aligned with direction
+   - CHoCH on 5M in the intended direction
+   - Fresh 5M FVG or OB respected
 
-═══════════ CALIBRATION ═══════════
-- Confidence 50 = no edge. 75+ = textbook A+.
-- If ANY pre-flight criterion is missing → status:"REJECT".
-- Do NOT invent news. Prefer "NEUTRAL" over a weak forced signal.
-- pips_identified MUST be a plain number (e.g. 32.5), never a string with units.
-- All price fields MUST be plain numbers, not strings.
-- rr_ratio MUST be a string like "1:2.5".
+═══════════ CRITICAL CONSTRAINTS ═══════════
+1. SAME-DAY INTRADAY ONLY. Analyze ONLY price action formed TODAY (from 00:00 UTC).
+2. DO NOT use multi-day/multi-week macro trends.
+3. Previous days are used ONLY to know "yesterday's high/low" as liquidity targets.
+4. ATR IS FORBIDDEN. Never mention ATR.
+5. If 4H chart is missing → status MUST be "REJECT".
+6. If 5M chart is missing → status MUST be capped at "PASS".
+
+═══════════ INDICATORS (ALL TIMEFRAMES) ═══════════
+1. PARABOLIC SAR (PRIMARY):
+   - Dots BELOW price = Bullish. Dots ABOVE price = Bearish.
+   - SL = the M15 PSAR dot level (technical reference).
+   - 5M PSAR flip = entry trigger.
+   - H1/H4 PSAR = directional alignment.
+2. RSI (14) on ALL TIMEFRAMES.
+   - RSI > 70 = overbought. RSI < 30 = oversold.
+   - Cross-TF divergence = reversal risk.
+
+═══════════ INTRADAY STRUCTURE (TODAY ONLY) ═══════════
+- Identify TODAY's Asian High/Low sweeps and London Killzone sweeps.
+- Identify TODAY's BOS / CHoCH on 5M, M15, H1, H4.
+- Identify FRESH FVGs and Order Blocks formed TODAY (untested).
+
+═══════════ DECISION RULES ═══════════
+- Confidence 50 = no edge. 75+ = A+ textbook setup.
+- 4H PSAR opposite direction → status = "REJECT".
+- M15 PSAR opposite direction → status = "REJECT".
+- M5 PSAR aligned with direction → +10 confidence.
+- H1 PSAR aligned → +10 confidence.
+- H4 PSAR aligned → +10 confidence.
+- No liquidity sweep today AND no fresh FVG/OB → "NEUTRAL".
+- SL MUST be at or just beyond the current M15 PSAR dot level.
 
 ═══════════ STRICT OUTPUT RULES ═══════════
 Return ONLY the raw JSON object. No markdown fences, no prose outside JSON.
+pips_identified MUST be a plain number. rr_ratio MUST be a string like "1:2.5".
 
-Schema (EXACT match required):
+Schema:
 {
   "main_signal": {
     "direction": "STRONG SELL" | "SELL" | "STRONG BUY" | "BUY" | "NEUTRAL",
@@ -759,6 +978,17 @@ Schema (EXACT match required):
       "lot_010": { "usd": NUMBER, "tzs": NUMBER },
       "lot_100": { "usd": NUMBER, "tzs": NUMBER }
     }
+  },
+  "psar_analysis": {
+    "m5":  { "trend": "BULLISH"|"BEARISH", "dot_level": NUMBER, "momentum_note": "STRING" },
+    "m15": { "trend": "BULLISH"|"BEARISH", "dot_level": NUMBER, "momentum_note": "STRING" },
+    "h1":  { "trend": "BULLISH"|"BEARISH", "dot_level": NUMBER, "momentum_note": "STRING" },
+    "h4":  { "trend": "BULLISH"|"BEARISH", "dot_level": NUMBER, "momentum_note": "STRING" },
+    "alignment_summary": "STRING"
+  },
+  "rsi_analysis": {
+    "m5": NUMBER, "m15": NUMBER, "h1": NUMBER, "h4": NUMBER,
+    "interpretation": "STRING"
   },
   "pre_flight_protocol": {
     "choch_confirmed": true|false,
@@ -783,9 +1013,7 @@ Schema (EXACT match required):
     "fundamental_analyst_master": "STRING"
   },
   "multi_timeframe_confluence": {
-    "tf_4h": "STRING",
-    "tf_1h": "STRING",
-    "tf_15m": "STRING"
+    "tf_5m": "STRING", "tf_15m": "STRING", "tf_1h": "STRING", "tf_4h": "STRING"
   },
   "final_trade_plan": "STRING"
 }`;
@@ -821,92 +1049,50 @@ function pipValueFor(pair, price) {
 const getBalance = () => getNum('BALANCE', 1000);
 const getRiskPct = () => getNum('RISK_PCT', 1);
 
-/* ═══ KILLZONE ═══ */
 function getKillzoneState(now = new Date()) {
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
   let session = 'DEAD_ZONE', inKillzone = false, label = '';
-  if (m >= KILLZONES.LONDON.startUTC && m < KILLZONES.LONDON.endUTC) { session = 'LONDON_KILLZONE'; inKillzone = true; label = '🇬🇧 London KZ'; }
-  else if (m >= KILLZONES.NY.startUTC && m < KILLZONES.NY.endUTC) { session = 'NY_KILLZONE'; inKillzone = true; label = '🇺🇸 NY KZ'; }
-  else if (m < 7 * 60) { session = 'ASIAN'; label = '🌙 Asian'; }
-  else if (m >= 10 * 60 && m < 12 * 60) { session = 'LONDON_MID'; label = '🇬🇧 London mid'; }
-  else if (m >= 15 * 60 && m < 21 * 60) { session = 'NY_PM'; label = '🇺🇸 NY PM'; }
+  if (m >= 420 && m < 600) { session = 'LONDON_KILLZONE'; inKillzone = true; label = '🇬🇧 London KZ'; }
+  else if (m >= 720 && m < 900) { session = 'NY_KILLZONE'; inKillzone = true; label = '🇺🇸 NY KZ'; }
+  else if (m < 420) { session = 'ASIAN'; label = '🌙 Asian'; }
+  else if (m >= 600 && m < 720) { session = 'LONDON_MID'; label = '🇬🇧 London mid'; }
+  else if (m >= 900 && m < 1260) { session = 'NY_PM'; label = '🇺🇸 NY PM'; }
   else { session = 'DEAD_ZONE'; label = '💀 Dead zone'; }
   return { session, inKillzone, label, utcMinutes: m };
 }
 
-/* ═══ WEEKEND HELPERS ═══ */
-function getDayKey(t) { return Math.floor(t / 86400000); }
 function isCryptoPair(pair) { const spec = PAIR_SPECS[pair]; return spec && spec.source === 'binance'; }
 function isWeekendUTC(t) { const dow = new Date(t).getUTCDay(); return dow === 0 || dow === 6; }
-function findPreviousTradingDayKey(candles, currentTime, skipWeekends) {
-  if (!Array.isArray(candles) || !candles.length) return null;
-  const todayKey = getDayKey(currentTime);
-  const seenDays = new Set(); const dayKeys = [];
+function getTodaySessionStartUTC() {
+  const now = new Date();
+  return Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0);
+}
+function getSameDayCandles(candles, pair = null) {
+  if (!Array.isArray(candles) || !candles.length) return [];
+  const todayStartUTC = getTodaySessionStartUTC();
+  if (pair && isCryptoPair(pair)) return candles.filter(c => c.time >= todayStartUTC);
+  if (isWeekendUTC(Date.now())) {
+    const lastDayStart = findLastTradingDayStart(candles);
+    if (lastDayStart !== null) {
+      const lastDayEnd = lastDayStart + 86400000;
+      return candles.filter(c => c.time >= lastDayStart && c.time < lastDayEnd);
+    }
+  }
+  return candles.filter(c => c.time >= todayStartUTC);
+}
+function findLastTradingDayStart(candles) {
+  if (!candles.length) return null;
   for (let i = candles.length - 1; i >= 0; i--) {
-    const k = getDayKey(candles[i].time);
-    if (k >= todayKey) continue;
-    if (seenDays.has(k)) continue;
-    if (skipWeekends && isWeekendUTC(candles[i].time)) continue;
-    seenDays.add(k); dayKeys.push(k);
+    const d = new Date(candles[i].time);
+    const dow = d.getUTCDay();
+    if (dow !== 0 && dow !== 6) {
+      return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 0, 0, 0);
+    }
   }
-  return dayKeys.length ? dayKeys[0] : null;
-}
-function getPreviousDayCandles(candles, currentTime = Date.now(), pair = null) {
-  if (!Array.isArray(candles) || !candles.length) return [];
-  const skipWeekends = pair ? !isCryptoPair(pair) : true;
-  const prevKey = findPreviousTradingDayKey(candles, currentTime, skipWeekends);
-  if (prevKey === null) return [];
-  return candles.filter(c => getDayKey(c.time) === prevKey);
-}
-function getCurrentDayCandles(candles, currentTime = Date.now(), pair = null) {
-  if (!Array.isArray(candles) || !candles.length) return [];
-  const skipWeekends = pair ? !isCryptoPair(pair) : true;
-  let todayKey = getDayKey(currentTime);
-  if (skipWeekends && isWeekendUTC(currentTime)) {
-    const prevKey = findPreviousTradingDayKey(candles, currentTime, skipWeekends);
-    if (prevKey !== null) todayKey = prevKey;
-  }
-  return candles.filter(c => getDayKey(c.time) === todayKey);
+  return null;
 }
 
-/* ═══ 4H ANCHOR ═══ */
-function compute4HAnchors(h4Candles, pair, currentTime = Date.now()) {
-  if (!Array.isArray(h4Candles) || h4Candles.length < 3) return { ok: false, reason: 'Insufficient 4H candles' };
-  const curDay4H = getCurrentDayCandles(h4Candles, currentTime, pair);
-  const source = curDay4H.length >= 2 ? curDay4H : h4Candles.slice(-6);
-  if (source.length < 2) return { ok: false, reason: 'No 2nd 4H candle' };
-  const c2 = source[ANCHOR_4H_CANDLE_INDEX];
-  if (!c2) return { ok: false, reason: 'Missing 2nd 4H candle' };
-  const RES_4H = c2.high, SUP_4H = c2.low;
-  return {
-    ok: true, RES_4H: +RES_4H.toFixed(5), SUP_4H: +SUP_4H.toFixed(5),
-    anchorRange: +(RES_4H - SUP_4H).toFixed(5),
-    anchorDay: new Date(c2.time).toISOString().slice(0, 10),
-    candleHourUTC: new Date(c2.time).getUTCHours()
-  };
-}
-
-/* ═══ PREVIOUS DAY ═══ */
-function computeAnchoredLevels(h1Candles, m15Candles, pair) {
-  const prevDayH1 = getPreviousDayCandles(h1Candles, Date.now(), pair);
-  const prevDayM15 = getPreviousDayCandles(m15Candles, Date.now(), pair);
-  if (!prevDayH1.length) return { ok: false, reason: 'No prev-day candles' };
-  const PDH = Math.max(...prevDayH1.map(c => c.high));
-  const PDL = Math.min(...prevDayH1.map(c => c.low));
-  const PDC = prevDayH1[prevDayH1.length - 1].close;
-  const vpSource = prevDayM15.length >= 20 ? prevDayM15 : prevDayH1;
-  const vp = calculateVolumeProfile(vpSource, 40);
-  const prevDayRange = PDH - PDL;
-  const prevDayATR = calculateATR(prevDayH1.map(c => c.high), prevDayH1.map(c => c.low), prevDayH1.map(c => c.close), 14) || prevDayRange;
-  return {
-    ok: true, PDH, PDL, PDC,
-    prevDayPOC: vp?.poc ?? null, prevDayVAH: vp?.vah ?? null, prevDayVAL: vp?.val ?? null,
-    prevDayRange, prevDayATR,
-    anchorDay: new Date(prevDayH1[0].time).toISOString().slice(0, 10)
-  };
-}
-
-/* ═══ SENTIMENT ═══ */
+/* ═══ SENTIMENT (FULL) ═══ */
 let sentimentCache = {};
 async function fetchPublicRetailSentiment(symbol, options = {}) {
   const forceFresh = options.force === true;
@@ -983,7 +1169,7 @@ function renderSentimentWidget(sentiment, symbol) {
 }
 async function refreshSentimentNow() {
   const pair = $('selectedPair').value;
-  showToast('🔄 Refreshing...', 2000);
+  showToast('🔄 Refreshing sentiment...', 2000);
   const s = await fetchPublicRetailSentiment(pair, { force: true });
   renderSentimentWidget(s, pair);
   showToast(`✅ ${s.sentimentRatio} (${s.source})`);
@@ -992,18 +1178,20 @@ async function renderMultiSentiment() {
   const c = $('multiSentContainer');
   const symbol = $('sentMultiPair').value;
   c.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
-  const s = await fetchPublicRetailSentiment(symbol);
+  const s = await fetchPublicRetailSentiment(symbol, { force: true });
   const L = s.retailLongPercent ?? 50, S = s.retailShortPercent ?? 50;
   const biasColor = s.smartMoneyBias === 'BULLISH' ? 'var(--green)' : s.smartMoneyBias === 'BEARISH' ? 'var(--red)' : 'var(--muted)';
   c.innerHTML = `
     <div class="mini-box" style="text-align:center;margin-bottom:12px;">
       <div style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:bold;">${esc(symbol)}</div>
       <div style="font-size:13px;font-weight:900;color:${biasColor};margin-top:4px;">${esc(s.smartMoneyBias)}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">${esc(s.biasReason)}</div>
     </div>
     <div class="grid-2">
       <div class="mini-box" style="text-align:center;"><div style="font-size:10px;color:var(--blue);font-weight:800;">LONG</div><div style="font-size:22px;font-weight:900;color:var(--blue);">${L}%</div></div>
       <div class="mini-box" style="text-align:center;"><div style="font-size:10px;color:var(--red);font-weight:800;">SHORT</div><div style="font-size:22px;font-weight:900;color:var(--red);">${S}%</div></div>
-    </div>`;
+    </div>
+    <div style="font-size:9px;color:var(--muted);margin-top:8px;text-align:right;font-family:ui-monospace,monospace;">source: ${esc(s.source)}</div>`;
 }
 
 /* ═══ VOICE ═══ */
@@ -1031,10 +1219,7 @@ function safeJsonParse(text) {
   try {
     const m = clean.match(/\{[\s\S]*\}/);
     if (m) {
-      const candidate = m[0]
-        .replace(/,\s*}/g, '}')
-        .replace(/,\s*]/g, ']')
-        .replace(/'/g, '"');
+      const candidate = m[0].replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
       try { return JSON.parse(candidate); } catch (e2) {}
       try { return JSON.parse(m[0]); } catch (e3) {}
     }
@@ -1060,9 +1245,7 @@ async function callGemini(models, parts, timeout, useSystemPrompt = false, syste
   for (const model of models) {
     try {
       const body = { contents: [{ parts }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
-      if (useSystemPrompt && systemPromptText) {
-        body.system_instruction = { parts: [{ text: systemPromptText }] };
-      }
+      if (useSystemPrompt && systemPromptText) body.system_instruction = { parts: [{ text: systemPromptText }] };
       const r = await fetchWithTimeout(`${GEMINI_BASE_URL}/models/${model}:generateContent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': gk },
@@ -1104,19 +1287,19 @@ async function callMistral(models, messages, maxTokens, timeout) {
   return { err };
 }
 
-/* ═══ MASTERS ANALYSIS v12.1 CALL ═══ */
-async function callMastersAnalysis(pair, price, marketContext) {
+async function callMastersAnalysis(pair, price, marketContext, has5M) {
   const userPrompt = `PAIR: ${pair}
 CURRENT PRICE: ${price}
 SESSION (UTC): ${new Date().toUTCString()}
+MODE: CHART ANALYSIS — SAME-DAY INTRADAY
+5M CHART PROVIDED: ${has5M ? 'YES (entry confirmation required)' : 'NO (cap status at PASS)'}
 
 MARKET CONTEXT:
 ${JSON.stringify(marketContext, null, 2)}
 
-Analyze now and return the strict JSON as specified.`;
+Analyze now and return the strict JSON. Follow the hierarchy: 4H bias → 1H structure → 15M setup → 5M confirmation.`;
 
   const parts = [{ text: userPrompt }];
-
   let r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, 120000, true, MASTERS_ANALYSIS_SYSTEM_PROMPT);
   if (r.result) return r;
   const geminiErr = r.err;
@@ -1168,34 +1351,40 @@ async function getLivePrice(pair, timeout = 10000) {
 let lastDataError = '';
 const ohlcCache = {};
 function parseTwelveTime(s) { return Date.parse(s.length <= 10 ? s + 'T00:00:00Z' : s.replace(' ', 'T') + 'Z'); }
-async function fetchOHLC(pair, tf, limit = 200, fresh = false) {
+
+async function fetchOHLC(pair, tf, limit = 500, fresh = false, sameDayOnly = true) {
   const spec = PAIR_SPECS[pair];
   if (!spec) return null;
-  const key = `${pair}|${tf}|${limit}`, c = ohlcCache[key];
+  const key = `${pair}|${tf}|${limit}|${sameDayOnly}`;
+  const c = ohlcCache[key];
   if (!fresh && c && Date.now() - c.t < 90000) return c.data;
+
   for (let a = 0; a < 2; a++) {
     try {
       let data;
       if (spec.source === 'binance') {
-        const r = await fetchWithTimeout(`${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${tf}&limit=${limit}`, {}, 15000);
+        const startTime = sameDayOnly ? getTodaySessionStartUTC() : (Date.now() - 30 * 86400000);
+        const r = await fetchWithTimeout(
+          `${BINANCE_API}/klines?symbol=${spec.binanceSymbol}&interval=${tf}&startTime=${startTime}&limit=${limit}`,
+          {}, 15000
+        );
         if (!r.ok) throw new Error(`Binance HTTP ${r.status}`);
         data = (await r.json()).map(x => ({ time: parseInt(x[0]), open: +x[1], high: +x[2], low: +x[3], close: +x[4], volume: +x[5] }));
       } else {
-        const im = { '4h': '4h', '1h': '1h', '15m': '15min' };
+        const im = { '5m': '5min', '15m': '15min', '1h': '1h', '4h': '4h' };
         const d = await twelveJson(`/time_series?symbol=${encodeURIComponent(spec.twelveSymbol)}&interval=${im[tf]}&outputsize=${limit}&timezone=UTC`, 30000);
         if (!d.values) throw new Error('No data');
         data = d.values.slice().reverse().map(x => ({ time: parseTwelveTime(x.datetime), open: +x.open, high: +x.high, low: +x.low, close: +x.close, volume: +(x.volume || 0) }));
       }
       data = data.filter(x => [x.time, x.open, x.high, x.low, x.close].every(Number.isFinite));
-      if (!data.length) throw new Error('Empty data');
+      if (sameDayOnly) data = getSameDayCandles(data, pair);
+      if (!data.length) throw new Error('Hakuna candles za leo');
       ohlcCache[key] = { t: Date.now(), data };
       return data;
     } catch (e) {
       lastDataError = e.message;
-      // Hard errors — do NOT retry
-      if (/invalid api key|api key not|api key|plan upgrade|forbidden|unauthorized/i.test(e.message)) break;
+      if (/invalid api key|api key not|plan upgrade|forbidden|unauthorized/i.test(e.message)) break;
       if (/symbol.*not found|invalid symbol|not available|not found/i.test(e.message)) break;
-      // Soft errors — retry once, longer wait for credits/limits
       if (/credits|limit|minute/i.test(e.message) && a === 0) { await sleep(15000); continue; }
       if (a === 0) await sleep(2000);
     }
@@ -1211,33 +1400,50 @@ function calculateRSI(closes, period = 14) {
   if (l === 0) return 100;
   return 100 - 100 / (1 + g / l);
 }
-const calculateSMA = (v, p) => v.length < p ? null : v.slice(-p).reduce((a, b) => a + b, 0) / p;
+function calculateParabolicSAR(candles, afStart = 0.02, afStep = 0.02, afMax = 0.20) {
+  if (!Array.isArray(candles) || candles.length < 3) return [];
+  const result = [];
+  let bull = candles[1].close >= candles[0].close;
+  let af = afStart;
+  let ep = bull ? candles[0].high : candles[0].low;
+  let sar = bull ? candles[0].low : candles[0].high;
+  result.push({ time: candles[0].time, sar, trend: bull ? 'bull' : 'bear' });
+  for (let i = 1; i < candles.length; i++) {
+    const prev = candles[i - 1], cur = candles[i];
+    let newSar = sar + af * (ep - sar);
+    if (bull) {
+      newSar = Math.min(newSar, prev.low);
+      if (i >= 2) newSar = Math.min(newSar, candles[i - 2].low);
+      if (cur.low < newSar) { bull = false; newSar = ep; ep = cur.low; af = afStart; }
+      else { if (cur.high > ep) { ep = cur.high; af = Math.min(af + afStep, afMax); } }
+    } else {
+      newSar = Math.max(newSar, prev.high);
+      if (i >= 2) newSar = Math.max(newSar, candles[i - 2].high);
+      if (cur.high > newSar) { bull = true; newSar = ep; ep = cur.high; af = afStart; }
+      else { if (cur.low < ep) { ep = cur.low; af = Math.min(af + afStep, afMax); } }
+    }
+    sar = newSar;
+    result.push({ time: cur.time, sar, trend: bull ? 'bull' : 'bear' });
+  }
+  return result;
+}
+function getSARState(candles) {
+  const sarSeries = calculateParabolicSAR(candles);
+  if (!sarSeries.length) return null;
+  const last = sarSeries.at(-1);
+  const prev = sarSeries.at(-2) || last;
+  let barsSinceFlip = 0;
+  for (let i = sarSeries.length - 1; i > 0; i--) {
+    if (sarSeries[i].trend !== sarSeries[i - 1].trend) break;
+    barsSinceFlip++;
+  }
+  return { sar: +last.sar.toFixed(8), trend: last.trend, justFlipped: last.trend !== prev.trend, barsSinceFlip };
+}
 function calculateATR(h, l, c, p = 14) {
   if (h.length < p + 1) return null;
   const tr = [];
   for (let i = 1; i < h.length; i++) tr.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])));
   return tr.slice(-p).reduce((a, b) => a + b, 0) / p;
-}
-function calculateVolumeProfile(ohlc, bins = 40) {
-  if (!Array.isArray(ohlc) || ohlc.length < 20) return null;
-  const mx = Math.max(...ohlc.map(d => d.high)), mn = Math.min(...ohlc.map(d => d.low));
-  const rng = mx - mn; if (rng === 0) return null;
-  const bs = rng / bins, prof = new Array(bins).fill(0);
-  ohlc.forEach(c => {
-    const lb = Math.max(0, Math.min(bins - 1, Math.floor((c.low - mn) / bs)));
-    const hb = Math.max(0, Math.min(bins - 1, Math.floor((c.high - mn) / bs)));
-    const v = c.volume || 1, s = Math.max(1, hb - lb + 1);
-    for (let i = lb; i <= hb; i++) prof[i] += v / s;
-  });
-  let pi = 0, mv = 0; prof.forEach((v, i) => { if (v > mv) { mv = v; pi = i; } });
-  const tg = prof.reduce((a, b) => a + b, 0) * 0.7;
-  let va = prof[pi], u = pi, d = pi;
-  while (va < tg && (u < bins - 1 || d > 0)) {
-    const un = u < bins - 1 ? prof[u + 1] : -1, dn = d > 0 ? prof[d - 1] : -1;
-    if (un > dn) { u++; va += un; } else { d--; va += dn; }
-  }
-  const px = i => (mn + i * bs + bs / 2);
-  return { poc: px(pi), vah: px(u), val: px(d) };
 }
 function detectOrderBlocks(o, lb = 60) {
   const empty = { nearestBull: null, nearestBear: null };
@@ -1276,14 +1482,14 @@ function detectFVG(o, lb = 60) {
   return { nearestBull: bull.at(-1) || null, nearestBear: bear.at(-1) || null };
 }
 function detectStructure(o) {
-  if (!Array.isArray(o) || o.length < 20) return { trend: 'NEUTRAL' };
+  if (!Array.isArray(o) || o.length < 10) return { trend: 'NEUTRAL', swings: [] };
   const sw = [];
   for (let i = 2; i < o.length - 2; i++) {
     const h = o[i].high, l = o[i].low;
-    if (h > o[i - 1].high && h > o[i - 2].high && h > o[i + 1].high && h > o[i + 2].high) sw.push({ type: 'H', price: h });
-    if (l < o[i - 1].low && l < o[i - 2].low && l < o[i + 1].low && l < o[i + 2].low) sw.push({ type: 'L', price: l });
+    if (h > o[i - 1].high && h > o[i - 2].high && h > o[i + 1].high && h > o[i + 2].high) sw.push({ type: 'H', price: h, time: o[i].time });
+    if (l < o[i - 1].low && l < o[i - 2].low && l < o[i + 1].low && l < o[i + 2].low) sw.push({ type: 'L', price: l, time: o[i].time });
   }
-  if (sw.length < 4) return { trend: 'NEUTRAL' };
+  if (sw.length < 3) return { trend: 'NEUTRAL', swings: sw };
   const rec = sw.slice(-6), hs = rec.filter(s => s.type === 'H'), ls = rec.filter(s => s.type === 'L');
   let t = 'NEUTRAL';
   if (hs.length >= 2 && ls.length >= 2) {
@@ -1291,14 +1497,14 @@ function detectStructure(o) {
     const lh = hs.at(-1).price < hs.at(-2).price, ll = ls.at(-1).price < ls.at(-2).price;
     t = hh && hl ? 'BULLISH' : lh && ll ? 'BEARISH' : 'RANGING';
   }
-  return { trend: t };
+  return { trend: t, swings: sw };
 }
 function detectLiquiditySweep(o) {
   if (!Array.isArray(o) || o.length < 20) return null;
   const last = o.at(-1);
   const rH = Math.max(...o.slice(-20, -1).map(d => d.high)), rL = Math.min(...o.slice(-20, -1).map(d => d.low));
-  if (last.low < rL && last.close > rL) return { type: 'BULLISH_SWEEP', bias: 'BUY' };
-  if (last.high > rH && last.close < rH) return { type: 'BEARISH_SWEEP', bias: 'SELL' };
+  if (last.low < rL && last.close > rL) return { type: 'BULLISH_SWEEP', bias: 'BUY', level: rL, time: last.time };
+  if (last.high > rH && last.close < rH) return { type: 'BEARISH_SWEEP', bias: 'SELL', level: rH, time: last.time };
   return null;
 }
 function detectDisplacement(o) {
@@ -1310,161 +1516,117 @@ function detectDisplacement(o) {
   return { detected: false };
 }
 
-/* ═══ INSTITUTIONAL METRICS (wires OB + FVG) ═══ */
-function computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair) {
-  if (!Array.isArray(h1) || h1.length < 30) return null;
-  const curH1 = getCurrentDayCandles(h1, Date.now(), pair);
-  const curM15 = getCurrentDayCandles(m15, Date.now(), pair);
-  const flowH1 = curH1.length >= 15 ? curH1 : h1.slice(-30);
-  const flowM15 = curM15.length >= 30 ? curM15 : (Array.isArray(m15) ? m15.slice(-60) : []);
-  const c = flowH1.map(d => d.close), h = flowH1.map(d => d.high), l = flowH1.map(d => d.low);
-  const atr = calculateATR(h, l, c, 14);
-
-  const recent20 = flowM15.slice(-20);
-  const rangeHigh = recent20.length ? Math.max(...recent20.map(c => c.high)) : lp;
-  const rangeLow = recent20.length ? Math.min(...recent20.map(c => c.low)) : lp;
-  const rangeSpan = rangeHigh - rangeLow || 1;
-  const pricePositionPct = ((lp - rangeLow) / rangeSpan) * 100;
-
-  const pipSize = PAIR_SPECS[pair]?.pipSize || 0.0001;
-  const anchors4h = compute4HAnchors(h4, pair);
-  const anchorZones = [];
-  if (anchors4h?.ok) {
-    const buf4h = ANCHOR_4H_BUFFER_PIPS * pipSize;
-    anchorZones.push({ name: 'RES_4H', price: anchors4h.RES_4H, buf: buf4h, type: 'supply', priority: 'HIGH' });
-    anchorZones.push({ name: 'SUP_4H', price: anchors4h.SUP_4H, buf: buf4h, type: 'demand', priority: 'HIGH' });
-  }
-  if (anchored?.ok) {
-    const narrowBuf = ZONE_BUFFER_PIPS * pipSize;
-    const wideBuf = ZONE_BUFFER_WIDE_PIPS * pipSize;
-    anchorZones.push({ name: 'PDH', price: anchored.PDH, buf: narrowBuf, type: 'supply' });
-    anchorZones.push({ name: 'PDL', price: anchored.PDL, buf: narrowBuf, type: 'demand' });
-    anchorZones.push({ name: 'PD-POC', price: anchored.prevDayPOC, buf: wideBuf, type: 'equilibrium' });
-  }
-  const validAnchorZones = anchorZones.filter(z => z.price != null);
-  const activeAnchorZones = validAnchorZones.filter(z => lp >= z.price - z.buf && lp <= z.price + z.buf);
-
-  const structureH1 = detectStructure(flowH1);
-  const structureH4 = Array.isArray(h4) ? detectStructure(getCurrentDayCandles(h4, Date.now(), pair).length > 5 ? getCurrentDayCandles(h4, Date.now(), pair) : h4) : null;
-  const structureM15 = flowM15.length ? detectStructure(flowM15) : null;
-
-  // ═══ WIRED: Order Blocks + FVGs ═══
-  const obs = detectOrderBlocks(flowM15, 60);
-  const fvgs = detectFVG(flowM15, 60);
-
-  return {
-    currentPrice: lp,
-    anchors4h,
-    PDH: anchored?.PDH ?? null, PDL: anchored?.PDL ?? null, PDC: anchored?.PDC ?? null,
-    prevDayRange: anchored?.prevDayRange ?? null, prevDayATR: anchored?.prevDayATR ?? null,
-    structure: structureH1, htfStructure: structureH4, ltfStructure: structureM15,
-    sweep: detectLiquiditySweep(flowH1),
-    displacement: detectDisplacement(flowH1),
-    killZone: getKillzoneState(),
-    rsi: calculateRSI(c, 14),
-    atr,
-    zones: {
-      active: activeAnchorZones, all: validAnchorZones,
-      rangeHigh, rangeLow, pricePositionPct: +pricePositionPct.toFixed(1),
-      isInDiscount: pricePositionPct <= 40, isInPremium: pricePositionPct >= 60,
-      ob: obs, fvg: fvgs
-    }
-  };
-}
-function getHTFBias(h4, h1) {
-  if (!Array.isArray(h4) || h4.length < 50) return { h4: 'NEUTRAL', h1: 'NEUTRAL', aligned: false };
-  const trend = arr => {
-    if (!Array.isArray(arr) || arr.length < 50) return 'NEUTRAL';
-    const c = arr.map(d => d.close), m20 = calculateSMA(c, 20), m50 = calculateSMA(c, 50), p = c.at(-1);
-    return p > m20 && m20 > m50 ? 'BULLISH' : p < m20 && m20 < m50 ? 'BEARISH' : 'NEUTRAL';
-  };
-  const a = trend(h4), b = trend(h1);
-  return { h4: a, h1: b, aligned: a === b && a !== 'NEUTRAL' };
-}
-
-/* ═══ BUILD MARKET CONTEXT (wires OB + FVG into AI prompt) ═══ */
-function buildMarketContext(pair, inst, anchored, htfBias) {
+function computeMTFIndicators(candlesByTF, pair) {
   const spec = PAIR_SPECS[pair];
-  const ctx = {
-    pair, pipSize: spec.pipSize, decimals: spec.decimals,
-    killzone: getKillzoneState(),
-    anchors4h: inst?.anchors4h?.ok ? { RES_4H: inst.anchors4h.RES_4H, SUP_4H: inst.anchors4h.SUP_4H, day: inst.anchors4h.anchorDay } : null,
-    prevDay: anchored?.ok ? { PDH: anchored.PDH, PDL: anchored.PDL, PDC: anchored.PDC, POC: anchored.prevDayPOC, VAH: anchored.prevDayVAH, VAL: anchored.prevDayVAL, ATR: anchored.prevDayATR, range: anchored.prevDayRange } : null,
-    structure: inst?.structure?.trend || 'NEUTRAL',
-    htfStructure: inst?.htfStructure?.trend || 'NEUTRAL',
-    ltfStructure: inst?.ltfStructure?.trend || 'NEUTRAL',
-    rsi: inst?.rsi ? +inst.rsi.toFixed(1) : null,
-    atr: inst?.atr ? +inst.atr.toFixed(4) : null,
-    sweep: inst?.sweep ? { type: inst.sweep.type, bias: inst.sweep.bias } : null,
-    displacement: inst?.displacement?.detected ? inst.displacement.direction : null,
-    htfEma: htfBias ? { h4: htfBias.h4, h1: htfBias.h1, aligned: htfBias.aligned } : null,
-    zones: inst?.zones ? {
-      position: inst.zones.pricePositionPct + '%',
-      zone: inst.zones.isInDiscount ? 'DISCOUNT' : inst.zones.isInPremium ? 'PREMIUM' : 'EQUILIBRIUM',
-      active: (inst.zones.active || []).map(z => z.name)
-    } : null,
-    orderBlocks: inst?.zones?.ob ? {
-      nearestBullOB: inst.zones.ob.nearestBull,
-      nearestBearOB: inst.zones.ob.nearestBear
-    } : null,
-    fairValueGaps: inst?.zones?.fvg ? {
-      nearestBullFVG: inst.zones.fvg.nearestBull,
-      nearestBearFVG: inst.zones.fvg.nearestBear
-    } : null
-  };
-  return ctx;
+  const out = {};
+  ['m5', 'm15', 'h1', 'h4'].forEach(tf => {
+    const candles = candlesByTF[tf] || [];
+    if (candles.length < 3) {
+      out[tf] = { ok: false, reason: `Insufficient ${tf.toUpperCase()}`, bars: candles.length };
+      return;
+    }
+    const closes = candles.map(c => c.close);
+    const psar = getSARState(candles);
+    const rsi = closes.length >= 15 ? calculateRSI(closes, 14) : null;
+    const structure = detectStructure(candles);
+    const sweep = detectLiquiditySweep(candles);
+    const ob = detectOrderBlocks(candles, 60);
+    const fvg = detectFVG(candles, 60);
+    out[tf] = {
+      ok: true, bars: candles.length,
+      psar: psar ? { trend: psar.trend, sar: +psar.sar.toFixed(spec.decimals + 2), barsSinceFlip: psar.barsSinceFlip, justFlipped: psar.justFlipped } : null,
+      rsi: rsi != null ? +rsi.toFixed(1) : null,
+      structure: structure.trend,
+      sweep: sweep ? { type: sweep.type, bias: sweep.bias, level: +sweep.level.toFixed(spec.decimals) } : null,
+      ob: {
+        bull: ob.nearestBull ? { low: +ob.nearestBull.low.toFixed(spec.decimals), high: +ob.nearestBull.high.toFixed(spec.decimals) } : null,
+        bear: ob.nearestBear ? { low: +ob.nearestBear.low.toFixed(spec.decimals), high: +ob.nearestBear.high.toFixed(spec.decimals) } : null
+      },
+      fvg: {
+        bull: fvg.nearestBull ? { bottom: +fvg.nearestBull.bottom.toFixed(spec.decimals), top: +fvg.nearestBull.top.toFixed(spec.decimals) } : null,
+        bear: fvg.nearestBear ? { bottom: +fvg.nearestBear.bottom.toFixed(spec.decimals), top: +fvg.nearestBear.top.toFixed(spec.decimals) } : null
+      },
+      high: +Math.max(...candles.map(c => c.high)).toFixed(spec.decimals),
+      low: +Math.min(...candles.map(c => c.low)).toFixed(spec.decimals)
+    };
+  });
+  return out;
 }
 
-/* ═══ AUTO-TRADE from Masters Analysis ═══ */
-function autoTrackFromMasters(pair, data, price, inst) {
+function renderMTFMatrix(mtfData, pair) {
+  const spec = PAIR_SPECS[pair] || { decimals: 2 };
+  const d = spec.decimals;
+  const tfs = [['m5', 'M5'], ['m15', 'M15'], ['h1', 'H1'], ['h4', 'H4']];
+  const rowClass = (val, type) => {
+    if (type === 'psar') { if (val === 'bull') return 'bull'; if (val === 'bear') return 'bear'; return 'neutral'; }
+    if (type === 'rsi') { if (val == null) return 'na'; if (val >= 70) return 'rsi-hot'; if (val <= 30) return 'rsi-cold'; return 'rsi-mid'; }
+    if (type === 'structure') { if (val === 'BULLISH') return 'bull'; if (val === 'BEARISH') return 'bear'; return 'neutral'; }
+    return '';
+  };
+  let html = `<div class="m-mtf-matrix"><table>
+    <thead><tr><th>TF</th><th>PSAR</th><th>Dot</th><th>RSI</th><th>Structure</th><th>Sweep</th></tr></thead>
+    <tbody>`;
+  tfs.forEach(([key, label]) => {
+    const t = mtfData[key];
+    if (!t || !t.ok) {
+      html += `<tr><td class="tf-cell">${label}</td><td colspan="5" class="na">insufficient data</td></tr>`;
+      return;
+    }
+    const psarTrend = t.psar ? (t.psar.trend === 'bull' ? 'BULL' : 'BEAR') : '—';
+    const psarLevel = t.psar ? t.psar.sar.toFixed(d) : '—';
+    const rsiTxt = t.rsi != null ? t.rsi.toFixed(1) : 'N/A';
+    const sweepTxt = t.sweep ? (t.sweep.type.includes('BULL') ? '🟢 Swept' : '🔴 Swept') : '—';
+    html += `<tr>
+      <td class="tf-cell">${label}</td>
+      <td class="${rowClass(t.psar?.trend, 'psar')}">${psarTrend}</td>
+      <td class="${rowClass(t.psar?.trend, 'psar')}">${psarLevel}</td>
+      <td class="${rowClass(t.rsi, 'rsi')}">${rsiTxt}</td>
+      <td class="${rowClass(t.structure, 'structure')}">${t.structure || 'NEUTRAL'}</td>
+      <td class="${t.sweep ? 'bull' : 'na'}">${sweepTxt}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>`;
+  return html;
+}
+
+/* ═══ AUTO-TRACK ═══ */
+function autoTrackFromMasters(pair, data, price) {
   if (!data || !data.main_signal) return;
   const ms = data.main_signal;
   const pf = data.pre_flight_protocol || {};
   const dir = String(ms.direction || '').toUpperCase();
   if (!dir.includes('BUY') && !dir.includes('SELL')) return;
-
   const action = dir.includes('SELL') ? 'SELL' : 'BUY';
   const entry = parseFloat(pf.entry_price) || price;
   const sl = parseFloat(pf.stop_loss) || 0;
   const tp1 = parseFloat(pf.take_profit_1) || 0;
   const tp2 = parseFloat(pf.take_profit_2) || 0;
   if (!entry || !sl || !tp1) return;
-
   const spec = PAIR_SPECS[pair];
-  const pips = d => Math.round(Math.abs(d) / spec.pipSize);
+  const pips = dd => Math.round(Math.abs(dd) / spec.pipSize);
   const slD = Math.abs(entry - sl);
   const m = getTpMults();
   const tp3 = action === 'BUY' ? entry + slD * m[2] : entry - slD * m[2];
-
   const rec = {
     id: Date.now(), ts: Date.now(), date: new Date().toLocaleString(),
-    source: 'masters_v12_1', pair, action, price,
+    source: 'chart_analysis_v13_2', pair, action, price,
     entry, sl, tp1, tp2, tp3: tp3 || tp2,
     slPips: pips(sl - entry),
     tp1Pips: pips(tp1 - entry), tp2Pips: pips(tp2 - entry), tp3Pips: pips(tp3 - entry),
     spreadPips: spec.spreadPips,
     conf: parseInt(ms.confidence_percentage) || 0,
-    reason: `Masters v12.1: ${ms.status || ''} — ${(data.final_trade_plan || '').slice(0, 200)}`,
-    volumeProfile: null,
+    reason: `Chart Analysis v13.2: ${ms.status || ''} — ${(data.final_trade_plan || '').slice(0, 200)}`,
     entryZone: { min_price: entry, max_price: entry },
     rr: pf.rr_ratio || '—',
-    provider: 'MastersAnalysis/v12.1',
+    provider: 'ChartAnalysis/v13.2',
     tier: ms.status === 'STRONG PASS' ? 'HIGH_PROBABILITY' : 'MEDIUM_PROBABILITY',
     execution_mode: ms.execution_type?.includes('LIMIT') ? 'CONDITIONAL_TRIGGER' : 'IMMEDIATE',
-    pattern_detected: 'NONE',
-    anchors_4h: inst?.anchors4h?.ok ? { resistance_2nd_4h: inst.anchors4h.RES_4H, support_2nd_4h: inst.anchors4h.SUP_4H } : null,
     masters_analysis: data,
-    conditional_alert: null,
-    rejectReason: '',
-    sentiment: null,
-    instScore: null,
-    session: getKillzoneState().session,
-    anchored: null,
-    tracked: true,
-    bt: null
+    tracked: true, bt: null,
+    session: getKillzoneState().session
   };
   saveToHistory(rec);
-  showToast(`✅ ${action} ${pair} saved @ ${entry.toFixed(spec.decimals)}`, 6000);
+  showToast(`✅ ${action} ${pair} @ ${entry.toFixed(spec.decimals)}`, 6000);
   setTimeout(() => updateBacktest(), 3000);
 }
 
@@ -1491,31 +1653,22 @@ async function fetchLivePrice() {
     st.className = 'price-status live';
     $('priceStatusText').innerHTML = `✅ LIVE: ${price.toFixed(spec.decimals)}`;
     $('priceTime').innerText = new Date().toLocaleTimeString();
-    if (window.marketData?.pair === pair) {
-      const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15, pair);
-      if (anchored?.ok) {
-        window.marketData.anchored = anchored;
-        checkPriceAlerts(price, anchored, spec.pipSize, pair);
-      }
-    }
     updateActiveAlertsSummary();
   } catch (e) {
     st.className = 'price-status error';
     $('priceStatusText').innerHTML = `❌ ${esc(e.message)}`;
     $('priceTime').innerText = '—';
-  } finally {
-    btn.disabled = false; btn.innerHTML = '🔄 Refresh';
-  }
+  } finally { btn.disabled = false; btn.innerHTML = '🔄 Refresh'; }
 }
 function resetMarketData() {
   window.marketData = null;
   $('runBtn').disabled = true;
-  ['data4H', 'data1H', 'data15M', 'dataIndicators'].forEach(id => {
+  ['data5M', 'data15M', 'data1H', 'data4H'].forEach(id => {
     const e = $(id); if (!e) return;
     e.className = 'data-status-item';
     const sp = e.querySelector('span:last-child'); if (sp) sp.innerText = '—';
   });
-  const cp = $('chartPreview'); if (cp) cp.innerHTML = '<div style="text-align:center;color:var(--muted);">Click "Fetch All Data"</div>';
+  const cp = $('chartPreview'); if (cp) cp.innerHTML = '<div style="text-align:center;color:var(--muted);">Bonyeza "Fetch TODAY Only"</div>';
 }
 async function onPairChange(pair) {
   resetMarketData(); priceMeta = null;
@@ -1524,13 +1677,11 @@ async function onPairChange(pair) {
   fetchLivePrice();
   const s = await fetchPublicRetailSentiment(pair);
   renderSentimentWidget(s, pair);
-  const multiSel = $('sentMultiPair');
-  if (multiSel) multiSel.value = pair;
 }
 async function fetchAllMarketData() {
   const pair = $('selectedPair').value;
   const btn = $('fetchDataBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Fetching...';
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Fetching TODAY only...';
   resetMarketData();
   const set = (id, ok, text) => {
     const el = $(id); if (!el) return;
@@ -1540,62 +1691,116 @@ async function fetchAllMarketData() {
   try {
     const get = async (id, tf) => {
       const el = $(id); if (el) { const sp = el.querySelector('span:last-child'); if (sp) sp.innerText = '⏳'; }
-      const d = await fetchOHLC(pair, tf, 200, true);
-      set(id, !!d, d ? `${d.length} ✓` : 'FAIL');
-      return d;
+      const d = await fetchOHLC(pair, tf, 500, true, true);
+      set(id, !!d, d ? `${d.length} bars ✓` : 'FAIL');
+      return d || [];
     };
-    const h4 = await get('data4H', '4h'), h1 = await get('data1H', '1h'), m15 = await get('data15M', '15m');
-    if (!h1 || !m15) { $('chartPreview').innerHTML = `<div class="error-box">❌ ${esc(lastDataError)}</div>`; return; }
-
-    const anchored = computeAnchoredLevels(h1, m15, pair);
-    const lp = parseFloat($('livePrice').value) || h1.at(-1).close;
-    const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
-    window.marketData = { pair, h4, h1, m15, inst, anchored, fetchedAt: Date.now() };
-
-    set('dataIndicators', !!inst, inst ? 'READY ✓' : 'FAIL');
-    if (inst) {
-      const spec = PAIR_SPECS[pair];
-      const kz = getKillzoneState();
-      let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)}</div>`;
-      if (inst.anchors4h?.ok) {
-        h += `<div style="margin-top:6px;padding:8px;background:rgba(236,72,153,.08);border-left:3px solid var(--pink);border-radius:6px;">
-          <div style="color:var(--pink);font-weight:900;">⭐ 4H ANCHORS (${esc(inst.anchors4h.anchorDay)})</div>
-          <div style="font-size:10px;">RES_4H: <strong style="color:var(--red);">${inst.anchors4h.RES_4H.toFixed(spec.decimals)}</strong></div>
-          <div style="font-size:10px;">SUP_4H: <strong style="color:var(--green);">${inst.anchors4h.SUP_4H.toFixed(spec.decimals)}</strong></div>
-        </div>`;
-      }
-      h += `<div>1H: ${inst.structure.trend}${inst.htfStructure ? ' | 4H: ' + inst.htfStructure.trend : ''}</div>`;
-      if (inst.rsi) h += `<div>RSI: ${inst.rsi.toFixed(1)} | ATR: ${inst.atr ? inst.atr.toFixed(spec.decimals) : '—'}</div>`;
-      const obCount = (inst.zones.ob?.nearestBull ? 1 : 0) + (inst.zones.ob?.nearestBear ? 1 : 0);
-      const fvgCount = (inst.zones.fvg?.nearestBull ? 1 : 0) + (inst.zones.fvg?.nearestBear ? 1 : 0);
-      h += `<div>OB: ${obCount} | FVG: ${fvgCount}</div>`;
-      h += `<div>⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
-      $('chartPreview').innerHTML = h;
-      $('runBtn').disabled = false;
-      showToast('✅ Data ready');
-      const s = await fetchPublicRetailSentiment(pair, { force: true });
-      renderSentimentWidget(s, pair);
-      updateActiveAlertsSummary();
+    const m5 = await get('data5M', '5m');
+    const m15 = await get('data15M', '15m');
+    const h1 = await get('data1H', '1h');
+    const h4 = await get('data4H', '4h');
+    if (!m15.length || !m5.length) {
+      $('chartPreview').innerHTML = `<div class="error-box">❌ Hakuna candles za LEO.<br><small>${esc(lastDataError)}</small></div>`;
+      return;
     }
-  } catch (e) { showToast(`❌ ${e.message}`); }
-  finally { btn.disabled = false; btn.innerHTML = '📊 Fetch All Data'; }
+    const mtfData = computeMTFIndicators({ m5, m15, h1, h4 }, pair);
+    const lp = parseFloat($('livePrice').value) || m15.at(-1).close;
+    window.marketData = { pair, m5, m15, h1, h4, mtf: mtfData, fetchedAt: Date.now(), sameDay: true };
+    const spec = PAIR_SPECS[pair];
+    const kz = getKillzoneState();
+    const todayHighLow = { high: Math.max(...m15.map(c => c.high)), low: Math.min(...m15.map(c => c.low)) };
+    let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)} — SAME-DAY</div>`;
+    h += `<div style="font-size:10px;color:var(--yellow);margin-top:4px;">📅 M5: ${m5.length} • M15: ${m15.length} • H1: ${h1.length} • H4: ${h4.length} bars</div>`;
+    h += `<div style="font-size:11px;margin-top:6px;">📊 Today H: <strong style="color:var(--red);">${todayHighLow.high.toFixed(spec.decimals)}</strong> | L: <strong style="color:var(--green);">${todayHighLow.low.toFixed(spec.decimals)}</strong></div>`;
+    h += `<div style="font-size:11px;margin-top:4px;">⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
+    h += `<div style="margin-top:10px;">${renderMTFMatrix(mtfData, pair)}</div>`;
+    $('chartPreview').innerHTML = h;
+    if (m15.length >= 5 && m5.length >= 5) {
+      $('runBtn').disabled = false;
+      showToast(`✅ Same-day ready (M5: ${m5.length}, M15: ${m15.length})`);
+    }
+    const s = await fetchPublicRetailSentiment(pair, { force: true });
+    renderSentimentWidget(s, pair);
+    updateActiveAlertsSummary();
+  } catch (e) {
+    showToast(`❌ ${e.message}`, 5000);
+  } finally { btn.disabled = false; btn.innerHTML = '📊 Fetch TODAY Only'; }
 }
 
-/* ═══ SCREENSHOT ═══ */
+/* ═══ MTF VIEW ═══ */
+async function fetchMTFOnly() {
+  const pair = $('mtfPair').value;
+  const c = $('mtfContainer');
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Fetching...</div>';
+  try {
+    const m5 = await fetchOHLC(pair, '5m', 500, true, true) || [];
+    const m15 = await fetchOHLC(pair, '15m', 500, true, true) || [];
+    const h1 = await fetchOHLC(pair, '1h', 500, true, true) || [];
+    const h4 = await fetchOHLC(pair, '4h', 500, true, true) || [];
+    const mtfData = computeMTFIndicators({ m5, m15, h1, h4 }, pair);
+    c.innerHTML = renderMTFMatrix(mtfData, pair);
+  } catch (e) { c.innerHTML = `<div class="error-box">❌ ${esc(e.message)}</div>`; }
+}
+function renderMTFView() {
+  if (window.marketData?.mtf) $('mtfContainer').innerHTML = renderMTFMatrix(window.marketData.mtf, window.marketData.pair);
+  else fetchMTFOnly();
+}
+
+/* ═══ CHART ANALYSIS ═══ */
 let ssPriceMeta = null;
+let uploadedCharts = { m5: null, m15: null, h1: null, h4: null };
+
+function switchCATab(tab) {
+  const tabs = document.querySelectorAll('.ca-tab');
+  const labels = ['new', 'history', 'guide'];
+  tabs.forEach((el, i) => el.classList.toggle('active', labels[i] === tab));
+  $('caTab-new').style.display = tab === 'new' ? 'block' : 'none';
+  $('caTab-history').style.display = tab === 'history' ? 'block' : 'none';
+  $('caTab-guide').style.display = tab === 'guide' ? 'block' : 'none';
+  if (tab === 'history') renderCAHistory();
+}
+function renderCAHistory() {
+  const c = $('caHistoryContainer');
+  if (!c) return;
+  const h = loadHist().filter(r => r.source && r.source.startsWith('chart_analysis'));
+  if (!h.length) { c.innerHTML = '<div class="ca-desc" style="border-color:var(--cyan);">Hakuna Chart Analysis bado.</div>'; return; }
+  c.innerHTML = h.slice(0, 20).map(r => {
+    const spec = PAIR_SPECS[r.pair] || { decimals: 2 };
+    const isBuy = r.action === 'BUY';
+    return `<div style="padding:12px;background:#0d1220;border:1px solid rgba(51,65,85,.5);border-radius:12px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="color:${isBuy ? 'var(--green)' : 'var(--red)'};">${esc(r.action)} ${esc(r.pair)}</strong>
+        <span style="font-size:10px;color:var(--muted);">${r.conf || 0}%</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">Entry: ${Number(r.entry).toFixed(spec.decimals)}</div>
+      <div style="font-size:10px;color:var(--muted);">${esc(r.date)}</div>
+    </div>`;
+  }).join('');
+}
+function toggleCapitalPanel() {
+  const p = $('capitalPanel');
+  if (p) p.classList.toggle('open');
+  const bal = $('caBalance'), risk = $('caRiskPct');
+  if (bal && !bal.value) bal.value = getBalance();
+  if (risk && !risk.value) risk.value = getRiskPct();
+}
+function saveCapital() {
+  const b = parseFloat($('caBalance').value) || 1000;
+  const r = parseFloat($('caRiskPct').value) || 1;
+  store.set(STORAGE_KEYS.BALANCE, String(b));
+  store.set(STORAGE_KEYS.RISK_PCT, String(r));
+  showToast(`✅ Balance $${b}, Risk ${r}%`);
+}
 function onSSManualPrice() {
   const v = parseFloat($('ssLivePrice').value);
   ssPriceMeta = v > 0 ? { pair: $('ssPair').value, manual: true, ts: Date.now() } : null;
-  const st = $('ssPriceStatus');
-  if (st) { st.className = 'price-status manual'; $('ssPriceStatusText').innerHTML = '✏️'; $('ssPriceTime').innerText = new Date().toLocaleTimeString(); }
 }
 async function fetchSSLivePrice() {
   const pair = $('ssPair').value, spec = PAIR_SPECS[pair];
   if (!spec) return;
   const btn = $('ssRefreshBtn'), st = $('ssPriceStatus');
   if (!btn || !st) return;
-  btn.disabled = true; btn.innerHTML = '<span class="spinner-white"></span>';
-  st.className = 'price-status loading'; $('ssPriceStatusText').innerHTML = '⏳';
+  btn.disabled = true; btn.innerHTML = '⏳';
   try {
     const price = await getLivePrice(pair);
     $('ssLivePrice').value = price.toFixed(spec.decimals);
@@ -1604,14 +1809,14 @@ async function fetchSSLivePrice() {
     $('ssPriceStatusText').innerHTML = `✅ ${price.toFixed(spec.decimals)}`;
     $('ssPriceTime').innerText = new Date().toLocaleTimeString();
   } catch (e) {
-    st.className = 'price-status error'; $('ssPriceStatusText').innerHTML = `❌ ${esc(e.message)}`;
-  } finally { btn.disabled = false; btn.innerHTML = '🔄 Refresh'; }
+    st.className = 'price-status error';
+    $('ssPriceStatusText').innerHTML = `❌ ${esc(e.message)}`;
+  } finally { btn.disabled = false; btn.innerHTML = '🔄'; }
 }
 async function onSSPairChange() { $('ssLivePrice').value = ''; ssPriceMeta = null; fetchSSLivePrice(); }
 
-let uploadedScreenshots = { m15: null, h1: null, h4: null };
-function setupScreenshotUploads() {
-  ['m15', 'h1', 'h4'].forEach(tf => {
+function setupChartUploads() {
+  ['h4', 'h1', 'm15', 'm5'].forEach(tf => {
     const inp = $(`ssInput-${tf}`);
     if (!inp || inp.dataset.bound) return;
     inp.dataset.bound = '1';
@@ -1620,92 +1825,433 @@ function setupScreenshotUploads() {
       if (f.size > 5 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 5MB`); return; }
       const r = new FileReader();
       r.onload = ev => {
-        uploadedScreenshots[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
+        uploadedCharts[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
         const img = $(`ssImg-${tf}`); if (img) img.src = ev.target.result;
         const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'block';
-        const box = $(`tfBox-${tf}`); if (box) box.classList.add('has-image');
-        updateSSUploadStatus();
+        const lbl = $(`caUpload-${tf}`); if (lbl) lbl.classList.add('has-image');
+        updateChartUploadStatus();
       };
       r.readAsDataURL(f);
     });
   });
 }
-function updateSSUploadStatus() {
-  const c = Object.values(uploadedScreenshots).filter(Boolean).length, s = $('ssUploadStatus');
-  if (!s) return;
-  s.innerHTML = `📤 Uploaded: <strong>${c}/3</strong>`;
-  s.style.borderColor = c === 3 ? 'var(--green)' : c > 0 ? 'var(--yellow)' : 'var(--blue)';
+function clearSS(tf) {
+  uploadedCharts[tf] = null;
+  const inp = $(`ssInput-${tf}`); if (inp) inp.value = '';
+  const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'none';
+  const lbl = $(`caUpload-${tf}`); if (lbl) lbl.classList.remove('has-image');
+  updateChartUploadStatus();
+}
+function updateChartUploadStatus() {
+  const count = Object.values(uploadedCharts).filter(Boolean).length;
+  const el = $('caUploadCount'); if (el) el.textContent = `${count}/4`;
   const btn = $('analyzeSSBtn');
   if (btn) {
     const hasKey = !!(getGeminiKey() || getMistralKey());
-    btn.disabled = c === 0 || !hasKey;
-    if (!hasKey) s.innerHTML += ' — <span style="color:var(--red);">Weka API key (Settings)</span>';
+    const hasRequired = !!uploadedCharts.h4;
+    btn.disabled = !hasRequired || !hasKey;
   }
 }
-function updateSSModeInfo() {
-  const el = $('ssModeInfo'); if (!el) return;
-  el.innerHTML = $('ssMode').value === 'combined' ? '⚡ Combined' : '🔍 Separate';
-}
-function clearAllScreenshots() {
-  uploadedScreenshots = { m15: null, h1: null, h4: null };
-  ['m15', 'h1', 'h4'].forEach(tf => {
-    const inp = $(`ssInput-${tf}`); if (inp) inp.value = '';
-    const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'none';
-    const box = $(`tfBox-${tf}`); if (box) box.classList.remove('has-image');
-  });
-  updateSSUploadStatus();
-  const rc = $('ssResultsContainer'); if (rc) rc.style.display = 'none';
-}
+function clearAllScreenshots() { ['m5', 'm15', 'h1', 'h4'].forEach(clearSS); }
+
 async function analyzeAllScreenshots() {
   if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key (Settings).'); return; }
-  if (!Object.values(uploadedScreenshots).some(Boolean)) { alert('Upload angalau 1.'); return; }
+  if (!uploadedCharts.h4) { alert('4H chart ni required.'); return; }
   const pair = $('ssPair').value;
   const lp = parseFloat($('ssLivePrice').value);
-  const spec = PAIR_SPECS[pair];
-  if (!(lp > 0)) { alert('Weka bei.'); return; }
+  if (!(lp > 0)) { alert('Weka bei (bonyeza Refresh).'); return; }
 
   const btn = $('analyzeSSBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Analyzing...';
-  const container = $('ssResultsContainer');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+
+  const resultsWrap = $('ssResultsContainer');
+  resultsWrap.style.display = 'block';
   renderMastersLoading('ssResultsContainer');
+  resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   try {
-    const shotList = [['m15', 'M15'], ['h1', 'H1'], ['h4', 'H4']]
-      .filter(([k]) => uploadedScreenshots[k])
-      .map(([k, label]) => ({ ...uploadedScreenshots[k], label }));
+    const ordered = [
+      ['h4', '4H (Higher TF Bias - REQUIRED)'],
+      ['h1', '1H (Intraday Structure)'],
+      ['m15', '15M (Setup TF)'],
+      ['m5', '5M (ENTRY CONFIRMATION)']
+    ].filter(([k]) => uploadedCharts[k]);
 
     const userPrompt = `PAIR: ${pair}
 CURRENT PRICE: ${lp}
 SESSION (UTC): ${new Date().toUTCString()}
+MODE: CHART ANALYSIS v13.2 — SAME-DAY INTRADAY
+HIERARCHY: ${ordered.map(o => o[1]).join(' → ')}
 
-Analyze the attached MTF screenshots (M15, H1, H4) and return the strict JSON.`;
+Analyze the attached MTF screenshots. 4H = bias. 5M = entry confirmation. Return the strict JSON.`;
 
     const parts = [{ text: MASTERS_ANALYSIS_SYSTEM_PROMPT + '\n\n' + userPrompt }];
-    shotList.forEach(im => { parts.push({ text: `\n${im.label}:` }); parts.push({ inline_data: { mime_type: im.mimeType, data: im.base64 } }); });
+    ordered.forEach(([k, label]) => {
+      parts.push({ text: `\n📸 ${label}:` });
+      parts.push({ inline_data: { mime_type: uploadedCharts[k].mimeType, data: uploadedCharts[k].base64 } });
+    });
 
     let r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, 120000, false);
     const firstErr = r.err;
     if (!r.result) {
       const messages = [{ role: 'system', content: MASTERS_ANALYSIS_SYSTEM_PROMPT }];
       const content = [{ type: 'text', text: userPrompt }];
-      shotList.forEach(im => { content.push({ type: 'text', text: `\n📸 ${im.label}:` }); content.push({ type: 'image_url', image_url: { url: `data:${im.mimeType};base64,${im.base64}` } }); });
+      ordered.forEach(([k, label]) => {
+        content.push({ type: 'text', text: `\n📸 ${label}:` });
+        content.push({ type: 'image_url', image_url: { url: `data:${uploadedCharts[k].mimeType};base64,${uploadedCharts[k].base64}` } });
+      });
       messages.push({ role: 'user', content });
       r = await callMistral(getList('MISTRAL_VISION', DEFAULTS.mistralVision), messages, 4096, 120000);
     }
-
     if (!r.result) throw new Error(firstErr || r.err || 'Vision analysis failed');
 
     renderMastersAnalysis(r.result, 'ssResultsContainer', pair);
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 
     const dir = String(r.result.main_signal?.direction || '').toUpperCase();
     if (dir.includes('BUY') || dir.includes('SELL')) {
-      setTimeout(() => autoTrackFromMasters(pair, r.result, lp, null), 500);
+      setTimeout(() => autoTrackFromMasters(pair, r.result, lp), 500);
     }
+
+    const spec = PAIR_SPECS[pair];
+    if (dir.includes('BUY')) speakText(`Nunua ${spec.spoken}.`);
+    else if (dir.includes('SELL')) speakText(`Uza ${spec.spoken}.`);
+    else speakText('Hakuna setup.');
+
   } catch (e) {
     showToast(`❌ ${e.message}`, 5000);
     renderMastersError(e, 'ssResultsContainer');
-  } finally { btn.disabled = false; btn.innerHTML = '🔍 ANALYZE'; }
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="star">★</span> GET MULTI-TIMEFRAME ANALYSIS';
+  }
+}
+
+/* ═══ RENDER MASTERS ANALYSIS ═══ */
+function dirClass(dir) {
+  const d = String(dir || '').toLowerCase();
+  if (d.includes('strong sell')) return 'strong-sell';
+  if (d.includes('sell')) return 'sell';
+  if (d.includes('strong buy')) return 'strong-buy';
+  if (d.includes('buy')) return 'buy';
+  return 'neutral';
+}
+function dirTextClass(dir) {
+  const d = String(dir || '').toLowerCase();
+  if (d.includes('sell')) return 'sell';
+  if (d.includes('buy')) return 'buy';
+  return 'neutral';
+}
+function statusClass(status) {
+  const s = String(status || '').toLowerCase();
+  if (s === 'strong pass') return 'strong-pass';
+  if (s === 'pass') return 'pass';
+  return 'reject';
+}
+function fmtMoney(n, currency = 'USD') {
+  const num = Number(n);
+  if (!Number.isFinite(num)) return '—';
+  return currency === 'TZS' ? `${Math.round(num).toLocaleString('en-US')} TZS` : `$${num.toFixed(2)}`;
+}
+function fmtPrice(x, decimals = 5) {
+  const n = parseFloat(x);
+  return Number.isFinite(n) ? n.toFixed(decimals) : '—';
+}
+function fmtRR(raw) {
+  if (raw == null || raw === '') return '—';
+  const s = String(raw).trim();
+  if (s.includes(':')) return s;
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? `1:${n}` : s;
+}
+function renderCheck(label, ok) {
+  const passed = ok === true;
+  const cls = passed ? 'pass' : 'fail';
+  return `<div class="m-check ${cls}">
+    <div class="m-check-icon ${cls}">${passed ? '✓' : '✕'}</div>
+    <div class="m-check-label">${esc(label)}</div>
+    <div class="m-check-value ${cls}">${passed ? 'CONFIRMED' : 'NOT MET'}</div>
+  </div>`;
+}
+function renderSpecialist(icon, name, body, cls) {
+  return `<div class="m-specialist ${cls}">
+    <div class="m-specialist-head"><div class="m-specialist-icon">${icon}</div><div>${esc(name)}</div></div>
+    <div class="m-specialist-body">${esc(body || 'No analysis.')}</div>
+  </div>`;
+}
+function renderTF(badge, title, body, cls) {
+  return `<div class="m-tf">
+    <div class="m-tf-badge ${cls}">${badge}</div>
+    <div class="m-tf-body"><div class="m-tf-title">${esc(title)}</div>${esc(body || '—')}</div>
+  </div>`;
+}
+
+function renderMastersAnalysis(data, containerId, pair) {
+  const c = $(containerId || 'resultsContainer');
+  if (!c) return;
+  if (!data) { c.innerHTML = `<div class="m-state">❌ No data</div>`; c.style.display = 'block'; return; }
+  const spec = PAIR_SPECS[pair] || { decimals: 5, pipSize: 0.0001 };
+  const d = spec.decimals;
+  const ms = data.main_signal || {};
+  const bi = data.ballistic_ai_insight || {};
+  const pf = data.pre_flight_protocol || {};
+  const et = data.execution_trade_plan || {};
+  const sc = data.specialist_consultation || {};
+  const mtf = data.multi_timeframe_confluence || {};
+  const psarAI = data.psar_analysis || {};
+  const rsiAI = data.rsi_analysis || {};
+  const finalPlan = data.final_trade_plan || 'Analysis complete.';
+
+  const dirCls = dirClass(ms.direction);
+  const dirTxtCls = dirTextClass(ms.direction);
+  const statusCls = statusClass(ms.status);
+  const conf = Math.max(0, Math.min(100, Number(ms.confidence_percentage) || 0));
+  const pipsVal = parseFloat(bi.pips_identified);
+  const pipsDisplay = Number.isFinite(pipsVal) ? pipsVal.toFixed(1) : '0.0';
+
+  const proj = bi.projections || {};
+  const pickLot = (...keys) => {
+    for (const k of keys) {
+      const v = proj[k];
+      if (v && typeof v === 'object') return { usd: Number(v.usd) || 0, tzs: Number(v.tzs) || 0 };
+    }
+    return { usd: 0, tzs: 0 };
+  };
+  const lot001 = pickLot('lot_001', 'lot001');
+  const lot010 = pickLot('lot_010', 'lot010');
+  const lot100 = pickLot('lot_100', 'lot100');
+
+  const entryP = parseFloat(pf.entry_price);
+  const slP = parseFloat(pf.stop_loss);
+  const balance = getBalance();
+  const riskPct = getRiskPct();
+  const riskAmount = balance * riskPct / 100;
+  const slPips = (Number.isFinite(entryP) && Number.isFinite(slP)) ? Math.abs(entryP - slP) / spec.pipSize : 0;
+  const pv = Number.isFinite(entryP) ? pipValueFor(pair, entryP) : spec.pipValue || 10;
+  const lotSize = (slPips > 0 && pv > 0) ? riskAmount / (slPips * pv) : 0;
+  const calcAvailable = slPips > 0 && lotSize > 0;
+  const checklist = Array.isArray(et.pre_entry_checklist) ? et.pre_entry_checklist.filter(Boolean) : [];
+
+  const mtfData = window.marketData?.pair === pair ? window.marketData.mtf : null;
+  const mtfMatrixHTML = mtfData ? renderMTFMatrix(mtfData, pair) : '';
+
+  const psarRows = ['m5', 'm15', 'h1', 'h4'].map(tf => {
+    const p = psarAI[tf];
+    if (!p) return null;
+    const trendCls = p.trend === 'BULLISH' ? 'bull' : 'bear';
+    return `<tr>
+      <td class="tf-cell">${tf.toUpperCase()}</td>
+      <td class="${trendCls}">${esc(p.trend || '—')}</td>
+      <td>${p.dot_level != null ? Number(p.dot_level).toFixed(d) : '—'}</td>
+    </tr>`;
+  }).filter(Boolean).join('');
+
+  const rsiRows = ['m5', 'm15', 'h1', 'h4'].map(tf => {
+    const v = rsiAI[tf];
+    if (v == null) return null;
+    const num = Number(v);
+    const cls = num >= 70 ? 'rsi-hot' : num <= 30 ? 'rsi-cold' : 'rsi-mid';
+    return `<tr><td class="tf-cell">${tf.toUpperCase()}</td><td class="${cls}">${num.toFixed(1)}</td></tr>`;
+  }).filter(Boolean).join('');
+
+  c.innerHTML = `
+  <div class="masters-wrap">
+    <div class="m-hero ${dirCls}">
+      <div class="m-hero-top">
+        <div style="flex:1;">
+          <div class="m-hero-label">Chart Analysis Signal</div>
+          <div class="m-direction ${dirTxtCls}">${esc(ms.direction || 'NEUTRAL')}</div>
+          <div class="m-exec">⚡ ${esc(ms.execution_type || 'STANDBY')}</div>
+        </div>
+        <div class="m-status-pill ${statusCls}">${esc(ms.status || 'REJECT')}</div>
+      </div>
+      <div class="m-conf-row">
+        <span class="m-conf-label">Conf</span>
+        <span class="m-conf-num">${conf}%</span>
+        <div class="m-conf-bar"><div class="m-conf-fill" style="width:${conf}%"></div></div>
+      </div>
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">02</div><h3>Ballistic AI Insight</h3></div>
+      <div class="m-pips-hero">
+        <div class="m-pips-num">${pipsDisplay}</div>
+        <div class="m-pips-sub">Pips Identified</div>
+      </div>
+      <table class="m-lot-table">
+        <thead><tr><th>Lot</th><th>USD</th><th>TZS</th></tr></thead>
+        <tbody>
+          <tr><td>0.01</td><td class="usd-val">${fmtMoney(lot001.usd)}</td><td class="tzs-val">${fmtMoney(lot001.tzs, 'TZS')}</td></tr>
+          <tr><td>0.10</td><td class="usd-val">${fmtMoney(lot010.usd)}</td><td class="tzs-val">${fmtMoney(lot010.tzs, 'TZS')}</td></tr>
+          <tr><td>1.00</td><td class="usd-val">${fmtMoney(lot100.usd)}</td><td class="tzs-val">${fmtMoney(lot100.tzs, 'TZS')}</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">03</div><h3>MTF Indicators</h3></div>
+      ${mtfMatrixHTML || '<div class="info-box">MTF data haipo.</div>'}
+      ${psarRows ? `
+      <div style="font-size:10px;color:var(--accent);font-weight:900;letter-spacing:.6px;margin:14px 0 6px;">🎯 AI PSAR READ</div>
+      <div class="m-mtf-matrix">
+        <table><thead><tr><th>TF</th><th>Trend</th><th>Dot Level</th></tr></thead>
+        <tbody>${psarRows}</tbody></table>
+      </div>
+      ${psarAI.alignment_summary ? `<div style="margin-top:8px;padding:10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:8px;font-size:11px;color:#fef3c7;"><strong>Alignment:</strong> ${esc(psarAI.alignment_summary)}</div>` : ''}
+      ` : ''}
+      ${rsiRows ? `
+      <div style="font-size:10px;color:var(--purple);font-weight:900;letter-spacing:.6px;margin:14px 0 6px;">📊 AI RSI READ</div>
+      <div class="m-mtf-matrix">
+        <table><thead><tr><th>TF</th><th>RSI(14)</th></tr></thead>
+        <tbody>${rsiRows}</tbody></table>
+      </div>
+      ${rsiAI.interpretation ? `<div style="margin-top:8px;padding:10px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.3);border-radius:8px;font-size:11px;color:#e9d5ff;"><strong>Interpretation:</strong> ${esc(rsiAI.interpretation)}</div>` : ''}
+      ` : ''}
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">04</div><h3>Pre-Flight Protocol</h3></div>
+      <div class="m-checks">
+        ${renderCheck('CHoCH Confirmed', pf.choch_confirmed)}
+        ${renderCheck('Liquidity Swept', pf.liquidity_swept)}
+        ${renderCheck('Retest Confirmed', pf.retest_confirmed)}
+      </div>
+      <div class="m-levels">
+        <div class="m-level entry"><div class="m-level-lbl">Entry</div><div class="m-level-val">${fmtPrice(pf.entry_price, d)}</div></div>
+        <div class="m-level sl"><div class="m-level-lbl">Stop Loss (PSAR)</div><div class="m-level-val">${fmtPrice(pf.stop_loss, d)}</div></div>
+        <div class="m-level tp1"><div class="m-level-lbl">Take Profit 1</div><div class="m-level-val">${fmtPrice(pf.take_profit_1, d)}</div></div>
+        <div class="m-level tp2"><div class="m-level-lbl">Take Profit 2</div><div class="m-level-val">${fmtPrice(pf.take_profit_2, d)}</div></div>
+        <div class="m-level rr"><div class="m-level-lbl">Risk : Reward</div><div class="m-level-val">${esc(fmtRR(pf.rr_ratio))}</div></div>
+      </div>
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">05</div><h3>Execution Plan</h3></div>
+      <div class="m-checklist">
+        ${checklist.length ? checklist.map(item => `<div class="m-checklist-item">${esc(item)}</div>`).join('') : '<div style="font-size:11px;color:var(--muted);">No checklist.</div>'}
+      </div>
+      <div class="m-meta-grid">
+        <div class="m-meta"><div class="m-meta-lbl">Invalidation</div><div class="m-meta-val">${fmtPrice(et.invalidation_level, d)}</div></div>
+        <div class="m-meta"><div class="m-meta-lbl">Breakeven</div><div class="m-meta-val">${Number.isFinite(Number(et.breakeven_trigger_pips)) ? Number(et.breakeven_trigger_pips) : '—'} pips</div></div>
+      </div>
+      <div class="m-trailing-note"><strong>📌 Trailing:</strong> ${esc(et.trailing_stop_notes || 'Trail by M5 PSAR.')}</div>
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">06</div><h3>Position Size</h3></div>
+      ${calcAvailable ? `
+      <div class="m-calc">
+        <div class="m-calc-hero">
+          <div class="m-calc-hero-num">${lotSize.toFixed(3)}</div>
+          <div class="m-calc-hero-sub">Lot Size (${esc(pair)})</div>
+        </div>
+        <div class="m-calc-grid">
+          <div class="m-calc-item"><div class="m-calc-lbl">Balance</div><div class="m-calc-val">$${balance.toFixed(2)}</div></div>
+          <div class="m-calc-item"><div class="m-calc-lbl">Risk ${riskPct}%</div><div class="m-calc-val red">$${riskAmount.toFixed(2)}</div></div>
+          <div class="m-calc-item"><div class="m-calc-lbl">SL Distance</div><div class="m-calc-val">${slPips.toFixed(1)} pips</div></div>
+          <div class="m-calc-item"><div class="m-calc-lbl">Pip Value</div><div class="m-calc-val blue">$${pv.toFixed(2)}</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6;">
+          Entry: <strong>${fmtPrice(entryP, d)}</strong> • SL: <strong>${fmtPrice(slP, d)}</strong><br>
+          Est. loss if SL hit: <strong style="color:var(--red);">$${(lotSize * slPips * pv).toFixed(2)}</strong>
+        </div>
+      </div>
+      ` : `<div class="m-calc-warn">⚠️ Entry/SL hazipo — calculator disabled.</div>`}
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">07</div><h3>Specialists</h3></div>
+      <div class="m-specialists">
+        ${renderSpecialist('📊', 'Price Action', sc.price_action_master, 'price-action')}
+        ${renderSpecialist('🏦', 'Supply & Demand', sc.supply_demand_master, 'supply-demand')}
+        ${renderSpecialist('🎯', 'Market Structure', sc.market_structure_master, 'market-structure')}
+        ${renderSpecialist('🌍', 'Fundamental', sc.fundamental_analyst_master, 'fundamental')}
+      </div>
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">08</div><h3>MTF Confluence & Final</h3></div>
+      <div class="m-mtf">
+        ${renderTF('5M', 'Entry Confirmation', mtf.tf_5m, 'm5')}
+        ${renderTF('15M', 'Setup TF', mtf.tf_15m, 'm15')}
+        ${renderTF('1H', 'Intraday Structure', mtf.tf_1h, 'h1')}
+        ${renderTF('4H', 'Higher TF Bias', mtf.tf_4h, 'h4')}
+      </div>
+      <div style="margin-top:14px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);font-weight:900;margin-bottom:6px;">⚡ FINAL PLAN</div>
+        <div class="m-final">${esc(finalPlan)}</div>
+      </div>
+    </div>
+  </div>`;
+  c.style.display = 'block';
+}
+function renderMastersLoading(containerId) {
+  const c = $(containerId || 'resultsContainer');
+  if (!c) return;
+  c.innerHTML = `<div class="m-state">
+    <div class="big-spinner"></div>
+    <div>Analyzing charts...</div>
+    <div style="font-size:11px;margin-top:6px;color:var(--muted);">4H → 1H → 15M → 5M</div>
+  </div>`;
+  c.style.display = 'block';
+}
+function renderMastersError(err, containerId) {
+  const c = $(containerId || 'resultsContainer');
+  if (!c) return;
+  c.innerHTML = `<div class="m-state" style="border-color:var(--red);color:#fca5a5;">
+    <div style="font-size:24px;">⚠️</div>
+    <div style="font-weight:900;color:var(--red);margin-top:6px;">Analysis Failed</div>
+    <div style="font-size:11px;margin-top:6px;">${esc(err?.message || err || 'Unknown error')}</div>
+  </div>`;
+  c.style.display = 'block';
+}
+
+async function runAnalysis() {
+  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key.'); return; }
+  const md = window.marketData, pair = $('selectedPair').value;
+  if (!md || !md.m15 || md.pair !== pair) { alert('Fetch data kwanza.'); return; }
+  const lp = parseFloat($('livePrice').value);
+  if (!(lp > 0)) { alert('Weka bei.'); return; }
+
+  const spec = PAIR_SPECS[pair];
+  const btn = $('runBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+  renderMastersLoading('resultsContainer');
+  $('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const killzone = getKillzoneState();
+    const todayHighLow = { high: Math.max(...md.m15.map(c => c.high)), low: Math.min(...md.m15.map(c => c.low)) };
+    const ctx = {
+      pair, pipSize: spec.pipSize, decimals: spec.decimals,
+      session_utc: new Date().toUTCString(), killzone,
+      same_day_intraday: {
+        today_high: +todayHighLow.high.toFixed(spec.decimals),
+        today_low: +todayHighLow.low.toFixed(spec.decimals),
+        bars_M5: md.m5.length, bars_M15: md.m15.length
+      },
+      mtf_analysis: {}, parabolic_sar: {}, rsi: {}, current_price: lp
+    };
+    ['m5', 'm15', 'h1', 'h4'].forEach(tf => {
+      const t = md.mtf[tf];
+      if (!t || !t.ok) { ctx.mtf_analysis[tf] = { status: 'INSUFFICIENT' }; return; }
+      ctx.mtf_analysis[tf] = { bars: t.bars, structure: t.structure, sweep: t.sweep, order_blocks: t.ob, fair_value_gaps: t.fvg };
+      ctx.parabolic_sar[tf] = t.psar;
+      ctx.rsi[tf] = t.rsi;
+    });
+    const r = await callMastersAnalysis(pair, lp, ctx, true);
+    if (!r.result) throw new Error(r.err || 'Analysis failed');
+    renderMastersAnalysis(r.result, 'resultsContainer', pair);
+    setTimeout(() => $('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    const dir = String(r.result.main_signal?.direction || '').toUpperCase();
+    if (dir.includes('BUY') || dir.includes('SELL')) autoTrackFromMasters(pair, r.result, lp);
+    if (dir.includes('BUY')) speakText(`Nunua ${spec.spoken}.`);
+    else if (dir.includes('SELL')) speakText(`Uza ${spec.spoken}.`);
+  } catch (e) {
+    showToast(`❌ ${e.message}`, 5000);
+    renderMastersError(e, 'resultsContainer');
+  } finally { btn.disabled = false; btn.innerHTML = '🚀 RUN MASTERS ANALYSIS'; }
 }
 
 /* ═══ TRAP SCAN ═══ */
@@ -1714,34 +2260,27 @@ async function runTrapScan() {
   const c = $('trapContainer');
   const btn = $('trapScanBtn');
   btn.disabled = true; btn.innerHTML = '<span class="spinner-white"></span>';
-  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Scanning...</div>';
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Scanning today...</div>';
   try {
-    const h4 = await fetchOHLC(pair, '4h', 100, true);
-    const m15 = await fetchOHLC(pair, '15m', 200, true);
-    if (!m15) throw new Error(lastDataError || 'Failed');
+    const m15 = await fetchOHLC(pair, '15m', 500, true, true);
+    const m5 = await fetchOHLC(pair, '5m', 500, true, true);
+    if (!m15 || !m5) throw new Error(lastDataError || 'No today data');
     const spec = PAIR_SPECS[pair];
-    const anchors4h = compute4HAnchors(h4, pair);
-    if (!anchors4h?.ok) {
-      c.innerHTML = '<div class="info-box">Hakuna 4H anchors.</div>';
-      return;
-    }
+    const mtf = computeMTFIndicators({ m5, m15, h1: [], h4: [] }, pair);
+    let html = `<div class="info-box">Same-day: M5 ${m5.length}, M15 ${m15.length}</div>`;
+    html += renderMTFMatrix(mtf, pair);
     const ob = detectOrderBlocks(m15, 60);
     const fvg = detectFVG(m15, 60);
-    let html = `<div class="mini-box" style="background:rgba(236,72,153,.06);border-color:rgba(236,72,153,.3);margin-bottom:10px;">
-      <div class="ballistic-header" style="color:var(--pink);">⭐ 4H ANCHORS (${esc(anchors4h.anchorDay)})</div>
-      <div style="font-size:11px;">RES_4H: <strong style="color:var(--red);font-family:ui-monospace,monospace;">${anchors4h.RES_4H.toFixed(spec.decimals)}</strong></div>
-      <div style="font-size:11px;">SUP_4H: <strong style="color:var(--green);font-family:ui-monospace,monospace;">${anchors4h.SUP_4H.toFixed(spec.decimals)}</strong></div>
-    </div>`;
     if (ob.nearestBull || ob.nearestBear) {
-      html += `<div class="mini-box" style="margin-bottom:10px;border-color:var(--cyan);">
-        <div style="font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:.6px;">🧱 ORDER BLOCKS (M15)</div>`;
+      html += `<div class="mini-box" style="margin-top:10px;border-color:var(--cyan);">
+        <div style="font-size:10px;color:var(--cyan);font-weight:900;">🧱 ORDER BLOCKS (M15)</div>`;
       if (ob.nearestBull) html += `<div style="font-size:11px;margin-top:6px;">🟢 Bull OB: <strong>${ob.nearestBull.low.toFixed(spec.decimals)} — ${ob.nearestBull.high.toFixed(spec.decimals)}</strong></div>`;
       if (ob.nearestBear) html += `<div style="font-size:11px;">🔴 Bear OB: <strong>${ob.nearestBear.low.toFixed(spec.decimals)} — ${ob.nearestBear.high.toFixed(spec.decimals)}</strong></div>`;
       html += `</div>`;
     }
     if (fvg.nearestBull || fvg.nearestBear) {
-      html += `<div class="mini-box" style="border-color:var(--purple);">
-        <div style="font-size:10px;color:var(--purple);font-weight:900;letter-spacing:.6px;">⚡ FAIR VALUE GAPS (M15)</div>`;
+      html += `<div class="mini-box" style="margin-top:10px;border-color:var(--purple);">
+        <div style="font-size:10px;color:var(--purple);font-weight:900;">⚡ FAIR VALUE GAPS (M15)</div>`;
       if (fvg.nearestBull) html += `<div style="font-size:11px;margin-top:6px;">🟢 Bull FVG: <strong>${fvg.nearestBull.bottom.toFixed(spec.decimals)} — ${fvg.nearestBull.top.toFixed(spec.decimals)}</strong></div>`;
       if (fvg.nearestBear) html += `<div style="font-size:11px;">🔴 Bear FVG: <strong>${fvg.nearestBear.bottom.toFixed(spec.decimals)} — ${fvg.nearestBear.top.toFixed(spec.decimals)}</strong></div>`;
       html += `</div>`;
@@ -1751,7 +2290,7 @@ async function runTrapScan() {
   finally { btn.disabled = false; btn.innerHTML = '🔍 Scan'; }
 }
 
-/* ═══ ALERTS ═══ */
+/* ═══ ALERTS (FULL) ═══ */
 let audioCtx = null;
 const alertCooldowns = {};
 function ensureAudioCtx() {
@@ -1759,7 +2298,7 @@ function ensureAudioCtx() {
   if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
   return audioCtx;
 }
-function playBeep(kind = 'touch') {
+function playBeep(kind = 'sweep') {
   if (isAlertsMuted()) return;
   const ctx = ensureAudioCtx(); if (!ctx) return;
   const now = ctx.currentTime;
@@ -1799,39 +2338,6 @@ function setAlertThresholdPips(pips) {
   const v = Math.max(1, Math.min(100, parseFloat(pips) || PROXIMITY_PIPS_DEFAULT));
   store.set(ALERT_KEYS.THRESHOLD, String(v));
   const el = $('alertThresholdInput'); if (el) el.value = v;
-  showToast(`✅ ${v} pips`);
-}
-function checkPriceAlerts(currentPrice, anchored, pipSize, pair) {
-  if (!currentPrice || !pair) return;
-  const now = Date.now();
-  const inst = window.marketData?.inst;
-  if (inst?.anchors4h?.ok) {
-    const a4 = inst.anchors4h;
-    const threshold = ANCHOR_4H_BUFFER_PIPS * pipSize;
-    [
-      { key: 'RES_4H', price: a4.RES_4H, kind: 'sweep', label: '4H Anchor Resistance' },
-      { key: 'SUP_4H', price: a4.SUP_4H, kind: 'sweep', label: '4H Anchor Support' }
-    ].forEach(lvl => {
-      if (Math.abs(currentPrice - lvl.price) > threshold) return;
-      const ck = `${pair}:${lvl.key}`;
-      if (now - (alertCooldowns[ck] || 0) < ALERT_COOLDOWN_MS) return;
-      alertCooldowns[ck] = now;
-      fireAlert(lvl, currentPrice, pair);
-    });
-  }
-  if (anchored?.ok) {
-    const threshold = getAlertThresholdPips() * pipSize;
-    [
-      { key: 'PDH', price: anchored.PDH, kind: 'sweep', label: 'PDH Sweep' },
-      { key: 'PDL', price: anchored.PDL, kind: 'sweep', label: 'PDL Sweep' }
-    ].forEach(lvl => {
-      if (Math.abs(currentPrice - lvl.price) > threshold) return;
-      const ck = `${pair}:${lvl.key}`;
-      if (now - (alertCooldowns[ck] || 0) < ALERT_COOLDOWN_MS) return;
-      alertCooldowns[ck] = now;
-      fireAlert(lvl, currentPrice, pair);
-    });
-  }
 }
 function fireAlert(lvl, price, pair) {
   const title = `⚡ ${lvl.label} — ${pair}`;
@@ -1843,8 +2349,6 @@ function fireAlert(lvl, price, pair) {
   }
   if (navigator.vibrate) navigator.vibrate([220, 90, 220]);
 }
-
-/* ═══ ACTIVE ALERTS (wired) ═══ */
 function getActiveAlerts() {
   const alerts = [];
   const pair = $('selectedPair')?.value;
@@ -1852,37 +2356,24 @@ function getActiveAlerts() {
   const spec = PAIR_SPECS[pair];
   if (!pair || !spec || !(price > 0)) return alerts;
 
-  // 1. Pending tracked entries within 2× threshold
   const h = loadHist();
-  const proximityMult = 2;
   h.forEach(r => {
     if (!r.tracked || r.pair !== pair) return;
     if (r.bt && r.bt.status !== 'PENDING') return;
     if (!(r.entry > 0)) return;
     const dist = Math.abs(price - r.entry) / spec.pipSize;
-    if (dist <= getAlertThresholdPips() * proximityMult) {
-      alerts.push({
-        type: 'ENTRY_PROXIMITY', pair: r.pair, action: r.action,
-        entry: r.entry, price, dist: dist.toFixed(1), id: r.id
-      });
+    if (dist <= getAlertThresholdPips() * 2) {
+      alerts.push({ type: 'ENTRY_PROXIMITY', pair: r.pair, action: r.action, entry: r.entry, price, dist: dist.toFixed(1) });
     }
   });
 
-  // 2. 4H anchor proximity
-  const inst = window.marketData?.inst;
-  if (inst?.anchors4h?.ok) {
-    const a4 = inst.anchors4h;
-    const thresh = ANCHOR_4H_BUFFER_PIPS * spec.pipSize * 3;
-    if (Math.abs(price - a4.RES_4H) <= thresh) alerts.push({ type: 'ANCHOR', label: 'RES_4H', pair, price: a4.RES_4H, current: price });
-    if (Math.abs(price - a4.SUP_4H) <= thresh) alerts.push({ type: 'ANCHOR', label: 'SUP_4H', pair, price: a4.SUP_4H, current: price });
-  }
-
-  // 3. PDH/PDL proximity
-  const anchored = window.marketData?.anchored;
-  if (anchored?.ok) {
-    const thresh = getAlertThresholdPips() * spec.pipSize * 1.5;
-    if (Math.abs(price - anchored.PDH) <= thresh) alerts.push({ type: 'ANCHOR', label: 'PDH', pair, price: anchored.PDH, current: price });
-    if (Math.abs(price - anchored.PDL) <= thresh) alerts.push({ type: 'ANCHOR', label: 'PDL', pair, price: anchored.PDL, current: price });
+  const mtf = window.marketData?.mtf;
+  if (mtf?.m15?.psar) {
+    const psarLevel = mtf.m15.psar.sar;
+    const dist = Math.abs(price - psarLevel) / spec.pipSize;
+    if (dist <= getAlertThresholdPips()) {
+      alerts.push({ type: 'PSAR_PROXIMITY', tf: 'M15', price: psarLevel, current: price, dist: dist.toFixed(1) });
+    }
   }
   return alerts;
 }
@@ -1894,14 +2385,12 @@ function updateActiveAlertsSummary() {
   if (!alerts.length) { box.style.display = 'none'; return; }
   box.style.display = 'block';
   list.innerHTML = alerts.slice(0, 6).map(a => {
-    if (a.type === 'ANCHOR') {
-      const spec = PAIR_SPECS[a.pair];
-      return `<div>⚡ <strong>${esc(a.label)}</strong> @ ${a.price.toFixed(spec.decimals)} <span style="opacity:.6;">(sasa ${a.current.toFixed(spec.decimals)})</span></div>`;
+    const spec = PAIR_SPECS[a.pair] || { decimals: 2 };
+    if (a.type === 'PSAR_PROXIMITY') {
+      return `<div>📡 <strong>PSAR ${a.tf}</strong> @ ${a.price.toFixed(spec.decimals)} — ${a.dist} pips</div>`;
     }
-    const spec = PAIR_SPECS[a.pair];
-    return `<div>⏰ <strong>${esc(a.action)} ${esc(a.pair)}</strong> @ ${a.entry.toFixed(spec.decimals)} — <span style="color:var(--yellow);">${a.dist} pips</span></div>`;
+    return `<div>⏰ <strong>${esc(a.action)} ${esc(a.pair)}</strong> @ ${a.entry.toFixed(spec.decimals)} — ${a.dist} pips</div>`;
   }).join('');
-  if (alerts.length > 6) list.innerHTML += `<div style="opacity:.6;">+${alerts.length - 6} zaidi…</div>`;
 }
 function renderActiveAlerts() {
   const c = $('activeAlertsContainer');
@@ -1912,19 +2401,17 @@ function renderActiveAlerts() {
     return;
   }
   c.innerHTML = alerts.map(a => {
-    if (a.type === 'ANCHOR') {
-      const spec = PAIR_SPECS[a.pair];
-      return `<div class="mini-box" style="margin-bottom:8px;border-color:var(--yellow);">
-        <div style="font-size:11px;color:var(--yellow);font-weight:900;">⚡ ANCHOR PROXIMITY</div>
-        <div style="font-size:12px;margin-top:4px;"><strong>${esc(a.label)}</strong> @ ${a.price.toFixed(spec.decimals)}</div>
-        <div style="font-size:11px;color:var(--muted);">Bei sasa: ${a.current.toFixed(spec.decimals)}</div>
+    const spec = PAIR_SPECS[a.pair] || { decimals: 2 };
+    if (a.type === 'PSAR_PROXIMITY') {
+      return `<div class="mini-box" style="margin-bottom:8px;border-color:var(--cyan);">
+        <div style="font-size:11px;color:var(--cyan);font-weight:900;">📡 PSAR ${a.tf} PROXIMITY</div>
+        <div style="font-size:12px;">PSAR dot: ${a.price.toFixed(spec.decimals)} • Bei: ${a.current.toFixed(spec.decimals)}</div>
+        <div style="font-size:11px;color:var(--yellow);">Umbali: ${a.dist} pips</div>
       </div>`;
     }
-    const spec = PAIR_SPECS[a.pair];
     return `<div class="mini-box" style="margin-bottom:8px;border-color:var(--accent);">
       <div style="font-size:11px;color:var(--accent);font-weight:900;">⏰ ENTRY PROXIMITY</div>
-      <div style="font-size:12px;margin-top:4px;"><strong>${esc(a.action)} ${esc(a.pair)}</strong></div>
-      <div style="font-size:11px;color:var(--muted);">Entry: ${a.entry.toFixed(spec.decimals)} • Bei: ${a.price.toFixed(spec.decimals)}</div>
+      <div style="font-size:12px;"><strong>${esc(a.action)} ${esc(a.pair)}</strong> @ ${a.entry.toFixed(spec.decimals)}</div>
       <div style="font-size:11px;color:var(--yellow);">Umbali: ${a.dist} pips</div>
     </div>`;
   }).join('');
@@ -1933,26 +2420,18 @@ function renderActiveAlerts() {
 /* ═══ HISTORY ═══ */
 const loadHist = () => { try { return JSON.parse(store.get(STORAGE_KEYS.HISTORY) || '[]'); } catch (e) { return []; } };
 function saveHist(h) {
-  let arr = h.slice(0, 400);
-  let dropped = false;
-  let attempts = 0;
+  let arr = h.slice(0, 400), dropped = false, attempts = 0;
   while (arr.length && attempts < 10) {
     attempts++;
     try {
       localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(arr));
-      if (dropped) showToast('⚠️ Nafasi imejaa — historia imefupishwa.', 6000);
+      if (dropped) showToast('⚠️ Historia imefupishwa.', 6000);
       return true;
     } catch (e) {
       const before = arr.length;
-      // 1st: strip heavy masters_analysis from records beyond index 20
       arr = arr.map((r, i) => (i > 20 && r.masters_analysis) ? { ...r, masters_analysis: null } : r);
-      // 2nd: still too big? cut by 20%
-      if (arr.length === before && arr.length > 1) {
-        arr = arr.slice(0, Math.max(1, Math.floor(arr.length * 0.8)));
-      } else if (arr.length === 1 && arr[0].masters_analysis) {
-        // 3rd: last resort — strip from the only record
-        arr = [{ ...arr[0], masters_analysis: null }];
-      }
+      if (arr.length === before && arr.length > 1) arr = arr.slice(0, Math.max(1, Math.floor(arr.length * 0.8)));
+      else if (arr.length === 1 && arr[0].masters_analysis) arr = [{ ...arr[0], masters_analysis: null }];
       dropped = true;
       if (arr.length === 0) return false;
     }
@@ -1960,13 +2439,9 @@ function saveHist(h) {
   return false;
 }
 function saveToHistory(r) {
-  const h = loadHist();
-  h.unshift(r);
-  const ok = saveHist(h);
-  updateStats();
-  updateActiveAlertsSummary();
+  const h = loadHist(); h.unshift(r);
+  saveHist(h); updateStats();
   try { if ($('view-history') && $('view-history').style.display !== 'none') loadHistory(); } catch (e) {}
-  return ok;
 }
 function evalRecord(rec, candles) {
   const spec = PAIR_SPECS[rec.pair];
@@ -1995,8 +2470,7 @@ function evalRecord(rec, candles) {
     const last = after.at(-1), mtm = (isBuy ? last.close - entry : entry - last.close) / risk;
     tps.forEach((tp, k) => { if (!models[k] && tp > 0) models[k] = { res: 'EXPIRED', r: mtm, rr: Math.abs(tp - entry) / risk }; });
   }
-  const allRes = models.every(Boolean);
-  return { status: allRes ? 'DONE' : 'PENDING', models, candles: after.length, checkedAt: Date.now() };
+  return { status: models.every(Boolean) ? 'DONE' : 'PENDING', models, candles: after.length, checkedAt: Date.now() };
 }
 let btRunning = false;
 async function updateBacktest() {
@@ -2009,14 +2483,14 @@ async function updateBacktest() {
     const pairs = [...new Set(pend.map(r => r.pair))];
     const errs = []; let changed = false;
     for (const pair of pairs) {
-      const candles = await fetchOHLC(pair, '15m', BT_FETCH_LIMIT, true);
+      const candles = await fetchOHLC(pair, '15m', BT_FETCH_LIMIT, true, false);
       if (!candles) { errs.push(`${pair}: ${lastDataError}`); continue; }
       pend.filter(r => r.pair === pair).forEach(r => {
         const bt = evalRecord(r, candles);
         if (bt) { r.bt = bt; changed = true; }
       });
     }
-    if (changed) { saveHist(h); updateStats(); updateActiveAlertsSummary(); }
+    if (changed) { saveHist(h); updateStats(); }
     if (msg) msg.innerHTML = errs.length ? `<div class="warn-box">⚠️ ${esc(errs.join(' | '))}</div>` : '';
   } catch (e) { if (msg) msg.innerHTML = `<div class="error-box">${esc(e.message)}</div>`; }
   finally { btRunning = false; if ($('view-backtest') && $('view-backtest').style.display !== 'none') renderBacktest(); }
@@ -2073,47 +2547,6 @@ function renderBacktest() {
     <div style="font-size:11px;color:var(--muted);">CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN}</div>`;
 }
 
-/* ═══ ORDER FLOW ═══ */
-async function refreshOrderFlow() {
-  const c = $('orderFlowContainer'), pair = $('selectedPair').value;
-  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Loading...</div>';
-  try {
-    const h4 = await fetchOHLC(pair, '4h', 100);
-    const m15 = await fetchOHLC(pair, '15m', 200);
-    const anchors4h = compute4HAnchors(h4, pair);
-    const spec = PAIR_SPECS[pair];
-    const f = x => x == null ? '—' : Number(x).toFixed(spec.decimals);
-    let html = '';
-    if (anchors4h?.ok) {
-      html += `<div class="mini-box" style="background:rgba(236,72,153,.06);border-color:rgba(236,72,153,.3);margin-bottom:10px;">
-        <div class="ballistic-header" style="color:var(--pink);">⭐ 4H ANCHORS (${esc(anchors4h.anchorDay)})</div>
-        <div style="font-size:11px;">RES_4H: <strong style="color:var(--red);font-family:ui-monospace,monospace;">${f(anchors4h.RES_4H)}</strong></div>
-        <div style="font-size:11px;">SUP_4H: <strong style="color:var(--green);font-family:ui-monospace,monospace;">${f(anchors4h.SUP_4H)}</strong></div>
-      </div>`;
-    }
-    if (Array.isArray(m15)) {
-      const ob = detectOrderBlocks(m15, 60);
-      const fvg = detectFVG(m15, 60);
-      if (ob.nearestBull || ob.nearestBear) {
-        html += `<div class="mini-box" style="margin-bottom:10px;border-color:var(--cyan);">
-          <div style="font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:.6px;">🧱 ORDER BLOCKS (M15)</div>`;
-        if (ob.nearestBull) html += `<div style="font-size:11px;margin-top:6px;">🟢 Bull: <strong>${f(ob.nearestBull.low)} — ${f(ob.nearestBull.high)}</strong></div>`;
-        if (ob.nearestBear) html += `<div style="font-size:11px;">🔴 Bear: <strong>${f(ob.nearestBear.low)} — ${f(ob.nearestBear.high)}</strong></div>`;
-        html += `</div>`;
-      }
-      if (fvg.nearestBull || fvg.nearestBear) {
-        html += `<div class="mini-box" style="border-color:var(--purple);">
-          <div style="font-size:10px;color:var(--purple);font-weight:900;letter-spacing:.6px;">⚡ FAIR VALUE GAPS (M15)</div>`;
-        if (fvg.nearestBull) html += `<div style="font-size:11px;margin-top:6px;">🟢 Bull: <strong>${f(fvg.nearestBull.bottom)} — ${f(fvg.nearestBull.top)}</strong></div>`;
-        if (fvg.nearestBear) html += `<div style="font-size:11px;">🔴 Bear: <strong>${f(fvg.nearestBear.bottom)} — ${f(fvg.nearestBear.top)}</strong></div>`;
-        html += `</div>`;
-      }
-    }
-    c.innerHTML = html || '<div class="info-box">No data.</div>';
-  } catch (e) { c.innerHTML = `<div class="error-box">${esc(e.message)}</div>`; }
-}
-
-/* ═══ RISK CALCULATOR (Journal) — math verified for all asset classes ═══ */
 function calculateRisk() {
   const b = parseFloat($('riskBalance').value) || 1000;
   const r = parseFloat($('riskPercent').value) || 1;
@@ -2126,7 +2559,6 @@ function calculateRisk() {
   const pv = pipValueFor(pair, price);
   const lot = (sl > 0 && pv > 0) ? riskAmount / (sl * pv) : 0;
   const estLossUsd = lot * sl * pv;
-  const unitLabel = (pair === 'BTCUSD' || pair === 'ETHUSD') ? 'lots (1 lot = 1 coin)' : 'lots';
   $('riskResultBox').style.display = 'block';
   $('riskResultText').innerHTML = `
     <div>Balance: <strong>$${b.toFixed(2)}</strong></div>
@@ -2134,11 +2566,11 @@ function calculateRisk() {
     <div>SL: <strong>${sl}</strong> pips @ ${esc(pair)}</div>
     <div>Pip value per 1.0 lot: <strong>$${pv.toFixed(2)}</strong></div>
     <div style="margin-top:10px;font-size:16px;color:var(--accent);">
-      Position Size: <strong>${lot.toFixed(3)}</strong> <span style="font-size:11px;color:var(--muted);">${unitLabel}</span>
+      Position Size: <strong>${lot.toFixed(3)}</strong> lots
     </div>
     <div style="font-size:11px;color:var(--muted);margin-top:6px;">
-      Estimated loss if SL hit: <strong>$${estLossUsd.toFixed(2)}</strong><br>
-      Price used: ${price.toFixed(spec.decimals)} • Pip size: ${spec.pipSize}
+      Est. loss if SL hit: <strong>$${estLossUsd.toFixed(2)}</strong><br>
+      Price used: ${price.toFixed(spec.decimals)}
     </div>`;
 }
 
@@ -2151,7 +2583,6 @@ function loadHistory() {
     c.innerHTML = h.map((r, i) => {
       let badge = '⏳';
       if (r.action === 'NO_TRADE' || r.action === 'HOLD') badge = '—';
-      else if (r.action === 'PENDING_ALERT') badge = '⏰';
       else { const mm = r.bt?.models?.[getBtModel()]; if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛'; }
       const isBuy = r.action === 'BUY', isSell = r.action === 'SELL';
       const color = isBuy ? 'var(--green)' : isSell ? 'var(--red)' : 'var(--yellow)';
@@ -2171,20 +2602,15 @@ function showHistoryDetail(i) {
     const f = x => (x == null || x === 0 || !Number.isFinite(Number(x))) ? '—' : Number(x).toFixed(d);
     let h = `<h3 style="margin-top:0;color:var(--accent);">${esc(r.pair)} — ${esc(r.action)}</h3>
       <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${esc(r.source)} • ${r.conf || 0}%</div>`;
-    if (r.anchors_4h) {
-      h += `<div class="mini-box" style="margin:10px 0;background:rgba(236,72,153,.06);border-color:rgba(236,72,153,.3);">
-        <div style="font-size:10px;color:var(--pink);font-weight:bold;margin-bottom:6px;">⭐ 4H ANCHORS</div>
-        <div style="font-size:11px;">RES_4H: <strong style="color:var(--red);">${f(r.anchors_4h.resistance_2nd_4h)}</strong></div>
-        <div style="font-size:11px;">SUP_4H: <strong style="color:var(--green);">${f(r.anchors_4h.support_2nd_4h)}</strong></div>
-      </div>`;
-    }
     if (r.entry) h += `<table class="tbl"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th></tr><tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td></tr></table>`;
-    if (r.bt?.models) h += `<table class="tbl"><tr><th>Exit</th><th>Result</th><th>R</th></tr>${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? (m.r > 0 ? '+' : '') + m.r.toFixed(2) + 'R' : '—'}</td></tr>`).join('')}</table>`;
+    if (r.rr) h += `<div style="font-size:11px;margin-bottom:8px;"><strong>R:R:</strong> ${esc(r.rr)}</div>`;
+    if (r.reason) h += `<div style="font-size:11px;color:var(--muted);line-height:1.6;">${esc(r.reason)}</div>`;
+    if (r.bt?.models) h += `<table class="tbl" style="margin-top:10px;"><tr><th>Exit</th><th>Result</th><th>R</th></tr>${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? (m.r > 0 ? '+' : '') + m.r.toFixed(2) + 'R' : '—'}</td></tr>`).join('')}</table>`;
     openUniversalModal(h);
   } catch (e) { showToast('❌ ' + e.message); }
 }
-function deleteHistory(i) { if (!confirm('Delete?')) return; const h = loadHist(); h.splice(i, 1); saveHist(h); loadHistory(); updateStats(); updateActiveAlertsSummary(); }
-function clearHistory() { if (!confirm('Clear all?')) return; store.del(STORAGE_KEYS.HISTORY); loadHistory(); updateStats(); updateActiveAlertsSummary(); }
+function deleteHistory(i) { if (!confirm('Delete?')) return; const h = loadHist(); h.splice(i, 1); saveHist(h); loadHistory(); updateStats(); }
+function clearHistory() { if (!confirm('Clear all?')) return; store.del(STORAGE_KEYS.HISTORY); loadHistory(); updateStats(); }
 function updateStats() {
   try {
     const h = loadHist();
@@ -2202,10 +2628,10 @@ function updateStats() {
   } catch (e) {}
 }
 function exportData() {
-  const d = { history: loadHist(), version: '38.4', exportedAt: new Date().toISOString() };
+  const d = { history: loadHist(), version: '39.2', exportedAt: new Date().toISOString() };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
-  a.download = `lutynoel-v38.4-${Date.now()}.json`; a.click();
+  a.download = `lutynoel-v39.2-${Date.now()}.json`; a.click();
 }
 
 /* ═══ AUTH ═══ */
@@ -2246,17 +2672,14 @@ function enterApp(name) {
   $('settingsTwelveKey').value = getTwelveKey() || '';
   $('settingsBalance').value = getBalance();
   $('settingsRiskPct').value = getRiskPct();
-  $('settingsSlMult').value = getNum('SL_MULT', 1.2);
   $('settingsTpMults').value = getTpMults().join(',');
-
+  $('caBalance').value = getBalance();
+  $('caRiskPct').value = getRiskPct();
   setAlertsMuted(isAlertsMuted());
   $('alertThresholdInput').value = getAlertThresholdPips();
-
-  setupScreenshotUploads();
-  updateSSModeInfo();
+  setupChartUploads();
   loadHistory(); updateStats();
   startAutoRefreshPrice(); startAutoBacktest(); warmUpVoice();
-
   showToast(`Welcome ${name}!`);
   onPairChange($('selectedPair').value);
   fetchSSLivePrice();
@@ -2282,12 +2705,11 @@ function logout() {
     $('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${esc(k.name)}</strong>!`;
   } else showLoginForm();
 }
-function saveKeyField(key, id, label) { const k = $(id).value.trim(); if (k) store.set(STORAGE_KEYS[key], k); showToast(`✅ ${label}`); updateSSUploadStatus(); }
+function saveKeyField(key, id, label) { const k = $(id).value.trim(); if (k) store.set(STORAGE_KEYS[key], k); showToast(`✅ ${label}`); updateChartUploadStatus(); }
 function saveRiskSettings() { store.set(STORAGE_KEYS.BALANCE, $('settingsBalance').value); store.set(STORAGE_KEYS.RISK_PCT, $('settingsRiskPct').value); showToast('✅ Saved'); }
 function saveTradeParams() {
   const tp = $('settingsTpMults').value.split(',').map(parseFloat);
   if (tp.length !== 3 || tp.some(x => !(x > 0))) { alert('TP lazima 3 chanya'); return; }
-  store.set(STORAGE_KEYS.SL_MULT, $('settingsSlMult').value);
   store.set(STORAGE_KEYS.TP_MULTS, tp.join(','));
   showToast('✅ Saved');
 }
@@ -2308,11 +2730,15 @@ function navigate(view) {
     if (view === 'history') loadHistory();
     if (view === 'overview') updateStats();
     if (view === 'backtest') { renderBacktest(); updateBacktest(); }
-    if (view === 'orderflow') refreshOrderFlow();
     if (view === 'sentiment') renderMultiSentiment();
     if (view === 'alerts') renderActiveAlerts();
     if (view === 'trap') runTrapScan();
-    if (view === 'screenshot') { setupScreenshotUploads(); updateSSModeInfo(); updateSSUploadStatus(); if (!$('ssLivePrice').value) fetchSSLivePrice(); }
+    if (view === 'mtf') renderMTFView();
+    if (view === 'screenshot') {
+      setupChartUploads();
+      updateChartUploadStatus();
+      if (!$('ssLivePrice').value) fetchSSLivePrice();
+    }
     window.scrollTo(0, 0);
   } catch (e) { showToast('❌ ' + e.message); }
 }
@@ -2334,340 +2760,16 @@ function startAutoRefreshPrice() {
       store.set(`price_${pair}`, String(p));
       $('livePrice').value = p.toFixed(spec.decimals);
       priceMeta = { pair, manual: false, ts: Date.now() };
-      if (window.marketData?.pair === pair) {
-        const anchored = window.marketData.anchored || computeAnchoredLevels(window.marketData.h1, window.marketData.m15, pair);
-        if (anchored?.ok) {
-          window.marketData.anchored = anchored;
-          checkPriceAlerts(p, anchored, spec.pipSize, pair);
-        }
-      }
       updateActiveAlertsSummary();
     } catch (e) {}
   }, PRICE_REFRESH_INTERVAL);
 }
-// Prune stale alert cooldowns every 5 minutes
 setInterval(() => {
   const now = Date.now();
   for (const k in alertCooldowns) {
     if (now - alertCooldowns[k] > ALERT_COOLDOWN_MS * 3) delete alertCooldowns[k];
   }
 }, 5 * 60 * 1000);
-
-/* ═══════════════════════════════════════════════════════════════
-   MASTERS ANALYSIS RENDER — 8-PART LAYOUT with safe fallbacks
-   ═══════════════════════════════════════════════════════════════ */
-function dirClass(dir) {
-  const d = String(dir || '').toLowerCase();
-  if (d.includes('strong sell')) return 'strong-sell';
-  if (d.includes('sell')) return 'sell';
-  if (d.includes('strong buy')) return 'strong-buy';
-  if (d.includes('buy')) return 'buy';
-  return 'neutral';
-}
-function dirTextClass(dir) {
-  const d = String(dir || '').toLowerCase();
-  if (d.includes('sell')) return 'sell';
-  if (d.includes('buy')) return 'buy';
-  return 'neutral';
-}
-function statusClass(status) {
-  const s = String(status || '').toLowerCase();
-  if (s === 'strong pass') return 'strong-pass';
-  if (s === 'pass') return 'pass';
-  return 'reject';
-}
-function fmtMoney(n, currency = 'USD') {
-  const num = Number(n);
-  if (!Number.isFinite(num)) return '—';
-  return currency === 'TZS' ? `${Math.round(num).toLocaleString('en-US')} TZS` : `$${num.toFixed(2)}`;
-}
-function fmtPrice(x, decimals = 5) {
-  const n = parseFloat(x);
-  return Number.isFinite(n) ? n.toFixed(decimals) : '—';
-}
-function fmtRR(raw) {
-  if (raw == null || raw === '') return '—';
-  const s = String(raw).trim();
-  if (s.includes(':')) return s;
-  const n = parseFloat(s);
-  return Number.isFinite(n) ? `1:${n}` : s;
-}
-function renderCheck(label, ok) {
-  const passed = ok === true;
-  const cls = passed ? 'pass' : 'fail';
-  return `<div class="m-check ${cls}">
-    <div class="m-check-icon ${cls}">${passed ? '✓' : '✕'}</div>
-    <div class="m-check-label">${esc(label)}</div>
-    <div class="m-check-value ${cls}">${passed ? 'CONFIRMED' : 'NOT MET'}</div>
-  </div>`;
-}
-function renderSpecialist(icon, name, body, cls) {
-  return `<div class="m-specialist ${cls}">
-    <div class="m-specialist-head"><div class="m-specialist-icon">${icon}</div><div>${esc(name)}</div></div>
-    <div class="m-specialist-body">${esc(body || 'No analysis provided.')}</div>
-  </div>`;
-}
-function renderTF(badge, title, body, cls) {
-  return `<div class="m-tf">
-    <div class="m-tf-badge ${cls}">${badge}</div>
-    <div class="m-tf-body"><div class="m-tf-title">${esc(title)}</div>${esc(body || '—')}</div>
-  </div>`;
-}
-
-function renderMastersAnalysis(data, containerId, pair) {
-  const c = $(containerId || 'resultsContainer');
-  if (!c) return;
-  if (!data) { c.innerHTML = `<div class="m-state">❌ No data</div>`; c.style.display = 'block'; return; }
-
-  const spec = PAIR_SPECS[pair] || { decimals: 5, pipSize: 0.0001, spoken: pair };
-  const d = spec.decimals;
-
-  // Safe extraction — every section falls back if node is missing
-  const ms = data.main_signal || {};
-  const bi = data.ballistic_ai_insight || {};
-  const pf = data.pre_flight_protocol || {};
-  const et = data.execution_trade_plan || {};
-  const sc = data.specialist_consultation || {};
-  const mtf = data.multi_timeframe_confluence || {};
-  const finalPlan = data.final_trade_plan || 'Analysis complete. Manage risk accordingly.';
-
-  const dirCls = dirClass(ms.direction);
-  const dirTxtCls = dirTextClass(ms.direction);
-  const statusCls = statusClass(ms.status);
-  const conf = Math.max(0, Math.min(100, Number(ms.confidence_percentage) || 0));
-
-  // Ballistic AI — safe pips parse (handles "30 pips", 30, 30.5, null)
-  const pipsRaw = bi.pips_identified;
-  const pipsVal = parseFloat(pipsRaw);
-  const pipsDisplay = Number.isFinite(pipsVal) ? pipsVal.toFixed(1) : '0.0';
-
-  const proj = bi.projections || {};
-  const pickLot = (...keys) => {
-    for (const k of keys) {
-      const v = proj[k];
-      if (v && typeof v === 'object') {
-        return { usd: Number(v.usd) || 0, tzs: Number(v.tzs) || 0 };
-      }
-    }
-    return { usd: 0, tzs: 0 };
-  };
-  const lot001 = pickLot('lot_001', 'lot001', '0.01');
-  const lot010 = pickLot('lot_010', 'lot010', '0.10');
-  const lot100 = pickLot('lot_100', 'lot100', '1.00');
-
-  // Section 05 Calculator — position sizing from AI entry/SL
-  const entryP = parseFloat(pf.entry_price);
-  const slP = parseFloat(pf.stop_loss);
-  const balance = getBalance();
-  const riskPct = getRiskPct();
-  const riskAmount = balance * riskPct / 100;
-  const slPips = (Number.isFinite(entryP) && Number.isFinite(slP)) ? Math.abs(entryP - slP) / spec.pipSize : 0;
-  const pv = Number.isFinite(entryP) ? pipValueFor(pair, entryP) : spec.pipValue || 10;
-  const lotSize = (slPips > 0 && pv > 0) ? riskAmount / (slPips * pv) : 0;
-  const calcAvailable = slPips > 0 && lotSize > 0;
-
-  // Pre-entry checklist — safe fallback if AI returns non-array
-  const checklist = Array.isArray(et.pre_entry_checklist) ? et.pre_entry_checklist.filter(Boolean) : [];
-
-  c.innerHTML = `
-  <div class="masters-wrap">
-    <!-- ═══ 01. MAIN SIGNAL HERO ═══ -->
-    <div class="m-hero ${dirCls}">
-      <div class="m-hero-top">
-        <div style="flex:1;">
-          <div class="m-hero-label">Institutional Signal</div>
-          <div class="m-direction ${dirTxtCls}">${esc(ms.direction || 'NEUTRAL')}</div>
-          <div class="m-exec">⚡ ${esc(ms.execution_type || 'STANDBY')}</div>
-        </div>
-        <div class="m-status-pill ${statusCls}">${esc(ms.status || 'REJECT')}</div>
-      </div>
-      <div class="m-conf-row">
-        <span class="m-conf-label">Conf</span>
-        <span class="m-conf-num">${conf}%</span>
-        <div class="m-conf-bar"><div class="m-conf-fill" style="width:${conf}%"></div></div>
-      </div>
-    </div>
-
-    <!-- ═══ 02. BALLISTIC AI INSIGHT ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">02</div><h3>Ballistic AI Insight</h3></div>
-      <div class="m-pips-hero">
-        <div class="m-pips-num">${pipsDisplay}</div>
-        <div class="m-pips-sub">Pips Identified</div>
-      </div>
-      <table class="m-lot-table">
-        <thead><tr><th>Lot Size</th><th>USD</th><th>TZS</th></tr></thead>
-        <tbody>
-          <tr><td>0.01</td><td class="usd-val">${fmtMoney(lot001.usd)}</td><td class="tzs-val">${fmtMoney(lot001.tzs, 'TZS')}</td></tr>
-          <tr><td>0.10</td><td class="usd-val">${fmtMoney(lot010.usd)}</td><td class="tzs-val">${fmtMoney(lot010.tzs, 'TZS')}</td></tr>
-          <tr><td>1.00</td><td class="usd-val">${fmtMoney(lot100.usd)}</td><td class="tzs-val">${fmtMoney(lot100.tzs, 'TZS')}</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ═══ 03. PRE-FLIGHT PROTOCOL ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">03</div><h3>Pre-Flight Protocol</h3></div>
-      <div class="m-checks">
-        ${renderCheck('Change of Character (CHoCH)', pf.choch_confirmed)}
-        ${renderCheck('Liquidity Sweep Detected', pf.liquidity_swept)}
-        ${renderCheck('Retest Confirmed', pf.retest_confirmed)}
-      </div>
-      <div class="m-levels">
-        <div class="m-level entry"><div class="m-level-lbl">Entry</div><div class="m-level-val">${fmtPrice(pf.entry_price, d)}</div></div>
-        <div class="m-level sl"><div class="m-level-lbl">Stop Loss</div><div class="m-level-val">${fmtPrice(pf.stop_loss, d)}</div></div>
-        <div class="m-level tp1"><div class="m-level-lbl">Take Profit 1</div><div class="m-level-val">${fmtPrice(pf.take_profit_1, d)}</div></div>
-        <div class="m-level tp2"><div class="m-level-lbl">Take Profit 2</div><div class="m-level-val">${fmtPrice(pf.take_profit_2, d)}</div></div>
-        <div class="m-level rr"><div class="m-level-lbl">Risk : Reward Ratio</div><div class="m-level-val">${esc(fmtRR(pf.rr_ratio))}</div></div>
-      </div>
-    </div>
-
-    <!-- ═══ 04. EXECUTION TRADE PLAN ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">04</div><h3>Execution Trade Plan</h3></div>
-      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;margin-bottom:8px;">Pre-Entry Checklist</div>
-      <div class="m-checklist">
-        ${checklist.length ? checklist.map(item => `<div class="m-checklist-item">${esc(item)}</div>`).join('') : '<div style="font-size:11px;color:var(--muted);">No checklist provided.</div>'}
-      </div>
-      <div class="m-meta-grid">
-        <div class="m-meta"><div class="m-meta-lbl">Invalidation Level</div><div class="m-meta-val">${fmtPrice(et.invalidation_level, d)}</div></div>
-        <div class="m-meta"><div class="m-meta-lbl">Breakeven Trigger</div><div class="m-meta-val">${Number.isFinite(Number(et.breakeven_trigger_pips)) ? Number(et.breakeven_trigger_pips) : '—'} pips</div></div>
-      </div>
-      <div class="m-trailing-note"><strong>📌 Trailing Stop Strategy:</strong><br>${esc(et.trailing_stop_notes || 'Move SL to breakeven at TP1, then trail by structure.')}</div>
-    </div>
-
-    <!-- ═══ 05. POSITION SIZE CALCULATOR ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">05</div><h3>Position Size Calculator</h3></div>
-      ${calcAvailable ? `
-      <div class="m-calc">
-        <div class="m-calc-hero">
-          <div class="m-calc-hero-num">${lotSize.toFixed(3)}</div>
-          <div class="m-calc-hero-sub">Lot Size (${esc(pair)})</div>
-        </div>
-        <div class="m-calc-grid">
-          <div class="m-calc-item"><div class="m-calc-lbl">Account Balance</div><div class="m-calc-val">$${balance.toFixed(2)}</div></div>
-          <div class="m-calc-item"><div class="m-calc-lbl">Risk (${riskPct}%)</div><div class="m-calc-val red">$${riskAmount.toFixed(2)}</div></div>
-          <div class="m-calc-item"><div class="m-calc-lbl">SL Distance</div><div class="m-calc-val">${slPips.toFixed(1)} pips</div></div>
-          <div class="m-calc-item"><div class="m-calc-lbl">Pip Value (1.0 lot)</div><div class="m-calc-val blue">$${pv.toFixed(2)}</div></div>
-        </div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.6;">
-          Entry: <strong>${fmtPrice(entryP, d)}</strong> • SL: <strong>${fmtPrice(slP, d)}</strong><br>
-          Est. loss if SL hit: <strong style="color:var(--red);">$${(lotSize * slPips * pv).toFixed(2)}</strong>
-        </div>
-      </div>
-      ` : `
-      <div class="m-calc-warn">⚠️ Entry au Stop Loss hazipo kwenye jibu la AI — calculator haiwezi kuhesabu position size. Hakikisha pre_flight_protocol.entry_price na stop_loss zimerudishwa.</div>
-      `}
-    </div>
-
-    <!-- ═══ 06. SPECIALIST CONSULTATION ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">06</div><h3>Specialist Consultation</h3></div>
-      <div class="m-specialists">
-        ${renderSpecialist('📊', 'Price Action Master', sc.price_action_master, 'price-action')}
-        ${renderSpecialist('🏦', 'Supply & Demand Master', sc.supply_demand_master, 'supply-demand')}
-        ${renderSpecialist('🎯', 'Market Structure Master', sc.market_structure_master, 'market-structure')}
-        ${renderSpecialist('🌍', 'Fundamental Analyst Master', sc.fundamental_analyst_master, 'fundamental')}
-      </div>
-    </div>
-
-    <!-- ═══ 07. MTF CONFLUENCE ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">07</div><h3>Multi-Timeframe Confluence</h3></div>
-      <div class="m-mtf">
-        ${renderTF('H4', 'Higher Timeframe Bias', mtf.tf_4h, 'h4')}
-        ${renderTF('H1', 'Medium Timeframe Structure', mtf.tf_1h, 'h1')}
-        ${renderTF('M15', 'Lower Timeframe Trigger', mtf.tf_15m, 'm15')}
-      </div>
-    </div>
-
-    <!-- ═══ 08. FINAL TRADE PLAN ═══ -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">08</div><h3>Final Trade Plan</h3></div>
-      <div class="m-final">${esc(finalPlan)}</div>
-    </div>
-  </div>
-  `;
-  c.style.display = 'block';
-}
-
-function renderMastersLoading(containerId) {
-  const c = $(containerId || 'resultsContainer');
-  if (!c) return;
-  c.innerHTML = `<div class="m-state">
-    <div class="big-spinner"></div>
-    <div>Analyzing institutional confluence...</div>
-    <div style="font-size:11px;margin-top:6px;color:var(--muted);">4 Specialists • MTF Confluence • Ballistic Insight</div>
-  </div>`;
-  c.style.display = 'block';
-}
-function renderMastersError(err, containerId) {
-  const c = $(containerId || 'resultsContainer');
-  if (!c) return;
-  c.innerHTML = `<div class="m-state" style="border-color:var(--red);color:#fca5a5;">
-    <div style="font-size:24px;">⚠️</div>
-    <div style="font-weight:900;color:var(--red);margin-top:6px;">Analysis Failed</div>
-    <div style="font-size:11px;margin-top:6px;">${esc(err?.message || err || 'Unknown error')}</div>
-  </div>`;
-  c.style.display = 'block';
-}
-
-/* ═══ RUN MASTERS ANALYSIS ═══ */
-async function runAnalysis() {
-  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key (Settings).'); return; }
-  const md = window.marketData, pair = $('selectedPair').value;
-  if (!md || !md.h1 || md.pair !== pair) { alert('Fetch data kwanza.'); return; }
-  const lp = parseFloat($('livePrice').value);
-  if (!(lp > 0)) { alert('Weka bei.'); return; }
-  if (!priceMeta || priceMeta.pair !== pair) { alert('Bei haijahakikiwa. Refresh.'); return; }
-
-  const spec = PAIR_SPECS[pair];
-  const { h4, h1, m15 } = md;
-  const anchored = md.anchored && md.anchored.ok ? md.anchored : computeAnchoredLevels(h1, m15, pair);
-  md.anchored = anchored;
-
-  const inst = computeInstitutionalMetrics(h4, h1, m15, lp, anchored, pair);
-  const htfBias = getHTFBias(h4, h1);
-
-  const btn = $('runBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Masters analyzing...';
-
-  renderMastersLoading('resultsContainer');
-  $('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  try {
-    const marketContext = buildMarketContext(pair, inst, anchored, htfBias);
-    const r = await callMastersAnalysis(pair, lp, marketContext);
-    if (!r.result) throw new Error(r.err || 'Analysis failed');
-
-    renderMastersAnalysis(r.result, 'resultsContainer', pair);
-
-    // Scroll to results after render
-    setTimeout(() => {
-      $('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-
-    // Auto-track for backtest
-    const dir = String(r.result.main_signal?.direction || '').toUpperCase();
-    if (dir.includes('BUY') || dir.includes('SELL')) {
-      autoTrackFromMasters(pair, r.result, lp, inst);
-    }
-
-    // Voice announce
-    const conf = r.result.main_signal?.confidence_percentage ?? 0;
-    if (dir.includes('BUY')) speakText(`Nunua ${spec.spoken}. Uhakika asilimia ${conf}.`);
-    else if (dir.includes('SELL')) speakText(`Uza ${spec.spoken}. Uhakika asilimia ${conf}.`);
-    else speakText('Hakuna setup wazi. Subiri.');
-
-  } catch (e) {
-    showToast(`❌ ${e.message}`, 5000);
-    renderMastersError(e, 'resultsContainer');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '🚀 RUN MASTERS ANALYSIS';
-  }
-}
 
 /* ═══ PWA ═══ */
 function setupPWA() {
