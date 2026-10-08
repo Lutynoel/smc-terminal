@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v40.0 — Masters Micro v14.0</title>
+<title>Lutynoel.fx v40.1 — Chart Analysis + Volume Delta</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,15 +11,15 @@
 <meta name="apple-mobile-web-app-title" content="Lutynoel.fx">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#0b1220;--border:#334155;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15;--cyan:#06b6d4;--pink:#ec4899;--inst:#8b5cf6}
+:root{--bg:#0f172a;--card:#1e293b;--card2:#0b1220;--border:#334155;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;--yellow:#facc15;--cyan:#06b6d4;--pink:#ec4899;--inst:#8b5cf6;--surface:#1a1f2e}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{background:radial-gradient(1000px 400px at 50% -10%,rgba(251,191,36,.06),transparent 60%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px;min-height:100%}
+body{background:#0a0e17;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;line-height:1.5;font-size:14px;min-height:100%}
 .auth-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
 .auth-box{background:var(--card);border:1px solid var(--border);padding:25px;border-radius:16px;width:100%;max-width:460px;box-shadow:0 20px 60px -20px rgba(0,0,0,.7)}
 .auth-title{text-align:center;font-size:22px;font-weight:bold;margin-bottom:5px}
 .auth-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:20px}
 #appInterface{display:none;padding-bottom:40px}
-header{display:flex;justify-content:space-between;align-items:center;background:var(--card);padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+header{display:flex;justify-content:space-between;align-items:center;background:#0a0e17;padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));border-bottom:1px solid rgba(51,65,85,.4);position:sticky;top:0;z-index:100}
 .logo-area{display:flex;align-items:center;gap:10px;font-weight:bold;font-size:17px;color:var(--accent)}
 .logo-icon{background:var(--accent);color:#000;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:bold;font-size:16px}
 .header-icons{display:flex;align-items:center;gap:10px}
@@ -76,46 +76,97 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .tbl th{color:var(--muted);font-size:10px;text-transform:uppercase;text-align:right;padding:6px 4px;border-bottom:1px solid var(--border)}
 .tbl td{text-align:right;padding:7px 4px;border-bottom:1px solid #1a2438}
 .tbl th:first-child,.tbl td:first-child{text-align:left}
-.pos{color:var(--green)}.neg{color:var(--red)}
 
-/* ═══ NEWS ALERT BANNER ═══ */
-.news-banner{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(249,115,22,.1));border:2px solid var(--red);border-radius:12px;padding:14px;margin-bottom:12px;display:none;animation:pulseNews 2s infinite}
+/* ═══ NEWS BANNER ═══ */
+.news-banner{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(249,115,22,.1));border:2px solid var(--red);border-radius:12px;padding:14px;margin-bottom:12px;display:none}
 .news-banner.active{display:block}
-.news-banner.warning{background:linear-gradient(135deg,rgba(249,115,22,.18),rgba(250,204,21,.08));border-color:var(--orange);animation:none}
-@keyframes pulseNews{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+.news-banner.warning{background:linear-gradient(135deg,rgba(249,115,22,.18),rgba(250,204,21,.08));border-color:var(--orange)}
 .news-banner-head{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;color:#fca5a5;letter-spacing:.6px;margin-bottom:8px}
-.news-banner-head .news-icon{font-size:20px}
 .news-event{padding:8px 10px;background:rgba(11,18,32,.5);border-radius:8px;margin-bottom:6px;font-size:11px;line-height:1.5;border-left:3px solid var(--red)}
 .news-event.warning{border-left-color:var(--orange)}
 .news-event-title{font-weight:900;color:var(--text);margin-bottom:2px}
 .news-event-meta{color:var(--muted);font-family:ui-monospace,monospace;font-size:10px}
 .news-countdown{color:var(--yellow);font-weight:900}
 
-/* ═══ MICRO ACCOUNT RISK PANEL ═══ */
-.micro-panel{background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(59,130,246,.05));border:1px solid rgba(6,182,212,.35);border-radius:12px;padding:14px;margin-bottom:12px}
-.micro-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.micro-panel-title{font-size:12px;font-weight:900;color:var(--cyan);letter-spacing:.8px;text-transform:uppercase}
-.micro-panel-balance{font-size:18px;font-weight:900;font-family:ui-monospace,monospace;color:var(--green)}
-.micro-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.micro-item{background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-.micro-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;margin-bottom:4px}
-.micro-val{font-size:14px;font-weight:900;font-family:ui-monospace,monospace;color:var(--text)}
-.micro-val.green{color:var(--green)}
-.micro-val.red{color:var(--red)}
-.micro-val.orange{color:var(--orange)}
-.micro-warning{padding:10px 12px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);border-radius:10px;font-size:11px;line-height:1.6;color:#fca5a5;margin-top:8px}
+/* ═══ VOLUME DELTA PANEL ═══ */
+.vd-panel{background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(239,68,68,.05));border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px;margin-bottom:12px}
+.vd-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.vd-title{font-size:12px;font-weight:900;color:var(--inst);letter-spacing:.8px;text-transform:uppercase}
+.vd-time{font-size:10px;color:var(--muted);font-family:ui-monospace,monospace}
+.vd-bars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.vd-bar{padding:12px;border-radius:10px;text-align:center}
+.vd-bar.buy{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4)}
+.vd-bar.sell{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4)}
+.vd-bar-lbl{font-size:9px;color:var(--muted);font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+.vd-bar-val{font-size:22px;font-weight:900;font-family:ui-monospace,monospace;margin-top:4px}
+.vd-bar.buy .vd-bar-val{color:var(--green)}
+.vd-bar.sell .vd-bar-val{color:var(--red)}
+.vd-bar-vol{font-size:10px;color:var(--muted);margin-top:2px;font-family:ui-monospace,monospace}
+.vd-ratio{height:16px;border-radius:50px;overflow:hidden;background:#0b1220;border:1px solid var(--border);display:flex;margin:10px 0}
+.vd-ratio-buy{background:linear-gradient(90deg,#10b981,#34d399);transition:width .5s}
+.vd-ratio-sell{background:linear-gradient(90deg,#f87171,#ef4444);transition:width .5s}
+.vd-bias{padding:10px 12px;border-radius:10px;text-align:center;font-size:11px;font-weight:900;letter-spacing:.5px;margin-top:8px}
+.vd-bias.bullish{background:rgba(16,185,129,.15);border:1px solid var(--green);color:var(--green)}
+.vd-bias.bearish{background:rgba(239,68,68,.15);border:1px solid var(--red);color:var(--red)}
+.vd-bias.neutral{background:rgba(148,163,184,.1);border:1px solid var(--muted);color:var(--muted)}
+.vd-reason{font-size:10px;color:var(--muted);margin-top:4px;font-style:italic;font-weight:400;letter-spacing:0}
+.vd-tf-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-top:10px}
+.vd-tf{background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center}
+.vd-tf-lbl{font-size:9px;color:var(--muted);font-weight:800}
+.vd-tf-val{font-size:13px;font-weight:900;font-family:ui-monospace,monospace;margin-top:2px}
 
-/* ═══ PWA INSTALL PROMPT ═══ */
-.pwa-install{background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.06));border:1px solid rgba(139,92,246,.4);border-radius:12px;padding:14px;margin-bottom:12px;display:none}
-.pwa-install.show{display:block}
-.pwa-install-title{font-size:12px;font-weight:900;color:var(--inst);letter-spacing:.6px;margin-bottom:6px}
-.pwa-install-desc{font-size:11px;color:#cbd5e1;line-height:1.6;margin-bottom:10px}
-.pwa-install-btns{display:flex;gap:8px}
-.pwa-install-btns button{flex:1;padding:10px;border-radius:10px;font-weight:900;font-size:11px;letter-spacing:.5px;border:none;cursor:pointer}
-.pwa-install-btns .install{background:var(--inst);color:#fff}
-.pwa-install-btns .later{background:transparent;color:var(--muted);border:1px solid var(--border)}
+/* ═══ CHART ANALYSIS UI ═══ */
+.ca-wrap{background:#0a0e17;min-height:100vh;padding:0}
+.ca-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.ca-subtitle{font-size:11px;color:var(--muted);letter-spacing:.3px}
+.ca-tabs{display:flex;gap:6px;padding:8px 14px 12px;overflow-x:auto}
+.ca-tab{flex:1;padding:10px 14px;border-radius:20px;background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.6);color:var(--muted);font-weight:900;font-size:11px;letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;cursor:pointer;transition:all .2s}
+.ca-tab.active{background:var(--accent);color:#0f172a;border-color:var(--accent)}
+.ca-tab .tab-icon{font-size:14px}
+.ca-card{background:var(--surface);border:1px solid rgba(51,65,85,.4);border-radius:20px;padding:22px 20px;margin:0 12px 16px;box-shadow:0 8px 30px -12px rgba(0,0,0,.5)}
+.ca-title{font-size:22px;font-weight:900;letter-spacing:.5px;margin:0 0 14px;color:var(--text)}
+.ca-title .ca-accent{color:var(--accent)}
+.ca-desc{font-size:13px;color:var(--muted);line-height:1.6;padding-left:12px;border-left:3px solid var(--accent);margin-bottom:18px}
+.ca-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:22px;border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.06);color:var(--accent);font-weight:900;font-size:12px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;margin-bottom:20px}
+.ca-field{margin-bottom:18px}
+.ca-field-label{font-size:10px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.ca-select{background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:16px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
+.ca-select-icon{width:38px;height:38px;border-radius:10px;background:rgba(51,65,85,.6);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);flex-shrink:0}
+.ca-select select{background:transparent;border:none;color:var(--text);font-size:20px;font-weight:900;width:100%;padding:0;margin:0;appearance:none;-webkit-appearance:none;font-family:inherit;cursor:pointer}
+.ca-select select:focus{outline:none}
+.ca-select-arrow{color:var(--muted);font-size:16px}
+.ca-badge{display:inline-block;padding:5px 10px;border-radius:6px;font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;border:1px solid}
+.ca-badge.required{background:rgba(251,191,36,.15);color:var(--accent);border-color:rgba(251,191,36,.4)}
+.ca-badge.confirm{background:rgba(6,182,212,.15);color:var(--cyan);border-color:rgba(6,182,212,.5)}
+.ca-badge.std{background:rgba(139,92,246,.12);color:var(--inst);border-color:rgba(139,92,246,.4);border-radius:20px;padding:5px 12px}
+.ca-badge.optional{background:rgba(148,163,184,.12);color:var(--muted);border-color:rgba(148,163,184,.3)}
+.ca-tf-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid rgba(51,65,85,.35);margin-bottom:14px}
+.ca-tf-label{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:.4px}
+.ca-tf-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(251,191,36,.6)}
+.ca-tf-dot.cyan{background:var(--cyan);box-shadow:0 0 12px rgba(6,182,212,.6)}
+.ca-tf-card{background:var(--surface);border:1px solid rgba(51,65,85,.4);border-radius:20px;padding:20px;margin:0 12px 14px}
 
-/* ═══ MASTERS v14.0 LAYOUT ═══ */
+/* ═══ FULL-SIZE UPLOAD AREA ═══ */
+.ca-upload{display:block;background:#0a0f1a;border:2px dashed rgba(51,65,85,.6);border-radius:14px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ca-upload:hover{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.03)}
+.ca-upload.has-image{border-style:solid;border-color:var(--green);background:rgba(16,185,129,.04);padding:8px;min-height:auto;display:block}
+.ca-upload-icon{width:64px;height:64px;border-radius:16px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;color:var(--accent)}
+.ca-upload-title{font-size:16px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--text);margin-bottom:8px}
+.ca-upload-sub{font-size:12px;color:var(--muted);letter-spacing:.3px}
+.ca-upload input[type=file]{display:none}
+.ca-preview{margin-top:0;display:none;position:relative}
+.ca-preview img{width:100%;height:auto;max-width:none;border-radius:10px;border:1px solid rgba(16,185,129,.4);display:block;object-fit:contain}
+.ca-preview-actions{margin-top:10px;display:flex;gap:8px;justify-content:center}
+.ca-preview-actions button{padding:8px 16px;background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.4);border-radius:8px;font-size:11px;font-weight:bold;letter-spacing:.4px}
+.ca-submit{width:calc(100% - 24px);margin:20px 12px 24px;padding:18px 20px;background:linear-gradient(135deg,#fbbf24,#f59e0b);border:none;border-radius:16px;color:#0f172a;font-size:15px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 12px 32px -8px rgba(251,191,36,.5);cursor:pointer}
+.ca-submit:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;background:#3f3f46;color:#a1a1aa}
+.ca-submit .star{font-size:20px}
+.ca-status-bar{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);padding:0 14px 8px}
+.ca-price-inline{display:flex;gap:8px;margin-top:8px}
+.ca-price-inline input{flex:1;padding:12px;background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:12px;color:#fff;font-size:14px;margin:0}
+.ca-price-inline button{padding:12px 16px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:13px}
+
+/* ═══ MASTERS ANALYSIS LAYOUT ═══ */
 .masters-wrap{display:flex;flex-direction:column;gap:14px}
 .m-hero{border-radius:20px;padding:24px 20px;position:relative;overflow:hidden;border:2px solid var(--border);background:linear-gradient(180deg,#1e293b,#0f172a)}
 .m-hero.strong-sell{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.04));border-color:var(--red)}
@@ -126,9 +177,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .m-hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
 .m-hero-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:800}
 .m-direction{font-size:28px;font-weight:900;letter-spacing:1px;margin:4px 0 8px 0}
-.m-direction.sell{color:var(--red)}
-.m-direction.buy{color:var(--green)}
-.m-direction.neutral{color:var(--yellow)}
+.m-direction.sell{color:var(--red)}.m-direction.buy{color:var(--green)}.m-direction.neutral{color:var(--yellow)}
 .m-exec{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:.8px;background:rgba(51,65,85,.5);color:#cbd5e1;border:1px solid rgba(51,65,85,.8)}
 .m-status-pill{padding:6px 14px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap}
 .m-status-pill.strong-pass{background:rgba(16,185,129,.2);color:var(--green);border:1px solid var(--green)}
@@ -181,14 +230,20 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .m-checklist{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
 .m-checklist-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;padding:8px 10px;border-radius:8px;background:rgba(11,18,32,.5);border-left:3px solid var(--cyan)}
 .m-checklist-item::before{content:"✓";color:var(--cyan);font-weight:900;font-size:13px;flex-shrink:0}
-.m-checklist-item.fail{border-left-color:var(--red)}
-.m-checklist-item.fail::before{content:"✕";color:var(--red)}
 .m-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .m-meta{padding:10px 12px;background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:10px}
 .m-meta-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;margin-bottom:4px}
 .m-meta-val{font-size:14px;font-weight:900;font-family:ui-monospace,monospace;color:var(--orange)}
 .m-trailing-note{padding:12px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.3);border-radius:10px;font-size:11px;line-height:1.6;color:#fdba74}
 .m-trailing-note strong{color:var(--orange)}
+.m-calc{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(168,85,247,.05));border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:14px}
+.m-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.m-calc-item{background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.m-calc-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;margin-bottom:4px}
+.m-calc-val{font-size:15px;font-weight:900;font-family:ui-monospace,monospace;color:var(--text)}
+.m-calc-hero{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:14px;text-align:center;margin-bottom:12px}
+.m-calc-hero-num{font-size:28px;font-weight:900;font-family:ui-monospace,monospace;color:var(--accent);letter-spacing:-0.5px}
+.m-calc-hero-sub{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800;margin-top:4px}
 .m-specialists{display:flex;flex-direction:column;gap:10px}
 .m-specialist{padding:12px 14px;border-radius:10px;background:rgba(11,18,32,.6);border-left:4px solid var(--border)}
 .m-specialist.aligned{border-left-color:var(--green)}
@@ -218,7 +273,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 </head>
 <body>
 
-<!-- ═══ UNIVERSAL MODAL ═══ -->
 <div id="universalModal" class="modal">
   <div class="modal-content">
     <button class="modal-close-top" onclick="closeUniversalModal()">✕</button>
@@ -227,12 +281,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
   </div>
 </div>
 
-<!-- ═══ AUTH SCREEN ═══ -->
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v40.0</div>
-    <div class="auth-subtitle">Micro-Account Engine — $10 Balance</div>
+    <div class="auth-title">Lutynoel.fx v40.1</div>
+    <div class="auth-subtitle">Chart Analysis + Volume Delta</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -251,19 +304,18 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>TwelveData API Key</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v40.0 Micro-Account:</strong><br>
-        💰 Default balance: <strong>$10.00</strong><br>
-        🚨 News filter: 30 min before/after high-impact<br>
-        🔔 Push notifications (SW + offline queue)<br>
-        📡 PSAR M15/M5 only (no ATR)<br>
-        ⚡ 4-Strategy alignment: ALL or REJECT
+        ✅ <strong>v40.1:</strong><br>
+        📊 Chart Analysis (4H → 1H → 15M → 5M)<br>
+        📸 Full-size image preview<br>
+        📈 Local Volume Delta Ratio (real candles)<br>
+        🚨 News filter (30 min buffer)<br>
+        🔔 Push notifications + offline queue
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ MAIN APP ═══ -->
 <div id="appInterface">
   <header>
     <div style="display:flex;align-items:center;gap:8px;">
@@ -279,18 +331,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v40.0</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v40.1</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
     <div class="menu-item" onclick="navigate('analyst')">🎯 Masters Analysis</div>
+    <div class="menu-item" onclick="navigate('screenshot')">📊 Chart Analysis</div>
     <div class="menu-item" onclick="navigate('news')">🚨 News Calendar</div>
     <div class="menu-item" onclick="navigate('trap')">🪤 Liquidity Traps</div>
     <div class="menu-item" onclick="navigate('alerts')">⏰ Active Alerts</div>
     <div class="menu-item" onclick="navigate('notifications')">🔔 Notification Center</div>
     <div class="menu-item" onclick="navigate('backtest')">📊 Backtest</div>
     <div class="menu-item" onclick="navigate('history')">📁 History</div>
-    <div class="menu-item" onclick="navigate('sentiment')">👥 Retail Sentiment</div>
+    <div class="menu-item" onclick="navigate('sentiment')">📈 Volume Delta</div>
     <div class="menu-item" onclick="navigate('journal')">💰 Risk Calculator</div>
     <div class="menu-item" onclick="navigate('livechart')">📈 Live Chart</div>
     <div class="menu-item" onclick="navigate('settings')">⚙️ Settings</div>
@@ -298,47 +351,21 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="main-content">
 
-    <!-- ═══ OVERVIEW / DASHBOARD ═══ -->
+    <!-- OVERVIEW -->
     <div id="view-overview" class="view-section">
       <div class="card" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v40.0 • Micro-Account Engine</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v40.1 • Chart Analysis + Volume Delta</div>
           </div>
         </div>
       </div>
 
-      <!-- NEWS BANNER -->
       <div id="newsAlertBanner" class="news-banner">
-        <div class="news-banner-head"><span class="news-icon">🚨</span> HIGH-IMPACT NEWS ALERT</div>
+        <div class="news-banner-head"><span>🚨</span> HIGH-IMPACT NEWS ALERT</div>
         <div id="newsAlertList"></div>
-      </div>
-
-      <!-- PWA INSTALL PROMPT -->
-      <div id="pwaInstallPrompt" class="pwa-install">
-        <div class="pwa-install-title">📲 Install for Push Notifications</div>
-        <div class="pwa-install-desc">Sakinisha app kuweza kupata notifications hata browser ikiwa imefungwa.</div>
-        <div class="pwa-install-btns">
-          <button class="install" onclick="installPWA()">📲 Install</button>
-          <button class="later" onclick="dismissPWAInstall()">Baadaye</button>
-        </div>
-      </div>
-
-      <!-- MICRO ACCOUNT PANEL -->
-      <div class="micro-panel">
-        <div class="micro-panel-head">
-          <div class="micro-panel-title">💰 Micro-Account Risk Engine</div>
-          <div class="micro-panel-balance" id="microBalanceDisplay">$10.00</div>
-        </div>
-        <div class="micro-grid">
-          <div class="micro-item"><div class="micro-lbl">Risk / Trade</div><div class="micro-val red" id="microRiskDisplay">$0.20 (2%)</div></div>
-          <div class="micro-item"><div class="micro-lbl">Max SL @ 0.01 lot</div><div class="micro-val orange" id="microMaxSlDisplay">—</div></div>
-          <div class="micro-item"><div class="micro-lbl">Min Lot</div><div class="micro-val">0.01</div></div>
-          <div class="micro-item"><div class="micro-lbl">Status</div><div class="micro-val green" id="microStatusDisplay">READY</div></div>
-        </div>
-        <div id="microWarningBox" class="micro-warning" style="display:none;"></div>
       </div>
 
       <div class="grid-3">
@@ -360,23 +387,25 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         </div>
       </div>
 
+      <div id="overviewVolumeDelta"></div>
+
       <div class="card">
         <h3 style="margin-top:0;font-size:15px;color:var(--accent);">Quick Actions</h3>
-        <button class="primary-btn" onclick="navigate('analyst')">🎯 Masters Analysis v14.0</button>
+        <button class="primary-btn" onclick="navigate('screenshot')">📊 Chart Analysis</button>
+        <button class="secondary-btn" onclick="navigate('analyst')">🎯 Masters Analysis</button>
         <button class="secondary-btn" onclick="navigate('news')">🚨 News Calendar</button>
-        <button class="secondary-btn" onclick="navigate('notifications')">🔔 Notification Center</button>
         <button class="secondary-btn" onclick="navigate('backtest')">📊 Backtest</button>
       </div>
     </div>
 
-    <!-- ═══ ANALYST ═══ -->
+    <!-- ANALYST -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters Analysis v14.0</h3>
+        <h3 style="margin:5px 0 15px;">🎯 Masters Analysis v14.1</h3>
         <div class="info-box" style="font-size:10px;">
-          ⚡ <strong>SAME-DAY ONLY</strong> (00:00 UTC)<br>
+          ⚡ Same-Day Only (00:00 UTC)<br>
           📡 PSAR M15/M5 primary — NO ATR<br>
-          💰 Micro-account: $10 risk engine<br>
+          📈 Volume Delta Ratio (local candles)<br>
           🚨 News filter (30 min buffer)
         </div>
 
@@ -413,39 +442,201 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="primary-btn" id="runBtn" onclick="runAnalysis()" disabled>🚀 RUN MASTERS ANALYSIS</button>
       </div>
 
-      <div id="sentimentCard" class="card" style="background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(239,68,68,.04));border:1px solid rgba(139,92,246,.3);">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <div>
-            <div style="font-size:13px;font-weight:900;color:var(--inst);letter-spacing:.6px;">👥 RETAIL SENTIMENT</div>
-            <div id="sentSymbolTime" style="font-size:10px;color:var(--muted);">— • —</div>
-          </div>
-          <button onclick="refreshSentimentNow()" style="background:var(--green);color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
-        </div>
-        <div class="grid-2">
-          <div class="mini-box" style="text-align:center;background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.4);">
-            <div style="font-size:10px;color:var(--blue);font-weight:800;">🔵 LONG</div>
-            <div id="sentLongPct" style="font-size:24px;font-weight:900;color:var(--blue);font-family:ui-monospace,monospace;margin-top:4px;">—%</div>
-          </div>
-          <div class="mini-box" style="text-align:center;background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);">
-            <div style="font-size:10px;color:var(--red);font-weight:800;">🔴 SHORT</div>
-            <div id="sentShortPct" style="font-size:24px;font-weight:900;color:var(--red);font-family:ui-monospace,monospace;margin-top:4px;">—%</div>
-          </div>
-        </div>
-        <div style="height:14px;border-radius:50px;overflow:hidden;background:#0b1220;border:1px solid var(--border);display:flex;margin:10px 0;">
-          <div id="sentBarLong" style="width:50%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div>
-          <div id="sentBarShort" style="width:50%;background:linear-gradient(90deg,#f87171,#ef4444);"></div>
-        </div>
-        <div id="sentBiasBox" class="mini-box" style="text-align:center;background:rgba(148,163,184,.08);border-color:var(--muted);">
-          <div id="sentBiasLabel" style="font-size:11px;font-weight:900;color:var(--muted);">⚖️ NEUTRAL</div>
-          <div id="sentBiasReason" style="font-size:10px;color:var(--muted);margin-top:4px;font-style:italic;">—</div>
-        </div>
-        <div id="sentSource" style="font-size:9px;color:var(--muted);margin-top:8px;text-align:right;font-family:ui-monospace,monospace;">source: —</div>
-      </div>
+      <div id="analystVolumeDelta"></div>
 
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- ═══ NEWS CALENDAR ═══ -->
+    <!-- ═══ CHART ANALYSIS ═══ -->
+    <div id="view-screenshot" class="view-section" style="display:none;">
+      <div class="ca-wrap">
+        <div class="ca-topbar">
+          <div class="ca-subtitle">Institutional multi-confluence AI chart analysis.</div>
+        </div>
+
+        <div class="ca-tabs">
+          <div class="ca-tab active" onclick="switchCATab('new')"><span class="tab-icon">✦</span> NEW ANALYSIS</div>
+          <div class="ca-tab" onclick="switchCATab('history')"><span class="tab-icon">🕐</span> HISTORY</div>
+          <div class="ca-tab" onclick="switchCATab('guide')"><span class="tab-icon">📖</span> GUIDELINES</div>
+        </div>
+
+        <div id="caTab-new">
+          <div class="ca-card">
+            <h2 class="ca-title"><span class="ca-accent">AI</span> ON-CHART ANALYST</h2>
+            <div class="ca-desc">
+              Upload MTF charts for complete analysis. <strong style="color:var(--accent);">5M chart confirms entry.</strong> Images are shown full-size for verification.
+            </div>
+
+            <div class="ca-pill" onclick="toggleCapitalPanel()">
+              <span>🛡️</span> Capital &amp; Risk Setup
+            </div>
+
+            <div id="capitalPanel" class="ca-capital-panel" style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:16px;margin-bottom:18px;display:none;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div>
+                  <label style="font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;display:block;">Balance (USD)</label>
+                  <input type="number" id="caBalance" value="1000" onchange="saveCapital()" style="width:100%;padding:10px 12px;background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:10px;color:#fff;font-size:14px;margin:0;">
+                </div>
+                <div>
+                  <label style="font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;display:block;">Risk %</label>
+                  <input type="number" step="0.1" id="caRiskPct" value="1.0" onchange="saveCapital()" style="width:100%;padding:10px 12px;background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:10px;color:#fff;font-size:14px;margin:0;">
+                </div>
+              </div>
+            </div>
+
+            <div class="ca-field">
+              <div class="ca-field-label">INSTRUMENT SYMBOL</div>
+              <div class="ca-select">
+                <div class="ca-select-icon">⇄</div>
+                <select id="ssPair" onchange="onSSPairChange()">
+                  <option value="XAUUSD">XAU/USD</option>
+                  <option value="EURUSD">EUR/USD</option>
+                  <option value="GBPUSD">GBP/USD</option>
+                  <option value="USDJPY">USD/JPY</option>
+                  <option value="BTCUSD">BTC/USD</option>
+                  <option value="NAS100">NAS100</option>
+                  <option value="US30">US30</option>
+                </select>
+                <div class="ca-select-arrow">▾</div>
+              </div>
+            </div>
+
+            <div class="ca-field">
+              <div class="ca-field-label">CURRENT PRICE <span style="margin-left:auto;color:var(--cyan);font-size:9px;">REQUIRED</span></div>
+              <div class="ca-price-inline">
+                <input type="number" step="any" id="ssLivePrice" placeholder="Bonyeza Refresh" oninput="onSSManualPrice()">
+                <button id="ssRefreshBtn" onclick="fetchSSLivePrice()">🔄</button>
+              </div>
+              <div id="ssPriceStatus" class="price-status manual" style="margin-top:8px;"><span id="ssPriceStatusText">⚪ Refresh</span><span id="ssPriceTime">—</span></div>
+            </div>
+
+            <div class="ca-field" style="margin-bottom:0;">
+              <div class="ca-field-label" style="display:flex;justify-content:space-between;align-items:center;">
+                <span>REQUIRED MARKET TIMEFRAMES</span>
+                <span class="ca-badge std">INSTITUTIONAL STANDARD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4H -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot"></span> 4H</div>
+              <span class="ca-badge required">REQUIRED</span>
+            </div>
+            <label class="ca-upload" id="caUpload-h4" for="ssInput-h4">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 4H Chart</div>
+              <div class="ca-upload-sub">Higher timeframe bias · Click or drop screenshot</div>
+              <input type="file" id="ssInput-h4" accept="image/*">
+              <div class="ca-preview" id="ssPreview-h4">
+                <img id="ssImg-h4">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('h4')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 1H -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot"></span> 1H</div>
+              <span class="ca-badge optional">OPTIONAL</span>
+            </div>
+            <label class="ca-upload" id="caUpload-h1" for="ssInput-h1">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 1H Chart</div>
+              <div class="ca-upload-sub">Intraday structure · Click or drop screenshot</div>
+              <input type="file" id="ssInput-h1" accept="image/*">
+              <div class="ca-preview" id="ssPreview-h1">
+                <img id="ssImg-h1">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('h1')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 15M -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot"></span> 15M</div>
+              <span class="ca-badge optional">OPTIONAL</span>
+            </div>
+            <label class="ca-upload" id="caUpload-m15" for="ssInput-m15">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 15M Chart</div>
+              <div class="ca-upload-sub">Setup timeframe (OB/FVG) · Click or drop screenshot</div>
+              <input type="file" id="ssInput-m15" accept="image/*">
+              <div class="ca-preview" id="ssPreview-m15">
+                <img id="ssImg-m15">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('m15')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 5M -->
+          <div class="ca-tf-card">
+            <div class="ca-tf-header">
+              <div class="ca-tf-label"><span class="ca-tf-dot cyan"></span> 5M</div>
+              <span class="ca-badge confirm">ENTRY CONFIRMATION</span>
+            </div>
+            <label class="ca-upload" id="caUpload-m5" for="ssInput-m5">
+              <div class="ca-upload-icon">⬆</div>
+              <div class="ca-upload-title">Upload 5M Chart</div>
+              <div class="ca-upload-sub">Micro trigger for precise entry · Click or drop screenshot</div>
+              <input type="file" id="ssInput-m5" accept="image/*">
+              <div class="ca-preview" id="ssPreview-m5">
+                <img id="ssImg-m5">
+                <div class="ca-preview-actions">
+                  <button onclick="event.preventDefault();event.stopPropagation();clearSS('m5')">🗑 Remove</button>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="ca-status-bar">
+            <span>📤 Uploaded: <strong id="caUploadCount" style="color:var(--accent);">0/4</strong></span>
+            <span style="display:flex;align-items:center;gap:6px;font-weight:900;color:var(--accent);">● 4H required</span>
+          </div>
+
+          <button class="ca-submit" id="analyzeSSBtn" onclick="analyzeAllScreenshots()" disabled>
+            <span class="star">★</span> GET MULTI-TIMEFRAME ANALYSIS
+          </button>
+        </div>
+
+        <div id="caTab-history" style="display:none;">
+          <div class="ca-card">
+            <h3 class="ca-title">Chart Analysis History</h3>
+            <div id="caHistoryContainer"><div class="ca-desc">Hakuna analysis bado.</div></div>
+          </div>
+        </div>
+
+        <div id="caTab-guide" style="display:none;">
+          <div class="ca-card">
+            <h3 class="ca-title">Guidelines</h3>
+            <div class="ca-desc">
+              <strong style="color:var(--accent);">Upload Priority:</strong><br>
+              1️⃣ <strong>4H (REQUIRED)</strong> — Higher timeframe bias<br>
+              2️⃣ <strong>1H (Optional)</strong> — Intraday structure<br>
+              3️⃣ <strong>15M (Optional)</strong> — Setup timeframe<br>
+              4️⃣ <strong>5M (Optional)</strong> — Entry confirmation
+              <br><br>
+              <strong style="color:var(--cyan);">PSAR:</strong> Primary SL indicator.<br>
+              <strong style="color:var(--inst);">Volume Delta:</strong> Local candle-based buy/sell pressure.<br>
+              <strong style="color:var(--red);">Same-Day Only:</strong> No multi-day macro.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="ssResultsContainer" style="display:none;padding:0 12px;"></div>
+    </div>
+
+    <!-- NEWS -->
     <div id="view-news" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--red);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -460,15 +651,12 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ NOTIFICATION CENTER ═══ -->
+    <!-- NOTIFICATIONS -->
     <div id="view-notifications" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--inst);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
           <h3 style="margin:0;">🔔 Notification Center</h3>
           <button onclick="clearNotificationQueue()" style="background:rgba(239,68,68,.2);color:var(--red);border:1px solid var(--red);padding:6px 12px;border-radius:8px;font-size:11px;">🗑️ Clear</button>
-        </div>
-        <div class="info-box" style="font-size:10px;">
-          Offline queue: alerts zilizochelewa zinatumwa mara network inarudi.
         </div>
         <div class="grid-2" style="margin-bottom:12px;">
           <div class="mini-box" style="text-align:center;"><div style="font-size:10px;color:var(--muted);font-weight:800;">QUEUE</div><div id="notifQueueCount" style="font-size:20px;font-weight:900;color:var(--yellow);">0</div></div>
@@ -478,7 +666,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ TRAPS ═══ -->
+    <!-- TRAPS -->
     <div id="view-trap" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--pink);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -497,7 +685,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ ALERTS ═══ -->
+    <!-- ALERTS -->
     <div id="view-alerts" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -508,7 +696,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ BACKTEST ═══ -->
+    <!-- BACKTEST -->
     <div id="view-backtest" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -526,7 +714,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ HISTORY ═══ -->
+    <!-- HISTORY -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -537,30 +725,41 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ SENTIMENT ═══ -->
+    <!-- VOLUME DELTA -->
     <div id="view-sentiment" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="margin:0;">👥 Retail Sentiment</h3>
-          <button onclick="renderMultiSentiment()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
+          <h3 style="margin:0;">📈 Volume Delta Ratio</h3>
+          <button onclick="refreshVolumeDeltaView()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
+        </div>
+        <div class="info-box" style="font-size:10px;">
+          <strong>Local Volume Delta</strong> — inahesabiwa kutoka candles halisi za MT5/Binance/TwelveData (bull vs bear volume) kwa M5/M15/H1/H4. Hii ni proxy ya order flow inayotokana na body direction × volume ya kila candle.
         </div>
         <label>Pair</label>
-        <select id="sentMultiPair" onchange="renderMultiSentiment()">
-          <option value="XAUUSD">XAUUSD</option><option value="EURUSD">EURUSD</option>
-          <option value="GBPUSD">GBPUSD</option><option value="USDJPY">USDJPY</option>
-          <option value="BTCUSD">BTCUSD</option><option value="US30">US30</option>
+        <select id="vdPair" onchange="fetchVolumeDeltaView()">
+          <option value="XAUUSD">XAUUSD</option>
+          <option value="EURUSD">EURUSD</option>
+          <option value="GBPUSD">GBPUSD</option>
+          <option value="USDJPY">USDJPY</option>
+          <option value="AUDUSD">AUDUSD</option>
+          <option value="USDCAD">USDCAD</option>
+          <option value="BTCUSD">BTCUSD</option>
+          <option value="NAS100">NAS100</option>
+          <option value="US30">US30</option>
+          <option value="WTI">WTI</option>
         </select>
-        <div id="multiSentContainer"><div class="info-box">Loading...</div></div>
+        <button class="secondary-btn" onclick="fetchVolumeDeltaView()">📊 Fetch Volume Delta</button>
+        <div id="volumeDeltaContainer" style="margin-top:12px;"><div class="info-box">Bonyeza "Fetch Volume Delta".</div></div>
       </div>
     </div>
 
-    <!-- ═══ JOURNAL / RISK CALC ═══ -->
+    <!-- JOURNAL -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 10px;">💰 Micro Risk Calculator</h3>
+        <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
         <div class="grid-2">
-          <div><label>Balance ($)</label><input type="number" id="riskBalance" value="10"></div>
-          <div><label>Risk (%)</label><input type="number" step="0.1" id="riskPercent" value="2.0"></div>
+          <div><label>Balance ($)</label><input type="number" id="riskBalance" value="1000"></div>
+          <div><label>Risk (%)</label><input type="number" step="0.1" id="riskPercent" value="1.0"></div>
         </div>
         <div class="grid-2">
           <div><label>SL (Pips)</label><input type="number" id="riskSlPips" value="30"></div>
@@ -581,7 +780,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ LIVE CHART ═══ -->
+    <!-- LIVE CHART -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -596,21 +795,20 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ═══ SETTINGS ═══ -->
+    <!-- SETTINGS -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v40.0 — Micro-Account Engine<br>
-          <strong>Default Balance:</strong> $10.00<br>
-          <strong>Mode:</strong> Same-Day Only + PSAR
+          <strong>Version:</strong> v40.1 — Chart Analysis + Volume Delta<br>
+          <strong>Mode:</strong> Same-Day Only • PSAR • News Filter
         </div>
 
-        <div class="ballistic-header" style="margin-top:14px;">💰 MICRO-ACCOUNT</div>
+        <div class="ballistic-header" style="margin-top:14px;">💰 RISK</div>
         <label>Balance (USD)</label>
-        <input type="number" id="settingsBalance" value="10" min="1">
-        <label>Risk Per Trade (%) — Max 5% of $10 = $0.50</label>
-        <input type="number" step="0.1" id="settingsRiskPct" value="2.0" min="0.1" max="5">
+        <input type="number" id="settingsBalance" value="1000">
+        <label>Risk Per Trade (%)</label>
+        <input type="number" step="0.1" id="settingsRiskPct" value="1.0">
         <button class="secondary-btn" onclick="saveRiskSettings()">💾 Save</button>
 
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
@@ -626,7 +824,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
         <div class="ballistic-header">🔔 NOTIFICATIONS</div>
         <button class="secondary-btn" onclick="requestNotificationPermission()">🔔 Request Permission</button>
-        <button class="secondary-btn" onclick="testPushNotification()">📤 Test Push Notification</button>
+        <button class="secondary-btn" onclick="testPushNotification()">📤 Test Push</button>
         <div id="notifPermStatus" class="info-box" style="margin-top:10px;font-size:10px;">Permission: —</div>
 
         <hr style="border:0;border-top:1px solid var(--border);margin:15px 0;">
@@ -652,23 +850,21 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
         <button class="danger-btn" onclick="clearAllKeys()">🗑️ Clear All</button>
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
 'use strict';
-/* ═══════════════════════════════════════════════════════════════════
-   Lutynoel.fx v40.0 — Masters Micro v14.0
-   - Micro-account $10 default, strict risk engine
-   - Economic news filter (30 min buffer)
-   - PWA Service Worker + offline notification queue (IndexedDB)
-   - PSAR-only intraday (no ATR)
-   - 4-strategy alignment (ALL or REJECT)
-   - Backtest WIN detection fix
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   Lutynoel.fx v40.1
+   - Chart Analysis restored (4H → 1H → 15M → 5M)
+   - Full-size image previews
+   - Micro-account $10 removed (back to configurable default)
+   - Local Volume Delta Ratio replaces mock sentiment
+   - Same-day only + PSAR + news filter + PWA push
+   ═══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'v40.0';
+const VERSION = 'v40.1';
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const BINANCE_API = 'https://api.binance.com/api/v3';
@@ -679,24 +875,22 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v40.0';
+const MODELS_VERSION = 'v40.1';
 
 const PROXIMITY_PIPS_DEFAULT = 12;
 const ALERT_COOLDOWN_MS = 90 * 1000;
 const TZS_PER_USD = 2700;
-
-/* ═══ MICRO-ACCOUNT CONSTANTS ═══ */
-const MICRO_DEFAULT_BALANCE = 10.00;
+const DEFAULT_BALANCE = 1000;
+const DEFAULT_RISK_PCT = 1.0;
 const MICRO_MIN_LOT = 0.01;
-const MICRO_MAX_RISK_PCT = 5.0;
 
 const ALERT_KEYS = {
   MUTED: 'lutynoel_alerts_muted',
   THRESHOLD: 'lutynoel_alert_threshold_pips',
   NEWS_FILTER: 'lutynoel_news_filter_enabled',
   NEWS_BUFFER: 'lutynoel_news_buffer_minutes',
-  NEWS_CACHE: 'lutynoel_news_cache_v2',
-  NOTIF_QUEUE: 'lutynoel_notif_queue_v2',
+  NEWS_CACHE: 'lutynoel_news_cache_v3',
+  NOTIF_QUEUE: 'lutynoel_notif_queue_v3',
   NOTIF_SENT: 'lutynoel_notif_sent_count',
   PWA_DISMISSED: 'lutynoel_pwa_prompt_dismissed'
 };
@@ -712,10 +906,10 @@ const STORAGE_KEYS = {
   GEMINI: 'lutynoel_saved_geminiKey',
   MISTRAL: 'lutynoel_saved_mistralKey',
   TWELVE: 'lutynoel_saved_twelveKey',
-  BALANCE: 'lutynoel_balance_v40',
-  RISK_PCT: 'lutynoel_riskPct_v40',
+  BALANCE: 'lutynoel_balance_v401',
+  RISK_PCT: 'lutynoel_riskPct_v401',
   VOICE_ENABLED: 'lutynoel_voice_enabled',
-  HISTORY: 'lutynoel_history_v40',
+  HISTORY: 'lutynoel_history_v401',
   GEMINI_MODELS: 'lutynoel_gemini_models',
   MISTRAL_MODELS: 'lutynoel_mistral_models',
   MISTRAL_VISION: 'lutynoel_mistral_vision',
@@ -724,13 +918,6 @@ const STORAGE_KEYS = {
   MODELS_VERSION: 'lutynoel_models_version'
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   PAIR SPECS — pipValue = USD per pip per 1.00 lot
-   XAUUSD: pip=0.01, 1.0 lot = 100oz, pip value = $1 (0.01 × 100)
-   Forex:  pip=0.0001, 1.0 lot = 100k units, pip value = $10
-   BTCUSD: pip=1, 1.0 lot = 1 BTC, pip value = $1
-   Indices: pip=1, 1.0 lot = 1 contract, pip value = $1
-   ═══════════════════════════════════════════════════════════════════ */
 const PAIR_SPECS = {
   XAUUSD: { pipSize: 0.01, defaultPrice: 2650, decimals: 2, source: 'twelve', twelveSymbol: 'XAU/USD', pipValue: 1, spreadPips: 30, spoken: 'Gold', category: 'metal' },
   EURUSD: { pipSize: 0.0001, defaultPrice: 1.085, decimals: 5, source: 'twelve', twelveSymbol: 'EUR/USD', pipValue: 10, spreadPips: 1, spoken: 'Euro Dollar', category: 'forex' },
@@ -745,54 +932,30 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil', category: 'commodity' }
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   SYSTEM PROMPT — Masters v14.0 (Micro-Account + PSAR-only + 4-Strategy)
-   ═══════════════════════════════════════════════════════════════════ */
-const MASTERS_ANALYSIS_SYSTEM_PROMPT = `You are the INSTITUTIONAL MICRO-ACCOUNT PROTOCOL v14.0 for XAUUSD & FX trading.
-You combine 4 specialist perspectives into ONE unified signal for a MICRO account.
+const MASTERS_ANALYSIS_SYSTEM_PROMPT = `You are the INSTITUTIONAL INTRADAY MTF PROTOCOL v14.1.
+Specialist in Price Action, SMC, and ICT.
 
-═══════════ CRITICAL CONSTRAINTS ═══════════
-1. SAME-DAY INTRADAY ONLY (00:00 UTC → now). No multi-day macro.
-2. ATR IS FORBIDDEN. Never mention ATR.
-3. PARABOLIC SAR IS THE PRIMARY INDICATOR (M15 & M5).
-4. MICRO-ACCOUNT: Balance = $10.00, Max lot = 0.01.
-5. Risk per trade = 1-5% of $10 = $0.10-$0.50 USD.
+═══════════ HIERARCHY ═══════════
+1. 4H = HIGHER TIMEFRAME BIAS (REQUIRED).
+2. 1H = INTRADAY STRUCTURE.
+3. 15M = SETUP TIMEFRAME.
+4. 5M = ENTRY CONFIRMATION.
 
-═══════════ 4-STRATEGY ALIGNMENT (100% REQUIRED) ═══════════
-All 4 strategies MUST vote the same direction to output STRONG PASS:
-1. Price Action Master — momentum + candlestick confirmation
-2. Supply & Demand Master — fresh OB/FVG alignment
-3. Market Structure Master — BOS/CHoCH alignment
-4. Session/Killzone Master — London or NY killzone active
+═══════════ CONSTRAINTS ═══════════
+1. SAME-DAY ONLY (00:00 UTC → now).
+2. ATR FORBIDDEN. Use PARABOLIC SAR M15/M5 only.
+3. Reference LOCAL VOLUME DELTA RATIO (buy vs sell volume from candles).
+4. Block if news within ±30 min.
+5. All 4 strategies must align for STRONG PASS.
 
-If ANY strategy conflicts → status = "REJECT" with blocking reason.
-
-═══════════ PARABOLIC SAR RULES ═══════════
-- M15 PSAR = direction filter.
-- M5 PSAR = entry timing trigger.
-- SL = M15 PSAR dot level (or 1 tick beyond).
-- If M15 PSAR disagrees with direction → REJECT.
-- If M5 PSAR disagrees → downgrade confidence 15 pts.
-
-═══════════ NEWS FILTER (NON-NEGOTIABLE) ═══════════
-- If economic news within ±30 min → status = "REJECT".
-- High-impact events: NFP, CPI, FOMC, GDP, Rate Decisions.
-
-═══════════ MICRO RISK RULES ═══════════
-Given entry and SL, calculate:
-  pips = |entry - sl| / pipSize
-  lotSize = riskUSD / (pips × pipValuePerLot)
-- If lotSize < 0.01 → REJECT: "SL distance too wide for a $10 account balance (Account Blow Risk)."
-- Max SL pips for $10 @ 0.01 lot = riskUSD / (0.01 × pipValuePerLot).
-
-═══════════ STRICT OUTPUT (raw JSON only) ═══════════
+═══════════ OUTPUT (raw JSON) ═══════════
 {
   "main_signal": {
-    "direction": "STRONG SELL" | "SELL" | "STRONG BUY" | "BUY" | "NEUTRAL",
-    "execution_type": "SELL LIMIT EXECUTION" | "BUY LIMIT EXECUTION" | "MARKET EXECUTION",
+    "direction": "STRONG SELL"|"SELL"|"STRONG BUY"|"BUY"|"NEUTRAL",
+    "execution_type": "SELL LIMIT EXECUTION"|"BUY LIMIT EXECUTION"|"MARKET EXECUTION",
     "confidence_percentage": 0-100,
-    "status": "STRONG PASS" | "PASS" | "REJECT",
-    "blocking_reason": "STRING or empty"
+    "status": "STRONG PASS"|"PASS"|"REJECT",
+    "blocking_reason": "STRING"
   },
   "ballistic_ai_insight": {
     "pips_identified": NUMBER,
@@ -815,16 +978,13 @@ Given entry and SL, calculate:
     "stop_loss": NUMBER,
     "take_profit_1": NUMBER,
     "take_profit_2": NUMBER,
-    "rr_ratio": "STRING",
-    "sl_pips": NUMBER,
-    "recommended_lot": NUMBER,
-    "risk_usd": NUMBER
+    "rr_ratio": "STRING"
   },
   "strategy_votes": {
-    "price_action": "ALIGNED" | "CONFLICT",
-    "supply_demand": "ALIGNED" | "CONFLICT",
-    "market_structure": "ALIGNED" | "CONFLICT",
-    "session": "ALIGNED" | "CONFLICT",
+    "price_action": "ALIGNED"|"CONFLICT",
+    "supply_demand": "ALIGNED"|"CONFLICT",
+    "market_structure": "ALIGNED"|"CONFLICT",
+    "session": "ALIGNED"|"CONFLICT",
     "total_aligned": 0-4
   },
   "execution_trade_plan": {
@@ -840,54 +1000,32 @@ Given entry and SL, calculate:
     "fundamental_analyst_master": "STRING"
   },
   "multi_timeframe_confluence": {
-    "tf_5m": "STRING", "tf_15m": "STRING", "tf_1h": "STRING", "tf_4h": "STRING"
+    "tf_5m": "STRING","tf_15m": "STRING","tf_1h": "STRING","tf_4h": "STRING"
   },
   "final_trade_plan": "STRING"
 }`;
 
-/* ═══════════════════════════════════════════════════════════════════
-   SERVICES — Local fallback news feed (Forex Factory has no public API)
-   These are recurring high-impact US/EU events. Update monthly.
-   ═══════════════════════════════════════════════════════════════════ */
-const FALLBACK_NEWS_FEED = [
-  // FOMC Rate Decisions (8x per year — 2025-2026 schedule)
-  { title: 'FOMC Rate Decision', impact: 'high', currency: 'USD', cron: 'FOMC' },
-  { title: 'FOMC Meeting Minutes', impact: 'high', currency: 'USD', cron: 'FOMC_MIN' },
-  { title: 'Non-Farm Payrolls (NFP)', impact: 'high', currency: 'USD', cron: 'NFP' },
-  { title: 'CPI (YoY)', impact: 'high', currency: 'USD', cron: 'CPI' },
-  { title: 'Core CPI (YoY)', impact: 'high', currency: 'USD', cron: 'CPI_CORE' },
-  { title: 'GDP (QoQ)', impact: 'high', currency: 'USD', cron: 'GDP' },
-  { title: 'ECB Rate Decision', impact: 'high', currency: 'EUR', cron: 'ECB' },
-  { title: 'BoE Rate Decision', impact: 'high', currency: 'GBP', cron: 'BOE' }
-];
-
-/* ═══════════════════════════════════════════════════════════════════
-   UTILITIES
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ UTILITIES ═══ */
 const $ = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
   del(k) { try { localStorage.removeItem(k); } catch (e) {} }
 };
-
 const getNum = (key, def) => { const v = parseFloat(store.get(STORAGE_KEYS[key])); return Number.isFinite(v) ? v : def; };
 const getList = (key, def) => (store.get(STORAGE_KEYS[key]) || def).split(',').map(s => s.trim()).filter(Boolean);
 const getTpMults = () => {
   const a = (store.get(STORAGE_KEYS.TP_MULTS) || '1.5,2.5,4').split(',').map(parseFloat);
   return a.length === 3 && a.every(x => x > 0) ? a : [1.5, 2.5, 4];
 };
-
 function showToast(msg, duration = 3500) {
   const t = document.createElement('div');
   t.className = 'toast'; t.innerText = msg;
   document.body.appendChild(t);
   setTimeout(() => t.remove(), duration);
 }
-
 function pipValueFor(pair, price) {
   const s = PAIR_SPECS[pair];
   if (!s) return 10;
@@ -895,657 +1033,125 @@ function pipValueFor(pair, price) {
   if (pair === 'USDCAD' && price > 0) return 10 / price;
   return s.pipValue;
 }
-
-/* ═══ MICRO-ACCOUNT GETTERS ═══ */
 const getBalance = () => {
   const v = parseFloat(store.get(STORAGE_KEYS.BALANCE));
-  return Number.isFinite(v) && v > 0 ? v : MICRO_DEFAULT_BALANCE;
+  return Number.isFinite(v) && v > 0 ? v : DEFAULT_BALANCE;
 };
 const getRiskPct = () => {
   const v = parseFloat(store.get(STORAGE_KEYS.RISK_PCT));
-  if (!Number.isFinite(v) || v <= 0) return 2.0;
-  return Math.min(v, MICRO_MAX_RISK_PCT);
+  return Number.isFinite(v) && v > 0 ? v : DEFAULT_RISK_PCT;
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   MICRO-ACCOUNT RISK ENGINE
-   ═══════════════════════════════════════════════════════════════════ */
-function computeMicroRisk(pair, entry, stopLoss) {
-  const spec = PAIR_SPECS[pair];
-  if (!spec) return { ok: false, reason: 'Unknown pair' };
+/* ═══════════════════════════════════════════════════════════════
+   VOLUME DELTA RATIO — Local computation from real candles
+   ═══════════════════════════════════════════════════════════════
+   Formula:
+   - Kila candle: kama close > open → bullish volume (+)
+   - Kama close < open → bearish volume (-)
+   - Volume inagawiwa kwa body strength (body / range)
+   - Delta Ratio = buyVol / (buyVol + sellVol) × 100
 
-  const balance = getBalance();
-  const riskPct = getRiskPct();
-  const riskUsd = +(balance * riskPct / 100).toFixed(4);
-
-  const entryN = parseFloat(entry);
-  const slN = parseFloat(stopLoss);
-  if (!Number.isFinite(entryN) || !Number.isFinite(slN)) {
-    return { ok: false, reason: 'Invalid entry/SL', riskUsd, balance, riskPct };
+   Hii ni proxy ya order flow — buy vs sell pressure kutoka
+   candle bodies × volume. Sio tick data halisi lakini ni sahihi
+   kwa institutional bias reading. */
+function computeVolumeDelta(candles, lookback = 100) {
+  if (!Array.isArray(candles) || !candles.length) {
+    return { ok: false, reason: 'No candles' };
   }
+  const slice = candles.slice(-lookback).filter(c =>
+    Number.isFinite(c.open) && Number.isFinite(c.close) && Number.isFinite(c.high) && Number.isFinite(c.low)
+  );
+  if (slice.length < 5) return { ok: false, reason: 'Insufficient candles' };
 
-  const slDistance = Math.abs(entryN - slN);
-  const slPips = slDistance / spec.pipSize;
-  const pipValue1Lot = pipValueFor(pair, entryN);
-  const pipValue001Lot = pipValue1Lot * 0.01;
+  let buyVol = 0, sellVol = 0;
+  let bullCount = 0, bearCount = 0;
 
-  // Required lot for the risk
-  const requiredLot = slPips > 0 ? riskUsd / (slPips * pipValue1Lot) : 0;
-  const riskAtMinLot = slPips * pipValue001Lot;
+  slice.forEach(c => {
+    const body = Math.abs(c.close - c.open);
+    const range = Math.max(c.high - c.low, 1e-9);
+    const bodyStrength = Math.min(body / range, 1.0);
+    const v = (Number(c.volume) || 1) * bodyStrength;
+    if (c.close > c.open) { buyVol += v; bullCount++; }
+    else if (c.close < c.open) { sellVol += v; bearCount++; }
+    else { /* doji — split evenly */ buyVol += v / 2; sellVol += v / 2; }
+  });
 
-  // Max SL pips for min lot
-  const maxSlPipsForMinLot = pipValue001Lot > 0 ? riskUsd / pipValue001Lot : 0;
+  const total = buyVol + sellVol;
+  if (total <= 0) return { ok: false, reason: 'No volume' };
 
-  if (requiredLot < MICRO_MIN_LOT) {
-    return {
-      ok: false,
-      reason: 'REJECTED: SL distance too wide for a $10 account balance (Account Blow Risk).',
-      balance, riskPct, riskUsd,
-      slPips, requiredLot, riskAtMinLot, maxSlPipsForMinLot,
-      pipValue001Lot
-    };
-  }
+  const buyPct = (buyVol / total) * 100;
+  const sellPct = (sellVol / total) * 100;
+  const delta = buyVol - sellVol;
+
+  let bias = 'NEUTRAL', reason = '';
+  if (buyPct >= 65) { bias = 'BULLISH'; reason = `Buy pressure dominant (${buyPct.toFixed(1)}%)`; }
+  else if (sellPct >= 65) { bias = 'BEARISH'; reason = `Sell pressure dominant (${sellPct.toFixed(1)}%)`; }
+  else if (buyPct >= 55) { bias = 'LEAN_BULLISH'; reason = `Mild buy tilt (${buyPct.toFixed(1)}%)`; }
+  else if (sellPct >= 55) { bias = 'LEAN_BEARISH'; reason = `Mild sell tilt (${sellPct.toFixed(1)}%)`; }
+  else { bias = 'NEUTRAL'; reason = `Balanced (${buyPct.toFixed(1)}% / ${sellPct.toFixed(1)}%)`; }
 
   return {
     ok: true,
-    balance, riskPct, riskUsd,
-    slPips, requiredLot, riskAtMinLot, maxSlPipsForMinLot,
-    pipValue001Lot,
-    recommendedLot: MICRO_MIN_LOT,
-    actualRiskUsd: riskAtMinLot
+    buyVol, sellVol, total, delta,
+    buyPct: +buyPct.toFixed(1),
+    sellPct: +sellPct.toFixed(1),
+    bullCount, bearCount,
+    candles: slice.length,
+    bias, reason
   };
 }
 
-function updateMicroPanel() {
-  const balance = getBalance();
-  const riskPct = getRiskPct();
-  const riskUsd = balance * riskPct / 100;
-
-  const balEl = $('microBalanceDisplay'); if (balEl) balEl.textContent = `$${balance.toFixed(2)}`;
-  const riskEl = $('microRiskDisplay'); if (riskEl) riskEl.textContent = `$${riskUsd.toFixed(2)} (${riskPct}%)`;
-
-  // Compute max SL for current pair @ 0.01 lot
-  const pair = $('selectedPair')?.value || 'XAUUSD';
-  const spec = PAIR_SPECS[pair];
-  const pv001 = pipValueFor(pair, spec.defaultPrice) * 0.01;
-  const maxSlPips = pv001 > 0 ? Math.floor(riskUsd / pv001) : 0;
-  const maxSlEl = $('microMaxSlDisplay');
-  if (maxSlEl) maxSlEl.textContent = `${maxSlPips} pips`;
-
-  const statusEl = $('microStatusDisplay');
-  const warnEl = $('microWarningBox');
-
-  if (riskUsd > 0.50) {
-    if (statusEl) { statusEl.textContent = 'RISK TOO HIGH'; statusEl.className = 'micro-val red'; }
-    if (warnEl) { warnEl.style.display = 'block'; warnEl.textContent = `⚠️ Risk $${riskUsd.toFixed(2)} inazidi $0.50 (5% of $10). Punguza risk %.`; }
-  } else if (maxSlPips < 30) {
-    if (statusEl) { statusEl.textContent = 'SL TOO TIGHT'; statusEl.className = 'micro-val orange'; }
-    if (warnEl) { warnEl.style.display = 'block'; warnEl.textContent = `⚠️ Max SL @ 0.01 lot: ${maxSlPips} pips tu. Chagua pair yenye SL ndogo au ongeza risk.`; }
-  } else {
-    if (statusEl) { statusEl.textContent = 'READY'; statusEl.className = 'micro-val green'; }
-    if (warnEl) warnEl.style.display = 'none';
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   ECONOMIC NEWS FILTER ENGINE
-   ═══════════════════════════════════════════════════════════════════ */
-function isNewsFilterEnabled() { return store.get(ALERT_KEYS.NEWS_FILTER) !== 'false'; }
-function getNewsBufferMinutes() {
-  const v = parseFloat(store.get(ALERT_KEYS.NEWS_BUFFER));
-  return Number.isFinite(v) && v >= 5 ? v : 30;
-}
-
-function getCachedNews() {
-  try { return JSON.parse(store.get(ALERT_KEYS.NEWS_CACHE) || '[]'); } catch (e) { return []; }
-}
-function setCachedNews(events) {
-  store.set(ALERT_KEYS.NEWS_CACHE, JSON.stringify(events.slice(0, 200)));
-}
-
-/* Generates recurring news events (fallback feed)
-   NFP = 1st Friday monthly 13:30 UTC
-   CPI = ~12th monthly 13:30 UTC
-   FOMC = 8x per year (approximate)
-   ECB/BoE = roughly monthly */
-function generateFallbackNewsFor(daysAhead = 14) {
-  const events = [];
-  const now = new Date();
-  const year = now.getUTCFullYear();
-  const month = now.getUTCMonth();
-
-  for (let i = 0; i < 2; i++) {
-    const m = month + i;
-    const y = year + Math.floor(m / 12);
-    const mm = m % 12;
-
-    // NFP — 1st Friday @ 13:30 UTC
-    const nfp = new Date(Date.UTC(y, mm, 1));
-    const dayOfWeek = nfp.getUTCDay();
-    const firstFri = 1 + ((5 - dayOfWeek + 7) % 7);
-    events.push({
-      title: 'US Non-Farm Payrolls (NFP)',
-      impact: 'high', currency: 'USD',
-      date: new Date(Date.UTC(y, mm, firstFri, 13, 30)).toISOString()
-    });
-
-    // CPI — roughly 12th @ 13:30 UTC
-    events.push({
-      title: 'US CPI (YoY)',
-      impact: 'high', currency: 'USD',
-      date: new Date(Date.UTC(y, mm, 12, 13, 30)).toISOString()
-    });
-
-    // FOMC — approximate (Mar, May, Jun, Jul, Sep, Nov, Dec)
-    const fomcMonths = [2, 4, 5, 6, 8, 10, 11];
-    if (fomcMonths.includes(mm)) {
-      events.push({
-        title: 'FOMC Rate Decision',
-        impact: 'high', currency: 'USD',
-        date: new Date(Date.UTC(y, mm, 18, 19, 0)).toISOString()
-      });
-    }
-
-    // ECB — approximate
-    if ([0, 2, 3, 5, 6, 8, 9, 11].includes(mm)) {
-      events.push({
-        title: 'ECB Rate Decision',
-        impact: 'high', currency: 'EUR',
-        date: new Date(Date.UTC(y, mm, 14, 12, 45)).toISOString()
-      });
-    }
-
-    // BoE — approximate
-    if ([1, 4, 7, 10].includes(mm)) {
-      events.push({
-        title: 'BoE Rate Decision',
-        impact: 'high', currency: 'GBP',
-        date: new Date(Date.UTC(y, mm, 6, 12, 0)).toISOString()
-      });
-    }
-  }
-
-  const cutoff = Date.now() + daysAhead * 86400000;
-  return events
-    .filter(e => {
-      const t = Date.parse(e.date);
-      return Number.isFinite(t) && t > Date.now() - 86400000 && t < cutoff;
-    })
-    .sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
-}
-
-async function refreshNewsFeed() {
-  const btn = $('newsRefreshBtn');
-  if (btn) { btn.disabled = true; btn.innerText = '⏳'; }
-
-  let events = [];
-  // Try external feed via CORS proxy (best effort — fallback if unavailable)
-  try {
-    const proxy = 'https://corsproxy.io/?url=';
-    const target = encodeURIComponent('https://nfs.faireconomy.media/ff_calendar_thisweek.json');
-    const r = await fetchWithTimeout(`${proxy}${target}`, {}, 12000);
-    if (r.ok) {
-      const raw = await r.json();
-      if (Array.isArray(raw)) {
-        events = raw
-          .filter(e => (e.impact || '').toLowerCase() === 'high')
-          .map(e => ({
-            title: e.title || e.event || 'High-Impact Event',
-            impact: 'high',
-            currency: e.country || e.currency || 'USD',
-            date: new Date(e.date).toISOString()
-          }));
-      }
-    }
-  } catch (e) {
-    console.warn('External news feed unavailable, using fallback:', e.message);
-  }
-
-  // Fallback if empty
-  if (!events.length) events = generateFallbackNewsFor(14);
-
-  // Merge with cached
-  const cached = getCachedNews();
-  const merged = [...events, ...cached]
-    .filter((e, i, arr) => arr.findIndex(x => x.title === e.title && x.date === e.date) === i)
-    .sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
-
-  setCachedNews(merged);
-
-  if (btn) { btn.disabled = false; btn.innerText = '🔄 Refresh'; }
-
-  renderNewsBanner();
-  renderNewsCalendar();
-
-  // Schedule notifications for upcoming events
-  scheduleNewsNotifications(merged);
-}
-
-function isNewsBlockingNow() {
-  if (!isNewsFilterEnabled()) return { blocked: false };
-  const events = getCachedNews();
-  if (!events.length) return { blocked: false };
-
-  const bufferMs = getNewsBufferMinutes() * 60 * 1000;
-  const now = Date.now();
-
-  for (const e of events) {
-    const t = Date.parse(e.date);
-    if (!Number.isFinite(t)) continue;
-    const dt = t - now;
-    if (Math.abs(dt) <= bufferMs) {
-      return {
-        blocked: true,
-        event: e,
-        minutesTo: Math.round(dt / 60000)
-      };
-    }
-  }
-  return { blocked: false };
-}
-
-function getUpcomingNews(hours = 24) {
-  const events = getCachedNews();
-  const cutoff = Date.now() + hours * 3600000;
-  return events.filter(e => {
-    const t = Date.parse(e.date);
-    return t > Date.now() && t < cutoff;
-  });
-}
-
-function renderNewsBanner() {
-  const banner = $('newsAlertBanner');
-  const list = $('newsAlertList');
-  if (!banner || !list) return;
-
-  const blocking = isNewsBlockingNow();
-  const upcoming = getUpcomingNews(4);
-
-  if (!blocking.blocked && !upcoming.length) {
-    banner.classList.remove('active', 'warning');
+function renderVolumeDeltaPanel(vdData, pair, containerId, title = '📈 VOLUME DELTA RATIO') {
+  const c = $(containerId);
+  if (!c) return;
+  if (!vdData || !vdData.ok) {
+    c.innerHTML = '';
     return;
   }
+  const spec = PAIR_SPECS[pair] || { decimals: 2 };
+  const buyPct = vdData.buyPct;
+  const sellPct = vdData.sellPct;
+  const biasClass = vdData.bias === 'BULLISH' || vdData.bias === 'LEAN_BULLISH' ? 'bullish'
+                  : vdData.bias === 'BEARISH' || vdData.bias === 'LEAN_BEARISH' ? 'bearish'
+                  : 'neutral';
+  const timeStr = new Date().toLocaleTimeString();
 
-  banner.classList.add('active');
-  if (!blocking.blocked) banner.classList.add('warning');
-  else banner.classList.remove('warning');
-
-  const head = banner.querySelector('.news-banner-head');
-  if (head) {
-    head.innerHTML = blocking.blocked
-      ? '<span class="news-icon">🚨</span> NEWS ACTIVE — TRADING BLOCKED'
-      : '<span class="news-icon">⏰</span> UPCOMING HIGH-IMPACT NEWS';
-  }
-
-  let html = '';
-  if (blocking.blocked) {
-    const dir = blocking.minutesTo >= 0 ? `in ${blocking.minutesTo} min` : `${Math.abs(blocking.minutesTo)} min ago`;
-    html += `<div class="news-event">
-      <div class="news-event-title">🚨 ${esc(blocking.event.title)}</div>
-      <div class="news-event-meta">${esc(blocking.event.currency)} • ${dir} • Trading blocked</div>
+  c.innerHTML = `
+    <div class="vd-panel">
+      <div class="vd-head">
+        <div class="vd-title">${title}</div>
+        <div class="vd-time">${esc(pair)} • ${timeStr}</div>
+      </div>
+      <div class="vd-bars">
+        <div class="vd-bar buy">
+          <div class="vd-bar-lbl">🟢 BUY VOLUME</div>
+          <div class="vd-bar-val">${buyPct.toFixed(1)}%</div>
+          <div class="vd-bar-vol">${Math.round(vdData.buyVol).toLocaleString()} units</div>
+        </div>
+        <div class="vd-bar sell">
+          <div class="vd-bar-lbl">🔴 SELL VOLUME</div>
+          <div class="vd-bar-val">${sellPct.toFixed(1)}%</div>
+          <div class="vd-bar-vol">${Math.round(vdData.sellVol).toLocaleString()} units</div>
+        </div>
+      </div>
+      <div class="vd-ratio">
+        <div class="vd-ratio-buy" style="width:${buyPct}%"></div>
+        <div class="vd-ratio-sell" style="width:${sellPct}%"></div>
+      </div>
+      <div class="vd-bias ${biasClass}">
+        ${vdData.bias === 'BULLISH' ? '🔥' : vdData.bias === 'BEARISH' ? '🩸' : vdData.bias.includes('LEAN') ? '⚠️' : '⚖️'} ${vdData.bias.replace('_', ' ')}
+        <div class="vd-reason">${esc(vdData.reason)}</div>
+      </div>
+      <div class="vd-tf-row">
+        <div class="vd-tf"><div class="vd-tf-lbl">CANDLES</div><div class="vd-tf-val">${vdData.candles}</div></div>
+        <div class="vd-tf"><div class="vd-tf-lbl">BULL</div><div class="vd-tf-val" style="color:var(--green);">${vdData.bullCount}</div></div>
+        <div class="vd-tf"><div class="vd-tf-lbl">BEAR</div><div class="vd-tf-val" style="color:var(--red);">${vdData.bearCount}</div></div>
+        <div class="vd-tf"><div class="vd-tf-lbl">DELTA</div><div class="vd-tf-val" style="color:${vdData.delta > 0 ? 'var(--green)' : 'var(--red)'};">${vdData.delta > 0 ? '+' : ''}${Math.round(vdData.delta).toLocaleString()}</div></div>
+      </div>
     </div>`;
-  }
-  upcoming.slice(0, 3).forEach(e => {
-    const mins = Math.round((Date.parse(e.date) - Date.now()) / 60000);
-    const h = Math.floor(mins / 60);
-    const m = mins % 60;
-    const timeStr = h > 0 ? `${h}h ${m}m` : `${m}m`;
-    html += `<div class="news-event warning">
-      <div class="news-event-title">${esc(e.title)}</div>
-      <div class="news-event-meta">${esc(e.currency)} • <span class="news-countdown">in ${timeStr}</span></div>
-    </div>`;
-  });
-  list.innerHTML = html;
 }
 
-function renderNewsCalendar() {
-  const c = $('newsCalendarContainer');
-  if (!c) return;
-  const events = getCachedNews();
-  if (!events.length) { c.innerHTML = '<div class="info-box">Hakuna events cached. Bonyeza Refresh.</div>'; return; }
-
-  c.innerHTML = events.slice(0, 20).map(e => {
-    const t = Date.parse(e.date);
-    const now = Date.now();
-    const mins = Math.round((t - now) / 60000);
-    const isPast = mins < 0;
-    const isNear = Math.abs(mins) <= getNewsBufferMinutes();
-    const timeStr = new Date(e.date).toLocaleString('en-GB', { timeZone: 'UTC', dateStyle: 'short', timeStyle: 'short' }) + ' UTC';
-    const countdown = isPast
-      ? `${Math.abs(mins)} min ago`
-      : mins < 60 ? `in ${mins} min` : `in ${Math.floor(mins / 60)}h ${mins % 60}m`;
-    const cls = isNear ? 'news-event' : 'news-event warning';
-    return `<div class="${cls}">
-      <div class="news-event-title">${esc(e.title)}</div>
-      <div class="news-event-meta">${esc(e.currency)} • ${timeStr} • ${countdown}</div>
-    </div>`;
-  }).join('');
-}
-
-function scheduleNewsNotifications(events) {
-  // Schedule 30-min warning for each upcoming event
-  events.forEach(e => {
-    const t = Date.parse(e.date);
-    if (!Number.isFinite(t)) return;
-    const warnAt = t - getNewsBufferMinutes() * 60000;
-    const dt = warnAt - Date.now();
-    if (dt > 0 && dt < 24 * 3600000) {
-      setTimeout(() => {
-        pushNotification({
-          type: 'NEWS_WARNING',
-          title: `🚨 News in ${getNewsBufferMinutes()} min`,
-          body: `${e.title} (${e.currency}) — Trading will be blocked.`,
-          tag: `news-${e.title}-${e.date}`
-        });
-      }, dt);
-    }
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   PWA SERVICE WORKER + PUSH NOTIFICATIONS + OFFLINE QUEUE
-   ═══════════════════════════════════════════════════════════════════ */
-let swRegistration = null;
-let deferredInstallPrompt = null;
-
-/* Service Worker code (inline via Blob — works in Chromium-based browsers).
-   For production, save this as sw.js at site root and change register() path. */
-const SW_CODE = `
-'use strict';
-const DB_NAME = 'lutynoel-alerts';
-const DB_VERSION = 1;
-const STORE = 'queue';
-
-self.addEventListener('install', e => { self.skipWaiting(); });
-self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = () => {
-      const db = req.result;
-      if (!db.objectStoreNames.contains(STORE)) {
-        db.createObjectStore(STORE, { keyPath: 'id', autoIncrement: true });
-      }
-    };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function enqueue(item) {
-  try {
-    const db = await openDB();
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction(STORE, 'readwrite');
-      tx.objectStore(STORE).add({ ...item, ts: Date.now() });
-      tx.oncomplete = () => resolve(true);
-      tx.onerror = () => reject(tx.error);
-    });
-  } catch (e) { return false; }
-}
-
-async function drain() {
-  try {
-    const db = await openDB();
-    return new Promise((resolve) => {
-      const tx = db.transaction(STORE, 'readwrite');
-      const store = tx.objectStore(STORE);
-      const all = [];
-      store.openCursor().onsuccess = (ev) => {
-        const cursor = ev.target.result;
-        if (cursor) { all.push(cursor.value); cursor.delete(); cursor.continue(); }
-      };
-      tx.oncomplete = () => resolve(all);
-      tx.onerror = () => resolve([]);
-    });
-  } catch (e) { return []; }
-}
-
-self.addEventListener('message', async (event) => {
-  const data = event.data || {};
-  if (data.type === 'SHOW_NOTIFICATION') {
-    try {
-      await self.registration.showNotification(data.title || 'Lutynoel.fx', {
-        body: data.body || '',
-        tag: data.tag || 'lutynoel',
-        icon: data.icon,
-        badge: data.badge,
-        vibrate: [220, 90, 220],
-        requireInteraction: data.requireInteraction === true,
-        data: data.data || {}
-      });
-    } catch (e) {}
-  } else if (data.type === 'QUEUE_NOTIFICATION') {
-    await enqueue(data.payload || {});
-  } else if (data.type === 'DRAIN_QUEUE') {
-    const items = await drain();
-    for (const it of items) {
-      try {
-        await self.registration.showNotification(it.title || 'Lutynoel.fx', {
-          body: it.body || '',
-          tag: it.tag || ('lutynoel-' + it.ts),
-          vibrate: [220, 90, 220]
-        });
-      } catch (e) {}
-    }
-    // Notify clients
-    const allClients = await self.clients.matchAll({ includeUncontrolled: true });
-    allClients.forEach(c => c.postMessage({ type: 'QUEUE_DRAINED', count: items.length }));
-  }
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil((async () => {
-    const allClients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-    for (const client of allClients) {
-      if ('focus' in client) { return client.focus(); }
-    }
-    if (self.clients.openWindow) return self.clients.openWindow('/');
-  })());
-});
-`;
-
-async function registerServiceWorker() {
-  if (!('serviceWorker' in navigator)) {
-    console.warn('Service Worker not supported');
-    return null;
-  }
-  try {
-    // Try Blob URL first (works in Chromium for same-origin scope)
-    const blob = new Blob([SW_CODE], { type: 'application/javascript' });
-    const url = URL.createObjectURL(blob);
-    swRegistration = await navigator.serviceWorker.register(url, { scope: './' });
-    console.log('[SW] Registered via Blob URL:', swRegistration.scope);
-    return swRegistration;
-  } catch (e) {
-    console.warn('[SW] Blob registration failed, trying /sw.js:', e.message);
-    try {
-      swRegistration = await navigator.serviceWorker.register('./sw.js', { scope: './' });
-      console.log('[SW] Registered via sw.js:', swRegistration.scope);
-      return swRegistration;
-    } catch (e2) {
-      console.warn('[SW] Both registration methods failed:', e2.message);
-      return null;
-    }
-  }
-}
-
-async function requestNotificationPermission() {
-  if (!('Notification' in window)) {
-    showToast('❌ Notifications hazitumiki kwenye browser hii.', 4000);
-    return 'unsupported';
-  }
-  if (Notification.permission === 'granted') {
-    updateNotifStatusPill();
-    return 'granted';
-  }
-  try {
-    const perm = await Notification.requestPermission();
-    updateNotifStatusPill();
-    if (perm === 'granted') showToast('✅ Notifications zimewashwa.');
-    else showToast('⚠️ Notifications zimekataliwa.', 4000);
-    return perm;
-  } catch (e) {
-    return 'error';
-  }
-}
-
-function updateNotifStatusPill() {
-  const pill = $('notifStatusPill');
-  if (!pill) return;
-  const perm = ('Notification' in window) ? Notification.permission : 'unsupported';
-  if (perm === 'granted') {
-    pill.textContent = '🔔 ACTIVE';
-    pill.style.background = 'rgba(16,185,129,.15)';
-    pill.style.color = 'var(--green)';
-    pill.style.borderColor = 'var(--green)';
-  } else if (perm === 'denied') {
-    pill.textContent = '🔕 BLOCKED';
-    pill.style.background = 'rgba(239,68,68,.15)';
-    pill.style.color = 'var(--red)';
-    pill.style.borderColor = 'var(--red)';
-  } else {
-    pill.textContent = '⏳ PENDING';
-    pill.style.background = 'rgba(250,204,21,.15)';
-    pill.style.color = 'var(--yellow)';
-    pill.style.borderColor = 'var(--yellow)';
-  }
-  const status = $('notifPermStatus');
-  if (status) status.textContent = `Permission: ${perm}`;
-}
-
-/* Push notification — SW-aware with offline queue fallback */
-async function pushNotification(payload) {
-  const { type = 'ALERT', title = 'Lutynoel.fx', body = '', tag = '', data = {} } = payload || {};
-  const isOnline = navigator.onLine;
-  const notifGranted = ('Notification' in window) && Notification.permission === 'granted';
-
-  // If offline → queue and exit
-  if (!isOnline) {
-    queueOfflineNotification(payload);
-    showToast(`📴 Queued (offline): ${title}`, 4000);
-    return false;
-  }
-
-  // If SW available → use it
-  if (swRegistration && swRegistration.active && notifGranted) {
-    try {
-      swRegistration.active.postMessage({
-        type: 'SHOW_NOTIFICATION',
-        title, body, tag: tag || `lutynoel-${Date.now()}`,
-        vibrate: [220, 90, 220]
-      });
-      incrementSentCount();
-      return true;
-    } catch (e) {
-      console.warn('[Notif] SW failed, fallback to Notification API:', e.message);
-    }
-  }
-
-  // Fallback: native Notification API (foreground only)
-  if (notifGranted) {
-    try {
-      new Notification(title, { body, tag: tag || `lutynoel-${Date.now()}`, vibrate: [220, 90, 220] });
-      incrementSentCount();
-      return true;
-    } catch (e) {
-      console.warn('[Notif] Native failed:', e.message);
-    }
-  }
-
-  // Last resort: in-app toast
-  showToast(`${title}\n${body}`, 6000);
-  return false;
-}
-
-function queueOfflineNotification(payload) {
-  let q = [];
-  try { q = JSON.parse(store.get(ALERT_KEYS.NOTIF_QUEUE) || '[]'); } catch (e) {}
-  q.push({ ...payload, queuedAt: Date.now() });
-  store.set(ALERT_KEYS.NOTIF_QUEUE, JSON.stringify(q.slice(-100)));
-
-  // Also queue in SW IndexedDB if available
-  if (swRegistration && swRegistration.active) {
-    try {
-      swRegistration.active.postMessage({ type: 'QUEUE_NOTIFICATION', payload });
-    } catch (e) {}
-  }
-  updateNotifQueueUI();
-}
-
-async function flushOfflineNotificationQueue() {
-  let q = [];
-  try { q = JSON.parse(store.get(ALERT_KEYS.NOTIF_QUEUE) || '[]'); } catch (e) {}
-  if (!q.length) return;
-
-  showToast(`📡 Flushing ${q.length} queued notification(s)...`, 3000);
-  for (const item of q) {
-    await pushNotification(item);
-    await sleep(300);
-  }
-  store.set(ALERT_KEYS.NOTIF_QUEUE, '[]');
-  updateNotifQueueUI();
-
-  // Ask SW to drain its own queue too
-  if (swRegistration && swRegistration.active) {
-    try {
-      swRegistration.active.postMessage({ type: 'DRAIN_QUEUE' });
-    } catch (e) {}
-  }
-}
-
-function getNotifQueue() {
-  try { return JSON.parse(store.get(ALERT_KEYS.NOTIF_QUEUE) || '[]'); } catch (e) { return []; }
-}
-function getNotifSentCount() {
-  return parseInt(store.get(ALERT_KEYS.NOTIF_SENT) || '0') || 0;
-}
-function incrementSentCount() {
-  store.set(ALERT_KEYS.NOTIF_SENT, String(getNotifSentCount() + 1));
-  const el = $('notifSentCount'); if (el) el.textContent = getNotifSentCount();
-}
-
-function updateNotifQueueUI() {
-  const q = getNotifQueue();
-  const cnt = $('notifQueueCount'); if (cnt) cnt.textContent = q.length;
-  const sent = $('notifSentCount'); if (sent) sent.textContent = getNotifSentCount();
-
-  const c = $('notifQueueContainer');
-  if (!c) return;
-  if (!q.length) { c.innerHTML = '<div class="info-box">Hakuna notifications queued.</div>'; return; }
-
-  c.innerHTML = q.slice().reverse().map(item => {
-    const when = new Date(item.queuedAt).toLocaleString();
-    return `<div class="mini-box" style="margin-bottom:8px;border-color:var(--yellow);">
-      <div style="font-size:10px;color:var(--yellow);font-weight:900;">${esc(item.type || 'ALERT')}</div>
-      <div style="font-size:12px;font-weight:700;margin-top:4px;">${esc(item.title || '')}</div>
-      <div style="font-size:11px;color:var(--muted);">${esc(item.body || '')}</div>
-      <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:ui-monospace,monospace;">${when}</div>
-    </div>`;
-  }).join('');
-}
-
-function clearNotificationQueue() {
-  if (!confirm('Clear notification queue?')) return;
-  store.set(ALERT_KEYS.NOTIF_QUEUE, '[]');
-  updateNotifQueueUI();
-  showToast('✅ Queue cleared');
-}
-
-function testPushNotification() {
-  pushNotification({
-    type: 'TEST',
-    title: '🔔 Lutynoel.fx Test',
-    body: 'Push notifications zinafanya kazi. Utapata alerts za ENTRY, TP, SL, na NEWS.',
-    tag: 'test-' + Date.now()
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   KILLZONE / SAME-DAY FILTERS
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ KILLZONE ═══ */
 function getKillzoneState(now = new Date()) {
   const m = now.getUTCHours() * 60 + now.getUTCMinutes();
   let session = 'DEAD_ZONE', inKillzone = false, label = '';
@@ -1584,9 +1190,7 @@ function findLastTradingDayStart(candles) {
   return null;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   JSON / FETCH
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ JSON / FETCH ═══ */
 function safeJsonParse(text) {
   if (!text) return null;
   if (typeof text === 'object') return text;
@@ -1609,7 +1213,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   finally { clearTimeout(id); }
 }
 
-/* ═══ AI PROVIDERS ═══ */
+/* ═══ AI ═══ */
 const getGeminiKey = () => store.get(STORAGE_KEYS.GEMINI);
 const getMistralKey = () => store.get(STORAGE_KEYS.MISTRAL);
 const getTwelveKey = () => store.get(STORAGE_KEYS.TWELVE);
@@ -1663,24 +1267,23 @@ async function callMistral(models, messages, maxTokens, timeout) {
   return { err };
 }
 
-async function callMastersAnalysis(pair, price, marketContext) {
-  const microInfo = `MICRO ACCOUNT: Balance = $${getBalance().toFixed(2)}, Risk = ${getRiskPct()}% = $${(getBalance() * getRiskPct() / 100).toFixed(2)} max loss, Max lot = 0.01`;
+async function callMastersAnalysis(pair, price, marketContext, has5M = true) {
   const newsState = isNewsBlockingNow();
   const newsInfo = newsState.blocked
-    ? `NEWS BLOCKING NOW: ${newsState.event.title} (${newsState.event.currency})`
+    ? `NEWS BLOCKING: ${newsState.event.title} (${newsState.event.currency})`
     : 'NEWS: Clear';
 
   const userPrompt = `PAIR: ${pair}
 CURRENT PRICE: ${price}
 SESSION (UTC): ${new Date().toUTCString()}
-MODE: SAME-DAY INTRADAY — PSAR-ONLY (NO ATR)
-${microInfo}
+MODE: SAME-DAY INTRADAY — PSAR ONLY (NO ATR)
+5M PROVIDED: ${has5M ? 'YES' : 'NO (cap at PASS)'}
 ${newsInfo}
 
 MARKET CONTEXT:
 ${JSON.stringify(marketContext, null, 2)}
 
-Analyze now and return the strict JSON. Apply 4-strategy alignment rule (ALL or REJECT). Apply micro-account risk filter. Apply PSAR-only SL.`;
+Analyze now and return strict JSON. 4-strategy alignment required for STRONG PASS.`;
 
   const parts = [{ text: userPrompt }];
   let r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, 120000, true, MASTERS_ANALYSIS_SYSTEM_PROMPT);
@@ -1701,7 +1304,7 @@ Analyze now and return the strict JSON. Apply 4-strategy alignment rule (ALL or 
   return { err: `${geminiErr || 'Gemini failed'} | ${r.err || 'Mistral failed'}` };
 }
 
-/* ═══ MARKET DATA FETCH ═══ */
+/* ═══ MARKET DATA ═══ */
 let twelveNext = 0;
 async function twelveGate() {
   const now = Date.now(), start = Math.max(now, twelveNext);
@@ -1775,9 +1378,7 @@ async function fetchOHLC(pair, tf, limit = 500, fresh = false, sameDayOnly = tru
   return null;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   PARABOLIC SAR (Wilder) — PRIMARY INDICATOR
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ PSAR + STRUCTURE ═══ */
 function calculateParabolicSAR(candles, afStart = 0.02, afStep = 0.02, afMax = 0.20) {
   if (!Array.isArray(candles) || candles.length < 3) return [];
   const result = [];
@@ -1785,13 +1386,10 @@ function calculateParabolicSAR(candles, afStart = 0.02, afStep = 0.02, afMax = 0
   let af = afStart;
   let ep = bull ? candles[0].high : candles[0].low;
   let sar = bull ? candles[0].low : candles[0].high;
-
   result.push({ time: candles[0].time, sar, trend: bull ? 'bull' : 'bear' });
-
   for (let i = 1; i < candles.length; i++) {
     const prev = candles[i - 1], cur = candles[i];
     let newSar = sar + af * (ep - sar);
-
     if (bull) {
       newSar = Math.min(newSar, prev.low);
       if (i >= 2) newSar = Math.min(newSar, candles[i - 2].low);
@@ -1820,8 +1418,6 @@ function getSARState(candles) {
   }
   return { sar: +last.sar.toFixed(8), trend: last.trend, justFlipped: last.trend !== prev.trend, barsSinceFlip };
 }
-
-/* ═══ OTHER INDICATORS (structure, OB, FVG, sweeps) ═══ */
 function detectOrderBlocks(o, lb = 60) {
   const empty = { nearestBull: null, nearestBear: null };
   if (!Array.isArray(o) || o.length < 10) return empty;
@@ -1886,7 +1482,6 @@ function detectLiquiditySweep(o) {
   return null;
 }
 
-/* ═══ MTF INDICATOR COMPUTATION ═══ */
 function computeMTFIndicators(candlesByTF, pair) {
   const spec = PAIR_SPECS[pair];
   const out = {};
@@ -1901,6 +1496,7 @@ function computeMTFIndicators(candlesByTF, pair) {
     const sweep = detectLiquiditySweep(candles);
     const ob = detectOrderBlocks(candles, 60);
     const fvg = detectFVG(candles, 60);
+    const vd = computeVolumeDelta(candles, 100);
     out[tf] = {
       ok: true, bars: candles.length,
       psar: psar ? { trend: psar.trend, sar: +psar.sar.toFixed(spec.decimals + 2), barsSinceFlip: psar.barsSinceFlip } : null,
@@ -1914,6 +1510,7 @@ function computeMTFIndicators(candlesByTF, pair) {
         bull: fvg.nearestBull ? { bottom: +fvg.nearestBull.bottom.toFixed(spec.decimals), top: +fvg.nearestBull.top.toFixed(spec.decimals) } : null,
         bear: fvg.nearestBear ? { bottom: +fvg.nearestBear.bottom.toFixed(spec.decimals), top: +fvg.nearestBear.top.toFixed(spec.decimals) } : null
       },
+      volumeDelta: vd,
       high: +Math.max(...candles.map(c => c.high)).toFixed(spec.decimals),
       low: +Math.min(...candles.map(c => c.low)).toFixed(spec.decimals)
     };
@@ -1932,7 +1529,7 @@ function renderMTFMatrix(mtfData, pair) {
       <th style="text-align:center;padding:6px 4px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">PSAR</th>
       <th style="text-align:center;padding:6px 4px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">Dot</th>
       <th style="text-align:center;padding:6px 4px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">Structure</th>
-      <th style="text-align:center;padding:6px 4px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">Sweep</th>
+      <th style="text-align:center;padding:6px 4px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">Vol Delta</th>
     </tr></thead><tbody>`;
   tfs.forEach(([key, label]) => {
     const t = mtfData[key];
@@ -1945,43 +1542,324 @@ function renderMTFMatrix(mtfData, pair) {
     const psarColor = t.psar?.trend === 'bull' ? 'var(--green)' : t.psar?.trend === 'bear' ? 'var(--red)' : 'var(--muted)';
     const psarLevel = t.psar ? t.psar.sar.toFixed(d) : '—';
     const structColor = t.structure === 'BULLISH' ? 'var(--green)' : t.structure === 'BEARISH' ? 'var(--red)' : 'var(--yellow)';
-    const sweepTxt = t.sweep ? (t.sweep.type.includes('BULL') ? '🟢 Swept' : '🔴 Swept') : '—';
+    const vd = t.volumeDelta;
+    const vdTxt = vd?.ok ? `${vd.buyPct.toFixed(0)}/${vd.sellPct.toFixed(0)}` : '—';
+    const vdColor = vd?.ok ? (vd.buyPct >= 60 ? 'var(--green)' : vd.sellPct >= 60 ? 'var(--red)' : 'var(--muted)') : 'var(--muted)';
     html += `<tr>
       <td style="text-align:center;padding:8px 4px;font-weight:900;color:var(--accent);">${label}</td>
       <td style="text-align:center;padding:8px 4px;font-weight:700;color:${psarColor};">${psarTrend}</td>
       <td style="text-align:center;padding:8px 4px;font-weight:700;color:${psarColor};">${psarLevel}</td>
       <td style="text-align:center;padding:8px 4px;font-weight:700;color:${structColor};">${t.structure || 'NEUTRAL'}</td>
-      <td style="text-align:center;padding:8px 4px;font-weight:700;color:${t.sweep ? 'var(--green)' : 'var(--muted)'};">${sweepTxt}</td>
+      <td style="text-align:center;padding:8px 4px;font-weight:700;color:${vdColor};">${vdTxt}</td>
     </tr>`;
   });
   html += `</tbody></table></div>`;
   return html;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   AUTO-TRACK (with notifications)
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   NEWS FILTER ENGINE
+   ═══════════════════════════════════════════════════════════════ */
+function isNewsFilterEnabled() { return store.get(ALERT_KEYS.NEWS_FILTER) !== 'false'; }
+function getNewsBufferMinutes() {
+  const v = parseFloat(store.get(ALERT_KEYS.NEWS_BUFFER));
+  return Number.isFinite(v) && v >= 5 ? v : 30;
+}
+function getCachedNews() {
+  try { return JSON.parse(store.get(ALERT_KEYS.NEWS_CACHE) || '[]'); } catch (e) { return []; }
+}
+function setCachedNews(events) { store.set(ALERT_KEYS.NEWS_CACHE, JSON.stringify(events.slice(0, 200))); }
+
+function generateFallbackNewsFor(daysAhead = 14) {
+  const events = [];
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const month = now.getUTCMonth();
+  for (let i = 0; i < 2; i++) {
+    const m = month + i;
+    const y = year + Math.floor(m / 12);
+    const mm = m % 12;
+
+    const nfp = new Date(Date.UTC(y, mm, 1));
+    const dow = nfp.getUTCDay();
+    const firstFri = 1 + ((5 - dow + 7) % 7);
+    events.push({ title: 'US Non-Farm Payrolls (NFP)', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, firstFri, 13, 30)).toISOString() });
+    events.push({ title: 'US CPI (YoY)', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, 12, 13, 30)).toISOString() });
+
+    const fomcMonths = [2, 4, 5, 6, 8, 10, 11];
+    if (fomcMonths.includes(mm)) {
+      events.push({ title: 'FOMC Rate Decision', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, 18, 19, 0)).toISOString() });
+    }
+    if ([0, 2, 3, 5, 6, 8, 9, 11].includes(mm)) {
+      events.push({ title: 'ECB Rate Decision', impact: 'high', currency: 'EUR', date: new Date(Date.UTC(y, mm, 14, 12, 45)).toISOString() });
+    }
+    if ([1, 4, 7, 10].includes(mm)) {
+      events.push({ title: 'BoE Rate Decision', impact: 'high', currency: 'GBP', date: new Date(Date.UTC(y, mm, 6, 12, 0)).toISOString() });
+    }
+  }
+  const cutoff = Date.now() + daysAhead * 86400000;
+  return events.filter(e => {
+    const t = Date.parse(e.date);
+    return Number.isFinite(t) && t > Date.now() - 86400000 && t < cutoff;
+  }).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+}
+
+async function refreshNewsFeed() {
+  const btn = $('newsRefreshBtn');
+  if (btn) { btn.disabled = true; btn.innerText = '⏳'; }
+  let events = [];
+  try {
+    const proxy = 'https://corsproxy.io/?url=';
+    const target = encodeURIComponent('https://nfs.faireconomy.media/ff_calendar_thisweek.json');
+    const r = await fetchWithTimeout(`${proxy}${target}`, {}, 12000);
+    if (r.ok) {
+      const raw = await r.json();
+      if (Array.isArray(raw)) {
+        events = raw.filter(e => (e.impact || '').toLowerCase() === 'high').map(e => ({
+          title: e.title || e.event || 'High-Impact Event',
+          impact: 'high',
+          currency: e.country || e.currency || 'USD',
+          date: new Date(e.date).toISOString()
+        }));
+      }
+    }
+  } catch (e) { console.warn('External news feed unavailable, using fallback:', e.message); }
+  if (!events.length) events = generateFallbackNewsFor(14);
+  const cached = getCachedNews();
+  const merged = [...events, ...cached].filter((e, i, arr) => arr.findIndex(x => x.title === e.title && x.date === e.date) === i).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+  setCachedNews(merged);
+  if (btn) { btn.disabled = false; btn.innerText = '🔄 Refresh'; }
+  renderNewsBanner();
+  renderNewsCalendar();
+  scheduleNewsNotifications(merged);
+}
+
+function isNewsBlockingNow() {
+  if (!isNewsFilterEnabled()) return { blocked: false };
+  const events = getCachedNews();
+  if (!events.length) return { blocked: false };
+  const bufferMs = getNewsBufferMinutes() * 60 * 1000;
+  const now = Date.now();
+  for (const e of events) {
+    const t = Date.parse(e.date);
+    if (!Number.isFinite(t)) continue;
+    const dt = t - now;
+    if (Math.abs(dt) <= bufferMs) return { blocked: true, event: e, minutesTo: Math.round(dt / 60000) };
+  }
+  return { blocked: false };
+}
+
+function getUpcomingNews(hours = 24) {
+  const events = getCachedNews();
+  const cutoff = Date.now() + hours * 3600000;
+  return events.filter(e => {
+    const t = Date.parse(e.date);
+    return t > Date.now() && t < cutoff;
+  });
+}
+
+function renderNewsBanner() {
+  const banner = $('newsAlertBanner');
+  const list = $('newsAlertList');
+  if (!banner || !list) return;
+  const blocking = isNewsBlockingNow();
+  const upcoming = getUpcomingNews(4);
+  if (!blocking.blocked && !upcoming.length) { banner.classList.remove('active', 'warning'); return; }
+  banner.classList.add('active');
+  if (!blocking.blocked) banner.classList.add('warning');
+  else banner.classList.remove('warning');
+  const head = banner.querySelector('.news-banner-head');
+  if (head) head.innerHTML = blocking.blocked ? '<span>🚨</span> NEWS ACTIVE — TRADING BLOCKED' : '<span>⏰</span> UPCOMING HIGH-IMPACT NEWS';
+  let html = '';
+  if (blocking.blocked) {
+    const dir = blocking.minutesTo >= 0 ? `in ${blocking.minutesTo} min` : `${Math.abs(blocking.minutesTo)} min ago`;
+    html += `<div class="news-event"><div class="news-event-title">🚨 ${esc(blocking.event.title)}</div><div class="news-event-meta">${esc(blocking.event.currency)} • ${dir} • Trading blocked</div></div>`;
+  }
+  upcoming.slice(0, 3).forEach(e => {
+    const mins = Math.round((Date.parse(e.date) - Date.now()) / 60000);
+    const h = Math.floor(mins / 60), m = mins % 60;
+    const timeStr = h > 0 ? `${h}h ${m}m` : `${m}m`;
+    html += `<div class="news-event warning"><div class="news-event-title">${esc(e.title)}</div><div class="news-event-meta">${esc(e.currency)} • <span class="news-countdown">in ${timeStr}</span></div></div>`;
+  });
+  list.innerHTML = html;
+}
+
+function renderNewsCalendar() {
+  const c = $('newsCalendarContainer');
+  if (!c) return;
+  const events = getCachedNews();
+  if (!events.length) { c.innerHTML = '<div class="info-box">Hakuna events cached.</div>'; return; }
+  c.innerHTML = events.slice(0, 20).map(e => {
+    const t = Date.parse(e.date);
+    const mins = Math.round((t - Date.now()) / 60000);
+    const isPast = mins < 0;
+    const isNear = Math.abs(mins) <= getNewsBufferMinutes();
+    const timeStr = new Date(e.date).toLocaleString('en-GB', { timeZone: 'UTC', dateStyle: 'short', timeStyle: 'short' }) + ' UTC';
+    const countdown = isPast ? `${Math.abs(mins)} min ago` : mins < 60 ? `in ${mins} min` : `in ${Math.floor(mins / 60)}h ${mins % 60}m`;
+    const cls = isNear ? 'news-event' : 'news-event warning';
+    return `<div class="${cls}"><div class="news-event-title">${esc(e.title)}</div><div class="news-event-meta">${esc(e.currency)} • ${timeStr} • ${countdown}</div></div>`;
+  }).join('');
+}
+
+function scheduleNewsNotifications(events) {
+  events.forEach(e => {
+    const t = Date.parse(e.date);
+    if (!Number.isFinite(t)) return;
+    const warnAt = t - getNewsBufferMinutes() * 60000;
+    const dt = warnAt - Date.now();
+    if (dt > 0 && dt < 24 * 3600000) {
+      setTimeout(() => {
+        pushNotification({
+          type: 'NEWS_WARNING',
+          title: `🚨 News in ${getNewsBufferMinutes()} min`,
+          body: `${e.title} (${e.currency}) — Trading will be blocked.`,
+          tag: `news-${e.title}-${e.date}`
+        });
+      }, dt);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PWA SERVICE WORKER + PUSH + OFFLINE QUEUE
+   ═══════════════════════════════════════════════════════════════ */
+let swRegistration = null;
+const SW_CODE = `
+'use strict';
+const DB_NAME='lutynoel-alerts';const DB_VERSION=1;const STORE='queue';
+self.addEventListener('install',e=>{self.skipWaiting();});
+self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,DB_VERSION);r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+async function enqueue(item){try{const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).add({...item,ts:Date.now()});tx.oncomplete=()=>res(true);tx.onerror=()=>rej(tx.error);});}catch(e){return false;}}
+async function drain(){try{const db=await openDB();return new Promise((res)=>{const tx=db.transaction(STORE,'readwrite');const st=tx.objectStore(STORE);const all=[];st.openCursor().onsuccess=ev=>{const c=ev.target.result;if(c){all.push(c.value);c.delete();c.continue();}};tx.oncomplete=()=>res(all);tx.onerror=()=>res([]);});}catch(e){return [];}}
+self.addEventListener('message',async(ev)=>{const d=ev.data||{};if(d.type==='SHOW_NOTIFICATION'){try{await self.registration.showNotification(d.title||'Lutynoel.fx',{body:d.body||'',tag:d.tag||'lutynoel',vibrate:[220,90,220],data:d.data||{}});}catch(e){}}else if(d.type==='QUEUE_NOTIFICATION'){await enqueue(d.payload||{});}else if(d.type==='DRAIN_QUEUE'){const items=await drain();for(const it of items){try{await self.registration.showNotification(it.title||'Lutynoel.fx',{body:it.body||'',tag:it.tag||('lutynoel-'+it.ts),vibrate:[220,90,220]});}catch(e){}}const cs=await self.clients.matchAll({includeUncontrolled:true});cs.forEach(c=>c.postMessage({type:'QUEUE_DRAINED',count:items.length}));}});
+self.addEventListener('notificationclick',ev=>{ev.notification.close();ev.waitUntil((async()=>{const cs=await self.clients.matchAll({type:'window',includeUncontrolled:true});for(const c of cs){if('focus' in c)return c.focus();}if(self.clients.openWindow)return self.clients.openWindow('/');})());});
+`;
+
+async function registerServiceWorker() {
+  if (!('serviceWorker' in navigator)) return null;
+  try {
+    const blob = new Blob([SW_CODE], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    swRegistration = await navigator.serviceWorker.register(url, { scope: './' });
+    return swRegistration;
+  } catch (e) {
+    try { swRegistration = await navigator.serviceWorker.register('./sw.js', { scope: './' }); return swRegistration; }
+    catch (e2) { return null; }
+  }
+}
+
+async function requestNotificationPermission() {
+  if (!('Notification' in window)) { showToast('❌ Notifications hazitumiki.', 4000); return 'unsupported'; }
+  if (Notification.permission === 'granted') { updateNotifStatusPill(); return 'granted'; }
+  try {
+    const perm = await Notification.requestPermission();
+    updateNotifStatusPill();
+    showToast(perm === 'granted' ? '✅ Notifications zimewashwa.' : '⚠️ Notifications zimekataliwa.', 4000);
+    return perm;
+  } catch (e) { return 'error'; }
+}
+
+function updateNotifStatusPill() {
+  const pill = $('notifStatusPill');
+  if (!pill) return;
+  const perm = ('Notification' in window) ? Notification.permission : 'unsupported';
+  if (perm === 'granted') { pill.textContent = '🔔 ACTIVE'; pill.style.background = 'rgba(16,185,129,.15)'; pill.style.color = 'var(--green)'; pill.style.borderColor = 'var(--green)'; }
+  else if (perm === 'denied') { pill.textContent = '🔕 BLOCKED'; pill.style.background = 'rgba(239,68,68,.15)'; pill.style.color = 'var(--red)'; pill.style.borderColor = 'var(--red)'; }
+  else { pill.textContent = '⏳ PENDING'; pill.style.background = 'rgba(250,204,21,.15)'; pill.style.color = 'var(--yellow)'; pill.style.borderColor = 'var(--yellow)'; }
+  const status = $('notifPermStatus'); if (status) status.textContent = `Permission: ${perm}`;
+}
+
+async function pushNotification(payload) {
+  const { title = 'Lutynoel.fx', body = '', tag = '', data = {} } = payload || {};
+  const isOnline = navigator.onLine;
+  const notifGranted = ('Notification' in window) && Notification.permission === 'granted';
+  if (!isOnline) { queueOfflineNotification(payload); showToast(`📴 Queued (offline): ${title}`, 4000); return false; }
+  if (swRegistration && swRegistration.active && notifGranted) {
+    try { swRegistration.active.postMessage({ type: 'SHOW_NOTIFICATION', title, body, tag: tag || `lutynoel-${Date.now()}`, data }); incrementSentCount(); return true; }
+    catch (e) {}
+  }
+  if (notifGranted) {
+    try { new Notification(title, { body, tag: tag || `lutynoel-${Date.now()}`, vibrate: [220, 90, 220] }); incrementSentCount(); return true; }
+    catch (e) {}
+  }
+  showToast(`${title}\n${body}`, 6000);
+  return false;
+}
+
+function queueOfflineNotification(payload) {
+  let q = [];
+  try { q = JSON.parse(store.get(ALERT_KEYS.NOTIF_QUEUE) || '[]'); } catch (e) {}
+  q.push({ ...payload, queuedAt: Date.now() });
+  store.set(ALERT_KEYS.NOTIF_QUEUE, JSON.stringify(q.slice(-100)));
+  if (swRegistration && swRegistration.active) {
+    try { swRegistration.active.postMessage({ type: 'QUEUE_NOTIFICATION', payload }); } catch (e) {}
+  }
+  updateNotifQueueUI();
+}
+
+async function flushOfflineNotificationQueue() {
+  let q = [];
+  try { q = JSON.parse(store.get(ALERT_KEYS.NOTIF_QUEUE) || '[]'); } catch (e) {}
+  if (!q.length) return;
+  showToast(`📡 Flushing ${q.length} queued...`, 3000);
+  for (const item of q) { await pushNotification(item); await sleep(300); }
+  store.set(ALERT_KEYS.NOTIF_QUEUE, '[]');
+  updateNotifQueueUI();
+  if (swRegistration && swRegistration.active) {
+    try { swRegistration.active.postMessage({ type: 'DRAIN_QUEUE' }); } catch (e) {}
+  }
+}
+
+function getNotifQueue() { try { return JSON.parse(store.get(ALERT_KEYS.NOTIF_QUEUE) || '[]'); } catch (e) { return []; } }
+function getNotifSentCount() { return parseInt(store.get(ALERT_KEYS.NOTIF_SENT) || '0') || 0; }
+function incrementSentCount() {
+  store.set(ALERT_KEYS.NOTIF_SENT, String(getNotifSentCount() + 1));
+  const el = $('notifSentCount'); if (el) el.textContent = getNotifSentCount();
+}
+function updateNotifQueueUI() {
+  const q = getNotifQueue();
+  const cnt = $('notifQueueCount'); if (cnt) cnt.textContent = q.length;
+  const sent = $('notifSentCount'); if (sent) sent.textContent = getNotifSentCount();
+  const c = $('notifQueueContainer');
+  if (!c) return;
+  if (!q.length) { c.innerHTML = '<div class="info-box">Hakuna notifications queued.</div>'; return; }
+  c.innerHTML = q.slice().reverse().map(item => {
+    const when = new Date(item.queuedAt).toLocaleString();
+    return `<div class="mini-box" style="margin-bottom:8px;border-color:var(--yellow);">
+      <div style="font-size:10px;color:var(--yellow);font-weight:900;">${esc(item.type || 'ALERT')}</div>
+      <div style="font-size:12px;font-weight:700;margin-top:4px;">${esc(item.title || '')}</div>
+      <div style="font-size:11px;color:var(--muted);">${esc(item.body || '')}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:ui-monospace,monospace;">${when}</div>
+    </div>`;
+  }).join('');
+}
+function clearNotificationQueue() {
+  if (!confirm('Clear queue?')) return;
+  store.set(ALERT_KEYS.NOTIF_QUEUE, '[]');
+  updateNotifQueueUI();
+  showToast('✅ Queue cleared');
+}
+function testPushNotification() {
+  pushNotification({ type: 'TEST', title: '🔔 Lutynoel Test', body: 'Push notifications work!', tag: 'test-' + Date.now() });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUTO-TRACK
+   ═══════════════════════════════════════════════════════════════ */
 function autoTrackFromMasters(pair, data, price) {
   if (!data || !data.main_signal) return;
   const ms = data.main_signal;
   const pf = data.pre_flight_protocol || {};
-
-  // Block tracking if status is REJECT
-  if (String(ms.status || '').toUpperCase() === 'REJECT') {
-    showToast(`🚫 Signal REJECTED — not tracking`, 4000);
-    return;
-  }
-
+  if (String(ms.status || '').toUpperCase() === 'REJECT') { showToast('🚫 Signal REJECTED — not tracking', 4000); return; }
   const dir = String(ms.direction || '').toUpperCase();
   if (!dir.includes('BUY') && !dir.includes('SELL')) return;
-
   const action = dir.includes('SELL') ? 'SELL' : 'BUY';
   const entry = parseFloat(pf.entry_price) || price;
   const sl = parseFloat(pf.stop_loss) || 0;
   const tp1 = parseFloat(pf.take_profit_1) || 0;
   const tp2 = parseFloat(pf.take_profit_2) || 0;
   if (!entry || !sl || !tp1) return;
-
   const spec = PAIR_SPECS[pair];
   const pips = dd => Math.abs(dd) / spec.pipSize;
   const slD = Math.abs(entry - sl);
@@ -1990,7 +1868,7 @@ function autoTrackFromMasters(pair, data, price) {
 
   const rec = {
     id: Date.now(), ts: Date.now(), date: new Date().toLocaleString(),
-    source: 'masters_v14_micro', pair, action, price,
+    source: 'masters_v14_1', pair, action, price,
     entry, sl, tp1, tp2, tp3: tp3 || tp2,
     slPips: Math.round(pips(sl - entry)),
     tp1Pips: Math.round(pips(tp1 - entry)),
@@ -1998,20 +1876,16 @@ function autoTrackFromMasters(pair, data, price) {
     tp3Pips: Math.round(pips(tp3 - entry)),
     spreadPips: spec.spreadPips,
     conf: parseInt(ms.confidence_percentage) || 0,
-    reason: `Micro v14.0: ${ms.status || ''} — ${(data.final_trade_plan || '').slice(0, 200)}`,
+    reason: `v14.1: ${ms.status || ''} — ${(data.final_trade_plan || '').slice(0, 200)}`,
     entryZone: { min_price: entry, max_price: entry },
     rr: pf.rr_ratio || '—',
-    provider: 'MastersMicro/v14.0',
+    provider: 'Masters/v14.1',
     tier: ms.status === 'STRONG PASS' ? 'HIGH_PROBABILITY' : 'MEDIUM_PROBABILITY',
     masters_analysis: data,
     tracked: true, bt: null,
-    session: getKillzoneState().session,
-    microRisk: computeMicroRisk(pair, entry, sl)
+    session: getKillzoneState().session
   };
-
   saveToHistory(rec);
-
-  // ═══ PUSH NOTIFICATION: ENTRY SIGNAL ═══
   pushNotification({
     type: 'ENTRY_SIGNAL',
     title: `🎯 ${action} ${pair} @ ${entry.toFixed(spec.decimals)}`,
@@ -2019,8 +1893,7 @@ function autoTrackFromMasters(pair, data, price) {
     tag: `entry-${rec.id}`,
     data: { pair, action, entry }
   });
-
-  showToast(`✅ ${action} ${pair} tracked @ ${entry.toFixed(spec.decimals)}`, 5000);
+  showToast(`✅ ${action} ${pair} @ ${entry.toFixed(spec.decimals)}`, 5000);
   setTimeout(() => updateBacktest(), 3000);
 }
 
@@ -2047,10 +1920,8 @@ async function fetchLivePrice() {
     st.className = 'price-status live';
     $('priceStatusText').innerHTML = `✅ LIVE: ${price.toFixed(spec.decimals)}`;
     $('priceTime').innerText = new Date().toLocaleTimeString();
-    updateMicroPanel();
   } catch (e) {
-    st.className = 'price-status error';
-    $('priceStatusText').innerHTML = `❌ ${esc(e.message)}`;
+    st.className = 'price-status error'; $('priceStatusText').innerHTML = `❌ ${esc(e.message)}`;
   } finally { btn.disabled = false; btn.innerHTML = '🔄 Refresh'; }
 }
 function resetMarketData() {
@@ -2062,13 +1933,14 @@ function resetMarketData() {
     const sp = e.querySelector('span:last-child'); if (sp) sp.innerText = '—';
   });
   const cp = $('chartPreview'); if (cp) cp.innerHTML = '<div style="text-align:center;color:var(--muted);">Bonyeza "Fetch TODAY Only"</div>';
+  const vd1 = $('analystVolumeDelta'); if (vd1) vd1.innerHTML = '';
+  const vd2 = $('overviewVolumeDelta'); if (vd2) vd2.innerHTML = '';
 }
 async function onPairChange(pair) {
   resetMarketData(); priceMeta = null;
   $('livePrice').value = '';
   $('resultsContainer').style.display = 'none';
   fetchLivePrice();
-  updateMicroPanel();
 }
 async function fetchAllMarketData() {
   const pair = $('selectedPair').value;
@@ -2091,7 +1963,6 @@ async function fetchAllMarketData() {
     const m15 = await get('data15M', '15m');
     const h1 = await get('data1H', '1h');
     const h4 = await get('data4H', '4h');
-
     if (!m15.length || !m5.length) {
       $('chartPreview').innerHTML = `<div class="error-box">❌ Hakuna candles za LEO.<br><small>${esc(lastDataError)}</small></div>`;
       return;
@@ -2103,33 +1974,34 @@ async function fetchAllMarketData() {
     const spec = PAIR_SPECS[pair];
     const kz = getKillzoneState();
     const todayHighLow = { high: Math.max(...m15.map(c => c.high)), low: Math.min(...m15.map(c => c.low)) };
-
     let h = `<div style="color:var(--inst);font-weight:bold;">🏦 ${esc(pair)} — SAME-DAY</div>`;
     h += `<div style="font-size:10px;color:var(--yellow);margin-top:4px;">📅 M5: ${m5.length} • M15: ${m15.length} • H1: ${h1.length} • H4: ${h4.length} bars</div>`;
     h += `<div style="font-size:11px;margin-top:6px;">📊 Today H: <strong style="color:var(--red);">${todayHighLow.high.toFixed(spec.decimals)}</strong> | L: <strong style="color:var(--green);">${todayHighLow.low.toFixed(spec.decimals)}</strong></div>`;
     h += `<div style="font-size:11px;margin-top:4px;">⏰ ${kz.label} ${kz.inKillzone ? '✅' : '⚠️'}</div>`;
-
-    // News state
     const newsState = isNewsBlockingNow();
-    if (newsState.blocked) {
-      h += `<div style="margin-top:6px;padding:6px 8px;background:rgba(239,68,68,.15);border-left:3px solid var(--red);border-radius:6px;font-size:10px;color:#fca5a5;font-weight:900;">🚨 NEWS BLOCKING: ${esc(newsState.event.title)}</div>`;
-    }
-
+    if (newsState.blocked) h += `<div style="margin-top:6px;padding:6px 8px;background:rgba(239,68,68,.15);border-left:3px solid var(--red);border-radius:6px;font-size:10px;color:#fca5a5;font-weight:900;">🚨 NEWS BLOCKING: ${esc(newsState.event.title)}</div>`;
     h += `<div style="margin-top:10px;">${renderMTFMatrix(mtfData, pair)}</div>`;
-
     $('chartPreview').innerHTML = h;
+
+    // Volume Delta panel (analyst)
+    const vd = mtfData.m15?.volumeDelta || mtfData.m5?.volumeDelta;
+    if (vd) renderVolumeDeltaPanel(vd, pair, 'analystVolumeDelta', '📈 VOLUME DELTA RATIO (M15)');
+
+    // Overview VD (smaller)
+    const vdOv = mtfData.m15?.volumeDelta;
+    if (vdOv) renderVolumeDeltaPanel(vdOv, pair, 'overviewVolumeDelta', '📈 VOLUME DELTA (M15)');
+
     if (m15.length >= 5 && m5.length >= 5) {
       $('runBtn').disabled = false;
       showToast(`✅ Same-day ready (M5: ${m5.length}, M15: ${m15.length})`);
     }
-  } catch (e) {
-    showToast(`❌ ${e.message}`, 5000);
-  } finally { btn.disabled = false; btn.innerHTML = '📊 Fetch TODAY Only'; }
+  } catch (e) { showToast(`❌ ${e.message}`, 5000); }
+  finally { btn.disabled = false; btn.innerHTML = '📊 Fetch TODAY Only'; }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
    RUN ANALYSIS
-   ═══════════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 async function runAnalysis() {
   if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key.'); return; }
   const md = window.marketData, pair = $('selectedPair').value;
@@ -2147,84 +2019,56 @@ async function runAnalysis() {
     const killzone = getKillzoneState();
     const todayHighLow = { high: Math.max(...md.m15.map(c => c.high)), low: Math.min(...md.m15.map(c => c.low)) };
     const newsState = isNewsBlockingNow();
+    const vd15 = md.mtf.m15?.volumeDelta;
+    const vd5 = md.mtf.m5?.volumeDelta;
 
     const ctx = {
       pair, pipSize: spec.pipSize, decimals: spec.decimals,
       session_utc: new Date().toUTCString(), killzone,
-      micro_account: {
-        balance: getBalance(),
-        risk_pct: getRiskPct(),
-        max_risk_usd: +(getBalance() * getRiskPct() / 100).toFixed(4),
-        min_lot: MICRO_MIN_LOT,
-        max_lot: 0.01
-      },
-      news_state: newsState.blocked ? {
-        blocking: true,
-        event: newsState.event.title,
-        minutes: newsState.minutesTo
-      } : { blocking: false },
+      news_state: newsState.blocked ? { blocking: true, event: newsState.event.title, minutes: newsState.minutesTo } : { blocking: false },
       same_day_intraday: {
         today_high: +todayHighLow.high.toFixed(spec.decimals),
         today_low: +todayHighLow.low.toFixed(spec.decimals),
-        bars_M5: md.m5.length,
-        bars_M15: md.m15.length
+        bars_M5: md.m5.length, bars_M15: md.m15.length
+      },
+      volume_delta: {
+        m15: vd15?.ok ? { buy_pct: vd15.buyPct, sell_pct: vd15.sellPct, bias: vd15.bias, reason: vd15.reason } : null,
+        m5: vd5?.ok ? { buy_pct: vd5.buyPct, sell_pct: vd5.sellPct, bias: vd5.bias, reason: vd5.reason } : null
       },
       mtf_analysis: {}, parabolic_sar: {}, current_price: lp
     };
     ['m5', 'm15', 'h1', 'h4'].forEach(tf => {
       const t = md.mtf[tf];
       if (!t || !t.ok) { ctx.mtf_analysis[tf] = { status: 'INSUFFICIENT' }; return; }
-      ctx.mtf_analysis[tf] = {
-        bars: t.bars, structure: t.structure, sweep: t.sweep,
-        order_blocks: t.ob, fair_value_gaps: t.fvg
-      };
+      ctx.mtf_analysis[tf] = { bars: t.bars, structure: t.structure, sweep: t.sweep, order_blocks: t.ob, fair_value_gaps: t.fvg };
       ctx.parabolic_sar[tf] = t.psar;
     });
 
-    const r = await callMastersAnalysis(pair, lp, ctx);
+    const r = await callMastersAnalysis(pair, lp, ctx, true);
     if (!r.result) throw new Error(r.err || 'Analysis failed');
 
-    // ═══ POST-PROCESS: enforce reject rules ═══
     const ms = r.result.main_signal || {};
-    const pf = r.result.pre_flight_protocol || {};
     let finalStatus = String(ms.status || 'REJECT').toUpperCase();
     let blockingReason = ms.blocking_reason || '';
 
-    // 1. News blocking
     if (newsState.blocked && finalStatus !== 'REJECT') {
       finalStatus = 'REJECT';
-      blockingReason = `High-impact news active: ${newsState.event.title} (±${getNewsBufferMinutes()} min)`;
+      blockingReason = `High-impact news active: ${newsState.event.title}`;
       ms.status = 'REJECT';
       ms.blocking_reason = blockingReason;
     }
-
-    // 2. Micro-account SL check
-    if (finalStatus !== 'REJECT' && pf.entry_price && pf.stop_loss) {
-      const microCheck = computeMicroRisk(pair, pf.entry_price, pf.stop_loss);
-      if (!microCheck.ok) {
-        finalStatus = 'REJECT';
-        blockingReason = microCheck.reason;
-        ms.status = 'REJECT';
-        ms.blocking_reason = blockingReason;
-      }
-    }
-
-    // 3. 4-Strategy alignment
     const votes = r.result.strategy_votes || {};
     if (finalStatus !== 'REJECT') {
       const totalAligned = Number(votes.total_aligned ?? 0);
       if (totalAligned < 4) {
         finalStatus = 'REJECT';
-        blockingReason = `Only ${totalAligned}/4 strategies aligned. All 4 must align for STRONG PASS.`;
+        blockingReason = `Only ${totalAligned}/4 strategies aligned.`;
         ms.status = 'REJECT';
         ms.blocking_reason = blockingReason;
       }
     }
-
     r.result.main_signal = ms;
-    if (finalStatus === 'REJECT') {
-      r.result.final_trade_plan = `🚫 REJECTED: ${blockingReason}`;
-    }
+    if (finalStatus === 'REJECT') r.result.final_trade_plan = `🚫 REJECTED: ${blockingReason}`;
 
     renderMastersAnalysis(r.result, 'resultsContainer', pair);
     setTimeout(() => $('resultsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
@@ -2233,12 +2077,7 @@ async function runAnalysis() {
     if (finalStatus !== 'REJECT' && (dir.includes('BUY') || dir.includes('SELL'))) {
       autoTrackFromMasters(pair, r.result, lp);
     } else if (finalStatus === 'REJECT') {
-      pushNotification({
-        type: 'REJECTED',
-        title: `🚫 ${pair} Signal Rejected`,
-        body: blockingReason,
-        tag: `rej-${Date.now()}`
-      });
+      pushNotification({ type: 'REJECTED', title: `🚫 ${pair} Rejected`, body: blockingReason, tag: `rej-${Date.now()}` });
     }
   } catch (e) {
     showToast(`❌ ${e.message}`, 5000);
@@ -2249,9 +2088,9 @@ async function runAnalysis() {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   RENDER MASTERS ANALYSIS v14.0
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   RENDER MASTERS ANALYSIS
+   ═══════════════════════════════════════════════════════════════ */
 function dirClass(dir) {
   const d = String(dir || '').toLowerCase();
   if (d.includes('strong sell')) return 'strong-sell';
@@ -2289,12 +2128,11 @@ function fmtRR(raw) {
   return Number.isFinite(n) ? `1:${n}` : s;
 }
 function renderCheck(label, ok) {
-  const passed = ok === true;
-  const cls = passed ? 'pass' : 'fail';
+  const cls = ok === true ? 'pass' : 'fail';
   return `<div class="m-check ${cls}">
-    <div class="m-check-icon ${cls}">${passed ? '✓' : '✕'}</div>
+    <div class="m-check-icon ${cls}">${ok === true ? '✓' : '✕'}</div>
     <div class="m-check-label">${esc(label)}</div>
-    <div class="m-check-value ${cls}">${passed ? 'CONFIRMED' : 'NOT MET'}</div>
+    <div class="m-check-value ${cls}">${ok === true ? 'CONFIRMED' : 'NOT MET'}</div>
   </div>`;
 }
 function renderSpecialist(icon, name, body, vote, cls) {
@@ -2317,10 +2155,8 @@ function renderMastersAnalysis(data, containerId, pair) {
   const c = $(containerId || 'resultsContainer');
   if (!c) return;
   if (!data) { c.innerHTML = `<div class="m-state">❌ No data</div>`; c.style.display = 'block'; return; }
-
   const spec = PAIR_SPECS[pair] || { decimals: 5, pipSize: 0.0001 };
   const d = spec.decimals;
-
   const ms = data.main_signal || {};
   const bi = data.ballistic_ai_insight || {};
   const psarAI = data.psar_analysis || {};
@@ -2330,60 +2166,53 @@ function renderMastersAnalysis(data, containerId, pair) {
   const sc = data.specialist_consultation || {};
   const mtf = data.multi_timeframe_confluence || {};
   const finalPlan = data.final_trade_plan || 'Analysis complete.';
-
   const dirCls = dirClass(ms.direction);
   const dirTxtCls = dirTextClass(ms.direction);
   const statusCls = statusClass(ms.status);
   const conf = Math.max(0, Math.min(100, Number(ms.confidence_percentage) || 0));
   const isReject = String(ms.status || '').toUpperCase() === 'REJECT';
-
   const pipsVal = parseFloat(bi.pips_identified);
   const pipsDisplay = Number.isFinite(pipsVal) ? pipsVal.toFixed(1) : '0.0';
-
-  // ═══ SECTION 02: PIPS + USD + TZS ═══
   const proj = bi.projections || {};
-  const getProj = (key) => {
-    const p = proj[key] || {};
-    return {
-      pips: Number(p.pips) || (Number.isFinite(pipsVal) ? pipsVal : 0),
-      usd: Number(p.usd) || 0,
-      tzs: Number(p.tzs) || 0
-    };
+  const getProj = k => {
+    const p = proj[k] || {};
+    return { pips: Number(p.pips) || (Number.isFinite(pipsVal) ? pipsVal : 0), usd: Number(p.usd) || 0, tzs: Number(p.tzs) || 0 };
   };
-  const lot001 = getProj('lot_001');
-  const lot010 = getProj('lot_010');
-  const lot100 = getProj('lot_100');
-
-  // ═══ MICRO ACCOUNT RISK ═══
-  const entryP = parseFloat(pf.entry_price);
-  const slP = parseFloat(pf.stop_loss);
-  const microCheck = (Number.isFinite(entryP) && Number.isFinite(slP))
-    ? computeMicroRisk(pair, entryP, slP)
-    : { ok: false, reason: 'Entry/SL missing' };
-
+  const lot001 = getProj('lot_001'), lot010 = getProj('lot_010'), lot100 = getProj('lot_100');
   const checklist = Array.isArray(et.pre_entry_checklist) ? et.pre_entry_checklist.filter(Boolean) : [];
-
   const mtfData = window.marketData?.pair === pair ? window.marketData.mtf : null;
-  const mtfMatrixHTML = mtfData ? renderMTFMatrix(mtfData, pair) : '<div class="info-box">MTF data haipo.</div>';
-
+  const mtfMatrixHTML = mtfData ? renderMTFMatrix(mtfData, pair) : '';
   const psarRows = ['m5', 'm15'].map(tf => {
-    const p = psarAI[tf];
-    if (!p) return null;
-    const trendCls = p.trend === 'BULLISH' ? 'bull' : 'bear';
+    const p = psarAI[tf]; if (!p) return null;
     return `<tr>
       <td style="text-align:center;padding:8px 4px;font-weight:900;color:var(--accent);">${tf.toUpperCase()}</td>
       <td style="text-align:center;padding:8px 4px;font-weight:700;color:${p.trend === 'BULLISH' ? 'var(--green)' : 'var(--red)'};">${esc(p.trend || '—')}</td>
       <td style="text-align:center;padding:8px 4px;font-weight:700;">${p.dot_level != null ? Number(p.dot_level).toFixed(d) : '—'}</td>
     </tr>`;
   }).filter(Boolean).join('');
+  const vd15 = mtfData?.m15?.volumeDelta;
+  const vdHTML = vd15?.ok ? `
+    <div class="vd-panel">
+      <div class="vd-head"><div class="vd-title">📈 VOLUME DELTA (M15)</div><div class="vd-time">${esc(pair)}</div></div>
+      <div class="vd-bars">
+        <div class="vd-bar buy"><div class="vd-bar-lbl">🟢 BUY</div><div class="vd-bar-val">${vd15.buyPct.toFixed(1)}%</div></div>
+        <div class="vd-bar sell"><div class="vd-bar-lbl">🔴 SELL</div><div class="vd-bar-val">${vd15.sellPct.toFixed(1)}%</div></div>
+      </div>
+      <div class="vd-ratio">
+        <div class="vd-ratio-buy" style="width:${vd15.buyPct}%"></div>
+        <div class="vd-ratio-sell" style="width:${vd15.sellPct}%"></div>
+      </div>
+      <div class="vd-bias ${vd15.bias.includes('BULL') ? 'bullish' : vd15.bias.includes('BEAR') ? 'bearish' : 'neutral'}">
+        ${esc(vd15.bias.replace('_', ' '))} — ${esc(vd15.reason)}
+      </div>
+    </div>` : '';
 
   c.innerHTML = `
   <div class="masters-wrap">
-    <!-- 01. MAIN SIGNAL -->
     <div class="m-hero ${dirCls}">
       <div class="m-hero-top">
         <div style="flex:1;">
-          <div class="m-hero-label">Micro-Account Signal</div>
+          <div class="m-hero-label">Institutional Signal</div>
           <div class="m-direction ${dirTxtCls}">${esc(ms.direction || 'NEUTRAL')}</div>
           <div class="m-exec">⚡ ${esc(ms.execution_type || 'STANDBY')}</div>
         </div>
@@ -2397,7 +2226,6 @@ function renderMastersAnalysis(data, containerId, pair) {
       ${isReject && ms.blocking_reason ? `<div style="margin-top:12px;padding:10px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);border-radius:8px;font-size:11px;color:#fca5a5;font-weight:700;">🚫 ${esc(ms.blocking_reason)}</div>` : ''}
     </div>
 
-    <!-- 02. BALLISTIC AI INSIGHT (PIPS + USD + TZS) -->
     <div class="m-section">
       <div class="m-section-title"><div class="m-section-num">02</div><h3>Ballistic AI — Pips / USD / TZS</h3></div>
       <div class="m-pips-hero">
@@ -2412,31 +2240,29 @@ function renderMastersAnalysis(data, containerId, pair) {
           <tr><td>1.00</td><td class="pips-val">${lot100.pips.toFixed(1)}</td><td class="usd-val">${fmtMoney(lot100.usd)}</td><td class="tzs-val">${fmtMoney(lot100.tzs, 'TZS')}</td></tr>
         </tbody>
       </table>
-      <div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:ui-monospace,monospace;">
-        Formula: USD = Pips × Lot × PipValue • TZS = USD × ${TZS_PER_USD}
-      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:ui-monospace,monospace;">USD = Pips × Lot × PipValue • TZS = USD × ${TZS_PER_USD}</div>
     </div>
 
-    <!-- 03. PSAR ANALYSIS -->
     <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">03</div><h3>Parabolic SAR (Primary)</h3></div>
+      <div class="m-section-title"><div class="m-section-num">03</div><h3>Volume Delta Ratio</h3></div>
+      ${vdHTML || '<div class="info-box">Volume Delta haipo — fetch data kwanza.</div>'}
+    </div>
+
+    <div class="m-section">
+      <div class="m-section-title"><div class="m-section-num">04</div><h3>Parabolic SAR</h3></div>
       ${psarRows ? `
       <table style="width:100%;border-collapse:collapse;font-size:11px;font-family:ui-monospace,monospace;">
         <thead><tr>
           <th style="text-align:center;padding:6px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">TF</th>
           <th style="text-align:center;padding:6px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">Trend</th>
           <th style="text-align:center;padding:6px;font-size:9px;color:var(--muted);border-bottom:1px solid var(--border);">Dot Level</th>
-        </tr></thead>
-        <tbody>${psarRows}</tbody>
-      </table>
+        </tr></thead><tbody>${psarRows}</tbody></table>
       ` : '<div class="info-box">PSAR data haipo.</div>'}
-      ${psarAI.alignment_summary ? `<div style="margin-top:10px;padding:10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:8px;font-size:11px;color:#fef3c7;"><strong>Alignment:</strong> ${esc(psarAI.alignment_summary)}</div>` : ''}
       <div style="margin-top:12px;">${mtfMatrixHTML}</div>
     </div>
 
-    <!-- 04. PRE-FLIGHT PROTOCOL -->
     <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">04</div><h3>Pre-Flight Protocol</h3></div>
+      <div class="m-section-title"><div class="m-section-num">05</div><h3>Pre-Flight Protocol</h3></div>
       <div class="m-checks">
         ${renderCheck('CHoCH Confirmed', pf.choch_confirmed)}
         ${renderCheck('Liquidity Swept', pf.liquidity_swept)}
@@ -2449,20 +2275,10 @@ function renderMastersAnalysis(data, containerId, pair) {
         <div class="m-level tp2"><div class="m-level-lbl">Take Profit 2</div><div class="m-level-val">${fmtPrice(pf.take_profit_2, d)}</div></div>
         <div class="m-level rr"><div class="m-level-lbl">Risk : Reward</div><div class="m-level-val">${esc(fmtRR(pf.rr_ratio))}</div></div>
       </div>
-      ${microCheck.reason ? `<div class="micro-warning" style="margin-top:12px;">${microCheck.ok ? '✅' : '🚫'} ${esc(microCheck.reason)}</div>` : ''}
-      ${microCheck.ok ? `
-      <div class="micro-grid" style="margin-top:12px;">
-        <div class="micro-item"><div class="micro-lbl">SL Distance</div><div class="micro-val">${microCheck.slPips.toFixed(1)} pips</div></div>
-        <div class="micro-item"><div class="micro-lbl">Recommended Lot</div><div class="micro-val green">${microCheck.recommendedLot.toFixed(2)}</div></div>
-        <div class="micro-item"><div class="micro-lbl">Actual Risk @ 0.01</div><div class="micro-val red">$${microCheck.actualRiskUsd.toFixed(2)}</div></div>
-        <div class="micro-item"><div class="micro-lbl">Max SL @ 0.01</div><div class="micro-val orange">${microCheck.maxSlPipsForMinLot.toFixed(0)} pips</div></div>
-      </div>
-      ` : ''}
     </div>
 
-    <!-- 05. 4-STRATEGY ALIGNMENT -->
     <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">05</div><h3>4-Strategy Alignment</h3></div>
+      <div class="m-section-title"><div class="m-section-num">06</div><h3>4-Strategy Alignment</h3></div>
       <div class="mini-box" style="text-align:center;margin-bottom:12px;background:${Number(votes.total_aligned) === 4 ? 'rgba(16,185,129,.1)' : 'rgba(239,68,68,.1)'};border-color:${Number(votes.total_aligned) === 4 ? 'var(--green)' : 'var(--red)'};">
         <div style="font-size:10px;color:var(--muted);font-weight:800;">ALIGNMENT SCORE</div>
         <div style="font-size:28px;font-weight:900;color:${Number(votes.total_aligned) === 4 ? 'var(--green)' : 'var(--red)'};">${Number(votes.total_aligned) || 0}/4</div>
@@ -2475,9 +2291,8 @@ function renderMastersAnalysis(data, containerId, pair) {
       </div>
     </div>
 
-    <!-- 06. EXECUTION PLAN -->
     <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">06</div><h3>Execution Trade Plan</h3></div>
+      <div class="m-section-title"><div class="m-section-num">07</div><h3>Execution Plan</h3></div>
       <div class="m-checklist">
         ${checklist.length ? checklist.map(item => `<div class="m-checklist-item">${esc(item)}</div>`).join('') : '<div style="font-size:11px;color:var(--muted);">No checklist.</div>'}
       </div>
@@ -2488,34 +2303,26 @@ function renderMastersAnalysis(data, containerId, pair) {
       <div class="m-trailing-note"><strong>📌 Trailing:</strong> ${esc(et.trailing_stop_notes || 'Trail by M5 PSAR.')}</div>
     </div>
 
-    <!-- 07. MTF CONFLUENCE -->
     <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">07</div><h3>MTF Confluence</h3></div>
+      <div class="m-section-title"><div class="m-section-num">08</div><h3>MTF Confluence & Final</h3></div>
       <div class="m-mtf">
         ${renderTF('5M', 'Entry Confirmation', mtf.tf_5m, 'm5')}
         ${renderTF('15M', 'Setup TF', mtf.tf_15m, 'm15')}
         ${renderTF('1H', 'Intraday Structure', mtf.tf_1h, 'h1')}
         ${renderTF('4H', 'Higher TF Bias', mtf.tf_4h, 'h4')}
       </div>
-    </div>
-
-    <!-- 08. FINAL PLAN -->
-    <div class="m-section">
-      <div class="m-section-title"><div class="m-section-num">08</div><h3>Final Trade Plan</h3></div>
-      <div class="m-final ${isReject ? 'reject' : ''}">${esc(finalPlan)}</div>
+      <div style="margin-top:14px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);font-weight:900;margin-bottom:6px;">⚡ FINAL PLAN</div>
+        <div class="m-final ${isReject ? 'reject' : ''}">${esc(finalPlan)}</div>
+      </div>
     </div>
   </div>`;
   c.style.display = 'block';
 }
-
 function renderMastersLoading(containerId) {
   const c = $(containerId || 'resultsContainer');
   if (!c) return;
-  c.innerHTML = `<div class="m-state">
-    <div class="big-spinner"></div>
-    <div>Analyzing micro-account confluence...</div>
-    <div style="font-size:11px;margin-top:6px;color:var(--muted);">4 Strategies • PSAR M15/M5 • Micro Risk • News Filter</div>
-  </div>`;
+  c.innerHTML = `<div class="m-state"><div class="big-spinner"></div><div>Analyzing...</div><div style="font-size:11px;margin-top:6px;color:var(--muted);">PSAR • Volume Delta • 4 Strategies</div></div>`;
   c.style.display = 'block';
 }
 function renderMastersError(err, containerId) {
@@ -2529,9 +2336,244 @@ function renderMastersError(err, containerId) {
   c.style.display = 'block';
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   TRAP SCAN
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   CHART ANALYSIS (full-size preview + MTF)
+   ═══════════════════════════════════════════════════════════════ */
+let uploadedCharts = { m5: null, m15: null, h1: null, h4: null };
+let ssPriceMeta = null;
+
+function switchCATab(tab) {
+  const tabs = document.querySelectorAll('.ca-tab');
+  const labels = ['new', 'history', 'guide'];
+  tabs.forEach((el, i) => el.classList.toggle('active', labels[i] === tab));
+  $('caTab-new').style.display = tab === 'new' ? 'block' : 'none';
+  $('caTab-history').style.display = tab === 'history' ? 'block' : 'none';
+  $('caTab-guide').style.display = tab === 'guide' ? 'block' : 'none';
+  if (tab === 'history') renderCAHistory();
+}
+function renderCAHistory() {
+  const c = $('caHistoryContainer');
+  if (!c) return;
+  const h = loadHist().filter(r => r.source && (r.source.startsWith('chart_analysis') || r.source.startsWith('masters')));
+  if (!h.length) { c.innerHTML = '<div class="ca-desc">Hakuna Chart Analysis bado.</div>'; return; }
+  c.innerHTML = h.slice(0, 20).map(r => {
+    const spec = PAIR_SPECS[r.pair] || { decimals: 2 };
+    const isBuy = r.action === 'BUY';
+    return `<div style="padding:12px;background:#0d1220;border:1px solid rgba(51,65,85,.5);border-radius:12px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="color:${isBuy ? 'var(--green)' : 'var(--red)'};">${esc(r.action)} ${esc(r.pair)}</strong>
+        <span style="font-size:10px;color:var(--muted);">${r.conf || 0}%</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">Entry: ${Number(r.entry).toFixed(spec.decimals)}</div>
+      <div style="font-size:10px;color:var(--muted);">${esc(r.date)}</div>
+    </div>`;
+  }).join('');
+}
+function toggleCapitalPanel() {
+  const p = $('capitalPanel');
+  if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
+  const bal = $('caBalance'), risk = $('caRiskPct');
+  if (bal && !bal.value) bal.value = getBalance();
+  if (risk && !risk.value) risk.value = getRiskPct();
+}
+function saveCapital() {
+  const b = parseFloat($('caBalance').value) || DEFAULT_BALANCE;
+  const r = parseFloat($('caRiskPct').value) || DEFAULT_RISK_PCT;
+  store.set(STORAGE_KEYS.BALANCE, String(b));
+  store.set(STORAGE_KEYS.RISK_PCT, String(r));
+  showToast(`✅ Balance $${b}, Risk ${r}%`);
+}
+function onSSManualPrice() {
+  const v = parseFloat($('ssLivePrice').value);
+  ssPriceMeta = v > 0 ? { pair: $('ssPair').value, manual: true, ts: Date.now() } : null;
+}
+async function fetchSSLivePrice() {
+  const pair = $('ssPair').value, spec = PAIR_SPECS[pair];
+  if (!spec) return;
+  const btn = $('ssRefreshBtn'), st = $('ssPriceStatus');
+  if (!btn || !st) return;
+  btn.disabled = true; btn.innerHTML = '⏳';
+  try {
+    const price = await getLivePrice(pair);
+    $('ssLivePrice').value = price.toFixed(spec.decimals);
+    ssPriceMeta = { pair, manual: false, ts: Date.now() };
+    st.className = 'price-status live';
+    $('ssPriceStatusText').innerHTML = `✅ ${price.toFixed(spec.decimals)}`;
+    $('ssPriceTime').innerText = new Date().toLocaleTimeString();
+  } catch (e) {
+    st.className = 'price-status error'; $('ssPriceStatusText').innerHTML = `❌ ${esc(e.message)}`;
+  } finally { btn.disabled = false; btn.innerHTML = '🔄'; }
+}
+async function onSSPairChange() { $('ssLivePrice').value = ''; ssPriceMeta = null; fetchSSLivePrice(); }
+
+function setupChartUploads() {
+  ['h4', 'h1', 'm15', 'm5'].forEach(tf => {
+    const inp = $(`ssInput-${tf}`);
+    if (!inp || inp.dataset.bound) return;
+    inp.dataset.bound = '1';
+    inp.addEventListener('change', e => {
+      const f = e.target.files[0]; if (!f) return;
+      if (f.size > 8 * 1024 * 1024) { alert(`${tf.toUpperCase()} max 8MB`); return; }
+      const r = new FileReader();
+      r.onload = ev => {
+        uploadedCharts[tf] = { base64: ev.target.result.split(',')[1], mimeType: f.type };
+        const img = $(`ssImg-${tf}`); if (img) img.src = ev.target.result;
+        const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'block';
+        const lbl = $(`caUpload-${tf}`); if (lbl) {
+          lbl.classList.add('has-image');
+          const icon = lbl.querySelector('.ca-upload-icon'); if (icon) icon.style.display = 'none';
+          const title = lbl.querySelector('.ca-upload-title'); if (title) title.style.display = 'none';
+          const sub = lbl.querySelector('.ca-upload-sub'); if (sub) sub.style.display = 'none';
+        }
+        updateChartUploadStatus();
+      };
+      r.readAsDataURL(f);
+    });
+  });
+}
+function clearSS(tf) {
+  uploadedCharts[tf] = null;
+  const inp = $(`ssInput-${tf}`); if (inp) inp.value = '';
+  const prev = $(`ssPreview-${tf}`); if (prev) prev.style.display = 'none';
+  const lbl = $(`caUpload-${tf}`); if (lbl) {
+    lbl.classList.remove('has-image');
+    const icon = lbl.querySelector('.ca-upload-icon'); if (icon) icon.style.display = 'flex';
+    const title = lbl.querySelector('.ca-upload-title'); if (title) title.style.display = 'block';
+    const sub = lbl.querySelector('.ca-upload-sub'); if (sub) sub.style.display = 'block';
+  }
+  updateChartUploadStatus();
+}
+function updateChartUploadStatus() {
+  const count = Object.values(uploadedCharts).filter(Boolean).length;
+  const el = $('caUploadCount'); if (el) el.textContent = `${count}/4`;
+  const btn = $('analyzeSSBtn');
+  if (btn) {
+    const hasKey = !!(getGeminiKey() || getMistralKey());
+    const hasRequired = !!uploadedCharts.h4;
+    btn.disabled = !hasRequired || !hasKey;
+  }
+}
+
+async function analyzeAllScreenshots() {
+  if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key.'); return; }
+  if (!uploadedCharts.h4) { alert('4H chart ni required.'); return; }
+  const pair = $('ssPair').value;
+  const lp = parseFloat($('ssLivePrice').value);
+  if (!(lp > 0)) { alert('Weka bei (bonyeza Refresh).'); return; }
+
+  const btn = $('analyzeSSBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+
+  const resultsWrap = $('ssResultsContainer');
+  resultsWrap.style.display = 'block';
+  renderMastersLoading('ssResultsContainer');
+  resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const ordered = [
+      ['h4', '4H (Higher TF Bias - REQUIRED)'],
+      ['h1', '1H (Intraday Structure)'],
+      ['m15', '15M (Setup TF)'],
+      ['m5', '5M (ENTRY CONFIRMATION)']
+    ].filter(([k]) => uploadedCharts[k]);
+
+    const userPrompt = `PAIR: ${pair}
+CURRENT PRICE: ${lp}
+SESSION (UTC): ${new Date().toUTCString()}
+MODE: CHART ANALYSIS v14.1 — SAME-DAY INTRADAY
+HIERARCHY: ${ordered.map(o => o[1]).join(' → ')}
+
+Analyze attached MTF screenshots. 4H = bias. 5M = entry confirmation. Return strict JSON.`;
+
+    const parts = [{ text: MASTERS_ANALYSIS_SYSTEM_PROMPT + '\n\n' + userPrompt }];
+    ordered.forEach(([k, label]) => {
+      parts.push({ text: `\n📸 ${label}:` });
+      parts.push({ inline_data: { mime_type: uploadedCharts[k].mimeType, data: uploadedCharts[k].base64 } });
+    });
+
+    let r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, 120000, false);
+    const firstErr = r.err;
+    if (!r.result) {
+      const messages = [{ role: 'system', content: MASTERS_ANALYSIS_SYSTEM_PROMPT }];
+      const content = [{ type: 'text', text: userPrompt }];
+      ordered.forEach(([k, label]) => {
+        content.push({ type: 'text', text: `\n📸 ${label}:` });
+        content.push({ type: 'image_url', image_url: { url: `data:${uploadedCharts[k].mimeType};base64,${uploadedCharts[k].base64}` } });
+      });
+      messages.push({ role: 'user', content });
+      r = await callMistral(getList('MISTRAL_VISION', DEFAULTS.mistralVision), messages, 4096, 120000);
+    }
+    if (!r.result) throw new Error(firstErr || r.err || 'Vision analysis failed');
+
+    renderMastersAnalysis(r.result, 'ssResultsContainer', pair);
+    setTimeout(() => resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+
+    const dir = String(r.result.main_signal?.direction || '').toUpperCase();
+    const stat = String(r.result.main_signal?.status || '').toUpperCase();
+    if (stat !== 'REJECT' && (dir.includes('BUY') || dir.includes('SELL'))) {
+      setTimeout(() => autoTrackFromMasters(pair, r.result, lp), 500);
+    }
+  } catch (e) {
+    showToast(`❌ ${e.message}`, 5000);
+    renderMastersError(e, 'ssResultsContainer');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="star">★</span> GET MULTI-TIMEFRAME ANALYSIS';
+  }
+}
+
+/* ═══ VOLUME DELTA VIEW (standalone) ═══ */
+async function fetchVolumeDeltaView() {
+  const pair = $('vdPair').value;
+  const c = $('volumeDeltaContainer');
+  c.innerHTML = '<div class="info-box"><span class="spinner"></span> Fetching volume delta...</div>';
+  try {
+    const m5 = await fetchOHLC(pair, '5m', 500, true, true) || [];
+    const m15 = await fetchOHLC(pair, '15m', 500, true, true) || [];
+    const h1 = await fetchOHLC(pair, '1h', 500, true, true) || [];
+    const h4 = await fetchOHLC(pair, '4h', 500, true, true) || [];
+
+    const vd5 = computeVolumeDelta(m5, 100);
+    const vd15 = computeVolumeDelta(m15, 100);
+    const vd1h = computeVolumeDelta(h1, 100);
+    const vd4h = computeVolumeDelta(h4, 100);
+
+    let html = '';
+    html += `<div style="display:flex;flex-direction:column;gap:12px;">`;
+    [[vd5, 'M5'], [vd15, 'M15'], [vd1h, 'H1'], [vd4h, 'H4']].forEach(([vd, label]) => {
+      if (!vd?.ok) return;
+      const biasClass = vd.bias.includes('BULL') ? 'bullish' : vd.bias.includes('BEAR') ? 'bearish' : 'neutral';
+      html += `
+        <div class="vd-panel">
+          <div class="vd-head"><div class="vd-title">📈 ${label} VOLUME DELTA</div><div class="vd-time">${vd.candles} candles</div></div>
+          <div class="vd-bars">
+            <div class="vd-bar buy"><div class="vd-bar-lbl">🟢 BUY</div><div class="vd-bar-val">${vd.buyPct.toFixed(1)}%</div><div class="vd-bar-vol">${Math.round(vd.buyVol).toLocaleString()} units</div></div>
+            <div class="vd-bar sell"><div class="vd-bar-lbl">🔴 SELL</div><div class="vd-bar-val">${vd.sellPct.toFixed(1)}%</div><div class="vd-bar-vol">${Math.round(vd.sellVol).toLocaleString()} units</div></div>
+          </div>
+          <div class="vd-ratio">
+            <div class="vd-ratio-buy" style="width:${vd.buyPct}%"></div>
+            <div class="vd-ratio-sell" style="width:${vd.sellPct}%"></div>
+          </div>
+          <div class="vd-bias ${biasClass}">
+            ${vd.bias.includes('BULL') ? '🔥' : vd.bias.includes('BEAR') ? '🩸' : '⚖️'} ${esc(vd.bias.replace('_', ' '))}
+            <div class="vd-reason">${esc(vd.reason)}</div>
+          </div>
+          <div class="vd-tf-row">
+            <div class="vd-tf"><div class="vd-tf-lbl">BULL</div><div class="vd-tf-val" style="color:var(--green);">${vd.bullCount}</div></div>
+            <div class="vd-tf"><div class="vd-tf-lbl">BEAR</div><div class="vd-tf-val" style="color:var(--red);">${vd.bearCount}</div></div>
+            <div class="vd-tf"><div class="vd-tf-lbl">DELTA</div><div class="vd-tf-val" style="color:${vd.delta > 0 ? 'var(--green)' : 'var(--red)'};">${vd.delta > 0 ? '+' : ''}${Math.round(vd.delta).toLocaleString()}</div></div>
+            <div class="vd-tf"><div class="vd-tf-lbl">RATIO</div><div class="vd-tf-val">${(vd.buyVol / Math.max(vd.sellVol, 1)).toFixed(2)}</div></div>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+    c.innerHTML = html || '<div class="info-box">No data.</div>';
+  } catch (e) { c.innerHTML = `<div class="error-box">❌ ${esc(e.message)}</div>`; }
+}
+function refreshVolumeDeltaView() { fetchVolumeDeltaView(); }
+
+/* ═══ TRAP SCAN ═══ */
 async function runTrapScan() {
   const pair = $('trapPair').value;
   const c = $('trapContainer');
@@ -2546,7 +2588,6 @@ async function runTrapScan() {
     const mtf = computeMTFIndicators({ m5, m15, h1: [], h4: [] }, pair);
     let html = `<div class="info-box">Same-day: M5 ${m5.length}, M15 ${m15.length}</div>`;
     html += renderMTFMatrix(mtf, pair);
-
     const ob = detectOrderBlocks(m15, 60);
     const fvg = detectFVG(m15, 60);
     if (ob.nearestBull || ob.nearestBear) {
@@ -2568,7 +2609,6 @@ function getActiveAlerts() {
   const price = parseFloat($('livePrice')?.value);
   const spec = PAIR_SPECS[pair];
   if (!pair || !spec || !(price > 0)) return alerts;
-
   const h = loadHist();
   h.forEach(r => {
     if (!r.tracked || r.pair !== pair) return;
@@ -2580,10 +2620,6 @@ function getActiveAlerts() {
     }
   });
   return alerts;
-}
-function updateActiveAlertsSummary() {
-  const box = $('activeAlertsSummary');
-  if (box) box.style.display = 'none';
 }
 function renderActiveAlerts() {
   const c = $('activeAlertsContainer');
@@ -2604,19 +2640,14 @@ function getAlertThresholdPips() {
   return Number.isFinite(v) && v > 0 ? v : PROXIMITY_PIPS_DEFAULT;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   HISTORY + BACKTEST (WIN detection fix)
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ HISTORY + BACKTEST ═══ */
 const loadHist = () => { try { return JSON.parse(store.get(STORAGE_KEYS.HISTORY) || '[]'); } catch (e) { return []; } };
 function saveHist(h) {
   let arr = h.slice(0, 400), dropped = false, attempts = 0;
   while (arr.length && attempts < 10) {
     attempts++;
-    try {
-      localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(arr));
-      if (dropped) showToast('⚠️ Historia imefupishwa.', 6000);
-      return true;
-    } catch (e) {
+    try { localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(arr)); if (dropped) showToast('⚠️ Historia imefupishwa.', 6000); return true; }
+    catch (e) {
       const before = arr.length;
       arr = arr.map((r, i) => (i > 20 && r.masters_analysis) ? { ...r, masters_analysis: null } : r);
       if (arr.length === before && arr.length > 1) arr = arr.slice(0, Math.max(1, Math.floor(arr.length * 0.8)));
@@ -2634,51 +2665,35 @@ function saveToHistory(r) {
   updateStats();
   try { if ($('view-history') && $('view-history').style.display !== 'none') loadHistory(); } catch (e) {}
 }
-
-/* FIX: WIN detection — check TP BEFORE SL on the same candle when both hit,
-   and check TP1 (first target) so wins register immediately. */
 function evalRecord(rec, candles) {
   const spec = PAIR_SPECS[rec.pair];
   if (!candles || !candles.length) return null;
   if (!(rec.entry > 0) || !(rec.sl > 0)) return { status: 'SKIPPED', checkedAt: Date.now() };
-
   const isBuy = rec.action === 'BUY';
   const sp = (rec.spreadPips || 0) * spec.pipSize;
   const entry = isBuy ? rec.entry + sp : rec.entry - sp;
   const risk = Math.abs(entry - rec.sl);
   if (!(risk > 0)) return { status: 'SKIPPED', checkedAt: Date.now() };
-
   const after = candles.filter(c => c.time >= rec.ts).slice(0, BT_MAX_CANDLES);
   const tps = [rec.tp1, rec.tp2, rec.tp3];
-
   const models = tps.map(tp => {
     if (!(tp > 0)) return null;
     const rr = Math.abs(tp - entry) / risk;
     for (const c of after) {
       const slHit = isBuy ? c.low <= rec.sl : c.high >= rec.sl;
       const tpHit = isBuy ? c.high >= tp : c.low <= tp;
-      // FIX: TP takes priority when both hit in same candle (optimistic but realistic for limit orders)
       if (tpHit && slHit) return { res: 'WIN', r: rr, rr, ambiguous: true };
       if (tpHit) return { res: 'WIN', r: rr, rr };
       if (slHit) return { res: 'LOSS', r: -1, rr };
     }
     return null;
   });
-
   if (after.length >= BT_MAX_CANDLES) {
     const last = after.at(-1);
     const mtm = (isBuy ? last.close - entry : entry - last.close) / risk;
-    tps.forEach((tp, k) => {
-      if (!models[k] && tp > 0) models[k] = { res: 'EXPIRED', r: mtm, rr: Math.abs(tp - entry) / risk };
-    });
+    tps.forEach((tp, k) => { if (!models[k] && tp > 0) models[k] = { res: 'EXPIRED', r: mtm, rr: Math.abs(tp - entry) / risk }; });
   }
-
-  return {
-    status: models.every(Boolean) ? 'DONE' : 'PENDING',
-    models,
-    candles: after.length,
-    checkedAt: Date.now()
-  };
+  return { status: models.every(Boolean) ? 'DONE' : 'PENDING', models, candles: after.length, checkedAt: Date.now() };
 }
 let btRunning = false;
 async function updateBacktest() {
@@ -2757,8 +2772,8 @@ function renderBacktest() {
 
 /* ═══ RISK CALCULATOR ═══ */
 function calculateRisk() {
-  const b = parseFloat($('riskBalance').value) || MICRO_DEFAULT_BALANCE;
-  const r = Math.min(parseFloat($('riskPercent').value) || 2, MICRO_MAX_RISK_PCT);
+  const b = parseFloat($('riskBalance').value) || DEFAULT_BALANCE;
+  const r = parseFloat($('riskPercent').value) || DEFAULT_RISK_PCT;
   const sl = parseFloat($('riskSlPips').value) || 30;
   const pair = $('riskPair').value;
   const spec = PAIR_SPECS[pair];
@@ -2766,35 +2781,16 @@ function calculateRisk() {
   const riskAmount = b * r / 100;
   const pv = pipValueFor(pair, price);
   const lot = (sl > 0 && pv > 0) ? riskAmount / (sl * pv) : 0;
-  const lot001Risk = sl * pv * 0.01;
-
-  let verdict = '';
-  if (lot < 0.01) {
-    verdict = `<div style="margin-top:10px;padding:10px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#fca5a5;font-size:11px;font-weight:700;">
-      🚫 REJECTED: SL distance too wide for a $${b.toFixed(2)} account (Account Blow Risk).<br>
-      Max SL @ 0.01 lot: ${(riskAmount / (pv * 0.01)).toFixed(0)} pips
-    </div>`;
-  } else {
-    verdict = `<div style="margin-top:10px;padding:10px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;color:#6ee7b7;font-size:11px;">
-      ✅ OK. Risk @ 0.01 lot: $${lot001Risk.toFixed(2)}
-    </div>`;
-  }
-
   $('riskResultBox').style.display = 'block';
   $('riskResultText').innerHTML = `
     <div>Balance: <strong>$${b.toFixed(2)}</strong></div>
     <div>Risk (${r}%): <strong style="color:var(--red);">$${riskAmount.toFixed(2)}</strong></div>
     <div>SL: <strong>${sl}</strong> pips @ ${esc(pair)}</div>
     <div>Pip value (1.0 lot): <strong>$${pv.toFixed(2)}</strong></div>
-    <div style="margin-top:10px;font-size:16px;color:var(--accent);">
-      Position Size: <strong>${lot.toFixed(3)}</strong> lots
-    </div>
-    ${verdict}`;
+    <div style="margin-top:10px;font-size:16px;color:var(--accent);">Position Size: <strong>${lot.toFixed(3)}</strong> lots</div>`;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   HISTORY UI
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ HISTORY UI ═══ */
 function loadHistory() {
   const c = $('historyList'); if (!c) return;
   try {
@@ -2805,9 +2801,8 @@ function loadHistory() {
       const mm = r.bt?.models?.[getBtModel()];
       if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛';
       const isBuy = r.action === 'BUY';
-      const color = isBuy ? 'var(--green)' : 'var(--red)';
       return `<div class="history-card" onclick="showHistoryDetail(${i})"><div style="flex-grow:1;">
-        <strong>${esc(r.pair)} <span style="color:${color};">${esc(r.action)}</span></strong> ${badge}
+        <strong>${esc(r.pair)} <span style="color:${isBuy ? 'var(--green)' : 'var(--red)'};">${esc(r.action)}</span></strong> ${badge}
         <span style="color:var(--muted);font-size:10px;"> ${r.conf || 0}%</span><br>
         <small style="color:var(--muted);">${esc(r.date || '')}</small>
       </div>
@@ -2823,11 +2818,6 @@ function showHistoryDetail(i) {
     <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${r.conf || 0}%</div>`;
   if (r.entry) h += `<table class="tbl"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th></tr>
     <tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td></tr></table>`;
-  if (r.microRisk && r.microRisk.ok) {
-    h += `<div class="micro-warning" style="background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#6ee7b7;">
-      ✅ Micro risk OK: SL ${r.microRisk.slPips.toFixed(1)} pips @ 0.01 lot = $${r.microRisk.actualRiskUsd.toFixed(2)}
-    </div>`;
-  }
   if (r.bt?.models) h += `<table class="tbl"><tr><th>Exit</th><th>Result</th><th>R</th></tr>
     ${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? (m.r > 0 ? '+' : '') + m.r.toFixed(2) + 'R' : '—'}</td></tr>`).join('')}</table>`;
   openUniversalModal(h);
@@ -2856,16 +2846,7 @@ function exportData() {
   a.download = `lutynoel-${VERSION}-${Date.now()}.json`; a.click();
 }
 
-/* ═══ SENTIMENT ═══ */
-async function refreshSentimentNow() { showToast('ℹ️ Sentiment data temporarily offline', 3000); }
-async function renderMultiSentiment() {
-  const c = $('multiSentContainer');
-  if (c) c.innerHTML = '<div class="info-box">Sentiment data temporarily offline.</div>';
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   AUTH
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ AUTH ═══ */
 function saveKeys(n, g, m, t) {
   store.set(STORAGE_KEYS.NAME, n);
   if (g) store.set(STORAGE_KEYS.GEMINI, g);
@@ -2904,16 +2885,19 @@ function enterApp(name) {
   $('settingsBalance').value = getBalance();
   $('settingsRiskPct').value = getRiskPct();
   $('settingsTpMults').value = getTpMults().join(',');
+  $('caBalance').value = getBalance();
+  $('caRiskPct').value = getRiskPct();
   $('newsFilterEnabled').checked = isNewsFilterEnabled();
   $('newsBufferMinutes').value = getNewsBufferMinutes();
   updateNotifStatusPill();
-  updateMicroPanel();
   updateNotifQueueUI();
   loadHistory(); updateStats();
   refreshNewsFeed();
   startAutoRefreshPrice(); startAutoBacktest();
+  setupChartUploads();
   showToast(`Welcome ${name}!`);
   onPairChange($('selectedPair').value);
+  fetchSSLivePrice();
 }
 function showLoginForm() {
   $('returningUserSection').style.display = 'none';
@@ -2937,11 +2921,10 @@ function logout() {
 }
 function saveKeyField(key, id, label) { const k = $(id).value.trim(); if (k) store.set(STORAGE_KEYS[key], k); showToast(`✅ ${label}`); }
 function saveRiskSettings() {
-  const b = Math.max(1, parseFloat($('settingsBalance').value) || MICRO_DEFAULT_BALANCE);
-  const r = Math.min(MICRO_MAX_RISK_PCT, Math.max(0.1, parseFloat($('settingsRiskPct').value) || 2));
+  const b = Math.max(1, parseFloat($('settingsBalance').value) || DEFAULT_BALANCE);
+  const r = Math.max(0.1, parseFloat($('settingsRiskPct').value) || DEFAULT_RISK_PCT);
   store.set(STORAGE_KEYS.BALANCE, String(b));
   store.set(STORAGE_KEYS.RISK_PCT, String(r));
-  updateMicroPanel();
   showToast(`✅ Balance $${b.toFixed(2)}, Risk ${r}%`);
 }
 function saveTradeParams() {
@@ -2967,9 +2950,7 @@ function clearAllKeys() {
   location.reload();
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ NAVIGATION ═══ */
 function navigate(view) {
   try {
     document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -2979,11 +2960,16 @@ function navigate(view) {
     if (view === 'history') loadHistory();
     if (view === 'overview') updateStats();
     if (view === 'backtest') { renderBacktest(); updateBacktest(); }
-    if (view === 'sentiment') renderMultiSentiment();
     if (view === 'alerts') renderActiveAlerts();
     if (view === 'trap') runTrapScan();
     if (view === 'news') renderNewsCalendar();
     if (view === 'notifications') updateNotifQueueUI();
+    if (view === 'sentiment') fetchVolumeDeltaView();
+    if (view === 'screenshot') {
+      setupChartUploads();
+      updateChartUploadStatus();
+      if (!$('ssLivePrice').value) fetchSSLivePrice();
+    }
     window.scrollTo(0, 0);
   } catch (e) { showToast('❌ ' + e.message); }
 }
@@ -2996,16 +2982,15 @@ function startAutoRefreshPrice() {
   clearInterval(window.__priceInt);
   window.__priceInt = setInterval(async () => {
     if (document.hidden) return;
-    const aV = $('view-analyst').style.display !== 'none';
-    if (!aV) return;
     if (priceMeta?.manual) return;
+    const aV = $('view-analyst')?.style.display !== 'none';
+    if (!aV) return;
     const pair = $('selectedPair').value, spec = PAIR_SPECS[pair];
     try {
       const p = await getLivePrice(pair, 8000);
       store.set(`price_${pair}`, String(p));
       $('livePrice').value = p.toFixed(spec.decimals);
       priceMeta = { pair, manual: false, ts: Date.now() };
-      updateMicroPanel();
     } catch (e) {}
   }, PRICE_REFRESH_INTERVAL);
 }
@@ -3015,66 +3000,26 @@ setInterval(() => {
     if (now - alertCooldowns[k] > ALERT_COOLDOWN_MS * 3) delete alertCooldowns[k];
   }
 }, 5 * 60 * 1000);
+const alertCooldowns = {};
 
-/* ═══════════════════════════════════════════════════════════════════
-   PWA MANIFEST + INSTALL
-   ═══════════════════════════════════════════════════════════════════ */
-let deferredPrompt = null;
+/* ═══ PWA ═══ */
 function setupPWA() {
   try {
     const icon = (s, r) => 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${s} ${s}"><rect width="${s}" height="${s}" rx="${r}" fill="#fbbf24"/><rect x="${s * .28}" y="${s * .22}" width="${s * .44}" height="${s * .5}" rx="${s * .08}" fill="#0f172a"/></svg>`);
-    const manifest = {
-      name: 'Lutynoel.fx',
-      short_name: 'Lutynoel',
-      start_url: location.pathname,
-      display: 'standalone',
-      orientation: 'portrait',
-      background_color: '#0f172a',
-      theme_color: '#fbbf24',
-      icons: [
-        { src: icon(192, 32), sizes: '192x192', type: 'image/svg+xml' },
-        { src: icon(512, 64), sizes: '512x512', type: 'image/svg+xml' }
-      ]
-    };
+    const manifest = { name: 'Lutynoel.fx', short_name: 'Lutynoel', start_url: location.pathname, display: 'standalone', orientation: 'portrait', background_color: '#0f172a', theme_color: '#fbbf24', icons: [{ src: icon(192, 32), sizes: '192x192', type: 'image/svg+xml' }, { src: icon(512, 64), sizes: '512x512', type: 'image/svg+xml' }] };
     $('dynamicManifest').href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' }));
   } catch (e) {}
 }
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (store.get(ALERT_KEYS.PWA_DISMISSED) !== 'true') {
-    const p = $('pwaInstallPrompt');
-    if (p) p.classList.add('show');
-  }
-});
-async function installPWA() {
-  if (!deferredPrompt) { showToast('ℹ️ Install haipatikani kwenye browser hii.'); return; }
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  $('pwaInstallPrompt').classList.remove('show');
-  showToast(outcome === 'accepted' ? '✅ App installed!' : '⚠️ Install cancelled');
-}
-function dismissPWAInstall() {
-  $('pwaInstallPrompt').classList.remove('show');
-  store.set(ALERT_KEYS.PWA_DISMISSED, 'true');
-}
 
-/* ═══════════════════════════════════════════════════════════════════
-   ONLINE / OFFLINE HANDLERS
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ ONLINE / OFFLINE ═══ */
 window.addEventListener('online', () => {
   showToast('📡 Network restored — flushing queue...', 3000);
   setTimeout(() => flushOfflineNotificationQueue(), 500);
   setTimeout(() => refreshNewsFeed(), 1500);
 });
-window.addEventListener('offline', () => {
-  showToast('📴 Offline — alerts will be queued', 4000);
-});
+window.addEventListener('offline', () => showToast('📴 Offline — alerts queued', 4000));
 
-/* ═══════════════════════════════════════════════════════════════════
-   INIT
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ INIT ═══ */
 window.addEventListener('DOMContentLoaded', async () => {
   $('universalModal').addEventListener('click', e => { if (e.target.id === 'universalModal') closeUniversalModal(); });
   setupPWA();
@@ -3089,29 +3034,17 @@ window.addEventListener('DOMContentLoaded', async () => {
     $('welcomeBackMsg').innerHTML = `👋 Welcome back, <strong>${esc(k.name)}</strong>!`;
   } else showLoginForm();
 
-  // Auto-request notification permission on first launch
   if ('Notification' in window && Notification.permission === 'default') {
-    setTimeout(() => {
-      requestNotificationPermission();
-    }, 2000);
+    setTimeout(() => requestNotificationPermission(), 2000);
   }
 
-  // Cache fallback news on init
-  if (!getCachedNews().length) {
-    setCachedNews(generateFallbackNewsFor(14));
-  }
+  if (!getCachedNews().length) setCachedNews(generateFallbackNewsFor(14));
   renderNewsBanner();
 
-  // Periodic news check (every 5 min)
   setInterval(() => {
     renderNewsBanner();
-    const blocking = isNewsBlockingNow();
-    if (blocking.blocked) {
-      console.log('[News] Blocking active:', blocking.event.title);
-    }
   }, 5 * 60 * 1000);
 
-  // Update session label
   setInterval(() => {
     const kz = getKillzoneState();
     const el = $('sessionStateLabel');
