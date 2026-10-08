@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lutynoel.fx v40.1 — Chart Analysis + Volume Delta</title>
+<title>Lutynoel.fx v40.2 — Masters PA/MS/D&S/Fundamental</title>
 <link rel="manifest" id="dynamicManifest">
 <meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,7 +147,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .ca-tf-card{background:var(--surface);border:1px solid rgba(51,65,85,.4);border-radius:20px;padding:20px;margin:0 12px 14px}
 
 /* ═══ FULL-SIZE UPLOAD AREA ═══ */
-.ca-upload{display:block;background:#0a0f1a;border:2px dashed rgba(51,65,85,.6);border-radius:14px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ca-upload{display:flex;background:#0a0f1a;border:2px dashed rgba(51,65,85,.6);border-radius:14px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;min-height:260px;flex-direction:column;align-items:center;justify-content:center}
 .ca-upload:hover{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.03)}
 .ca-upload.has-image{border-style:solid;border-color:var(--green);background:rgba(16,185,129,.04);padding:8px;min-height:auto;display:block}
 .ca-upload-icon{width:64px;height:64px;border-radius:16px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;color:var(--accent)}
@@ -166,7 +166,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .ca-price-inline input{flex:1;padding:12px;background:#0d1220;border:1px solid rgba(51,65,85,.6);border-radius:12px;color:#fff;font-size:14px;margin:0}
 .ca-price-inline button{padding:12px 16px;background:var(--green);color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:13px}
 
-/* ═══ MASTERS ANALYSIS LAYOUT ═══ */
+/* ═══ MASTERS LAYOUT ═══ */
 .masters-wrap{display:flex;flex-direction:column;gap:14px}
 .m-hero{border-radius:20px;padding:24px 20px;position:relative;overflow:hidden;border:2px solid var(--border);background:linear-gradient(180deg,#1e293b,#0f172a)}
 .m-hero.strong-sell{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.04));border-color:var(--red)}
@@ -236,14 +236,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 .m-meta-val{font-size:14px;font-weight:900;font-family:ui-monospace,monospace;color:var(--orange)}
 .m-trailing-note{padding:12px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.3);border-radius:10px;font-size:11px;line-height:1.6;color:#fdba74}
 .m-trailing-note strong{color:var(--orange)}
-.m-calc{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(168,85,247,.05));border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:14px}
-.m-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.m-calc-item{background:rgba(11,18,32,.6);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-.m-calc-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:800;margin-bottom:4px}
-.m-calc-val{font-size:15px;font-weight:900;font-family:ui-monospace,monospace;color:var(--text)}
-.m-calc-hero{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(59,130,246,.1));border:2px solid var(--accent);border-radius:12px;padding:14px;text-align:center;margin-bottom:12px}
-.m-calc-hero-num{font-size:28px;font-weight:900;font-family:ui-monospace,monospace;color:var(--accent);letter-spacing:-0.5px}
-.m-calc-hero-sub{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800;margin-top:4px}
 .m-specialists{display:flex;flex-direction:column;gap:10px}
 .m-specialist{padding:12px 14px;border-radius:10px;background:rgba(11,18,32,.6);border-left:4px solid var(--border)}
 .m-specialist.aligned{border-left-color:var(--green)}
@@ -284,8 +276,8 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <div id="authScreen" class="auth-container">
   <div class="auth-box">
     <div class="logo-icon" style="margin:0 auto 10px;font-size:22px;">🏦</div>
-    <div class="auth-title">Lutynoel.fx v40.1</div>
-    <div class="auth-subtitle">Chart Analysis + Volume Delta</div>
+    <div class="auth-title">Lutynoel.fx v40.2</div>
+    <div class="auth-subtitle">PA · MS · D&amp;S · Fundamental</div>
     <div class="disclaimer-box">⚠️ <strong>DISCLAIMER:</strong> Educational tool only. Not financial advice.</div>
 
     <div id="returningUserSection" style="display:none;">
@@ -304,12 +296,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <label>TwelveData API Key</label>
       <input type="text" id="authTwelveKey" placeholder="TwelveData key" autocomplete="off">
       <div class="info-box">
-        ✅ <strong>v40.1:</strong><br>
+        ✅ <strong>v40.2:</strong><br>
+        🎯 4 Strategies: Price Action · Market Structure · Demand &amp; Supply · Fundamental<br>
         📊 Chart Analysis (4H → 1H → 15M → 5M)<br>
-        📸 Full-size image preview<br>
-        📈 Local Volume Delta Ratio (real candles)<br>
-        🚨 News filter (30 min buffer)<br>
-        🔔 Push notifications + offline queue
+        📈 Local Volume Delta Ratio<br>
+        🚨 News filter · 🔔 Push notifications
       </div>
       <button class="primary-btn" onclick="handleLogin()">Login</button>
     </div>
@@ -331,7 +322,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="sidebar" id="appSidebar">
     <div class="sidebar-header">
-      <div class="logo-area"><div class="logo-icon">🏦</div> v40.1</div>
+      <div class="logo-area"><div class="logo-icon">🏦</div> v40.2</div>
       <button onclick="toggleSidebar()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
     </div>
     <div class="menu-item active" onclick="navigate('overview')">📊 Dashboard</div>
@@ -351,14 +342,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 
   <div class="main-content">
 
-    <!-- OVERVIEW -->
     <div id="view-overview" class="view-section">
       <div class="card" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="font-size:54px;">🏦</div>
           <div>
             <div style="font-size:20px;font-weight:900;color:var(--accent);letter-spacing:1.5px;">LUTYNOEL.FX</div>
-            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v40.1 • Chart Analysis + Volume Delta</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:2px;">v40.2 • PA · MS · D&amp;S · Fundamental</div>
           </div>
         </div>
       </div>
@@ -398,14 +388,13 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ANALYST -->
     <div id="view-analyst" class="view-section" style="display:none;">
       <div class="card">
-        <h3 style="margin:5px 0 15px;">🎯 Masters Analysis v14.1</h3>
+        <h3 style="margin:5px 0 15px;">🎯 Masters Analysis v14.2</h3>
         <div class="info-box" style="font-size:10px;">
           ⚡ Same-Day Only (00:00 UTC)<br>
           📡 PSAR M15/M5 primary — NO ATR<br>
-          📈 Volume Delta Ratio (local candles)<br>
+          🎯 4 Strategies: Price Action · Market Structure · D&amp;S · Fundamental<br>
           🚨 News filter (30 min buffer)
         </div>
 
@@ -447,7 +436,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="resultsContainer" style="display:none;"></div>
     </div>
 
-    <!-- ═══ CHART ANALYSIS ═══ -->
     <div id="view-screenshot" class="view-section" style="display:none;">
       <div class="ca-wrap">
         <div class="ca-topbar">
@@ -464,14 +452,14 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <div class="ca-card">
             <h2 class="ca-title"><span class="ca-accent">AI</span> ON-CHART ANALYST</h2>
             <div class="ca-desc">
-              Upload MTF charts for complete analysis. <strong style="color:var(--accent);">5M chart confirms entry.</strong> Images are shown full-size for verification.
+              Upload MTF charts. <strong style="color:var(--accent);">5M confirms entry.</strong> Images shown full-size for verification. Analysis uses <strong>Price Action · Market Structure · D&amp;S · Fundamental</strong>.
             </div>
 
             <div class="ca-pill" onclick="toggleCapitalPanel()">
               <span>🛡️</span> Capital &amp; Risk Setup
             </div>
 
-            <div id="capitalPanel" class="ca-capital-panel" style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:16px;margin-bottom:18px;display:none;">
+            <div id="capitalPanel" style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:16px;margin-bottom:18px;display:none;">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div>
                   <label style="font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;display:block;">Balance (USD)</label>
@@ -518,7 +506,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
             </div>
           </div>
 
-          <!-- 4H -->
           <div class="ca-tf-card">
             <div class="ca-tf-header">
               <div class="ca-tf-label"><span class="ca-tf-dot"></span> 4H</div>
@@ -538,7 +525,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
             </label>
           </div>
 
-          <!-- 1H -->
           <div class="ca-tf-card">
             <div class="ca-tf-header">
               <div class="ca-tf-label"><span class="ca-tf-dot"></span> 1H</div>
@@ -558,7 +544,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
             </label>
           </div>
 
-          <!-- 15M -->
           <div class="ca-tf-card">
             <div class="ca-tf-header">
               <div class="ca-tf-label"><span class="ca-tf-dot"></span> 15M</div>
@@ -578,7 +563,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
             </label>
           </div>
 
-          <!-- 5M -->
           <div class="ca-tf-card">
             <div class="ca-tf-header">
               <div class="ca-tf-label"><span class="ca-tf-dot cyan"></span> 5M</div>
@@ -625,6 +609,10 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
               3️⃣ <strong>15M (Optional)</strong> — Setup timeframe<br>
               4️⃣ <strong>5M (Optional)</strong> — Entry confirmation
               <br><br>
+              <strong style="color:var(--accent);">4 Strategies (all must align):</strong><br>
+              📊 Price Action &nbsp;·&nbsp; 🎯 Market Structure<br>
+              🏦 Demand &amp; Supply &nbsp;·&nbsp; 🌍 Fundamental
+              <br><br>
               <strong style="color:var(--cyan);">PSAR:</strong> Primary SL indicator.<br>
               <strong style="color:var(--inst);">Volume Delta:</strong> Local candle-based buy/sell pressure.<br>
               <strong style="color:var(--red);">Same-Day Only:</strong> No multi-day macro.
@@ -636,7 +624,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       <div id="ssResultsContainer" style="display:none;padding:0 12px;"></div>
     </div>
 
-    <!-- NEWS -->
     <div id="view-news" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--red);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -651,7 +638,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- NOTIFICATIONS -->
     <div id="view-notifications" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--inst);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -666,7 +652,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- TRAPS -->
     <div id="view-trap" class="view-section" style="display:none;">
       <div class="card" style="border-color:var(--pink);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -685,7 +670,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- ALERTS -->
     <div id="view-alerts" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -696,7 +680,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- BACKTEST -->
     <div id="view-backtest" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -714,7 +697,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- HISTORY -->
     <div id="view-history" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -725,7 +707,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- VOLUME DELTA -->
     <div id="view-sentiment" class="view-section" style="display:none;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -733,7 +714,7 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
           <button onclick="refreshVolumeDeltaView()" style="background:var(--green);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:bold;">🔄</button>
         </div>
         <div class="info-box" style="font-size:10px;">
-          <strong>Local Volume Delta</strong> — inahesabiwa kutoka candles halisi za MT5/Binance/TwelveData (bull vs bear volume) kwa M5/M15/H1/H4. Hii ni proxy ya order flow inayotokana na body direction × volume ya kila candle.
+          <strong>Local Volume Delta</strong> — inahesabiwa kutoka candles halisi za M5/M15/H1/H4 (bull vs bear volume).
         </div>
         <label>Pair</label>
         <select id="vdPair" onchange="fetchVolumeDeltaView()">
@@ -753,7 +734,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- JOURNAL -->
     <div id="view-journal" class="view-section" style="display:none;">
       <div class="card">
         <h3 style="margin:5px 0 10px;">💰 Risk Calculator</h3>
@@ -780,7 +760,6 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- LIVE CHART -->
     <div id="view-livechart" class="view-section" style="display:none;">
       <div class="card">
         <h3>📈 Live Chart</h3>
@@ -795,12 +774,11 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
       </div>
     </div>
 
-    <!-- SETTINGS -->
     <div id="view-settings" class="view-section" style="display:none;">
       <div class="card">
         <h3>⚙️ Settings</h3>
         <div class="info-box">
-          <strong>Version:</strong> v40.1 — Chart Analysis + Volume Delta<br>
+          <strong>Version:</strong> v40.2 — PA · MS · D&amp;S · Fundamental<br>
           <strong>Mode:</strong> Same-Day Only • PSAR • News Filter
         </div>
 
@@ -856,15 +834,19 @@ button:disabled{background:#3f3f46!important;color:#a1a1aa!important;cursor:not-
 <script>
 'use strict';
 /* ═══════════════════════════════════════════════════════════════
-   Lutynoel.fx v40.1
-   - Chart Analysis restored (4H → 1H → 15M → 5M)
-   - Full-size image previews
-   - Micro-account $10 removed (back to configurable default)
-   - Local Volume Delta Ratio replaces mock sentiment
-   - Same-day only + PSAR + news filter + PWA push
+   Lutynoel.fx v40.2
+   BUG FIXES APPLIED:
+   ✅ alertCooldowns declared before use (ReferenceError fixed)
+   ✅ Ambiguous TP+SL same candle → LOSS (conservative, safer backtest)
+   ✅ masters_analysis compressed to prevent localStorage overflow
+   ✅ Entry-hit validation added to evalRecord()
+   ✅ Spread applied to TP levels for realism
+   ANALYSIS CHANGED:
+   ✅ 4 Strategies: Price Action · Market Structure · Demand & Supply · Fundamental
+   ✅ Session/Killzone removed as strategy vote (still used as context)
    ═══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'v40.1';
+const VERSION = 'v40.2';
 const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 const MISTRAL_BASE_URL = 'https://api.mistral.ai/v1';
 const BINANCE_API = 'https://api.binance.com/api/v3';
@@ -875,7 +857,7 @@ const BACKTEST_INTERVAL = 10 * 60 * 1000;
 const BT_MAX_CANDLES = 192;
 const BT_FETCH_LIMIT = 600;
 const TWELVE_GAP_MS = 7500;
-const MODELS_VERSION = 'v40.1';
+const MODELS_VERSION = 'v40.2';
 
 const PROXIMITY_PIPS_DEFAULT = 12;
 const ALERT_COOLDOWN_MS = 90 * 1000;
@@ -883,6 +865,9 @@ const TZS_PER_USD = 2700;
 const DEFAULT_BALANCE = 1000;
 const DEFAULT_RISK_PCT = 1.0;
 const MICRO_MIN_LOT = 0.01;
+
+/* ✅ FIX 1: alertCooldowns declared at TOP to prevent ReferenceError */
+const alertCooldowns = {};
 
 const ALERT_KEYS = {
   MUTED: 'lutynoel_alerts_muted',
@@ -906,10 +891,10 @@ const STORAGE_KEYS = {
   GEMINI: 'lutynoel_saved_geminiKey',
   MISTRAL: 'lutynoel_saved_mistralKey',
   TWELVE: 'lutynoel_saved_twelveKey',
-  BALANCE: 'lutynoel_balance_v401',
-  RISK_PCT: 'lutynoel_riskPct_v401',
+  BALANCE: 'lutynoel_balance_v402',
+  RISK_PCT: 'lutynoel_riskPct_v402',
   VOICE_ENABLED: 'lutynoel_voice_enabled',
-  HISTORY: 'lutynoel_history_v401',
+  HISTORY: 'lutynoel_history_v402',
   GEMINI_MODELS: 'lutynoel_gemini_models',
   MISTRAL_MODELS: 'lutynoel_mistral_models',
   MISTRAL_VISION: 'lutynoel_mistral_vision',
@@ -932,8 +917,17 @@ const PAIR_SPECS = {
   WTI: { pipSize: 0.01, defaultPrice: 75, decimals: 2, source: 'twelve', twelveSymbol: 'WTI/USD', pipValue: 10, spreadPips: 4, spoken: 'Oil', category: 'commodity' }
 };
 
-const MASTERS_ANALYSIS_SYSTEM_PROMPT = `You are the INSTITUTIONAL INTRADAY MTF PROTOCOL v14.1.
-Specialist in Price Action, SMC, and ICT.
+/* ✅ UPDATED SYSTEM PROMPT — 4 Strategies: PA · MS · D&S · Fundamental */
+const MASTERS_ANALYSIS_SYSTEM_PROMPT = `You are the INSTITUTIONAL INTRADAY MTF PROTOCOL v14.2.
+You analyze markets using EXACTLY FOUR strategies. NO OTHERS.
+
+═══════════ THE 4 STRATEGIES (ALL MUST ALIGN 100%) ═══════════
+1. 📊 PRICE ACTION — Candle patterns, momentum, wicks, engulfing, pin bars, displacement.
+2. 🎯 MARKET STRUCTURE — BOS/CHoCH, HH/HL vs LH/LL, swing points, trend validity.
+3. 🏦 DEMAND & SUPPLY — Fresh Order Blocks, Fair Value Gaps, premium/discount zones, unfilled imbalances.
+4. 🌍 FUNDAMENTAL — Macro context, interest rate differentials, risk sentiment, DXY correlation, session flow (Asian/London/NY), liquidity positioning.
+
+You do NOT use: Session/Killzone as a strategy vote, ICT-only bias, indicator-only bias, or any other framework. Session/killzone is CONTEXT ONLY, not a strategy vote.
 
 ═══════════ HIERARCHY ═══════════
 1. 4H = HIGHER TIMEFRAME BIAS (REQUIRED).
@@ -943,12 +937,12 @@ Specialist in Price Action, SMC, and ICT.
 
 ═══════════ CONSTRAINTS ═══════════
 1. SAME-DAY ONLY (00:00 UTC → now).
-2. ATR FORBIDDEN. Use PARABOLIC SAR M15/M5 only.
-3. Reference LOCAL VOLUME DELTA RATIO (buy vs sell volume from candles).
+2. ATR FORBIDDEN. Use PARABOLIC SAR M15/M5 for momentum and SL.
+3. Use LOCAL VOLUME DELTA RATIO provided in context.
 4. Block if news within ±30 min.
-5. All 4 strategies must align for STRONG PASS.
+5. ALL 4 strategies must be "ALIGNED" for STRONG PASS.
 
-═══════════ OUTPUT (raw JSON) ═══════════
+═══════════ OUTPUT (raw JSON only) ═══════════
 {
   "main_signal": {
     "direction": "STRONG SELL"|"SELL"|"STRONG BUY"|"BUY"|"NEUTRAL",
@@ -982,9 +976,9 @@ Specialist in Price Action, SMC, and ICT.
   },
   "strategy_votes": {
     "price_action": "ALIGNED"|"CONFLICT",
-    "supply_demand": "ALIGNED"|"CONFLICT",
     "market_structure": "ALIGNED"|"CONFLICT",
-    "session": "ALIGNED"|"CONFLICT",
+    "demand_supply": "ALIGNED"|"CONFLICT",
+    "fundamental": "ALIGNED"|"CONFLICT",
     "total_aligned": 0-4
   },
   "execution_trade_plan": {
@@ -995,8 +989,8 @@ Specialist in Price Action, SMC, and ICT.
   },
   "specialist_consultation": {
     "price_action_master": "STRING",
-    "supply_demand_master": "STRING",
     "market_structure_master": "STRING",
+    "demand_supply_master": "STRING",
     "fundamental_analyst_master": "STRING"
   },
   "multi_timeframe_confluence": {
@@ -1042,30 +1036,15 @@ const getRiskPct = () => {
   return Number.isFinite(v) && v > 0 ? v : DEFAULT_RISK_PCT;
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   VOLUME DELTA RATIO — Local computation from real candles
-   ═══════════════════════════════════════════════════════════════
-   Formula:
-   - Kila candle: kama close > open → bullish volume (+)
-   - Kama close < open → bearish volume (-)
-   - Volume inagawiwa kwa body strength (body / range)
-   - Delta Ratio = buyVol / (buyVol + sellVol) × 100
-
-   Hii ni proxy ya order flow — buy vs sell pressure kutoka
-   candle bodies × volume. Sio tick data halisi lakini ni sahihi
-   kwa institutional bias reading. */
+/* ═══ VOLUME DELTA ═══ */
 function computeVolumeDelta(candles, lookback = 100) {
-  if (!Array.isArray(candles) || !candles.length) {
-    return { ok: false, reason: 'No candles' };
-  }
+  if (!Array.isArray(candles) || !candles.length) return { ok: false, reason: 'No candles' };
   const slice = candles.slice(-lookback).filter(c =>
     Number.isFinite(c.open) && Number.isFinite(c.close) && Number.isFinite(c.high) && Number.isFinite(c.low)
   );
   if (slice.length < 5) return { ok: false, reason: 'Insufficient candles' };
 
-  let buyVol = 0, sellVol = 0;
-  let bullCount = 0, bearCount = 0;
-
+  let buyVol = 0, sellVol = 0, bullCount = 0, bearCount = 0;
   slice.forEach(c => {
     const body = Math.abs(c.close - c.open);
     const range = Math.max(c.high - c.low, 1e-9);
@@ -1073,7 +1052,7 @@ function computeVolumeDelta(candles, lookback = 100) {
     const v = (Number(c.volume) || 1) * bodyStrength;
     if (c.close > c.open) { buyVol += v; bullCount++; }
     else if (c.close < c.open) { sellVol += v; bearCount++; }
-    else { /* doji — split evenly */ buyVol += v / 2; sellVol += v / 2; }
+    else { buyVol += v / 2; sellVol += v / 2; }
   });
 
   const total = buyVol + sellVol;
@@ -1090,27 +1069,15 @@ function computeVolumeDelta(candles, lookback = 100) {
   else if (sellPct >= 55) { bias = 'LEAN_BEARISH'; reason = `Mild sell tilt (${sellPct.toFixed(1)}%)`; }
   else { bias = 'NEUTRAL'; reason = `Balanced (${buyPct.toFixed(1)}% / ${sellPct.toFixed(1)}%)`; }
 
-  return {
-    ok: true,
-    buyVol, sellVol, total, delta,
-    buyPct: +buyPct.toFixed(1),
-    sellPct: +sellPct.toFixed(1),
-    bullCount, bearCount,
-    candles: slice.length,
-    bias, reason
-  };
+  return { ok: true, buyVol, sellVol, total, delta, buyPct: +buyPct.toFixed(1), sellPct: +sellPct.toFixed(1), bullCount, bearCount, candles: slice.length, bias, reason };
 }
 
 function renderVolumeDeltaPanel(vdData, pair, containerId, title = '📈 VOLUME DELTA RATIO') {
   const c = $(containerId);
   if (!c) return;
-  if (!vdData || !vdData.ok) {
-    c.innerHTML = '';
-    return;
-  }
+  if (!vdData || !vdData.ok) { c.innerHTML = ''; return; }
   const spec = PAIR_SPECS[pair] || { decimals: 2 };
-  const buyPct = vdData.buyPct;
-  const sellPct = vdData.sellPct;
+  const buyPct = vdData.buyPct, sellPct = vdData.sellPct;
   const biasClass = vdData.bias === 'BULLISH' || vdData.bias === 'LEAN_BULLISH' ? 'bullish'
                   : vdData.bias === 'BEARISH' || vdData.bias === 'LEAN_BEARISH' ? 'bearish'
                   : 'neutral';
@@ -1213,7 +1180,7 @@ async function fetchWithTimeout(url, options, timeout = API_TIMEOUT) {
   finally { clearTimeout(id); }
 }
 
-/* ═══ AI ═══ */
+/* ═══ AI CALLS ═══ */
 const getGeminiKey = () => store.get(STORAGE_KEYS.GEMINI);
 const getMistralKey = () => store.get(STORAGE_KEYS.MISTRAL);
 const getTwelveKey = () => store.get(STORAGE_KEYS.TWELVE);
@@ -1280,10 +1247,13 @@ MODE: SAME-DAY INTRADAY — PSAR ONLY (NO ATR)
 5M PROVIDED: ${has5M ? 'YES' : 'NO (cap at PASS)'}
 ${newsInfo}
 
+Analyze using EXACTLY these 4 strategies: Price Action, Market Structure, Demand & Supply, Fundamental.
+All 4 must be ALIGNED for STRONG PASS. Session/Killzone is context only — NOT a strategy vote.
+
 MARKET CONTEXT:
 ${JSON.stringify(marketContext, null, 2)}
 
-Analyze now and return strict JSON. 4-strategy alignment required for STRONG PASS.`;
+Return strict JSON.`;
 
   const parts = [{ text: userPrompt }];
   let r = await callGemini(getList('GEMINI_MODELS', DEFAULTS.geminiModels), parts, 120000, true, MASTERS_ANALYSIS_SYSTEM_PROMPT);
@@ -1557,9 +1527,7 @@ function renderMTFMatrix(mtfData, pair) {
   return html;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   NEWS FILTER ENGINE
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ NEWS ═══ */
 function isNewsFilterEnabled() { return store.get(ALERT_KEYS.NEWS_FILTER) !== 'false'; }
 function getNewsBufferMinutes() {
   const v = parseFloat(store.get(ALERT_KEYS.NEWS_BUFFER));
@@ -1579,23 +1547,15 @@ function generateFallbackNewsFor(daysAhead = 14) {
     const m = month + i;
     const y = year + Math.floor(m / 12);
     const mm = m % 12;
-
     const nfp = new Date(Date.UTC(y, mm, 1));
     const dow = nfp.getUTCDay();
     const firstFri = 1 + ((5 - dow + 7) % 7);
     events.push({ title: 'US Non-Farm Payrolls (NFP)', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, firstFri, 13, 30)).toISOString() });
     events.push({ title: 'US CPI (YoY)', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, 12, 13, 30)).toISOString() });
-
     const fomcMonths = [2, 4, 5, 6, 8, 10, 11];
-    if (fomcMonths.includes(mm)) {
-      events.push({ title: 'FOMC Rate Decision', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, 18, 19, 0)).toISOString() });
-    }
-    if ([0, 2, 3, 5, 6, 8, 9, 11].includes(mm)) {
-      events.push({ title: 'ECB Rate Decision', impact: 'high', currency: 'EUR', date: new Date(Date.UTC(y, mm, 14, 12, 45)).toISOString() });
-    }
-    if ([1, 4, 7, 10].includes(mm)) {
-      events.push({ title: 'BoE Rate Decision', impact: 'high', currency: 'GBP', date: new Date(Date.UTC(y, mm, 6, 12, 0)).toISOString() });
-    }
+    if (fomcMonths.includes(mm)) events.push({ title: 'FOMC Rate Decision', impact: 'high', currency: 'USD', date: new Date(Date.UTC(y, mm, 18, 19, 0)).toISOString() });
+    if ([0, 2, 3, 5, 6, 8, 9, 11].includes(mm)) events.push({ title: 'ECB Rate Decision', impact: 'high', currency: 'EUR', date: new Date(Date.UTC(y, mm, 14, 12, 45)).toISOString() });
+    if ([1, 4, 7, 10].includes(mm)) events.push({ title: 'BoE Rate Decision', impact: 'high', currency: 'GBP', date: new Date(Date.UTC(y, mm, 6, 12, 0)).toISOString() });
   }
   const cutoff = Date.now() + daysAhead * 86400000;
   return events.filter(e => {
@@ -1617,13 +1577,12 @@ async function refreshNewsFeed() {
       if (Array.isArray(raw)) {
         events = raw.filter(e => (e.impact || '').toLowerCase() === 'high').map(e => ({
           title: e.title || e.event || 'High-Impact Event',
-          impact: 'high',
-          currency: e.country || e.currency || 'USD',
+          impact: 'high', currency: e.country || e.currency || 'USD',
           date: new Date(e.date).toISOString()
         }));
       }
     }
-  } catch (e) { console.warn('External news feed unavailable, using fallback:', e.message); }
+  } catch (e) { console.warn('News feed fallback:', e.message); }
   if (!events.length) events = generateFallbackNewsFor(14);
   const cached = getCachedNews();
   const merged = [...events, ...cached].filter((e, i, arr) => arr.findIndex(x => x.title === e.title && x.date === e.date) === i).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
@@ -1720,9 +1679,7 @@ function scheduleNewsNotifications(events) {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PWA SERVICE WORKER + PUSH + OFFLINE QUEUE
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ SERVICE WORKER ═══ */
 let swRegistration = null;
 const SW_CODE = `
 'use strict';
@@ -1844,9 +1801,7 @@ function testPushNotification() {
   pushNotification({ type: 'TEST', title: '🔔 Lutynoel Test', body: 'Push notifications work!', tag: 'test-' + Date.now() });
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   AUTO-TRACK
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ AUTO-TRACK (with compressed masters_analysis — BUG FIX #3) ═══ */
 function autoTrackFromMasters(pair, data, price) {
   if (!data || !data.main_signal) return;
   const ms = data.main_signal;
@@ -1866,9 +1821,18 @@ function autoTrackFromMasters(pair, data, price) {
   const m = getTpMults();
   const tp3 = action === 'BUY' ? entry + slD * m[2] : entry - slD * m[2];
 
+  /* ✅ BUG FIX #3: Compress masters_analysis to prevent localStorage overflow */
+  const compressedMA = {
+    main_signal: data.main_signal,
+    pre_flight_protocol: data.pre_flight_protocol,
+    strategy_votes: data.strategy_votes,
+    psar_analysis: data.psar_analysis,
+    final_trade_plan: data.final_trade_plan
+  };
+
   const rec = {
     id: Date.now(), ts: Date.now(), date: new Date().toLocaleString(),
-    source: 'masters_v14_1', pair, action, price,
+    source: 'masters_v14_2', pair, action, price,
     entry, sl, tp1, tp2, tp3: tp3 || tp2,
     slPips: Math.round(pips(sl - entry)),
     tp1Pips: Math.round(pips(tp1 - entry)),
@@ -1876,12 +1840,12 @@ function autoTrackFromMasters(pair, data, price) {
     tp3Pips: Math.round(pips(tp3 - entry)),
     spreadPips: spec.spreadPips,
     conf: parseInt(ms.confidence_percentage) || 0,
-    reason: `v14.1: ${ms.status || ''} — ${(data.final_trade_plan || '').slice(0, 200)}`,
+    reason: `v14.2: ${ms.status || ''} — ${(data.final_trade_plan || '').slice(0, 200)}`,
     entryZone: { min_price: entry, max_price: entry },
     rr: pf.rr_ratio || '—',
-    provider: 'Masters/v14.1',
+    provider: 'Masters/v14.2',
     tier: ms.status === 'STRONG PASS' ? 'HIGH_PROBABILITY' : 'MEDIUM_PROBABILITY',
-    masters_analysis: data,
+    masters_analysis: compressedMA,
     tracked: true, bt: null,
     session: getKillzoneState().session
   };
@@ -1983,11 +1947,8 @@ async function fetchAllMarketData() {
     h += `<div style="margin-top:10px;">${renderMTFMatrix(mtfData, pair)}</div>`;
     $('chartPreview').innerHTML = h;
 
-    // Volume Delta panel (analyst)
     const vd = mtfData.m15?.volumeDelta || mtfData.m5?.volumeDelta;
     if (vd) renderVolumeDeltaPanel(vd, pair, 'analystVolumeDelta', '📈 VOLUME DELTA RATIO (M15)');
-
-    // Overview VD (smaller)
     const vdOv = mtfData.m15?.volumeDelta;
     if (vdOv) renderVolumeDeltaPanel(vdOv, pair, 'overviewVolumeDelta', '📈 VOLUME DELTA (M15)');
 
@@ -1999,9 +1960,7 @@ async function fetchAllMarketData() {
   finally { btn.disabled = false; btn.innerHTML = '📊 Fetch TODAY Only'; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RUN ANALYSIS
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ RUN ANALYSIS ═══ */
 async function runAnalysis() {
   if (!getGeminiKey() && !getMistralKey()) { alert('Weka API key.'); return; }
   const md = window.marketData, pair = $('selectedPair').value;
@@ -2024,7 +1983,8 @@ async function runAnalysis() {
 
     const ctx = {
       pair, pipSize: spec.pipSize, decimals: spec.decimals,
-      session_utc: new Date().toUTCString(), killzone,
+      session_utc: new Date().toUTCString(),
+      killzone_context: killzone,  /* Context only — NOT a strategy vote */
       news_state: newsState.blocked ? { blocking: true, event: newsState.event.title, minutes: newsState.minutesTo } : { blocking: false },
       same_day_intraday: {
         today_high: +todayHighLow.high.toFixed(spec.decimals),
@@ -2062,7 +2022,7 @@ async function runAnalysis() {
       const totalAligned = Number(votes.total_aligned ?? 0);
       if (totalAligned < 4) {
         finalStatus = 'REJECT';
-        blockingReason = `Only ${totalAligned}/4 strategies aligned.`;
+        blockingReason = `Only ${totalAligned}/4 strategies aligned (need PA + MS + D&S + Fundamental).`;
         ms.status = 'REJECT';
         ms.blocking_reason = blockingReason;
       }
@@ -2088,9 +2048,7 @@ async function runAnalysis() {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER MASTERS ANALYSIS
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ RENDER MASTERS (4-Strategy: PA · MS · D&S · Fundamental) ═══ */
 function dirClass(dir) {
   const d = String(dir || '').toLowerCase();
   if (d.includes('strong sell')) return 'strong-sell';
@@ -2285,9 +2243,9 @@ function renderMastersAnalysis(data, containerId, pair) {
       </div>
       <div class="m-specialists">
         ${renderSpecialist('📊', 'Price Action', sc.price_action_master, votes.price_action, votes.price_action === 'ALIGNED' ? 'aligned' : 'conflict')}
-        ${renderSpecialist('🏦', 'Supply & Demand', sc.supply_demand_master, votes.supply_demand, votes.supply_demand === 'ALIGNED' ? 'aligned' : 'conflict')}
         ${renderSpecialist('🎯', 'Market Structure', sc.market_structure_master, votes.market_structure, votes.market_structure === 'ALIGNED' ? 'aligned' : 'conflict')}
-        ${renderSpecialist('⏰', 'Session/Killzone', sc.fundamental_analyst_master, votes.session, votes.session === 'ALIGNED' ? 'aligned' : 'conflict')}
+        ${renderSpecialist('🏦', 'Demand & Supply', sc.demand_supply_master, votes.demand_supply, votes.demand_supply === 'ALIGNED' ? 'aligned' : 'conflict')}
+        ${renderSpecialist('🌍', 'Fundamental', sc.fundamental_analyst_master, votes.fundamental, votes.fundamental === 'ALIGNED' ? 'aligned' : 'conflict')}
       </div>
     </div>
 
@@ -2322,7 +2280,7 @@ function renderMastersAnalysis(data, containerId, pair) {
 function renderMastersLoading(containerId) {
   const c = $(containerId || 'resultsContainer');
   if (!c) return;
-  c.innerHTML = `<div class="m-state"><div class="big-spinner"></div><div>Analyzing...</div><div style="font-size:11px;margin-top:6px;color:var(--muted);">PSAR • Volume Delta • 4 Strategies</div></div>`;
+  c.innerHTML = `<div class="m-state"><div class="big-spinner"></div><div>Analyzing PA · MS · D&amp;S · Fundamental...</div><div style="font-size:11px;margin-top:6px;color:var(--muted);">PSAR • Volume Delta • 4 Strategies</div></div>`;
   c.style.display = 'block';
 }
 function renderMastersError(err, containerId) {
@@ -2336,9 +2294,7 @@ function renderMastersError(err, containerId) {
   c.style.display = 'block';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CHART ANALYSIS (full-size preview + MTF)
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ CHART ANALYSIS ═══ */
 let uploadedCharts = { m5: null, m15: null, h1: null, h4: null };
 let ssPriceMeta = null;
 
@@ -2481,10 +2437,10 @@ async function analyzeAllScreenshots() {
     const userPrompt = `PAIR: ${pair}
 CURRENT PRICE: ${lp}
 SESSION (UTC): ${new Date().toUTCString()}
-MODE: CHART ANALYSIS v14.1 — SAME-DAY INTRADAY
+MODE: CHART ANALYSIS v14.2 — SAME-DAY INTRADAY
 HIERARCHY: ${ordered.map(o => o[1]).join(' → ')}
 
-Analyze attached MTF screenshots. 4H = bias. 5M = entry confirmation. Return strict JSON.`;
+Analyze attached MTF screenshots using EXACTLY 4 strategies: Price Action, Market Structure, Demand & Supply, Fundamental. All 4 must align for STRONG PASS. Return strict JSON.`;
 
     const parts = [{ text: MASTERS_ANALYSIS_SYSTEM_PROMPT + '\n\n' + userPrompt }];
     ordered.forEach(([k, label]) => {
@@ -2523,7 +2479,7 @@ Analyze attached MTF screenshots. 4H = bias. 5M = entry confirmation. Return str
   }
 }
 
-/* ═══ VOLUME DELTA VIEW (standalone) ═══ */
+/* ═══ VOLUME DELTA VIEW ═══ */
 async function fetchVolumeDeltaView() {
   const pair = $('vdPair').value;
   const c = $('volumeDeltaContainer');
@@ -2533,14 +2489,11 @@ async function fetchVolumeDeltaView() {
     const m15 = await fetchOHLC(pair, '15m', 500, true, true) || [];
     const h1 = await fetchOHLC(pair, '1h', 500, true, true) || [];
     const h4 = await fetchOHLC(pair, '4h', 500, true, true) || [];
-
     const vd5 = computeVolumeDelta(m5, 100);
     const vd15 = computeVolumeDelta(m15, 100);
     const vd1h = computeVolumeDelta(h1, 100);
     const vd4h = computeVolumeDelta(h4, 100);
-
-    let html = '';
-    html += `<div style="display:flex;flex-direction:column;gap:12px;">`;
+    let html = `<div style="display:flex;flex-direction:column;gap:12px;">`;
     [[vd5, 'M5'], [vd15, 'M15'], [vd1h, 'H1'], [vd4h, 'H4']].forEach(([vd, label]) => {
       if (!vd?.ok) return;
       const biasClass = vd.bias.includes('BULL') ? 'bullish' : vd.bias.includes('BEAR') ? 'bearish' : 'neutral';
@@ -2665,35 +2618,76 @@ function saveToHistory(r) {
   updateStats();
   try { if ($('view-history') && $('view-history').style.display !== 'none') loadHistory(); } catch (e) {}
 }
+
+/* ✅ BUG FIXES #2, #4, #5 in evalRecord:
+   - Entry must hit first before evaluating TP/SL (BUG #4)
+   - Spread applied to TP levels too (BUG #5)
+   - Ambiguous TP+SL candle → LOSS (BUG #2, conservative) */
 function evalRecord(rec, candles) {
   const spec = PAIR_SPECS[rec.pair];
   if (!candles || !candles.length) return null;
   if (!(rec.entry > 0) || !(rec.sl > 0)) return { status: 'SKIPPED', checkedAt: Date.now() };
+
   const isBuy = rec.action === 'BUY';
   const sp = (rec.spreadPips || 0) * spec.pipSize;
   const entry = isBuy ? rec.entry + sp : rec.entry - sp;
   const risk = Math.abs(entry - rec.sl);
   if (!(risk > 0)) return { status: 'SKIPPED', checkedAt: Date.now() };
+
   const after = candles.filter(c => c.time >= rec.ts).slice(0, BT_MAX_CANDLES);
+
+  /* ✅ BUG FIX #4: Entry must hit first */
+  let entryHitIdx = -1;
+  for (let i = 0; i < after.length; i++) {
+    const c = after[i];
+    const entryHit = isBuy ? c.low <= entry : c.high >= entry;
+    if (entryHit) { entryHitIdx = i; break; }
+  }
+
+  if (entryHitIdx === -1) {
+    if (after.length >= BT_MAX_CANDLES) {
+      return { status: 'SKIPPED', reason: 'Entry never triggered', checkedAt: Date.now() };
+    }
+    return { status: 'PENDING', models: [null, null, null], entryHit: false, candles: after.length, checkedAt: Date.now() };
+  }
+
+  const afterEntry = after.slice(entryHitIdx);
   const tps = [rec.tp1, rec.tp2, rec.tp3];
+
   const models = tps.map(tp => {
     if (!(tp > 0)) return null;
+    /* ✅ BUG FIX #5: Spread applied to TP for realism */
+    const tpAdj = isBuy ? tp + sp : tp - sp;
     const rr = Math.abs(tp - entry) / risk;
-    for (const c of after) {
+
+    for (const c of afterEntry) {
       const slHit = isBuy ? c.low <= rec.sl : c.high >= rec.sl;
-      const tpHit = isBuy ? c.high >= tp : c.low <= tp;
-      if (tpHit && slHit) return { res: 'WIN', r: rr, rr, ambiguous: true };
+      const tpHit = isBuy ? c.high >= tpAdj : c.low <= tpAdj;
+
+      /* ✅ BUG FIX #2: Ambiguous → conservative LOSS */
+      if (tpHit && slHit) return { res: 'LOSS', r: -1, rr, ambiguous: true };
       if (tpHit) return { res: 'WIN', r: rr, rr };
       if (slHit) return { res: 'LOSS', r: -1, rr };
     }
     return null;
   });
+
   if (after.length >= BT_MAX_CANDLES) {
     const last = after.at(-1);
     const mtm = (isBuy ? last.close - entry : entry - last.close) / risk;
-    tps.forEach((tp, k) => { if (!models[k] && tp > 0) models[k] = { res: 'EXPIRED', r: mtm, rr: Math.abs(tp - entry) / risk }; });
+    tps.forEach((tp, k) => {
+      if (!models[k] && tp > 0) models[k] = { res: 'EXPIRED', r: mtm, rr: Math.abs(tp - entry) / risk };
+    });
   }
-  return { status: models.every(Boolean) ? 'DONE' : 'PENDING', models, candles: after.length, checkedAt: Date.now() };
+
+  return {
+    status: models.every(Boolean) ? 'DONE' : 'PENDING',
+    models,
+    entryHit: true,
+    entryHitIdx,
+    candles: after.length,
+    checkedAt: Date.now()
+  };
 }
 let btRunning = false;
 async function updateBacktest() {
@@ -2751,6 +2745,7 @@ function renderBacktest() {
   if (!all.length) { c.innerHTML = `<div class="info-box">Hakuna tracked trades.</div>`; return; }
   const s = btCalc(all, m);
   const pendingN = all.filter(r => !r.bt || r.bt.status === 'PENDING').length;
+  const skippedN = all.filter(r => r.bt?.status === 'SKIPPED').length;
   let verdict, vcol;
   if (s.n < 30) { verdict = `⚠️ <strong>Sample ndogo (n=${s.n}).</strong>`; vcol = 'var(--orange)'; }
   else if (s.n >= 100 && s.avgR > 0 && s.ci[0] > s.be) { verdict = `✅ <strong>Edge dalili.</strong>`; vcol = 'var(--green)'; }
@@ -2767,7 +2762,7 @@ function renderBacktest() {
       <div class="mini-box" style="text-align:center;"><label>PF</label><div>${s.n ? (isFinite(s.pf) ? s.pf.toFixed(2) : '∞') : '—'}</div></div>
       <div class="mini-box" style="text-align:center;"><label>BE WR</label><div>${s.n ? pct(s.be) : '—'}</div></div>
     </div>
-    <div style="font-size:11px;color:var(--muted);">CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN}</div>`;
+    <div style="font-size:11px;color:var(--muted);">CI: ${s.n ? pct(s.ci[0]) + ' – ' + pct(s.ci[1]) : '—'} • Pending: ${pendingN} • Skipped (entry never hit): ${skippedN}</div>`;
 }
 
 /* ═══ RISK CALCULATOR ═══ */
@@ -2798,8 +2793,11 @@ function loadHistory() {
     if (!h.length) { c.innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);">📭 Hakuna historia.</div>'; return; }
     c.innerHTML = h.map((r, i) => {
       let badge = '⏳';
-      const mm = r.bt?.models?.[getBtModel()];
-      if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛';
+      if (r.bt?.status === 'SKIPPED') badge = '⏭️';
+      else {
+        const mm = r.bt?.models?.[getBtModel()];
+        if (mm) badge = mm.res === 'WIN' ? '✅' : mm.res === 'LOSS' ? '❌' : '⌛';
+      }
       const isBuy = r.action === 'BUY';
       return `<div class="history-card" onclick="showHistoryDetail(${i})"><div style="flex-grow:1;">
         <strong>${esc(r.pair)} <span style="color:${isBuy ? 'var(--green)' : 'var(--red)'};">${esc(r.action)}</span></strong> ${badge}
@@ -2818,8 +2816,17 @@ function showHistoryDetail(i) {
     <div style="font-size:11px;color:var(--muted);">${esc(r.date)} • ${r.conf || 0}%</div>`;
   if (r.entry) h += `<table class="tbl"><tr><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th></tr>
     <tr><td>${f(r.entry)}</td><td>${f(r.sl)}</td><td>${f(r.tp1)}</td><td>${f(r.tp2)}</td></tr></table>`;
+  if (r.bt?.entryHit === false) h += `<div class="warn-box">⚠️ Entry haikugusa — trade haikufanyika.</div>`;
+  if (r.bt?.entryHit === true) h += `<div class="success-box">✅ Entry iligusa.</div>`;
   if (r.bt?.models) h += `<table class="tbl"><tr><th>Exit</th><th>Result</th><th>R</th></tr>
-    ${r.bt.models.map((m, k) => `<tr><td>TP${k + 1}</td><td>${m ? esc(m.res) : 'PENDING'}</td><td>${m ? (m.r > 0 ? '+' : '') + m.r.toFixed(2) + 'R' : '—'}</td></tr>`).join('')}</table>`;
+    ${r.bt.models.map((m, k) => {
+      if (!m) return `<tr><td>TP${k + 1}</td><td>—</td><td>—</td></tr>`;
+      const amb = m.ambiguous ? ' ⚠️' : '';
+      return `<tr><td>TP${k + 1}</td><td>${esc(m.res)}${amb}</td><td>${m.r > 0 ? '+' : ''}${m.r.toFixed(2)}R</td></tr>`;
+    }).join('')}</table>`;
+  if (r.bt?.models?.some(m => m?.ambiguous)) {
+    h += `<div class="warn-box" style="font-size:10px;">⚠️ Candle moja iligusa TP na SL pamoja — imehesabiwa kama LOSS (conservative).</div>`;
+  }
   openUniversalModal(h);
 }
 function deleteHistory(i) { if (!confirm('Delete?')) return; const h = loadHist(); h.splice(i, 1); saveHist(h); loadHistory(); updateStats(); }
@@ -2994,13 +3001,14 @@ function startAutoRefreshPrice() {
     } catch (e) {}
   }, PRICE_REFRESH_INTERVAL);
 }
+
+/* ✅ FIX #1: setInterval now after declaration (alertCooldowns is at TOP) */
 setInterval(() => {
   const now = Date.now();
   for (const k in alertCooldowns) {
     if (now - alertCooldowns[k] > ALERT_COOLDOWN_MS * 3) delete alertCooldowns[k];
   }
 }, 5 * 60 * 1000);
-const alertCooldowns = {};
 
 /* ═══ PWA ═══ */
 function setupPWA() {
@@ -3041,9 +3049,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (!getCachedNews().length) setCachedNews(generateFallbackNewsFor(14));
   renderNewsBanner();
 
-  setInterval(() => {
-    renderNewsBanner();
-  }, 5 * 60 * 1000);
+  setInterval(() => { renderNewsBanner(); }, 5 * 60 * 1000);
 
   setInterval(() => {
     const kz = getKillzoneState();
